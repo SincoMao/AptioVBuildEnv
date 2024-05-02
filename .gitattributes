@@ -1,0 +1,24 @@
+###############################################################################
+# Set default behavior to automatically normalize line endings.
+###############################################################################
+* text=auto
+
+# Mark Windows Driver Kit files as binary.
+/EWDK1703/**    -text
+/WinDDK/**      -text
+
+###############################################################################
+# Specify the files that should be managed by Git LFS.
+###############################################################################
+"/EWDK1703/Program Files/Microsoft Visual Studio 14.0/VC/atlmfc/lib/amd64/uafxcw.lib" filter=lfs diff=lfs merge=lfs
+"/EWDK1703/Program Files/Windows Kits/10/Lib/10.0.15063.0/ucrt/arm/libucrtd.lib" filter=lfs diff=lfs merge=lfs
+"/EWDK1703/Program Files/Windows Kits/10/Lib/10.0.15063.0/ucrt/x86/libucrt.lib" filter=lfs diff=lfs merge=lfs
+"/EWDK1703/Program Files/Windows Kits/10/Lib/10.0.15063.0/ucrt/x64/libucrtd.lib" filter=lfs diff=lfs merge=lfs
+"/EWDK1703/Program Files/Windows Kits/10/Lib/10.0.15063.0/ucrt/arm64/libucrtd.lib" filter=lfs diff=lfs merge=lfs
+"/EWDK1703/Program Files/Windows Kits/10/Lib/10.0.15063.0/ucrt/x86/libucrtd.lib" filter=lfs diff=lfs merge=lfs
+"/EWDK1703/Program Files/Microsoft Visual Studio 14.0/VC/atlmfc/lib/uafxcw.lib" filter=lfs diff=lfs merge=lfs
+"/EWDK1703/Program Files/Microsoft Visual Studio 14.0/VC/atlmfc/lib/uafxcwd.lib" filter=lfs diff=lfs merge=lfs
+"/EWDK1703/Program Files/Windows Kits/10/Lib/10.0.15063.0/ucrt/arm/libucrt.lib" filter=lfs diff=lfs merge=lfs
+"/EWDK1703/Program Files/Windows Kits/10/Lib/10.0.15063.0/ucrt/x64/libucrt.lib" filter=lfs diff=lfs merge=lfs
+"/EWDK1703/Program Files/Windows Kits/10/Lib/10.0.15063.0/ucrt/arm64/libucrt.lib" filter=lfs diff=lfs merge=lfs
+"/EWDK1703/Program Files/Microsoft Visual Studio 14.0/VC/atlmfc/lib/amd64/uafxcwd.lib" filter=lfs diff=lfs merge=lfs
