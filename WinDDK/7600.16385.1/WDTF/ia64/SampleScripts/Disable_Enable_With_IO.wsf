@@ -1,0 +1,268 @@
+<PACKAGE>
+
+<COMMENT>
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Copyright 2005 Microsoft Corporation. All Rights Reserved.
+//
+// Disable_Enable_With_IO.wsf
+//
+// Collection: WDTF Tests
+// 
+// Environment: CScript
+//
+// Primary Contact: WDTF Support (WDTFSupp@microsoft.com)
+//
+// Remarks:
+//   This script uses WDTF version 1 to simply disable and enable each device that it can,
+// one by one. It also runs IO on all the devices related to the selected devices.
+//
+//   To run this script open a CMD window and type:
+//
+//      cscript Disable_Enable_With_IO.wsf /Devices:"<Devices>" [/Cycles:<Cycles>]
+//
+//   Parameter details are as follows -  
+//
+//        Devices
+//            This is an optional parameter. Devices to disable/enable. By 
+//            default it chooses all disableable devices.
+//            This should be in the format of an SDEL query. Additionally, 
+//            'AND', 'OR', and parenthesis are supported.
+//                ie:     "DeviceID='<someDeviceID>' OR Class='Net'"
+//                   
+//        Cycles
+//          This is an optional parameter. It's value specifies the number of 
+//          Test Cycles. Default value is 1.
+//
+// History:
+//   [Date]        -   [Status]
+//   Sep 20 2005   -   Reviewed
+//   Oct 27 2005   -   Devices parameter upgraded to be more generic.
+//   Nov 21 2005   -   Assertion Based Logging
+//   Apr 08 2006   -   Converted to JScript implementation, updated
+//                     comments.
+//   Feb 25 2009   -   Created TestNotFinished.log file at the beginning of the Test
+//                     and deleted the same at the end of the test. This to catch 
+//                     to check if test cancelled due to unexpected interruption like Ctlr-c
+//---------------------------------------------------------------------------
+</COMMENT>
+
+
+<JOB id=Enter>
+<REFERENCE object="WDTF.WDTF" />
+<REFERENCE object="WDTFRefs.1\Device\SimpleIOStress" />
+<REFERENCE object="Scripting.FileSystemObject" />
+
+<SCRIPT LANGUAGE="JScript" src="Common.js" />
+
+<SCRIPT LANGUAGE="JScript">
+
+var TestName = "Disable Enable With IO";
+var FileName = WScript.ScriptName;
+
+
+// WTT Log creation
+var Log = new JScript_WTTLogger("$Logfile:file=" + FileName + ".wtl,writemode=overwrite,encoding=UNICODE;$Console;$Debugger");
+  
+  
+// whole script is contained within a try block to catch any remaining script errors
+try
+{
+
+  Log.StartTest("_", Log.TestCases.RootDisableEnable);
+  
+  Log.TraceMsg("Test Version: 1.0.0003");
+
+  // Root WDTF object
+  var WDTF = new JScript_WDTF();
+
+  //
+  //  Parameter Defaults
+  //
+  var DeviceSelection = "IsPhantom=False AND " +
+                        "IsRootEnumerated=False AND " +
+                        "IsDisableable=True AND " +
+                        "ClassGUID!='{8ECC055D-047F-11D1-A537-0000F8753ED1}' AND " +  // Class!=LegacyDriver
+                        "ClassGUID!='{533C5B84-EC70-11D2-9505-00C04F79DEAF}' AND " +  // Class!=VolumeSnapshot
+                        "parent/service!=swenum";
+
+  var Cycles = 3;
+
+  var IOPeriod = 20000;
+
+
+  ParseCommandLineArgs();
+  
+  //
+  // Find the targeted devices
+  //
+  var MainDevices = WDTF.DeviceDepot.Query(DeviceSelection);
+
+  if(MainDevices.length == 0)
+  {
+    Log.TraceMsg("No device(s) selected or selected device was not found! Auto pass.");
+    
+    Log.EndTest("_");
+    Log.Close();
+    WDTF.Destroy();
+    WScript.Quit(0);
+  }
+  else
+  {
+    Log.TraceMsg("Number of Main Devices selected: " + MainDevices.length);
+  }
+  //Create a log that will be check to see if test has finished
+  var fso = new ActiveXObject("Scripting.FileSystemObject");
+  var IsTestFinishedLog = fso.CreateTextFile("TestNotFinished.log",true);
+  IsTestFinishedLog.WriteLine("The Test has not been finished");
+  IsTestFinishedLog.close();
+  
+  //
+  // Main loop
+  //
+  for (var idx in MainDevices)
+  {
+    var MainDevice = MainDevices[idx];
+
+    Log.StartTest("(" + idx + ")", "Main Device: " + MainDevice.GetValue("DisplayName"));
+    
+      TraceDeviceInfo(MainDevice);
+
+      var TestDevices = MainDevice.GetRelations("below-or-self/");
+      
+      // Use the common.js scenario module
+      var ScenarioModule = new JScript_CommonScenarioModule(WDTF, TestDevices);
+      
+      Log.TraceMsg("Attempting to find a SimpleIOStress implementation for each related test device.");
+      
+      
+      Log.StartTest("I", Log.TestCases.StartSimpleIOStress);
+        ScenarioModule.ConstructSimpleIOStress();
+        
+        if(ScenarioModule.bFoundSimpleIO)
+        {
+          Log.TraceMsg("Running IO for: " + IOPeriod/1000 + " seconds.");
+          WScript.Sleep(IOPeriod);
+        }
+      Log.EndTest("I");
+      
+          
+      Log.StartTest("II", Log.TestCases.StopSimpleIOStress);
+        if(ScenarioModule.bFoundSimpleIO)
+        {
+          ScenarioModule.CheckSimpleIOStress("Stop");
+        }
+        else
+        {
+          Log.TraceMsg("No SimpleIOStress found, skipping IO verification.");
+        }
+      Log.EndTest("II");
+            
+      
+      for(var Cycle = 1; Cycle <= Cycles; Cycle++)
+      {
+        Log.StartTest("III(" + Cycle + ")",
+                      "Repeatedly Disable and Enable the Main Device then re-test related devices");
+
+
+          Log.StartTest("A", Log.TestCases.DoDisableEnable);
+            ScenarioModule.DisableEnable(MainDevice);
+          Log.EndTest("A");
+          
+          // Needs time to allow all devices to come back before
+          // SimpleIO verification begins again.
+          WScript.Sleep(10000);
+          
+          Log.StartTest("B", Log.TestCases.StopSimpleIOStress);
+            if(ScenarioModule.bFoundSimpleIO)
+            {
+              ScenarioModule.CheckSimpleIOStress("Start");
+            
+              Log.TraceMsg("Running IO for: " + IOPeriod/1000 + " seconds.");
+              WScript.Sleep(IOPeriod);
+        
+              ScenarioModule.CheckSimpleIOStress("Stop");
+            }
+            else
+            {
+              Log.TraceMsg("No SimpleIOStress found, skipping IO verification.");
+            }
+          Log.EndTest("B");
+          
+          
+          Log.StartTest("C", Log.TestCases.DoCheckStatus);
+            ScenarioModule.DoCheckStatus();
+          Log.EndTest("C");
+
+
+        Log.EndTest("III(" + Cycle + ")");
+      }
+      
+      
+    Log.EndTest("(" + idx + ")");
+  }
+
+  Log.EndTest("_");
+
+  
+  var ExitCode = Log.Close();
+
+  // Delete TestNotFinished.log file as test has executed completely  
+  fso.DeleteFile("TestNotFinished.log",true);
+  
+  WScript.Sleep(10000);
+  WScript.Echo("Waiting for 7 minutes to give plenty of time for the network to come back online.");
+  WScript.Sleep(60000*7);
+  
+  WDTF.Destroy();
+  WScript.Quit(ExitCode);
+}
+catch(e)
+{
+  // Catch and report any script errors
+
+  Log.StartTest("ScriptError!", Log.TestCases.ScriptError);
+  
+    Log.TraceExcept(e, "This is probably a configuration issue. In rare cases it could be a bug in the script itself.");
+  
+  Log.EndTest("ScriptError!");
+  
+  Log.EndTests("_");
+  Log.Close();
+  
+  WScript.Sleep(10000);
+  WScript.Echo("Waiting for 7 minutes to give plenty of time for the network to come back online.");
+  WScript.Sleep(60000*7);
+  
+  WDTF.Destroy();
+  WScript.Quit(2);
+}
+
+
+
+//----------------------------------------------------------------------------
+//  Parses command line args
+//----------------------------------------------------------------------------
+function ParseCommandLineArgs()
+{
+  if(ArgExists("Devices"))
+  {
+    DeviceSelection = DeviceSelection + " AND (" + WScript.Arguments.Named("Devices") + ")";
+  }
+  
+  Cycles = IntegerFromArg("Cycles", Cycles);
+  
+  IOPeriod = IntegerFromArg("IOPeriod", IOPeriod);
+  
+
+  Log.TraceMsg("Devices: '" + DeviceSelection + "'");
+  Log.TraceMsg("Cycles: " + Cycles);
+  Log.TraceMsg("IOPeriod: " + IOPeriod + " msec");
+} 
+
+// Cleanup just in case we get here somehow
+WDTF.Destroy();
+</SCRIPT>
+</JOB>
+</PACKAGE>

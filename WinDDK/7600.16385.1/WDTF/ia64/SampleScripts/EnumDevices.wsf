@@ -1,0 +1,123 @@
+<PACKAGE>
+
+<COMMENT>
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Copyright 2005 Microsoft Corporation. All Rights Reserved.
+//
+// EnumDevices.wsf
+//
+// Collection: WDTF Tests
+// 
+// Environment: CScript
+//
+// Primary Contact: WDTF Support (WDTFSupp@microsoft.com)
+//
+// Remarks:
+//   This script uses WDTF version 1 display information about devices found on the system
+//
+//   To run this script open a CMD window and type:
+//
+//      cscript EnumDevices.wsf
+//
+// History:
+//   [Date]        -   [Status]
+//   Aug 19 2005   -   Released
+//---------------------------------------------------------------------------
+</COMMENT>
+
+
+<job id=Enter>
+<script language="JScript" src="Common.js" />
+<script language="VBScript" src="Common.vbs" />
+
+
+<script language="JScript">
+
+var WDTF = new JScript_WDTF();
+
+var Devices = WDTF.DeviceDepot.Query("IsAttached");
+
+
+for(var idx in Devices)
+{
+    var Device = Devices[idx];
+
+    // echo info on all devices found
+    WScript.Echo("DeviceID:     " + Device.GetValue("DEVICEID"));
+    WScript.Echo("DisplayName:  " + Device.GetValue("DisplayName"));
+    WScript.Echo("SymbolicLink: " + Device.GetValue("SymbolicLink"));
+    WScript.Echo("Class:        " + Device.GetValue("class"));
+    
+    WScript.Echo("DriverNames:  " + Device.GetValue("DriverNames"));
+    
+    WScript.Echo("ClassGUID:    " + Device.GetValue("ClassGUID"));
+    WScript.Echo("Enumerator:   " + Device.GetValue("Enumerator"));
+    WScript.Echo("HardwareIDs:  " + Device.GetValue("HardwareIDs"));
+    WScript.Echo("CompatIDs:    " + Device.GetValue("CompatIDs"));
+
+    if(Device.Eval("disk::"))
+    {
+        WScript.Echo("Disk Info: BusType(" + Device.GetValue("disk::BusType") + ") DeviceType(" + Device.GetValue("disk::DeviceType") + ") IsRemovable(" + Device.GetValue("disk::IsRemovable") + ") IsCommandQueuing(" + Device.GetValue("disk::IsCommandQueuing") + ") VendorID:'" + Device.GetValue("disk::VendorID") + "' ProductID:'" + Device.GetValue("disk::ProductID") + "' ProductRev:'" + Device.GetValue("disk::ProductRev") + "' SerialNumber(" + Device.GetValue("disk::SerialNumber") + ") Size(" + Device.GetValue("disk::Size") + ") Disk#(" + Device.GetValue("disk::Number") + ")");
+    }
+    
+    if(Device.Eval("volume::"))
+    {
+        WScript.Echo("Volume Info: DriveLetter(" + Device.GetValue("volume::DriveLetter") + ") SerialNumber(" + Device.GetValue("volume::SerialNumber") + ") TotalSize(" + Device.GetValue("volume::TotalSize") + ") FreeSize(" + Device.GetValue("volume::FreeSize") + ") FileSystem:'" + Device.GetValue("volume::FileSystem") + "' VolumeType:'" + Device.GetValue("Volume::Type") + "' #Extents:'" + Device.GetValue("Volume::ExtentCount") + "' Extents:'" + Device.GetValue("Volume::ExtentDiskNumbers") + "'");
+    }
+    
+    WScript.Echo("");
+    WScript.Echo("");
+}
+
+WScript.Echo("Found " + Devices.length + " devices");
+
+WDTF.Destroy();
+</SCRIPT>
+</JOB>
+
+
+<JOB id=EnterVBS>
+<SCRIPT LANGUAGE="VBScript">
+
+
+Set WDTF = WScript.CreateObject("WDTF.WDTF")
+
+Set Devices = WDTF.DeviceDepot.Query("IsPhantom='false'") ' 
+
+For Each Device In Devices
+
+    ' echo info on all devices found
+    WScript.Echo "DeviceID:     " & Device.GetValue("DEVICEID")
+    WScript.Echo "DisplayName:  " & Device.GetValue("DisplayName")
+    WScript.Echo "SymbolicLink: " & Device.GetValue("SymbolicLink")
+    WScript.Echo "Class:        " & Device.GetValue("class")
+    
+    WScript.Echo "Drivers:      " & Device.GetValue("drivers")
+    
+    WScript.Echo "ClassGUID:    " & Device.GetValue("ClassGUID")
+    WScript.Echo "Enumerator:   " & Device.GetValue("Enumerator")
+    WScript.Echo "HardwareIDs:  " & Device.GetValue("HardwareIDs")
+    WScript.Echo "CompatIDs:    " & Device.GetValue("CompatIDs")
+
+    If Device.Eval("disk::") Then
+        WScript.Echo "Disk Info: BusType(" & Device.GetValue("disk::BusType") & ") DeviceType(" & Device.GetValue("disk::DeviceType") & ") IsRemovable(" & Device.GetValue("disk::IsRemovable") & ") IsCommandQueuing(" & Device.GetValue("disk::IsCommandQueuing") & ") VendorID:'" & Device.GetValue("disk::VendorID") & "' ProductID:'" & Device.GetValue("disk::ProductID") & "' ProductRev:'" & Device.GetValue("disk::ProductRev") & "' SerialNumber(" & Device.GetValue("disk::SerialNumber") & ") Size(" & Device.GetValue("disk::Size") & ") Disk#(" & Device.GetValue("disk::Number") & ")"
+    End If
+    
+    If Device.Eval("volume::") Then
+        WScript.Echo "Volume Info: DriveLetter(" & Device.GetValue("volume::DriveLetter") & ") SerialNumber(" & Device.GetValue("volume::SerialNumber") & ") TotalSize(" & Device.GetValue("volume::TotalSize") & ") FreeSize(" & Device.GetValue("volume::FreeSize") & ") FileSystem:'" & Device.GetValue("volume::FileSystem") & "' VolumeType:'" & Device.GetValue("Volume::Type") & "' #Extents:'" & Device.GetValue("Volume::ExtentCount") & "' Extents:'" & Device.GetValue("Volume::ExtentDiskNumbers") & "'"
+    End If
+    
+    WScript.Echo ""
+    WScript.Echo ""
+Next
+
+
+WScript.Echo "Found " & Devices.Count & " devices"
+
+WDTF.Destroy()
+</SCRIPT>
+</JOB>
+
+</PACKAGE>

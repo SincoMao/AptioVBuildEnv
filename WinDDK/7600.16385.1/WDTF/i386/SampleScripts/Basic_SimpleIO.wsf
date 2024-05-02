@@ -1,0 +1,192 @@
+<PACKAGE>
+
+<COMMENT>
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Copyright 2005 Microsoft Corporation. All Rights Reserved.
+//
+// Basic_SimpleIO.wsf
+//
+// Collection: WDTF Tests
+// 
+// Environment: CScript
+//
+// Primary Contact: WDTF Support (WDTFSupp@microsoft.com)
+//
+// Remarks:
+//   This script uses WDTF version 1 to run Power Management stress.
+//
+//   To run this script open a CMD window and type:
+//
+//      cscript Basic_SimpleIO.wsf [/Devices:"<Devices>"]
+//            [/MinutesToRun:<MinutesToRun>]
+//
+//   Parameter details are as follows -  
+//
+//        Devices
+//            This is an optional parameter. Devices to run stress on. By 
+//            default it runs IO on all devices who currently support SimpleIO.
+//            This should be in the format of an SDEL query. Additionally, 
+//            'AND', 'OR', and parenthesis are supported.
+//                ie:     "DeviceID='<someDeviceID>' OR Class='Net'"
+//        MinutesToRun
+//            This is an optional parameter. Minimum amount of time the script 
+//            will run. Default value is 10 min. The script will continue to
+//            run past this time if CyclesToRun has not yet been met.
+//        CyclesToRun
+//            This is an optional parameter. Minimum amount of cycles the script
+//            will run. Default value is 5. The script will continue to
+//            run past this number of cycles if MinutesToRun has not yet been met.
+//
+// History:
+//   [Date]        -   [Status]
+//   Aug 19 2005   -   Created
+//---------------------------------------------------------------------------
+</COMMENT>
+
+
+<JOB id=Enter>
+<REFERENCE object="WDTF.WDTF" />
+<REFERENCE object="WDTFRefs.1\Device\SimpleIOStress" />
+
+<SCRIPT LANGUAGE="JScript" src="Common.js" />
+<SCRIPT LANGUAGE="VBScript" src="Common.vbs" />
+
+<SCRIPT LANGUAGE="JScript">
+
+var TestName = "Basic IO Test using SimpleIOStress";
+var FileName = WScript.ScriptName;
+
+
+// WTT Log creation
+var Log = new JScript_WTTLogger("$Logfile:file=" + FileName + ".wtl,writemode=overwrite,encoding=UNICODE;$Console;$Debugger");
+
+
+// whole script is contained within a try block to catch any remaining script errors
+try
+{
+  Log.StartTest("_", TestName);
+  
+  Log.TraceMsg("Test Version: 1.0.0003");
+  
+  // Root WDTF object
+  var WDTF = new JScript_WDTF();
+  
+  //
+  //  Parameter Defaults
+  //
+  var DeviceSelection = "IsPhantom=False";
+  var MinutesToRun = 10;
+  var CyclesToRun = 5;
+
+  ParseCommandLineArgs();
+
+  var StartTime = new Date();
+  var FinishTime = new Date(StartTime.valueOf() + MinutesToRun*1000*60);
+
+  var FinishTickCount = parseInt(WDTF.SystemDepot.ThisSystem.GetValue("TickCount")) + MinutesToRun*1000*60;
+  
+  Log.TraceMsg("Start Time: " + StartTime);
+  Log.TraceMsg("Earliest End Time: " + FinishTime);
+
+
+  //
+  // Find chosen devices
+  //
+  var Devices = WDTF.DeviceDepot.Query(DeviceSelection);
+
+
+  // Use the common.js scenario module
+  var IOScenarioModule = new JScript_CommonScenarioModule(WDTF, Devices);
+
+  Log.TraceMsg("Attempting to find a SimpleIOStress implementation for each related test device.");
+
+  Log.StartTest("A", Log.TestCases.StartSimpleIOStress);
+    IOScenarioModule.ConstructSimpleIOStress();
+    if(!IOScenarioModule.bFoundSimpleIO)
+    {
+      Log.TraceMsg("No SimpleIOStress found, Auto-Pass.");
+      Log.EndTest("A");
+      Log.EndTest("_");
+      Log.Close();
+      WDTF.Destroy();
+      WScript.Quit(0);
+    }
+  Log.EndTest("A");
+  
+  
+  var MainCount = 0;
+
+  while(WDTF.SystemDepot.ThisSystem.GetValue("TickCount") < FinishTickCount || MainCount < CyclesToRun)
+  {
+    MainCount++;
+    Log.StartTest("B(" + MainCount + ")", Log.TestCases.PauseSimpleIOStress);
+        
+      Log.TraceMsg("Running IO for: 1 min.");
+      WScript.Sleep(1000*60);
+      
+      IOScenarioModule.CheckSimpleIOStress("Pause");
+      
+      IOScenarioModule.CheckSimpleIOStress("Continue");
+    
+    Log.EndTest("B(" + MainCount + ")");
+  }
+
+
+  Log.StartTest("C", Log.TestCases.StopSimpleIOStress);
+    Log.TraceMsg("Running IO for: 1 min.");
+    WScript.Sleep(1000*60);
+  
+    IOScenarioModule.CheckSimpleIOStress("Stop");
+  Log.EndTest("C");
+
+  IOScenarioModule.DestructSimpleIOStress();
+
+  Log.EndTest("_");
+  
+  WDTF.Destroy();
+  WScript.Quit(Log.Close());
+}
+catch(e)
+{
+  // Catch and report any script errors
+
+  Log.StartTest("!ScriptError!", Log.TestCases.ScriptError);
+
+    Log.TraceExcept(e, "A script error occured. This is probably a configuration issue. In rare cases it could be a bug in the script itself.");
+  
+  Log.EndTest("!ScriptError!");
+  
+  Log.EndTest("_");
+  Log.Close();
+  WDTF.Destroy();
+  WScript.Quit(1);
+}
+
+
+
+//----------------------------------------------------------------------------
+//  Parses command line args
+//----------------------------------------------------------------------------
+function ParseCommandLineArgs()
+{
+  if(ArgExists("Devices"))
+  {
+    DeviceSelection = DeviceSelection + " AND (" + WScript.Arguments.Named("Devices") + ")";
+  }
+
+  MinutesToRun = IntegerFromArg("MinutesToRun", MinutesToRun);
+
+  CyclesToRun = IntegerFromArg("CyclesToRun", CyclesToRun);
+  
+  Log.TraceMsg("Devices: '" + DeviceSelection + "'");
+  Log.TraceMsg("MinutesToRun: " + MinutesToRun);
+  Log.TraceMsg("CyclesToRun: " + CyclesToRun);
+}
+
+// Cleanup just in case we get here somehow
+WDTF.Destroy();
+</SCRIPT>
+</JOB>
+</PACKAGE>

@@ -1,0 +1,6 @@
+VSWIZARD 7.0
+Wizard=VsWizard.VsWizardEngine.9.0
+Param="WIZARD_NAME = SimpleIO"
+Param="RELATIVE_PATH = VCWizards\CodeWiz\WDTF"
+Param="PREPROCESS_FUNCTION = CanAddATLClass"
+Param="WIZARD_ID = 11"

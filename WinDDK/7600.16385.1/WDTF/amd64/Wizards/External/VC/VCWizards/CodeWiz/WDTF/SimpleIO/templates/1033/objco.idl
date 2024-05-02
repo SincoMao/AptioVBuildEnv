@@ -1,0 +1,19 @@
+    [
+        object,
+        uuid([!output UUID_REGISTRY_FORMAT]),
+        dual,
+        nonextensible,
+        pointer_default(unique)
+    ]
+    interface [!output INTERFACE_NAME] : ISimpleIO_Action
+    {
+    };
+
+    [
+        uuid([!output CLSID_REGISTRY_FORMAT]),
+        helpstring("[!output TYPE_NAME]")
+    ]
+    coclass [!output COCLASS]
+    {
+        [default] interface [!output INTERFACE_NAME];
+    };

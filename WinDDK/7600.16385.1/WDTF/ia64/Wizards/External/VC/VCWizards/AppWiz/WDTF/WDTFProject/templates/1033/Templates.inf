@@ -1,0 +1,25 @@
+stdafx.cpp
+stdafx.h
+root.cpp
+resource.h
+root.rc
+readme.txt
+root.rgs
+
+[!if SUPPORT_COMPONENT_REGISTRAR]
+compreg.cpp
+compreg.h
+[!endif]
+
+[!if !ATTRIBUTED]
+root.idl
+[!if DLL_APP]
+root.def
+[!endif]
+[!endif]
+
+[!if MERGE_PROXY_STUB]
+dlldatax.c
+dlldatax.h
+[!endif]
+

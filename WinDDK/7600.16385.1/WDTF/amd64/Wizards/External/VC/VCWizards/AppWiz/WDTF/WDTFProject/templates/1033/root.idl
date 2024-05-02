@@ -1,0 +1,55 @@
+// [!output SAFE_IDL_NAME].idl : IDL source for [!output PROJECT_NAME]
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library ([!output SAFE_IDL_NAME].tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[!if SUPPORT_COMPONENT_REGISTRAR]
+[
+    object,
+    uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
+    dual,
+    helpstring("IComponentRegistrar Interface"),
+    pointer_default(unique)
+]
+interface IComponentRegistrar : IDispatch
+{
+    [id(1)]    HRESULT Attach([in] BSTR bstrPath);
+    [id(2)]    HRESULT RegisterAll();
+    [id(3)]    HRESULT UnregisterAll();
+    [id(4)]    HRESULT GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
+    [id(5)]    HRESULT RegisterComponent([in] BSTR bstrCLSID);
+    [id(6)]    HRESULT UnregisterComponent([in] BSTR bstrCLSID);
+};
+
+[!endif]
+[
+    uuid([!output LIBID_REGISTRY_FORMAT]),
+    version(1.0),
+[!if SUPPORT_COMPONENT_REGISTRAR]
+    helpstring("[!output LIB_NAME] 1.0 Type Library"),
+    custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a,"{[!output COMPREG_REGISTRY_FORMAT]}")
+[!else]
+    helpstring("[!output LIB_NAME] 1.0 Type Library")
+[!endif]
+]
+library [!output LIB_NAME]Lib
+{
+    importlib("stdole2.tlb");
+    importlib("WDTF.tlb");
+    importlib("WDTFInterfaces.tlb");
+[!if SUPPORT_COMPONENT_REGISTRAR]
+
+    [
+        uuid([!output COMPREG_REGISTRY_FORMAT]),
+        helpstring("ComponentRegistrar Class")
+    ]
+    coclass CompReg
+    {
+        [default] interface IComponentRegistrar;
+    };
+[!endif]
+};

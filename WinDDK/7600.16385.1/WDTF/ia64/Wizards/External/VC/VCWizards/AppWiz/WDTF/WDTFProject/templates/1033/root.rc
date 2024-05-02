@@ -1,0 +1,134 @@
+//Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+[!if SUPPORT_MFC]
+#include "afxres.h"
+[!else]
+#include "winres.h"
+[!endif]
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_[!output LANG_SUFFIX])
+LANGUAGE [!output PRIMARY_LANG_ID], [!output SUB_LANG_ID]
+#pragma code_page([!output SYSTEM_CODE_PAGE])
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE  
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE  
+BEGIN
+[!if SUPPORT_MFC]
+    "#include ""afxres.h""\r\n"
+[!else]
+    "#include ""winres.h""\r\n"
+[!endif]
+    "\0"
+END
+
+[!if !ATTRIBUTED]
+3 TEXTINCLUDE  
+BEGIN
+    "1 TYPELIB ""[!output SAFE_IDL_NAME].tlb""\r\n"
+    "\0"
+END
+[!endif]
+
+#endif    // APSTUDIO_INVOKED
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,1,1
+ PRODUCTVERSION 1,0,1,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+[!if DLL_APP]
+ FILETYPE 0x2L
+[!else]
+ FILETYPE 0x1L
+[!endif]
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "[!output HEX_LCID][!output HEX_CODE_PAGE]"
+        BEGIN
+            VALUE "CompanyName", "Microsoft Corporation"
+            VALUE "FileDescription", "WDTF Wizard"
+            VALUE "FileVersion", "1.0.1.1"
+            VALUE "LegalCopyright", "(c) Microsoft Corporation.  All rights reserved."
+[!if DLL_APP]
+            VALUE "InternalName", "[!output PROJECT_NAME].dll"
+            VALUE "OriginalFilename", "[!output PROJECT_NAME].dll"
+[!else]
+            VALUE "InternalName", "[!output PROJECT_NAME].exe"
+            VALUE "OriginalFilename", "[!output PROJECT_NAME].exe"
+[!endif]
+            VALUE "ProductName", "Windows Device Testing Framework (WDTF) 1.0"
+            VALUE "ProductVersion", "1.0.1.1"
+            VALUE "OLESelfRegister", ""
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x[!output HEX_LCID], [!output CODE_PAGE]
+    END
+END
+
+#endif    // !_MAC
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE  
+BEGIN
+[!if SERVICE_APP]
+    IDS_SERVICENAME                    "[!output PROJECT_NAME]"
+[!else]
+    IDS_PROJNAME                    "[!output PROJECT_NAME]"
+[!endif]
+END
+
+IDR_[!output UPPER_CASE_SAFE_PROJECT_IDENTIFIER_NAME] REGISTRY "[!output PROJECT_NAME].rgs"
+////////////////////////////////////////////////////////////////////////////
+
+
+#endif
+
+#ifndef APSTUDIO_INVOKED
+[!if !ATTRIBUTED]
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "[!output SAFE_IDL_NAME].tlb"
+[!endif]
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,348 @@
+<PACKAGE>
+
+<COMMENT>
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Copyright 2005 Microsoft Corporation. All Rights Reserved.
+//
+// Common_Scenario_Stress_With_IO.wsf
+//
+// Collection: WDTF Tests
+// 
+// Environment: CScript
+//
+// Primary Contact: WDTF Support (WDTFSupp@microsoft.com)
+//
+// Remarks:
+//   This script uses WDTF version 1 to run Power Management/PnP stress.
+//
+//   To run this script open a CMD window and type:
+//
+//      cscript Common_Scenario_Stress_With_IO.wsf [/IODevices:"<IODevices>"] 
+//            [/DisableDevices:"<DisableDevices>"]
+//            [/MinutesToRun:<MinutesToRun>] [/SleepPeriod:<SleepPeriod>]
+//            [/MinIOPeriod:<MinIOPeriod>] [/MaxIOPeriod:<MaxIOPeriod>]
+//            [/ResumeDelay:<ResumeDelay>] [/RandomSeed:<RandomSeed>]
+//
+//   Parameter details are as follows -  
+//
+//        IODevices
+//            This is an optional parameter. Devices to run IO stress on. By 
+//            default it runs IO on all devices who currently support SimpleIO.
+//            This should be in the format of an SDEL query. Additionally, 
+//            'AND', 'OR', and parenthesis are supported.
+//                ie:     "DeviceID='<someDeviceID>' OR Class='Net'"
+//        DisableDevices
+//            This is an optional parameter. Devices to disable. By 
+//            default it attempts to disable all disableable devices.
+//            This should be in the format of an SDEL query. 
+//        MinutesToRun
+//            This is an optional parameter. Minimum amount of time the script 
+//            will run. Default value is 180 min. The script will continue to
+//            run past this time if CyclesToRun has not yet been met.
+//        CyclesToRun
+//            This is an optional parameter. Minimum amount of cycles the script
+//            will run. Default value is 12. The script will continue to
+//            run past this number of cycles if MinutesToRun has not yet been met.
+//        SleepPeriod
+//            This is an optional parameter. RTC wake timer will be set to this 
+//            value (in seconds) each time the machine goes to sleep. 
+//            Default value is 45.
+//        MinIOPeriod
+//            This is an optional parameter. Specify the minimum time 
+//            (in milliseconds) IO tests will run per cycle 
+//            Default value is 1000.
+//        MaxIOPeriod
+//            This is an optional parameter. Specify the maximum time 
+//            (in milliseconds) that IO tests will run per cycle 
+//            Default value is 20000.
+//        ResumeDelay
+//            This is an optional parameter. Delay in milliseconds after machine 
+//            resumes from sleep and before next IO cycle starts. It is needed 
+//            to allow devices restore their working state (renew IP address 
+//            for network card etc.). Default value is 10000.
+//        RandomSeed
+//            This is an optional parameter. Use this parameter to specify a
+//            previous RandomSeed to run try to reproduce a specific run.
+//            Default value is 0, which indicates that a new seed will
+//            chosen based on the system time.
+//
+// History:
+//   [Date]        -   [Status]
+//   Sep 29 2005   -   Reviewed
+//   Oct 27 2005   -   Edited to conform to features in other DRS scripts.
+//   Nov 21 2005   -   Assertion Based Logging
+//   Apr 08 2006   -   Converted to JScript implementation, updated
+//                     comments.
+//   Feb 24 2009   -   CyclesToRun default value was changed from 60 to 12.
+//                     Reduce the SleepPeriod from 60 to 45
+//   Feb 25 2009   -   Created TestNotFinished.log file at the beginning of the Test
+//                     and deleted the same at the end of the test. This to catch 
+//                     to check if test cancelled due to unexpected interruption like Ctlr-c
+//---------------------------------------------------------------------------
+</COMMENT>
+
+
+<JOB id=Enter>
+<REFERENCE object="WDTF.WDTF" />
+<REFERENCE object="WDTFRefs.1\Device\SimpleIOStress" />
+<REFERENCE object="Scripting.FileSystemObject" />
+
+<SCRIPT LANGUAGE="JScript" src="Common.js" />
+
+<SCRIPT LANGUAGE="VBScript" src="Common.vbs" />
+
+<SCRIPT LANGUAGE="JScript">
+
+var TestName = "Common Scenario Stress With IO";
+var FileName = WScript.ScriptName;
+
+
+// WTT Log creation
+var Log = new JScript_WTTLogger("$Logfile:file=" + FileName + ".wtl,writemode=overwrite,encoding=UNICODE;$Console;$Debugger");
+
+
+// whole script is contained within a try block to catch any remaining script errors
+try
+{
+  Log.StartTest("_", Log.TestCases.RootCommonScenarioStress);
+
+  Log.TraceMsg("Test Version: 1.0.0003");
+          
+  // Root WDTF object
+  var WDTF = new JScript_WDTF();
+  
+  //
+  //  Parameter Defaults
+  //
+  var IODeviceSelection = "IsPhantom=False AND IsRootEnumerated=False AND ClassGUID!='{533C5B84-EC70-11D2-9505-00C04F79DEAF}' AND parent/service!=swenum";
+  var DisableDeviceSelection = "IsPhantom=False AND IsDisableable=True AND IsRootEnumerated=False AND ClassGUID!='{8ECC055D-047F-11D1-A537-0000F8753ED1}' AND parent/service!=swenum";
+  var SleepPeriod = 45;
+  var MinIOPeriod = 1000;
+  var MaxIOPeriod = 20000;
+  var ResumeDelay = 10000;
+  var MinutesToRun = 180;
+  var CyclesToRun = 12;
+  var RandomSeed = 0;   // Zero seeds with the system time
+
+  ParseCommandLineArgs();
+  
+  //Create a log that will be check to see if test has finished
+  var fso = new ActiveXObject("Scripting.FileSystemObject");
+  var IsTestFinishedLog = fso.CreateTextFile("TestNotFinished.log",true);
+  IsTestFinishedLog.WriteLine("The Test has not been finished");
+  IsTestFinishedLog.close();
+
+  var StartTime = new Date();
+  var FinishTime = new Date(StartTime.valueOf() + MinutesToRun*1000*60);
+
+  var FinishTickCount = parseInt(WDTF.SystemDepot.ThisSystem.GetValue("TickCount")) + MinutesToRun*1000*60;
+  
+  Log.TraceMsg("Start Time: " + StartTime);
+  Log.TraceMsg("Earliest End Time: " + FinishTime);
+
+  var SleepCycler = new SleepCycler(WDTF);
+
+
+  //
+  // Find chosen devices
+  //
+  var IODevices = WDTF.DeviceDepot.Query(IODeviceSelection);
+
+  var DisableDevices = WDTF.DeviceDepot.Query(DisableDeviceSelection);
+
+
+  // Use the common.js scenario module
+  var IOScenarioModule = new JScript_CommonScenarioModule(WDTF, IODevices);
+  var ScenarioModule2 = new JScript_CommonScenarioModule(WDTF, DisableDevices);
+  
+  Log.TraceMsg("Attempting to find a SimpleIOStress implementation for each related test device.");
+
+  Log.StartTest("A", Log.TestCases.StartSimpleIOStress);
+    IOScenarioModule.ConstructSimpleIOStress();
+  Log.EndTest("A");
+
+
+  var MainCount = 0;
+  var IOPeriod;
+
+
+  while(WDTF.SystemDepot.ThisSystem.GetValue("TickCount") < FinishTickCount || MainCount < CyclesToRun)
+  {
+    MainCount++;
+    Log.StartTest("B(" + MainCount + ")", Log.TestCases.CommonScenarioStressCycle);
+        
+        
+      Log.StartTest("1", Log.TestCases.PauseSimpleIOStress);
+        if(IOScenarioModule.bFoundSimpleIO)
+        {
+          IOPeriod = (MinIOPeriod + Rand() * (MaxIOPeriod - MinIOPeriod));
+          Log.TraceMsg("Running IO for: " + IOPeriod/1000 + " seconds.");
+          WScript.Sleep(IOPeriod);
+          
+          IOScenarioModule.CheckSimpleIOStress("Pause");
+        }
+        else
+        {
+          Log.TraceMsg("No SimpleIOStress found, skipping IO verification.");
+        }
+      Log.EndTest("1");
+      
+    
+      Log.StartTest("2", Log.TestCases.DoSleepCycle);
+
+        if(SleepCycler.bSleepStateAvailable)
+        {
+          SleepCycler.DoSleepCycle(SleepPeriod);
+            
+          //  Wait for some time to let all devices resume
+          WScript.Sleep(ResumeDelay);
+        }
+        else
+        {
+          Log.TraceMsg("No system sleep states available, skipping sleep testing.");
+        }
+      Log.EndTest("2");
+    
+    
+      Log.StartTest("3", Log.TestCases.DoCheckStatus);
+          IOScenarioModule.DoCheckStatus();
+      Log.EndTest("3");
+    
+      Log.StartTest("4", Log.TestCases.StopSimpleIOStress);
+        if(IOScenarioModule.bFoundSimpleIO)
+        {
+          IOScenarioModule.CheckSimpleIOStress("Continue");
+        
+          IOPeriod = (MinIOPeriod + Rand() * (MaxIOPeriod - MinIOPeriod));
+          Log.TraceMsg("Running IO for: " + IOPeriod/1000 + " seconds.");
+          WScript.Sleep(IOPeriod);
+      
+          IOScenarioModule.CheckSimpleIOStress("Stop");
+        }
+        else
+        {
+          Log.TraceMsg("No SimpleIOStress found, skipping IO verification.");
+        }
+      Log.EndTest("4");
+        
+
+      Log.StartTest("5", Log.TestCases.DoDisableEnable);
+          ScenarioModule2.DoDisableEnable();
+      Log.EndTest("5");
+    
+      Log.StartTest("6", Log.TestCases.StartSimpleIOStress);
+        if(IOScenarioModule.bFoundSimpleIO)
+        {
+          IOScenarioModule.CheckSimpleIOStress("Start");
+        }
+        else
+        {
+          Log.TraceMsg("No SimpleIOStress found, skipping IO verification.");
+        }
+      Log.EndTest("6");
+    
+    Log.EndTest("B(" + MainCount + ")");
+  }
+
+  Log.StartTest("C", Log.TestCases.StopSimpleIOStress);
+    if(IOScenarioModule.bFoundSimpleIO)
+    {
+      IOScenarioModule.CheckSimpleIOStress("Stop");
+    }
+    else
+    {
+      Log.TraceMsg("No SimpleIOStress found, skipping IO verification.");
+    }
+  Log.EndTest("C");
+
+  IOScenarioModule.DestructSimpleIOStress();
+
+  Log.EndTest("_");
+  
+  var ExitCode = Log.Close();
+
+  // Delete TestNotFinished.log file as test has executed completely  
+  fso.DeleteFile("TestNotFinished.log",true);
+  
+  WScript.Sleep(10000);
+  WScript.Echo("Waiting for 7 minutes to give plenty of time for the network to come back online.");
+  WScript.Sleep(60000*7);
+  
+  WDTF.Destroy();
+  WScript.Quit(ExitCode);
+}
+catch(e)
+{
+  // Catch and report any script errors
+
+  Log.StartTest("ScriptError!", Log.TestCases.ScriptError);
+
+    Log.TraceExcept(e, "This is probably a configuration issue. In rare cases it could be a bug in the script itself.");
+  
+  Log.EndTest("ScriptError!");
+  
+  Log.EndTests("_");
+  Log.Close();
+  
+  WScript.Sleep(10000);
+  WScript.Echo("Waiting for 7 minutes to give plenty of time for the network to come back online.");
+  WScript.Sleep(60000*7);
+  
+  WDTF.Destroy();
+  WScript.Quit(2);
+}
+
+
+
+//----------------------------------------------------------------------------
+//  Parses command line args
+//----------------------------------------------------------------------------
+function ParseCommandLineArgs()
+{
+  if(ArgExists("IODevices"))
+  {
+    IODeviceSelection = IODeviceSelection + " AND (" + WScript.Arguments.Named("IODevices") + ")";
+  }
+
+  if(ArgExists("DisableDevices"))
+  {
+    DisableDeviceSelection = DisableDeviceSelection + " AND (" + WScript.Arguments.Named("DisableDevices") + ")";
+  }
+
+  MinutesToRun = IntegerFromArg("MinutesToRun", MinutesToRun);
+
+  CyclesToRun = IntegerFromArg("CyclesToRun", CyclesToRun);
+  
+  SleepPeriod = IntegerFromArg("SleepPeriod", SleepPeriod);
+  
+  MinIOPeriod = IntegerFromArg("MinIOPeriod", MinIOPeriod);
+  
+  MaxIOPeriod = IntegerFromArg("MaxIOPeriod", MaxIOPeriod);
+  
+  ResumeDelay = IntegerFromArg("ResumeDelay", ResumeDelay);
+  
+  RandomSeed = FloatFromArg("RandomSeed", RandomSeed);
+  if(RandomSeed == 0)
+  {
+    RandomSeed = parseFloat(Math.random().toPrecision(5));
+  }
+  SeedRand(RandomSeed);
+  
+  Log.TraceMsg("IODevices: '" + IODeviceSelection + "'");
+  Log.TraceMsg("DisableDevices: '" + DisableDeviceSelection + "'");
+  Log.TraceMsg("MinutesToRun: " + MinutesToRun);
+  Log.TraceMsg("CyclesToRun: " + CyclesToRun);
+  Log.TraceMsg("SleepPeriod: " + SleepPeriod );
+  Log.TraceMsg("MinIOPeriod: " + MinIOPeriod/1000 + " sec");
+  Log.TraceMsg("MaxIOPeriod: " + MaxIOPeriod/1000 + " sec");
+  Log.TraceMsg("ResumeDelay: " + ResumeDelay/1000 + " sec");
+  Log.TraceMsg("RandomSeed: " + RandomSeed );
+}
+
+// Cleanup just in case we get here somehow
+WDTF.Destroy();
+</SCRIPT>
+</JOB>
+</PACKAGE>
