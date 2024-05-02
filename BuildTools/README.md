@@ -1,9 +1,7 @@
 # AptioVBuildEnv
-#### AMI AptioV BIOS Build Environment Integration Package.
-<br />AMI BuildToolsÊÜÉÌÒµĞí¿ÉÏŞÖÆ£¬ĞèÒªÊÚÈ¨ÕËºÅ´Ó[Customer Portal](https://cp.ami.com)ÏÂÔØ¡£<br />
 
-½«ËùĞè°æ±¾µÄ"**Aptio_5.x_TOOLS_xx**"ÏÂÔØµ½±¾µØ£¬½âÑ¹ºó½ö½«"**BuildTools**"ÎÄ¼ş¼Ğ¸´ÖÆ³öÀ´¹éÄÉºÃ²¢ÒÀ¾İ°æ±¾ÖØÃüÃû£¬ 
+Aptio_5.x_TOOLS_xxå—å•†ä¸šè®¸å¯é™åˆ¶ï¼Œéœ€æˆæƒè´¦å·ä»[Customer Portal](https://cp.ami.com)ä¸‹è½½ã€‚
 
-ÀıÈç½«"**Aptio_5.x_TOOLS_JRE_37_1.zip**"½âÑ¹ºóÖ»Ğè°ÑÀïÃæµÄ"**BuildTools**"ÎÄ¼ş¼ĞÖØÃüÃûÎª"**37.1**"£¬  
-
-È»ºóÒÆ¶¯µ½ÀıÈç ***D:\VisualeBios\AptioVBuildEnv\BuildTools*** Ä¿Â¼ÏÂ£¬ÁíÒ»¸öÎÄ¼ş¼Ğ"VisualeBios"ÎªIDE¹¤¾ß¿ÉÒÔ²»ÓÃ¡£
+**ç¤ºä¾‹**ï¼š
+- å°†Aptio_5.x_TOOLS_JRE_37_1.zipè§£å‹åï¼Œä»…éœ€å°†å…¶ä¸­çš„BuildToolsæ–‡ä»¶å¤¹é‡å‘½åä¸º37.1ã€‚
+- ç§»åŠ¨æ–‡ä»¶å¤¹37.1åˆ° `D:\VisualeBios\AptioVBuildEnv\BuildTools` ç›®å½•ä¸‹ã€‚
