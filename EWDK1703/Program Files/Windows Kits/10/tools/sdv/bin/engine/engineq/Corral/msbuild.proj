@@ -1,0 +1,11 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemGroup>
+    <InstallFiles Include="*">
+      <SDVDir>product\bin\engine\engineq\Corral</SDVDir>
+    </InstallFiles>
+  </ItemGroup>
+
+  <Import Project="$(SLAMSRC)\msbuild\sdv.targets" />
+
+</Project>

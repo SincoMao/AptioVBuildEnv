@@ -1,0 +1,30 @@
+[$RootKey$\Packages\{afa50ba6-e144-43c7-8cc2-2244793ef4e9}]
+@="Microsoft.VsWizards.ImportProjectFolderWizard.NewProjectFromExistingPackage, Microsoft.VisualStudio.ImportProjectFolderWizard, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"InprocServer32"="$WinDir$\system32\mscoree.dll"
+"Class"="Microsoft.VsWizards.ImportProjectFolderWizard.NewProjectFromExistingPackage"
+"Assembly"="Microsoft.VisualStudio.ImportProjectFolderWizard, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Codebase"="$PackageFolder$\Microsoft.VisualStudio.ImportProjectFolderWizard.dll"
+
+[$RootKey$\ProgId\Microsoft.VsWizards.ImportProjectFolderWizard.Wizard]
+@="Microsoft.VsWizards.ImportProjectFolderWizard.Wizard"
+
+[$RootKey$\ProgId\Microsoft.VsWizards.ImportProjectFolderWizard.Wizard\CLSID]
+@="{81A1ED1C-76B9-4363-A838-F413FCCBB606}"
+
+[$RootKey$\CLSID\{81A1ED1C-76B9-4363-A838-F413FCCBB606}]
+@="Microsoft.VsWizards.ImportProjectFolderWizard.Wizard"
+"InprocServer32"="$WinDir$\system32\mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="Microsoft.VsWizards.ImportProjectFolderWizard.Wizard"
+"Assembly"="Microsoft.VisualStudio.ImportProjectFolderWizard, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Codebase"="$PackageFolder$\Microsoft.VisualStudio.ImportProjectFolderWizard.dll"
+
+[$RootKey$\CLSID\{81A1ED1C-76B9-4363-A838-F413FCCBB606}\InprocServer32\11.0.0.0]
+"Class"="Microsoft.VsWizards.ImportProjectFolderWizard.Wizard"
+"Assembly"="Microsoft.VisualStudio.ImportProjectFolderWizard, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\CLSID\{81A1ED1C-76B9-4363-A838-F413FCCBB606}\ProgId]
+@="Microsoft.VsWizards.ImportProjectFolderWizard.Wizard"
+
+[$RootKey$\CLSID\{81A1ED1C-76B9-4363-A838-F413FCCBB606}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+@=""

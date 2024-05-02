@@ -1,0 +1,55 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlIoPassive3
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x0002000C
+
+Description:
+
+    The IrqlIoPassive3 rule specifies that the driver calls the following 
+    routines only when it is executing at IRQL = PASSIVE_LEVEL:
+        IoDetachDevice
+        IoAssignArcName
+        IoRegisterDeviceInterface
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216029
+
+--*/
+
+
+#include "slic_base.h"
+
+
+[IoAssignArcName,IoCreateSymbolicLink].entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+IoDetachDevice.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+IoRegisterDeviceInterface.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+

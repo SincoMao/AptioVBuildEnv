@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   targetNamespace="urn:schemas-microsoft-com:datatypes"
+   xmlns:dt="urn:schemas-microsoft-com:datatypes"
+   attributeFormDefault="qualified" elementFormDefault="qualified">
+   
+  <xsd:attributeGroup name="typeAttributes">
+      <xsd:attribute ref="dt:type" />
+      <xsd:attribute ref="dt:values"/>
+      <xsd:attribute ref="dt:minLength"/>
+      <xsd:attribute ref="dt:maxLength"/>
+  </xsd:attributeGroup>
+  <xsd:attribute name="type"> 
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="bin.base64"/>
+        <xsd:enumeration value="bin.hex"/>
+        <xsd:enumeration value="boolean"/>
+        <xsd:enumeration value="char"/>
+        <xsd:enumeration value="date"/>
+        <xsd:enumeration value="dateTime"/>
+        <xsd:enumeration value="dateTime.tz"/>
+        <xsd:enumeration value="entity"/>
+        <xsd:enumeration value="entities"/>
+        <xsd:enumeration value="enumeration"/>
+        <xsd:enumeration value="fixed.14.4"/>
+        <xsd:enumeration value="float"/>
+        <xsd:enumeration value="i1"/>
+        <xsd:enumeration value="i2"/>
+        <xsd:enumeration value="i4"/>
+        <xsd:enumeration value="i8"/>
+        <xsd:enumeration value="id"/>
+        <xsd:enumeration value="idref"/>
+        <xsd:enumeration value="idrefs"/>
+        <xsd:enumeration value="int"/>        
+        <xsd:enumeration value="nmtoken"/>
+        <xsd:enumeration value="nmtokens"/>
+        <xsd:enumeration value="notation"/>
+        <xsd:enumeration value="number"/>
+        <xsd:enumeration value="r4"/>
+        <xsd:enumeration value="r8"/>        
+        <xsd:enumeration value="string"/>
+        <xsd:enumeration value="time"/>
+        <xsd:enumeration value="time.tz"/>
+        <xsd:enumeration value="ui1"/>
+        <xsd:enumeration value="ui2"/>
+        <xsd:enumeration value="ui4"/>
+        <xsd:enumeration value="ui8"/>
+        <xsd:enumeration value="uri"/>
+        <xsd:enumeration value="uuid"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:attribute>
+  <xsd:attribute name="values" type="xsd:string"/> 
+  <xsd:attribute name="minLength" type="xsd:int"/> 
+  <xsd:attribute name="maxLength" type="xsd:int"/> 
+</xsd:schema>

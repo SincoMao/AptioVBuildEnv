@@ -1,0 +1,60 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    Irql_Timer_Function
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that Timer related DDIs are only called at proper IRQL levels.
+    Check for the proper IRQL when the function is entering.
+    
+    Related Rule:
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507185
+
+--*/
+
+
+#include "slic_base.h"
+
+NdisAllocateTimerObject.entry
+{
+    if ( SDV_IRQL_ELEVATED_LEVEL(sdv_irql_current) ) {
+        abort "$fname should only be called at IRQL <= DISPATCH_LEVEL.";
+    }
+}
+
+NdisCancelTimerObject.entry
+{
+    if ( SDV_IRQL_ELEVATED_LEVEL(sdv_irql_current) ) {
+        abort "$fname should only be called at IRQL <= DISPATCH_LEVEL.";
+    }
+}
+
+NdisFreeTimerObject.entry
+{
+    if ( SDV_IRQL_ELEVATED_LEVEL(sdv_irql_current) ) {
+        abort "$fname should only be called at IRQL <= DISPATCH_LEVEL.";
+    }
+}
+
+NdisSetTimerObject.entry
+{
+    if ( SDV_IRQL_ELEVATED_LEVEL(sdv_irql_current) ) {
+        abort "$fname should only be called at IRQL <= DISPATCH_LEVEL.";
+    }
+}
+

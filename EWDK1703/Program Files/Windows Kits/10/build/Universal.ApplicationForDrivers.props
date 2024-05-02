@@ -1,0 +1,58 @@
+<!--
+***********************************************************************************************
+Universal.ApplicationForDrivers.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> 
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalOptions>/D_ATL_NO_WIN_SUPPORT /D_CRT_USE_WINAPI_PARTITION_APP /wd4603 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries);kernel32.lib;user32.lib</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>%(AdditionalDependencies);onecoreuap.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '12.0'">
+    <LibraryPath>$(WDKContentRoot)lib\crt12.0\$(DDKPlatform);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(VisualStudioVersion)' == '12.0'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies);libcmt12-onecore.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <PropertyGroup Condition="'$(VisualStudioVersion)' &gt;= '14.0'">
+    <LibraryPath Condition="'$(DDKPlatform)'=='x86'">$(VCInstallDir)lib\onecore;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(DDKPlatform)'=='x64'">$(VCInstallDir)lib\onecore\amd64;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(DDKPlatform)'!='x86' AND '$(DDKPlatform)'!='x64'">$(VCInstallDir)lib\onecore\$(DDKPlatform);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup Condition="'$(VisualStudioVersion)' &gt;= '14.0'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(Platform)' == 'arm' or '$(Platform)' == 'arm64'">
+    <ClCompile>
+      <AdditionalOptions>/D_ARM_WINAPI_PARTITION_DESKTOP_SDK_AVAILABLE=1 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>    
+
+</Project>
+
+
+

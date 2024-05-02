@@ -1,0 +1,37 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlRtlApc
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020024
+
+Description:
+
+    The IrqlRtlApc rule specifies that the driver calls 
+    RtlCreateUnicodeString only when it is executing at 
+    IRQL <= APC_LEVEL.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=251708
+
+--*/
+
+
+#include "slic_base.h"
+
+[RtlCreateUnicodeString].entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL && sdv_irql_current != APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}

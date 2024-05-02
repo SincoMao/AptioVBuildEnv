@@ -1,0 +1,239 @@
+[$RootKey$]
+[$RootKey$\AutomationProperties]
+[$RootKey$\AutomationProperties\WindowsFormsDesigner]
+[$RootKey$\AutomationProperties\WindowsFormsDesigner\General]
+"Name"="WindowsFormsDesigner.General"
+"Package"="{7b5d447b-0b12-41ea-a84e-c822034422d4}"
+[$RootKey$\CLSID]
+[$RootKey$\CLSID\{0452cd78-e6bf-4d67-848b-994dce92a503}]
+"Assembly"="Microsoft.VisualStudio.Design,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Design.Serialization.VBMyResXFileCodeGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Design.Serialization.VBMyResXFileCodeGenerator"
+[$RootKey$\CLSID\{0dfbe0f3-bc01-3308-a764-9edcaeb3bfc3}]
+"Assembly"="Microsoft.VisualStudio.Design,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Design.Serialization.ResXGlobalObjectProvider"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Design.Serialization.ResXGlobalObjectProvider"
+[$RootKey$\CLSID\{26f2a656-27cd-436a-89e3-3d4616811281}]
+"Assembly"="Microsoft.VisualStudio.Design,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Design.Serialization.LicXFileGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Design.Serialization.LicXFileGenerator"
+[$RootKey$\CLSID\{4187fbf6-7e80-44d0-bc1f-0e33d6254098}]
+"Assembly"="Microsoft.VisualStudio.Design,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Design.Serialization.ResXFileGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Design.Serialization.ResXFileGenerator"
+[$RootKey$\CLSID\{69b6a86d-ef43-4d9e-a758-8a18b38a7384}]
+"Assembly"="Microsoft.VisualStudio.Design,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Design.Serialization.PublicResXFileCodeGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Design.Serialization.PublicResXFileCodeGenerator"
+[$RootKey$\CLSID\{7494683a-37a0-11d2-a273-00c04f8ef4ff}]
+"Assembly"="Microsoft.VisualStudio.Windows.Forms,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Windows.Forms.InheritanceDialog"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Windows.Forms.InheritanceDialog"
+[$RootKey$\CLSID\{74d398e9-7cc3-4ff2-9a4d-acd177f40b58}]
+"Assembly"="Microsoft.VisualStudio.Design,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Design.Serialization.PublicVBMyResXFileCodeGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Design.Serialization.PublicVBMyResXFileCodeGenerator"
+[$RootKey$\CLSID\{87693f06-f943-450d-a099-efbb26373a58}]
+"Assembly"="Microsoft.VisualStudio.Windows.Forms,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Windows.Forms.WindowsFormsBootStrap"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Windows.Forms.WindowsFormsBootStrap"
+[$RootKey$\CLSID\{c77981ec-ba19-3348-878f-6f88745a251e}]
+"Assembly"="Microsoft.VisualStudio.Design,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Design.Serialization.ResXFileCodeGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Design.Serialization.ResXFileCodeGenerator"
+[$RootKey$\Designers]
+[$RootKey$\Designers\Extensions]
+[$RootKey$\Designers\Extensions\{87693f06-f943-450d-a099-efbb26373a58}]
+@="Microsoft.VisualStudio.Windows.Forms.WindowsFormsBootStrap"
+[$RootKey$\Designers\Extensions\{87693f06-f943-450d-a099-efbb26373a58}\Filters]
+"System.Windows.Forms"="Require"
+[$RootKey$\Designers\Metadata]
+[$RootKey$\Designers\Metadata\System.Collections.Specialized.NameValueCollection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
+"Microsoft.VisualStudio.Configuration.AppSettingsReaderMetadata, Microsoft.VisualStudio.Configuration, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"=dword:00000001
+[$RootKey$\Designers\Metadata\System.Configuration.AppSettingsReader, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
+"Microsoft.VisualStudio.Configuration.AppSettingsReaderMetadata, Microsoft.VisualStudio.Configuration, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"=dword:00000001
+[$RootKey$\Designers\Metadata\System.Configuration.Install.Installer, System.Configuration.Install, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]
+"Microsoft.VisualStudio.Configuration.InstallerMetadata, Microsoft.VisualStudio.Configuration, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"=dword:00000001
+[$RootKey$\Designers\Metadata\System.Diagnostics.EventLog, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
+"Microsoft.VisualStudio.Configuration.EventLogMetadata, Microsoft.VisualStudio.Configuration, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"=dword:00000001
+[$RootKey$\Designers\Metadata\System.Diagnostics.PerformanceCounter, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
+"Microsoft.VisualStudio.Configuration.PerformanceCounterMetadata, Microsoft.VisualStudio.Configuration, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"=dword:00000001
+[$RootKey$\Designers\Metadata\System.Messaging.MessageQueue, System.Messaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]
+"Microsoft.VisualStudio.Configuration.MessageQueueMetadata, Microsoft.VisualStudio.Configuration, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"=dword:00000001
+[$RootKey$\Designers\Metadata\System.ServiceProcess.ServiceBase, System.ServiceProcess, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]
+"Microsoft.VisualStudio.Configuration.ServiceBaseMetadata, Microsoft.VisualStudio.Configuration, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"=dword:00000001
+[$RootKey$\Designers\Options]
+[$RootKey$\Designers\Options\WindowsFormsDesigner]
+[$RootKey$\Editors]
+[$RootKey$\Editors\{74946834-37a0-11d2-a273-00c04f8ef4ff}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DisplayName"="#1000"
+"EditorTrustLevel"=dword:00000000
+"Package"="{68939055-38e0-4d17-92cb-8909710d8178}"
+@="VSEditorFactory"
+[$RootKey$\Editors\{74946834-37a0-11d2-a273-00c04f8ef4ff}\LogicalViews]
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+[$RootKey$\Generators]
+[$RootKey$\Generators\{164b10b9-b200-11d0-8c61-00a0c91e29d5}]
+[$RootKey$\Generators\{164b10b9-b200-11d0-8c61-00a0c91e29d5}\PublicResXFileCodeGenerator]
+"CLSID"="{69b6a86d-ef43-4d9e-a758-8a18b38a7384}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft ResX File Code Generator (public class)"
+[$RootKey$\Generators\{164b10b9-b200-11d0-8c61-00a0c91e29d5}\PublicVbMyResourcesResXFileCodeGenerator]
+"CLSID"="{74d398e9-7cc3-4ff2-9a4d-acd177f40b58}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft Visual Basic Primary My.Resources ResX File Code Generator (public cass)"
+[$RootKey$\Generators\{164b10b9-b200-11d0-8c61-00a0c91e29d5}\ResXFileCodeGenerator]
+"CLSID"="{c77981ec-ba19-3348-878f-6f88745a251e}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft ResX File Code Generator"
+[$RootKey$\Generators\{164b10b9-b200-11d0-8c61-00a0c91e29d5}\VbMyResourcesResXFileCodeGenerator]
+"CLSID"="{0452cd78-e6bf-4d67-848b-994dce92a503}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft Visual Basic Primary My.Resources ResX File Code Generator"
+[$RootKey$\Generators\{e6fdf8b0-f3d1-11d4-8576-0002a516ece8}]
+[$RootKey$\Generators\{e6fdf8b0-f3d1-11d4-8576-0002a516ece8}\PublicResXFileCodeGenerator]
+"CLSID"="{69b6a86d-ef43-4d9e-a758-8a18b38a7384}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft ResX File Code Generator (public class)"
+[$RootKey$\Generators\{e6fdf8b0-f3d1-11d4-8576-0002a516ece8}\ResXFileCodeGenerator]
+"CLSID"="{c77981ec-ba19-3348-878f-6f88745a251e}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft ResX File Code Generator"
+[$RootKey$\Generators\{fae04ec1-301f-11d3-bf4b-00c04f79efbc}]
+[$RootKey$\Generators\{fae04ec1-301f-11d3-bf4b-00c04f79efbc}\PublicResXFileCodeGenerator]
+"CLSID"="{69b6a86d-ef43-4d9e-a758-8a18b38a7384}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft ResX File Code Generator (public class)"
+[$RootKey$\Generators\{fae04ec1-301f-11d3-bf4b-00c04f79efbc}\ResXFileCodeGenerator]
+"CLSID"="{c77981ec-ba19-3348-878f-6f88745a251e}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft ResX File Code Generator"
+[$RootKey$\GlobalObjectProviders]
+"{0dfbe0f3-bc01-3308-a764-9edcaeb3bfc3}"="Microsoft.VisualStudio.Design.Serialization.ResXGlobalObjectProvider"
+[$RootKey$\KeyBindingTables]
+[$RootKey$\KeyBindingTables\{ba09e2af-9df2-4068-b2f0-4c7e5cc19e2f}]
+"AllowNavKeyBinding"=dword:00000000
+"Package"="{7b5d447b-0b12-41ea-a84e-c822034422d4}"
+@="#1000"
+[$RootKey$\Menus]
+"{68939055-38E0-4d17-92CB-8909710D8178}"=", 1, 1"
+"{7b5d447b-0b12-41ea-a84e-c822034422d4}"=", 1, 1"
+[$RootKey$\Packages]
+[$RootKey$\Packages\{68939055-38e0-4d17-92cb-8909710d8178}]
+"Assembly"="Microsoft.VisualStudio.Design,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Design.VSDesignPackage"
+"CompanyName"="Microsoft Corporation"
+"ID"=dword:00000064
+"InprocServer32"="$System$\mscoree.dll"
+"MinEdition"="Standard"
+"ProductName"="VSDesignPackage"
+"ProductVersion"="1.0"
+@="Windows Forms Designer Hosting Package"
+[$RootKey$\Packages\{68939055-38e0-4d17-92cb-8909710d8178}\SatelliteDll]
+"DllName"="Microsoft.VisualStudio.DesignUI.dll"
+"Path"="$ShellFolder$\Common7\IDE\"
+[$RootKey$\Packages\{68939055-38e0-4d17-92cb-8909710d8178}\Toolbox]
+"Default Items"=dword:00000001
+"NeedsCallbackAfterReset"=dword:00000001
+[$RootKey$\Packages\{9DA57A40-22DE-4CC9-896A-500489DCE0E7}]
+"Assembly"="Microsoft.VisualStudio.Design,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Design.DesignerEventsPackage"
+"CompanyName"="Microsoft Corporation"
+"ID"=dword:00000065
+"InprocServer32"="$System$\mscoree.dll"
+"MinEdition"="Standard"
+"ProductName"="DesignerEventsPackage"
+"ProductVersion"="1.0"
+@="Windows Forms Designer Events Service Hosting Package"
+[$RootKey$\Packages\{9DA57A40-22DE-4CC9-896A-500489DCE0E7}\SatelliteDll]
+"DllName"="Microsoft.VisualStudio.DesignUI.dll"
+"Path"="$ShellFolder$\Common7\IDE\"
+[$RootKey$\Packages\{7b5d447b-0b12-41ea-a84e-c822034422d4}]
+"Assembly"="Microsoft.VisualStudio.Windows.Forms,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Windows.Forms.VSWindowsFormsPackage"
+"CompanyName"="Microsoft Corporation"
+"ID"=dword:00000064
+"InprocServer32"="$System$\mscoree.dll"
+"MinEdition"="Standard"
+"ProductName"="VSWindowsFormsPackage"
+"ProductVersion"="1.0"
+@="Windows Forms Designer Resources Package"
+[$RootKey$\Packages\{7b5d447b-0b12-41ea-a84e-c822034422d4}\SatelliteDll]
+"DllName"="Microsoft.VisualStudio.Windows.FormsUI.dll"
+"Path"="$ShellFolder$\Common7\IDE\"
+[$RootKey$\Packages\{7b5d447b-0b12-41ea-a84e-c822034422d4}\Toolbox]
+"Formats"=".NET Toolbox Item,CF_CACHEKEY,CF_NDP_TYPENAME,CF_NESTEDTOOLBOXITEM,CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_CONTENTS,CF_TOOLBOXITEMCONTAINER_HASH"
+[$RootKey$\Packages\{80c7728b-70a6-4528-8669-73e02d1b9c41}]
+"Assembly"="Microsoft.VisualStudio.Configuration,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Configuration.DesignerConfigurationPackage"
+"CompanyName"="Microsoft Corporation"
+"ID"=dword:00000064
+"InprocServer32"="$System$\mscoree.dll"
+"MinEdition"="Standard"
+"ProductName"="DesignerConfigurationPackage"
+"ProductVersion"="1.0"
+@="Windows Forms Application Configuration Package"
+[$RootKey$\Packages\{80c7728b-70a6-4528-8669-73e02d1b9c41}\SatelliteDll]
+"DllName"="Microsoft.VisualStudio.ConfigurationUI.dll"
+"Path"="$ShellFolder$\Common7\IDE\"
+[$RootKey$\Services\{053a8de0-5a5e-362f-8f1a-0fbfd70f8b36}]
+"Name"="IDesignerOptionService"
+@="{68939055-38e0-4d17-92cb-8909710d8178}"
+[$RootKey$\Services\{39fd482d-c76c-4dd4-9e06-fb7c52f69c8a}]
+"Name"="GlobalObjectProviderFactory"
+@="{68939055-38e0-4d17-92cb-8909710d8178}"
+[$RootKey$\Services\{74946829-37a0-11d2-a273-00c04f8ef4ff}]
+"Name"="IVSMDDesignerService"
+@="{68939055-38e0-4d17-92cb-8909710d8178}"
+[$RootKey$\Services\{8394d9e8-d8fb-39b7-a160-4c0dbe16e6fc}]
+"Name"="DesignerOptionService"
+@="{68939055-38e0-4d17-92cb-8909710d8178}"
+[$RootKey$\Services\{87693f06-f943-450d-a099-efbb26373a58}]
+"Name"="WindowsFormsBootStrap"
+@="{7b5d447b-0b12-41ea-a84e-c822034422d4}"
+[$RootKey$\Services\{94e38dff-614b-4cbd-b67c-f211bb35ce8b}]
+"Name"="ProjectDebugTargetFactory"
+@="{7b5d447b-0b12-41ea-a84e-c822034422d4}"
+[$RootKey$\Services\{961afe89-0cc9-3dba-983f-e1416e158b08}]
+"Name"="DesignSurfaceManager"
+@="{9DA57A40-22DE-4CC9-896A-500489DCE0E7}"
+[$RootKey$\Services\{ef902d46-ace1-3668-adff-b323562e22f9}]
+"Name"="IDesignerEventService"
+@="{9DA57A40-22DE-4CC9-896A-500489DCE0E7}"
+[$RootKey$\Services\{f520a550-5b18-4109-a679-278d959aa0b1}]
+"Name"="AutoToolboxTypeEnumeratorService"
+@="{68939055-38e0-4d17-92cb-8909710d8178}"
+[$RootKey$\Services\{fc43bf19-86fe-4255-901e-15c8d236f3a4}]
+"Name"="DynamicTypeService"
+@="{68939055-38e0-4d17-92cb-8909710d8178}"
+[$RootKey$\UserSettings]
+[$RootKey$\UserSettings\WindowsFormsDesigner_General]
+"AlternateParent"="AutomationProperties"
+"Category"="{de03177c-918d-40af-8c17-c9d63670c175}"
+"Description"="#1003"
+"Package"="{7b5d447b-0b12-41ea-a84e-c822034422d4}"
+"ToolsOptionsPath"="WindowsFormsDesigner"
+"VsSettingsMigration"=dword:00000001
+@="#1002"
+[$RootKey$\ViewAdapters]
+"Microsoft.VisualStudio.OLE.Interop.IOleDocument, Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"="Microsoft.VisualStudio.Design.PassthroughWindowPane, Microsoft.VisualStudio.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"System.Windows.Forms.Control, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"="Microsoft.VisualStudio.Windows.Forms.WinformsWindowPane, Microsoft.VisualStudio.Windows.Forms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"

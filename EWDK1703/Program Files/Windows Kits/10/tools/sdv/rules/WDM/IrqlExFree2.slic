@@ -1,0 +1,72 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlExFree2
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule specifies that ExFreePool and
+    ExFreePoolWithTag is called at proper IRQL.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507279
+
+--*/
+
+#include "slic_base.h"
+
+state{
+   enum {initial,allocated_paged} s = initial;
+}
+watch ExAllocatePoolWithTagPriority.exit.$return;
+
+[ExAllocatePoolWithTagPriority].exit[guard $return]
+{
+    if($return!=NULL)
+    {
+        if(($1 & PagedPool) || ($1 & PagedPoolCacheAligned))
+        {
+            s=allocated_paged;
+        }
+        else 
+        {
+            halt;
+            
+        }
+    }
+    else
+    {
+        halt;
+    }
+}
+
+[ExFreePool]@X86.entry[guard $1]
+{
+    if ((sdv_irql_current == DISPATCH_LEVEL)&&(s==allocated_paged)) 
+    {
+        abort "$fname can be called at IRQL = DISPATCH_LEVEL only if a NonPagedXxx value is specified for PoolType.";
+    }
+}
+
+[ExFreePoolWithTag].entry[guard $1]
+{
+    if ((sdv_irql_current == DISPATCH_LEVEL)&&(s==allocated_paged)) 
+    {
+        abort "$fname can be called at IRQL = DISPATCH_LEVEL only if a NonPagedXxx value is specified for PoolType.";
+    }
+}
+
+
+

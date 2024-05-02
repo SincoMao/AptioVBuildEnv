@@ -1,0 +1,47 @@
+<!--
+***********************************************************************************************
+WindowsPhone.WindowsApplicationForDrivers.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> 
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalOptions>/D_CRT_USE_WINAPI_PARTITION_APP /wd4603 %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
+    </ClCompile>
+
+    <Link>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>onecoreuap.lib;msvcrt.lib;msvcprt.lib;vcomp.lib</AdditionalDependencies>
+    </Link>
+
+    <Link Condition="'$(VisualStudioVersion)' &gt;= '14.0'">
+      <AdditionalDependencies>%(AdditionalDependencies);vcruntime.lib;ucrt.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <ItemDefinitionGroup Condition="'$(Platform)' == 'arm' or '$(Platform)' == 'arm64'">
+    <ClCompile>
+      <AdditionalOptions>/D_ARM_WINAPI_PARTITION_DESKTOP_SDK_AVAILABLE=1 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  
+  <PropertyGroup>
+    <!-- IncludePath is appended to add the minwin and mincore headers -->
+    <IncludePath>$(IncludePath);$(UM_IncludePath)\minwin;$(UM_IncludePath)\mincore;</IncludePath>
+  </PropertyGroup>
+  
+  <!-- Define defaults for any driver tools for property page-->
+  <Import Condition="Exists('$(WDKContentRoot)build\WindowsPhone.$(PlatformToolset).$(Platform).props')" Project="$(WDKContentRoot)build\WindowsPhone.$(PlatformToolset).$(Platform).props"/>
+</Project>
+
+
+

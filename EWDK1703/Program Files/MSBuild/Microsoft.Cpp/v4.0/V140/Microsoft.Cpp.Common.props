@@ -1,0 +1,564 @@
+<!--
+***********************************************************************************************
+Microsoft.Cpp.Common.props
+
+Common properties for v140 toolsets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- *******************************************************************************************
+        Cpp settings mapping file
+       ******************************************************************************************* -->
+  <!-- Default values -->
+  <PropertyGroup>
+    <TargetExt />
+  </PropertyGroup>
+
+   <!-- Set the SDK upgrader for Desktop projects -->
+   <PropertyGroup Condition="'$(AppContainerApplication)' != 'true' and '$(_ImportDefaultToolSet)' != 'true' and '$(SharedAssetsProject)' != 'true'">
+     <VCProjectUpgraderObjectName>WindowsSDKVersionUpgrader</VCProjectUpgraderObjectName>
+     <!--  Also define the latest upgrade toolset as "SDK Upgrade" - To enable SDK version re targeting instead of toolset upgrade -->
+     <_UpgradePlatformToolsetFor_v140 Condition="'$(_UpgradePlatformToolsetFor_v140)' == 'v140'">SDK Upgrade</_UpgradePlatformToolsetFor_v140>
+   </PropertyGroup>
+  <!-- Specific values -->
+  <PropertyGroup Condition="'$(ConfigurationType)' == 'Application'">
+    <LinkCompiled>true</LinkCompiled>
+    <TargetExt>.exe</TargetExt>
+    <OutputType>exe</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ConfigurationType)' == 'DynamicLibrary'">
+    <LinkCompiled>true</LinkCompiled>
+    <!-- $(GenerateImportLib) should be set to true when you want to generate the import library as part of the BuildCompile pass rather than wait
+         until the BuildLink pass for Linker to generate it. This allows circular dependencies between dlls to be satisfied when building using passes -->
+    <ImpLibCompiled Condition="'$(GenerateImportLib)'=='true'">true</ImpLibCompiled>
+    <TargetExt>.dll</TargetExt>
+    <OutputType>library</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ConfigurationType)' == 'StaticLibrary'">
+    <LibCompiled>true</LibCompiled>
+    <TargetExt>.lib</TargetExt>
+    <OutputType>staticlibrary</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(DisableRegistryUse)' != 'true'">
+    <VCInstallDir_140 Condition="'$(VCInstallDir_140)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\14.0\Setup\VC@ProductDir)</VCInstallDir_140>
+    <VCInstallDir_140 Condition="'$(VCInstallDir_140)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VisualStudio\14.0\Setup\VC@ProductDir)</VCInstallDir_140>
+    <VCInstallDir_140 Condition="'$(VCInstallDir_140)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VSWinExpress\14.0\Setup\VC@ProductDir)</VCInstallDir_140>
+    <VCInstallDir_140 Condition="'$(VCInstallDir_140)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VSWinExpress\14.0\Setup\VC@ProductDir)</VCInstallDir_140>
+
+    <VSInstallDir_140 Condition="'$(VSInstallDir_140)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\14.0\Setup\VS@ProductDir)</VSInstallDir_140>
+    <VSInstallDir_140 Condition="'$(VSInstallDir_140)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VisualStudio\14.0\Setup\VS@ProductDir)</VSInstallDir_140>
+    <VSInstallDir_140 Condition="'$(VSInstallDir_140)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VSWinExpress\14.0\Setup\VS@ProductDir)</VSInstallDir_140>
+    <VSInstallDir_140 Condition="'$(VSInstallDir_140)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VSWinExpress\14.0\Setup\VS@ProductDir)</VSInstallDir_140>
+    
+    <!-- Search 32-bit registry first on 32-bit Windows to ensure we get the 32-bit key if present -->
+    <UniversalCRTSdkDir Condition="'$(UniversalCRTSdkDir)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows Kits\Installed Roots@KitsRoot10)</UniversalCRTSdkDir>
+    <UniversalCRTSdkDir Condition="'$(UniversalCRTSdkDir)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots@KitsRoot10)</UniversalCRTSdkDir>
+
+    <WindowsSdkDir_81 Condition="'$(WindowsSdkDir_81)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v8.1@InstallationFolder)</WindowsSdkDir_81>
+    <WindowsSdkDir_81 Condition="'$(WindowsSdkDir_81)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v8.1@InstallationFolder)</WindowsSdkDir_81>
+    
+    <WindowsSdkDir_81A Condition="'$(WindowsSdkDir_81A)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v8.1A@InstallationFolder)</WindowsSdkDir_81A>
+    <WindowsSdkDir_81A Condition="'$(WindowsSdkDir_81A)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v8.1A@InstallationFolder)</WindowsSdkDir_81A>
+
+    <FrameworkDir_110 Condition="'$(FrameworkDir_110)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework@InstallRoot)</FrameworkDir_110>
+    <FrameworkDir_110 Condition="'$(FrameworkDir_110)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\.NETFramework@InstallRoot)</FrameworkDir_110>
+  </PropertyGroup>
+
+  <!-- Get the location of Windows SDK 7.1 if xp toolsets ask for it -->
+  <PropertyGroup Condition="'$(DisableRegistryUse)' != 'true' and '$(DefineWindowsSDK_71A)' == 'true'">
+    <WindowsSdkDir_71A Condition="'$(WindowsSdkDir_71A)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v7.1A@InstallationFolder)</WindowsSdkDir_71A>
+    <WindowsSdkDir_71A Condition="'$(WindowsSdkDir_71A)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v7.1A@InstallationFolder)</WindowsSdkDir_71A>
+
+    <FrameworkSdkDir_71A Condition="'$(FrameworkSdkDir_71A)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v7.1A@InstallationFolder)</FrameworkSdkDir_71A>
+    <FrameworkSdkDir_71A Condition="'$(FrameworkSdkDir_71A)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v7.1A@InstallationFolder)</FrameworkSdkDir_71A>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(DisableRegistryUse)' == 'true'">
+    <VCInstallDir_140 Condition="'$(VCInstallDir_140)' == ''">VCInstallDir_140_is_not_defined</VCInstallDir_140>
+    <VSInstallDir_140 Condition="'$(VSInstallDir_140)' == ''">VSInstallDir_140_is_not_defined</VSInstallDir_140>
+    <UniversalCRTSdkDir Condition="'$(UniversalCRTSdkDir)' == ''">UniversalCRTSdkDir_is_not_defined</UniversalCRTSdkDir>
+    <WindowsSdkDir_81 Condition="'$(WindowsSdkDir_81)' == ''">WindowsSdkDir_81_is_not_defined</WindowsSdkDir_81>
+    <FrameworkDir_110 Condition="'$(FrameworkDir_110)' == ''">FrameworkDir_110_is_not_defined</FrameworkDir_110>
+    <WindowsSdkDir_71A Condition="'$(WindowsSdkDir_71A)' == ''">WindowsSdkDir_71A_is_not_defined</WindowsSdkDir_71A>
+    <FrameworkSdkDir_71A Condition="'$(FrameworkSdkDir_71A)' == ''">FrameworkSdkDir_71A_is_not_defined</FrameworkSdkDir_71A>
+    <_CheckDev11ToolsInstalled>false</_CheckDev11ToolsInstalled>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PlatformToolsetVersion>140</PlatformToolsetVersion>
+    <VCInstallDir>$(VCInstallDir_140)</VCInstallDir>
+    <VSInstallDir>$(VSInstallDir_140)</VSInstallDir>
+    <!-- Fall back to 8.1 if windows 10 SDK is not found or WindowsTargetPlatformVersion is set to "8.1" or is not set at all -->
+    <WindowsSdkDir Condition="'$(TargetPlatformVersion)' == '8.1'">$(WindowsSdkDir_81)</WindowsSdkDir>
+    <WindowsSDKDir Condition="'$(DefineWindowsSDK_71A)' == 'true'">$(WindowsSdkDir_71A)</WindowsSDKDir>
+    <Windows81SdkInstalled Condition="'$(WindowsSdkDir_81)' != ''">true</Windows81SdkInstalled>
+    <FrameworkDir Condition="'$(UseEnv)' != 'true'">$(FrameworkDir_110)</FrameworkDir>
+    <FrameworkSdkDir Condition="'$(UseEnv)' != 'true'">$(WindowsSdkDir)</FrameworkSdkDir>
+    <FrameworkVersion Condition="'$(UseEnv)' != 'true'">v4.6</FrameworkVersion>
+
+    <!-- 10.0.10240.0 is the hardcoded checked-in version of uCRT that we use in case we target 8.1 SDK -->
+    <TargetUniversalCRTVersion Condition="'$(TargetUniversalCRTVersion)' == ''  and ('$(TargetPlatformVersion)' == '8.1' or '$(DefineWindowsSDK_71A)' == 'true')">10.0.10240.0</TargetUniversalCRTVersion>
+    <UniversalCRT_PropsPath Condition="'$(UniversalCRT_PropsPath)' == ''">$(UniversalCRTSdkDir)\DesignTime\CommonConfiguration\Neutral\ucrt.props</UniversalCRT_PropsPath>
+ 
+    <!-- UseNativeEnvironment and _IsNativeEnvironment was used in prev versions to define if we want to use 64-bit tools when building for x64 platform. -->
+    <PreferredToolArchitecture Condition="'$(PreferredToolArchitecture)' == '' and ('$(UseNativeEnvironment)' == 'true' or '$(_IsNativeEnvironment)' == 'true')">x64</PreferredToolArchitecture>
+    
+    <!-- By default we use the same bitness as the hosting platform -->
+    <PreferredToolArchitecture Condition="'$(PreferredToolArchitecture)' == '' and ('$(PROCESSOR_ARCHITECTURE)' == 'AMD64' and '$(Platform)' == 'x64')">x64</PreferredToolArchitecture>
+    <PreferredToolArchitecture Condition="'$(PreferredToolArchitecture)' == ''">x86</PreferredToolArchitecture>
+     
+    <!-- If OS is not x64, we cannot use x64 tools even if preferred -->
+    <PreferredToolArchitecture Condition="'$(PreferredToolArchitecture)' == 'x64' and '$(PROCESSOR_ARCHITECTURE)' != 'AMD64' and '$(PROCESSOR_ARCHITEW6432)' != 'AMD64'">x86</PreferredToolArchitecture>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(TargetPlatformVersion)' == '8.1'">
+    <!-- For desktop projects targeting 8.1 SDK, override the SDKDisplayName and WindowsTargetPlatformVersion to windows 8.1 so that the correct TPI and TPV are displayed in the UI -->
+    <SDKDisplayName>Windows</SDKDisplayName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+
+  <!-- Get include and lib paths for the Universal CRT -->  
+  <Import Condition="Exists('$(UniversalCRT_PropsPath)')" Project="$(UniversalCRT_PropsPath)" />
+
+  <!-- For AppContainer apps, If Windows 10 SDK is found, use it -->
+  <Import Condition="'$(TargetPlatformVersion)' != '8.1' and '$(AppContainerApplication)' == 'true' and Exists('$(WindowsSdkDir)\DesignTime\CommonConfiguration\Neutral\$(TargetPlatformIdentifier)\$(TargetPlatformVersion)\UAP.props')" Project="$(WindowsSdkDir)\DesignTime\CommonConfiguration\Neutral\$(TargetPlatformIdentifier)\$(TargetPlatformVersion)\UAP.props"/>
+  
+  <!-- For Desktop scenarios, use Windows 10 SDK if it is found but hardcoding TargetPlatformIdentifier as 'UAP', since Desktop projects don't set that as TPI -->
+  <Import Condition="'$(TargetPlatformVersion)' != '8.1' and '$(AppContainerApplication)' != 'true' and Exists('$(WindowsSdkDir)\DesignTime\CommonConfiguration\Neutral\UAP\$(TargetPlatformVersion)\UAP.props')" Project="$(WindowsSdkDir)\DesignTime\CommonConfiguration\Neutral\UAP\$(TargetPlatformVersion)\UAP.props"/>
+
+  <!-- If windows 10 SDK is not found, fall back to windows 81 SDK-->
+  <Import Condition="'$(TargetPlatformVersion)' == '8.1' and Exists('$(WindowsSdkDir)\DesignTime\CommonConfiguration\Neutral\Windows.props')"
+  Project="$(WindowsSdkDir)\DesignTime\CommonConfiguration\Neutral\Windows.props"/>
+  
+  <!-- Executable path for NETFX 4.6 tools -->
+  <PropertyGroup Condition="'$(DisableRegistryUse)' != 'true'">
+    <NETFXKitsDir Condition = "'$(NETFXKitsDir)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\NETFXSDK\4.6.1@KitsInstallationFolder)</NETFXKitsDir>
+    <NETFXKitsDir Condition = "'$(NETFXKitsDir)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\NETFXSDK\4.6.1@KitsInstallationFolder)</NETFXKitsDir>
+    <NETFXSDKDir Condition = "'$(NETFXSDKDir)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\NETFXSDK\4.6.1@InstallationFolder)</NETFXSDKDir>
+    <NETFXSDKDir Condition = "'$(NETFXSDKDir)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\NETFXSDK\4.6.1@InstallationFolder)</NETFXSDKDir>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <WindowsSDK_ExecutablePath_x86 Condition = "'$(NETFXSDKDir)' != ''">$(WindowsSDK_ExecutablePath_x86);$(NETFXSDKDir)bin\NETFX 4.6.1 Tools</WindowsSDK_ExecutablePath_x86>
+    <WindowsSDK_ExecutablePath_x64 Condition = "'$(NETFXSDKDir)' != ''">$(WindowsSDK_ExecutablePath_x64);$(NETFXSDKDir)bin\NETFX 4.6.1 Tools\x64</WindowsSDK_ExecutablePath_x64>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(WindowsSdkDir_71A)' != ''">
+    <WindowsSdk_71A_ExecutablePath_x86>$(WindowsSdkDir_71A)\bin</WindowsSdk_71A_ExecutablePath_x86>
+    <WindowsSdk_71A_ExecutablePath_x64>$(WindowsSdkDir_71A)\bin\x64</WindowsSdk_71A_ExecutablePath_x64>
+    <WindowsSdk_71A_IncludePath>$(WindowsSdkDir_71A)include</WindowsSdk_71A_IncludePath>
+    <WindowsSdk_71A_LibraryPath_x86>$(WindowsSdkDir_71A)lib</WindowsSdk_71A_LibraryPath_x86>
+    <WindowsSdk_71A_LibraryPath_x64>$(WindowsSdkDir_71A)lib\x64</WindowsSdk_71A_LibraryPath_x64>
+  </PropertyGroup>
+  
+  <!-- VC directories -->
+  <PropertyGroup>
+    <VC_ExecutablePath_x86_x86 Condition="'$(VC_ExecutablePath_x86_x86)' == ''">$(VCInstallDir)bin</VC_ExecutablePath_x86_x86>
+    <VC_ExecutablePath_x86_x64 Condition="'$(VC_ExecutablePath_x86_x64)' == ''">$(VCInstallDir)bin\x86_amd64</VC_ExecutablePath_x86_x64>
+    <VC_ExecutablePath_x86_ARM Condition="'$(VC_ExecutablePath_x86_ARM)' == ''">$(VCInstallDir)bin\x86_arm</VC_ExecutablePath_x86_ARM>
+
+    <VC_ExecutablePath_x64_x86 Condition="'$(VC_ExecutablePath_x64_x86)' == ''">$(VCInstallDir)bin\amd64_x86</VC_ExecutablePath_x64_x86>
+    <VC_ExecutablePath_x64_x64 Condition="'$(VC_ExecutablePath_x64_x64)' == ''">$(VCInstallDir)bin\amd64</VC_ExecutablePath_x64_x64>
+    <VC_ExecutablePath_x64_ARM Condition="'$(VC_ExecutablePath_x64_ARM)' == ''">$(VCInstallDir)bin\amd64_arm</VC_ExecutablePath_x64_ARM>
+
+    <VC_ReferencesPath_VC_x86 Condition="'$(VC_ReferencesPath_VC_x86)' == ''">$(VCInstallDir)lib</VC_ReferencesPath_VC_x86>
+    <VC_ReferencesPath_ATL_x86 Condition="'$(VC_ReferencesPath_ATL_x86)' == ''">$(VCInstallDir)atlmfc\lib;</VC_ReferencesPath_ATL_x86>
+    <VC_ReferencesPath_x86>$(VC_ReferencesPath_ATL_x86);$(VC_ReferencesPath_VC_x86)</VC_ReferencesPath_x86>
+
+    <VC_ReferencesPath_VC_x64 Condition="'$(VC_ReferencesPath_VC_x64)' == ''">$(VCInstallDir)lib\amd64</VC_ReferencesPath_VC_x64>
+    <VC_ReferencesPath_ATL_x64 Condition="'$(VC_ReferencesPath_ATL_x64)' == ''">$(VCInstallDir)atlmfc\lib\amd64;</VC_ReferencesPath_ATL_x64>
+    <VC_ReferencesPath_x64>$(VC_ReferencesPath_ATL_x64);$(VC_ReferencesPath_VC_x64)</VC_ReferencesPath_x64>
+
+    <VC_ReferencesPath_VC_ARM Condition="'$(VC_ReferencesPath_VC_ARM)' == ''">$(VCInstallDir)lib\ARM</VC_ReferencesPath_VC_ARM>
+    <VC_ReferencesPath_ATL_ARM Condition="'$(VC_ReferencesPath_ATL_ARM)' == ''">$(VCInstallDir)atlmfc\lib\ARM;</VC_ReferencesPath_ATL_ARM>
+    <VC_ReferencesPath_ARM>$(VC_ReferencesPath_ATL_ARM);$(VC_ReferencesPath_VC_ARM)</VC_ReferencesPath_ARM>
+
+    <VC_VC_IncludePath Condition="'$(VC_VC_IncludePath)' == ''">$(VCInstallDir)include;</VC_VC_IncludePath>
+    <VC_ATLMFC_IncludePath Condition="'$(VC_ATLMFC_IncludePath)' == ''">$(VCInstallDir)atlmfc\include;</VC_ATLMFC_IncludePath>
+    <VC_IncludePath>$(VC_VC_IncludePath);$(VC_ATLMFC_IncludePath);$(UniversalCRT_IncludePath);</VC_IncludePath>
+
+    <VC_CRT_SourcePath Condition="'$(VC_CRT_SourcePath)' == ''">$(VCInstallDir)crt\src;</VC_CRT_SourcePath>
+    <VC_ATLMFC_SourcePath Condition="'$(VC_ATLMFC_SourcePath)' == ''">$(VCInstallDir)atlmfc\src\mfc;$(VCInstallDir)atlmfc\src\mfcm;$(VCInstallDir)atlmfc\src\atl;</VC_ATLMFC_SourcePath>
+    <VC_SourcePath>$(VC_ATLMFC_SourcePath);$(VC_CRT_SourcePath);$(UniversalCRT_SourcePath);</VC_SourcePath>
+
+    <_VC_x64_ToolsInstalled Condition="Exists('$(VCInstallDir)bin\amd64_x86') and '$(_VC_x64_ToolsInstalled)' == ''">true</_VC_x64_ToolsInstalled>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(WindowsAppContainer)' != 'true'">
+    <VC_LibraryPath_VC_x86 Condition="'$(VC_LibraryPath_VC_x86)' == ''">$(VCInstallDir)lib;</VC_LibraryPath_VC_x86>
+    <VC_LibraryPath_ATL_x86 Condition="'$(VC_LibraryPath_ATL_x86)' == ''">$(VCInstallDir)atlmfc\lib;</VC_LibraryPath_ATL_x86>
+    <VC_LibraryPath_x86>$(VC_LibraryPath_VC_x86);$(VC_LibraryPath_ATL_x86);$(UniversalCRT_LibraryPath_x86);</VC_LibraryPath_x86>
+
+    <VC_LibraryPath_VC_x64 Condition="'$(VC_LibraryPath_VC_x64)' == ''">$(VCInstallDir)lib\amd64;</VC_LibraryPath_VC_x64>
+    <VC_LibraryPath_ATL_x64 Condition="'$(VC_LibraryPath_ATL_x64)' == ''">$(VCInstallDir)atlmfc\lib\amd64;</VC_LibraryPath_ATL_x64>
+    <VC_LibraryPath_x64>$(VC_LibraryPath_VC_x64);$(VC_LibraryPath_ATL_x64);$(UniversalCRT_LibraryPath_x64);</VC_LibraryPath_x64>
+
+    <VC_LibraryPath_VC_ARM Condition="'$(VC_LibraryPath_VC_ARM)' == ''">$(VCInstallDir)lib\ARM;</VC_LibraryPath_VC_ARM>
+    <VC_LibraryPath_ATL_ARM Condition="'$(VC_LibraryPath_ATL_ARM)' == ''">$(VCInstallDir)atlmfc\lib\ARM;</VC_LibraryPath_ATL_ARM>
+    <VC_LibraryPath_ARM>$(VC_LibraryPath_VC_ARM);$(VC_LibraryPath_ATL_ARM);$(UniversalCRT_LibraryPath_ARM);</VC_LibraryPath_ARM>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(WindowsAppContainer)' == 'true'">
+    <VC_LibraryPath_VC_x86 Condition="'$(VC_LibraryPath_VC_x86)' == ''">$(VCInstallDir)lib\store;</VC_LibraryPath_VC_x86>
+    <VC_LibraryPath_ATL_x86 Condition="'$(VC_LibraryPath_ATL_x86)' == ''">$(VCInstallDir)atlmfc\lib;</VC_LibraryPath_ATL_x86>
+    <VC_LibraryPath_x86>$(VC_LibraryPath_VC_x86);$(VC_LibraryPath_ATL_x86);$(UniversalCRT_LibraryPath_x86);</VC_LibraryPath_x86>
+
+    <VC_LibraryPath_VC_x64 Condition="'$(VC_LibraryPath_VC_x64)' == ''">$(VCInstallDir)lib\store\amd64;</VC_LibraryPath_VC_x64>
+    <VC_LibraryPath_ATL_x64 Condition="'$(VC_LibraryPath_ATL_x64)' == ''">$(VCInstallDir)atlmfc\lib\amd64;</VC_LibraryPath_ATL_x64>
+    <VC_LibraryPath_x64>$(VC_LibraryPath_VC_x64);$(VC_LibraryPath_ATL_x64);$(UniversalCRT_LibraryPath_x64);</VC_LibraryPath_x64>
+
+    <VC_LibraryPath_VC_ARM Condition="'$(VC_LibraryPath_VC_ARM)' == ''">$(VCInstallDir)lib\store\ARM;</VC_LibraryPath_VC_ARM>
+    <VC_LibraryPath_ATL_ARM Condition="'$(VC_LibraryPath_ATL_ARM)' == ''">$(VCInstallDir)atlmfc\lib\ARM;</VC_LibraryPath_ATL_ARM>
+    <VC_LibraryPath_ARM>$(VC_LibraryPath_VC_ARM);$(VC_LibraryPath_ATL_ARM);$(UniversalCRT_LibraryPath_ARM);</VC_LibraryPath_ARM>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(PreferredToolArchitecture)' == 'x64' and '$(_VC_x64_ToolsInstalled)' == 'true'">
+    <VCToolArchitecture>Native64Bit</VCToolArchitecture>
+    <VC_ExecutablePath_x86>$(VC_ExecutablePath_x64_x86);$(VC_ExecutablePath_x64_x64)</VC_ExecutablePath_x86>
+    <VC_ExecutablePath_x64>$(VC_ExecutablePath_x64_x64)</VC_ExecutablePath_x64>
+    <VC_ExecutablePath_ARM>$(VC_ExecutablePath_x64_ARM);$(VC_ExecutablePath_x64_x64)</VC_ExecutablePath_ARM>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(VCToolArchitecture)' != 'Native64Bit'">
+    <VCToolArchitecture>Native32Bit</VCToolArchitecture>
+    <VC_ExecutablePath_x86>$(VC_ExecutablePath_x86_x86)</VC_ExecutablePath_x86>
+    <VC_ExecutablePath_x64>$(VC_ExecutablePath_x86_x64);$(VC_ExecutablePath_x86_x86)</VC_ExecutablePath_x64>
+    <VC_ExecutablePath_ARM>$(VC_ExecutablePath_x86_ARM);$(VC_ExecutablePath_x86_x86)</VC_ExecutablePath_ARM>
+  </PropertyGroup>
+
+  <!-- WindowsSDK tools architecture needs to match VC tools -->
+  <PropertyGroup>
+    <WindowsSDKToolArchitecture>$(VCToolArchitecture)</WindowsSDKToolArchitecture>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(WindowsSDKToolArchitecture)' == 'Native64Bit'">
+    <WindowsSDK_ExecutablePath>$(WindowsSDK_ExecutablePath_x64);$(WindowsSDK_ExecutablePath_x86)</WindowsSDK_ExecutablePath>
+    <WindowsSdk_71A_ExecutablePath Condition="'$(WindowsSdkDir_71A)' != ''">$(WindowsSdk_71A_ExecutablePath_x64)</WindowsSdk_71A_ExecutablePath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(WindowsSDKToolArchitecture)' != 'Native64Bit'">
+    <WindowsSDK_ExecutablePath>$(WindowsSDK_ExecutablePath_x86)</WindowsSDK_ExecutablePath>
+    <WindowsSdk_71A_ExecutablePath Condition="'$(WindowsSdkDir_71A)' != ''">$(WindowsSdk_71A_ExecutablePath_x86)</WindowsSdk_71A_ExecutablePath>
+  </PropertyGroup>
+  
+  <!-- Msbuild tools -->
+  <PropertyGroup>
+    <MSBuild_ExecutablePath>$(MSBuildToolsPath32);$(MSBuildFrameworkToolsPath32)</MSBuild_ExecutablePath>
+    <MSBuild_ExecutablePath Condition="'$(VCToolArchitecture)' == 'Native64Bit'">$(MSBuildToolsPath);$(MSBuildFrameworkToolsPath);$(MSBuild_ExecutablePath)</MSBuild_ExecutablePath>
+  </PropertyGroup>
+  
+  <!-- VS tools -->
+  <PropertyGroup>
+     <VS_ExecutablePath>$(VSInstallDir)Common7\tools;$(VSInstallDir)Common7\ide;$(MSBuildProgramFiles32)\HTML Help Workshop;</VS_ExecutablePath>
+  </PropertyGroup>
+
+  <!-- Set the property used in Microsoft.Cpp.AppContainerApplication.props and in Microsoft.Common.targets for reference resolution -->
+  <PropertyGroup>
+    <TargetPlatformWinMDLocation Condition="'$(TargetPlatformWinMDLocation)' == ''">$(WindowsSDK_MetadataPath)</TargetPlatformWinMDLocation>
+  </PropertyGroup>
+
+  <!-- Default debugger properties -->
+  <PropertyGroup>
+    <!-- Local Windows debugger -->
+    <LocalDebuggerDebuggerType>Auto</LocalDebuggerDebuggerType>
+    <UseLegacyManagedDebugger>true</UseLegacyManagedDebugger>
+
+    <!-- LocalDebuggerCommand is defined into an empty $(TargetPath) for the property page, it is later redefined to its proper value. -->
+    <LocalDebuggerCommand Condition="'$(TargetPath)' != ''">$(TargetPath)</LocalDebuggerCommand>
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerMergeEnvironment>true</LocalDebuggerMergeEnvironment>
+    <LocalDebuggerAttach>False</LocalDebuggerAttach>
+    <LocalDebuggerSQLDebugging>False</LocalDebuggerSQLDebugging>
+
+    <!-- Remote Windows debugger -->
+    <RemoteDebuggerDebuggerType>Auto</RemoteDebuggerDebuggerType>
+    <RemoteDebuggerWorkingDirectory>$(ProjectDir)</RemoteDebuggerWorkingDirectory>
+    <RemoteDebuggerServerName>$(COMPUTERNAME)</RemoteDebuggerServerName>
+    <RemoteDebuggerConnection>RemoteWithAuthentication</RemoteDebuggerConnection>
+    <RemoteDebuggerAttach>False</RemoteDebuggerAttach>
+    <RemoteDebuggerSQLDebugging>False</RemoteDebuggerSQLDebugging>
+    <RemoteDebuggerDeployDebugCppRuntime Condition="'$(UseDebugLibraries)' == 'true'">true</RemoteDebuggerDeployDebugCppRuntime>
+
+    <!-- MPI Cluster Debugger -->
+    <MpiDebuggerSchedulerNode>localhost/1</MpiDebuggerSchedulerNode>
+    <MpiDebuggerApplicationCommand Condition="'$(TargetPath)' != ''">$(TargetFileName)</MpiDebuggerApplicationCommand>
+    <MpiDebuggerDebuggerType>Auto</MpiDebuggerDebuggerType>
+    <MpiDebuggerNetworkSecurityMode>AnyAddress</MpiDebuggerNetworkSecurityMode>
+    <MpiDebuggerSchedulerTimeout>5000</MpiDebuggerSchedulerTimeout>
+    <MpiDebuggerDeployCommonRuntime>True</MpiDebuggerDeployCommonRuntime>
+    <MpiDebuggerCleanupDeployment>True</MpiDebuggerCleanupDeployment>
+
+    <!-- Web Browser debugger -->
+    <WebBrowserDebuggerDebuggerType>Auto</WebBrowserDebuggerDebuggerType>
+
+    <!-- Web Service debugger-->
+    <WebServiceDebuggerDebuggerType>Auto</WebServiceDebuggerDebuggerType>
+    <WebServiceDebuggerSQLDebugging>False</WebServiceDebuggerSQLDebugging>
+
+    <!-- GPU debugger-->
+    <LocalGPUDebuggerTargetType Condition="'$(GPUDebuggerTargetType)' == ''">{F4453496-1DB8-47F8-A7D5-31EBDDC2EC96}</LocalGPUDebuggerTargetType>
+    <RemoteGPUDebuggerTargetType Condition="'$(GPUDebuggerTargetType)' == ''">{F4453496-1DB8-47F8-A7D5-31EBDDC2EC96}</RemoteGPUDebuggerTargetType>
+    <GPURefDebuggerBreakOnAllThreads Condition="'$(GPURefDebuggerBreakOnAllThreads)' == ''">GPURefBreakOncePerWarp</GPURefDebuggerBreakOnAllThreads>
+    
+    <DebuggerLaunchApplication>true</DebuggerLaunchApplication>
+    <AllowLocalNetworkLoopback>true</AllowLocalNetworkLoopback>
+    <DebuggerType>NativeOnly</DebuggerType>
+    <DebuggerRequireAuthentication>true</DebuggerRequireAuthentication>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Language>C++</Language>
+    <DefaultLanguageSourceExtension>.cpp</DefaultLanguageSourceExtension>
+  </PropertyGroup>
+
+  <!-- Define defaults for all tools for property page-->
+  <PropertyGroup>
+    <TargetName Condition="'$(TargetName)' == ''">$(ProjectName)</TargetName>
+    <ExtensionsToDeleteOnClean Condition="'$(ExtensionsToDeleteOnClean)' == ''">*.cdf;*.cache;*.obj;*.obj.enc;*.ilk;*.ipdb;*.iobj;*.resources;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.tlog;*.manifest;*.res;*.pch;*.exp;*.idb;*.rep;*.xdc;*.pdb;*_manifest.rc;*.bsc;*.sbr;*.xml;*.metagen;*.bi</ExtensionsToDeleteOnClean>
+    <IncludeVersionInInteropName Condition="'$(IncludeVersionInInteropName)'==''" >true</IncludeVersionInInteropName>
+    <InteropOutputPath Condition="'$(InteropOutputPath)'==''" >Interop\</InteropOutputPath>
+    <EmbedManifest Condition="'$(EmbedManifest)'==''">true</EmbedManifest>
+    <PreBuildEventUseInBuild Condition="'$(PreBuildEventUseInBuild)' == ''">true</PreBuildEventUseInBuild>
+    <PreLinkEventUseInBuild Condition="'$(PreLinkEventUseInBuild)' == ''">true</PreLinkEventUseInBuild>
+    <PostBuildEventUseInBuild Condition="'$(PostBuildEventUseInBuild)' == ''">true</PostBuildEventUseInBuild>
+    <DocumentLibraryDependencies Condition="'$(DocumentLibraryDependencies)' == ''">true</DocumentLibraryDependencies>
+
+    <!-- CLR enabled -->
+    <EnableManagedIncrementalBuild Condition="$(EnableManagedIncrementalBuild)=='' and '$(CLRSupport)'!='' and '$(CLRSupport)'!='false'">true</EnableManagedIncrementalBuild>
+    <EnableManagedIncrementalBuild Condition="$(EnableManagedIncrementalBuild)==''">false</EnableManagedIncrementalBuild>
+    <IgnoreImportLibrary Condition="$(IgnoreImportLibrary)=='' and '$(CLRSupport)'!='' and '$(CLRSupport)'!='false'">true</IgnoreImportLibrary>
+    <IgnoreImportLibrary Condition="$(IgnoreImportLibrary)==''">false</IgnoreImportLibrary>
+    <GenerateManifest Condition="$(GenerateManifest)==''">true</GenerateManifest>
+
+    <!-- DelayImp.lib -->
+    <DelayImplib Condition="'$(DelayImplib)' == ''">Delayimp.lib</DelayImplib>
+  </PropertyGroup>
+
+  <!-- Import CL and Link defaults-->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cl.Common.props"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Link.Common.props"/>
+  <Import Condition="exists('$(VCTargetsPath)\Microsoft.CodeAnalysis.props')" Project="$(VCTargetsPath)\Microsoft.CodeAnalysis.props"/>
+
+  <ItemDefinitionGroup>
+    <CustomBuild>
+      <Message                     Condition="'%(CustomBuild.Message)'                    == ''">Performing Custom Build Tools</Message>
+      <LinkObjects                 Condition="'%(CustomBuild.LinkObjects)'                == ''">true</LinkObjects>
+      <TreatOutputAsContent        Condition="'%(CustomBuild.TreatOutputAsContent)'       == ''">false</TreatOutputAsContent>
+      <TrackerLogDirectory         Condition="'%(CustomBuild.TrackerLogDirectory)'        == ''">$(TLogLocation)</TrackerLogDirectory>
+      <MinimalRebuildFromTracking  Condition="'%(CustomBuild.MinimalRebuildFromTracking)' == ''">true</MinimalRebuildFromTracking>
+      <AcceptableNonZeroExitCodes  Condition="'%(CustomBuild.AcceptableNonZeroExitCodes)' == ''">$(AcceptableNonZeroExitCodes)</AcceptableNonZeroExitCodes>
+    </CustomBuild>
+    <CustomBuildStep>
+      <Message                     Condition="'%(CustomBuildStep.Message)'==''" >Performing Custom Build Step</Message>
+    </CustomBuildStep>
+    <Lib>
+      <TrackerLogDirectory         Condition="'%(Lib.TrackerLogDirectory)'          == ''">$(TLogLocation)</TrackerLogDirectory>
+      <MinimalRebuildFromTracking  Condition="'%(Lib.MinimalRebuildFromTracking)'   == ''">true</MinimalRebuildFromTracking>
+      <OutputFile                  Condition="'%(Lib.OutputFile)'                   == ''">$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <SuppressStartupBanner       Condition="'%(Lib.SuppressStartupBanner)'        == ''">true</SuppressStartupBanner>
+      <AcceptableNonZeroExitCodes  Condition="'%(Lib.AcceptableNonZeroExitCodes)'   == ''">$(AcceptableNonZeroExitCodes)</AcceptableNonZeroExitCodes>
+    </Lib>
+    <Midl>
+      <TypeLibraryName              Condition="'%(Midl.TypeLibraryName)'                    == ''">$(IntDir)$(ProjectName).tlb</TypeLibraryName>
+      <WarningLevel                 Condition="'%(Midl.WarningLevel)'                       == ''">1</WarningLevel>
+      <DefaultCharType              Condition="'%(Midl.DefaultCharType)'                    == ''">Signed</DefaultCharType>
+      <SuppressStartupBanner        Condition="'%(Midl.SuppressStartupBanner)'              == ''">true</SuppressStartupBanner>
+      <TrackerLogDirectory          Condition="'%(Midl.TrackerLogDirectory)'                == ''">$(TLogLocation)</TrackerLogDirectory>
+      <MinimalRebuildFromTracking   Condition="'%(Midl.MinimalRebuildFromTracking)'         == ''">true</MinimalRebuildFromTracking>
+      <AcceptableNonZeroExitCodes   Condition="'%(Midl.AcceptableNonZeroExitCodes)'         == ''">$(AcceptableNonZeroExitCodes)</AcceptableNonZeroExitCodes>
+      <IgnoreStandardIncludePath    Condition="'%(Midl.IgnoreStandardIncludePath)'          == ''">false</IgnoreStandardIncludePath>
+      <WarnAsError                  Condition="'%(Midl.WarnAsError)'                        == ''">false</WarnAsError>
+      <GenerateTypeLibrary          Condition="'%(Midl.GenerateTypeLibrary)'                == ''">true</GenerateTypeLibrary>
+      <ErrorCheckAllocations        Condition="'%(Midl.ErrorCheckAllocations)'              == ''">false</ErrorCheckAllocations>
+      <ErrorCheckBounds             Condition="'%(Midl.ErrorCheckBounds)'                   == ''">false</ErrorCheckBounds>
+      <ErrorCheckEnumRange          Condition="'%(Midl.ErrorCheckEnumRange)'                == ''">false</ErrorCheckEnumRange>
+      <ErrorCheckRefPointers        Condition="'%(Midl.ErrorCheckRefPointers)'              == ''">false</ErrorCheckRefPointers>
+      <ErrorCheckStubData           Condition="'%(Midl.ErrorCheckStubData)'                 == ''">false</ErrorCheckStubData>
+      <StructMemberAlignment        Condition="'%(Midl.StructMemberAlignment)'              == ''">NotSet</StructMemberAlignment>
+      <HeaderFileName               Condition="'%(Midl.HeaderFileName)'                     == ''">%(Filename)_h.h</HeaderFileName>
+    </Midl>
+    <FxCompile>
+      <ObjectFileOutput             Condition="'%(FxCompile.ObjectFileOutput)'              == ''">$(OutDir)%(Filename).cso</ObjectFileOutput>
+      <TrackerLogDirectory          Condition="'%(FxCompile.TrackerLogDirectory)'           == ''">$(TLogLocation)</TrackerLogDirectory>
+      <EntryPointName               Condition="'%(FxCompile.EntryPointName)'                == ''">main</EntryPointName>
+      <SuppressStartupBanner        Condition="'%(FxCompile.SuppressStartupBanner)'         == ''">true</SuppressStartupBanner>      
+      <ShaderModel                  Condition="'$(UseDebugLibraries)' == 'true' and '%(FxCompile.ShaderModel)' == ''">4.0_level_9_3</ShaderModel>
+      <ShaderModel                  Condition="'$(UseDebugLibraries)' != 'true' and '%(FxCompile.ShaderModel)' == ''">4.0_level_9_1</ShaderModel>
+      <MinimalRebuildFromTracking   Condition="'%(FxCompile.MinimalRebuildFromTracking)'    == ''">true</MinimalRebuildFromTracking>
+      <DisableOptimizations         Condition="'$(UseDebugLibraries)' == 'true' and '%(FxCompile.ShaderModel)' != '2.0' and '%(FxCompile.ShaderModel)' != '3.0' and '%(FxCompile.ShaderModel)' != '4.0_level_9_1'">true</DisableOptimizations>
+      <EnableDebuggingInformation   Condition="'$(UseDebugLibraries)' == 'true' and '%(FxCompile.ShaderModel)' != '2.0' and '%(FxCompile.ShaderModel)' != '3.0' and '%(FxCompile.ShaderModel)' != '4.0_level_9_1'">true</EnableDebuggingInformation>
+      <DisableOptimizations         Condition="'$(UseDebugLibraries)'                       != 'true'">false</DisableOptimizations>
+      <EnableDebuggingInformation   Condition="'$(UseDebugLibraries)'                       != 'true'">false</EnableDebuggingInformation>
+    </FxCompile>
+    <ResourceCompile>
+      <ResourceOutputFileName       Condition="'%(ResourceCompile.ResourceOutputFileName)'        == ''">$(IntDir)%(Filename).res</ResourceOutputFileName>
+      <Culture                      Condition="'%(ResourceCompile.Culture)'                       == ''">0x0409</Culture>
+      <TrackerLogDirectory          Condition="'%(ResourceCompile.TrackerLogDirectory)'           == ''">$(TLogLocation)</TrackerLogDirectory>
+      <MinimalRebuildFromTracking   Condition="'%(ResourceCompile.MinimalRebuildFromTracking)'    == ''">true</MinimalRebuildFromTracking>
+      <AcceptableNonZeroExitCodes   Condition="'%(ResourceCompile.AcceptableNonZeroExitCodes)'    == ''">$(AcceptableNonZeroExitCodes)</AcceptableNonZeroExitCodes>
+    </ResourceCompile>
+    <Manifest>
+      <TrackerLogDirectory          Condition="'%(Manifest.TrackerLogDirectory)'            == ''">$(TLogLocation)</TrackerLogDirectory>
+      <MinimalRebuildFromTracking   Condition="'%(Manifest.MinimalRebuildFromTracking)'     == ''">true</MinimalRebuildFromTracking>
+      <SuppressStartupBanner        Condition="'%(Manifest.SuppressStartupBanner)'          == ''">true</SuppressStartupBanner>
+      <AcceptableNonZeroExitCodes   Condition="'%(Manifest.AcceptableNonZeroExitCodes)'     == ''">$(AcceptableNonZeroExitCodes)</AcceptableNonZeroExitCodes>
+      <VerboseOutput                Condition="'%(Manifest.VerboseOutput)'                  == ''">true</VerboseOutput>
+      <GenerateCatalogFiles         Condition="'%(Manifest.GenerateCatalogFiles)'           == ''">false</GenerateCatalogFiles>
+      <UpdateFileHashes             Condition="'%(Manifest.UpdateFileHashes)'               == ''">false</UpdateFileHashes>
+      <OutputManifestFile           Condition="'$(EmbedManifest)'                           == 'false'">$(TargetPath).manifest</OutputManifestFile>
+      <!-- The manifest has been embedded via Link, but we might still need to run MT.  Place the output manifest into IntDir as it isn't part of the final outputs. -->
+      <OutputManifestFile           Condition="'$(EmbedManifest)'                           == 'true' AND '$(EmbedManifestBy)'=='LINK'">$(IntDir)$(TargetName)$(TargetExt).embed.manifest</OutputManifestFile>
+    </Manifest>
+    <ManifestResourceCompile>
+      <ResourceOutputFileName       Condition="'%(ManifestResourceCompile.ResourceOutputFileName)' == '' and '$(EmbedManifestBy)'=='LINK'">$(IntDir)$(TargetName)$(TargetExt).embed.manifest.res</ResourceOutputFileName>
+    </ManifestResourceCompile>
+    <XdcMake>
+      <TrackerLogDirectory          Condition="'%(XdcMake.TrackerLogDirectory)'            == ''">$(TLogLocation)</TrackerLogDirectory>
+      <MinimalRebuildFromTracking   Condition="'%(XdcMake.MinimalRebuildFromTracking)'     == ''">true</MinimalRebuildFromTracking>
+      <SuppressStartupBanner        Condition="'%(XdcMake.SuppressStartupBanner)'          == ''">true</SuppressStartupBanner>
+      <OutputFile                   Condition="'%(XdcMake.OutputFile)'                     == ''">$(OutDir)$(TargetName).xml</OutputFile>
+      <AcceptableNonZeroExitCodes   Condition="'%(XdcMake.AcceptableNonZeroExitCodes)'     == ''">$(AcceptableNonZeroExitCodes)</AcceptableNonZeroExitCodes>
+      <DocumentLibraryDependencies  Condition="'%(XdcMake.DocumentLibraryDependencies)'    == ''">true</DocumentLibraryDependencies>
+    </XdcMake>
+    <BscMake>
+      <TrackerLogDirectory          Condition="'%(BscMake.TrackerLogDirectory)'            == ''">$(TLogLocation)</TrackerLogDirectory>
+      <MinimalRebuildFromTracking   Condition="'%(BscMake.MinimalRebuildFromTracking)'     == ''">true</MinimalRebuildFromTracking>
+      <SuppressStartupBanner        Condition="'%(BscMake.SuppressStartupBanner)'          == ''">true</SuppressStartupBanner>
+      <PreserveSBR                  Condition="'%(BscMake.PreserveSBR)'                    == ''">false</PreserveSBR>
+      <OutputFile                   Condition="'%(BscMake.OutputFile)'                     == ''">$(OutDir)$(TargetName).bsc</OutputFile>
+      <AcceptableNonZeroExitCodes   Condition="'%(BscMake.AcceptableNonZeroExitCodes)'     == ''">$(AcceptableNonZeroExitCodes)</AcceptableNonZeroExitCodes>
+    </BscMake>
+    <XSD>
+      <TrackerLogDirectory          Condition="'%(XSD.TrackerLogDirectory)'            == ''">$(TLogLocation)</TrackerLogDirectory>
+      <MinimalRebuildFromTracking   Condition="'%(XSD.MinimalRebuildFromTracking)'     == ''">true</MinimalRebuildFromTracking>
+      <SuppressStartupBanner        Condition="'%(XSD.SuppressStartupBanner)'          == ''">true</SuppressStartupBanner>
+      <Language                     Condition="'%(XSD.Language)'                       == ''">cpp</Language>
+      <Namespace                    Condition="'%(XSD.Namespace)'                      == ''">$(TargetName)</Namespace>
+      <GenerateFromSchema           Condition="'%(XSD.GenerateFromSchema)'             == ''">dataset</GenerateFromSchema>
+      <AcceptableNonZeroExitCodes   Condition="'%(XSD.AcceptableNonZeroExitCodes)'     == ''">$(AcceptableNonZeroExitCodes)</AcceptableNonZeroExitCodes>
+    </XSD>
+    <ProjectReference>
+      <LinkLibraryDependencies      Condition="'%(ProjectReference.LinkLibraryDependencies)' == '' and '$(ConfigurationType)' == 'StaticLibrary'">false</LinkLibraryDependencies>
+      <LinkLibraryDependencies      Condition="'%(ProjectReference.LinkLibraryDependencies)' == ''">true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs   Condition="'%(ProjectReference.UseLibraryDependencyInputs)' == ''">false</UseLibraryDependencyInputs>
+      <ReferenceOutputAssembly      Condition="'%(ProjectReference.ReferenceOutputAssembly)' == ''">true</ReferenceOutputAssembly>
+      <Private                      Condition="'%(ProjectReference.Private)' == ''">true</Private>
+      <SetPlatform                  Condition="'%(ProjectReference.SetPlatform)' == '' and '$(Platform_Actual)' == 'x86'">Platform=x86</SetPlatform>
+    </ProjectReference>
+    <Reference>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+    </Reference>
+    <COMReference>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+    </COMReference>
+  </ItemDefinitionGroup>
+
+  <ItemGroup>
+    <!--  Unique items for the project-->
+    <CustomBuildStep Include="$(ProjectName)" />
+    <PreBuildEvent Include="$(ProjectName)" />
+    <PreLinkEvent Include="$(ProjectName)" />
+    <PostBuildEvent Include="$(ProjectName)" />
+  </ItemGroup>
+
+  <ItemDefinitionGroup>
+    <ResourceCompile>
+      <SuppressStartupBanner Condition="'%(ResourceCompile.SuppressStartupBanner)' == ''">true</SuppressStartupBanner>
+    </ResourceCompile>
+    <ManifestResourceCompile>
+      <SuppressStartupBanner Condition="'%(ManifestResourceCompile.SuppressStartupBanner)'==''">true</SuppressStartupBanner>
+    </ManifestResourceCompile>
+    <Manifest>
+      <EnableDPIAwareness Condition="'$(EnableDPIAwareness)' == '' AND '$(UseOfMFC)' == 'static'">true</EnableDPIAwareness>
+      <EnableDPIAwareness Condition="'$(EnableDPIAwareness)' == '' AND '$(UseOfMFC)' == 'dynamic'">true</EnableDPIAwareness>
+      <EnableDPIAwareness Condition="'$(EnableDPIAwareness)' == '' AND '$(UseOfMFC)' != 'static' AND '$(UseOfMFC)' != 'dynamic'">false</EnableDPIAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+
+  <!-- Whole Program Optimization -->
+  <PropertyGroup>
+    <WholeProgramOptimizationAvailabilityTrue Condition="(exists('$(VCTargetsPath)\Microsoft.Cpp.WholeProgramOptimization.props'))">true</WholeProgramOptimizationAvailabilityTrue>
+    <WholeProgramOptimizationAvailabilityInstrument Condition="(exists('$(VCTargetsPath)\Microsoft.Cpp.pginstrument.props'))">true</WholeProgramOptimizationAvailabilityInstrument>
+    <WholeProgramOptimizationAvailabilityOptimize Condition="(exists('$(VCTargetsPath)\Microsoft.Cpp.pgoptimize.props'))">true</WholeProgramOptimizationAvailabilityOptimize>
+    <WholeProgramOptimizationAvailabilityUpdate Condition="(exists('$(VCTargetsPath)\Microsoft.Cpp.pgupdate.props'))">true</WholeProgramOptimizationAvailabilityUpdate>
+  </PropertyGroup>
+
+  <ImportGroup Label="PropertySheets" Condition="'$(ConfigurationType)' != 'Makefile'">
+    <!-- Core Windows Libraries -->
+    <Import Condition="'$(WindowsAppContainer)' == 'true'" Project="$(VCTargetsPath)\Microsoft.Cpp.AppContainerApplication.props" />
+
+    <Import Condition="'$(NonCoreWin)' != 'true' and ( '$(UseOfMFC)' == 'false' OR '$(UseOfMFC)' == '')" Project="$(VCTargetsPath)\Microsoft.Cpp.CoreWin.props"/>
+
+    <!-- MFC -->
+    <Import Condition="'$(UseOfMFC)' == 'Static'"   Project="$(VCTargetsPath)\Microsoft.Cpp.MFCStatic.props"/>
+    <Import Condition="'$(UseOfMFC)' == 'Dynamic'"  Project="$(VCTargetsPath)\Microsoft.Cpp.MFCDynamic.props"/>
+
+    <!-- Character Set -->
+    <Import Condition="'$(CharacterSet)' == 'Unicode'"    Project="$(VCTargetsPath)\Microsoft.Cpp.unicodesupport.props"/>
+    <Import Condition="'$(CharacterSet)' == 'MultiByte'"  Project="$(VCTargetsPath)\Microsoft.Cpp.MultiByteCharSupport.props"/>
+
+    <!-- Configuration Type -->
+    <Import Condition="'$(ConfigurationType)' == 'DynamicLibrary'"  Project="$(VCTargetsPath)\Microsoft.Cpp.WinDLL.props"/>
+    <Import Condition="'$(ConfigurationType)' == 'Application'"     Project="$(VCTargetsPath)\Microsoft.Cpp.Application.props"/>
+
+    <!-- Whole Program Optimization -->
+    <Import Condition="'$(WholeProgramOptimizationDelayImport)' != 'true' and '$(WholeProgramOptimization)' == 'true'"          Project="$(VCTargetsPath)\Microsoft.Cpp.WholeProgramOptimization.props"/>
+    <Import Condition="'$(WholeProgramOptimization)' == 'FASTLTCG'" Project="$(VCTargetsPath)\Microsoft.Cpp.WholeProgramOptimization.props"/>
+    <Import Condition="'$(WholeProgramOptimizationDelayImport)' != 'true' and '$(WholeProgramOptimization)' == 'PGInstrument'"  Project="$(VCTargetsPath)\Microsoft.Cpp.pginstrument.props"/>
+    <Import Condition="'$(WholeProgramOptimizationDelayImport)' != 'true' and '$(WholeProgramOptimization)' == 'PGOptimize'"    Project="$(VCTargetsPath)\Microsoft.Cpp.pgoptimize.props"/>
+    <Import Condition="'$(WholeProgramOptimizationDelayImport)' != 'true' and '$(WholeProgramOptimization)' == 'PGUpdate'"      Project="$(VCTargetsPath)\Microsoft.Cpp.pgupdate.props"/>
+  </ImportGroup>
+    
+  <ImportGroup Label="PropertySheets">
+    <!-- Common Language Runtime Support  -->
+    <Import Condition="'$(CLRSupport)' == 'true'"       Project="$(VCTargetsPath)\Microsoft.Cpp.ManagedExtensions.props"/>
+    <Import Condition="'$(CLRSupport)' == 'Pure'"       Project="$(VCTargetsPath)\Microsoft.Cpp.ManagedExtensionsPure.props"/>
+    <Import Condition="'$(CLRSupport)' == 'Safe'"       Project="$(VCTargetsPath)\Microsoft.Cpp.ManagedExtensionsSafe.props"/>
+    <!-- OldSyntax support has been removed. We're leaving this here so that the compiler errors out for projects that still have it set -->
+    <Import Condition="'$(CLRSupport)' == 'OldSyntax'"  Project="$(VCTargetsPath)\Microsoft.Cpp.ManagedExtensionsOldSyntax.props"/>
+  </ImportGroup>
+
+  <!-- CRT SDK Reference -->
+  <PropertyGroup Condition="'$(EnableAppLocalVCLibs)' != 'true'">
+    <CrtSDKReferenceVersion Condition="'$(CrtSDKReferenceVersion)' == ''">14.0</CrtSDKReferenceVersion>
+    <CrtSDKReferenceInclude Condition="'$(CrtSDKReferenceInclude)' == ''">Microsoft.VCLibs, Version=$(CrtSDKReferenceVersion)</CrtSDKReferenceInclude>
+  </PropertyGroup>
+  
+    <!-- Applocal CRT SDK Reference, in case user wants it explicitly by setting 'UseAppLocalVcLibs' -->
+  <PropertyGroup Condition="'$(EnableAppLocalVCLibs)' == 'true'">
+    <CrtSDKReferenceVersion Condition="'$(CrtSDKReferenceVersion)' == ''">14.0</CrtSDKReferenceVersion>
+    <CrtSDKReferenceInclude Condition="'$(CrtSDKReferenceInclude)' == ''">Microsoft.VCLibs.AppLocal, Version=$(CrtSDKReferenceVersion)</CrtSDKReferenceInclude>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup Condition="'$(WindowsAppContainer)' == 'true'">
+    <ClCompile>
+      <ForcedUsingFiles>$(VCInstallDir)lib\store\references\platform.winmd;%(ForcedUsingFiles)</ForcedUsingFiles>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  
+  <!-- Project capabiltities are used to filter which Extension SDKs appear in the Add/Remove References dialog -->
+  <ItemGroup Condition="'$(SharedAssetsProject)' != 'true'">
+    <ProjectCapability Include="WindowsAppContainer" Condition="'$(WindowsAppContainer)' == 'true'"/>
+    <ProjectCapability Include="desktop" Condition="'$(WindowsAppContainer)' != 'true'"/>
+  </ItemGroup>
+
+  <!-- Manifest metadata items.                       -->
+  <!-- See Microsoft.AppxPackage.targets for details. -->
+  <ItemGroup Label="AppxManifestMetadata">
+      <AppxManifestMetadata Include="$(VCInstallDir)bin\cl.exe" />
+  </ItemGroup>
+
+</Project>

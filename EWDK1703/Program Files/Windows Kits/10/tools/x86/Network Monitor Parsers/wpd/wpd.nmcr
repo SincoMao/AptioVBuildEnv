@@ -1,0 +1,147 @@
+Version = 1
+
+BEGIN_RULE
+BEGIN_FILTER_TEXT
+(WPDMTP.ResponseReceived.MTPResponseCode != 0x2001) 
+|| (NetEvent.Header.Descriptor.Level.ToString == "WINEVENT_LEVEL_ERROR")
+END_FILTER_TEXT
+	Active = 1
+	Foreground = 255, 0, 0
+	Background = 225, 225, 225
+	Bold = 0
+	Italic = 0
+	Underline = 0
+END_RULE
+
+BEGIN_RULE
+BEGIN_FILTER_TEXT
+wpdmtp and property.EventId<2000 /*Operational events*/
+END_FILTER_TEXT
+	Active = 1
+	Foreground = 128, 0, 0
+	Background = 225, 225, 225
+	Bold = 0
+	Italic = 0
+	Underline = 0
+END_RULE
+
+BEGIN_RULE
+BEGIN_FILTER_TEXT
+wpdmtp and property.EventId==2004 /*Device Events*/
+END_FILTER_TEXT
+	Active = 1
+	Foreground = 255, 0, 128
+	Background = 225, 225, 225
+	Bold = 0
+	Italic = 0
+	Underline = 0
+END_RULE
+
+BEGIN_RULE
+BEGIN_FILTER_TEXT
+wpdmtp and (property.EventId==2000 or property.EventId==2006 or property.Eventid==2007)/* WPDMTP command*/
+END_FILTER_TEXT
+	Active = 1
+	Foreground = 18, 7, 143
+	Background = 225, 225, 225
+	Bold = 0
+	Italic = 0
+	Underline = 0
+END_RULE
+
+BEGIN_RULE
+BEGIN_FILTER_TEXT
+wpdmtp and (property.EventId==2001 or property.EventID==2002 or property.EventId==2003) /* MTP response*/
+END_FILTER_TEXT
+	Active = 1
+	Foreground = 0, 64, 0
+	Background = 225, 225, 225
+	Bold = 0
+	Italic = 0
+	Underline = 0
+END_RULE
+
+BEGIN_RULE
+BEGIN_FILTER_TEXT
+wpdmtpip
+END_FILTER_TEXT
+	Active = 1
+	Foreground = 0, 0, 0
+	Background = 198, 224, 253
+	Bold = 0
+	Italic = 0
+	Underline = 0
+END_RULE
+
+BEGIN_RULE
+BEGIN_FILTER_TEXT
+WPDMTPUS.MTPUSBResponse.ResponseHeader.Code!=0x2001
+END_FILTER_TEXT
+	Active = 1
+	Foreground = 255, 0, 0
+	Background = 224, 253, 254
+	Bold = 0
+	Italic = 0
+	Underline = 0
+END_RULE
+
+BEGIN_RULE
+BEGIN_FILTER_TEXT
+wpdmtpus
+END_FILTER_TEXT
+	Active = 1
+	Foreground = 0, 0, 0
+	Background = 224, 253, 254
+	Bold = 0
+	Italic = 0
+	Underline = 0
+END_RULE
+
+BEGIN_RULE
+BEGIN_FILTER_TEXT
+WPDAPI AND Property.HResultValue != 0
+END_FILTER_TEXT
+	Active = 1
+	Foreground = 255, 0, 0
+	Background = 251, 254, 224
+	Bold = 0
+	Italic = 0
+	Underline = 0
+END_RULE
+
+BEGIN_RULE
+BEGIN_FILTER_TEXT
+wpdapi
+END_FILTER_TEXT
+	Active = 1
+	Foreground = 0, 0, 160
+	Background = 251, 254, 224
+	Bold = 0
+	Italic = 0
+	Underline = 0
+END_RULE
+
+BEGIN_RULE
+BEGIN_FILTER_TEXT
+WPDMTPBT.EventChannelRecvdPacket.Header.PacketType == 0x115 /* PACKET_TYPE_TRANSPORT_ERROR*/
+END_FILTER_TEXT
+	Active = 1
+	Foreground = 255, 0, 0
+	Background = 237, 254, 235
+	Bold = 0
+	Italic = 0
+	Underline = 0
+END_RULE
+
+BEGIN_RULE
+BEGIN_FILTER_TEXT
+wpdmtpbt 
+END_FILTER_TEXT
+	Active = 1
+	Foreground = 0, 0, 0
+	Background = 237, 254, 235
+	Bold = 0
+	Italic = 0
+	Underline = 0
+END_RULE
+

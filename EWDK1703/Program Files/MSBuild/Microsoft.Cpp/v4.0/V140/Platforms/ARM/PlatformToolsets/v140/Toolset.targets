@@ -1,0 +1,57 @@
+﻿<!--
+***********************************************************************************************
+Toolset.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file defines the steps/targets required to build Visual C++ (version 14.0) projects
+specifically on ARM platforms.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildThisFileDirectory)ImportBefore\*.targets" Condition="Exists('$(MSBuildThisFileDirectory)ImportBefore')" />
+
+  <!-- only remote debuggers can be used for arm binaries -->
+  <PropertyGroup>
+    <UseDefaultDebuggersPropertyPageSchemas>false</UseDefaultDebuggersPropertyPageSchemas>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AppHostDebuggerPages Include="$(VCTargetsPath)$(LangID)\AppHostDebugger_Remote.xml" />
+    <DesktopDebuggerPages Include="$(VCTargetsPath)$(LangID)\debugger_remote_windows.xml" />
+  </ItemGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.CppCommon.targets" />
+
+  <PropertyGroup Condition="'$(ApplicationType)' == '' and '$(DesignTimeBuild)'!='true'">
+    <PrepareForBuildDependsOn>Desktop_PlatformPrepareForBuild;$(PrepareForBuildDependsOn)</PrepareForBuildDependsOn>
+  </PropertyGroup>
+
+  <Target Name="Desktop_PlatformPrepareForBuild" DependsOnTargets="$(Desktop_PlatformPrepareForBuildDependsOn)">
+    <!-- For desktop projects targeting win 10 SDK, check if the win10 SDK props are found -->
+    <PropertyGroup Condition="'$(TargetPlatformVersion)' != '8.1' and '$(AppContainerApplication)' != 'true'" >
+        <MissingSDKProps Condition="!Exists('$(WindowsSdkDir)\DesignTime\CommonConfiguration\Neutral\UAP\$(TargetPlatformVersion)\UAP.props')">true</MissingSDKProps>
+    </PropertyGroup>
+    <!-- For desktop projects targeting win 8.1 SDK, check if the win8.1 SDK props are found -->
+    <PropertyGroup Condition="'$(TargetPlatformVersion)' == '8.1' and '$(AppContainerApplication)' != 'true'" >
+        <MissingSDKProps Condition="!Exists('$(WindowsSdkDir)\DesignTime\CommonConfiguration\Neutral\Windows.props')">true</MissingSDKProps>
+    </PropertyGroup>
+
+    <VCMessage Code="MSB8036" Type="Error" Arguments="$(TargetPlatformVersion)" Condition="$(MissingSDKProps) == 'true'" />
+  </Target>
+
+  <PropertyGroup>
+    <PrepareForBuildDependsOn>$(PrepareForBuildDependsOn);_WindowsSDKDesktopARMSupportInstalled</PrepareForBuildDependsOn>
+  </PropertyGroup>
+  
+  <Target Name="_WindowsSDKDesktopARMSupportInstalled" >
+    <VCMessage Code="MSB8022" Type="Error" Condition="'$(DesignTimeBuild)' != 'true' and '$(WindowsSDKDesktopARMSupport)' != 'true' and '$(WindowsAppContainer)' != 'true'"/>
+  </Target>
+
+  <Import Project="$(MSBuildThisFileDirectory)ImportAfter\*.targets" Condition="Exists('$(MSBuildThisFileDirectory)ImportAfter')" />
+</Project>

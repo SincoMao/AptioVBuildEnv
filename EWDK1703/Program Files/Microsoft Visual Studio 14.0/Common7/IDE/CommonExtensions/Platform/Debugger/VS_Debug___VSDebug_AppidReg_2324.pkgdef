@@ -1,0 +1,619 @@
+[$RootKey$]
+
+[$RootKey$\AD7Metrics]
+
+[$RootKey$\AD7Metrics\EEExtensions]
+
+[$RootKey$\AD7Metrics\EEExtensions\{274F994E-C88C-4894-9054-97DAE30B5ACF}]
+"ExtensionDll"="$BaseInstallDir$\Common7\Packages\Debugger\vsdebug.dll"
+"RegistersEntryPoint"="EEExtension_UserRegister"
+"RegistersSupported"="$user"
+
+[$RootKey$\AD7Metrics\Engine]
+
+[$RootKey$\AD7Metrics\Engine\{3B476D35-A401-11D2-AAD4-00C04F990171}]
+"Name"="resource=$BaseInstallDir$\Common7\Packages\Debugger\*\vsdebugui.dll#6008"
+@="guidNativeOnlyEng"
+
+[$RootKey$\AD7Metrics\Engine\{449EC4CC-30D2-4032-9256-EE18EB41B62B}]
+"Name"="resource=$BaseInstallDir$\Common7\Packages\Debugger\*\vsdebugui.dll#6012"
+@="guidCOMPlusOnlyEng"
+
+[$RootKey$\AD7Metrics\Engine\{5FFF7536-0C87-462D-8FD2-7971D948E6DC}]
+"Name"="resource=$BaseInstallDir$\Common7\Packages\Debugger\*\vsdebugui.dll#6048"
+@="guidCOMPlusOnlyEng2"
+
+[$RootKey$\AD7Metrics\Engine\{92EF0900-2251-11D2-B72E-0000F87572EF}]
+"Name"="resource=$BaseInstallDir$\Common7\Packages\Debugger\*\vsdebugui.dll#6013"
+@="guidCOMPlusNativeEng"
+
+[$RootKey$\AD7Metrics\Engine\{E04BDE58-45EC-48DB-9807-513F78865212}]
+"Name"="resource=$BaseInstallDir$\Common7\Packages\Debugger\*\vsdebugui.dll#6012"
+@="guidCOMPlusSQLLocalEng"
+
+[$RootKey$\AD7Metrics\Engine\{FB0D4648-F776-4980-95F8-BB7F36EBC1EE}]
+"Name"="resource=$BaseInstallDir$\Common7\Packages\Debugger\*\vsdebugui.dll#6049"
+@="guidCOMPlusOnlyEng4"
+
+[$RootKey$\AppCommandLine]
+"ExeName"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"JitDebug"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\AppCommandLine\Configfirewall]
+"Arguments"="0"
+"DemandLoad"=dword:00000001
+"ElevationRequired"=dword:00000001
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\AppCommandLine\vs7jitdebugginghelp]
+"Arguments"="0"
+"DemandLoad"=dword:00000000
+"HelpString"="#5078"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\AutoLoadPackages]
+
+[$RootKey$\AutoLoadPackages\{F1536EF8-92EC-443C-9ED7-FDADF150DA82}]
+"{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"=dword:00000000
+
+[$RootKey$\AutomationProperties]
+
+[$RootKey$\AutomationProperties\Debugging]
+
+[$RootKey$\AutomationProperties\Debugging\EditAndContinue]
+"Name"="Debugging.EditAndContinue"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\AutomationProperties\Debugging\General]
+"Name"="Debugging.General"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\AutomationProperties\Debugging\JustInTime]
+"Name"="Debugging.JustInTime"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\AutomationProperties\Debugging\Native]
+"Name"="Debugging.Native"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\CLSID]
+
+[$RootKey$\CLSID\{4FF9DEF4-8922-4D02-9379-3FFA64D1D639}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\vsdebug.dll"
+"ThreadingModel"="Apartment"
+@="CLSID_SDMProgramProvider"
+
+[$RootKey$\CLSID\{5CEB3CEF-F536-428B-A798-D1A31C67167C}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\vsdebug.dll"
+"ThreadingModel"="Apartment"
+@="VSDebugFindSourcePage"
+
+[$RootKey$\CLSID\{5EB7D9F7-AF21-400E-A2C4-7FD6396F8641}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\vsdebug.dll"
+"ThreadingModel"="Apartment"
+@="Session Debug Manager"
+
+[$RootKey$\CLSID\{019e07aa-9ad6-406c-878d-d6e2987209ac}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\vsdebug.dll"
+"ThreadingModel"="Apartment"
+@="DebugRemoteDiscovery"
+
+[$RootKey$\Debugger]
+"AspProcessNames"="inetinfo.exe;mtx.exe;dllhost.exe;w3wp.exe"
+"GeneratedFileExtensions"=hex(7):2e,00,61,00,73,00,70,00,78,00,00,00,2e,00,61,\
+  00,73,00,70,00,00,00,2e,00,61,00,73,00,68,00,78,00,00,00,2e,00,61,00,78,00,\
+  64,00,00,00,2e,00,63,00,73,00,68,00,74,00,6d,00,6c,00,00,00,2e,00,76,00,62,\
+  00,68,00,74,00,6d,00,6c,00,00,00,00,00
+"StopDebuggingMessageFilterTimeout"=dword:00001388
+
+[$RootKey$\FontAndColors]
+
+[$RootKey$\FontAndColors\AllDebuggerVarWnds]
+"Category"="{35B25E75-AB53-4C5D-80EA-6682EBB2BBBD}"
+"NameID"=dword:00000326
+"Package"="{3B70A4AE-BB91-4ABE-A05C-C4DE07B9763E}"
+
+[$RootKey$\FontAndColors\Autos]
+"Category"="{A7EE6BEE-D0AA-4B2F-AD9D-748276A725F6}"
+"NameID"=dword:00000321
+"Package"="{3B70A4AE-BB91-4ABE-A05C-C4DE07B9763E}"
+
+[$RootKey$\FontAndColors\CallStack]
+"Category"="{FD2219AF-EBF8-4116-A801-3B503C48DFF0}"
+"NameID"=dword:00000323
+"Package"="{3B70A4AE-BB91-4ABE-A05C-C4DE07B9763E}"
+
+[$RootKey$\FontAndColors\DataTips]
+"Category"="{F7B7B222-E186-48DF-A5EE-174E8129891B}"
+"NameID"=dword:00000325
+"Package"="{3B70A4AE-BB91-4ABE-A05C-C4DE07B9763E}"
+
+[$RootKey$\FontAndColors\DebugLocation]
+"Category"="{B20C0001-0836-4535-A5E8-96E595B1F094}"
+"NameID"=dword:00001435
+"Package"="{3B70A4AE-BB91-4ABE-A05C-C4DE07B9763E}"
+
+[$RootKey$\FontAndColors\Locals]
+"Category"="{8259ACED-490A-41B3-A0FB-64C842CCDC80}"
+"NameID"=dword:00000322
+"Package"="{3B70A4AE-BB91-4ABE-A05C-C4DE07B9763E}"
+
+[$RootKey$\FontAndColors\Parallel Watch]
+"Category"="{E02A3CCD-2D8E-4628-97D7-1C0921DFA2F3}"
+"NameID"=dword:00000327
+"Package"="{3B70A4AE-BB91-4ABE-A05C-C4DE07B9763E}"
+
+[$RootKey$\FontAndColors\Threads]
+"Category"="{BB8FE807-A186-404A-81FA-D20B908CA93B}"
+"NameID"=dword:00000324
+"Package"="{3B70A4AE-BB91-4ABE-A05C-C4DE07B9763E}"
+
+[$RootKey$\FontAndColors\Watch]
+"Category"="{358463D0-D084-400F-997E-A34FC570BC72}"
+"NameID"=dword:00000320
+"Package"="{3B70A4AE-BB91-4ABE-A05C-C4DE07B9763E}"
+
+[$RootKey$\FontAndColors\Performance Tips]
+"Category"="{7A4C6CC9-8404-4B95-AF88-F11B657C7268}"
+"NameID"=dword:00001FBE
+"Package"="{3B70A4AE-BB91-4ABE-A05C-C4DE07B9763E}"
+
+[$RootKey$\HandleInComingCall]
+
+[$RootKey$\HandleInComingCall\{037EDD0F-8551-4F7F-8CA0-04D9E29F532D}]
+@="IDebugDocumentPositionOffset2"
+
+[$RootKey$\HandleInComingCall\{0EA91CF7-8542-4780-8D6B-7BD686CD2471}]
+@="IDebugBreakpointChecksumRequest2"
+
+[$RootKey$\HandleInComingCall\{12C1180E-C257-4485-9800-AF484B699713}]
+@="IDebugCoreServer3"
+
+[$RootKey$\HandleInComingCall\{17BF8FA3-4C5A-49A3-B2F8-5942E1EA287E}]
+@="IDebugCoreServer2"
+
+[$RootKey$\HandleInComingCall\{1EDE3B4B-35E7-4B97-8133-02845D600174}]
+@="IDebugFunctionPosition2"
+
+[$RootKey$\HandleInComingCall\{302F0F55-1EDE-4777-9B38-115E1F229D56}]
+@="IDebugDefaultPort2"
+
+[$RootKey$\HandleInComingCall\{33EC72E3-002F-4966-B91C-5CE2F7BA5124}]
+@="IDebugDocumentTextEvents2"
+
+[$RootKey$\HandleInComingCall\{43286FEA-6997-4543-803E-60A20C473DE5}]
+@="IDebugProcess2"
+
+[$RootKey$\HandleInComingCall\{5C18A5FE-7150-4E66-8246-27BFB0E7BFD9}]
+@="IDebugBreakpointRequest3"
+
+[$RootKey$\HandleInComingCall\{6015FD18-8257-4DF3-AC42-F074DEDD4CBD}]
+@="IDebugBreakpointRequest2"
+
+[$RootKey$\HandleInComingCall\{69D172EF-F2C4-44E1-89F7-C86231E706E9}]
+@="IDebugProgram2"
+
+[$RootKey$\HandleInComingCall\{79293CC8-D9D9-43F5-97AD-0BCC5A688776}]
+@="IDebugPort2"
+
+[$RootKey$\HandleInComingCall\{80F3A462-2B43-45A5-98A4-7A519B114899}]
+@="IDebugCausalityEventCallback90"
+
+[$RootKey$\HandleInComingCall\{8948300F-8BD5-4728-A1D8-83D172295A9D}]
+@="IDebugSession2"
+
+[$RootKey$\HandleInComingCall\{8D36BEB8-9BFE-47DD-A11B-7BA1DE18E449}]
+@="IDebugPortRequest2"
+
+[$RootKey$\HandleInComingCall\{ADE2EEB9-FC85-4F5B-B5D9-D431B4AAC31A}]
+@="IDebugEventCallback2"
+
+[$RootKey$\HandleInComingCall\{BB7BE481-DA8F-4B9E-89CB-0A8DDE6BC5D7}]
+@="IEEHostServices"
+
+[$RootKey$\HandleInComingCall\{BDDE0EEE-3B8D-4C82-B529-33F16B42832E}]
+@="IDebugDocumentPosition2"
+
+[$RootKey$\HandleInComingCall\{C43CC2F3-90AF-4E93-9112-DFB8B36749B5}]
+@="INotifySink2"
+
+[$RootKey$\HandleInComingCall\{F239E580-DB73-11D0-938A-00A0C9034910}]
+@="ISqlDebugEvent"
+
+[$RootKey$\HandleInComingCall\{F239E584-DB73-11D0-938A-00A0C9034910}]
+@="ISqlDebugEvent2"
+
+[$RootKey$\Languages]
+
+[$RootKey$\Languages\Language Services]
+
+[$RootKey$\Languages\Language Services\ENC]
+"LangResID"=dword:0000138D
+"NotALanguage"=dword:00000001
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"ShowCompletion"=dword:00000000
+"ShowSmartIndent"=dword:00000000
+@="{75058B12-F5A9-4B1C-9161-9B3754D7488F}"
+
+[$RootKey$\Languages\Language Services\Memory]
+"LangResID"=dword:00000099
+"NotALanguage"=dword:00000001
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"ShowCompletion"=dword:00000000
+"ShowSmartIndent"=dword:00000000
+@="{DF38847E-CC19-11D2-8ADA-00C04F79E479}"
+
+[$RootKey$\Languages\Language Services\Register]
+"LangResID"=dword:00001360
+"NotALanguage"=dword:00000001
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"ShowCompletion"=dword:00000000
+"ShowSmartIndent"=dword:00000000
+@="{13F6A341-59C0-11D3-994C-00C04F68FDAF}"
+
+[$RootKey$\Menus]
+"{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"=", 1000, 1"
+
+[$RootKey$\OutputWindow]
+
+[$RootKey$\OutputWindow\{FC076020-078A-11D1-A7DF-00A0C9110051}]
+"ContentType"="DebugOutput"
+"InitiallyInvisible"=dword:00000001
+"Name"="Debug"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+@="#66"
+
+[$RootKey$\Packages]
+
+[$RootKey$\Packages\{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\vsdebug.dll"
+"Preload"=dword:00000000
+@="Visual Studio Debugger"
+
+[$RootKey$\Packages\{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}\Automation]
+"Debugger"="Visual Studio Debugger"
+
+[$RootKey$\Packages\{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}\AutomationEvents]
+"DebuggerEvents"="Visual Studio Debugger Events"
+
+[$RootKey$\Packages\{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}\SatelliteDll]
+"DllName"="VSDebugUI.dll"
+"Path"="$BaseInstallDir$\Common7\Packages\Debugger\"
+
+[$RootKey$\Services]
+
+[$RootKey$\Services\{13F6A341-59C0-11D3-994C-00C04F68FDAF}]
+"Name"="Register Language Service"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\Services\{3B70A4AE-BB91-4ABE-A05C-C4DE07B9763E}]
+"Name"="Debugger Window Font and Color Service"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\Services\{44B05627-95C2-4CE8-BDCD-4AA722785093}]
+"Name"="Debugger Marker Service"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\Services\{75058B12-F5A9-4B1C-9161-9B3754D7488F}]
+"Name"="ENCStale Language Service"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\Services\{7d960b16-7af8-11d0-8e5e-00a0c911005a}]
+"Name"="IVsDebugger"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\Services\{DF38847E-CC19-11D2-8ADA-00C04F79E479}]
+"Name"="Memory Language Service"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\Text Editor]
+
+[$RootKey$\Text Editor\External Markers]
+
+[$RootKey$\Text Editor\External Markers\{030EF597-983E-4DC8-BFE2-A57508256636}]
+"DisplayName"="#271"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Tracepoint Mapped Enabled Marker"
+
+[$RootKey$\Text Editor\External Markers\{095C01F2-B8AB-4FBB-9404-6EFCD125E4F8}]
+"DisplayName"="#248"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Tracepoint Disabled Marker"
+
+[$RootKey$\Text Editor\External Markers\{1915461E-0F61-44C5-8F2C-9CE3CA05B2C1}]
+"DisplayName"="#272"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Tracepoint Mapped Error Marker"
+
+[$RootKey$\Text Editor\External Markers\{1B7D8015-15FF-4EC9-9C8C-5B83499C8468}]
+"DisplayName"="#263"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Breakpoint Advanced Disabled Marker"
+
+[$RootKey$\Text Editor\External Markers\{1E36D6FC-803F-4FD3-BD00-435A4EEF8911}]
+"DisplayName"="#255"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Breakpoint Advanced Enabled Marker"
+
+[$RootKey$\Text Editor\External Markers\{1F66BCD8-0239-4A9B-A3F9-F51321D3368C}]
+"DisplayName"="#249"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Tracepoint Error Marker"
+
+[$RootKey$\Text Editor\External Markers\{2138B8A9-9D8F-4073-90AC-88678AC755A5}]
+"DisplayName"="#273"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Tracepoint Mapped Warning Marker"
+
+[$RootKey$\Text Editor\External Markers\{237C7135-D8A7-48C4-832C-DF1FB8CEFD0E}]
+"DisplayName"="#266"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Tracepoint Advanced Disabled Marker"
+
+[$RootKey$\Text Editor\External Markers\{2DAA2998-36A1-4B85-B8E9-4CDA438DDF8C}]
+"DisplayName"="#269"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Tracepoint Advanced Warning Marker"
+
+[$RootKey$\Text Editor\External Markers\{2FA576FC-EA49-49B0-93D6-85133168BA82}]
+"DisplayName"="#270"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Tracepoint Mapped Disabled Marker"
+
+[$RootKey$\Text Editor\External Markers\{37469172-F83A-4BFA-864B-6900D34EA6F0}]
+"DisplayName"="#247"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Tracepoint Enabled Marker"
+
+[$RootKey$\Text Editor\External Markers\{3DDBBA3A-4C4A-493B-BAD1-70E2B47B421C}]
+"DisplayName"="#265"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Breakpoint Advanced Warning Marker"
+
+[$RootKey$\Text Editor\External Markers\{546FAD73-6000-4138-BA73-9B4746C38324}]
+"DisplayName"="#251"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Breakpoint Mapped Warning Marker"
+
+[$RootKey$\Text Editor\External Markers\{59E4355F-5663-45B8-B4F3-51ED22561DED}]
+"DisplayName"="#201"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Breakpoint Mapped Disabled Marker"
+
+[$RootKey$\Text Editor\External Markers\{61DF72D6-D8F7-472E-A78D-4DDF06ED7391}]
+"DisplayName"="#253"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Breakpoint Mapped Error Marker"
+
+[$RootKey$\Text Editor\External Markers\{69DA1285-D454-4DA1-AB7A-1039C71F3F80}]
+"DisplayName"="#264"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Breakpoint Advanced Error Marker"
+
+[$RootKey$\Text Editor\External Markers\{6D799B25-7F32-4173-A4EB-521827D4AE4F}]
+"DisplayName"="#199"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Current Statement Marker"
+
+[$RootKey$\Text Editor\External Markers\{6D799B26-7F31-4173-A4EB-521827D4AE4F}]
+"DisplayName"="#5159"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Current Statement (New Context) Marker"
+
+[$RootKey$\Text Editor\External Markers\{79BC1EA2-8729-4E27-8A45-876B2AC41D49}]
+"DisplayName"="#5158"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Executing Threads Ip Marker"
+
+[$RootKey$\Text Editor\External Markers\{7E2ED083-0516-4366-A84E-3FECB4369799}]
+"DisplayName"="#195"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Breakpoint Disabled Marker"
+
+[$RootKey$\Text Editor\External Markers\{9D00A12E-9336-4585-A4A6-27B87383312D}]
+"DisplayName"="#196"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Breakpoint Error Marker"
+
+[$RootKey$\Text Editor\External Markers\{9E96A88C-A98E-4711-B610-F2783EEFD731}]
+"DisplayName"="#268"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Tracepoint Advanced Error Marker"
+
+[$RootKey$\Text Editor\External Markers\{A5998F84-BB45-4885-B552-0A9A6D98BE26}]
+"DisplayName"="#197"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Breakpoint Warning Marker"
+
+[$RootKey$\Text Editor\External Markers\{BABF7B70-3291-4063-BD30-78A0066597D8}]
+"DisplayName"="#7004"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Selected Breakpoint Marker"
+
+[$RootKey$\Text Editor\External Markers\{BF443FF9-5FB3-44D8-B087-E2A50E6D1E56}]
+"DisplayName"="#5157"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Executing Thread Ip Marker"
+
+[$RootKey$\Text Editor\External Markers\{C362E2C6-C242-425D-95D4-9A52B27096A8}]
+"DisplayName"="#194"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Breakpoint Enabled Marker"
+
+[$RootKey$\Text Editor\External Markers\{CCB8B9D5-1643-4B41-8395-53C5B5ED5284}]
+"DisplayName"="#198"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Call Return Marker"
+
+[$RootKey$\Text Editor\External Markers\{CCB8B9D6-1642-4B41-8395-53C5B5ED5284}]
+"DisplayName"="#5175"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Call Return (New Context) Marker"
+
+[$RootKey$\Text Editor\External Markers\{D49BF491-8D10-4535-BC7E-379Fb551A1D6}]
+"DisplayName"="#8001"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Call Return (historical mode) Marker"
+
+[$RootKey$\Text Editor\External Markers\{DCEBFA0F-BBDB-45FA-BA34-3A85A8AABD57}]
+"DisplayName"="#8000"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Current Statement (historical mode) Marker"
+
+[$RootKey$\Text Editor\External Markers\{E3AA0043-8E3E-4441-BDC5-79F72387E807}]
+"DisplayName"="#267"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Tracepoint Advanced Enabled Marker"
+
+[$RootKey$\Text Editor\External Markers\{E52A924F-0A81-4CE0-B5A2-C4BAE0BF29E3}]
+"DisplayName"="#200"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Breakpoint Mapped Enabled Marker"
+
+[$RootKey$\Text Editor\External Markers\{F7218A30-4648-4994-8A38-2FAF8A992E4F}]
+"DisplayName"="#250"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Service"="{44B05627-95C2-4CE8-BDCD-4AA722785093}"
+@="Debugger Tracepoint Warning Marker"
+
+[$RootKey$\ToolsOptionsPages]
+
+[$RootKey$\ToolsOptionsPages\Debugger]
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Sort"=dword:00000004
+@="#5000"
+
+[$RootKey$\ToolsOptionsPages\Debugger\General]
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Page"="{FA9EB535-C624-13D0-AE1F-00A0190FF4C3}"
+"Keywords"="#8046"
+@="#5001"
+
+[$RootKey$\ToolsOptionsPages\Debugger\JIT]
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Page"="{B9EFCAF2-9EAE-4022-9E39-FA947666ADD9}"
+"Keywords"="#8048"
+@="#5036"
+
+[$RootKey$\ToolsOptionsPages\Debugger\JIT\VisibilityCmdUIContexts]
+"{CA99BB24-1434-44AD-8BF7-E50615989FB3}"="1"
+
+[$RootKey$\ToolsOptionsPages\Debugger\Symbols]
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"Page"="{1F5E080F-CBD2-459C-8267-39FD83032166}"
+"Keywords"="#8049"
+@="#5051"
+
+[$RootKey$\ToolsOptionsPages\Debugger\VisibilityCmdUIContexts]
+"{338492A6-3F51-407C-8DE5-D25445BFFCDD}"="1"
+
+[$RootKey$\ToolWindows]
+
+[$RootKey$\ToolWindows\{0504FF91-9D61-11D0-A794-00A0C9110051}]
+"Name"="Call Stack"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\ToolWindows\{0504FF91-9D61-11D0-A794-00A0C9110051}\Visibility]
+"{ADFC4E61-0397-11D1-9F4E-00A0C911004F}"=dword:00000000
+
+[$RootKey$\ToolWindows\{350F9856-A72B-11D2-8AD0-00C04F79E479}]
+"Name"="Memory"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\ToolWindows\{350F9856-A72B-11D2-8AD0-00C04F79E479}\Visibility]
+"{ADFC4E61-0397-11D1-9F4E-00A0C911004F}"=dword:00000000
+
+[$RootKey$\ToolWindows\{37ABA9BE-445A-11D3-9949-00C04F68FD0A}]
+"Name"="Modules"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\ToolWindows\{37ABA9BE-445A-11D3-9949-00C04F68FD0A}\Visibility]
+"{ADFC4E61-0397-11D1-9F4E-00A0C911004F}"=dword:00000000
+
+[$RootKey$\ToolWindows\{4A18F9D0-B838-11D0-93EB-00A0C90F2734}]
+"Name"="Locals"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\ToolWindows\{4A18F9D0-B838-11D0-93EB-00A0C90F2734}\Visibility]
+"{ADFC4E61-0397-11D1-9F4E-00A0C911004F}"=dword:00000000
+
+[$RootKey$\ToolWindows\{51C76317-9037-4CF2-A20A-6206FD30B4A1}]
+"Name"="Processes"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\ToolWindows\{51C76317-9037-4CF2-A20A-6206FD30B4A1}\Visibility]
+"{ADFC4E61-0397-11D1-9F4E-00A0C911004F}"=dword:00000000
+
+[$RootKey$\ToolWindows\{90243340-BD7A-11D0-93EF-00A0C90F2734}]
+"Name"="Watch"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\ToolWindows\{90243340-BD7A-11D0-93EF-00A0C90F2734}\Visibility]
+"{ADFC4E61-0397-11D1-9F4E-00A0C911004F}"=dword:00000000
+
+[$RootKey$\ToolWindows\{BE4D7042-BA3F-11D2-840E-00C04F9902C1}]
+"Float"="200, 200, 700, 450"
+"Name"="Breakpoints"
+"Style"="Tabbed"
+"Window"="{4A9B7E51-AA16-11D0-A8C5-00A0C921A4D2}"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\ToolWindows\{BE4D7042-BA3F-11D2-840E-00C04F9902C1}\Visibility]
+"{F1536EF8-92EC-443C-9ED7-FDADF150DA82}"=dword:00000000
+
+[$RootKey$\ToolWindows\{CA4B8FF5-BFC7-11D2-9929-00C04F68FDAF}]
+"Name"="Registers"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\ToolWindows\{CA4B8FF5-BFC7-11D2-9929-00C04F68FDAF}\Visibility]
+"{ADFC4E61-0397-11D1-9F4E-00A0C911004F}"=dword:00000000
+
+[$RootKey$\ToolWindows\{F2E84780-2AF1-11D1-A7FA-00A0C9110051}]
+"Name"="Autos"
+@="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+
+[$RootKey$\ToolWindows\{F2E84780-2AF1-11D1-A7FA-00A0C9110051}\Visibility]
+"{ADFC4E61-0397-11D1-9F4E-00A0C911004F}"=dword:00000000
+
+[$RootKey$\UserSettings]
+
+[$RootKey$\UserSettings\Debugger]
+"AlternateParent"="AutomationProperties"
+"Category"="{EEDBF29A-5C8B-4E01-827C-263382C18CFE}"
+"Description"="#310"
+"Package"="{C9DD4A57-47FB-11D2-83E7-00C04F9902C1}"
+"VsSettingsMigration"=dword:00000001
+@="#5000"
+

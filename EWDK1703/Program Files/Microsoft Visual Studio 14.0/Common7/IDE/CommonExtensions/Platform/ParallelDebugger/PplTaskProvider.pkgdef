@@ -1,0 +1,8 @@
+[$RootKey$]
+
+[$RootKey$\CLSID]
+
+[$RootKey$\CLSID\{4B62D2BF-CEA4-47dd-82D9-C772BA5BA40E}]
+@="Ppl Task Provider"
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\PplTaskProvider.dll"
+"ThreadingModel"="Both"

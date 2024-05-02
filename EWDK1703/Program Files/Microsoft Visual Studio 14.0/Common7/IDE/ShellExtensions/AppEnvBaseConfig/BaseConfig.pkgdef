@@ -1,0 +1,2927 @@
+﻿[$RootKey$\AD7Metrics\Engine\{22189D02-CCA4-40AE-A874-6C2A764FB071}]
+"Attach"=dword:00000001
+"AutoSelectPriority"=dword:00000020
+"CallStackBP"=dword:00000001
+"CLSID"="{7386310B-D5CB-4369-9BDD-609B3F103914}"
+"ConditionalBP"=dword:00000001
+"DataBP"=dword:00000000
+"Disassembly"=dword:00000000
+"DumpWriting"=dword:00000000
+"Embedded"=dword:00000001
+"ENC"=dword:00000000
+"Exceptions"=dword:00000001
+"FunctionBP"=dword:00000001
+"HitCountBP"=dword:00000001
+"Interop"=dword:00000000
+"JITDebug"=dword:00000000
+"JustMyCodeStepping"=dword:00000001
+"Name"="resource=$ShellFolder$\Silverlight\MacDebugging\*\SilverlightPortSupplierUI.dll#1000"
+"NativeInteropOK"=dword:00000000
+"PortSupplier"="{F561BF8D-BFBA-4FC6-AEA7-2445D0EAC1C5}"
+"Registers"=dword:00000000
+"RemoteDebugging"=dword:00000001
+"Runtime"="{8bd1daae-188e-42f4-b009-08fafd17813b}"
+"SetNextStatement"=dword:00000001
+"SqlClr"=dword:00000000
+"SuspendThread"=dword:00000001
+"UseShimAPI"=dword:00000000
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\JScript Exceptions\Microsoft.JScript.JScriptException]
+"Code"=dword:00000000
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\JScript Exceptions]
+"Code"=dword:00000000
+"State"=dword:00000002
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{3A12D0B6-C26C-11D0-B442-00A0244A1DD2}\{994B45C4-E6E9-11D2-903F-00C04FA302A1}\Engine]
+"0"="{449EC4CC-30D2-4032-9256-EE18EB41B62B}"
+"1"="{92EF0900-2251-11D2-B72E-0000F87572EF}"
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{3A12D0B6-C26C-11D0-B442-00A0244A1DD2}\{994B45C4-E6E9-11D2-903F-00C04FA302A1}]
+"CLSID"="{4D4D35A3-1391-4E17-813D-54D1B846096A}"
+"Language"="JScript"
+"Name"="JScript EE"
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{3A12D0B8-C26C-11D0-B442-00A0244A1DD2}\{994B45C4-E6E9-11D2-903F-00C04FA302A1}\Engine]
+"0"="{449EC4CC-30D2-4032-9256-EE18EB41B62B}"
+"1"="{92EF0900-2251-11D2-B72E-0000F87572EF}"
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{3A12D0B8-C26C-11D0-B442-00A0244A1DD2}\{994B45C4-E6E9-11D2-903F-00C04FA302A1}]
+"ClrCustomVisualizerVSHost"="{E82F32A8-074E-465A-86E5-D68A87284F61}"
+"CLSID"="{59924502-559A-4BB1-B995-5D511BB218CD}"
+"EnableILInterpreter"=dword:00000001
+"Language"="Basic"
+"LoadInShimManagedEE"=dword:00000001
+"LoadRuntimeExpression1"="System.Type.GetType("Microsoft.VisualStudio.Debugger.Runtime.Main, Microsoft.VisualStudio.Debugger.Runtime, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")"
+"LoadRuntimeExpression2"="Microsoft.VisualStudio.Debugger.Runtime.Main.Initialize(&h%p)"
+"Name"="Microsoft Visual Basic"
+"RemoteDllName"="vbdebug.dll"
+"ThisObjectName"="Me"
+"TracingExpression1"="System.Type.GetType("Microsoft.VisualStudio.Debugger.Runtime.Tracing, Microsoft.VisualStudio.Debugger.Runtime, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")"
+"TracingExpression2"="Microsoft.VisualStudio.Debugger.Runtime.Tracing.Refresh("%s")"
+"UnmanagedViewer"="{0A9F2A56-3827-42dc-8A8F-B594879873AF}"
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{3A12D0B8-C26C-11D0-B442-00A0244A1DD2}]
+"ExampleConditionalBreakpointText"="e.g. x = 5"
+
+[$RootKey$\AD7Metrics\PortSupplier\{F561BF8D-BFBA-4FC6-AEA7-2445D0EAC1C5}]
+"CLSID"="{3484EFB2-0A52-4EB2-869C-1F7E668E1B87}"
+"Name"="Silverlight Remote Cross Platform Debugging"
+
+[$RootKey$\AutoLoadPackages\{53544C4D-FFD5-48A9-B04A-0700CCD31070}]
+"{53544C4D-B03D-4209-A7D0-D9DD13A4019B}"=dword:00000000
+
+[$RootKey$\AutoLoadPackages\{93694fa0-0397-11d1-9f4e-00a0c911004f}]
+"{588205e0-66e0-11d3-8600-00c04f6123b3}"=dword:00000000
+
+[$RootKey$\AutoLoadPackages\{adfc4e66-0397-11d1-9f4e-00a0c911004f}]
+"{588205e0-66e0-11d3-8600-00c04f6123b3}"=dword:00000000
+
+[$RootKey$\AutoLoadPackages\{D2567162-F94F-4091-8798-A096E61B8B50}]
+"{588205e0-66e0-11d3-8600-00c04f6123b3}"=dword:00000000
+
+[$RootKey$\AutoLoadPackages\{EF4F870B-7B85-4F29-9D15-CE1ABFBE733B}]
+"{8D8529D3-625D-4496-8354-3DAD630ECC1B}"=dword:00000000
+
+[$RootKey$\AutomationProperties\TextEditor\T-SQL90]
+"Description"="#6412"
+"Name"="T-SQL90"
+"Package"="{F5E7E720-1401-11d1-883B-0000F87579D2}"
+"ProfileSave"=dword:00000001
+"ResourcePackage"="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+
+[$RootKey$\Capabilities\UrlAssociations]
+"git-client"="VisualStudio.git-client"
+
+[$RootKey$\ClickOnce]
+"PublishURL"=hex(m):35,00,2E,00,31,00,00,00,35,00,2E,00,32,00,00,00,00,00
+
+[$RootKey$\CLSID\{04b5c000-df2e-42be-8682-2a9f39c8daa5}\Programmable]
+@=""
+
+[$RootKey$\CLSID\{04b5c000-df2e-42be-8682-2a9f39c8daa5}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="PrimerMgr Class"
+
+[$RootKey$\CLSID\{062F936D-86F6-40b6-AEB3-DF70875BC2F2}]
+"Assembly"="Microsoft.VSDesigner, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSDesigner.Project.UpgradeWizard.UpgradeWizard"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+
+[$RootKey$\CLSID\{0c075ae9-42ac-4bef-87a1-85c1bfed9f1f}]
+"InprocServer32"="$ShellFolder$\Common7\Packages\Compsvcspkg.dll"
+"ThreadingModel"="Both"
+@="Primary Interop Assembly Wrapper Tool (9.0)"
+
+[$RootKey$\CLSID\{13F75875-5C54-4692-9C80-A5431FF1F773}]
+"Assembly"="Microsoft.VisualStudio.Publish, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Publish.Library.Bootstrapper.ProductState"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Publish.Library.Bootstrapper.ProductState"
+
+[$RootKey$\CLSID\{15797C83-07A7-4f90-9D17-8995B6DE590A}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataView"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataView Mapped Object Class"
+
+[$RootKey$\CLSID\{15d5e750-72dc-466c-a1b9-222fbb0c58c0}\Programmable]
+@=""
+
+[$RootKey$\CLSID\{15d5e750-72dc-466c-a1b9-222fbb0c58c0}\TypeLib]
+@="{457A98FF-C2FE-4162-9CE0-16F3A236814F}"
+
+[$RootKey$\CLSID\{15d5e750-72dc-466c-a1b9-222fbb0c58c0}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="CQryAutoColumn Class"
+
+[$RootKey$\CLSID\{163968a9-0a82-4a6c-b369-a452477f26a5}\Programmable]
+@=""
+
+[$RootKey$\CLSID\{163968a9-0a82-4a6c-b369-a452477f26a5}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="StreamWrapper Class"
+
+[$RootKey$\CLSID\{17A9A28C-30F9-4e80-897F-5F16B13C7391}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DataTransaction"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IVsDataTransaction Class"
+
+[$RootKey$\CLSID\{1a5c7e00-a12e-4cb3-9cd2-30597f5f1d8e}\Programmable]
+@=""
+
+[$RootKey$\CLSID\{1a5c7e00-a12e-4cb3-9cd2-30597f5f1d8e}\TypeLib]
+@="{457A98FF-C2FE-4162-9CE0-16F3A236814F}"
+
+[$RootKey$\CLSID\{1a5c7e00-a12e-4cb3-9cd2-30597f5f1d8e}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="CQryAutoColsCollection Class"
+
+[$RootKey$\CLSID\{1C6A51C9-D07D-4e82-BD3E-0EB7F88AC004}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Default.DataObjectMemberComparer"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Default IVsDataObjectMemberComparer Class"
+
+[$RootKey$\CLSID\{1F0DA31F-1C61-4b96-B1CC-CBF2D3872353}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Default.DataAsyncCommand"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Default IVsDataAsyncCommand Class"
+
+[$RootKey$\CLSID\{1F411263-3A1D-43F5-96AF-F5648CB89186}]
+"Assembly"="Microsoft.VSDesigner, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSDesigner.Project.TypeLibraryImporter"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+
+[$RootKey$\CLSID\{1faf3cb1-30ac-40ca-b115-5999e7daf938}]
+"InprocServer32"="$ShellFolder$\Common7\IDE\vbdebug.dll"
+"ThreadingModel"="Both"
+
+[$RootKey$\CLSID\{23A162EC-2CFE-46bd-B6A3-DD4D5150422F}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DataObjectSelector"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IVsDataObjectSelector Class"
+
+[$RootKey$\CLSID\{25F7A929-9E69-4e2f-8B31-93661DB50853}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DataObjectIdentifierConverter"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IVsDataObjectIdentifierConverter Class"
+
+[$RootKey$\CLSID\{26FA29E5-8A81-45E0-AEEB-0B1D6E5DD977}]
+"InprocServer32"="$ShellFolder$\Common7\Packages\WebAppUpgrade.dll"
+@="Web Application Migration Class"
+
+[$RootKey$\CLSID\{29868CA2-0428-486e-89EE-E26AAEE51A66}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataScalarFunction"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataScalarFunction Mapped Object Class"
+
+[$RootKey$\CLSID\{29885742-32C5-46d3-A2A6-A28F4B6D746B}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DataReader"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IVsDataReader Class"
+
+[$RootKey$\CLSID\{2C971BD4-FAA6-4cae-9AF4-8D268FD43EAB}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataTableForeignKey"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataTableForeignKey Mapped Object Class"
+
+[$RootKey$\CLSID\{3484EFB2-0A52-4EB2-869C-1F7E668E1B87}]
+"InprocServer32"="$ShellFolder$\Silverlight\MacDebugging\SilverlightPortSupplier.dll"
+"ThreadingModel"="Both"
+@="Silverlight Mac Port Supplier"
+
+[$RootKey$\CLSID\{349C5852-65DF-11DA-9384-00065B846F21}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.WAProject"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Web.Application.WAProject"
+
+[$RootKey$\CLSID\{349C5856-65DF-11DA-9384-00065B846F21}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.CSWACodeBehindEventBinding"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Web.Application.CSWACodeBehindEventBinding"
+
+[$RootKey$\CLSID\{349C5857-65DF-11DA-9384-00065B846F21}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.VBWACodeBehindEventBinding"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Web.Application.VBWACodeBehindEventBinding"
+
+[$RootKey$\CLSID\{349C5859-65DF-11DA-9384-00065B846F21}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.WACodeBehindCodeGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Web.Application.WACodeBehindCodeGenerator"
+
+[$RootKey$\CLSID\{349C585A-65DF-11DA-9384-00065B846F21}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.CSWACodeBehindCodeGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Web.Application.CSWACodeBehindCodeGenerator"
+
+[$RootKey$\CLSID\{349C585B-65DF-11DA-9384-00065B846F21}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.VBWACodeBehindCodeGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Web.Application.VBWACodeBehindCodeGenerator"
+
+[$RootKey$\CLSID\{349C585E-65DF-11DA-9384-00065B846F21}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.WATemplateWizard"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Web.Application.WATemplateWizard"
+
+[$RootKey$\CLSID\{36131D1D-D454-472A-952F-8295B6C694DB}]
+"Assembly"="Microsoft.VSDesigner, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSDesigner.Project.UnmanagedRegistrar"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+
+[$RootKey$\CLSID\{374fc192-9ebd-4954-a0f7-26221439a1c2}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="TrackSelection Class"
+
+[$RootKey$\CLSID\{379354F2-BBB3-4ba9-AA71-FBE7B0E5EA94}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.SilverlightLinksPage"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Web.Application.SilverlightLinksPage"
+
+[$RootKey$\CLSID\{38A714F3-E641-4be5-8E92-A26A0F0E920A}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DataAsyncCommand"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IVsDataAsyncCommand Class"
+
+[$RootKey$\CLSID\{3e94c4f7-3bcb-4810-8f3d-ba993731443b}\ControlMDTPrivate]
+@=""
+
+[$RootKey$\CLSID\{3e94c4f7-3bcb-4810-8f3d-ba993731443b}\MiscStatus\1]
+@="131473"
+
+[$RootKey$\CLSID\{3e94c4f7-3bcb-4810-8f3d-ba993731443b}\MiscStatus]
+@="0"
+
+[$RootKey$\CLSID\{3e94c4f7-3bcb-4810-8f3d-ba993731443b}\ToolboxBitmap32]
+@="$ShellFolder$\Common7\Tools\VDT\vdt80.dll, 1"
+
+[$RootKey$\CLSID\{3e94c4f7-3bcb-4810-8f3d-ba993731443b}\Version]
+@="8.0"
+
+[$RootKey$\CLSID\{3e94c4f7-3bcb-4810-8f3d-ba993731443b}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="MSVDTDDGridCtrl8 Object"
+
+[$RootKey$\CLSID\{44488309-FCCA-404f-A6C9-728BF996D4A5}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataStoredProcedure"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataStoredProcedure Mapped Object Class"
+
+[$RootKey$\CLSID\{44B66758-3C1C-40ce-BEE4-5DBDA7293387}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DataCommand"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IVsDataCommand Class"
+
+[$RootKey$\CLSID\{4725D21D-00FB-42a8-9F94-DC184E0C3ED0}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DSRefBuilder"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IDSRefBuilder Class"
+
+[$RootKey$\CLSID\{4921502a-feb9-4960-8f27-9833942b3de7}\Programmable]
+@=""
+
+[$RootKey$\CLSID\{4921502a-feb9-4960-8f27-9833942b3de7}\TypeLib]
+@="{457A98FF-C2FE-4162-9CE0-16F3A236814F}"
+
+[$RootKey$\CLSID\{4921502a-feb9-4960-8f27-9833942b3de7}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="CQryAutoParameterCollection Class"
+
+[$RootKey$\CLSID\{4C66D6F4-BBED-44CB-9149-D55E8E7077D7}]
+"Assembly"="Microsoft.VisualStudio.Silverlight, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Silverlight.SilverlightPropertyPageComClass"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Silverlight.SilverlightPropertyPageComClass"
+
+[$RootKey$\CLSID\{4D4D35A3-1391-4E17-813D-54D1B846096A}]
+"InprocServer32"="$ShellFolder$\Common7\Packages\Debugger\jsee.dll"
+"ThreadingModel"="Both"
+
+[$RootKey$\CLSID\{503DCF80-0135-420e-AC74-A17E64A1F9AF}]
+"Assembly"="Microsoft.VisualStudio.Silverlight, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Silverlight.DebugPropertyPageComClass"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Silverlight.DebugPropertyPageComClass"
+
+[$RootKey$\CLSID\{53544C4D-CFBF-404e-9E37-19C8BB80F6E3}]
+"InprocServer32"="$ShellFolder$\Common7\IDE\VS SCC\VssProvider.dll"
+"ThreadingModel"="Both"
+@="VAPI Scheme Parser Msss"
+
+[$RootKey$\CLSID\{53957D8C-5FAD-4d27-8B4D-1DC4E7364E08}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DataMappedObjectConverter"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IVsDataMappedObjectConverter Class"
+
+[$RootKey$\CLSID\{566E6728-5F6B-4F42-8EDE-Fd8FBDADFA21}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.GlobalResourceProxyGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Web.Application.GlobalResourceProxyGenerator"
+
+[$RootKey$\CLSID\{59924502-559a-4bb1-b995-5d511bb218cd}]
+"InprocServer32"="$ShellFolder$\Common7\IDE\vbdebug.dll"
+"ThreadingModel"="Both"
+@="Microsoft Visual Basic Expression Evaluator Class"
+
+[$RootKey$\CLSID\{5a303e2f-b50c-4f84-a3e1-dbeafdabd6a9}\Programmable]
+@=""
+
+[$RootKey$\CLSID\{5a303e2f-b50c-4f84-a3e1-dbeafdabd6a9}\TypeLib]
+@="{457A98FF-C2FE-4162-9CE0-16F3A236814F}"
+
+[$RootKey$\CLSID\{5a303e2f-b50c-4f84-a3e1-dbeafdabd6a9}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="CQryAutoParameter Class"
+
+[$RootKey$\CLSID\{5C0C15BD-0023-44FF-B39E-2DD32BE65A84}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+@=""
+
+[$RootKey$\CLSID\{5C0C15BD-0023-44FF-B39E-2DD32BE65A84}\InprocServer32\14.0.0.0]
+"Assembly"="Microsoft.VisualStudio.WizardFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSWizards.WizardManager"
+"RuntimeVersion"="v4.0.30319"
+
+[$RootKey$\CLSID\{5C0C15BD-0023-44FF-B39E-2DD32BE65A84}\ProgId]
+@="Microsoft.VSWizards.WizardManager"
+
+[$RootKey$\CLSID\{5C0C15BD-0023-44FF-B39E-2DD32BE65A84}]
+"Assembly"="Microsoft.VisualStudio.WizardFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSWizards.WizardManager"
+"InprocServer32"="$System$\mscoree.dll"
+"RuntimeVersion"="v4.0.30319"
+"ThreadingModel"="Both"
+@="Microsoft.VSWizards.WizardManager"
+
+[$RootKey$\CLSID\{64cc4181-1a6d-40a1-b911-d710932e570d}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="MDT OleUndoManager Class"
+
+[$RootKey$\CLSID\{675817C0-B836-4624-B6F6-7282BB4C470E}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataTableForeignKeyColumn"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataTableForeignKeyColumn Mapped Object Class"
+
+[$RootKey$\CLSID\{68014e87-fac7-4ad8-a490-7a55a7c30ed1}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.WAFactory"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Web.Application.WAFactory"
+
+[$RootKey$\CLSID\{6856262F-19D4-4090-A0CD-A486A148709C}]
+"InprocServer32"="$ShellFolder$\Common7\IDE\VS SCC\msemp.dll"
+"ThreadingModel"="Both"
+@="VSEE Versioning Enlistment Manager Proxy Data Source"
+
+[$RootKey$\CLSID\{6B8DE07B-0317-4934-BE29-9B68BAE28C67}]
+"Assembly"="Microsoft.VSDesigner, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSDesigner.Project.CultureStringUtilities"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+
+[$RootKey$\CLSID\{6eaad443-3795-4f98-a983-e83a573b4e12}\Programmable]
+@=""
+
+[$RootKey$\CLSID\{6eaad443-3795-4f98-a983-e83a573b4e12}\TypeLib]
+@="{457A98FF-C2FE-4162-9CE0-16F3A236814F}"
+
+[$RootKey$\CLSID\{6eaad443-3795-4f98-a983-e83a573b4e12}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="AUtoDataSource Class"
+
+[$RootKey$\CLSID\{708E625C-BFA6-4124-9F40-D5771944583D}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.SpecialFilesProject"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Web.Application.SpecialFilesProject"
+
+[$RootKey$\CLSID\{737871B7-9254-4221-8387-085B287EA104}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Default.DataSourceVersionComparer"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Default IVsDataSourceVersionComparer Class"
+
+[$RootKey$\CLSID\{7601A5B8-4FF4-4786-A481-AC32310FA36A}]
+"Assembly"="Microsoft.VisualStudio.Silverlight, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Silverlight.SLTemplateWizard"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Silverlight.SLTemplateWizard"
+
+[$RootKey$\CLSID\{77C65D96-63B8-449e-B413-D37680C9F990}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataExecutableObject"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataExecutableObject Mapped Object Class"
+
+[$RootKey$\CLSID\{7B2CA1BE-14A9-4898-9FF1-DD5003E70AF7}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DataObjectMemberComparer"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IVsDataObjectMemberComparer Class"
+
+[$RootKey$\CLSID\{7D7D0D7B-A0D5-4BFE-A2CF-04B372A446BB}]
+"Assembly"="Microsoft.VSDesigner, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSDesigner.Project.AxTypeLibraryImporter"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+
+[$RootKey$\CLSID\{82103334-A4FB-425b-82D2-A98C80DE788D}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Default.DataSourceInformation"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Default IVsDataSourceInformation Class"
+
+[$RootKey$\CLSID\{884DD964-5327-461f-9F06-6484DD540F8F}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.DataViewQueryCommandProvider"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Data View Query Command Provider class"
+
+[$RootKey$\CLSID\{8B217746-717D-11CE-AB5B-D41203C10000}]
+"InprocServer32"="$ShellFolder$\Common7\IDE\vstlbinf.dll"
+@="CLSID_TypeLibInfo"
+
+[$RootKey$\CLSID\{8B217752-717D-11CE-AB5B-D41203C10000}]
+"InprocServer32"="$ShellFolder$\Common7\IDE\vstlbinf.dll"
+@="CLSID_SearchHelper"
+
+[$RootKey$\CLSID\{8B21775E-717D-11CE-AB5B-D41203C10000}]
+"InprocServer32"="$ShellFolder$\Common7\IDE\vstlbinf.dll"
+@="CLSID_TLIApplication"
+
+[$RootKey$\CLSID\{8bd1daae-188e-42f4-b009-08fafd17813b}]
+"InprocServer32"="$ShellFolder$\Silverlight\MacDebugging\SilverlightPortSupplier.dll"
+"ThreadingModel"="Both"
+@="Silverlight Mac Debug Engine"
+
+[$RootKey$\CLSID\{8C64357F-10D7-40ef-9803-95F8165B6A7B}]
+"Assembly"="Microsoft.VSDesigner, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSDesigner.CodeGenerator.DiscoCodeGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="COM+ class: Microsoft.VSDesigner.CodeGenerator.DiscoCodeGenerator"
+
+[$RootKey$\CLSID\{909D16B3-C8E8-43D1-A2B8-26EA0D4B6B57}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.WebPropertyPage"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Web.Application.WebPropertyPage"
+
+[$RootKey$\CLSID\{976FE4E3-92F1-447b-B10A-116DD948732D}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+@=""
+
+[$RootKey$\CLSID\{976FE4E3-92F1-447b-B10A-116DD948732D}\InprocServer32\14.0.0.0]
+"Assembly"="Microsoft.VSDesigner, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSDesigner.Data.VS.LaunchDataComponentWizard"
+
+[$RootKey$\CLSID\{976FE4E3-92F1-447b-B10A-116DD948732D}\ProgId]
+@="Microsoft.VSDesigner.Data.VS.LaunchDataComponentWizard"
+
+[$RootKey$\CLSID\{976FE4E3-92F1-447b-B10A-116DD948732D}]
+"Assembly"="Microsoft.VSDesigner, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSDesigner.Data.VS.LaunchDataComponentWizard"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VSDesigner.Data.VS.LaunchDataComponentWizard"
+
+[$RootKey$\CLSID\{99D8D806-9FD7-4e15-9E76-487F2104666E}]
+"Assembly"="Microsoft.VisualStudio.Data, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.AdoDotNet.AdoDotNetRootObjectEnumerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="ADO .NET Root Object Enumerator class"
+
+[$RootKey$\CLSID\{9ACDE3B7-0F9B-4c36-8E9E-2DBDE37F65B7}]
+"Assembly"="Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.DataTools.DTClassActivator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Managed Data Tools Class Activator Class"
+
+[$RootKey$\CLSID\{9AEBB15B-6649-4fb6-B6F7-B594F6E16F70}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataColumn"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataColumn Mapped Object Class"
+
+[$RootKey$\CLSID\{9DBACAC7-8589-4c46-AE40-4B4FDE40DCDA}]
+"Assembly"="Microsoft.VisualStudio.Data.Compatibility, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Compatibility.NewProviderObjectFactory"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Compatible DataProviderObjectFactory Class"
+
+[$RootKey$\CLSID\{9e1a60ac-2c3b-45cc-9466-82ceb2bd3518}\AuxUserType\2]
+@="MSVDTDB Designer 8.0"
+
+[$RootKey$\CLSID\{9e1a60ac-2c3b-45cc-9466-82ceb2bd3518}\AuxUserType\3]
+@="Microsoft Visual Database Tools Database Designer V8.0"
+
+[$RootKey$\CLSID\{9e1a60ac-2c3b-45cc-9466-82ceb2bd3518}\AuxUserType]
+@=""
+
+[$RootKey$\CLSID\{9e1a60ac-2c3b-45cc-9466-82ceb2bd3518}\MiscStatus]
+@="131072"
+
+[$RootKey$\CLSID\{9e1a60ac-2c3b-45cc-9466-82ceb2bd3518}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+@="Microsoft Visual Database Tools Database Designer V8.0"
+
+[$RootKey$\CLSID\{9EEA02EB-4328-456b-B1B3-83EC5A942C16}]
+"Assembly"="Microsoft.VisualStudio.Data, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.AdoDotNet.AdoDotNetObjectEnumerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="ADO .NET Object Enumerator class"
+
+[$RootKey$\CLSID\{A4810A0C-49B2-4260-9D81-2D2EBA25AA3F}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DataObjectIdentifierResolver"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IVsDataObjectIdentifierResolver Class"
+
+[$RootKey$\CLSID\{a4e8b5aa-c736-41d9-af4d-fa49e2a7c36f}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+@="Microsoft Visual Database Tools Database Designer V8.0 Table Designer Column Property Page"
+
+[$RootKey$\CLSID\{A6383CAD-E8B2-422A-BEBF-44CBB7CE73AA}]
+"Assembly"="Microsoft.VisualStudio.Publish, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Publish.Library.Bootstrapper.ComBootstrapperDialog"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Publish.Library.Bootstrapper.ComBootstrapperDialog"
+
+[$RootKey$\CLSID\{A90516D5-0C0D-4576-92B5-7BF4BE075590}]
+"InprocServer32"="$ShellFolder$\Common7\IDE\vb7to8DL.dll"
+"ThreadingModel"="Apartment"
+@="Microsoft Visual Basic File Upgrade"
+
+[$RootKey$\CLSID\{AC344921-3BAF-4b42-8FB8-654E27A44C66}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Default.DataConnectionUITester"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Default IVsDataConnectionUITester Class"
+
+[$RootKey$\CLSID\{ac929c9f-903b-4904-84e3-eefe47439d49}\Programmable]
+@=""
+
+[$RootKey$\CLSID\{ac929c9f-903b-4904-84e3-eefe47439d49}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="DSRefWrapper Class"
+
+[$RootKey$\CLSID\{AC97DC0A-C7E1-4532-AFBF-C80A122D6533}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Default.DataObjectIdentifierResolver"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Default IVsDataObjectIdentifierResolver Class"
+
+[$RootKey$\CLSID\{AD028B85-FA21-41b1-AB4A-08672F633506}]
+"Assembly"="Microsoft.VSDesigner, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSDesigner.VSDesignerPackage.VSDesignerBootStrap"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VSDesigner.VSDesignerPackage.VSDesignerBootStrap"
+
+[$RootKey$\CLSID\{B07DA5DD-055B-4018-88F3-3A433FDB9B25}]
+"Assembly"="Microsoft.VisualStudio.Silverlight, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Silverlight.SigningPropertyPageComClass"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Silverlight.SigningPropertyPageComClass"
+
+[$RootKey$\CLSID\{B0A5A025-FAEF-4440-AFE3-3869E2766AEB}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DataSourceInformation"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IVsDataSourceInformation Class"
+
+[$RootKey$\CLSID\{b9c665d2-0451-4ae2-a38c-443b85d634f2}]
+"Assembly"="Microsoft.VisualStudio.TextTemplating.VSHost.14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.TextTemplating.VSHost.TemplatedCodeGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Generator that uses the Text Templating engine"
+
+[$RootKey$\CLSID\{BA82B5A5-1337-433e-BA7C-754356C69B43}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataTableUniqueKey"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataTableUniqueKey Mapped Object Class"
+
+[$RootKey$\CLSID\{BF3222AA-B1FF-4dc1-9123-3BD149572B66}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataParameter"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataParameter Mapped Object Class"
+
+[$RootKey$\CLSID\{BF75277B-C02A-4D17-B8C9-C211CA00DB28}]
+"Assembly"="Microsoft.VisualStudio.Publish, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Publish.Library.Bootstrapper.ProductStateList"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Publish.Library.Bootstrapper.ProductStateList"
+
+[$RootKey$\CLSID\{c080bc37-eb1c-466c-8ae0-42756f9e6e92}\Programmable]
+@=""
+
+[$RootKey$\CLSID\{c080bc37-eb1c-466c-8ae0-42756f9e6e92}\TypeLib]
+@="{457A98FF-C2FE-4162-9CE0-16F3A236814F}"
+
+[$RootKey$\CLSID\{c080bc37-eb1c-466c-8ae0-42756f9e6e92}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="CQryAuto Class"
+
+[$RootKey$\CLSID\{C402364C-5474-47E7-AE72-BF5418780221}]
+"InprocServer32"="$ShellFolder$\Common7\Packages\WebAppUpgrade.dll"
+@="Visual Studio Web Application ProjectAggregator2 Class"
+
+[$RootKey$\CLSID\{C58E1B8D-9723-40c8-8B11-9DDAF0B393BA}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Default.DataConnectionUIConnector"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Default IVsDataConnectionUIConnector Class"
+
+[$RootKey$\CLSID\{C6D2F26F-624E-4AB3-8C43-0F937D52897C}]
+"Assembly"="Microsoft.VisualStudio.Publish, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Publish.Library.Bootstrapper.BootstrapperDialogProperties"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Publish.Library.Bootstrapper.BootstrapperDialogProperties"
+
+[$RootKey$\CLSID\{CBC8E38C-130D-4770-A682-C8DBB61C48FC}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataTabularObject"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataTabularObject Mapped Object Class"
+
+[$RootKey$\CLSID\{CC4014F5-B18D-439C-9352-F99D984CCA85}]
+"Assembly"="Microsoft.VisualStudio.Publish, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Publish.Framework.PublishPropPageComClass"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Publish.Framework.PublishPropPageComClass"
+
+[$RootKey$\CLSID\{CC7369A8-B9B0-439C-B136-BA955819F7F8}]
+"Assembly"="Microsoft.VisualStudio.Publish, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Publish.Framework.ProviderBasedPublishPropPageComClass"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Publish.Framework.ProviderBasedPublishPropPageComClass"
+
+[$RootKey$\CLSID\{D42D21CE-A94A-47f2-A2DA-ACE133020BCD}]
+"Assembly"="Microsoft.VisualStudio.Data, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.DSRefBuilder"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Data Source Reference Builder class"
+
+[$RootKey$\CLSID\{d5474961-c90b-4d5d-a433-45768b3d0444}\Control]
+@=""
+
+[$RootKey$\CLSID\{d5474961-c90b-4d5d-a433-45768b3d0444}\Insertable]
+@=""
+
+[$RootKey$\CLSID\{d5474961-c90b-4d5d-a433-45768b3d0444}\MiscStatus\1]
+@="131473"
+
+[$RootKey$\CLSID\{d5474961-c90b-4d5d-a433-45768b3d0444}\MiscStatus]
+@="0"
+
+[$RootKey$\CLSID\{d5474961-c90b-4d5d-a433-45768b3d0444}\Programmable]
+@=""
+
+[$RootKey$\CLSID\{d5474961-c90b-4d5d-a433-45768b3d0444}\ToolboxBitmap32]
+@="$ShellFolder$\Common7\Tools\VDT\vdt80.dll, 1"
+
+[$RootKey$\CLSID\{d5474961-c90b-4d5d-a433-45768b3d0444}\Version]
+@="8.0"
+
+[$RootKey$\CLSID\{d5474961-c90b-4d5d-a433-45768b3d0444}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="MSDTHostCtrl Class"
+
+[$RootKey$\CLSID\{D7793992-6260-411a-8C2A-FD82D953611E}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataTabularFunction"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataTabularFunction Mapped Object Class"
+
+[$RootKey$\CLSID\{db8fd887-d324-42a2-923a-a1ca0d77ffb9}]
+"Class"="Microsoft.VisualStudio.Internal.WPFFlavor.WPFProject"
+"CodeBase"="$ShellFolder$\Common7\IDE\Microsoft.VisualStudio.WPFFlavor.dll"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Internal.WPFFlavor.WPFProject"
+
+[$RootKey$\CLSID\{DBC02F8D-6DC4-49FB-BDEE-C80CBBEA60DD}]
+"Assembly"="Microsoft.VSDesigner, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSDesigner.Project.NativeAssemblyUtilities"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+
+[$RootKey$\CLSID\{DBE7CC72-58E6-457e-B38F-3CB34FF59057}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DataSourceVersionComparer"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IVsDataSourceVersionComparer Class"
+
+[$RootKey$\CLSID\{df4b6a92-088f-4963-b2a4-3da796218782}\Programmable]
+@=""
+
+[$RootKey$\CLSID\{df4b6a92-088f-4963-b2a4-3da796218782}\TypeLib]
+@="{457A98FF-C2FE-4162-9CE0-16F3A236814F}"
+
+[$RootKey$\CLSID\{df4b6a92-088f-4963-b2a4-3da796218782}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="CQryAutoDSCollection Class"
+
+[$RootKey$\CLSID\{e05a0ac9-7fb7-481e-b5bb-08e1e35b211d}\Programmable]
+@=""
+
+[$RootKey$\CLSID\{e05a0ac9-7fb7-481e-b5bb-08e1e35b211d}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+"ThreadingModel"="Apartment"
+@="Primer Class"
+
+[$RootKey$\CLSID\{e0d7b2ab-9988-4444-80b5-4a0900582d87}\AuxUserType\2]
+@="MS VDT Query V8.0"
+
+[$RootKey$\CLSID\{e0d7b2ab-9988-4444-80b5-4a0900582d87}\AuxUserType\3]
+@="Microsoft Visual Database Tools Query Designer V8.0"
+
+[$RootKey$\CLSID\{e0d7b2ab-9988-4444-80b5-4a0900582d87}\AuxUserType]
+@=""
+
+[$RootKey$\CLSID\{e0d7b2ab-9988-4444-80b5-4a0900582d87}\DataFormats\GetSet\0]
+@="3,1,32,1"
+
+[$RootKey$\CLSID\{e0d7b2ab-9988-4444-80b5-4a0900582d87}\DataFormats\GetSet\2]
+@="Embed Source,1,8,3"
+
+[$RootKey$\CLSID\{e0d7b2ab-9988-4444-80b5-4a0900582d87}\DataFormats\GetSet]
+@=""
+
+[$RootKey$\CLSID\{e0d7b2ab-9988-4444-80b5-4a0900582d87}\DataFormats]
+@=""
+
+[$RootKey$\CLSID\{e0d7b2ab-9988-4444-80b5-4a0900582d87}\DefaultIcon]
+@="progman.exe,2"
+
+[$RootKey$\CLSID\{e0d7b2ab-9988-4444-80b5-4a0900582d87}\MiscStatus]
+@="131072"
+
+[$RootKey$\CLSID\{e0d7b2ab-9988-4444-80b5-4a0900582d87}\Verb\0]
+@="&Play,0,2"
+
+[$RootKey$\CLSID\{e0d7b2ab-9988-4444-80b5-4a0900582d87}\Verb]
+@=""
+
+[$RootKey$\CLSID\{e0d7b2ab-9988-4444-80b5-4a0900582d87}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+@="Microsoft Visual Database Tools Query Designer V8.0"
+
+[$RootKey$\CLSID\{E2905C7C-4435-4212-9148-BE9614BD377B}]
+"InprocServer32"="$ShellFolder$\Common7\Packages\Compsvcspkg.dll"
+"ThreadingModel"="Both"
+@="MSBuild Task File Manager Host Object"
+
+[$RootKey$\CLSID\{E61903FE-29C0-40d7-9B2A-788D0BD20DFD}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.DataExplorerConnection"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="DataExplorerConnection Class"
+
+[$RootKey$\CLSID\{E76D53CC-3D4F-40A2-BD4D-4F3419755476}]
+"Assembly"="Microsoft.VSDesigner, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSDesigner.CodeGenerator.TypedDataSourceGenerator.DataSourceGeneratorWrapper"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="COM+ class: Microsoft.VSDesigner.CodeGenerator.TypedDataSourceGenerator.DataSourceGeneratorWrapper"
+
+[$RootKey$\CLSID\{ECAB02DB-6A5D-4675-8FC2-FD38A115D674}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataTableColumn"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataTableColumn Mapped Object Class"
+
+[$RootKey$\CLSID\{EFB9A924-3760-49AF-B363-5A82DF3A960C}]
+"Assembly"="Microsoft.VisualStudio.Publish, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Publish.Framework.PublishProject"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Publish.Framework.PublishProject"
+
+[$RootKey$\CLSID\{F0668202-46B2-4922-8A37-7FD52C620D09}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.RelationalObjectModel.DataTable"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="IVsDataTable Mapped Object Class"
+
+[$RootKey$\CLSID\{f56db4b6-c280-40f1-855d-5da0ed7bd270}]
+"Assembly"="Microsoft.VisualStudio.TextTemplating.VSHost.14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.TextTemplating.VSHost.TemplatedPreprocessor"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Generator that uses the Text Templating engine to preprocess a template for runtime use"
+
+[$RootKey$\CLSID\{F5726551-CC9F-4873-9752-E1058CF0BCA5}]
+"Assembly"="Microsoft.VisualStudio.Publish, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Publish.Framework.PersistenceData"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Microsoft.VisualStudio.Publish.Framework.PersistenceData"
+
+[$RootKey$\CLSID\{FBCD1862-4BF3-4562-A8A6-3A8B66AEAC00}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Client.DataObjectSupport"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Client IVsDataObjectSupport Class"
+
+[$RootKey$\CLSID\{FE690B14-48F7-4687-81B1-44A111D2E919}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.Default.DataConnectionEquivalencyComparer"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Default IVsDataConnectionEquivalencyComparer Class"
+
+[$RootKey$\ComponentPickerPages\SQL Server]
+"ComponentType"="SQLCLR assembly"
+"Package"="{588205e0-66e0-11d3-8600-00c04f6123b3}"
+"Page"="{BBA3635A-F590-4397-9036-E826053E25AD}"
+"Sort"=dword:00000015
+@="#3100"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\Microsoft.ACE.OLEDB.12.0\DataConnectionPromptDialog]
+@="Microsoft.VisualStudio.DataTools.Providers.OleDB.OleDBJetConnectionPromptDialog, Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\Microsoft.ACE.OLEDB.12.0\DataConnectionProperties]
+@="Microsoft.Data.ConnectionUI.OleDBAccessConnectionProperties, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\Microsoft.ACE.OLEDB.12.0\DataConnectionUIControl]
+@="Microsoft.VisualStudio.DataTools.Providers.OleDB.OleDBJetConnectionUIControl, Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\Microsoft.ACE.OLEDB.12.0\DataSourceInformation]
+@="Microsoft.VisualStudio.DataTools.Providers.OleDB.OleDBJetDataSourceInformation, Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\Microsoft.ACE.OLEDB.12.0\DataViewSupport]
+"Assembly"="Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+@="OleDBJetDataViewSupport"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\Microsoft.ACE.OLEDB.12.0]
+"DataSource"="{466CE797-67A4-4495-B75C-A3FD282E7FC3}"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\Microsoft.Jet.OLEDB.4.0\DataConnectionPromptDialog]
+@="Microsoft.VisualStudio.DataTools.Providers.OleDB.OleDBJetConnectionPromptDialog, Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\Microsoft.Jet.OLEDB.4.0\DataConnectionProperties]
+@="Microsoft.Data.ConnectionUI.OleDBAccessConnectionProperties, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\Microsoft.Jet.OLEDB.4.0\DataConnectionUIControl]
+@="Microsoft.VisualStudio.DataTools.Providers.OleDB.OleDBJetConnectionUIControl, Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\Microsoft.Jet.OLEDB.4.0\DataSourceInformation]
+@="Microsoft.VisualStudio.DataTools.Providers.OleDB.OleDBJetDataSourceInformation, Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\Microsoft.Jet.OLEDB.4.0\DataViewSupport]
+"Assembly"="Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+@="OleDBJetDataViewSupport"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\Microsoft.Jet.OLEDB.4.0]
+"DataSource"="{466CE797-67A4-4495-B75C-A3FD282E7FC3}"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\MSDAORA.1\DataConnectionProperties]
+@="Microsoft.Data.ConnectionUI.OleDBOracleConnectionProperties, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\MSDAORA.1\DataConnectionUIControl]
+@="Microsoft.VisualStudio.Data.Providers.Oracle.OracleConnectionUIControl, Microsoft.VisualStudio.Data.Providers.Oracle, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\MSDAORA.1\DataSourceInformation]
+@="Microsoft.VisualStudio.DataTools.Providers.OleDB.OleDBOracleDataSourceInformation, Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\MSDAORA.1\DataViewSupport]
+"Assembly"="Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+@="OleDBOracleDataViewSupport"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\MSDAORA.1]
+"DataSource"="{E5E86CD6-6454-4fdd-910F-DC5DFC73EB45}"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\SQLNCLI.1\DataConnectionProperties]
+@="Microsoft.Data.ConnectionUI.OleDBSqlConnectionProperties, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\SQLNCLI.1\DataConnectionUIControl]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlConnectionUIControl, Microsoft.VisualStudio.Data.Providers.SqlServer, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\SQLNCLI.1\DataSourceInformation]
+@="Microsoft.VisualStudio.DataTools.Providers.OleDB.OleDBSqlDataSourceInformation, Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\SQLNCLI.1\DataViewSupport]
+"Assembly"="Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+@="OleDBSqlDataViewSupport"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\SQLNCLI.1]
+"DataSource"="{067EA0D9-BA62-43f7-9106-34930C60C528}"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\SQLOLEDB.1\DataConnectionProperties]
+@="Microsoft.Data.ConnectionUI.OleDBSqlConnectionProperties, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\SQLOLEDB.1\DataConnectionUIControl]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlConnectionUIControl, Microsoft.VisualStudio.Data.Providers.SqlServer, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\SQLOLEDB.1\DataSourceInformation]
+@="Microsoft.VisualStudio.DataTools.Providers.OleDB.OleDBSqlDataSourceInformation, Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\SQLOLEDB.1\DataViewSupport]
+"Assembly"="Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+@="OleDBSqlDataViewSupport"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\SQLOLEDB.1]
+"DataSource"="{067EA0D9-BA62-43f7-9106-34930C60C528}"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\Specialization\VFPOLEDB.1\DataSourceInformation]
+@="Microsoft.VisualStudio.DataTools.Providers.OleDB.OleDBFoxDataSourceInformation, Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\SupportedObjects\DataConnectionPromptDialog\{466CE797-67A4-4495-B75C-A3FD282E7FC3}]
+@=""
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\SupportedObjects\DataConnectionProperties]
+@=""
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\SupportedObjects\DataConnectionSupport]
+@=""
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\SupportedObjects\DataConnectionUIControl]
+@=""
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\SupportedObjects\DataObjectSupport]
+@=""
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\SupportedObjects\DataSourceSpecializer]
+@=""
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}\SupportedObjects\DataViewSupport]
+@=""
+
+[$RootKey$\DataProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}]
+"Description"="DataProvider_OleDB_Description, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"DisplayName"="DataProvider_OleDB, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"FactoryService"="{8CB5F787-2D74-459e-88D6-39E20A4D9454}"
+"InvariantName"="System.Data.OleDb"
+"ShortDisplayName"="DataProvider_OleDB_Short, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Technology"="{77AB9A9D-78B9-4ba7-91AC-873F5338F1D2}"
+@=".NET Framework Data Provider for OLE DB"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataAsyncCommand]
+@=""
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataCommand]
+@=""
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataConnectionEquivalencyComparer]
+@="Microsoft.VisualStudio.Data.Providers.Oracle.OracleConnectionEquivalencyComparer"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataConnectionPromptDialog]
+@="Microsoft.VisualStudio.Data.Providers.Oracle.OracleConnectionPromptDialog"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataConnectionProperties]
+@="Microsoft.VisualStudio.Data.Providers.Oracle.OracleConnectionProperties"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataConnectionSupport]
+@="Microsoft.VisualStudio.Data.Providers.Oracle.OracleConnectionSupport"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataConnectionUIProperties]
+@="Microsoft.VisualStudio.Data.Providers.Oracle.OracleConnectionProperties"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataMappedObjectConverter]
+@="Microsoft.VisualStudio.Data.Providers.Oracle.OracleMappedObjectConverter"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataObjectIdentifierConverter]
+@="Microsoft.VisualStudio.Data.Providers.Oracle.OracleObjectIdentifierConverter"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataObjectIdentifierResolver]
+@="Microsoft.VisualStudio.Data.Providers.Oracle.OracleObjectIdentifierResolver"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataObjectMemberComparer]
+@="Microsoft.VisualStudio.Data.Providers.Oracle.OracleObjectMemberComparer"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataObjectSupport]
+"Assembly"="Microsoft.VisualStudio.Data.Framework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"XmlResource"="Microsoft.VisualStudio.Data.Providers.Oracle.OracleObjectSupport.xml"
+@="Microsoft.VisualStudio.Data.Framework.DataObjectSupport"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataSourceInformation]
+@="Microsoft.VisualStudio.Data.Providers.Oracle.OracleSourceInformation"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataTransaction]
+@=""
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\IVsDataViewSupport]
+"AllowAsynchronousEnumerations"="true"
+"Assembly"="Microsoft.VisualStudio.Data.Framework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"PersistentCommands"=hex(m):35,00,30,00,31,00,38,00,32,00,32,00,45,00,31,00,2D,00,42,00,35,00,41,00,46,00,2D,00,31,00,31,00,64,00,30,00,2D,00,42,00,34,00,44,00,43,00,2D,00,30,00,30,00,41,00,30,00,43,00,39,00,31,00,35,00,30,00,36,00,45,00,46,00,2C,00,30,00,78,00,33,00,35,00,31,00,33,00,2C,00,33,00,00,00,35,00,30,00,31,00,38,00,32,00,32,00,45,00,31,00,2D,00,42,00,35,00,41,00,46,00,2D,00,31,00,31,00,64,00,30,00,2D,00,42,00,34,00,44,00,43,00,2D,00,30,00,30,00,41,00,30,00,43,00,39,00,31,00,35,00,30,00,36,00,45,00,46,00,2C,00,30,00,78,00,33,00,35,00,32,00,38,00,2C,00,33,00,00,00,00,00
+"XmlResource"="Microsoft.VisualStudio.Data.Providers.Oracle.OracleViewSupport.xml"
+@="Microsoft.VisualStudio.Data.Framework.DataViewSupport"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\Microsoft.Data.ConnectionUI.IDataConnectionProperties]
+"Assembly"="Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+@="Microsoft.Data.ConnectionUI.OracleConnectionProperties"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}\SupportedObjects\Microsoft.Data.ConnectionUI.IDataConnectionUIControl]
+@="Microsoft.VisualStudio.Data.Providers.Oracle.OracleConnectionUIControl"
+
+[$RootKey$\DataProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}]
+"Assembly"="Microsoft.VisualStudio.Data.Providers.Oracle, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"AssociatedSource"="{E5E86CD6-6454-4fdd-910F-DC5DFC73EB45}"
+"Description"="DataProvider_Oracle_Description, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"DescriptionEx"="DataProvider_Oracle_Description_Ex, Microsoft.VisualStudio.Data.Providers.Oracle.Properties.Resources, Microsoft.VisualStudio.Data.Providers.Oracle, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"DisplayName"="DataProvider_Oracle, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"InvariantName"="System.Data.OracleClient"
+"PlatformVersion"="2.0"
+"ShortDisplayName"="DataProvider_Oracle_Short, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Technology"="{77AB9A9D-78B9-4ba7-91AC-873F5338F1D2}"
+@=".NET Framework Data Provider for Oracle"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataAsyncCommand]
+@=""
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataCommand]
+@=""
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataConnectionEquivalencyComparer]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlConnectionEquivalencyComparer"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataConnectionPromptDialog]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlConnectionPromptDialog"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataConnectionProperties]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlConnectionProperties"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataConnectionSupport]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlConnectionSupport"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataConnectionUIConnector]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlConnectionUIConnector"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataConnectionUIProperties]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlConnectionProperties"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataMappedObjectConverter]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlMappedObjectConverter"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataObjectIdentifierConverter]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlObjectIdentifierConverter"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataObjectIdentifierResolver]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlObjectIdentifierResolver"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataObjectMemberComparer]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlObjectMemberComparer"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataObjectSelector]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlObjectSelector"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataObjectSupport]
+"Assembly"="Microsoft.VisualStudio.Data.Framework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"XmlResource"="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlObjectSupport.xml"
+@="Microsoft.VisualStudio.Data.Framework.DataObjectSupport"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataSourceInformation]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlSourceInformation"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataSourceSpecializer]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlSourceSpecializer"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataSourceVersionComparer]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlSourceVersionComparer"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataTransaction]
+@=""
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\IVsDataViewSupport]
+"AllowAsynchronousEnumerations"="true"
+"HasDocumentProvider"=dword:00000001
+"PersistentCommands"=hex(m):35,00,30,00,31,00,38,00,32,00,32,00,45,00,31,00,2D,00,42,00,35,00,41,00,46,00,2D,00,31,00,31,00,64,00,30,00,2D,00,42,00,34,00,44,00,43,00,2D,00,30,00,30,00,41,00,30,00,43,00,39,00,31,00,35,00,30,00,36,00,45,00,46,00,2C,00,30,00,78,00,33,00,35,00,31,00,33,00,2C,00,33,00,00,00,35,00,30,00,31,00,38,00,32,00,32,00,45,00,31,00,2D,00,42,00,35,00,41,00,46,00,2D,00,31,00,31,00,64,00,30,00,2D,00,42,00,34,00,44,00,43,00,2D,00,30,00,30,00,41,00,30,00,43,00,39,00,31,00,35,00,30,00,36,00,45,00,46,00,2C,00,30,00,78,00,33,00,35,00,32,00,38,00,2C,00,33,00,00,00,00,00
+"XmlResource"="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlViewSupport.xml"
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlViewSupport"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\Microsoft.Data.ConnectionUI.IDataConnectionProperties]
+"Assembly"="Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+@="Microsoft.Data.ConnectionUI.SqlConnectionProperties"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}\SupportedObjects\Microsoft.Data.ConnectionUI.IDataConnectionUIControl]
+@="Microsoft.VisualStudio.Data.Providers.SqlServer.SqlConnectionUIControl"
+
+[$RootKey$\DataProviders\{91510608-8809-4020-8897-FBA057E22D54}]
+"Assembly"="Microsoft.VisualStudio.Data.Providers.SqlServer, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"AssociatedSource"="{067EA0D9-BA62-43f7-9106-34930C60C528}"
+"Description"="DataProvider_Sql_Description, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"DisplayName"="DataProvider_Sql, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"InvariantName"="System.Data.SqlClient"
+"PlatformVersion"="2.0"
+"ShortDisplayName"="DataProvider_Sql_Short, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Technology"="{77AB9A9D-78B9-4ba7-91AC-873F5338F1D2}"
+@=".NET Framework Data Provider for SQL Server"
+
+[$RootKey$\DataProviders\{C3D4F4CE-2C48-4381-B4D6-34FA50C51C86}\SupportedObjects\DataConnectionPromptDialog]
+@=""
+
+[$RootKey$\DataProviders\{C3D4F4CE-2C48-4381-B4D6-34FA50C51C86}\SupportedObjects\DataConnectionProperties]
+@=""
+
+[$RootKey$\DataProviders\{C3D4F4CE-2C48-4381-B4D6-34FA50C51C86}\SupportedObjects\DataConnectionSupport]
+@=""
+
+[$RootKey$\DataProviders\{C3D4F4CE-2C48-4381-B4D6-34FA50C51C86}\SupportedObjects\DataConnectionUIControl]
+@=""
+
+[$RootKey$\DataProviders\{C3D4F4CE-2C48-4381-B4D6-34FA50C51C86}\SupportedObjects\DataObjectSupport]
+@=""
+
+[$RootKey$\DataProviders\{C3D4F4CE-2C48-4381-B4D6-34FA50C51C86}\SupportedObjects\DataSourceSpecializer]
+@=""
+
+[$RootKey$\DataProviders\{C3D4F4CE-2C48-4381-B4D6-34FA50C51C86}\SupportedObjects\DataViewSupport]
+@=""
+
+[$RootKey$\DataProviders\{C3D4F4CE-2C48-4381-B4D6-34FA50C51C86}]
+"Description"="DataProvider_Odbc_Description, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"DisplayName"="DataProvider_Odbc, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"FactoryService"="{06D0BE35-FA3A-4ef6-81B9-3EDBB68EF982}"
+"InvariantName"="System.Data.Odbc"
+"ShortDisplayName"="DataProvider_Odbc_Short, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Technology"="{77AB9A9D-78B9-4ba7-91AC-873F5338F1D2}"
+@=".NET Framework Data Provider for ODBC"
+
+[$RootKey$\DataSources\{067EA0D9-BA62-43f7-9106-34930C60C528}\SupportingProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}]
+"Description"="DataProvider_OleDB_SqlDataSource_Description, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"SpecializedProvider"="SQLOLEDB.1"
+
+[$RootKey$\DataSources\{067EA0D9-BA62-43f7-9106-34930C60C528}\SupportingProviders\{91510608-8809-4020-8897-FBA057E22D54}]
+"DisplayName"="DataSource_MicrosoftSqlServer, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"UsingDescription"="DataProvider_Sql_DataSource_Description, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataSources\{067EA0D9-BA62-43f7-9106-34930C60C528}]
+"DefaultProvider"="{91510608-8809-4020-8897-FBA057E22D54}"
+@="Microsoft SQL Server"
+
+[$RootKey$\DataSources\{42568F9E-354A-4c76-9916-3225D8C8E750}\SupportingProviders\{C3D4F4CE-2C48-4381-B4D6-34FA50C51C86}]
+"Description"="DataProvider_Odbc_DataSource_Description, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"DisplayName"="DataSource_MicrosoftOdbcDsn, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataSources\{42568F9E-354A-4c76-9916-3225D8C8E750}]
+@="ODBC Data Source"
+
+[$RootKey$\DataSources\{466CE797-67A4-4495-B75C-A3FD282E7FC3}\SupportingProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}]
+"Description"="DataProvider_OleDB_AccessDataSource_Description, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"DisplayName"="DataSource_MicrosoftAccess, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"SpecializedProvider"="Microsoft.Jet.OLEDB.4.0"
+
+[$RootKey$\DataSources\{466CE797-67A4-4495-B75C-A3FD282E7FC3}]
+"DefaultProvider"="{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}"
+@="Microsoft Access Database File"
+
+[$RootKey$\DataSources\{485C80D5-BC85-46db-9E6D-4238A0AD7B6B}\SupportingProviders\{91510608-8809-4020-8897-FBA057E22D54}]
+"DisplayName"="DataSource_MicrosoftSqlServerFile, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"UsingDescription"="DataProvider_Sql_FileDataSource_Description, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataSources\{485C80D5-BC85-46db-9E6D-4238A0AD7B6B}]
+"DefaultProvider"="{91510608-8809-4020-8897-FBA057E22D54}"
+@="Microsoft SQL Server Database File"
+
+[$RootKey$\DataSources\{E5E86CD6-6454-4fdd-910F-DC5DFC73EB45}\SupportingProviders\{7F041D59-D76A-44ed-9AA2-FBF6B0548B80}]
+"Description"="DataProvider_OleDB_OracleDataSource_Description, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"DescriptionEx"="DataProvider_OleDB_OracleDataSource_Description_Ex, SR, Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"SpecializedProvider"="MSDAORA.1"
+
+[$RootKey$\DataSources\{E5E86CD6-6454-4fdd-910F-DC5DFC73EB45}\SupportingProviders\{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}]
+"DisplayName"="DataSource_Oracle, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"UsingDescription"="DataProvider_Oracle_DataSource_Description, SR, Microsoft.Data.ConnectionUI.Dialog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"UsingDescriptionEx"="DataProvider_Oracle_DataSource_Description_Ex, Microsoft.VisualStudio.Data.Providers.Oracle.Properties.Resources, Microsoft.VisualStudio.Data.Providers.Oracle, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\DataSources\{E5E86CD6-6454-4fdd-910F-DC5DFC73EB45}]
+"DefaultProvider"="{8F5C5018-AE09-42cf-B2CC-2CCCC7CFC2BB}"
+@="Oracle Database"
+
+[$RootKey$\Designers\Extensions\{AD028B85-FA21-41b1-AB4A-08672F633506}\Filters]
+"DisableWinformDragDrop"="Prevent"
+"System.Windows.Forms"="Require"
+
+[$RootKey$\Designers\Extensions\{AD028B85-FA21-41b1-AB4A-08672F633506}]
+"LoadAtIdle"=dword:00000001
+@="Microsoft.VSDesigner.VSDesignerPackage.VSDesignerBootStrap"
+
+[$RootKey$\DslTools\DomainModels\{91d59b16-e488-4a28-8d51-59273ad5bf2e}]
+"Assembly"="Microsoft.VisualStudio.Modeling.Sdk.Diagrams.14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Modeling.CoreDesignSurfaceDomainModel"
+"Uri"="http://schemas.microsoft.com/VisualStudio/2008/DslTools/CoreDesignSurface"
+
+[$RootKey$\DslTools\DomainModels\{968f9fb9-6074-49e3-8ec2-1e1ce7143e71}]
+"Assembly"="Microsoft.VisualStudio.Modeling.Sdk.14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Modeling.CoreDomainModel"
+"Uri"="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core"
+
+[$RootKey$\Editors\{07AC752B-D2B0-4dcd-AD9C-237BF561A30A}\Extensions]
+"xsd"=dword:0000001E
+
+[$RootKey$\Editors\{07AC752B-D2B0-4dcd-AD9C-237BF561A30A}\LogicalViews]
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"="Designer"
+
+[$RootKey$\Editors\{07AC752B-D2B0-4dcd-AD9C-237BF561A30A}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DisplayName"="#1100"
+"EditorTrustLevel"=dword:00000001
+"Package"="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+@="DataSet Editor"
+
+[$RootKey$\Editors\{29887BCD-E81F-4722-85CE-2CCF2D9AF30A}\Extensions]
+"mdf"=dword:00000032
+
+[$RootKey$\Editors\{29887BCD-E81F-4722-85CE-2CCF2D9AF30A}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DisplayName"="#1101"
+"EditorTrustLevel"=dword:00000001
+"Package"="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+@="SQL Data File Handler"
+
+[$RootKey$\Editors\{B2879096-4670-4df0-B201-AD1D0ED5BE6B}\Extensions]
+"accdb"=dword:00000033
+"mdb"=dword:00000032
+
+[$RootKey$\Editors\{B2879096-4670-4df0-B201-AD1D0ED5BE6B}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DisplayName"="#1102"
+"EditorTrustLevel"=dword:00000001
+"Package"="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+@="Access Data File Handler"
+
+[$RootKey$\ExceptionAssistant\KnownEngines\{123D150B-FA18-461C-B218-45B3E4589F9B}]
+@="guidEmbeddedCLREngWhidbeyV1"
+
+[$RootKey$\ExceptionAssistant\KnownEngines\{449ec4cc-30d2-4032-9256-ee18eb41b62b}]
+@="guidCOMPlusOnlyEng"
+
+[$RootKey$\ExceptionAssistant\KnownEngines\{5FFF7536-0C87-462D-8FD2-7971D948E6DC}]
+@="guidCOMPlusOnlyEng2"
+
+[$RootKey$\ExceptionAssistant\KnownEngines\{8C37B683-C921-4076-AC47-EC6DA03FA658}]
+@="guidEmbeddedCLREngWhidbeyV2"
+
+[$RootKey$\ExceptionAssistant\KnownEngines\{ab9942ab-2473-4b22-8d7b-b95a89e1fe6b}]
+@="guidEmbeddedCLREng"
+
+[$RootKey$\ExceptionAssistant\KnownEngines\{e04bde58-45ec-48db-9807-513f78865212}]
+@="guidCOMPlusSQLLocalEng"
+
+[$RootKey$\ExceptionAssistant\KnownEngines\{FB0D4648-F776-4980-95F8-BB7F36EBC1EE}]
+@="guidCOMPlusOnlyEng4"
+
+[$RootKey$\FontAndColors\Data Source Designer]
+"Category"="{3FFB3681-9B54-42b2-81D5-52453ADF56A6}"
+"Package"="{F35159B3-6FB3-417a-99FB-14B598F1C46E}"
+
+[$RootKey$\FontAndColors\Database Designer]
+"Category"="{4C889E8A-2BBB-4DC8-AE21-B1E4799D7631}"
+"Package"="{ADF95D98-9094-4B7B-874A-D94844D05DCE}"
+
+[$RootKey$\FontAndColors\Query/View Designer]
+"Category"="{5B50CEC1-B3AB-4CC3-BE1E-44AF4A07B2AF}"
+"Package"="{1F2EEAC2-DCF7-4B90-9412-2CE752DE5FEB}"
+
+[$RootKey$\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\.tt]
+@="TextTemplatingFileGenerator"
+
+[$RootKey$\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\.xaml]
+@="MSBuild:Compile"
+
+[$RootKey$\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29d5}\GlobalResourceProxyGenerator]
+"CLSID"="{566E6728-5F6b-4F42-8EDE-FD8FBDADFA21}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft App Global Resource Proxy Generator"
+
+[$RootKey$\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\MSDataSetGenerator]
+"CLSID"="{E76D53CC-3D4F-40a2-BD4D-4F3419755476}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft VB Code Generator for XSD"
+
+[$RootKey$\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\MSDiscoCodeGenerator]
+"CLSID"="{8C64357F-10D7-40ef-9803-95F8165B6A7B}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft VB Code Generator for Web Discovery"
+
+[$RootKey$\Generators\{164b10b9-b200-11d0-8c61-00a0c91e29d5}\TextTemplatingFileGenerator]
+"CLSID"="{b9c665d2-0451-4ae2-a38c-443b85d634f2}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Generator that uses the Text Templating engine"
+
+[$RootKey$\Generators\{164b10b9-b200-11d0-8c61-00a0c91e29d5}\TextTemplatingFilePreprocessor]
+"CLSID"="{F56DB4B6-C280-40F1-855D-5DA0ED7BD270}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Generator that uses the Text Templating engine to preprocess a template for runtime use"
+
+[$RootKey$\Generators\{349C5850-65DF-11DA-9384-00065B846F21}\GlobalResourceProxyGenerator]
+"CLSID"="{566E6728-5F6b-4F42-8EDE-FD8FBDADFA21}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft App Global Resource Proxy Generator"
+
+[$RootKey$\Generators\{39C9C826-8EF8-4079-8C95-428F5B1C323F}\.tt]
+@="TextTemplatingFileGenerator"
+
+[$RootKey$\Generators\{39C9C826-8EF8-4079-8C95-428F5B1C323F}\TextTemplatingFileGenerator]
+"CLSID"="{b9c665d2-0451-4ae2-a38c-443b85d634f2}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Generator that uses the Text Templating engine"
+
+[$RootKey$\Generators\{39C9C826-8EF8-4079-8C95-428F5B1C323F}\TextTemplatingFilePreprocessor]
+"CLSID"="{F56DB4B6-C280-40F1-855D-5DA0ED7BD270}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Generator that uses the Text Templating engine to preprocess a template for runtime use"
+
+[$RootKey$\Generators\{E6FDF8B0-F3D1-11D4-8576-0002A516ECE8}\MSDataSetGenerator]
+"CLSID"="{E76D53CC-3D4F-40a2-BD4D-4F3419755476}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft J# Code Generator for XSD"
+
+[$RootKey$\Generators\{FAE04EC1-301F-11d3-BF4B-00C04F79EFBC}\.tt]
+@="TextTemplatingFileGenerator"
+
+[$RootKey$\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\.xaml]
+@="MSBuild:Compile"
+
+[$RootKey$\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\GlobalResourceProxyGenerator]
+"CLSID"="{566E6728-5F6b-4F42-8EDE-FD8FBDADFA21}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft App Global Resource Proxy Generator"
+
+[$RootKey$\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\MSDataSetGenerator]
+"CLSID"="{E76D53CC-3D4F-40a2-BD4D-4F3419755476}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft C# Code Generator for XSD"
+
+[$RootKey$\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\MSDiscoCodeGenerator]
+"CLSID"="{8C64357F-10D7-40ef-9803-95F8165B6A7B}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft C# Code Generator for Web Discovery"
+
+[$RootKey$\Generators\{fae04ec1-301f-11d3-bf4b-00c04f79efbc}\TextTemplatingFileGenerator]
+"CLSID"="{b9c665d2-0451-4ae2-a38c-443b85d634f2}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Generator that uses the Text Templating engine"
+
+[$RootKey$\Generators\{fae04ec1-301f-11d3-bf4b-00c04f79efbc}\TextTemplatingFilePreprocessor]
+"CLSID"="{F56DB4B6-C280-40F1-855D-5DA0ED7BD270}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Generator that uses the Text Templating engine to preprocess a template for runtime use"
+
+[$RootKey$\KeyBindingTables\{4194fee5-6777-419f-a5fc-47a536df1bdb}]
+"AllowNavKeyBinding"=dword:00000000
+"Package"="{d6c919aa-1217-41e2-a13b-9b92e1866305}"
+@="#316"
+
+[$RootKey$\KeyBindingTables\{b2c40b32-3a37-4ca9-97b9-fa44248b69ff}]
+"AllowNavKeyBinding"=dword:00000000
+"Package"="{d6c919aa-1217-41e2-a13b-9b92e1866305}"
+@="#313"
+
+[$RootKey$\KeyBindingTables\{B334A759-F450-40A5-BE2A-65937BCD5415}]
+"AllowNavKeyBinding"=dword:00000000
+"Package"="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+@="#1100"
+
+[$RootKey$\KeyBindingTables\{b968e165-98e0-41f0-8fbe-a8ed1d246a90}]
+"AllowNavKeyBinding"=dword:00000000
+"Package"="{d6c919aa-1217-41e2-a13b-9b92e1866305}"
+@="#314"
+
+[$RootKey$\KeyBindingTables\{cff78a9b-78a3-45a3-9142-0267afc261fa}]
+"AllowNavKeyBinding"=dword:00000000
+"Package"="{d6c919aa-1217-41e2-a13b-9b92e1866305}"
+@="#315"
+
+[$RootKey$\Languages\CodeExpansions\Basic\Paths]
+"WPF"="%InstallRoot%\VB\Snippets\%LCID%\WPF\"
+
+[$RootKey$\Languages\CodeExpansions\CSharp\Paths]
+"WinFX"="%InstallRoot%\VC#\Snippets\%LCID%\NetFX30\"
+
+[$RootKey$\Languages\Language Services\Basic\Debugger Languages\{3A12D0B8-C26C-11D0-B442-00A0244A1DD2}]
+@="Basic"
+
+[$RootKey$\Languages\Language Services\Basic\EditorToolsOptions\SimplifiedEditorPage]
+"NoShowAllView"=dword:00000001
+"Package"="{67909B06-91E9-4F3E-AB50-495046BE9A9A}"
+"Page"="{0FD397F9-E4A5-4392-AFF2-36DC3FB133D2}"
+"Sort"=dword:00000001
+@="#1005"
+
+[$RootKey$\Languages\Language Services\Basic]
+"DesignerLoader"="Microsoft.VisualStudio.Design.Serialization.CodeDom.VSCodeDomDesignerLoader, Microsoft.VisualStudio.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\Languages\Language Services\T-SQL90]
+"RequestStockColors"=dword:00000001
+"ShowCompletion"=dword:00000000
+"ShowSmartIndent"=dword:00000000
+@="{43AF1158-FED5-432e-8E8F-23B6FD592857}"
+
+[$RootKey$\LocalData\{349C5851-65DF-11DA-9384-00065B846F21}]
+"SupportsLocalData"=dword:00000002
+
+[$RootKey$\LocalData\{60dc8134-eba5-43b8-bcc9-bb4bc16c2548}]
+"SupportsLocalData"=dword:00000002
+
+[$RootKey$\LocalData\{BAA0C2D2-18E2-41B9-852F-F413020CAA33}]
+"SupportsLocalData"=dword:00000002
+
+[$RootKey$\LocalData\{E24C65DC-7377-472b-9ABA-BC803B73C61A}]
+"SupportsIVsProjectStartupServices"=dword:00000000
+
+[$RootKey$\LocalData\{E6FDF86B-F3D1-11D4-8576-0002A516ECE8}]
+"EnableDependentFileMonitoring"=dword:00000001
+"GenerateDALOnAdd"=dword:00000001
+
+[$RootKey$\LocalData\{F184B08F-C81C-45F6-A57F-5ABD9991F28F}]
+"EnableDependentFileMonitoring"=dword:00000001
+"GenerateDALOnAdd"=dword:00000001
+
+[$RootKey$\LocalData\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}]
+"EnableDependentFileMonitoring"=dword:00000001
+"GenerateDALOnAdd"=dword:00000001
+
+[$RootKey$\LocalData\{FE3BBBB6-72D5-11d2-9ACE-00C04F79A2A4}]
+"SupportsLocalData"=dword:00000002
+
+[$RootKey$\Menus]
+"{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"=", 8100, 1"
+"{349C5850-65DF-11DA-9384-00065B846F21}"=", 2, 7"
+"{3f3d9528-bac4-420e-8147-29896300c5c0}"=", CallHierarchy.ctmenu, 1"
+"{8D8529D3-625D-4496-8354-3DAD630ECC1B}"=",1, 2"
+"{A8F602E2-40CE-4daf-AE82-A457A91728B9}"=", VSPackage.ctmenu, 1"
+"{a9696de6-e209-414d-bbec-a0506fb0e924}"=", 1000.ctmenu, 11"
+"{AA8EB8CD-7A51-11D0-92C3-00A0C9138C45}"=",1,6"
+"{b3bae735-386c-4030-8329-ef48eeda4036}"=",Commands.ctmenu, 1"
+"{CB22EE0E-4072-4ae7-96E2-90FCCF879544}"=", 2, 1"
+"{d1091694-ea72-4bdd-8918-78324cc25448}"=",1000.ctmenu,1"
+"{d6c919aa-1217-41e2-a13b-9b92e1866305}"=", 541, 32"
+
+[$RootKey$\MSBuild\SafeImports]
+"Microsoft.Silverlight.Common.targets"="Program Files\MSBuild\Microsoft\Silverlight\V2.0\Microsoft.Silverlight.Common.targets"
+"Microsoft.Silverlight.Common.targets_30"="Program Files\MSBuild\Microsoft\Silverlight\V3.0\Microsoft.Silverlight.Common.targets"
+"Microsoft.Silverlight.Common.targets_40"="Program Files\MSBuild\Microsoft\Silverlight\V4.0\Microsoft.Silverlight.Common.targets"
+"Microsoft.Silverlight.CSharp.targets"="Program Files\MSBuild\Microsoft\Silverlight\V2.0\Microsoft.Silverlight.CSharp.targets"
+"Microsoft.Silverlight.CSharp.targets_30"="Program Files\MSBuild\Microsoft\Silverlight\V3.0\Microsoft.Silverlight.CSharp.targets"
+"Microsoft.Silverlight.CSharp.targets_40"="Program Files\MSBuild\Microsoft\Silverlight\V4.0\Microsoft.Silverlight.CSharp.targets"
+"Microsoft.Silverlight.VisualBasic.targets"="Program Files\MSBuild\Microsoft\Silverlight\V2.0\Microsoft.Silverlight.VisualBasic.targets"
+"Microsoft.Silverlight.VisualBasic.targets_30"="Program Files\MSBuild\Microsoft\Silverlight\V3.0\Microsoft.Silverlight.VisualBasic.targets"
+"Microsoft.Silverlight.VisualBasic.targets_40"="Program Files\MSBuild\Microsoft\Silverlight\V4.0\Microsoft.Silverlight.VisualBasic.targets"
+"Microsoft.WebApplication.targets"="Program Files\msbuild\microsoft\visualstudio\v14.0\WebApplications\Microsoft.WebApplication.targets"
+"WinFX1"="$WinDir$\microsoft.net\framework\v4.0.23107\Microsoft.WinFX.targets"
+
+[$RootKey$\NewProjectTemplates\PseudoFolders\{152CDB9D-B85A-4513-A171-245CE5C61FCC}]
+"DisplayName"="#13406"
+"Package"="{DA9FB551-C724-11D0-AE1F-00A0C90FFFC3}"
+"SortPriority"=dword:0000012C
+@="Other Languages"
+
+[$RootKey$\NewProjectTemplates\PseudoFolders\{DCF2A94A-45B0-11D1-ADBF-00C04FB6BE4C}]
+"DisplayName"="#13016"
+"Package"="{DA9FB551-C724-11D0-AE1F-00A0C90FFFC3}"
+"SortPriority"=dword:00000384
+@="Other Project Types"
+
+[$RootKey$\NewProjectTemplates\TemplateDirs\{019971D6-4685-11D2-B48A-0000F87572EB}]
+@=""
+
+[$RootKey$\OutputWindow\{220A4C17-7E7C-4663-BBCC-5E607C6543CD}]
+"ContentType"="DatabaseOutput"
+"InitiallyInvisible"=dword:00000001
+"Name"="Database Output"
+"Package"="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+@="#6095"
+
+[$RootKey$\OutputWindow\{CBF36220-3F6F-11d1-8631-006008184050}]
+"ContentType"="SourceControlOutput"
+"InitiallyInvisible"=dword:00000001
+"Package"="{AA8EB8CD-7A51-11D0-92C3-00A0C9138C45}"
+@="#508"
+
+[$RootKey$\Packages\{220A4C17-7E7C-4663-BBCC-5E607C6543CD}\Automation]
+"DataService"=""
+
+[$RootKey$\Packages\{220A4C17-7E7C-4663-BBCC-5E607C6543CD}\SatelliteDll]
+"DllName"="vdt80pui.dll"
+"Path"="$ShellFolder$\Common7\Tools\VDT\"
+
+[$RootKey$\Packages\{220A4C17-7E7C-4663-BBCC-5E607C6543CD}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80p.dll"
+@="Visual Database Tools Package"
+
+[$RootKey$\Packages\{349C5850-65DF-11DA-9384-00065B846F21}\AddNewItemFilters\App_Browsers]
+"BrowserFile.vstemplate"=dword:00000000
+"Text.vstemplate"=dword:00000000
+"TextFile.vstemplate"=dword:00000000
+"XMLFile.vstemplate"=dword:00000000
+
+[$RootKey$\Packages\{349C5850-65DF-11DA-9384-00065B846F21}\AddNewItemFilters\App_Data]
+"SQLCEDatabase.vstemplate"=dword:00000000
+"SqlDatabase.vstemplate"=dword:00000000
+"Text.vstemplate"=dword:00000000
+"TextFile.vstemplate"=dword:00000000
+"XMLFile.vstemplate"=dword:00000000
+"XMLSchema.vstemplate"=dword:00000000
+
+[$RootKey$\Packages\{349C5850-65DF-11DA-9384-00065B846F21}\AddNewItemFilters\App_Resources]
+"Resource.vstemplate"=dword:00000000
+"Text.vstemplate"=dword:00000000
+"TextFile.vstemplate"=dword:00000000
+"XMLFile.vstemplate"=dword:00000000
+
+[$RootKey$\Packages\{349C5850-65DF-11DA-9384-00065B846F21}\AddNewItemFilters\App_Themes]
+"SkinFile.vstemplate"=dword:00000000
+"Text.vstemplate"=dword:00000000
+"TextFile.vstemplate"=dword:00000000
+"WebStyleSheet.vstemplate"=dword:00000000
+"XMLFile.vstemplate"=dword:00000000
+"XSLTFile.vstemplate"=dword:00000000
+
+[$RootKey$\Packages\{349C5850-65DF-11DA-9384-00065B846F21}\AddNewItemFilters\ExcludedTemplates]
+"AboutBox.vstemplate"=dword:00000000
+"App.vstemplate"=dword:00000000
+"AppConfiguration.vstemplate"=dword:00000000
+"Bitmap.vstemplate"=dword:00000000
+"Component.vstemplate"=dword:00000000
+"Cursor.vstemplate"=dword:00000000
+"CustomControl.vstemplate"=dword:00000000
+"Dialog.vstemplate"=dword:00000000
+"EmptyDatabase.vstemplate"=dword:00000000
+"EmptyDatabase2.vstemplate"=dword:00000000
+"Explorer.vstemplate"=dword:00000000
+"Form.vstemplate"=dword:00000000
+"htmlpage.vstemplate"=dword:00000000
+"Icon.vstemplate"=dword:00000000
+"JScript.vstemplate"=dword:00000000
+"LocalDataCache.vstemplate"=dword:00000000
+"LoginForm.vstemplate"=dword:00000000
+"mdiparent.vstemplate"=dword:00000000
+"Settings.vstemplate"=dword:00000000
+"splashscreen.vstemplate"=dword:00000000
+"StyleSheet.vstemplate"=dword:00000000
+"UserControl.vstemplate"=dword:00000000
+"UserService.vstemplate"=dword:00000000
+"WcfService.vstemplate"=dword:00000000
+"windowsform.vstemplate"=dword:00000000
+"windowsservice.vstemplate"=dword:00000000
+"WorkflowWebConfig.vstemplate"=dword:00000000
+"WPFCustomControl.vstemplate"=dword:00000000
+"WPFFlowDocument.vstemplate"=dword:00000000
+"WPFPage.vstemplate"=dword:00000000
+"WPFPageFunction.vstemplate"=dword:00000000
+"WPFResourceDictionary.vstemplate"=dword:00000000
+"WPFUserControl.vstemplate"=dword:00000000
+"WPFWindow.vstemplate"=dword:00000000
+
+[$RootKey$\Packages\{349C5850-65DF-11DA-9384-00065B846F21}\Automation]
+"CustomWebServerProvider"=""
+
+[$RootKey$\Packages\{349C5850-65DF-11DA-9384-00065B846F21}\SatelliteDll]
+"DllName"="Microsoft.VisualStudio.Web.ApplicationUI.dll"
+"Path"="$ShellFolder$\Common7\IDE\"
+
+[$RootKey$\Packages\{349C5850-65DF-11DA-9384-00065B846F21}]
+"Assembly"="Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Web.Application.WAPackage"
+"InprocServer32"="$System$\mscoree.dll"
+@="Microsoft.VisualStudio.Web.Application.WAPackage, Microsoft.VisualStudio.Web.Application, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\Packages\{3F3D9528-BAC4-420e-8147-29896300C5C0}]
+"Assembly"="Microsoft.VisualStudio.CallHierarchy.Package.Implementation, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.CallHierarchy.Package.Implementation.HostPackage"
+"InprocServer32"="$WinDir$\system32\mscoree.dll"
+@="Visual Studio Call Hierarchy Package"
+
+[$RootKey$\Packages\{512be089-83ec-4cc6-8483-cf16565ae209}\Toolbox]
+"Default Items"=dword:0000001B
+
+[$RootKey$\Packages\{53544C4D-B03D-4209-A7D0-D9DD13A4019B}\SatelliteDll]
+"DllName"="VssProviderStubui.dll"
+"Path"="$ShellFolder$\Common7\IDE\VS SCC\"
+
+[$RootKey$\Packages\{53544C4D-B03D-4209-A7D0-D9DD13A4019B}]
+"InprocServer32"="$ShellFolder$\Common7\IDE\VS SCC\VssProviderStub.dll"
+@="Visual SourceSafe Provider Stub Package"
+
+[$RootKey$\Packages\{588205e0-66e0-11d3-8600-00c04f6123b3}\SatelliteDll]
+"DllName"="compsvcspkgui.dll"
+"Path"="$ShellFolder$\Common7\Packages\"
+
+[$RootKey$\Packages\{588205e0-66e0-11d3-8600-00c04f6123b3}]
+"InprocServer32"="$ShellFolder$\Common7\Packages\Compsvcspkg.dll"
+@="Visual Studio Component Enumerator Package"
+
+[$RootKey$\Packages\{8D8529D3-625D-4496-8354-3DAD630ECC1B}\SatelliteDll]
+"DllName"="Microsoft.VSDesignerUI.DLL"
+"Path"="$ShellFolder$\Common7\IDE\"
+
+[$RootKey$\Packages\{8D8529D3-625D-4496-8354-3DAD630ECC1B}\Toolbox\DefaultContent\Data\Data_BindingNavigator]
+"BitmapResourceID"="#11"
+"Formats"=".NET Toolbox Item,CF_NDP_TYPENAME,CF_CACHEKEY,CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS"
+"HelpKeyword"="System.Windows.Forms.BindingNavigator"
+"TFMs"=".NETFramework,Version=v2.0;.NETFramework,Version=v3.0;.NETFramework,Version=v3.5;.NETFramework,Version=v4.0"
+"TransparentColor"=dword:00FF00FF
+"UniqueID"="Data_BindingNavigator"
+"UseProjectTargetFrameworkVersionInTooltip"=dword:00000001
+@="BindingNavigator"
+
+[$RootKey$\Packages\{8D8529D3-625D-4496-8354-3DAD630ECC1B}\Toolbox\DefaultContent\Data\Data_BindingSource]
+"BitmapResourceID"="#12"
+"Formats"=".NET Toolbox Item,CF_NDP_TYPENAME,CF_CACHEKEY,CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS"
+"HelpKeyword"="System.Windows.Forms.BindingSource"
+"TFMs"=".NETFramework,Version=v2.0;.NETFramework,Version=v3.0;.NETFramework,Version=v3.5;.NETFramework,Version=v4.0"
+"TransparentColor"=dword:00FF00FF
+"UniqueID"="Data_BindingSource"
+"UseProjectTargetFrameworkVersionInTooltip"=dword:00000001
+@="BindingSource"
+
+[$RootKey$\Packages\{8D8529D3-625D-4496-8354-3DAD630ECC1B}\Toolbox\DefaultContent\Data\Data_DataGridView]
+"BitmapResourceID"="#13"
+"Formats"=".NET Toolbox Item,CF_NDP_TYPENAME,CF_CACHEKEY,CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS"
+"HelpKeyword"="System.Windows.Forms.DataGridView"
+"TFMs"=".NETFramework,Version=v2.0;.NETFramework,Version=v3.0;.NETFramework,Version=v3.5;.NETFramework,Version=v4.0"
+"TransparentColor"=dword:00FF00FF
+"UniqueID"="Data_DataGridView"
+"UseProjectTargetFrameworkVersionInTooltip"=dword:00000001
+@="DataGridView"
+
+[$RootKey$\Packages\{8D8529D3-625D-4496-8354-3DAD630ECC1B}\Toolbox\DefaultContent\Data\Data_DataSet]
+"BitmapResourceID"="#14"
+"Formats"=".NET Toolbox Item,CF_NDP_TYPENAME,CF_CACHEKEY,CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS"
+"HelpKeyword"="System.Data.DataSet"
+"TFMs"=".NETFramework,Version=v2.0;.NETFramework,Version=v3.0;.NETFramework,Version=v3.5;.NETFramework,Version=v4.0"
+"TransparentColor"=dword:00FF00FF
+"UniqueID"="Data_DataSet"
+"UseProjectTargetFrameworkVersionInTooltip"=dword:00000001
+@="DataSet"
+
+[$RootKey$\Packages\{8D8529D3-625D-4496-8354-3DAD630ECC1B}\Toolbox\DefaultContent\Data]
+"UniqueID"="Data"
+@="#1310"
+
+[$RootKey$\Packages\{8D8529D3-625D-4496-8354-3DAD630ECC1B}\Toolbox\DefaultContent\DataSet\DataSet_DataTable]
+"BitmapResourceID"="#21"
+"Formats"=".NET Toolbox Item,CF_NDP_TYPENAME,CF_CACHEKEY,CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS"
+"HelpKeyword"="Microsoft.VSDesigner.DataSource.DesignTable"
+"TFMs"=".NETFramework,Version=v2.0;.NETFramework,Version=v3.0;.NETFramework,Version=v3.5;.NETFramework,Version=v4.0"
+"TransparentColor"=dword:00FF00FF
+"UniqueID"="DataSet_DataTable"
+"UseProjectTargetFrameworkVersionInTooltip"=dword:00000001
+@="DataTable"
+
+[$RootKey$\Packages\{8D8529D3-625D-4496-8354-3DAD630ECC1B}\Toolbox\DefaultContent\DataSet\DataSet_Query]
+"BitmapResourceID"="#22"
+"Formats"=".NET Toolbox Item,CF_NDP_TYPENAME,CF_CACHEKEY,CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS"
+"HelpKeyword"="Microsoft.VSDesigner.DataSource.DbSource"
+"TFMs"=".NETFramework,Version=v2.0;.NETFramework,Version=v3.0;.NETFramework,Version=v3.5;.NETFramework,Version=v4.0"
+"TransparentColor"=dword:0000FF00
+"UniqueID"="DataSet_Query"
+"UseProjectTargetFrameworkVersionInTooltip"=dword:00000001
+@="Query"
+
+[$RootKey$\Packages\{8D8529D3-625D-4496-8354-3DAD630ECC1B}\Toolbox\DefaultContent\DataSet\DataSet_Relation]
+"BitmapResourceID"="#23"
+"Formats"=".NET Toolbox Item,CF_NDP_TYPENAME,CF_CACHEKEY,CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS"
+"HelpKeyword"="Microsoft.VSDesigner.DataSource.DesignRelation"
+"TFMs"=".NETFramework,Version=v2.0;.NETFramework,Version=v3.0;.NETFramework,Version=v3.5;.NETFramework,Version=v4.0"
+"TransparentColor"=dword:00FF00FF
+"UniqueID"="DataSet_Relation"
+"UseProjectTargetFrameworkVersionInTooltip"=dword:00000001
+@="Relation"
+
+[$RootKey$\Packages\{8D8529D3-625D-4496-8354-3DAD630ECC1B}\Toolbox\DefaultContent\DataSet\DataSet_TableAdapter]
+"BitmapResourceID"="#24"
+"Formats"=".NET Toolbox Item,CF_NDP_TYPENAME,CF_CACHEKEY,CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS"
+"HelpKeyword"="Microsoft.VSDesigner.DataSource.DataAccessor"
+"TFMs"=".NETFramework,Version=v2.0;.NETFramework,Version=v3.0;.NETFramework,Version=v3.5;.NETFramework,Version=v4.0"
+"TransparentColor"=dword:00FF00FF
+"UniqueID"="DataSet_TableAdapter"
+"UseProjectTargetFrameworkVersionInTooltip"=dword:00000001
+@="TableAdapter"
+
+[$RootKey$\Packages\{8D8529D3-625D-4496-8354-3DAD630ECC1B}\Toolbox\DefaultContent\DataSet]
+"UniqueID"="DataSet"
+@="#1320"
+
+[$RootKey$\Packages\{8D8529D3-625D-4496-8354-3DAD630ECC1B}]
+"Assembly"="Microsoft.VSDesigner, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VSDesigner.VSDesignerPackage.VSDesignerPackage"
+"InprocServer32"="$System$\mscoree.dll"
+@="Visual Studio Explorers and Designers Package"
+
+[$RootKey$\Packages\{8FF02D1A-C177-4ac8-A62F-88FC6EA65F57}\IgnorableFiles\mssccprj.scc]
+@=""
+
+[$RootKey$\Packages\{8FF02D1A-C177-4ac8-A62F-88FC6EA65F57}\IgnorableFiles\vssver.scc]
+@=""
+
+[$RootKey$\Packages\{8FF02D1A-C177-4ac8-A62F-88FC6EA65F57}\IgnorableFiles\vssver2.scc]
+@=""
+
+[$RootKey$\Packages\{8FF02D1A-C177-4ac8-A62F-88FC6EA65F57}\SatelliteDll]
+"DllName"="webdirprjui.dll"
+"Path"="$ShellFolder$\Common7\Packages\"
+
+[$RootKey$\Packages\{8FF02D1A-C177-4ac8-A62F-88FC6EA65F57}]
+"InprocServer32"="$ShellFolder$\Common7\Packages\webdirprj.dll"
+@="Visual Web Developer Project Persistance Package"
+
+[$RootKey$\Packages\{A8F602E2-40CE-4daf-AE82-A457A91728B9}]
+"Assembly"="Microsoft.VisualStudio.Data.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Data.Package.DataPackage"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Visual Studio Data Designer Extensibility Package"
+
+[$RootKey$\Packages\{a9696de6-e209-414d-bbec-a0506fb0e924}]
+"Assembly"="Microsoft.VisualStudio.TextTemplating.VSHost.14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.TextTemplating.VSHost.OrchestratorPackage"
+"CompanyName"="Microsoft"
+"ID"=dword:00000064
+"InprocServer32"="$System$\mscoree.dll"
+"ProductName"="Microsoft T4"
+@="Microsoft.VisualStudio.TextTemplating.VSHost.OrchestratorPackage, Microsoft.VisualStudio.TextTemplating.VSHost.14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\Packages\{AA8EB8CD-7A51-11D0-92C3-00A0C9138C45}\SatelliteDll]
+"DllName"="VssProviderui.dll"
+"Path"="$ShellFolder$\Common7\IDE\VS SCC\"
+
+[$RootKey$\Packages\{AA8EB8CD-7A51-11D0-92C3-00A0C9138C45}]
+"InprocServer32"="$ShellFolder$\Common7\IDE\VS SCC\VssProvider.dll"
+@="Visual SourceSafe Provider Package"
+
+[$RootKey$\Packages\{b3bae735-386c-4030-8329-ef48eeda4036}]
+"Class"="Microsoft.VisualStudio.Internal.WPFFlavor.WPFPackage"
+"CodeBase"="$ShellFolder$\Common7\IDE\Microsoft.VisualStudio.WPFFlavor.dll"
+"CompanyName"="Microsoft"
+"ID"=dword:00000096
+"InprocServer32"="$System$\mscoree.dll"
+"MinEdition"="standard"
+"ProductName"="wpfflavor"
+"ProductVersion"="2.0.0.0"
+@="Microsoft.VisualStudio.Internal.WPFFlavor.WPFPackage, Microsoft.VisualStudio.WPFFlavor, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\Packages\{B7C8A95B-B8E4-4adb-9560-0F487D1429FB}]
+"Assembly"="Microsoft.VisualStudio.Modeling.SDK.Integration.Shell.14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Modeling.Integration.Shell.ModelBusPackage"
+"InprocServer32"="$System$\mscoree.dll"
+@="Microsoft.VisualStudio.Modeling.Integration.Shell.ModelBusPackage, Microsoft.VisualStudio.Modeling.SDK.Integration.Shell.14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\Packages\{CB22EE0E-4072-4ae7-96E2-90FCCF879544}\AddNewItemFilters\ExcludedTemplateDirs]
+"Reporting"=dword:00000000
+"Windows Forms"=dword:00000000
+"WorkFlow"=dword:00000000
+"WPF"=dword:00000000
+
+[$RootKey$\Packages\{CB22EE0E-4072-4ae7-96E2-90FCCF879544}\AddNewItemFilters\ExcludedTemplates]
+"AboutBox.vstemplate"=dword:00000000
+"Activity.vstemplate"=dword:00000000
+"ADONETArtifactGenerator_T4CodeGenTemplateCS.vstemplate"=dword:00000000
+"ADONETArtifactGenerator_T4CodeGenTemplateCS_V5.0.vstemplate"=dword:00000000
+"ADONETArtifactGenerator_T4CodeGenTemplateVB.vstemplate"=dword:00000000
+"ADONETArtifactGenerator_T4CodeGenTemplateVB_V5.0.vstemplate"=dword:00000000
+"ADONETArtifactGenerator_T4SelfTrackingCodeGenTemplateCS.vstemplate"=dword:00000000
+"ADONETArtifactGenerator_T4SelfTrackingCodeGenTemplateCS_V5.0.vstemplate"=dword:00000000
+"ADONETArtifactGenerator_T4SelfTrackingCodeGenTemplateVB.vstemplate"=dword:00000000
+"ADONETArtifactGenerator_T4SelfTrackingCodeGenTemplateVB_V5.0.vstemplate"=dword:00000000
+"App.vstemplate"=dword:00000000
+"AppConfiguration.vstemplate"=dword:00000000
+"appManifest.vstemplate"=dword:00000000
+"AspNetHandler.vstemplate"=dword:00000000
+"AspNetModule.vstemplate"=dword:00000000
+"AssemblyInfo.vstemplate"=dword:00000000
+"Bitmap.vstemplate"=dword:00000000
+"ComClass.vstemplate"=dword:00000000
+"component.vstemplate"=dword:00000000
+"cursor.vstemplate"=dword:00000000
+"customcontrol.vstemplate"=dword:00000000
+"DatabaseUnitTest.vstemplate"=dword:00000000
+"dataset.vstemplate"=dword:00000000
+"Dialog.vstemplate"=dword:00000000
+"DynamicDataField.vstemplate"=dword:00000000
+"EmptyDatabase.vstemplate"=dword:00000000
+"EmptyDatabase2.vstemplate"=dword:00000000
+"Explorer.vstemplate"=dword:00000000
+"Form.vstemplate"=dword:00000000
+"Icon.vstemplate"=dword:00000000
+"installer.vstemplate"=dword:00000000
+"Interface.vstemplate"=dword:00000000
+"LinqToSQLObjects_CS.vstemplate"=dword:00000000
+"LinqToSQLObjects_VB.vstemplate"=dword:00000000
+"LocalDataCache.vstemplate"=dword:00000000
+"LoginForm.vstemplate"=dword:00000000
+"mdiparent.vstemplate"=dword:00000000
+"ModelObjectItemCS.vstemplate"=dword:00000000
+"ModelObjectItemVB.vstemplate"=dword:00000000
+"MTSTransactionClass.vstemplate"=dword:00000000
+"PreTextTemplate.CSharp.vstemplate"=dword:00000000
+"PreTextTemplate.VisualBasic.vstemplate"=dword:00000000
+"Report.vstemplate"=dword:00000000
+"Settings.vstemplate"=dword:00000000
+"splashscreen.vstemplate"=dword:00000000
+"TextTemplate.CSharp.vstemplate"=dword:00000000
+"TextTemplate.VisualBasic.vstemplate"=dword:00000000
+"usercontrol.vstemplate"=dword:00000000
+"UserService.vstemplate"=dword:00000000
+"VBScript.vstemplate"=dword:00000000
+"Visualizer.vstemplate"=dword:00000000
+"WcfService.vstemplate"=dword:00000000
+"WCFWorkflowService.vstemplate"=dword:00000000
+"WebApiControllerItemTemplate.11.cs.vstemplate"=dword:00000000
+"WebApiControllerItemTemplate.11.vb.vstemplate"=dword:00000000
+"WebControl.vstemplate"=dword:00000000
+"WebCustomControl.vstemplate"=dword:00000000
+"windowsform.vstemplate"=dword:00000000
+"windowsservice.vstemplate"=dword:00000000
+"WinScript.vstemplate"=dword:00000000
+"WorkflowWebConfig.vstemplate"=dword:00000000
+"WPFUserControl.vstemplate"=dword:00000000
+
+[$RootKey$\Packages\{CB22EE0E-4072-4ae7-96E2-90FCCF879544}\SatelliteDll]
+"DllName"="Microsoft.VisualStudio.SilverlightUI.dll"
+"Path"="$ShellFolder$\Common7\IDE\"
+
+[$RootKey$\Packages\{CB22EE0E-4072-4ae7-96E2-90FCCF879544}]
+"Assembly"="Microsoft.VisualStudio.Silverlight, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Silverlight.SLPackage"
+"InprocServer32"="$System$\mscoree.dll"
+@="Microsoft.VisualStudio.Silverlight.SLPackage, Microsoft.VisualStudio.Silverlight, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\Packages\{d1091694-ea72-4bdd-8918-78324cc25448}]
+"Assembly"="Microsoft.VisualStudio.Modeling.Sdk.Shell.14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.Modeling.Shell.CommonModelingPackage"
+"CompanyName"="Microsoft"
+"ID"=dword:00000064
+"InprocServer32"="$System$\mscoree.dll"
+"ProductName"="Microsoft DSL Tools"
+"ProductVersion"="2.0"
+@="Microsoft.VisualStudio.Modeling.Shell.CommonModelingPackage, Microsoft.VisualStudio.Modeling.Sdk.Shell.14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+[$RootKey$\Packages\{d6c919aa-1217-41e2-a13b-9b92e1866305}\SatelliteDll]
+"DllName"="vdt80ui.dll"
+"Path"="$ShellFolder$\Common7\Tools\VDT\"
+
+[$RootKey$\Packages\{d6c919aa-1217-41e2-a13b-9b92e1866305}]
+@="Visual Studio Data Designers"
+
+[$RootKey$\Packages\{DC7F691A-91FC-4F7b-923E-FE829C3A18DC}\SatelliteDll]
+"DllName"="webappupgradeui.dll"
+"Path"="$ShellFolder$\Common7\Packages\"
+
+[$RootKey$\Packages\{DC7F691A-91FC-4F7b-923E-FE829C3A18DC}]
+"InprocServer32"="$ShellFolder$\Common7\Packages\WebAppUpgrade.dll"
+@="Visual Web Developer Web Application Upgrade Package"
+
+[$RootKey$\Packages\{E1AA7737-69BE-43d0-A425-E3097651E192}\SatelliteDll]
+"DllName"="vdt80ui.dll"
+"Path"="$ShellFolder$\Common7\Tools\VDT\"
+
+[$RootKey$\Packages\{E1AA7737-69BE-43d0-A425-E3097651E192}]
+"Assembly"="Microsoft.VisualStudio.DataTools, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.DataTools.DataPackage"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="Visual Studio Data Package"
+
+[$RootKey$\Packages\{EF828E39-70F5-4b8e-A3A0-4C0ECD28A69A}\SatelliteDll]
+"DllName"="vdt80ui.dll"
+"Path"="$ShellFolder$\Common7\Tools\VDT\"
+
+[$RootKey$\Packages\{EF828E39-70F5-4b8e-A3A0-4C0ECD28A69A}]
+"InprocServer32"="$ShellFolder$\Common7\Tools\VDT\vdt80.dll"
+@="Visual Studio Database Tools Designers"
+
+[$RootKey$\ProgId\Microsoft.VSDesigner.Data.VS.LaunchDataComponentWizard\CLSID]
+@="{976FE4E3-92F1-447b-B10A-116DD948732D}"
+
+[$RootKey$\ProgId\Microsoft.VSDesigner.Data.VS.LaunchDataComponentWizard]
+@="Microsoft.VSDesigner.Data.VS.LaunchDataComponentWizard"
+
+[$RootKey$\ProgId\Microsoft.VSWizards.WizardManager\CLSID]
+@="{5C0C15BD-0023-44FF-B39E-2DD32BE65A84}"
+
+[$RootKey$\ProgId\Microsoft.VSWizards.WizardManager]
+@="Microsoft.VSWizards.WizardManager"
+
+[$RootKey$\Projects\{1d6d3185-e7ba-44a5-8dbe-00485ef28094}\Filters\Audio Files]
+"Package"="{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}"
+"SortPriority"=dword:00000514
+@="#2076"
+
+[$RootKey$\Projects\{1d6d3185-e7ba-44a5-8dbe-00485ef28094}\Filters\ClassDiagram]
+"Package"="{DD1683A7-5A4C-4234-81B3-A4CC91DBEAC9}"
+@="#108"
+
+[$RootKey$\Projects\{1d6d3185-e7ba-44a5-8dbe-00485ef28094}\Filters\Data Files]
+"Package"="{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}"
+"SortPriority"=dword:0000044C
+@="#2045"
+
+[$RootKey$\Projects\{1d6d3185-e7ba-44a5-8dbe-00485ef28094}\Filters\Executable Files]
+"Package"="{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}"
+"SortPriority"=dword:000005DC
+@="#2080"
+
+[$RootKey$\Projects\{1d6d3185-e7ba-44a5-8dbe-00485ef28094}\Filters\Image Files]
+"Package"="{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}"
+"SortPriority"=dword:000004B0
+@="#2075"
+
+[$RootKey$\Projects\{1d6d3185-e7ba-44a5-8dbe-00485ef28094}\Filters\Script Files]
+"Package"="{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}"
+"SortPriority"=dword:00000640
+@="#2081"
+
+[$RootKey$\Projects\{1d6d3185-e7ba-44a5-8dbe-00485ef28094}\Filters\Video Files]
+"Package"="{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}"
+"SortPriority"=dword:00000578
+@="#2077"
+
+[$RootKey$\Projects\{1d6d3185-e7ba-44a5-8dbe-00485ef28094}\Filters\Visual C# Files]
+"Package"="{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}"
+"SortPriority"=dword:000003E8
+@="#2072"
+
+[$RootKey$\Projects\{1d6d3185-e7ba-44a5-8dbe-00485ef28094}\Filters\XAML Files]
+"Package"="{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}"
+"SortPriority"=dword:0000041A
+@="#2073"
+
+[$RootKey$\Projects\{1d6d3185-e7ba-44a5-8dbe-00485ef28094}]
+"Language(VsTemplate)"="CSharp"
+"Package"="{b3bae735-386c-4030-8329-ef48eeda4036}"
+"ShowOnlySpecifiedTemplates(VsTemplate)"=dword:00000000
+"TemplateGroupIDs(VsTemplate)"="WPF"
+@="WPF Project Flavor CSharp Templates"
+
+[$RootKey$\Projects\{349C5851-65DF-11DA-9384-00065B846F21}\LanguageTemplates]
+"{E6FDF86B-F3D1-11D4-8576-0002A516ECE8}"="{349C5855-65DF-11DA-9384-00065B846F21}"
+"{F184B08F-C81C-45F6-A57F-5ABD9991F28F}"="{349C5854-65DF-11DA-9384-00065B846F21}"
+"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"="{349C5853-65DF-11DA-9384-00065B846F21}"
+
+[$RootKey$\Projects\{349C5851-65DF-11DA-9384-00065B846F21}]
+"Package"="{349C5850-65DF-11DA-9384-00065B846F21}"
+@="Web Application Project Factory"
+
+[$RootKey$\Projects\{349C5853-65Df-11DA-9384-00065B846F21}\WebApplicationProperties]
+"CodeBehindCodeGenerator"="{349C585A-65DF-11DA-9384-00065B846F21}"
+"CodeBehindEventBinding"="{349C5856-65DF-11DA-9384-00065B846F21}"
+"CodeFileExtension"=".cs"
+"DebugPageGUID"="{6185191F-1008-4FB2-A715-3A4E4F27E610}"
+"PropertyPagesToRemove"="{6185191F-1008-4FB2-A715-3A4E4F27E610};{43E38D2E-43B8-4204-8225-9357316137A4}"
+"RootIcon"="#9001"
+"RootIconMoniker"="KnownMonikers.CSWebApplication"
+"TemplateFolder"="CSharp"
+
+[$RootKey$\Projects\{349C5853-65DF-11DA-9384-00065B846F21}]
+"Language(VsTemplate)"="CSharp"
+"Package"="{349C5850-65DF-11DA-9384-00065B846F21}"
+"ShowOnlySpecifiedTemplates(VsTemplate)"=dword:00000000
+"TemplateGroupIDs(VsTemplate)"="Web"
+@="C# Web Application Project Templates"
+
+[$RootKey$\Projects\{349C5854-65Df-11DA-9384-00065B846F21}\WebApplicationProperties]
+"CodeBehindCodeGenerator"="{349C585B-65DF-11DA-9384-00065B846F21}"
+"CodeBehindEventBinding"="{349C5857-65DF-11DA-9384-00065B846F21}"
+"CodeFileExtension"=".vb"
+"DebugPageGUID"="{6185191F-1008-4FB2-A715-3A4E4F27E610}"
+"PropertyPagesToRemove"="{6185191F-1008-4FB2-A715-3A4E4F27E610};{43E38D2E-43B8-4204-8225-9357316137A4}"
+"RootIcon"="#9002"
+"RootIconMoniker"="KnownMonikers.VBWebApplication"
+"TemplateFolder"="VisualBasic"
+
+[$RootKey$\Projects\{349C5854-65DF-11DA-9384-00065B846F21}]
+"Language(VsTemplate)"="VisualBasic"
+"Package"="{349C5850-65DF-11DA-9384-00065B846F21}"
+"ShowOnlySpecifiedTemplates(VsTemplate)"=dword:00000000
+"TemplateGroupIDs(VsTemplate)"="Web"
+@="VB Web Application Project Templates"
+
+[$RootKey$\Projects\{58839851-977a-4c1b-a0d3-79157d5f2bbf}\AddItemTemplates\TemplateDirs\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\/1]
+"SortPriority"=dword:00000014
+"TemplatesDir"="[Vb7.3643236F_FC70_11D3_A536_0090278A1BB8].\VBProjectItems"
+@="#3082"
+
+[$RootKey$\Projects\{58839851-977a-4c1b-a0d3-79157d5f2bbf}\Filters\ClassDiagram]
+"Package"="{DD1683A7-5A4C-4234-81B3-A4CC91DBEAC9}"
+@="#108"
+
+[$RootKey$\Projects\{58839851-977a-4c1b-a0d3-79157d5f2bbf}\Filters\Data Files]
+"Package"="{164B10B9-B200-11D0-8C61-00A0C91E29D5}"
+"SortPriority"=dword:0000044C
+@="#2045"
+
+[$RootKey$\Projects\{58839851-977a-4c1b-a0d3-79157d5f2bbf}\Filters\Executable Files]
+"Package"="{164B10B9-B200-11D0-8C61-00A0C91E29D5}"
+"SortPriority"=dword:000005DC
+@="#2078"
+
+[$RootKey$\Projects\{58839851-977a-4c1b-a0d3-79157d5f2bbf}\Filters\Image Files]
+"Package"="{164B10B9-B200-11D0-8C61-00A0C91E29D5}"
+"SortPriority"=dword:000004B0
+@="#2075"
+
+[$RootKey$\Projects\{58839851-977a-4c1b-a0d3-79157d5f2bbf}\Filters\Script Files]
+"Package"="{164B10B9-B200-11D0-8C61-00A0C91E29D5}"
+"SortPriority"=dword:00000640
+@="#2732"
+
+[$RootKey$\Projects\{58839851-977a-4c1b-a0d3-79157d5f2bbf}\Filters\VB Code Files]
+"Package"="{164B10B9-B200-11D0-8C61-00A0C91E29D5}"
+"SortPriority"=dword:000003E8
+@="#2072"
+
+[$RootKey$\Projects\{58839851-977a-4c1b-a0d3-79157d5f2bbf}\Filters\XAML Files]
+"Package"="{164B10B9-B200-11D0-8C61-00A0C91E29D5}"
+"SortPriority"=dword:0000041A
+@="#2073"
+
+[$RootKey$\Projects\{58839851-977a-4c1b-a0d3-79157d5f2bbf}]
+"Language(VsTemplate)"="VisualBasic"
+"Package"="{b3bae735-386c-4030-8329-ef48eeda4036}"
+"ShowOnlySpecifiedTemplates(VsTemplate)"=dword:00000000
+"TemplateGroupIDs(VsTemplate)"="WPF"
+@="WPF Project Flavor Visual Basic Templates"
+
+[$RootKey$\Projects\{60dc8134-eba5-43b8-bcc9-bb4bc16c2548}]
+"Package"="{b3bae735-386c-4030-8329-ef48eeda4036}"
+
+[$RootKey$\Projects\{66E200F7-60E8-4616-90F5-E52B2F2F8298}\SilverlightProperties]
+"AspNetLanguage"="C#"
+"CodeFileExtension"=".cs"
+"DefaultProjectTemplate"="Silverlight\{lcid}\SilverlightProject\SilverlightProject.vstemplate"
+"LanguageDisplayString"="Visual C#"
+"PropertyPagesToRemove"="{5E9A8AC2-4F34-4521-858F-4C248BA31532};{6185191F-1008-4FB2-A715-3A4E4F27E610};{43E38D2E-43B8-4204-8225-9357316137A4};{F8D6553F-F752-4DBF-ACB6-F291B744A792}"
+"RootIcon"="#9007"
+"TemplateFolder"="CSharp"
+
+[$RootKey$\Projects\{66E200F7-60E8-4616-90F5-E52B2F2F8298}]
+"Language(VsTemplate)"="CSharp"
+"Package"="{CB22EE0E-4072-4ae7-96E2-90FCCF879544}"
+"ShowOnlySpecifiedTemplates(VsTemplate)"=dword:00000000
+"TemplateGroupIDs(VsTemplate)"="Silverlight"
+@="C# Silverlight Project Templates"
+
+[$RootKey$\Projects\{A1591282-1198-4647-A2B1-27E5FF5F6F3B}\LanguageTemplates]
+"{F184B08F-C81C-45F6-A57F-5ABD9991F28F}"="{D236E6CA-A73B-4ede-86F5-9BC20A84EF90}"
+"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"="{66E200F7-60E8-4616-90F5-E52B2F2F8298}"
+
+[$RootKey$\Projects\{A1591282-1198-4647-A2B1-27E5FF5F6F3B}]
+"Package"="{CB22EE0E-4072-4ae7-96E2-90FCCF879544}"
+@="Microsoft Silverlight Project Factory"
+
+[$RootKey$\Projects\{D236E6CA-A73B-4ede-86F5-9BC20A84EF90}\SilverlightProperties]
+"AspNetLanguage"="VB"
+"CodeFileExtension"=".vb"
+"DefaultProjectTemplate"="Silverlight\{lcid}\SilverlightProject\SilverlightProject.vstemplate"
+"LanguageDisplayString"="Visual Basic"
+"PropertyPagesToRemove"="{8998E48E-B89A-4034-B66E-353D8C1FDC2E};{6185191F-1008-4FB2-A715-3A4E4F27E610};{F24459FC-E883-4A8E-9DA2-AEF684F0E1F4};{43E38D2E-43B8-4204-8225-9357316137A4};{F8D6553F-F752-4DBF-ACB6-F291B744A792}"
+"RootIcon"="#9008"
+"TemplateFolder"="VisualBasic"
+
+[$RootKey$\Projects\{D236E6CA-A73B-4ede-86F5-9BC20A84EF90}]
+"Language(VsTemplate)"="VisualBasic"
+"Package"="{CB22EE0E-4072-4ae7-96E2-90FCCF879544}"
+"ShowOnlySpecifiedTemplates(VsTemplate)"=dword:00000000
+"TemplateGroupIDs(VsTemplate)"="Silverlight"
+@="VB Silverlight Project Templates"
+
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\FileExtensions\.accdb]
+"EditorFactoryNotify"="{B2879096-4670-4df0-B201-AD1D0ED5BE6B}"
+
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\FileExtensions\.mdb]
+"EditorFactoryNotify"="{B2879096-4670-4df0-B201-AD1D0ED5BE6B}"
+
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\FileExtensions\.mdf]
+"EditorFactoryNotify"="{29887BCD-E81F-4722-85CE-2CCF2D9AF30A}"
+
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\FileExtensions\.tt]
+"CustomTool"="TextTemplatingFileGenerator"
+
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\FileExtensions\.xsd\RefactorNotify]
+@="{E76D53CC-3D4F-40a2-BD4D-4F3419755476}"
+
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.xaml\.generated.js]
+@=""
+
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.xaml\.js]
+@=""
+
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\RelatedFiles\.xaml]
+"RelationType"=dword:00000001
+
+[$RootKey$\Projects\{E502E3C0-BAAE-11D0-88BF-00A0C9110049}]
+@=""
+
+[$RootKey$\Projects\{E6FDF86B-F3D1-11D4-8576-0002A516ECE8}\FileExtensions\.accdb]
+"EditorFactoryNotify"="{B2879096-4670-4df0-B201-AD1D0ED5BE6B}"
+
+[$RootKey$\Projects\{E6FDF86B-F3D1-11D4-8576-0002A516ECE8}\FileExtensions\.mdb]
+"EditorFactoryNotify"="{B2879096-4670-4df0-B201-AD1D0ED5BE6B}"
+
+[$RootKey$\Projects\{E6FDF86B-F3D1-11D4-8576-0002A516ECE8}\FileExtensions\.mdf]
+"EditorFactoryNotify"="{29887BCD-E81F-4722-85CE-2CCF2D9AF30A}"
+
+[$RootKey$\Projects\{F184B08F-C81C-45F6-A57F-5ABD9991F28F}\FileExtensions\.accdb]
+"EditorFactoryNotify"="{B2879096-4670-4df0-B201-AD1D0ED5BE6B}"
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\FileExtensions\.asax\RefactorNotify\{8ECE6196-E7CF-4f0e-B519-28C9846162D4}]
+"NotificationType"=dword:00000001
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\FileExtensions\.ascx\RefactorNotify\{8ECE6196-E7CF-4f0e-B519-28C9846162D4}]
+"NotificationType"=dword:00000001
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\FileExtensions\.ashx\RefactorNotify\{8ECE6196-E7CF-4f0e-B519-28C9846162D4}]
+"NotificationType"=dword:00000001
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\FileExtensions\.asmx\RefactorNotify\{8ECE6196-E7CF-4f0e-B519-28C9846162D4}]
+"NotificationType"=dword:00000001
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\FileExtensions\.aspx\RefactorNotify\{8ECE6196-E7CF-4f0e-B519-28C9846162D4}]
+"NotificationType"=dword:00000001
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\FileExtensions\.master\RefactorNotify\{8ECE6196-E7CF-4f0e-B519-28C9846162D4}]
+"NotificationType"=dword:00000001
+
+[$RootKey$\Projects\{F184B08F-C81C-45F6-A57F-5ABD9991F28F}\FileExtensions\.mdb]
+"EditorFactoryNotify"="{B2879096-4670-4df0-B201-AD1D0ED5BE6B}"
+
+[$RootKey$\Projects\{F184B08F-C81C-45F6-A57F-5ABD9991F28F}\FileExtensions\.mdf]
+"EditorFactoryNotify"="{29887BCD-E81F-4722-85CE-2CCF2D9AF30A}"
+
+[$RootKey$\Projects\{F184B08F-C81C-45F6-A57F-5ABD9991F28F}\FileExtensions\.xaml]
+"DefaultBuildAction"="Page"
+
+[$RootKey$\Projects\{F184B08F-C81C-45F6-A57F-5ABD9991F28F}\FileExtensions\.xap]
+"DefaultBuildAction"=dword:00000002
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\MSBuildHostObjects\MarkupCompilePass1;CompileXaml]
+@="{E2905C7C-4435-4212-9148-BE9614BD377B}"
+
+[$RootKey$\Projects\{F184B08F-C81C-45F6-A57F-5ABD9991F28F}\MSBuildHostObjects\MarkupCompilePass1;MarkupCompilePass1]
+@="{E2905C7C-4435-4212-9148-BE9614BD377B}"
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\RelatedFiles\.asax]
+".vb"=dword:00000002
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\RelatedFiles\.ascx]
+".designer.vb"=dword:00000002
+".vb"=dword:00000002
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\RelatedFiles\.ashx]
+".vb"=dword:00000002
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\RelatedFiles\.asmx]
+".vb"=dword:00000002
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\RelatedFiles\.aspx]
+".designer.vb"=dword:00000002
+".vb"=dword:00000002
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\RelatedFiles\.master]
+".designer.vb"=dword:00000002
+".vb"=dword:00000002
+
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\RelatedFiles\.svc]
+".vb"=dword:00000002
+
+[$RootKey$\Projects\{F184B08F-C81C-45F6-A57F-5ABD9991F28F}\RelatedFiles\.xaml]
+".vb"=dword:00000002
+
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\FileExtensions\.accdb]
+"EditorFactoryNotify"="{B2879096-4670-4df0-B201-AD1D0ED5BE6B}"
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\FileExtensions\.asax\RefactorNotify\{8ECE6196-E7CF-4f0e-B519-28C9846162D4}]
+"NotificationType"=dword:00000001
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\FileExtensions\.ascx\RefactorNotify\{8ECE6196-E7CF-4f0e-B519-28C9846162D4}]
+"NotificationType"=dword:00000001
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\FileExtensions\.ashx\RefactorNotify\{8ECE6196-E7CF-4f0e-B519-28C9846162D4}]
+"NotificationType"=dword:00000001
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\FileExtensions\.asmx\RefactorNotify\{8ECE6196-E7CF-4f0e-B519-28C9846162D4}]
+"NotificationType"=dword:00000001
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\FileExtensions\.aspx\RefactorNotify\{8ECE6196-E7CF-4f0e-B519-28C9846162D4}]
+"NotificationType"=dword:00000001
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\FileExtensions\.master\RefactorNotify\{8ECE6196-E7CF-4f0e-B519-28C9846162D4}]
+"NotificationType"=dword:00000001
+
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\FileExtensions\.mdb]
+"EditorFactoryNotify"="{B2879096-4670-4df0-B201-AD1D0ED5BE6B}"
+
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\FileExtensions\.mdf]
+"EditorFactoryNotify"="{29887BCD-E81F-4722-85CE-2CCF2D9AF30A}"
+
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\FileExtensions\.xaml]
+"DefaultBuildAction"="Page"
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\FileExtensions\.xap]
+"DefaultBuildAction"=dword:00000002
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\MSBuildHostObjects\MarkupCompilePass1;CompileXaml]
+@="{E2905C7C-4435-4212-9148-BE9614BD377B}"
+
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\MSBuildHostObjects\MarkupCompilePass1;MarkupCompilePass1]
+@="{E2905C7C-4435-4212-9148-BE9614BD377B}"
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\RelatedFiles\.asax]
+".cs"=dword:00000002
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\RelatedFiles\.ascx]
+".cs"=dword:00000002
+".designer.cs"=dword:00000002
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\RelatedFiles\.ashx]
+".cs"=dword:00000002
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\RelatedFiles\.asmx]
+".cs"=dword:00000002
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\RelatedFiles\.aspx]
+".cs"=dword:00000002
+".designer.cs"=dword:00000002
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\RelatedFiles\.master]
+".cs"=dword:00000002
+".designer.cs"=dword:00000002
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\RelatedFiles\.svc]
+".cs"=dword:00000002
+
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\RelatedFiles\.xaml]
+".cs"=dword:00000002
+
+[$RootKey$\Services\{06D0BE35-FA3A-4ef6-81B9-3EDBB68EF982}]
+"Name"="ODBC Provider Object Factory"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{099A2AA5-CE07-4FE4-85E8-AD53D8D5D56C}]
+"Name"="ReferencePicker"
+@="{B7C8A95B-B8E4-4adb-9560-0F487D1429FB}"
+
+[$RootKey$\Services\{12F6309A-7AA4-45c9-9925-3C7979EC68FB}]
+"Name"="WebDirPrjService"
+@="{8FF02D1A-C177-4ac8-A62F-88FC6EA65F57}"
+
+[$RootKey$\Services\{1F2EEAC2-DCF7-4B90-9412-2CE752DE5FEB}]
+"Name"="Query Designer font and colors provider"
+@="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+
+[$RootKey$\Services\{26EB4812-18FE-4A11-BC23-7DC1C9B453A3}]
+"Name"="Web Config Runtime Bindings Service"
+@="{588205e0-66e0-11d3-8600-00c04f6123b3}"
+
+[$RootKey$\Services\{2C6350D2-9A3D-4F78-940A-763A8F66E660}]
+"Name"="IUIGenerationHelperService"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{32E0C769-C2C9-4587-B58C-013266137571}]
+"Name"="IVsDataSourceManager service"
+@="{A8F602E2-40CE-4daf-AE82-A457A91728B9}"
+
+[$RootKey$\Services\{33a24090-6565-11d3-85fc-00c04f6123b3}]
+"Name"="SID_SCompEnumService"
+@="{588205e0-66e0-11d3-8600-00c04f6123b3}"
+
+[$RootKey$\Services\{3B807793-E160-4885-911E-DE329B485002}]
+"Name"="VsWebPlatformHelperSvc"
+@="{349C5850-65DF-11DA-9384-00065B846F21}"
+
+[$RootKey$\Services\{3EE91C82-6BB6-4E88-A723-839A8F542CB7}]
+"Name"="DBNotifyDebugEvents"
+@="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+
+[$RootKey$\Services\{41AB5AA8-2511-4e96-A682-C30B0292C2EF}]
+"Name"="Data Tools Document Tool Factory Provider"
+@="{EF828E39-70F5-4b8e-A3A0-4C0ECD28A69A}"
+
+[$RootKey$\Services\{42503C6C-3D54-4986-BC13-AE6855CE89B8}]
+"Name"="IVsDataConnectionManager service"
+@="{A8F602E2-40CE-4daf-AE82-A457A91728B9}"
+
+[$RootKey$\Services\{42B51AD0-12B8-409f-BB67-1A381CCAD02E}]
+"Name"="IVsDataHostService service"
+@="{A8F602E2-40CE-4daf-AE82-A457A91728B9}"
+
+[$RootKey$\Services\{43AF1158-FED5-432e-8E8F-23B6FD592857}]
+"Name"="T-SQL90"
+@="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+
+[$RootKey$\Services\{43EC4BFD-99F1-4215-8E96-9783309F14AF}]
+"Name"="IVsDataDesignService"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{441F8B2D-28E3-41d2-A0EE-A91E45B502F2}]
+"Name"="IVsLocalIISService"
+@="{8FF02D1A-C177-4ac8-A62F-88FC6EA65F57}"
+
+[$RootKey$\Services\{45F98286-52A4-4198-AC69-F1FF3B02D2E0}]
+"Name"="IWebServiceDataSourcesService"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{4A3116FC-942B-4692-B9F4-344E08285712}]
+"Name"="App Config Runtime Bindings Service"
+@="{588205e0-66e0-11d3-8600-00c04f6123b3}"
+
+[$RootKey$\Services\{4D958576-253E-4624-87F5-D2B2DDD1F3A4}]
+"Name"="IWCFServiceDataSourcesService"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{4E1F8BE5-9C9C-47B5-85E7-4AF3BD7FADF8}]
+"Name"="IVsDeveloperWebServerProviderSvc"
+@="{349C5850-65DF-11DA-9384-00065B846F21}"
+
+[$RootKey$\Services\{4E406457-B0E6-4b94-BEB9-62069E6E4CD7}]
+"Name"="Data Tools SKU Analysis Management service"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{508349B6-6B84-4df5-91F0-309BEEBAD82D}]
+"Name"="STextTemplating"
+@="{a9696de6-e209-414d-bbec-a0506fb0e924}"
+
+[$RootKey$\Services\{52F0DAB8-99A9-4aea-A037-42581B7009D2}]
+"Name"="SID_SVsSmartOpenScope"
+@="{588205e0-66e0-11d3-8600-00c04f6123b3}"
+
+[$RootKey$\Services\{53544C4D-0079-44FE-826C-1B04B9E1598D}]
+"Name"="Dont Show Dialog Again Service"
+@="{53544C4D-B03D-4209-A7D0-D9DD13A4019B}"
+
+[$RootKey$\Services\{53544C4D-35D0-4D26-9789-9295A73E7A10}]
+"Name"="Private SccManager Service"
+@="{AA8EB8CD-7A51-11D0-92C3-00A0C9138C45}"
+
+[$RootKey$\Services\{53544C4D-B03D-4209-A7D0-D9DD13A4019B}]
+"Name"="Microsoft Scc Providers Service"
+@="{53544C4D-B03D-4209-A7D0-D9DD13A4019B}"
+
+[$RootKey$\Services\{58132988-8A5C-43c6-9ACF-6A688CDFF57A}]
+"Name"="ADO .NET Provider Mapper service"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{5942B3FC-3827-4680-9488-922B1C371679}]
+"Name"="IWinFormsBindableControlManagerService"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{5C164B27-EEC2-4b9f-B3D6-60C2EFF8C800}]
+"Name"="SQL Connection Reference Manager"
+@="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+
+[$RootKey$\Services\{624E92A9-C81B-4f0a-A1BD-8C875DAF7CED}]
+"Name"="IDSRefToXmlService"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{654C847E-E6ED-4217-9ABF-A6208631F73F}]
+"Name"="DataConnectionFactory service"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{65A105A2-16CA-4c6c-A84A-D882700A87EB}]
+"Name"="Data Tools Diagram Support service"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{66B94087-4468-4938-9899-FA51E2F65FAB}]
+"Name"="Visual Studio Call Hierarchy Service"
+@="{3F3D9528-BAC4-420e-8147-29896300C5C0}"
+
+[$RootKey$\Services\{69BD65B1-1C44-49c6-B83A-FB0353334545}]
+"Name"="DataSourceManager service"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{6bc0d168-247a-4b39-aed2-0499b65df63f}]
+"Name"="Silverlight Service"
+@="{CB22EE0E-4072-4ae7-96E2-90FCCF879544}"
+
+[$RootKey$\Services\{70BEE20C-077A-4342-B456-2B67AA1CB411}]
+"Name"="Connection Reference Picker"
+@="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+
+[$RootKey$\Services\{7884CCA5-4B77-427b-8124-9D1C3CA7A0C0}]
+"Name"="SDTInternalRunManager"
+@="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+
+[$RootKey$\Services\{7D9EA559-68F0-4944-97E3-2795D4FF9730}]
+"Name"="SQL Create Database service"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{84041912-6B0D-4601-A064-D6FC830A6E67}]
+"Name"="VsWebPlatformInstallerSvc"
+@="{349C5850-65DF-11DA-9384-00065B846F21}"
+
+[$RootKey$\Services\{8901DD4E-64BA-431f-8040-0BC75EE1ADAD}]
+"Name"="ModelBus"
+@="{B7C8A95B-B8E4-4adb-9560-0F487D1429FB}"
+
+[$RootKey$\Services\{8B6159D9-A634-4549-9EAC-8642744F1042}]
+"Name"="IVsDataExplorerConnectionManager service"
+@="{A8F602E2-40CE-4daf-AE82-A457A91728B9}"
+
+[$RootKey$\Services\{8CB5F787-2D74-459e-88D6-39E20A4D9454}]
+"Name"="OLE DB Provider Object Factory"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\CustomMarshalers.dll]
+@="CustomMarshalers"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\Microsoft.VisualBasic.dll]
+@="Microsoft.VisualBasic"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\Microsoft.VisualC.dll]
+@="Microsoft.VisualC"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\mscorlib.dll]
+@="mscorlib"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\System.Configuration.dll]
+@="System.Configuration"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\System.Core.dll]
+@="system.core"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\System.Data.dll]
+@="System.Data"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\System.Data.OracleClient.dll]
+@="System.Data.OracleClient"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\System.Data.SqlXml.dll]
+@="System.Data.SqlXml"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\System.Deployment.dll]
+@="System.Deployment"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\System.dll]
+@="System"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\System.Security.dll]
+@="System.Security"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\System.Transactions.dll]
+@="System.Transactions"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\System.Web.Services.dll]
+@="System.Web.Services"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\System.Xml.dll]
+@="system.xml"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}\SQL .NET References\System.Xml.Linq.dll]
+@="system.xml.linq"
+
+[$RootKey$\Services\{8ED9966C-102F-45b0-8293-BB9F2463A6F2}]
+"Name"="SID_SVsSQLCLRReferences"
+@="{588205e0-66e0-11d3-8600-00c04f6123b3}"
+
+[$RootKey$\Services\{8F16130E-9999-4e5c-9478-34E8C4F1B26D}]
+"Name"="IWebItemTemplateMruSvc"
+@="{349C5850-65DF-11DA-9384-00065B846F21}"
+
+[$RootKey$\Services\{945D4846-CB19-4797-86DF-21E70A103FED}]
+"Name"="PublishRemoteSiteService"
+@="{8FF02D1A-C177-4ac8-A62F-88FC6EA65F57}"
+
+[$RootKey$\Services\{950220AF-CA7D-4c57-AA0F-A72A8FE79377}]
+"Name"="IApplicationSettingsService"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{9725AFBF-0986-40d6-9063-BEA9B532265A}]
+"Name"="WebPublishService"
+@="{349C5850-65DF-11DA-9384-00065B846F21}"
+
+[$RootKey$\Services\{97422BAE-2144-4207-AB16-B4C3B7A2D9A3}]
+"Name"="WebAppUpgradeService"
+@="{DC7F691A-91FC-4f7B-923E-FE829C3A18DC}"
+
+[$RootKey$\Services\{97BAE668-2CF2-4ed8-A019-D279E3D74C80}]
+"Name"="SID_SVsStrongNameKeys"
+@="{588205e0-66e0-11d3-8600-00c04f6123b3}"
+
+[$RootKey$\Services\{A47EE51D-0283-4AEA-9301-92F62C69028F}]
+"Name"="DBToolsOptionProvider"
+@="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+
+[$RootKey$\Services\{AB5F7D50-A307-46e6-A20C-ADDBF34C6771}]
+"Name"="DataViewManager service"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{ABE5C1F0-C96E-40c4-A22D-4A5CEC899BDC}]
+"Name"="DataSourceProviderService"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{ACC3A946-DA4F-4b44-BE7D-263267586A32}]
+"Name"="VsDeveloperWebServerSvc"
+@="{349C5850-65DF-11DA-9384-00065B846F21}"
+
+[$RootKey$\Services\{AD028B85-FA21-41b1-AB4A-08672F633506}]
+"Name"="VSDesignerBootStrap"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{AD7D246C-AD11-4D3D-8F6E-2EBB18B3309C}]
+"Name"="Data Tools Query Proxy Automation Factory"
+@="{EF828E39-70F5-4b8e-A3A0-4C0ECD28A69A}"
+
+[$RootKey$\Services\{ADF95D98-9094-4B7B-874A-D94844D05DCE}]
+"Name"="Database Designer font and colors provider"
+@="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+
+[$RootKey$\Services\{AFF5D36A-CA5A-4ab5-90AF-AEF23C6E3FFB}]
+"Name"="IExceptionAssistantDebuggerMonitor"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{BCD55999-B818-4240-9528-3D96274477C9}]
+"Name"="DataProviderManager service"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{BD71396F-39C6-4e3f-BBA2-79CE33A8B302}]
+"Name"="SID_SVsAddWebReferenceDlg"
+@="{588205e0-66e0-11d3-8600-00c04f6123b3}"
+
+[$RootKey$\Services\{C269ADA8-95F9-4987-A247-151FB2DDFB34}\TargetFrameworks\v3.0]
+"VersionMaj"=dword:00000003
+"VersionMin"=dword:00000000
+
+[$RootKey$\Services\{C269ADA8-95F9-4987-A247-151FB2DDFB34}\TargetFrameworks\v3.5]
+"VersionMaj"=dword:00000003
+"VersionMin"=dword:00000005
+
+[$RootKey$\Services\{C269ADA8-95F9-4987-A247-151FB2DDFB34}\TargetFrameworks\v4.0]
+"VersionMaj"=dword:00000004
+"VersionMin"=dword:00000000
+
+[$RootKey$\Services\{C269ADA8-95F9-4987-A247-151FB2DDFB34}]
+@="{588205e0-66e0-11d3-8600-00c04f6123b3}"
+
+[$RootKey$\Services\{C42DEB5D-2382-4537-842C-B50E2A61BDE2}]
+"Name"="IVsDataConnectionFactory service"
+@="{A8F602E2-40CE-4daf-AE82-A457A91728B9}"
+
+[$RootKey$\Services\{C4FEE15B-72AC-45e3-9612-7A142D1AC0BF}]
+"Name"="IVsDataConnectionDialogFactory service"
+@="{A8F602E2-40CE-4daf-AE82-A457A91728B9}"
+
+[$RootKey$\Services\{C67A5F0C-31C0-4316-9EF9-B451B30C829E}]
+"Name"="SID_SVsSymbolicNavigationManager"
+@="{588205e0-66e0-11d3-8600-00c04f6123b3}"
+
+[$RootKey$\Services\{CA25A305-EEF9-4416-A901-E6EE6069B8E6}]
+"Name"="IGenericObjectDataSourcesService"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{D0C5450D-F4D8-4F4F-8E4F-E0F5A56117FF}]
+"Name"="IWebSSLCertificateTrustSvc"
+@="{349C5850-65DF-11DA-9384-00065B846F21}"
+
+[$RootKey$\Services\{D2A95B42-57F9-4efd-B41F-0E198C6C1E45}]
+"Name"="Sql Object Scriptor service"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{D4D51B8E-6ECF-4C42-A3E2-E0925E5115D6}]
+"Name"="SID_SVsFrameworkRetargetingDlg"
+@="{588205e0-66e0-11d3-8600-00c04f6123b3}"
+
+[$RootKey$\Services\{D70C9DB7-988F-4b46-989B-773A4180F262}]
+"Name"="BrowserDebugTargetSelectionService"
+@="{349C5850-65DF-11DA-9384-00065B846F21}"
+
+[$RootKey$\Services\{D77E81FC-873E-4283-A0F8-CF1CCE8CC42B}]
+"Name"="DataConnectionDialogFactory service"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{D8D207DA-64EB-4b46-9740-282F5F458B22}]
+"Name"="DataExplorerConnectionManager service"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{E4A1263A-11CF-4c5f-B3D5-E41AFA0ADE59}]
+"Name"="WebConnectionDlgSvc"
+@="{8FF02D1A-C177-4ac8-A62F-88FC6EA65F57}"
+
+[$RootKey$\Services\{E663F492-4589-4f60-9CA5-022E59FA635B}]
+"Name"="SQL Server Assembly support"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{E76D53CC-3D4F-40a2-BD4D-4F3419755476}]
+"Name"="MSDataSetGenerator IVsRefactorNotify"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{E7A0D4E0-D0E4-4afa-A8A1-DD4636073D98}]
+"Name"="DataConnectionManager service"
+@="{E1AA7737-69BE-43d0-A425-E3097651E192}"
+
+[$RootKey$\Services\{e7bc4cb9-8433-4b25-961c-a009a83513e2}]
+"Name"="IConnectionStringConverterService"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{F1F2A506-C37B-475c-9712-415F656649E0}]
+"Name"="Data Tool Sql Editor Class"
+@="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+
+[$RootKey$\Services\{F35159B3-6FB3-417a-99FB-14B598F1C46E}]
+"Name"="VSDesignerFontAndColorProvider"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{F3DA2C42-8A1A-4234-BBAE-E6E1FB0D67E9}]
+"Name"="IGlobalConnectionService"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+
+[$RootKey$\Services\{F8B01F14-9F78-4506-80A8-3534837AF0D4}]
+"Name"="IVsDataProviderManager service"
+@="{A8F602E2-40CE-4daf-AE82-A457A91728B9}"
+
+[$RootKey$\Setup\IsoShell]
+"ProductDir"="$ShellFolder$\"
+
+[$RootKey$\Setup\VS]
+"EnvironmentDirectory"="$ShellFolder$\Common7\IDE\"
+"EnvironmentPath"="$ShellFolder$\Common7\IDE\devenv.exe"
+"VS7EnvironmentLocation"="$ShellFolder$\Common7\IDE\devenv.exe"
+
+[$RootKey$\ShellFileAssociations\.datasource]
+@="VisualStudio.datasource.14.0"
+
+[$RootKey$\ShellFileAssociations\.resx]
+@="VisualStudio.resx.14.0"
+
+[$RootKey$\ShellFileAssociations\.settings]
+@="VisualStudio.settings.14.0"
+
+[$RootKey$\ShellFileAssociations\.snk]
+@="VisualStudio.snk.14.0"
+
+[$RootKey$\ShellFileAssociations\.vspscc]
+@="VisualStudio.vspscc.14.0"
+
+[$RootKey$\ShellFileAssociations\.vsscc]
+@="VisualStudio.vsscc.14.0"
+
+[$RootKey$\ShellFileAssociations\.vssettings]
+@="VisualStudio.vssettings.14.0"
+
+[$RootKey$\ShellFileAssociations\.vssscc]
+@="VisualStudio.vssscc.14.0"
+
+[$RootKey$\ShellFileAssociations\.vstemplate]
+@="VisualStudio.vstemplate.14.0"
+
+[$RootKey$\ShellFileAssociations\.xsc]
+@="VisualStudio.xsc.14.0"
+
+[$RootKey$\ShellFileAssociations\.xss]
+@="VisualStudio.xss.14.0"
+
+[$RootKey$\SolutionPersistence\SourceCodeControl]
+@="{AA8EB8CD-7A51-11D0-92C3-00A0C9138C45}"
+
+[$RootKey$\SourceControlProviders\{53544C4D-FFD5-48A9-B04A-0700CCD31070}\Name]
+"Package"="{53544C4D-B03D-4209-A7D0-D9DD13A4019B}"
+@="#101"
+
+[$RootKey$\SourceControlProviders\{53544C4D-FFD5-48A9-B04A-0700CCD31070}\Packages]
+"MainPackage"="$ShellFolder$\Common7\IDE\VS SCC\VssProvider.dll"
+"StubPackage"="$ShellFolder$\Common7\IDE\VS SCC\VssProviderStub.dll"
+
+[$RootKey$\SourceControlProviders\{53544C4D-FFD5-48A9-B04A-0700CCD31070}]
+"Service"="{53544C4D-B03D-4209-A7D0-D9DD13A4019B}"
+@="Microsoft MSSCCI Support Provider"
+
+[$RootKey$\SourceControlProviders]
+@="{53544C4D-FFD5-48A9-B04A-0700CCD31070}"
+
+[$RootKey$\Text Editor\External Markers\{BF347299-B51B-428D-9E37-1F9C5FCF3C1C}]
+"DisplayName"="#6225"
+"Package"="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+"Service"="{a47ee51d-0283-4aea-9301-92f62c69028f}"
+@="SQL DML Marker"
+
+[$RootKey$\TlbAutoRepair\publish.tlb]
+"DisplayMessage"=dword:00000001
+"LIBID"="{BC198913-218A-46e3-9FF9-C80FC69BF4BC}"
+"TlbPath"="%CommonDir%\publish.tlb"
+"Version"="1.0"
+
+[$RootKey$\ToolsOptionsPages\Database Tools\Database Designer\General]
+"Keywords"="#6421"
+"Package"="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+"Page"="{89e05c19-4303-4204-9b99-3f7650da8714}"
+@="#6273"
+
+[$RootKey$\ToolsOptionsPages\Database Tools\Database Designer\SQL Server]
+"Keywords"="#6422"
+"Package"="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+"Page"="{2f3474ae-ab19-4360-95d5-866956bc40a7}"
+@="#6228"
+
+[$RootKey$\ToolsOptionsPages\Database Tools\Database Designer]
+"Package"="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+@="#6227"
+
+[$RootKey$\ToolsOptionsPages\Database Tools\General]
+"Keywords"="#6420"
+"Package"="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+"Page"="{bfa9f0a5-6078-45b0-a2ca-6debfacdf358}"
+@="#6387"
+
+[$RootKey$\ToolsOptionsPages\Database Tools\Query/View Designer]
+"Keywords"="#6423"
+"Package"="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+"Page"="{e0454c12-45cb-4b7d-afc6-59fe0f2e55cf}"
+@="#6226"
+
+[$RootKey$\ToolsOptionsPages\Database Tools\Server Explorer]
+"Keywords"="#6424"
+"Package"="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+"Page"="{7caa0ebd-58ec-4eb0-90e6-c912668cee38}"
+@="#6152"
+
+[$RootKey$\ToolsOptionsPages\Database Tools]
+"Package"="{220A4C17-7E7C-4663-BBCC-5E607C6543CD}"
+@="#6206"
+
+[$RootKey$\ToolsOptionsPages\Source Control\Environment\VisibilityCmdUIContexts]
+"{53544C4D-FFD5-48A9-B04A-0700CCD31070}"="1"
+
+[$RootKey$\ToolsOptionsPages\Source Control\Environment]
+"Keywords"="#512"
+"Package"="{AA8EB8CD-7A51-11D0-92C3-00A0C9138C45}"
+"Page"="{9C1B8A62-7C24-11d3-8E6E-005004775AC2}"
+"Sort"=dword:00000001
+@="#510"
+
+[$RootKey$\ToolsOptionsPages\Source Control\Visual SourceSafe\VisibilityCmdUIContexts]
+"{53544C4D-FFD5-48A9-B04A-0700CCD31070}"="1"
+
+[$RootKey$\ToolsOptionsPages\Source Control\Visual SourceSafe]
+"Keywords"="#513"
+"Package"="{AA8EB8CD-7A51-11D0-92C3-00A0C9138C45}"
+"Page"="{9C1B8A63-7C24-11d3-8E6E-005004775AC2}"
+"Sort"=dword:00000002
+@="#511"
+
+[$RootKey$\ToolsOptionsPages\TextTemplating\TextTemplating]
+"Keywords"="#503"
+"Package"="{a9696de6-e209-414d-bbec-a0506fb0e924}"
+"Page"="{64998aaf-06ee-4517-9d19-a4787db08f4b}"
+@="#502"
+
+[$RootKey$\ToolsOptionsPages\TextTemplating]
+"Package"="{a9696de6-e209-414d-bbec-a0506fb0e924}"
+@="#501"
+
+[$RootKey$\ToolsOptionsPages\WindowsFormsDesigner\Data UI Customization]
+"Keywords"="#1201"
+"Package"="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+"Page"="{E7CA29CE-6D17-4071-A258-E760ACFFEA79}"
+@="#1200"
+
+[$RootKey$\ToolsOptionsPages]
+@=""
+
+[$RootKey$\ToolWindows\{3822E751-EB69-4B0E-B301-595A9E4C74D5}]
+"Name"="Microsoft.VisualStudio.CallHierarchy.Package.Implementation.CallHierarchyToolWindow"
+"Orientation"="Bottom"
+"Style"="Tabbed"
+"Window"="{68487888-204A-11D3-87EB-00C04F7971A5}"
+@="{3f3d9528-bac4-420e-8147-29896300c5c0}"
+
+[$RootKey$\ToolWindows\{53544C4D-5C18-11d3-AB71-0050040AE094}\Visibility]
+"{53544C4D-FFD5-48A9-B04A-0700CCD31070}"=dword:00000000
+
+[$RootKey$\ToolWindows\{53544C4D-5C18-11d3-AB71-0050040AE094}]
+"Float"="100,100,450,300"
+"Name"="LocalChanges"
+"Orientation"="Bottom"
+"Style"="Tabbed"
+"Window"="{34E76E81-EE4A-11D0-AE2E-00A0C90FFFC3}"
+@="{AA8EB8CD-7A51-11D0-92C3-00A0C9138C45}"
+
+[$RootKey$\ToolWindows\{873151D0-CF2E-48cc-B4BF-AD0394F6A3C3}\AutoVisibleReferences\System.Windows.Forms, Version=4.0.0.0]
+@="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+
+[$RootKey$\ToolWindows\{873151D0-CF2E-48cc-B4BF-AD0394F6A3C3}\Visibility]
+"{2E78870D-AC7C-4460-A4A1-3FE37D00EF81}"=dword:00000000
+
+[$RootKey$\ToolWindows\{873151D0-CF2E-48cc-B4BF-AD0394F6A3C3}]
+"Name"="Data Source Window"
+"Orientation"="Right"
+"Style"="Tabbed"
+"Window"="{3AE79031-E1BC-11D0-8F78-00A0C9110057}"
+@="{8D8529D3-625D-4496-8354-3DAD630ECC1B}"
+

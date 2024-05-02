@@ -1,0 +1,3209 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema targetNamespace='http://schemas.microsoft.com/mobile/html32template'
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		xmlns='http://schemas.microsoft.com/mobile/html32template'
+		xmlns:vs='urn:schemas-microsoft-com:HTML-Intellisense'
+		vs:ishtmlschema="true"
+		vs:isserverschema="false"
+		vs:SuccinctFriendlyName="Mobile HTML">
+
+	<xsd:element name="a" vs:clientom="anchor">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin AContent -->
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="img" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End AContent -->
+			</xsd:choice>
+			<xsd:attribute name="href" type="xsd:anyURI" />
+			<xsd:attribute name="name" />
+			<xsd:attribute name="onserverclick" vs:omtype="event"  />
+			<xsd:attribute name="onserverchange" vs:omtype="event"  />
+			<xsd:attribute name="target">
+				<xsd:simpleType>
+					<xsd:union>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:NMTOKEN">
+							<xsd:enumeration value="_blank" />
+							<xsd:enumeration value="_parent" />
+							<xsd:enumeration value="_search" />
+							<xsd:enumeration value="_self" />
+							<xsd:enumeration value="_top" />
+							</xsd:restriction>
+						</xsd:simpleType>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string"  />
+						</xsd:simpleType>
+					</xsd:union>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="onclick" vs:omtype="event" />
+			<xsd:attribute name="onmouseover" vs:omtype="event" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="address">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+				<xsd:element ref="p" />
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="applet">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+								<!-- Begin BlockContent -->
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="center" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BlockContent -->
+				<xsd:element ref="param" />
+			</xsd:choice>
+			<xsd:attribute name="align">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="top" />
+					<xsd:enumeration value="texttop" />
+					<xsd:enumeration value="middle" />
+					<xsd:enumeration value="absmiddle" />
+					<xsd:enumeration value="baseline" />
+					<xsd:enumeration value="bottom" />
+					<xsd:enumeration value="absbottom" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="alt" />
+			<xsd:attribute name="code" type="xsd:anyURI" />
+			<xsd:attribute name="codebase" type="xsd:anyURI" />
+			<xsd:attribute name="height" />
+			<xsd:attribute name="hspace" type="ui4" />
+			<xsd:attribute name="name" />
+			<xsd:attribute name="vspace" type="ui4" />
+			<xsd:attribute name="width"  />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="area">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="coords" />
+			<xsd:attribute name="href" type="xsd:anyURI" />
+			<xsd:attribute name="nohref" vs:standalone="true"  />
+			<xsd:attribute name="shape"  default="rect">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="rect" />
+					<xsd:enumeration value="rectangle" />
+					<xsd:enumeration value="circ" />
+					<xsd:enumeration value="circle" />
+					<xsd:enumeration value="poly" />
+					<xsd:enumeration value="polygon" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="target">
+				<xsd:simpleType>
+					<xsd:union>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:NMTOKEN">
+							<xsd:enumeration value="_blank" />
+							<xsd:enumeration value="_parent" />
+							<xsd:enumeration value="_search" />
+							<xsd:enumeration value="_self" />
+							<xsd:enumeration value="_top" />
+							</xsd:restriction>
+						</xsd:simpleType>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string"  />
+						</xsd:simpleType>
+					</xsd:union>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="b">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="basefont">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin BaseFontContent -->
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BaseFontContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="size" type="xsd:integer" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="big">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="blockquote">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+								<!-- Begin BlockContent -->
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="center" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BlockContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="br">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="clear"  default="none">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="none" />
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="all" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="caption">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="align">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="top" />
+					<xsd:enumeration value="bottom" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="center">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+								<!-- Begin BlockContent -->
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="center" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BlockContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="cite">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="code">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="comment" vs:deprecated="true">
+		<xsd:complexType mixed="true"></xsd:complexType>
+	</xsd:element>
+	<xsd:element name="dd">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+								<!-- Begin BlockContent -->
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="center" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BlockContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="dir">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+				<xsd:element ref="li" />
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="div">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+								<!-- Begin BlockContent -->
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="center" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BlockContent -->
+			</xsd:choice>
+			<xsd:attribute name="align"  default="left">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="center" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="justify" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="dl">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+				<xsd:element ref="dd" />
+				<xsd:element ref="dt" />
+			</xsd:choice>
+			<xsd:attribute name="compact" default="false" type="xsd:boolean" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="dt">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="em">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="embed">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+								<!-- Begin BlockContent -->
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="center" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BlockContent -->
+				<xsd:element ref="param" />
+			</xsd:choice>
+			<xsd:attribute name="hspace" type="ui4" />
+			<xsd:attribute name="height"  />
+			<xsd:attribute name="name" />
+			<xsd:attribute name="src" type="xsd:anyURI" />
+			<xsd:attribute name="width"  />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="units" default="pixels">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="em" />
+					<xsd:enumeration value="pixels" />
+					<xsd:enumeration value="px" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="vspace" type="ui4" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="font">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+								<!-- Begin BlockContent -->
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="center" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BlockContent -->
+			</xsd:choice>
+			<xsd:attribute name="color" vs:builder="color" />
+			<xsd:attribute name="face" />
+			<xsd:attribute name="size" type="xsd:integer" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="form">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin FormElementContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="img" />
+				<xsd:element ref="input" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End FormElementContent -->
+						</xsd:choice>
+			<xsd:attribute name="action" type="xsd:anyURI" />
+			<xsd:attribute name="enctype" />
+			<xsd:attribute name="method"  default="get">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="get" />
+					<xsd:enumeration value="post" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="name" />
+			<xsd:attribute name="target" >
+				<xsd:simpleType>
+					<xsd:union>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:NMTOKEN">
+							<xsd:enumeration value="_blank" />
+							<xsd:enumeration value="_parent" />
+							<xsd:enumeration value="_search" />
+							<xsd:enumeration value="_self" />
+							<xsd:enumeration value="_top" />
+							</xsd:restriction>
+						</xsd:simpleType>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string"  />
+						</xsd:simpleType>
+					</xsd:union>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="onsubmit" vs:omtype="event" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="hr">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="align"  default="right">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="center" />
+					<xsd:enumeration value="right" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="noshade" vs:standalone="true"  />
+			<xsd:attribute name="size"  />
+			<xsd:attribute name="width"  />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="h1">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="align"  default="left">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="center" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="justify" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="h2">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="align"  default="left">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="center" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="justify" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="h3">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="align"  default="left">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="center" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="justify" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="h4">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="align"  default="left">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="center" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="justify" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="h5">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="align"  default="left">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="center" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="justify" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="h6">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="align"  default="left">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="center" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="justify" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="i">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="img">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="align">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="top" />
+					<xsd:enumeration value="texttop" />
+					<xsd:enumeration value="middle" />
+					<xsd:enumeration value="absmiddle" />
+					<xsd:enumeration value="baseline" />
+					<xsd:enumeration value="bottom" />
+					<xsd:enumeration value="absbottom" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="alt" />
+			<xsd:attribute name="border" type="xsd:integer" />
+			<xsd:attribute name="height" />
+			<xsd:attribute name="hspace" type="ui4" />
+			<xsd:attribute name="ismap" vs:standalone="true"  />
+			<xsd:attribute name="name" />
+			<xsd:attribute name="src" type="xsd:anyURI" />
+			<xsd:attribute name="usemap" type="xsd:anyURI" />
+			<xsd:attribute name="vspace" type="ui4" />
+			<xsd:attribute name="width"  />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="isindex">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="prompt" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+		<!-- vs:requiredancestor="form" intentionally ommitted -->
+	<xsd:element name="input" vs:clientom="#type">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="align" vs:inputtype="image">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="top" />
+					<xsd:enumeration value="texttop" />
+					<xsd:enumeration value="middle" />
+					<xsd:enumeration value="absmiddle" />
+					<xsd:enumeration value="baseline" />
+					<xsd:enumeration value="bottom" />
+					<xsd:enumeration value="absbottom" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="causesvalidation" type="boolean" vs:nonbrowseable="true"  />
+			<xsd:attribute name="checked" vs:inputtype="checkbox radio" vs:standalone="true" />
+			<xsd:attribute name="maxlength" type="ui4" vs:inputtype="password text" />
+			<xsd:attribute name="name" vs:inputtype="button checkbox hidden image password radio reset submit text" />
+			<xsd:attribute name="onblur"   vs:omtype="event" vs:inputtype="button checkbox file image radio reset submit" />
+			<xsd:attribute name="onclick"  vs:omtype="event" vs:inputtype="button checkbox image radio reset submit" />
+			<xsd:attribute name="onfocus"  vs:omtype="event" vs:inputtype="button checkbox file image radio reset submit" />
+			<xsd:attribute name="onselect" vs:omtype="event" vs:inputtype="password text textarea" />
+			<xsd:attribute name="onmouseover"  vs:omtype="event" vs:inputtype="button checkbox file image password radio reset submit text" />
+			<xsd:attribute name="onchange" vs:omtype="event" vs:inputtype="password text textarea" />
+			<xsd:attribute name="onserverclick"  vs:omtype="event"  />
+			<xsd:attribute name="onserverchange" vs:omtype="event"  />
+			<xsd:attribute name="src" type="xsd:anyURI" vs:inputtype="image"  />
+			<xsd:attribute name="size" type="xsd:integer" />
+			<xsd:attribute name="type" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="button" />
+					<xsd:enumeration value="checkbox" />
+					<xsd:enumeration value="file" />
+					<xsd:enumeration value="hidden" />
+					<xsd:enumeration value="image" />
+					<xsd:enumeration value="password" />
+					<xsd:enumeration value="radio" />
+					<xsd:enumeration value="submit" />
+					<xsd:enumeration value="reset" />
+					<xsd:enumeration value="text" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="value" vs:inputtype="button checkbox hidden password radio reset submit text" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="kbd">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="li" vs:implicitclosure="true">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+								<!-- Begin BlockContent -->
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="center" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BlockContent -->
+			</xsd:choice>
+			<xsd:attribute name="type" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="A" />
+					<xsd:enumeration value="a" />
+					<xsd:enumeration value="I" />
+					<xsd:enumeration value="i" />
+					<xsd:enumeration value="1" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="value" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="listing" vs:deprecated="true">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="map">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+				<xsd:element ref="area" />
+			</xsd:choice>
+			<xsd:attribute name="name" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="menu">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+				<xsd:element ref="li" />
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="metadata">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="type" vs:readonly="true"  />
+			<xsd:attribute name="startspan" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="nobr">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="noembed">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+								<!-- Begin BlockContent -->
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="center" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BlockContent -->
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="object">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+								<!-- Begin BlockContent -->
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="center" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BlockContent -->
+				<xsd:element ref="param" />
+			</xsd:choice>
+			<xsd:attribute name="align">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="top" />
+					<xsd:enumeration value="texttop" />
+					<xsd:enumeration value="middle" />
+					<xsd:enumeration value="absmiddle" />
+					<xsd:enumeration value="baseline" />
+					<xsd:enumeration value="bottom" />
+					<xsd:enumeration value="absbottom" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="border" type="xsd:integer" />
+			<xsd:attribute name="classid" />
+			<xsd:attribute name="code" type="xsd:anyURI" />
+			<xsd:attribute name="codebase" type="xsd:anyURI" />
+			<xsd:attribute name="codetype" />
+			<xsd:attribute name="data" />
+			<xsd:attribute name="height" />
+			<xsd:attribute name="name" />
+			<xsd:attribute name="onafterupdate" vs:omtype="event" />
+			<xsd:attribute name="ondataavailable" vs:omtype="event" />
+			<xsd:attribute name="ondatasetchanged" vs:omtype="event" />
+			<xsd:attribute name="ondatasetcomplete" vs:omtype="event" />
+			<xsd:attribute name="onerror" vs:omtype="event" />
+			<xsd:attribute name="onerrorupdate" vs:omtype="event" />
+			<xsd:attribute name="onreadystatechange" vs:omtype="event" />
+			<xsd:attribute name="progid" />
+			<xsd:attribute name="type" vs:readonly="true"  />
+			<xsd:attribute name="width"  />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ol" vs:implicitclosure="true">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+				<xsd:element ref="li" />
+			</xsd:choice>
+			<xsd:attribute name="start" type="xsd:integer" />
+			<xsd:attribute name="type" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="A" />
+					<xsd:enumeration value="a" />
+					<xsd:enumeration value="I" />
+					<xsd:enumeration value="i" />
+					<xsd:enumeration value="1" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="option" vs:implicitclosure="true">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="selected" vs:standalone="true"  />
+			<xsd:attribute name="value" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="p" vs:implicitclosure="true">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+				<xsd:element ref="table" />
+				<xsd:element ref="hr" />
+			</xsd:choice>
+			<xsd:attribute name="align"  default="left">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="center" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="justify" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="param">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="name" />
+			<xsd:attribute name="value" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="plaintext" vs:deprecated="true">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="pre">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin PreContent -->
+				<xsd:element ref="b" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End PreContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="s">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="samp">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="script">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="language"  default="jscript">
+				<xsd:simpleType vs:serverlanguages="true">
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="vbs" />
+						<xsd:enumeration value="vbscript" />
+						<xsd:enumeration value="js" />
+						<xsd:enumeration value="jscript" />
+						<xsd:enumeration value="javascript" />
+						<xsd:enumeration value="xml" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="src" type="xsd:anyURI" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="select">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+				<xsd:element ref="option" />
+			</xsd:choice>
+			<xsd:attribute name="multiple" vs:standalone="true"  />
+			<xsd:attribute name="name" />
+			<xsd:attribute name="onblur" vs:omtype="event" />
+			<xsd:attribute name="onchange" vs:omtype="event" />
+			<xsd:attribute name="onfocus" vs:omtype="event" />
+			<xsd:attribute name="onserverclick" vs:omtype="event"  />
+			<xsd:attribute name="onserverchange" vs:omtype="event"  />
+			<xsd:attribute name="size" type="ui4" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<!-- the following are valid within a web form -->
+			<xsd:attribute name="DataSource"  />
+			<xsd:attribute name="DataMember"  />
+			<xsd:attribute name="DataTextField"  />
+			<xsd:attribute name="DataValueField"  />
+			<xsd:attribute name="SelectedIndex"  />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="small">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="strike">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="strong">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="sub">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="sup">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="table">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+				<xsd:element ref="caption" />
+				<xsd:element ref="tr" />
+			</xsd:choice>
+			<xsd:attribute name="align">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="center" />
+					<xsd:enumeration value="right" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="border" type="xsd:integer" />
+			<xsd:attribute name="cellpadding" type="xsd:integer" />
+			<xsd:attribute name="cellspacing" type="xsd:integer" />
+			<xsd:attribute name="height" />
+			<xsd:attribute name="width"  />
+			<xsd:attribute name="bgcolor" vs:builder="color" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="td" vs:implicitclosure="true">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+								<!-- Begin BlockContent -->
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="center" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BlockContent -->
+			</xsd:choice>
+			<xsd:attribute name="align"  default="left">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="center" />
+					<xsd:enumeration value="right" />
+					<xsd:enumeration value="middle" vs:nonbrowseable="true" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="colspan"  default="1" type="xsd:integer" />
+			<xsd:attribute name="height" />
+			<xsd:attribute name="nowrap" vs:standalone="true"  />
+			<xsd:attribute name="rowspan"  default="1" type="xsd:integer" />
+			<xsd:attribute name="valign"  default="top">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="top" />
+					<xsd:enumeration value="middle" />
+					<xsd:enumeration value="bottom" />
+					<xsd:enumeration value="baseline" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="width"  />
+			<xsd:attribute name="bgcolor" vs:builder="color" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="textarea">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="cols" type="xsd:integer" />
+			<xsd:attribute name="name" />
+			<xsd:attribute name="onblur" vs:omtype="event" />
+			<xsd:attribute name="onchange" vs:omtype="event" />
+			<xsd:attribute name="onfocus" vs:omtype="event" />
+			<xsd:attribute name="onselect" vs:omtype="event" />
+			<xsd:attribute name="onserverclick" vs:omtype="event"  />
+			<xsd:attribute name="onserverchange" vs:omtype="event"  />
+			<xsd:attribute name="rows" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="th">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+								<!-- Begin BlockContent -->
+				<xsd:element ref="address" />
+				<xsd:element ref="basefont" />
+				<xsd:element ref="blockquote" />
+				<xsd:element ref="center" />
+				<xsd:element ref="dir" />
+				<xsd:element ref="div" />
+				<xsd:element ref="dl" />
+				<xsd:element ref="form" />
+				<xsd:element ref="h1" />
+				<xsd:element ref="h2" />
+				<xsd:element ref="h3" />
+				<xsd:element ref="h4" />
+				<xsd:element ref="h5" />
+				<xsd:element ref="h6" />
+				<xsd:element ref="hr" />
+				<xsd:element ref="isindex" />
+				<xsd:element ref="listing" />
+				<xsd:element ref="menu" />
+				<xsd:element ref="noembed" />
+				<xsd:element ref="ol" />
+				<xsd:element ref="p" />
+				<xsd:element ref="plaintext" />
+				<xsd:element ref="pre" />
+				<xsd:element ref="table" />
+				<xsd:element ref="ul" />
+				<xsd:element ref="xmp" />
+								<!-- End BlockContent -->
+			</xsd:choice>
+			<xsd:attribute name="align"  default="left">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="left" />
+					<xsd:enumeration value="center" />
+					<xsd:enumeration value="right" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="colspan"  default="1" type="xsd:integer" />
+			<xsd:attribute name="height" />
+			<xsd:attribute name="nowrap" vs:standalone="true"  />
+			<xsd:attribute name="rowspan"  default="1" type="xsd:integer" />
+			<xsd:attribute name="valign"  default="top">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="top" />
+					<xsd:enumeration value="middle" />
+					<xsd:enumeration value="bottom" />
+					<xsd:enumeration value="baseline" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="width"  />
+			<xsd:attribute name="background" type="xsd:anyURI" />
+			<xsd:attribute name="bgcolor" vs:builder="color" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="tr" vs:implicitclosure="true">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+				<xsd:element ref="th" />
+				<xsd:element ref="td" />
+			</xsd:choice>
+			<xsd:attribute name="bgcolor" vs:builder="color" />
+			<xsd:attribute name="id" />
+			<xsd:attribute name="valign"  default="top">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="top" />
+					<xsd:enumeration value="middle" />
+					<xsd:enumeration value="bottom" />
+					<xsd:enumeration value="baseline" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="tt">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="u">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ul" type="ulType" />
+
+	<xsd:complexType name="ulType" mixed="true">
+		<xsd:choice>
+			<xsd:element name="ul" type="ulType" vs:deprecated="true" />
+			<xsd:element ref="li" />
+		</xsd:choice>
+		<xsd:attribute name="id" />
+		<xsd:attribute name="runat" vs:readonly="true">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+				<xsd:enumeration value="server" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="type">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+				<xsd:enumeration value="circle" />
+				<xsd:enumeration value="disc" />
+				<xsd:enumeration value="square" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:element name="var">
+		<xsd:complexType mixed="true">
+			<xsd:choice>
+								<!-- Begin InlineContent -->
+				<xsd:element ref="a" />
+				<xsd:element ref="applet" />
+				<xsd:element ref="b" />
+				<xsd:element ref="big" />
+				<xsd:element ref="br" />
+				<xsd:element ref="cite" />
+				<xsd:element ref="code" />
+				<xsd:element ref="em" />
+				<xsd:element ref="embed" />
+				<xsd:element ref="font" />
+				<xsd:element ref="i" />
+				<xsd:element ref="input"  />
+				<xsd:element ref="img" />
+				<xsd:element ref="kbd" />
+				<xsd:element ref="map" />
+				<xsd:element ref="nobr" />
+				<xsd:element ref="s" />
+				<xsd:element ref="samp" />
+				<xsd:element ref="script" />
+				<xsd:element ref="select" />
+				<xsd:element ref="small" />
+				<xsd:element ref="strike" />
+				<xsd:element ref="strong" />
+				<xsd:element ref="sub" />
+				<xsd:element ref="sup" />
+				<xsd:element ref="textarea" />
+				<xsd:element ref="tt" />
+				<xsd:element ref="u" />
+				<xsd:element ref="var" />
+				<xsd:element ref="wbr" />
+								<!-- End InlineContent -->
+			</xsd:choice>
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="wbr">
+		<xsd:complexType mixed="true"></xsd:complexType>
+	</xsd:element>
+	<xsd:element name="xmp" vs:deprecated="true">
+		<xsd:complexType mixed="true">
+			<xsd:attribute name="id" />
+			<xsd:attribute name="runat" vs:readonly="true">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="server" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="ui4">
+		<xsd:restriction base="xsd:nonNegativeInteger">
+		<xsd:minInclusive value="0" />
+		<xsd:maxInclusive value="4294967295" />
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

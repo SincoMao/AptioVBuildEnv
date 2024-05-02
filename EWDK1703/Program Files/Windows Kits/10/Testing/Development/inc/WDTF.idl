@@ -1,0 +1,1563 @@
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Copyright 2005 Microsoft Corporation. All Rights Reserved.
+//
+// WDTF.idl
+//
+// Collection: WDTF - Main Interface Reference
+// 
+// Environment: User mode
+// 
+// DLL: WDTF.dll
+//
+// Primary Contact: WDTF Support (WDTFSupp@microsoft.com)
+//
+// Abstract:
+// 
+// This is the published interface for using WDTF. This is a beta version, 
+// and as such is still subject to change.
+// 
+// There are 2 creatable 'depots' in WDTF. Both the <!IDeviceDepot> and the 
+// <!ISystemDepot> provide <!ITarget> objects that represent testable objects.
+// By using these objects and retrieving controlling interfaces and test
+// interfaces, WDTF allows you to construct innumerable scenarios that are 
+// easy to understand and extend.
+// 
+// Instead of directly calling CoCreateObject() for each of these objects, 
+// you could just instantiate the <!WDTF> aggregation object which provides 
+// access to these.
+//
+// You should also take a look at WDTF Sample Scenarios available in the
+// following languages: <A href=WDTFSamples_VBScript.html>VBScript</A> and
+// <A href=WDTFSamples_CPP.html>C++</A>.
+//---------------------------------------------------------------------------
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+
+/*
+ *   Version 1 
+ */
+
+
+/*
+ *  Forward defines
+ */
+
+interface ITarget;
+interface ITargets;
+interface IWDTF;
+interface IMatchEventSource;
+
+[
+    object,
+    uuid(544A0C59-315A-45a3-A391-5CE3E7798613),
+    nonextensible,
+    helpstring("Bogus unreferenced but only to make MIDL generate correct output"),
+    pointer_default(unique)
+]
+interface IBogusUnreferenced : IUnknown
+{    
+};
+
+
+
+
+
+[
+    uuid(DEB99A80-9125-48CA-A33C-3F3FA2A640CC),
+    version(1.0),
+    helpstring("WDTF Version 1 Type Library")
+]
+library WDTFLib
+{
+    importlib("stdole2.tlb");
+    
+    /* 
+     * TTraceLevel
+     * 
+     * Abstract:
+     *   A set of levels from all the way Off to All traces on. What each level means
+     * is dependent on registry settings for the <!ITracer> interface.
+     *
+     * Remarks:
+     *  The following are the internal bits for WDTF tracing. The individual levels
+     * within the TTraceLevel enumeration correspond to a set of internal tracing
+     * bits.
+     *   Trace_COMEntryExit      = 0x0001,    // LOW Tracing
+     *   Trace_COMError          = 0x0002,    // LOW Tracing
+     *   Trace_EntryExit         = 0x0004,    // MEDIUM Tracing
+     *   Trace_APICall           = 0x0008,    // MEDIUM Tracing
+     *   Trace_Info              = 0x0010,    // MEDIUM Tracing
+     *   Trace_Warning           = 0x0020,    // LOW Tracing
+     *   Trace_Error             = 0x0040,    // LOW Tracing
+     *   
+     *   Trace_NoisyCOMEntryExit = 0x0080,    // HIGH Tracing
+     *   Trace_NoisyEntryExit    = 0x0100,    // HIGH Tracing
+     *   Trace_NoisyAPICall      = 0x0200,    // HIGH Tracing
+     *   Trace_NoisyInfo         = 0x0400,    // HIGH Tracing
+     *   Trace_NoisyWarning      = 0x0800,    // HIGH Tracing
+     *
+     */
+    typedef 
+    [uuid(548DD0B0-70EA-4fa0-9251-A28DA88291ED)]
+    enum
+    {
+        Trace0_Off    = 0,  // -> 0x0000,
+        Trace1_Low    = 1,  // -> 0x0061,
+        Trace2_Medium = 2,  // -> 0x007F,
+        Trace3_High   = 3,  // -> 0x0FFF,
+        Trace4_All    = 4,  // -> 0x0FFF,
+        Trace5_Custom = 5,
+        Trace6_Custom = 6,
+        Trace7_Custom = 7,
+        Trace8_Custom = 8,
+
+        Trace_Default = 9   // special level that indicates you want the default level
+                            // to be retrieved from the CLSID key of the object you're
+                            // setting the tracing level (using <!ITracing::SetTraceLevel>)
+    } TTraceLevel;
+
+
+    /*
+     * ITracing
+     * 
+     * Abstract:
+     * 
+     *  This interface is the base of all interfaces in WDTF that have the ability
+     * to set the object's tracing settings.
+     *
+     */
+    [
+        object,
+        uuid(B11605F7-2C8C-4EF2-87C0-10010079AF58),
+        dual,
+        nonextensible,
+        helpstring("WDTF Tracing Control Interface"),
+        pointer_default(unique)
+    ]
+    interface ITracing : IDispatch
+    {
+        [id(100), helpstring("Provides a way to set the tracing level on a per-object basis.")]
+        //---------------------------------------------------------------------------
+        //
+        // Arguments:
+        //   Level      The new tracing level for this object.
+        //
+        //---------------------------------------------------------------------------
+        HRESULT SetTraceLevel([in] TTraceLevel Level);
+    };
+
+
+    /* 
+     * IAction
+     * 
+     * Abstract:
+     * 
+     * This interface encapsulates the semantic idea of an 'Action' interface
+     * on an ITarget. These are retrieved through a call to 
+     * ITarget::GetInterface(). These operations should all be
+     * in the form of "Do this to the Target"   
+     * 
+     */
+
+   
+    [
+        object,
+        uuid(163C58BE-DAFF-48B1-B1BC-F0D735CF3BF1),
+        dual,
+        nonextensible,
+        helpstring("An 'Action' operation interface."),
+        pointer_default(unique)
+    ]
+    interface IAction : ITracing
+    {
+        //---------------------------------------------------------------------------
+        // 
+        // This method provides a way to provide target(s) for the implementation to
+        // use in whatever actions it performs.
+        //
+        // Arguments:
+        //   MainTarget     The main target for the implementation to use.
+        //
+        //   MoreTargets    Optional additional targets for the implementation. This
+        //                  should be a SAFEARRAY of ordered ITarget and ITargets 
+        //                  pointers.
+        // 
+        //---------------------------------------------------------------------------
+        HRESULT SetTarget([in] ITarget* pMainTarget, [in, optional] VARIANT MoreTargets);
+    };
+
+    
+    
+ 
+
+
+
+    [
+        object,
+        uuid(11682262-FB33-4CFB-9250-0577DAA9A8BF),
+        dual,
+        nonextensible,
+        helpstring("Provides WDTF Objects the ability to find out what thier tracing settings are from the registry."),
+        pointer_default(unique)
+    ]
+    interface ITracer : IDispatch
+    {
+        [helpstring("Get the tracing bit mask for this coclass from a specified tracing Level.")]
+        //---------------------------------------------------------------------------
+        // Arguments:
+        //   ClassID    The CLSID of the coclass of the object requesting Tracing Bits
+        //
+        //   Level      The level being requested. Trace_Default indicates that the method
+        //              will search the HKCR\CLSID\<ClassID>\ (or HKCR\<TraceLevelPath>) 
+        //              key to find it's default level.
+        //
+        //   pBits      The returned bit mask that indicates which bits are enabled.
+        //
+        // Remarks:
+        //   If no default exists, the method fails.
+        //
+        //   If the method fails for any reason, the caller is expected to silently fall
+        // back to using it's previous tracing bits.
+        //---------------------------------------------------------------------------
+        HRESULT GetBits([in] CLSID ClassID, [in] TTraceLevel Level, [out, retval] DWORD* pBits);
+        
+        [helpstring("Get the tracing TLS slot for this process.")]
+        //---------------------------------------------------------------------------
+        // Arguments:
+        //   pSlot      A pointer to the variable which will hold the returned TLS slot.
+        //
+        // Remarks:
+        //   Since the Tracer is a singleton, it should only return one TLS slot 
+        // per-process.
+        //---------------------------------------------------------------------------
+        HRESULT GetTlsSlot([out, retval] DWORD* pSlot);
+
+        [helpstring("Get the tracing bit mask for this coclass from a specified tracing Level.")]
+        //---------------------------------------------------------------------------
+        // Arguments:
+        //   TraceLevelPath      An alternative to ClassID to specify where to find the
+        //                       default level.
+        //
+        // Remarks:
+        //   See GetBits
+        //---------------------------------------------------------------------------
+        HRESULT GetBitsForLevel([in] BSTR TraceLevelPath, [in] TTraceLevel Level, [out, retval] DWORD* pBits);
+    };
+  
+    /* 
+     * ITarget
+     * 
+     * Abstract:
+     * 
+     *  This interface is the heart of WDTF. Everything revolves around first
+     * finding and retrieving these objects and then using their methods and
+     * properties to do useful operations. Some of these operations could be
+     * in the form of "Do this to the Target", and others could be in the form
+     * of "run this functionality test on the Target".
+     *
+     * ITarget objects are only retrievable through other objects (like the
+     * <!IDeviceDepot> and the <!ISystemDepot>.) Also, the lifetime of ITarget 
+     * objects is tied to its creator (ie. if you retrieve an ITarget object 
+     * from the DeviceDepot, it will exist as long as the DeviceDepot exists.)
+     *
+     * There is no way to 'copy' an ITarget object, even adding a target to a
+     * collection really just adds a pointer to the same Target.
+     * 
+     */
+    [
+        object,
+        uuid(258E9C41-29B7-4A66-87DB-23342246438D),
+        dual,
+        nonextensible,
+        helpstring("A 'Target' for running Tests on or Controlling. Can also retrieve related Targets."),
+        pointer_default(unique)
+    ]
+    interface ITarget : ITracing
+    {
+        [id(1), propget, helpstring("Retrieve the reference to the main WDTF aggregation object.")]
+        HRESULT WDTF([out, retval] IWDTF** ppWDTF);
+
+        [id(2), propget, helpstring("A string that identifies the depot that this Target came from.")]
+        //---------------------------------------------------------------------------
+        // Remarks:
+        //  This property returns a string that uniquely identifies the
+        // specific depot that it came from. Currently there are only two possibilities:
+        //     "device" and "system".
+        //---------------------------------------------------------------------------
+        HRESULT Type([out, retval] BSTR* pVal);
+
+        [id(3), propget, helpstring("Retrieve user data from this Target by providing it's Tag.")]
+        HRESULT Context([in] BSTR Tag, [out, retval] VARIANT* pVal);
+        
+        [id(3), propput, helpstring("Attach user data associated with a Tag to this Target.")]
+        HRESULT Context([in] BSTR Tag, [in] VARIANT newVal);
+
+        [id(10), helpstring("Evaluate whether this Target matches an SDEL statement")] 
+        //---------------------------------------------------------------------------
+        // 
+        // Arguments:
+        //   SDEL           The SDEL statement that you are trying to match
+        //                  this Target against.
+        //
+        // Remarks:
+        //  This method can be used to figure out if a Target matches a provided 
+        // SDEL statement.
+        // 
+        //---------------------------------------------------------------------------
+        HRESULT Eval([in] BSTR SDEL, [out, retval] VARIANT_BOOL* pResult);
+        
+
+        [id(11), helpstring("Retrieve a single value from the Target given a single field.")]
+        //---------------------------------------------------------------------------
+        // 
+        // Arguments:
+        //   SDEL           An SDEL statement that specifies which field
+        //                  to retrieve a single value for.
+        //
+        // Remarks:
+        //  This method can be used by scenario writers to retrieve a value 
+        // associated with a provided field. The field to be retrieved is
+        // specified by a regular SDEL statement. Normally an SDEL statement can 
+        // contain comparison operators and value specifiers in order to perform 
+        // matches, however these need not be present for this method to function.
+        // 
+        //  This method finds the first value assigned to the first field specified in 
+        // the SDEL statement, and then returns it.
+        //
+        //---------------------------------------------------------------------------
+        HRESULT GetValue([in] BSTR SDEL, [out, retval] VARIANT* pValue);
+
+
+        [id(12), helpstring("Retrieve an instantiated implementation of an interface for this Target.")]
+        //---------------------------------------------------------------------------
+        // 
+        // Arguments:
+        //   WDTFInterfaceName         The WDTFInterfaceName of the requested interface.
+        //
+        //   Args           Optional extra arguments that could be used to define
+        //                  additional Targets to attach to the returned interface.
+        //
+        //   MonikerSuffix  An optional moniker that defines more options about how
+        //                  the interface should be instantiated.
+        //
+        // Remarks:
+        //  This method can be used by scenario writers to retrieve plug-ins that can
+        // act upon the <!ITarget>. The interface is specified in the WDTFInterfaceName, and 
+        // the scenario writer is responsible for understanding both the syntax and
+        // the semantics of the returned interface.
+        // 
+        //---------------------------------------------------------------------------
+
+        HRESULT GetInterface([in] BSTR WDTFInterfaceName,
+                             [in, optional] VARIANT Args,
+                             [in, optional] VARIANT MonikerSuffix,
+                             [out, retval] IAction** ppInterface);
+
+       
+        [id(13), helpstring("Retrieve a subset of related Target objects packaged into a new ITargets collection object.")]
+        //---------------------------------------------------------------------------
+        // 
+        // Arguments:
+        //   RelationSDEL       A series of one or more relation tokens that
+        //                      specifies the related Targets.
+        // 
+        //   MatchSDEL          The SDEL statement that each returned Target must
+        //                      match. If a specified related Target does not
+        //                      match this statement, then it will not be 
+        //                      included in the returned collection.
+        //                      Specify an empty string to skip this step.
+        //
+        // Remarks:
+        //  This method can be used by scenario writers to retrieve related <B>
+        // Target</B> objects. The desired <B>Target</B> objects are specified by a
+        // regular SDEL statement. Normally an SDEL statement can contain field
+        // specifiers, comparison operators and value specifiers in order to perform 
+        // matches, however these need not be present for this method to function.
+        // 
+        //  For every relation found by following the SDEL statement, this method 
+        // will fill up an <!ITargets> collection containing each related Target.
+        //
+        //  This method then reduces the returned collection to only those Target 
+        // objects that match the statement in the MatchSDEL parameter. If this string
+        // is empty, the step is skipped and the whole collection is returned.
+        // 
+        //---------------------------------------------------------------------------
+        HRESULT GetRelations([in] BSTR RelationSDEL,
+                             [in] BSTR MatchSDEL,
+                             [out, retval] ITargets** ppRelations);
+
+      
+    };
+
+     /* 
+     * ITargets
+     * 
+     * Abstract:
+     * 
+     *  This interface represents a collection of <!ITarget> objects. While it is
+     * possible to create an object of this type, one would normally just retrieve
+     * one (pre-filled) by calling the relevant methods of this and other 
+     * interfaces (like <!IDeviceDepot> or <!ISystemDepot>).
+     * 
+     * Once you have an ITargets collection object, you can <!ITargets::Add> and
+     * <!ITargets::Remove> target objects as you see fit. Just remember that the
+     * lifetime of <!ITarget> objects is always tied to the original creator of that 
+     * object (ie. <!IDeviceDepot> or <!ISystemDepot>).
+     *
+     */
+    [
+        object,
+        uuid(F5F76D45-79F4-426B-B112-E316C80C9B93),
+        dual,
+        nonextensible,
+        helpstring("ITargets Interface"),
+        pointer_default(unique)
+    ]
+    interface ITargets : ITracing
+    {
+        [propget, id(DISPID_NEWENUM), helpstring("This property provides access to the 'for each xxxxx in xxxx' feature present in many high-level languages."), hidden]
+        HRESULT _NewEnum([out, retval] IUnknown** ppNewEnum);
+        
+        
+        [propget, id(DISPID_VALUE), helpstring("This property provides access to individual Targets in the collection. 0-indexed.")]
+        HRESULT Item([in] LONG Index, [out, retval] ITarget** ppTarget);
+        
+        
+        [propget, helpstring("Number of Target objects in this collection.")]
+        HRESULT Count([out, retval] LONG* pVal);
+        
+        
+        [id(2), helpstring("Add a Target to the collection.")]
+        HRESULT Add([in] ITarget* pTarget);
+        
+        
+        [id(3), helpstring("Remove a Target from the collection.")]
+        HRESULT Remove([in] ITarget* pTarget);
+
+        
+        [id(4), helpstring("Empty the collection.")]
+        HRESULT Clear(void);
+
+        
+        [id(5), helpstring("Retrieve a subset of the contained Target objects packaged into a new ITargets collection object.")]
+        //---------------------------------------------------------------------------
+        // 
+        // Arguments:
+        //   SDEL       The SDEL statement that each returned Target must
+        //              match. If a Target within this collection matches
+        //              this statement, then it will be included in the 
+        //              returned collection.
+        //
+        // Remarks:
+        //  This method is used by the scenario writer in order to select and 
+        // retrieve a subset of the Targets within this collection.
+        // 
+        //  Underneath, this method calls <!ITarget::Eval> on every Target in this
+        // collection. Every Target that returns VARIANT_TRUE is added to a new
+        // <!ITargets> collection object. At the end of this process, the new 
+        // collection object is then returned to the caller.
+        // 
+        //---------------------------------------------------------------------------
+        HRESULT Query([in] BSTR SDEL, [out, retval] ITargets** ppTargets);
+
+      };
+
+
+    
+
+
+    /* 
+     * IDeviceDepot
+     * 
+     * Abstract:
+     * 
+     *  This interface represents the collection of all devices on this machine. It
+     * exposes each of these devices as an <!ITarget> object. Once you have your 
+     * one copy of the DeviceDepot created, you should be able to use it's methods
+     * to retrieve arbitrary subsets of <!ITarget> objects packaged within
+     * <!ITargets> collection objects. You could also just retrieve the 
+     * <I>RootDevice</I> property and navigate to children (or other related) 
+     * devices using the <!ITarget::GetRelations> methods.
+     *
+     * See the <!ISystemDepot> for another source of <!ITarget> objects.
+     *
+     * Unimplemented:
+     *  The DeviceDepot also exposes a set of <!_IDeviceDepotEvents> that can be
+     * enabled through <!IDeviceDepot::QueryRemoveEventEnabled> and 
+     * <!IDeviceDepot::RequestMatchEvents> (obviously after you've called
+     * ConnectObject on the DeviceDepot).
+     * 
+     */
+    [
+        object,
+        uuid(39F87079-4FB8-48F6-B8DE-E6DD04001673),
+        dual,
+        nonextensible,
+        helpstring("A collection of all devices in this machine, exposed as ITarget objects."),
+        pointer_default(unique)
+    ]
+    interface IDeviceDepot : ITracing
+    {
+        [id(1), propget, helpstring("Retrieve a reference to the main WDTF aggregation object.")]
+        HRESULT WDTF([out, retval] IWDTF** ppWDTF);
+
+        [propget, id(DISPID_NEWENUM), helpstring("This property provides access to the 'for each xxxxx in xxxx' feature present in many high-level languages."), hidden]
+        //---------------------------------------------------------------------------
+        // Remarks:
+        //  This method just passes off the call to its private <I>AllDevices</I>
+        // <!ITargets> collection.
+        //---------------------------------------------------------------------------
+        HRESULT _NewEnum([out, retval] IUnknown** ppNewEnum);
+        
+        
+        [propget, id(DISPID_VALUE), helpstring("This property provides access to individual Targets in the DeviceDepot. 0-indexed.")]
+        //---------------------------------------------------------------------------
+        // Remarks:
+        //  This method just passes off the call to its private <I>AllDevices</I>
+        // <!ITargets> collection.
+        //---------------------------------------------------------------------------
+        HRESULT Item([in] LONG Index, [out, retval] ITarget** ppTarget);
+        
+        
+        [id(2), propget, helpstring("Number of Target objects currently provided by the DeviceDepot.")]
+        //---------------------------------------------------------------------------
+        // Remarks:
+        //  This method just passes off the call to its private <I>AllDevices</I>
+        // <!ITargets> collection.
+        //---------------------------------------------------------------------------
+        HRESULT Count([out, retval] LONG* pVal);
+        
+        
+        [id(3), helpstring("Retrieve a subset of the contained Target objects packaged into a new ITargets collection object.")]
+        //---------------------------------------------------------------------------
+        // Remarks:
+        //  This method just passes off the call to its private <I>AllDevices</I>
+        // <!ITargets> collection. See <!ITargets::Query> for how to use this method.
+        //---------------------------------------------------------------------------
+        HRESULT Query([in] BSTR SDEL, [out, retval] ITargets** ppTargets);
+        
+        
+        [id(4), propget, helpstring("Provides access to the 'Root' device exposed as an ITarget object.")]
+        HRESULT RootDevice([out, retval] ITarget** pVal);
+       
+        [id(20), helpstring("Request an object that can provide 'MatchFound' and 'MatchLost' events for a particular SDEL statement.")]
+        //---------------------------------------------------------------------------
+        // 
+        // Arguments:
+        //   SDEL               The SDEL statement that Targets will be matched 
+        //                      against.
+        //
+        // Remarks:
+        //  This method requests an <!IMatchEventSource> object that is capable of
+        // sourcing <!IMatchEvents::MatchFound> and <!IMatchEvents::MatchLost> events.
+        //
+        // These events are useful as an alternative to <!IDeviceDepot::Query>,
+        // when the user would like to find a set of devices and also be notified
+        // when those devices go away or new ones arrive.
+        // 
+        //---------------------------------------------------------------------------
+        HRESULT GetMatchEventSource([in] BSTR SDEL, [out, retval] IMatchEventSource** ppMatchEventSource);
+        
+        [id(21), helpstring("Clear out all the stale data in the DeviceDepot. Any match events that need to be fired as a result of this, will be fired.")]
+        HRESULT UpdateAndReportMatches();
+
+        [id(50), propget, helpstring("property QueryRemoveEventEnabled")]
+        HRESULT QueryRemoveEventEnabled([out, retval] VARIANT_BOOL* pVal);
+        [id(50), propput, helpstring("property QueryRemoveEventEnabled")]
+        HRESULT QueryRemoveEventEnabled([in] VARIANT_BOOL newVal);
+
+     };
+
+
+
+ 
+
+
+
+    /* 
+     * ISystemDepot
+     * 
+     * Abstract:
+     * 
+     *  This interface provides access to a single <I>ThisSystem</I> property,
+     * which is an <!ITarget> object that represents the current system.
+     *
+     * See the <!IDeviceDepot> for another source of <!ITarget> objects.
+     * 
+     */
+    [
+        object,
+        uuid(0F4DA66C-DAF7-421F-AE88-736C0701FDD2),
+        dual,
+        nonextensible,
+        helpstring("Provides access to this system exposed as an ITarget object."),
+        pointer_default(unique)
+    ]
+    interface ISystemDepot : ITracing
+    {
+        [id(1), propget, helpstring("Retrieve the reference to the main WDTF aggregation object.")]
+        HRESULT WDTF([out, retval] IWDTF** ppWDTF);
+        
+        /*
+         * Below not needed yet, because the SystemDepot currently only exposes a single ITarget
+         *
+        [propget, id(DISPID_NEWENUM), helpstring("property _NewEnum"), hidden]
+        HRESULT _NewEnum([out, retval] IUnknown** ppNewEnum);
+        
+        
+        [propget, id(DISPID_VALUE), helpstring("property Item")]
+        HRESULT Item([in] LONG Index, [out, retval] ITarget** ppTarget);
+        
+        
+        [propget, helpstring("property Count")]
+        HRESULT Count([out, retval] LONG* pVal);
+        
+        
+        [helpstring("method Query")]
+        HRESULT Query([in] BSTR SDEL, [out, retval] ITargets** ppNewTargets);
+         *
+         */
+        
+        [id(10), propget, helpstring("Provides access to an ITarget object that represents the current system.")]
+        HRESULT ThisSystem([out, retval] ITarget** pVal);
+    };
+
+     /* 
+     * IWDTF
+     * 
+     * Abstract:
+     * 
+     * This interface simply provides a single instantiation point for the user
+     * of WDTF. The provided WDTF sub-objects are instantiated on an 'as-needed' 
+     * basis when their corresponding property is first accessed.
+     */
+    [
+        object,
+        uuid(09AFFB31-8C4F-4EBA-B7B2-1887890EA18D),
+        dual,
+        nonextensible,
+        helpstring("Provides a 'one-stop-shop' for WDTF instantiation."),
+        pointer_default(unique)
+    ]
+    interface IWDTF : IDispatch
+    {
+        [id(1), helpstring("You MUST call this method to cleanup WDTF. It will destroy and reclaim all resources used by WDTF.")]
+        //---------------------------------------------------------------------------
+        // Remarks:
+        //  This method propagates down to all objects retrieved through the WDTF object.
+        //
+        //  Once this method is called, WDTF will no longer function (unless you're using
+        //  a second instantiated copy of WDTF). All methods and properties will fail.
+        //  You may instantiate a brand new copy of WDTF.
+        //
+        //  Note:     It is not necessary to call this function , WDTF will do so automatically once 
+        //  the last reference to it has been released. 
+        //---------------------------------------------------------------------------
+        HRESULT Destroy();
+
+        [id(10), propget, helpstring("Instantiates (if needed) and retrieves the DeviceDepot")]
+        HRESULT DeviceDepot([out, retval] IDeviceDepot** pVal);
+
+
+        [id(20), propget, helpstring("Instantiates (if needed) and retrieves the SystemDepot")]
+        HRESULT SystemDepot([out, retval] ISystemDepot** pVal);
+
+       };
+
+
+ 
+
+    /* 
+     * _IDeviceDepotEvents
+     * 
+     * Abstract:
+     * 
+     *  This interface provides events for the <!IDeviceDepot>. However, this
+     * is not yet implemented.
+     */
+    [
+        uuid(37795E2D-7459-41D1-8F3A-1D9C6B5038EF),
+        helpstring("Provides events for the the DeviceDepot.")
+    ]
+    dispinterface _IDeviceDepotEvents
+    {
+        properties:
+        methods:
+        [id(1), helpstring("Do you want to allow removal of this Target?")]
+        //---------------------------------------------------------------------------
+        // 
+        // Arguments:
+        //   pTarget                The specific <!ITarget> object in question.
+        //
+        // Remarks:
+        //  This event propagates a QueryRemove out to the WDTF consumer. Return
+        // VARIANT_TRUE to accept the removal, or VARIANT_FALSE to veto the request.
+        //
+        //  This event must first be enabled by calling:
+        // <!IDeviceDepot::QueryRemoveEventEnabled> = VARIANT_TRUE;
+        // 
+        //---------------------------------------------------------------------------
+        HRESULT QueryRemove([in] ITarget* pTarget, [out,retval] VARIANT_BOOL* pAcceptRemove);
+    };
+
+
+    /* 
+     * IMatchEventSource
+     * 
+     * Abstract:
+     * 
+     *  This interface is a source of MatchEvents from some Depot. Retrieved by 
+     * calling Depot::GetMatchEventSource(...)
+     */
+    [
+        uuid(E46102AB-83F4-4B1C-B55B-C8D89C26093D),
+        helpstring("Provides match events for targets in some Depot.")
+    ]
+    interface IMatchEventSource : IDispatch
+    {
+        [id(1), helpstring("Start sending MatchFound/MatchLost events.")]
+        //---------------------------------------------------------------------------
+        // Remarks:
+        // This function blocks until existing matches have been sent.
+        // If this method is called a second time, it is a No-Op and S_FALSE is returned.
+        //---------------------------------------------------------------------------
+        HRESULT Start();
+
+        [id(2), helpstring("Stop sending events and destroy this IMatchEventSource.")]
+        //---------------------------------------------------------------------------
+        // Remarks:
+        //  You cannot call Start() again after calling this method.
+        //---------------------------------------------------------------------------
+        HRESULT Destroy();
+
+        [id(4), propget, helpstring("Retrieve a reference to the main WDTF object.")]
+        HRESULT WDTF([out, retval] IWDTF** ppWDTF);
+
+        [id(5), propget, helpstring("Retrieve the SDEL statement used to create this IMatchEventSource.")]
+        HRESULT SDEL([out, retval] BSTR* pVal);
+        
+        [id(7), propget, helpstring("Get your context value back.")]
+        HRESULT Context([out, retval] VARIANT* pVal);
+        [id(7), propput, helpstring("Set the context value.")]
+        HRESULT Context([in] VARIANT newVal);
+    };
+
+    /* 
+     * IMatchEvents
+     * 
+     * Abstract:
+     * 
+     *  This interface provides late-bound events for the <!IMatchEventSource>.
+     */
+    [
+        uuid(9E953703-0337-4E6E-A0E2-642A2F44E9E6),
+        helpstring("Provides late-bound events for an IMatchEventSource.")
+    ]
+    dispinterface IMatchEvents
+    {
+    properties:
+    methods:
+
+        [id(1), helpstring("A Target was found to match a provided SDEL statement.")]
+        //---------------------------------------------------------------------------
+        // 
+        // Arguments:
+        //   pTarget    The specific <!ITarget> object in question.
+        //
+        //   pSource    The IMatchEventSource that this event was sent from.
+        //
+        // Remarks:
+        //  This event is enabled by calling <!IMatchEventSource::Start>.
+        //
+        //  When this event is sent, it means that an <!ITarget> object has just 
+        // arrived (or an existing one changed) such that it now matches the 
+        // parameters specified when the events were requested.
+        // 
+        //---------------------------------------------------------------------------
+        HRESULT MatchFound([in] ITarget* pTarget,
+                           [in] IMatchEventSource* pSource);
+        
+
+        [id(2), helpstring("A Target no longer matches the provided SDEL statement." )]
+        //---------------------------------------------------------------------------
+        // 
+        // Arguments:
+        //   pTarget    The specific <!ITarget> object in question.
+        //
+        //   pSource    The IMatchEventSource that this event was sent from.
+        //
+        // Remarks:
+        //  This event is enabled by calling <!IDeviceDepot::RequestMatchEvents>.
+        //
+        //  When this event is sent, it means that an <!ITarget> object has just 
+        // been removed (or one changed) such that it no longer matches the 
+        // parameters specified when the events were requested.
+        //
+        //---------------------------------------------------------------------------
+        HRESULT MatchLost([in] ITarget* pTarget,
+                          [in] IMatchEventSource* pSource);
+    };
+
+
+
+
+    /* 
+     * Ver 2
+     * 
+     */
+
+
+    /*
+    * Forward defines
+    */
+
+
+    interface IWDTFTarget2;
+    interface IWDTFTargets2;
+    interface IWDTF2;
+
+
+/* 
+     * IWDTFAction2
+     * 
+     * Abstract:
+     *    Extends the original IAction interface. This interface is intended for device actions whose 
+     *    methods are NOT re-entrant and support object logging.   It also simplifies script authoring 
+     *    over the original IAction interface. Action specific interface methods that are added need to 
+     *    return a VARIANT_BOOL to indicate an operational success or failure. The methods HRESULT 
+     *    should be reserved for critical errors. 
+     * 
+     *    HRESULT Stop([out, retval] VARIANT_BOOL* pResult);
+     *    
+     *    If the script author needs more detailed operation status info , they can use the Status 
+     *    and/or Status String properties.  
+     * 
+     *    Note:  SimpleIo Action will still derive from IAction. 
+     * 
+     */
+
+    [
+        object,
+        uuid(1ABC1EB4-4ADD-4A19-9E13-236FE42768FB),
+        dual,
+        nonextensible,
+        helpstring("The 'IWDTFAction2'device action interface."),
+        pointer_default(unique)
+    ]
+    interface IWDTFAction2 : IAction
+    {
+
+        [id(1), propget, helpstring("Provides access to target")]
+        HRESULT Target([out, retval] IWDTFTarget2** ppTarget);
+        HRESULT EnableObjectErrorLogging();
+        HRESULT DisableObjectErrorLogging();
+        HRESULT EnableObjectLogging(void);
+        HRESULT DisableObjectLogging(void);
+        HRESULT IsStatusSuccess([out, retval] VARIANT_BOOL* pResult);
+        HRESULT GetStatus([out, retval] HRESULT* pResult);
+        HRESULT GetStatusString([out, retval] BSTR * pResult);
+
+    };
+
+
+    /* 
+     * IWDTFActions2
+     * 
+     * Abstract:
+     *    A collection of IWDTFActions2 interfaces.  Returned by IWDTFTargets2::GetInterfacesIfExists and 
+     *    IWDTFTargets2::GetInterfaces() .   It supports the common collection interface
+     *
+     */
+    [
+        object,
+        uuid(F5F76D45-79F4-426B-B112-5316C80C9B93),
+        dual,
+        nonextensible,
+        helpstring("IWDTFActions2 Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFActions2 : ITracing
+    {
+        [propget, id(DISPID_NEWENUM), helpstring("This property provides access to the 'for each xxxxx in xxxx' feature present in many high-level languages."), hidden]
+        HRESULT _NewEnum([out, retval] IUnknown** ppNewEnum);
+
+        [propget, id(DISPID_VALUE), helpstring("This property provides access to individual Targets in the collection. 0-indexed.")]
+        HRESULT Item([in] LONG Index, [out, retval] IWDTFAction2** ppAction);
+        
+        [propget, helpstring("Number of Action objects in this collection.")]
+        HRESULT Count([out, retval] LONG* pVal);
+        
+        [id(2), helpstring("Add a Action to the collection.")]
+        HRESULT Add([in] IWDTFAction2* pAction);
+        
+        [id(3), helpstring("Remove a Action from the collection.")]
+        HRESULT Remove([in] IWDTFAction2* pAction);
+       
+        [id(4), helpstring("Empty the collection.")]
+        HRESULT Clear(void);
+
+        [id(5), helpstring("")]
+        HRESULT EnableObjectErrorLogging();
+        [id(6), helpstring("")]
+        HRESULT DisableObjectErrorLogging();
+        [id(7), helpstring("")]
+        HRESULT EnableObjectLogging(void);
+        [id(8), helpstring("")]
+        HRESULT DisableObjectLogging(void);
+
+    };
+
+
+    /* 
+     * IWDTFActionsCustom2
+     * Abstract:
+     * This interface is NOT thread-safe.
+     */
+    [
+        object,
+        uuid(5435AEF8-E855-4C9C-AB35-7722C4EBD26D),
+        dual,
+        nonextensible,
+        helpstring("Interface to create custom action collection."),
+        pointer_default(unique)
+    ]
+    interface IWDTFActionsCustom2 : IWDTFActions2
+    {
+
+        HRESULT IsStatusSuccess([out, retval] VARIANT_BOOL* pResult);
+	   	HRESULT GetStatus([out, retval] HRESULT* pResult);
+        HRESULT GetStatusString([out, retval] BSTR * pResult);
+	};
+
+  
+ /*
+      * IWDTFStrings2
+      *
+      * Abstract:
+      *
+      *  A COM collection of BSTR
+      *
+      */
+     [
+         object,
+         uuid(C7DF0A7B-AC75-4F0A-9CF6-F0A5E054B2DC),
+         dual,
+         nonextensible,
+         helpstring("IWDTFStrings2 Interface"),
+         pointer_default(unique)
+     ]
+     interface IWDTFStrings2 : ITracing{
+
+        [propget, id(DISPID_NEWENUM), helpstring("This property provides access to the 'for each xxxxx in xxxx' feature present in many high-level languages."), hidden]
+        HRESULT _NewEnum([out, retval] IUnknown** ppNewEnum);
+        [propget, id(DISPID_VALUE), helpstring("This property provides access to individual strings in the collection. 0-indexed.")]
+        HRESULT Item([in] LONG Index, [out, retval] BSTR * pString);
+        [propget, helpstring("Number of string in this collection.")]
+        HRESULT Count([out, retval] LONG* pVal);
+        [id(2), helpstring("Add a string to the collection.")]
+        HRESULT Add([in] BSTR  pString);
+        [id(3), helpstring("Remove a string from the collection.")]
+        HRESULT Remove([in] LONG  Index);
+     };
+
+ /*
+      * IWDTFNumbers2
+      *
+      * Abstract:
+      *
+      *  A COM collection of numbers ( LONG )
+      *
+      */
+     [
+         object,
+         uuid(7BC4F2C6-B126-4348-9CED-E0EA79564DA4),
+         dual,
+         nonextensible,
+         helpstring("IWDTFNumbers2 Interface"),
+         pointer_default(unique)
+     ]
+     interface IWDTFNumbers2 : ITracing{
+
+        [propget, id(DISPID_NEWENUM), helpstring("This property provides access to the 'for each xxxxx in xxxx' feature present in many high-level languages."), hidden]
+        HRESULT _NewEnum([out, retval] IUnknown** ppNewEnum);
+        [propget, id(DISPID_VALUE), helpstring("This property provides access to individual numbers in the collection. 0-indexed.")]
+        HRESULT Item([in] LONG Index, [out, retval] LONG * pNumber);
+        [propget, helpstring("Number of numbers in this collection.")]
+        HRESULT Count([out, retval] LONG* pVal);
+        [id(2), helpstring("Add a number to the collection.")]
+        HRESULT Add([in] LONG  Number);
+        [id(3), helpstring("Remove a number from the collection.")]
+        HRESULT Remove([in] LONG  Index);
+     };
+
+    /*
+      * IWDTFLongNUmbers2
+      *
+      * Abstract:
+      *
+      *  A COM collection of long numbers (LONGLONG)
+      *
+      */
+
+     [
+         object,
+         uuid(9167FC3A-CDD5-46D2-AC03-F370A3072321),
+         dual,
+         nonextensible,
+         helpstring("IWDTFLongNUmbers2 Interface"),
+         pointer_default(unique)
+     ]
+     interface IWDTFLongNumbers2 : ITracing{
+
+        [propget, id(DISPID_NEWENUM), helpstring("This property provides access to the 'for each xxxxx in xxxx' feature present in many high-level languages."), hidden]
+        HRESULT _NewEnum([out, retval] IUnknown** ppNewEnum);
+        [propget, id(DISPID_VALUE), helpstring("This property provides access to individual numbers in the collection. 0-indexed.")]
+        HRESULT Item([in] LONG Index, [out, retval] LONGLONG * pNumber);
+        [propget, helpstring("Number of numbers in this collection.")]
+        HRESULT Count([out, retval] LONG* pVal);
+        [id(2), helpstring("Add a number to the collection.")]
+        HRESULT Add([in] LONGLONG  Number);
+        [id(3), helpstring("Remove a number from the collection.")]
+        HRESULT Remove([in] LONG  Index);
+     };
+
+
+
+ /* 
+     * IWDTFTarget2
+     * 
+     * Abstract:
+     * Interface representing a version 2 WDTF target ( device or system ).
+     *
+     */
+    [
+        object,
+        uuid(90882A46-106B-4BA9-BB22-C4C416663F24),
+        dual,
+        nonextensible,
+        helpstring("A 'Target' for running Tests on or Controlling. Can also retrieve related Targets."),
+        pointer_default(unique)
+    ]
+    interface IWDTFTarget2 : ITracing
+    {
+        
+        [id(1), propget, helpstring("Retrieve the reference to the main WDTF aggregation object.")]
+        HRESULT WDTF([out, retval] IWDTF2** ppWDTF);
+
+        [id(2), propget, helpstring("A string that identifies the depot that this Target came from.")]
+        HRESULT Type([out, retval] BSTR* pVal);
+
+        [id(3), propget, helpstring("Retrieve user data from this Target by providing it's Tag.")]
+        HRESULT Context([in] BSTR Tag, [out, retval] VARIANT* pVal);
+        
+        [id(3), propput, helpstring("Attach user data associated with a Tag to this Target.")]
+        HRESULT Context([in] BSTR Tag, [in] VARIANT newVal);
+
+        [id(10), helpstring("Evaluate whether this Target matches an SDEL statement")] 
+        HRESULT Eval([in] BSTR SDEL, [out, retval] VARIANT_BOOL* pResult);
+        
+
+        [id(11), helpstring("Retrieve a single value from the Target given a single field.")]
+        HRESULT GetValue([in] BSTR SDEL, [out, retval] VARIANT* pValue);
+
+
+        [id(12), helpstring("Retrieve an instantiated implementation of an interface for this Target.")]
+        HRESULT GetInterface([in] BSTR WDTFInterfaceName,
+                             [in, optional] VARIANT Args,
+                             [in, optional] VARIANT MonikerSuffix,
+                             [out, retval] IWDTFAction2** ppInterface);
+
+       
+        [id(13), helpstring("Retrieve a subset of related Target objects packaged into a new ITargets collection object.")]
+        HRESULT GetRelations([in] BSTR RelationSDEL,
+                             [in] BSTR MatchSDEL,
+                             [out, retval] IWDTFTargets2** ppRelations);
+
+        [id(16), helpstring("See if we have data associated with a Tag to this Target.")]
+        HRESULT HasContext([in] BSTR Tag, [out, retval] VARIANT_BOOL* pResult);
+
+        [id(20), helpstring("See if Target supports a given interface.")]
+        HRESULT HasInterface([in] BSTR WDTFInterfaceName,
+                [in, optional] VARIANT Args,
+                [in, optional] VARIANT MonikerSuffix,
+                [out, retval] VARIANT_BOOL* pResult);
+
+        [id(24), helpstring("Retrieve a single value from the Target given a single field.")]
+        HRESULT GetValueString([in] BSTR SDEL, [out, retval] BSTR* pValue);
+
+        [id(26), helpstring("Retrieve a collection of values from the Target given a single field.")]
+        HRESULT GetValueStrings([in] BSTR SDEL, [out, retval] IWDTFStrings2** ppValues);
+   
+        [id(28), helpstring("Retrieve a single value from the Target given a single field.")]
+        HRESULT GetValueNumber([in] BSTR SDEL, [out, retval] LONG * pValue);
+
+        [id(30), helpstring("Retrieve a collection of values from the Target given a single field.")]
+        HRESULT GetValueNumbers([in] BSTR SDEL, [out, retval] IWDTFNumbers2** ppValue);
+
+        [id(32), helpstring("Retrieve a single value from the Target given a single field.")]
+        HRESULT GetValueLongNumber([in] BSTR SDEL, [out, retval] LONGLONG * pValue);
+
+        [id(34), helpstring("Retrieve a collection of values from the Target given a single field.")]
+        HRESULT GetValueLongNumbers([in] BSTR SDEL, [out, retval] IWDTFLongNumbers2** ppValue);
+
+        [id(36), helpstring("Retrieve a single value from the Target given a single field.")]
+        HRESULT GetValueBool([in] BSTR SDEL, [out, retval] VARIANT_BOOL * pValue);
+
+    };
+
+
+/* 
+     * IWDTFInternalTarget2
+     * 
+     * Abstract:
+     * 
+     * Internal interface used by some of the other WDTF objects like CTargets. 
+     * 
+     */
+    [
+        object,
+        uuid(83FF9C30-6DDC-43B0-AA67-4529AC386C10),
+        dual,
+        nonextensible,
+        helpstring("A 'Target' for running Tests on or Controlling. Can also retrieve related Targets."),
+        pointer_default(unique)
+    ]
+    interface IWDTFInternalTarget2 : IWDTFTarget2
+    {
+    
+        HRESULT InternalGetInterfaceVer1([in] BSTR WDTFInterfaceName,
+                [in, optional] VARIANT Args,
+                [in, optional] VARIANT MonikerSuffix,
+                [out, retval] IAction** ppInterface);
+
+        HRESULT InternalGetInterfaceVer2([in] BSTR WDTFInterfaceName,
+                [in, optional] VARIANT Args,
+                [in, optional] VARIANT MonikerSuffix,
+                [out, retval] IWDTFAction2** ppInterface);
+
+    
+        HRESULT InternalGetRelations([in] BSTR RelationSDEL,
+                [in] BSTR MatchSDEL,
+                [out, retval] IWDTFTargets2** ppRelations);
+
+    };
+
+
+
+    /* 
+     * IWDTFTargets2
+     * 
+     * Abstract:
+     *  Supersedes ITargets and adds new methods
+     *
+     */
+    [
+        object,
+        uuid(AB89B3CC-ECEC-44CC-939F-BA5309FAAF66),             
+        dual,
+        nonextensible,
+        helpstring("IWDTFTargets2 Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFTargets2 : ITracing
+    {
+
+    [propget, id(DISPID_NEWENUM), helpstring("This property provides access to the 'for each xxxxx in xxxx' feature present in many high-level languages."), hidden]
+    HRESULT _NewEnum([out, retval] IUnknown** ppNewEnum);
+        
+        
+    [propget, id(DISPID_VALUE), helpstring("This property provides access to individual Targets in the collection. 0-indexed.")]
+    HRESULT Item([in] LONG Index, [out, retval] IWDTFTarget2** ppTarget);
+        
+        
+    [propget, helpstring("Number of Target objects in this collection.")]
+    HRESULT Count([out, retval] LONG* pVal);
+
+
+    [id(1), propget, helpstring("Retrieve the reference to the main WDTF aggregation object.")]
+    HRESULT WDTF([out, retval] IWDTF2** ppWDTF);
+        
+    [id(2), helpstring("Add a Target to the collection.")]
+    HRESULT Add([in] IWDTFTarget2* pTarget);
+        
+        
+    [id(3), helpstring("Remove a Target from the collection.")]
+    HRESULT Remove([in] IWDTFTarget2* pTarget);
+
+        
+    [id(4), helpstring("Empty the collection.")]
+    HRESULT Clear(void);
+
+    [id(5), helpstring("Evaluate whether all Targets matches an SDEL statement")] 
+    HRESULT Eval([in] BSTR SDEL, [out, retval] VARIANT_BOOL* pResult);
+
+       
+    [id(6), helpstring("Retrieve a subset of the contained Target objects packaged into a new ITargets collection object.")]
+    HRESULT Query([in] BSTR SDEL, [out, retval] IWDTFTargets2** ppTargets);
+
+    [id(7), helpstring("Retrieve a single IWDTFTarget2 object meeting SDEL criteria.")]
+    HRESULT QuerySingle([in] BSTR SDEL, [out, retval] IWDTFTarget2** ppTarget);
+
+    [id(8), helpstring("Retrieve an IWDTFActions2 collection object of IWDTFActions2 .")]
+    HRESULT GetInterfacesIfExist([in] BSTR WDTFInterfaceName,
+                    [in, optional] VARIANT MoreTargets,
+                    [in, optional] VARIANT MonikerSuffix,
+                    [out, retval] IWDTFActions2** ppInterface);
+
+    [id(9), helpstring("Retrieve an IWDTFActions2 collection object of IWDTFActions2 .")]
+    HRESULT GetInterfaces([in] BSTR WDTFInterfaceName,
+                    [in, optional] VARIANT MoreTargets,
+                    [in, optional] VARIANT MonikerSuffix,
+                    [out, retval] IWDTFActions2** ppInterface);
+
+    [id(10), helpstring("Retrieve a subset of related Target objects packaged into a new ITargets collection object.")]
+    HRESULT GetRelations([in] BSTR RelationSDEL,
+                    [in] BSTR MatchSDEL,
+                    [out, retval] IWDTFTargets2** ppRelations);
+
+ 
+
+    };
+
+
+    /* 
+     * IWDTFSystemDepot2
+     * 
+     * Abstract:
+     * 
+     * This interface provides access to a single <I>ThisSystem</I> property,
+     * which is an <!ITarget> object that represents the current system.
+     *
+     * See the <!IDeviceDepot> for another source of <!ITarget> objects.
+     * 
+     */
+    [
+        object,
+        uuid(ABA723E6-AB7D-4A77-BF93-D35ED7D1611A),
+        dual,
+        nonextensible,
+        helpstring("Provides access to this system exposed as an ITarget object."),
+        pointer_default(unique)
+    ]
+    interface IWDTFSystemDepot2 : ITracing
+    {
+        [id(1), propget, helpstring("Retrieve the reference to the main WDTF aggregation object.")]
+        HRESULT WDTF([out, retval] IWDTF2** ppWDTF);
+        
+        /*
+         * Below not needed yet, because the SystemDepot currently only exposes a single ITarget
+         *
+        [propget, id(DISPID_NEWENUM), helpstring("property _NewEnum"), hidden]
+        HRESULT _NewEnum([out, retval] IUnknown** ppNewEnum);
+        
+        
+        [propget, id(DISPID_VALUE), helpstring("property Item")]
+        HRESULT Item([in] LONG Index, [out, retval] ITarget** ppTarget);
+        
+        
+        [propget, helpstring("property Count")]
+        HRESULT Count([out, retval] LONG* pVal);
+        
+        
+        [helpstring("method Query")]
+        HRESULT Query([in] BSTR SDEL, [out, retval] ITargets** ppNewTargets);
+         *
+         */
+        
+        [id(10), propget, helpstring("Provides access to an ITarget object that represents the current system.")]
+        HRESULT ThisSystem([out, retval] IWDTFTarget2** pVal);
+    };
+
+
+    /* 
+     * IDeviceDepot2
+     * 
+     * Abstract:
+     * Supersedes IDeviceDepot and adds new methods
+     * 
+     */
+    [
+        object,
+        uuid(501E6CC4-4C6B-4B84-9F7B-B3FF7C2CE690),
+        dual,
+        nonextensible,
+        helpstring("A collection of all devices in this machine, exposed as ITarget objects."),
+        pointer_default(unique)
+    ]
+    interface IWDTFDeviceDepot2 : ITracing
+    {
+
+        [id(1), propget, helpstring("Retrieve a reference to the main WDTF aggregation object.")]
+        HRESULT WDTF([out, retval] IWDTF2** ppWDTF);
+
+        [propget, id(DISPID_NEWENUM), helpstring("This property provides access to the 'for each xxxxx in xxxx' feature present in many high-level languages."), hidden]
+        HRESULT _NewEnum([out, retval] IUnknown** ppNewEnum);
+        
+        
+        [propget, id(DISPID_VALUE), helpstring("This property provides access to individual Targets in the DeviceDepot. 0-indexed.")]
+        HRESULT Item([in] LONG Index, [out, retval] IWDTFTarget2** ppTarget);
+        
+        
+        [id(2), propget, helpstring("Number of Target objects currently provided by the DeviceDepot.")]
+        HRESULT Count([out, retval] LONG* pVal);
+        
+        
+        [id(3), helpstring("Retrieve a subset of the contained Target objects packaged into a new ITargets collection object.")]
+        HRESULT Query([in] BSTR SDEL, [out, retval] IWDTFTargets2** ppTargets);
+        
+        
+        [id(4), propget, helpstring("Provides access to the 'Root' device exposed as an ITarget object.")]
+        HRESULT RootDevice([out, retval] IWDTFTarget2** pVal);
+       
+        [id(55), helpstring("Query for a single target.")]
+        HRESULT QuerySingle([in] BSTR SDEL, [out, retval] IWDTFTarget2** ppTarget);
+
+    };
+
+    /* 
+     * IWDTFLOG2
+     * 
+     * Abstract:
+     *  The WDTF logger interface. To enable the test cause authers to add to the WDTF test log. 
+     *  Can be instantiated by itself or gotten from the IWDTF2::Log property.  
+     *  
+     */
+
+    [
+    object,
+    uuid(C5CEAA1E-878B-45C3-8E5C-EDDC5A36CC79),
+    dual,
+    nonextensible,
+    helpstring("IWDTFLOG2 Interface"),
+    pointer_default(unique)
+    ]
+    interface IWDTFLOG2 : IDispatch{
+        [id(1), helpstring("method StartTestCase")] HRESULT StartTestCase([in] BSTR sTestCaseName);
+        [id(2), helpstring("method EndTestCase")] HRESULT EndTestCase(void);
+        [id(3), helpstring("method OutputInfo")] HRESULT OutputInfo([in] BSTR sInfoString);
+        [id(4), helpstring("method OutputError")] HRESULT OutputError([in] BSTR sErrorString);
+    };
+
+
+/* 
+     * IWDTFCONFIG2
+     * 
+     * Abstract:
+     * Used to control configuration aspect globally with in the script.  Like  object logging. 
+     *  
+     */
+
+    [
+    object,
+    uuid(6B6EA9DC-7100-4450-8540-5E19828FDDCC),
+    dual,
+    nonextensible,
+    helpstring("IWDTFCONFIG2 Interface"),
+    pointer_default(unique)
+    ]
+    interface IWDTFCONFIG2 : IDispatch{
+        [id(1), helpstring("method EnableObjectLogging")]  HRESULT EnableObjectLogging(void);
+        [id(2), helpstring("method DisableObjectLogging")] HRESULT DisableObjectLogging(void);
+        [id(3), helpstring("method IsObjectLoggingEnabled")] HRESULT IsObjectLoggingEnabled([out, retval]VARIANT_BOOL * pbIsEnabled);
+        [id(4), helpstring("method EnableObjectErrorLogging")] HRESULT EnableObjectErrorLogging(void);
+        [id(5), helpstring("method DisableObjectErrorLogging")] HRESULT DisableObjectErrorLogging(void);
+        [id(6), helpstring("method IsObjectErrorLoggingEnabled")] HRESULT IsObjectErrorLoggingEnabled([out, retval]VARIANT_BOOL * pbIsEnabled);
+        [id(7), propput,helpstring("property TestModeVerify")]  HRESULT TestModeVerify([in] VARIANT_BOOL  bTestModeVerify);
+        [id(7), propget,helpstring("property TestModeVerify")]  HRESULT TestModeVerify([out, retval] VARIANT_BOOL * pbTestModeVerify);
+    };
+
+
+
+/* 
+     * IWDTF2
+     * 
+     * Abstract:
+     * Adds functionality to the original IWDTF interface.  It  should be used in place of IWDTF.  
+     * But IWDTF still exists for backword compatbilty. 
+     */
+    [
+        object,
+        uuid(27E87F97-5523-4C23-AE15-E082A3CB4BCE),
+        dual,
+        nonextensible,
+        helpstring("WDTF Core Object."),
+        pointer_default(unique)
+    ]
+    interface IWDTF2 : IDispatch
+    {
+
+    [id(10), propget, helpstring("Instantiates (if needed) and retrieves the DeviceDepot")]
+    HRESULT DeviceDepot([out, retval] IWDTFDeviceDepot2** pVal);
+
+    [id(20), propget, helpstring("Instantiates (if needed) and retrieves the SystemDepot")]
+    HRESULT SystemDepot([out, retval] IWDTFSystemDepot2** pVal);
+
+    [id(30), propget, helpstring("Retrieve a reference to the LOG object.")]
+    HRESULT Log([out, retval] IWDTFLOG2** ppLog);
+
+    [id(40), propget, helpstring("Retrieve a reference to the Config object.")]
+    HRESULT Config([out, retval] IWDTFCONFIG2** ppConfig);
+
+    };
+
+  
+
+    //----------
+    // Version 1 CoClasses
+    //----------
+
+    [
+        uuid(140F2286-3B39-4DE1-AF94-E083DEEA6BB9),
+        helpstring("Tracer Class")
+    ]
+    coclass Tracer
+    {
+        [default] interface ITracer;
+    };
+
+    [
+        uuid(28EE5F0B-97D8-4A59-BAC8-A8A80E11F56B),
+        helpstring("WDTF Aggregation Object")
+    ]
+    coclass WDTF
+    {
+        [default] interface IWDTF;
+        // Include to make event source: [default, source] dispinterface _IWDTFEvents;
+    };
+
+    [
+        uuid(485785D3-8820-4C3D-A532-4C0F66392A30),
+        helpstring("Targets Class")
+    ]
+    coclass Targets
+    {
+        [default] interface ITargets;
+    };
+
+    [
+        uuid(240FA08C-1D70-40CB-BDB3-2CC41A45496B),
+        helpstring("Actionss Class")
+    ]
+    coclass WDTFActions2
+    {
+        [default] interface IWDTFActions2;
+    };
+
+    [
+        uuid(2C9AF7D6-2589-4413-A2BA-9926EBCFD67C),
+        helpstring("MatchEventSource Class")
+    ]
+    coclass MatchEventSource
+    {
+        [default] interface IMatchEventSource;
+        [default, source] interface IMatchEvents;
+    };
+
+
+
+    //----------
+    // Version 2 CoClasses
+    //----------
+
+
+    [
+    uuid(B43FF7F1-629C-4DE5-9559-1D09E0A07037),
+    helpstring("WDTFStrings Class")
+    ]
+    coclass WDTFStrings2
+    {
+    [default] interface IWDTFStrings2;
+    };
+
+    [
+    uuid(0E770B12-7221-4A5D-86EE-77310A5506BB),
+    helpstring("WDTFNumbers Class")
+    ]
+    coclass WDTFNumbers2
+    {
+    [default] interface IWDTFNumbers2;
+    };
+
+    [
+    uuid(A2FD15D7-64F0-4080-AABD-884380202022),
+    helpstring("WDTFLongNUmbers Class")
+    ]
+    coclass WDTFLongNumbers2
+    {
+    [default] interface IWDTFLongNumbers2;
+    };
+
+    [
+        uuid(0D972387-817B-46E7-913F-E9993FF401EB),
+        helpstring("WDTF2 Aggregation Object")
+    ]
+    coclass WDTF2
+    {
+        [default] interface IWDTF2;
+        // Include to make event source: [default, source] dispinterface _IWDTFEvents;
+    };
+
+
+    [
+    uuid(2236B1F3-4A33-48C2-B22C-A1F93A626F05),
+    helpstring("WDTFLOG Class")
+    ]
+    coclass WDTFLOG2
+    {
+        [default] interface IWDTFLOG2;
+    };
+    [
+    uuid(26CC4211-A9A6-4E5C-A30D-3C659BB4CDC9),
+    helpstring("WDTFCONFIG Class")
+    ]
+    coclass WDTFCONFIG2
+    {
+        [default] interface IWDTFCONFIG2;
+    };
+
+
+    [
+        uuid(9663A00A-5B72-4810-9014-C77108062949),
+        helpstring("WDTFTargets2 Class")
+    ]
+    coclass WDTFTargets2
+    {
+        [default] interface ITargets;
+    };
+
+
+   
+
+
+/*
+ * These below commented-out sections can allow some of the WDTF coclasses
+ * to source events.
+ * 
+ 
+    [
+        uuid(85908D9B-7E3E-4C2D-81BE-44746A39C23B),
+        helpstring("_IWDTFEvents Interface")
+    ]
+    dispinterface _IWDTFEvents
+    {
+        properties:
+        methods:
+    };
+
+    [
+        uuid(E3BB6801-75A6-4D6F-969E-F76080EA0A48),
+        helpstring("_ISystemDepotEvents Interface")
+    ]
+    dispinterface _ISystemDepotEvents
+    {
+        properties:
+        methods:
+    };
+ *
+ *
+ */
+};

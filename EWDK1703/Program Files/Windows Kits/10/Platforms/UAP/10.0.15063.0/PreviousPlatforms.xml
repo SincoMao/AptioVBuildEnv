@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreviousPlatforms xmlns="http://microsoft.com/schemas/Windows/SDK/PreviousPlatforms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://microsoft.com/schemas/Windows/SDK/PreviousPlatforms ./PreviousPlatformsXmlSchema.xsd">
+	<!-- The idea here is to use this entry to represent the current platform version. 
+         Once current version is released, we add a new entry with the locked version number while retaining this.
+         Ensure that the friendlyName is in sync with Platform.xml -->
+	<ApplicationPlatform name="UAP" friendlyName="Windows 10 Creators Update" version="10.0.15063.0">
+		<VersionedContent>true</VersionedContent>
+		<ContainedApiContracts xmlns="">
+			<ApiContract name="Windows.ApplicationModel.Calls.CallsVoipContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.ApplicationModel.SocialInfo.SocialInfoContract" version="2.0.0.0"/>
+			<ApiContract name="Windows.Devices.DevicesLowLevelContract" version="3.0.0.0"/>
+			<ApiContract name="Windows.Devices.Printers.PrintersContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.Foundation.FoundationContract" version="3.0.0.0"/>
+			<ApiContract name="Windows.Foundation.UniversalApiContract" version="4.0.0.0"/>
+			<ApiContract name="Windows.Graphics.Printing3D.Printing3DContract" version="3.0.0.0"/>
+			<ApiContract name="Windows.Networking.Connectivity.WwanContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.Services.Store.StoreContract" version="2.0.0.0"/>
+			<ApiContract name="Windows.Services.TargetedContent.TargetedContentContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.System.Profile.ProfileHardwareTokenContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.System.Profile.ProfileSharedModeContract" version="2.0.0.0"/>
+			<ApiContract name="Windows.UI.ViewManagement.ViewManagementViewScalingContract" version="1.0.0.0"/>
+		</ContainedApiContracts>
+	</ApplicationPlatform>
+	<ApplicationPlatform name="UAP" friendlyName="Windows 10 Anniversary Update" version="10.0.14393.0">
+		<VersionedContent>false</VersionedContent>
+		<ContainedApiContracts>
+			<ApiContract name="Windows.ApplicationModel.Calls.CallsVoipContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.ApplicationModel.SocialInfo.SocialInfoContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.Devices.DevicesLowLevelContract" version="2.0.0.0"/>
+			<ApiContract name="Windows.Devices.Printers.PrintersContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.Foundation.FoundationContract" version="2.0.0.0"/>
+			<ApiContract name="Windows.Foundation.UniversalApiContract" version="3.0.0.0"/>
+			<ApiContract name="Windows.Graphics.Printing3D.Printing3DContract" version="3.0.0.0"/>
+			<ApiContract name="Windows.Networking.Connectivity.WwanContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.Services.Store.StoreContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.System.Profile.ProfileHardwareTokenContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.System.Profile.ProfileSharedModeContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.UI.ViewManagement.ViewManagementViewScalingContract" version="1.0.0.0"/>
+		</ContainedApiContracts>
+	</ApplicationPlatform>
+	<ApplicationPlatform name="UAP" friendlyName="Windows 10 November Update" version="10.0.10586.0" IsDefaultFallback="True">
+		<VersionedContent>false</VersionedContent>
+		<ContainedApiContracts>
+			<ApiContract name="Windows.ApplicationModel.Calls.CallsVoipContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.Devices.Printers.PrintersContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.Foundation.FoundationContract" version="2.0.0.0"/>
+			<ApiContract name="Windows.Foundation.UniversalApiContract" version="2.0.0.0"/>
+			<ApiContract name="Windows.Graphics.Printing3D.Printing3DContract" version="2.0.0.0"/>
+			<ApiContract name="Windows.Networking.Connectivity.WwanContract" version="1.0.0.0"/>
+		</ContainedApiContracts>
+	</ApplicationPlatform>
+	<ApplicationPlatform name="UAP" friendlyName="Windows 10" version="10.0.10240.0">
+		<VersionedContent>false</VersionedContent>
+		<ContainedApiContracts>
+			<ApiContract name="Windows.Foundation.FoundationContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.Foundation.UniversalApiContract" version="1.0.0.0"/>
+			<ApiContract name="Windows.Networking.Connectivity.WwanContract" version="1.0.0.0"/>
+		</ContainedApiContracts>
+	</ApplicationPlatform>
+</PreviousPlatforms>

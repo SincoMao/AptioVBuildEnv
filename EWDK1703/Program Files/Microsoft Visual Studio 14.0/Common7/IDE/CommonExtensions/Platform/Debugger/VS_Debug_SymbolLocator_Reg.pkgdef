@@ -1,0 +1,6 @@
+[$RootKey$]
+
+[$RootKey$\CLSID\{896CBC6E-3117-4AE6-80F9-5B8619581BDA}]
+@="Symbol Locator Class"
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\symbollocator.dll"
+"ThreadingModel"="Both"

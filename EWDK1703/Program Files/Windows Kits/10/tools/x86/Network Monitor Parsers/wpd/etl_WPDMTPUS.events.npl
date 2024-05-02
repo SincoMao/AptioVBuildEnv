@@ -1,0 +1,283 @@
+//#  (c) 2011 Microsoft Corporation
+//#
+//#  Title:       Microsoft-Windows-WPD-MTPUS
+//#
+//#  Details:     WPD MTP Driver over USB logs analytical ETW events.
+//#               This parser helps to decode the data logged.
+//#
+//#  References:  WpdCoreInstrumentation.man
+//#
+//#  Comments:    MTP dataphase is not logged at transport layer. Enable WPD-MTPClassDriver
+//#               to log the dataphase and etl_WPDMTP.events.npl will be able to parse it.
+//#
+//#  Revision Class and Date:Major, 8/2/2011
+//#
+//####
+
+const MTPCONTAINER_TYPE_UNDEFINED = 0;
+const MTPCONTAINER_TYPE_COMMAND   = 1;
+const MTPCONTAINER_TYPE_DATA      = 2;
+const MTPCONTAINER_TYPE_RESPONSE  = 3;
+const MTPCONTAINER_TYPE_EVENT     = 4;
+
+// Multisession Container types
+const MSMTPCONTAINER_TYPE_STARTDATA   = 5;
+const MSMTPCONTAINER_TYPE_ENDDATA     = 6;
+
+// USB Request Type (not specific to MTP);     Dir Type  Rsv Recipient
+const USB_REQUEST_TYPE_OUT     = 0x21; // 0   01    000 01         = OUT CLASS Interface
+const USB_REQUEST_TYPE_IN      = 0xA1; // 1   01    000 01         = IN  CLASS Interface
+
+// Reference PIMA 17740 Annex D: USB Implementation of PIMA 15740
+const USB_MTPREQUEST_CANCELIO  = 0x64;  
+const USB_MTPREQUEST_GETEVENT  = 0x65; 
+const USB_MTPREQUEST_RESET     = 0x66;
+const USB_MTPREQUEST_GETSTATUS = 0x67;
+
+const MAX_NUM_PIPES = 8;
+
+Table MTP_USBRequestTypeToStringTable
+{
+    switch(value)
+    {
+        case USB_REQUEST_TYPE_OUT     : "USB_REQUEST_TYPE_OUT";
+        case USB_REQUEST_TYPE_IN     : "USB_REQUEST_TYPE_IN";
+        default                      : FormatString("Undefined: 0X%X", value);
+    }
+}
+
+Table MTP_USBRequestToStringTable
+{
+    switch(value)
+    {
+        case USB_MTPREQUEST_CANCELIO  : "USB_MTPREQUEST_CANCELIO";
+        case USB_MTPREQUEST_GETEVENT  : "USB_MTPREQUEST_GETEVENT";
+        case USB_MTPREQUEST_RESET     : "USB_MTPREQUEST_RESET";
+        case USB_MTPREQUEST_GETSTATUS : "USB_MTPREQUEST_GETSTATUS";
+        default                       : FormatString("Undefined: 0X%X", value);
+    }
+}
+Table MTPUSContainerTypeToStringTable
+{
+    switch(value)
+    {
+        case MTPCONTAINER_TYPE_UNDEFINED : "MTPCONTAINER_TYPE_UNDEFINED";
+        case MTPCONTAINER_TYPE_COMMAND   : "MTPCONTAINER_TYPE_COMMAND";
+        case MTPCONTAINER_TYPE_DATA      : "MTPCONTAINER_TYPE_DATA";
+        case MTPCONTAINER_TYPE_RESPONSE  : "MTPCONTAINER_TYPE_RESPONSE";
+        case MTPCONTAINER_TYPE_EVENT     : "MTPCONTAINER_TYPE_EVENT";
+        case MSMTPCONTAINER_TYPE_STARTDATA:"MSMTPCONTAINER_TYPE_STARTDATA";
+        case MSMTPCONTAINER_TYPE_ENDDATA:  "MSMTPCONTAINER_TYPE_ENDDATA";
+    }
+}
+
+[RegisterBefore(NetEvent.UserData, MicrosoftWindowsWPDMTPUS, "{DCFC4489-9CE0-403C-99DF-A05422C60898}")]
+[Property.wpderror = 0]
+Protocol  WPDMTPUS = property.ETLSummary
+{
+    [BuildConversationWithParent, conversation.ConversationDescription = ""]
+    switch(property.EventId)
+    {
+        case 100: case 101: case 102: case 103: case 104:
+        case 200: case 201: case 202: case 203: case 204:
+        case 205: case 206: case 207: case 208:            
+            UINT32 ETWTraceLength;
+    }
+
+    switch(property.EventId)
+    {
+        case 100: //WPD_I_MTPUS_SENDCOMMAND
+            [property.ETLSummary = MTPUSBCommand.ToString]
+            struct MTPUSBCommand = FormatString("Sending  Cmd : %s (%s)", MTPOperation(CommandHeader.code,0), MTPOpcodeToStringTable(MTPOperation(CommandHeader.code,0)))
+            {
+                MTP_USB_HEADER CommandHeader;
+                UINT32 Param[MTP_COMMAND_NUMPARAMS_MAX];
+            }
+        case 101: //WPD_I_MTPUS_READRESPONSE
+            [property.ETLSummary = MTPUSBResponse.ToString]
+            struct MTPUSBResponse = FormatString("Received Resp: %s (%s)",MTPResponseCode(ResponseHeader.code,0),MTPResponseCodeToStringTable(MTPResponseCode(ResponseHeader.code,0)))
+            {
+                MTP_USB_HEADER ResponseHeader;
+                switch
+                {
+                    case (ResponseHeader.code != MTP_RESPONSECODE_OK):
+                        ReportWPDError("ResponseCode Not OK") MTPResponseNotOK;
+                }
+                UINT32 Param[MTP_RESPONSE_NUMPARAMS_MAX];
+            }
+        case 102: //WPD_I_MTPUS_RECEIVEDEVENT
+            [property.ETLSummary = MTPUSBEvent.ToString]
+            struct MTPUSBEvent = FormatString("Event: %s (%s)", MTPEventCode(EventHeader.code,0),MTPEventCodeToStringTable(MTPEventCode(EventHeader.code,0)))
+            {
+                MTP_USB_HEADER EventHeader;
+                UINT32 Param[MTP_EVENT_NUMPARAMS_MAX];
+            }
+        case 103: //WPD_I_MTPUS_READ_DATA_HEADER
+            [property.ETLSummary = MTPUSBReadData.ToString]
+            struct MTPUSBReadData = (DataHeader.Length!=0)?
+                    FormatString("Read     Data: %d (0X%X) bytes",DataHeader.Length-12,DataHeader.Length-12 ):
+                    FormatString("Read     Data: MTP_DATASIZE_UNKNOWN")
+            {
+                MTP_USB_HEADER DataHeader;
+            }
+        case 104: //WPD_I_MTPUS_WRITE_DATA_HEADER
+            [property.ETLSummary = MTPUSBWriteData.ToString;]
+            struct MTPUSBWriteData = FormatString("Write    Data: %d (0X%X) bytes",DataHeader.Length-12,DataHeader.Length-12 )
+            {
+                MTP_USB_HEADER DataHeader;
+            }
+        case 106: //WPD_I_MTPUS_WINUSB_RESET_REQUEST
+            [property.ETLSummary = MTPUSBControlReset.ToString;]
+            struct MTPUSBControlReset = FormatString("%s", SetupPacket.ToString)
+            {
+                UINT16 SetupPacketLength;
+                MTP_USBSetupPacket SetupPacket;
+            }
+        case 105: //WPD_I_MTPUS_WINUSB_GETSTATUS_REQUEST
+        case 107: //WPD_I_MTPUS_WINUSB_CANCELIO_REQUEST
+            [property.ETLSummary = MTPUSBControl.ToString;]
+            struct MTPUSBControl = FormatString("%s %s", SetupPacket.ToString, Payload.ToString)
+            {
+                UINT16 SetupPacketLength;
+                MTP_USBSetupPacket SetupPacket;
+                UINT32 PayloadSize;
+                MTP_USBControlTranferPayload(SetupPacket.Request) Payload;
+            }
+
+        case 200: //WPD_I_MTP_MSUSB_SENDCOMMAND
+            [property.ETLSummary = MTP_MSUSBCommand.ToString]
+            struct MTP_MSUSBCommand = FormatString("Sending  Cmd : %s (%s)", MTPOperation(CommandHeader.code,0), MTPOpcodeToStringTable(MTPOperation(CommandHeader.code,0)))
+            {
+                MTP_MSUSB_HEADER CommandHeader;
+                UINT32 Param[MTP_COMMAND_NUMPARAMS_MAX];
+            }
+        case 201: //WPD_I_MTP_MSUSB_RECVD_STARTDATA
+            [property.ETLSummary = MTP_MSUSB_RecvdStartData.ToString]
+            struct MTP_MSUSB_RecvdStartData = FormatString("Received StartData block with TotalLength=%d", TotalLength )
+            {
+                MTP_MSUSB_HEADER StartDataHeader;
+                UINT64           TotalLength;
+            }
+        case 202: //WPD_I_MTP_MSUSB_RECVD_RESPONSE
+            [property.ETLSummary = MTP_MSUSB_RecvdResponse.ToString]
+            struct MTP_MSUSB_RecvdResponse = FormatString("Received Resp: %s (%s)",MTPResponseCode(ResponseHeader.code,0),MTPResponseCodeToStringTable(MTPResponseCode(ResponseHeader.code,0)))
+            {
+                MTP_MSUSB_HEADER ResponseHeader;
+                switch
+                {
+                    case (ResponseHeader.code != MTP_RESPONSECODE_OK):
+                        ReportWPDError("ResponseCode Not OK") MTPResponseNotOK;
+                }
+                UINT32 Param[MTP_RESPONSE_NUMPARAMS_MAX];
+            }
+        case 203: //WPD_I_MTP_MSUSB_RECVD_DATAHEADER
+            [property.ETLSummary = MTP_MSUSB_RecvdDataChunkHeader.ToString]
+            struct MTP_MSUSB_RecvdDataChunkHeader = FormatString("Received DataChunkHeader with ChunkSize= %d",DataChunkHeader.Length-20)
+            {
+                MTP_MSUSB_HEADER DataChunkHeader;
+            }
+        case 204: //WPD_I_MTP_MSUSB_RECVD_EVENT
+            [property.ETLSummary = MTP_MSUSB_RecvdEvent.ToString]
+            struct MTP_MSUSB_RecvdEvent = FormatString("Received Device Event: %s (%s)", MTPEventCode(EventHeader.code,0),MTPEventCodeToStringTable(MTPEventCode(EventHeader.code,0)))
+            {
+                MTP_MSUSB_HEADER EventHeader;
+                UINT32 Param[MTP_EVENT_NUMPARAMS_MAX];
+            }
+        case 205: //WPD_I_MTP_MSUSB_RECVD_ENDDATA
+            [property.ETLSummary = MTP_MSUSB_RecvdEndData.ToString]
+            struct MTP_MSUSB_RecvdEndData = FormatString("Received EndData")
+            {
+                MTP_MSUSB_HEADER EndDataHeader;
+            }
+        case 206: //WPD_I_MTP_MSUSB_RECVD_UNKNOWN
+            [property.ETLSummary = MTP_MSUSB_RecvdUnknown.ToString]
+            struct MTP_MSUSB_RecvdUnknown = FormatString("Received Unknown header of type %s", UnknownDataHeader.Type)
+            {
+                MTP_MSUSB_HEADER UnknownDataHeader;
+            }
+        case 207: //WPD_I_MTP_MSUSB_SEND_STARTDATA
+            [property.ETLSummary = MTP_MSUSB_SendStartData.ToString]
+            struct MTP_MSUSB_SendStartData = FormatString("Sending StartData block with TotalLength=%d", TotalLength )
+            {
+                MTP_MSUSB_HEADER StartDataHeader;
+                UINT64           TotalLength;
+            }
+        case 208: //WPD_I_MTP_MSUSB_SEND_DATAHEADER
+            [property.ETLSummary = MTP_MSUSB_SendDataChunkHeader.ToString]
+            struct MTP_MSUSB_SendDataChunkHeader = FormatString("Sending DataChunkHeader with ChunkSize= %d",DataChunkHeader.Length-20)
+            {
+                MTP_MSUSB_HEADER DataChunkHeader;
+            }
+    }
+}
+
+//
+// Legacy MTP USB
+//
+struct MTP_USB_HEADER = FormatString("%s", Type.ToString)
+{
+    UINT32 Length; // Total length including size of header
+    UINT16 Type = MTPUSContainerTypeToStringTable(this);
+    UINT16 Code;   // Opcode/responsecode/eventcode
+    UINT32 TransactionID;    
+}
+
+// WINUSB_SETUP_PACKET 
+struct MTP_USBSetupPacket = FormatString("%s", Request.ToString)
+{
+    UINT8  RequestType = MTP_USBRequestTypeToStringTable(this);  
+    UINT8  Request     = MTP_USBRequestToStringTable(this);
+    UINT16 Value;  
+    UINT16 Index;  
+    UINT16 Length;
+}
+
+struct MTP_USBControlTranferPayload(Request) = FormatString("%s",Property.MTP_USBControlTranferPayloadStr)
+{
+    switch(Request)
+    {
+        case USB_MTPREQUEST_GETSTATUS:
+            // Payload is received from device, which will contain the device status
+            [Property.MTP_USBControlTranferPayloadStr = FormatString("Code:%s", Code.ToString);]
+            struct USB_MTPREQUEST_GETSTATUS_Payload = ""
+            {
+                UINT16 StatusLength;
+                MTPResponseCode Code;
+                UINT32 Params[MAX_NUM_PIPES];
+            }
+
+        case USB_MTPREQUEST_CANCELIO:
+            [Property.MTP_USBControlTranferPayloadStr = FormatString("TransactionID:%s", TransactionID.ToString);]
+            struct USB_MTPREQUEST_CANCELIO_Payload = ""
+            { 
+                UINT16 ID;
+                MTPTransactionID TransactionID;
+            }
+        default: 
+            [Property.MTP_USBControlTranferPayloadStr = FormatString("Unknown MTPUSB Request 0x%x", Request);]
+            _struct{
+            ReportWPDError(Property.MTP_USBControlTranferPayloadStr) UnknownMTPUSBRequest;
+            Blob( FrameLength - Offset ) RemainingUnparsedDataBlob;
+            }
+    }
+}
+
+
+//
+// MTP USB MULTISESSION
+//
+struct MTP_MSUSB_HEADER = FormatString("%s", Type.ToString)
+{
+    UINT64 Length; // Total length including size of header
+    UINT16 Type = MTPUSContainerTypeToStringTable(this);
+    UINT16 Code;   // Opcode/responsecode/eventcode
+    UINT32 SessionID;
+    UINT32 TransactionID;
+}
+
+
+[RegisterBefore(EventDescriptor.DefaultKeyword, MicrosoftWindowsWPDMTPUS_Keyword, "{DCFC4489-9CE0-403C-99DF-A05422C60898}")]
+struct MicrosoftWindowsWPDMTPUS_Keyword
+{
+	UINT64 Reserved1:64 = FormatString("(%s)", this.ToBitString);
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Vsix Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="Microsoft.VisualStudio.Modeling.Extension">
+    <Name>Microsoft Visual Studio Modeling Extension</Name>
+    <Author>Microsoft</Author>
+    <Version>11.0</Version>
+    <Description>Microsoft Visual Studio Modeling Extension</Description>
+    <Locale>1033</Locale>
+    <SupportedProducts>
+      <VisualStudio Version="11.0">
+        <Edition>Express_All</Edition>
+        <Edition>IntegratedShell</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.0" />
+    <SystemComponent>true</SystemComponent>
+  </Identifier>
+  <References />
+  <Content>
+    <MefComponent>Microsoft.VisualStudio.Modeling.Components.14.0.dll</MefComponent>
+  </Content>
+</Vsix>

@@ -1,0 +1,15 @@
+﻿{
+    "start_url": "GpuProfilingRuntimeViewScripted.html",
+    "domain": "http://microsoft.com",
+    "name": "Gpu Profiling Runtime View",
+	"file_aliases": {
+        "DiagnosticsHub.DataWarehouseHost": {}
+    },
+    "resource_aliases": {
+        "Resources": {
+            "path": "Resources\\Resources",
+            "is_default": true 
+        }
+    }
+
+}

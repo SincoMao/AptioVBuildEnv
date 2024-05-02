@@ -1,0 +1,46 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns="http://www.microsoft.com/SDV"
+	targetNamespace="http://www.microsoft.com/SDV"
+	attributeFormDefault="qualified" elementFormDefault="qualified">
+   
+    <xs:element id="SDV_frontend" name="SDV_frontend" type="xs:string"/>
+	<xs:element id="SDV_engine" name="SDV_engine" type="xs:string"/>
+	<xs:element id="SDV_SlamConfig_Maximum_Driver_Size" name="SDV_SlamConfig_Maximum_Driver_Size">
+		<xs:simpleType>
+				<xs:restriction base="xs:integer">
+					<xs:minInclusive value="0"/>
+				</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element id="SDV_SlamConfig_Timeout" name="SDV_SlamConfig_Timeout">
+		<xs:simpleType>
+				<xs:restriction base="xs:integer">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="86400"/>
+				</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element id="SDV_SlamConfig_Spaceout" name="SDV_SlamConfig_Spaceout" nillable="true">
+		<xs:simpleType>
+				<xs:restriction base="xs:integer">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="65536"/>
+				</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SDV_SlamConfig_NumberOfThreads" nillable="true">
+		<xs:simpleType>
+				<xs:restriction base="xs:integer">
+					<xs:minInclusive value="0"/>
+				</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SDV_SlamConfig_Osmodel_Libraries" type="xs:string"/>
+	<xs:element name="SlamclFlags" type="xs:string"/>
+	<xs:element name="ScannerFlags" type="xs:string"/>
+	<xs:element name="SlamFlags" type="xs:string"/>
+	<xs:element name="SlamCFlags" type="xs:string"/>
+	<xs:element name="SDV_SlamConfig_Model_Export_Libraries" type="xs:string"/>
+	<xs:element name="SDV_engine_backup" type="xs:string"/>
+
+</xs:schema>

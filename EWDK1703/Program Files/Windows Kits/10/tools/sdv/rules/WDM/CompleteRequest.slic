@@ -1,0 +1,123 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    CompleteRequest
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that IoCompleteRequest routine is not called after a completion routine runs
+    and does not return STATUS_MORE_PROCESSING_REQUIRED.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507253
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+   enum {initial,complete_not_required,complete_required} s = initial;
+   enum {init,completion_set} forward_state = init;
+} 
+with guard(sdv_main,sdv_irp) 
+
+
+[RemoveHeadList,sdv_containing_record].entry
+{
+    halt;
+}
+
+IoSetCompletionRoutineEx.exit[guard $2]
+{
+    forward_state=completion_set;
+}
+
+IoSetCompletionRoutine.exit[guard $1]
+{
+    forward_state=completion_set;
+}
+
+[sdv_RunIoCompletionRoutines].exit[guard $2]
+{
+   if(forward_state==completion_set&&(!(*$4)))
+   {
+       halt;
+   }
+   else if($return==STATUS_MORE_PROCESSING_REQUIRED)
+   {
+       s=complete_required;
+   }
+   else
+   {
+       s=complete_not_required;
+   }
+}
+
+
+IoCompleteRequest.entry[guard $1]
+{
+    if(s==complete_not_required)
+    {
+        abort "The driver is calling IoCompleteRequest when it does not own the request.";
+    }
+    else
+    {
+        halt;
+    }
+}
+
+ExQueueWorkitem.entry
+{
+    halt;
+}
+
+[sdv_RunStartDevice
+,fun_IRP_MJ_CLEANUP
+,fun_IRP_MJ_CLOSE
+,fun_IRP_MJ_CREATE
+,fun_IRP_MJ_DEVICE_CONTROL
+,fun_IRP_MJ_FILE_SYSTEM_CONTROL
+,fun_IRP_MJ_FLUSH_BUFFERS
+,fun_IRP_MJ_INTERNAL_DEVICE_CONTROL
+,fun_IRP_MJ_LOCK_CONTROL
+,fun_IRP_MJ_QUERY_INFORMATION
+,fun_IRP_MJ_READ
+,fun_IRP_MJ_SET_INFORMATION
+,fun_IRP_MJ_SYSTEM_CONTROL
+,fun_IRP_MJ_WRITE
+,fun_IRP_MJ_PNP
+,fun_IRP_MJ_POWER
+,sdv_RunRemoveDevice].exit
+{
+    if(s==complete_required&&$return!=STATUS_PENDING)
+    {
+    	abort "The driver needs to call IoCompleteRequest in this case.";
+    }
+}
+
+
+
+[fun_DriverStartIo
+,fun_DriverUnload].exit
+{
+    if(s==complete_required)
+    {
+    	abort "The driver needs to call IoCompleteRequest in this case.";
+    }
+
+}
+

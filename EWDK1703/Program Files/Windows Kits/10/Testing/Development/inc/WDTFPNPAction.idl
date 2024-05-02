@@ -1,0 +1,162 @@
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Microsoft Confidential
+// Copyright 2009 Microsoft Corporation. All Rights Reserved.
+//
+// PNPAction.idl
+//
+// Collection: WDTF Internals - PNP Reference
+// 
+// Environment: User mode
+// 
+// DLL: PNPAction.dll
+//
+// Creator: Dieter Achtelstetter
+//
+//---------------------------------------------------------------------------
+
+// This file will be processed by the MIDL tool to
+// produce the type library (PNPAction.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    uuid(2511B903-8885-4B5B-B167-B1FC8A3275F3),
+    version(1.0),
+    helpstring("PNP 1.0 Type Library")
+]
+library WDTFPNPLib
+{
+    importlib("stdole2.tlb");
+    importlib("WDTF.tlb");
+    importlib("WDTFInterfaces.tlb");
+
+    [
+        object,
+        uuid(57AD00E5-8CB3-4665-9A70-366764B37DBF),
+        dual,
+        nonextensible,
+        helpstring("IWDTFPNP Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFPNPAction2 : IWDTFAction2
+    {
+
+    [helpstring("Method to trigger an IRP_MN_SURPRISE_REMOVAL on target device.")]
+    HRESULT EDTSurpriseRemoveDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    [helpstring("Method to trigger an IRP_MN_CANCEL_REMOVE_DEVICE on target device.")]
+    HRESULT EDTCancelRemoveDevice([out,retval]VARIANT_BOOL* pbSuccess);
+    
+    [helpstring("Method to trigger an IRP_MN_QUERY_STOP_DEVICE on target device.")]
+    HRESULT EDTCancelStopDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    [helpstring("Method to attempt to trigger an IRP_MN_STOP_DEVICE on target device.")]
+    HRESULT EDTTryStopDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    [helpstring("Method to attempt to trigger an IRP_MN_STOP_DEVICE on target device and start device with new resources.")]
+    HRESULT EDTTryStopDeviceRequestNewResources([out,retval]VARIANT_BOOL* pbSuccess);
+
+    [helpstring("Method to attempt to trigger an IRP_MN_STOP_DEVICE on target device and fail subsequent Start IRP.")]
+    HRESULT EDTTryStopDeviceFailRestart([out,retval]VARIANT_BOOL* pbSuccess);
+
+    [helpstring("Method to enable the target device")] 
+    HRESULT EnableDevice([out,retval] VARIANT_BOOL* pbSuccess);
+
+    [helpstring("Method to disable the target device")] 
+    HRESULT DisableDevice([out,retval] VARIANT_BOOL* pbSuccess);
+
+    [helpstring("Method to rescan the parent  of the target device")] 
+    HRESULT RescanParentDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    [helpstring("Method to rescan the target device")] 
+    HRESULT RescanDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    [helpstring("Method to restart the target device using CM API")] 
+    HRESULT RestartDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    [helpstring("Method to eject the target device")] 
+    HRESULT RequestEjectDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    [helpstring("Method to remove and reconfigure (DICS_PROPCHANGE) the target device")] 
+    HRESULT RemoveDevice([out,retval]VARIANT_BOOL* pbSuccess);
+            
+    };
+
+    [
+        object,
+        uuid(DF6B50E3-AE7F-4A0B-9738-6307AFBA00F2),
+        dual,
+        nonextensible,
+        helpstring("IWDTFInternalPNPAction2 Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFInternalPNPAction2 : IWDTFPNPAction2
+    {
+    [id(20), propget,helpstring("property IsRebootRequired")]  HRESULT IsRebootRequired([out, retval] VARIANT_BOOL * pbRebootRequired);
+
+    [helpstring("Method to remove (DIF_REMOVE) the target device")] 
+    HRESULT DIFRemoveDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    };
+
+    [
+        object,
+        uuid(326F9F9D-1AC2-40EE-BFD6-60026E002E50),
+        dual,
+        nonextensible,
+        helpstring("IWDTFPNPCollection Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFPNPActions2 : IWDTFActionsCustom2
+    {
+
+    HRESULT EDTSurpriseRemoveDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    HRESULT EDTCancelRemoveDevice([out,retval]VARIANT_BOOL* pbSuccess);
+    
+    HRESULT EDTCancelStopDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    HRESULT EDTTryStopDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    HRESULT EDTTryStopDeviceRequestNewResources([out,retval]VARIANT_BOOL* pbSuccess);
+
+    HRESULT EDTTryStopDeviceFailRestart([out,retval]VARIANT_BOOL* pbSuccess);
+
+    HRESULT EnableDevice([out,retval] VARIANT_BOOL* pbRebootRequired);
+
+    HRESULT DisableDevice([out,retval] VARIANT_BOOL* pbRebootRequired);
+
+    HRESULT RescanParentDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    HRESULT RescanDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    HRESULT RestartDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    HRESULT RequestEjectDevice([out,retval]VARIANT_BOOL* pbSuccess);
+
+    HRESULT RemoveDevice([out,retval]VARIANT_BOOL* pbSuccess);
+            
+    };
+
+
+    [
+        uuid(B8D74985-4EB9-46AA-B2ED-DD2D918849DF),
+        helpstring("WDTFPNPAction2 Class")
+    ]
+    coclass WDTFPNPAction2
+    {
+        [default] interface IWDTFPNPAction2;
+    };
+
+	[
+        uuid(C0B6C572-D37D-47CC-A89D-E6B9E0852764),
+        helpstring("WDTFPNPActions2 Class")
+    ]
+    coclass WDTFPNPActions2
+    {
+        [default] interface IWDTFPNPActions2;
+    };
+};

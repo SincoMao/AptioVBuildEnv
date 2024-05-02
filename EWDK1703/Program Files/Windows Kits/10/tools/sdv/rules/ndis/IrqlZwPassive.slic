@@ -1,0 +1,53 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlZwPassive
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x0002001F
+
+Description:
+
+    The IrqlZwPassive rule specifies that the driver calls ZwClose only when 
+    it is executing at IRQL = PASSIVE_LEVEL.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216048
+
+--*/
+
+
+#include "slic_base.h"
+
+
+[ZwCreateKey,
+ZwOpenKey,
+ZwDeleteKey,
+ZwEnumerateKey,
+ZwEnumerateValueKey,
+ZwFlushKey,
+ZwQueryKey,
+ZwQueryValueKey,
+ZwSetValueKey,
+ZwClose].entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+
+
+
+
+
+

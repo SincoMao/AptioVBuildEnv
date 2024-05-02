@@ -1,0 +1,112 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    UsbKmdfIrqlExplicit
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    Verifies that KMDF DDIs are called at the correct Irql level. This rule applies to all EvtIoCallback rotuines.
+
+	More Information:
+
+    If your driver called WdfIoQueueCreate with WDF_NO_OBJECT_ATTRIBUTES and the device object passed into this DDI was created 
+    using the default attributes (WDF_OBJECT_ATTRIBUTES_INIT_CONTEXT_TYPE or VOID WDF_OBJECT_ATTRIBUTES_INIT) then you may be need 
+    to modify your driver in one of the following ways otherwise Static Driver Verifier will report a defect for the following 
+    for this rule.
+
+    
+        1. Set the device attributes explicitly to WdfExecutionLevelPassive or WdfExecutionLevelDispatch as appropriate.
+        
+        OR
+         
+        2. Set the device attributes explicitly to WdfExecutionLevelPassive or WdfExecutionLevelDispatch using __analysis_asssume 
+           for example (__analysis_assume(deviceAttributes.ExecutionLevel==WdfExecutionLevelPassive)).
+           
+    If your driver processes some IOCTLs at PASSIVE_LEVEL and some others at DISPATCH_LEVEL then you may need to exclude the IOCTLs processed at DISPATCH_LEVEL 
+    from the verification. You can use __analysis_assume to do this. Here is an example (__analysis_assume(IoControlCode != IOCTL_RH_QUERY_DUMMY_TRANSLATOR_INTERFACE)) 
+    where IOCTL_RH_QUERY_DUMMY_TRANSLATOR_INTERFACE is processed at DISPATCH_LEVEL in the driver EvtIoDeviceControlCallback.
+           
+
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state
+{
+}
+
+[WdfUsbTargetDeviceCreate,
+WdfUsbTargetDeviceGetDeviceDescriptor,
+WdfUsbTargetDeviceRetrieveConfigDescriptor,
+WdfUsbTargetDeviceQueryString,
+WdfUsbTargetDeviceAllocAndQueryString,
+WdfUsbTargetDeviceSendControlTransferSynchronously,
+WdfUsbTargetDeviceIsConnectedSynchronous,
+WdfUsbTargetDeviceResetPortSynchronously,
+WdfUsbTargetDeviceCyclePortSynchronously,
+WdfUsbTargetDeviceSendUrbSynchronously,
+WdfUsbTargetPipeResetSynchronously,
+WdfUsbTargetPipeWriteSynchronously,
+WdfUsbTargetPipeReadSynchronously,
+WdfUsbTargetPipeAbortSynchronously,
+WdfUsbTargetPipeSendUrbSynchronously,
+WdfUsbInterfaceSelectSetting,
+WdfUsbTargetDeviceSelectConfig].entry
+{
+     if ( sdv_irql_current > PASSIVE_LEVEL ) 
+         abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+[WdfUsbTargetDeviceRetrieveInformation,
+WdfUsbTargetDeviceFormatRequestForString,
+WdfUsbTargetDeviceGetNumInterfaces,
+WdfUsbTargetDeviceWdmGetConfigurationHandle,
+WdfUsbTargetDeviceRetrieveCurrentFrameNumber,
+WdfUsbTargetDeviceFormatRequestForControlTransfer,
+WdfUsbTargetDeviceFormatRequestForCyclePort,
+WdfUsbTargetDeviceFormatRequestForUrb,
+WdfUsbTargetPipeGetInformation,
+WdfUsbTargetPipeIsInEndpoint,
+WdfUsbTargetPipeIsOutEndpoint,
+WdfUsbTargetPipeGetType,
+WdfUsbTargetPipeSetNoMaximumPacketSizeCheck,
+WdfUsbTargetPipeFormatRequestForWrite,
+WdfUsbTargetPipeFormatRequestForRead,
+WdfUsbTargetPipeConfigContinuousReader,
+WdfUsbTargetPipeFormatRequestForAbort,
+WdfUsbTargetPipeFormatRequestForReset,
+WdfUsbTargetPipeFormatRequestForUrb,
+WdfUsbInterfaceGetInterfaceNumber,
+WdfUsbInterfaceGetNumEndpoints,
+WdfUsbInterfaceGetDescriptor,
+WdfUsbInterfaceGetNumSettings,
+WdfUsbInterfaceGetEndpointInformation,
+WdfUsbTargetDeviceGetInterface,
+WdfUsbInterfaceGetConfiguredSettingIndex,
+WdfUsbInterfaceGetNumConfiguredPipes,
+WdfUsbInterfaceGetConfiguredPipe,
+WdfUsbTargetPipeWdmGetPipeHandle].entry
+{
+     if ( sdv_irql_current > DISPATCH_LEVEL ) 
+         abort "$fname should be called at IRQL <= DISPATCH_LEVEL ";
+}

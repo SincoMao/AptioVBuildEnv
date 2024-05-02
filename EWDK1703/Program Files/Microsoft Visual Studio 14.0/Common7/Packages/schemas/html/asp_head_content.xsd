@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema
+	xmlns="http://schemas.microsoft.com/AspNet/WebControlsInHead"
+	xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetnamespace="http://schemas.microsoft.com/AspNet/WebControlsInHead"
+	vs:defaultns="asp"
+	vs:friendlyname="Web Forms Controls inside head tag"
+	vs:generatedcontrolsschema="true"
+	vs:isaspschema="true"
+	vs:ishtmlschema="false"
+	vs:isserverschema="true"
+	vs:nonbrowseable="true">
+
+	<!-- TOP LEVEL ELEMENTS -->
+	<xsd:element name="Content" type="System.Web.UI.WebControls.ContentDef" />
+	<xsd:element name="ContentPlaceHolder" type="System.Web.UI.WebControls.ContentPlaceHolderDef" />
+	<xsd:element name="Literal" type="System.Web.UI.WebControls.LiteralDef" />
+	<xsd:element name="Localize" type="System.Web.UI.WebControls.LocalizeDef" />
+	<xsd:element name="PlaceHolder" type="System.Web.UI.WebControls.PlaceHolderDef" />
+
+
+	<!-- TOP LEVEL TYPES -->
+
+	<xsd:complexType name="System.ComponentModel.TypeConverterDef" vs:excludefromcollections="true" vs:noambientcontentmodel="true" vs:parsechildren="true" vs:qualifiedbasetypename="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" vs:qualifiedtypename="System.ComponentModel.TypeConverter, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+	</xsd:complexType>
+
+	<xsd:complexType name="System.Drawing.ColorConverterDef" vs:excludefromcollections="true" vs:noambientcontentmodel="true" vs:parsechildren="true" vs:qualifiedbasetypename="System.ComponentModel.TypeConverter, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" vs:qualifiedtypename="System.Drawing.ColorConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+	</xsd:complexType>
+
+	<xsd:complexType name="System.ObjectDef" vs:excludefromcollections="true" vs:noambientcontentmodel="true" vs:parsechildren="true" vs:qualifiedtypename="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+	</xsd:complexType>
+
+	<xsd:complexType name="System.Web.UI.ControlDef" vs:excludefromcollections="true" vs:noambientcontentmodel="true" vs:qualifiedbasetypename="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" vs:qualifiedtypename="System.Web.UI.Control, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+		<xsd:attributeGroup ref="System.Web.UI.ControlAttributeGroupDef" />
+	</xsd:complexType>
+
+	<xsd:complexType name="System.Web.UI.WebControls.ContentDef" mixed="true" vs:childrenderivedfrom="System.Web.UI.Control, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" vs:qualifiedbasetypename="System.Web.UI.Control, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" vs:qualifiedtypename="System.Web.UI.WebControls.Content, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+		<xsd:attributeGroup ref="System.Web.UI.WebControls.ContentAttributeGroupDef" />
+		<xsd:attribute name="runat" type="Microsoft.VisualStudio.Web.HTML.Implementation.Schemas.Generation.runatDef" use="required" vs:nonfilterable="true" />
+	</xsd:complexType>
+
+	<xsd:complexType name="System.Web.UI.WebControls.ContentPlaceHolderDef" mixed="true" vs:childrenderivedfrom="System.Web.UI.Control, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" vs:qualifiedbasetypename="System.Web.UI.Control, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" vs:qualifiedtypename="System.Web.UI.WebControls.ContentPlaceHolder, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+		<xsd:attributeGroup ref="System.Web.UI.ControlAttributeGroupDef" />
+		<xsd:attribute name="runat" type="Microsoft.VisualStudio.Web.HTML.Implementation.Schemas.Generation.runatDef" use="required" vs:nonfilterable="true" />
+	</xsd:complexType>
+
+	<xsd:complexType name="System.Web.UI.WebControls.FontUnitConverterDef" vs:noambientcontentmodel="true" vs:parsechildren="true" vs:qualifiedbasetypename="System.ComponentModel.TypeConverter, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" vs:qualifiedtypename="System.Web.UI.WebControls.FontUnitConverter, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+	</xsd:complexType>
+
+	<xsd:complexType name="System.Web.UI.WebControls.LiteralDef" mixed="true" vs:childrenderivedfrom="System.Web.UI.Control, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" vs:overrideaddparsedsubobject="true" vs:qualifiedbasetypename="System.Web.UI.Control, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" vs:qualifiedtypename="System.Web.UI.WebControls.Literal, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+		<xsd:attributeGroup ref="System.Web.UI.WebControls.LiteralAttributeGroupDef" />
+		<xsd:attribute name="runat" type="Microsoft.VisualStudio.Web.HTML.Implementation.Schemas.Generation.runatDef" use="required" vs:nonfilterable="true" />
+	</xsd:complexType>
+
+	<xsd:complexType name="System.Web.UI.WebControls.LocalizeDef" mixed="true" vs:childrenderivedfrom="System.Web.UI.Control, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" vs:overrideaddparsedsubobject="true" vs:qualifiedbasetypename="System.Web.UI.WebControls.Literal, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" vs:qualifiedtypename="System.Web.UI.WebControls.Localize, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+		<xsd:attributeGroup ref="System.Web.UI.WebControls.LiteralAttributeGroupDef" />
+		<xsd:attribute name="runat" type="Microsoft.VisualStudio.Web.HTML.Implementation.Schemas.Generation.runatDef" use="required" vs:nonfilterable="true" />
+	</xsd:complexType>
+
+	<xsd:complexType name="System.Web.UI.WebControls.PlaceHolderDef" mixed="true" vs:childrenderivedfrom="System.Web.UI.Control, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" vs:qualifiedbasetypename="System.Web.UI.Control, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" vs:qualifiedtypename="System.Web.UI.WebControls.PlaceHolder, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+		<xsd:attributeGroup ref="System.Web.UI.WebControls.PlaceHolderAttributeGroupDef" />
+		<xsd:attribute name="runat" type="Microsoft.VisualStudio.Web.HTML.Implementation.Schemas.Generation.runatDef" use="required" vs:nonfilterable="true" />
+	</xsd:complexType>
+
+	<xsd:complexType name="System.Web.UI.WebControls.WebColorConverterDef" vs:noambientcontentmodel="true" vs:parsechildren="true" vs:qualifiedbasetypename="System.Drawing.ColorConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" vs:qualifiedtypename="System.Web.UI.WebControls.WebColorConverter, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+	</xsd:complexType>
+
+	<xsd:complexType name="System.Web.UI.WebControls.WebControlDef" vs:excludefromcollections="true" vs:noambientcontentmodel="true" vs:parsechildren="true" vs:qualifiedbasetypename="System.Web.UI.Control, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" vs:qualifiedtypename="System.Web.UI.WebControls.WebControl, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+		<xsd:attributeGroup ref="System.Web.UI.WebControls.WebControlAttributeGroupDef" />
+		<xsd:attribute name="runat" type="Microsoft.VisualStudio.Web.HTML.Implementation.Schemas.Generation.runatDef" vs:nonfilterable="true" />
+	</xsd:complexType>
+
+
+	<!-- TOP LEVEL ELEMENT GROUPS -->
+
+
+	<!-- TOP LEVEL ATTRIBUTE GROUPS -->
+
+	<xsd:attributeGroup name="System.Web.UI.ControlAttributeGroupDef">
+		<xsd:attribute name="ClientIDMode" type="System.Web.UI.ClientIDModeDef" default="Inherit" vs:category="Behavior" />
+		<xsd:attribute name="EnableTheming" type="xsd:boolean" default="True" vs:category="Behavior" vs:nonbrowseable="true" />
+		<xsd:attribute name="EnableViewState" type="xsd:boolean" default="True" vs:category="Behavior" />
+		<xsd:attribute name="ID" type="xsd:string" vs:category="Misc" vs:nonfilterable="true" vs:renametype="classmember" />
+		<xsd:attribute name="SkinID" type="xsd:string" default="" vs:category="Behavior" vs:nonbrowseable="true" vs:nonfilterable="true" />
+		<xsd:attribute name="Visible" type="xsd:boolean" default="True" vs:category="Behavior" />
+		<!-- Events -->
+		<xsd:attribute name="OnDataBinding" vs:category="Data" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnDisposed" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnInit" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnLoad" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnPreRender" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnUnload" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="System.Web.UI.WebControls.ContentAttributeGroupDef">
+		<xsd:attribute name="ClientIDMode" type="System.Web.UI.ClientIDModeDef" default="Inherit" vs:category="Behavior" />
+		<xsd:attribute name="ContentPlaceHolderID" type="xsd:string" default="" use="required" vs:category="Behavior" />
+		<xsd:attribute name="EnableTheming" type="xsd:boolean" default="True" vs:category="Behavior" vs:nonbrowseable="true" />
+		<xsd:attribute name="EnableViewState" type="xsd:boolean" default="True" vs:category="Behavior" />
+		<xsd:attribute name="ID" type="xsd:string" vs:category="Misc" vs:nonfilterable="true" vs:renametype="classmember" />
+		<xsd:attribute name="SkinID" type="xsd:string" default="" vs:category="Behavior" vs:nonbrowseable="true" vs:nonfilterable="true" />
+		<xsd:attribute name="Visible" type="xsd:boolean" default="True" vs:category="Behavior" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="System.Web.UI.WebControls.FontInfoAttributeGroupDef_Font">
+		<xsd:attribute name="Font-Bold" type="xsd:boolean" default="False" vs:category="Appearance" />
+		<xsd:attribute name="Font-Italic" type="xsd:boolean" default="False" vs:category="Appearance" />
+		<xsd:attribute name="Font-Names" type="xsd:string" vs:category="Appearance" />
+		<xsd:attribute name="Font-Overline" type="xsd:boolean" default="False" vs:category="Appearance" />
+		<xsd:attribute name="Font-Size" type="System.Web.UI.WebControls.FontUnitConverterDef" default="" vs:category="Appearance" />
+		<xsd:attribute name="Font-Strikeout" type="xsd:boolean" default="False" vs:category="Appearance" />
+		<xsd:attribute name="Font-Underline" type="xsd:boolean" default="False" vs:category="Appearance" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="System.Web.UI.WebControls.LiteralAttributeGroupDef">
+		<xsd:attributeGroup ref="System.Web.UI.ControlAttributeGroupDef" />
+		<xsd:attribute name="Mode" type="System.Web.UI.WebControls.LiteralModeDef" default="Transform" vs:category="Behavior" />
+		<xsd:attribute name="Text" type="xsd:string" default="" vs:category="Appearance" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="System.Web.UI.WebControls.PlaceHolderAttributeGroupDef">
+		<xsd:attribute name="ClientIDMode" type="System.Web.UI.ClientIDModeDef" default="Inherit" vs:category="Behavior" />
+		<xsd:attribute name="EnableTheming" type="xsd:boolean" default="True" vs:category="Behavior" />
+		<xsd:attribute name="EnableViewState" type="xsd:boolean" default="True" vs:category="Behavior" />
+		<xsd:attribute name="ID" type="xsd:string" vs:nonfilterable="true" vs:renametype="classmember" />
+		<xsd:attribute name="SkinID" type="xsd:string" default="" vs:category="Behavior" vs:nonbrowseable="true" vs:nonfilterable="true" />
+		<xsd:attribute name="ViewStateMode" type="System.Web.UI.ViewStateModeDef" default="Inherit" vs:category="Behavior" />
+		<xsd:attribute name="Visible" type="xsd:boolean" default="True" vs:category="Behavior" />
+		<!-- Events -->
+		<xsd:attribute name="OnDataBinding" vs:category="Data" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnDisposed" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnInit" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnLoad" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnPreRender" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnUnload" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="System.Web.UI.WebControls.WebControlAttributeGroupDef">
+		<xsd:attributeGroup ref="System.Web.UI.WebControls.FontInfoAttributeGroupDef_Font" />
+		<xsd:attribute name="AccessKey" type="xsd:string" default="" vs:category="Accessibility" />
+		<xsd:attribute name="BackColor" type="System.Web.UI.WebControls.WebColorConverterDef" default="" vs:builder="color" vs:category="Appearance" />
+		<xsd:attribute name="BorderColor" type="System.Web.UI.WebControls.WebColorConverterDef" default="" vs:builder="color" vs:category="Appearance" />
+		<xsd:attribute name="BorderStyle" type="System.Web.UI.WebControls.BorderStyleDef" default="NotSet" vs:category="Appearance" />
+		<xsd:attribute name="BorderWidth" type="xsd:ui4" default="" vs:category="Appearance" />
+		<xsd:attribute name="ClientIDMode" type="System.Web.UI.ClientIDModeDef" default="Inherit" vs:category="Behavior" />
+		<xsd:attribute name="CssClass" type="xsd:string" default="" vs:category="Appearance" />
+		<xsd:attribute name="Enabled" type="xsd:boolean" default="True" vs:category="Behavior" />
+		<xsd:attribute name="EnableTheming" type="xsd:boolean" default="True" vs:category="Behavior" vs:disallowedonmobilepages="true" />
+		<xsd:attribute name="EnableViewState" type="xsd:boolean" default="True" vs:category="Behavior" />
+		<xsd:attribute name="ForeColor" type="System.Web.UI.WebControls.WebColorConverterDef" default="" vs:builder="color" vs:category="Appearance" />
+		<xsd:attribute name="Height" type="xsd:ui4" default="" vs:category="Layout" />
+		<xsd:attribute name="ID" type="xsd:string" vs:category="Misc" vs:nonfilterable="true" vs:renametype="classmember" />
+		<xsd:attribute name="SkinID" type="xsd:string" default="" vs:category="Behavior" vs:disallowedonmobilepages="true" vs:nonfilterable="true" />
+		<xsd:attribute name="Style" type="xsd:string" vs:category="Misc" vs:nonbrowseable="true" />
+		<xsd:attribute name="TabIndex" type="xsd:integer" default="0" vs:category="Accessibility" />
+		<xsd:attribute name="ToolTip" type="xsd:string" default="" vs:category="Behavior" />
+		<xsd:attribute name="Visible" type="xsd:boolean" default="True" vs:category="Behavior" />
+		<xsd:attribute name="Width" type="xsd:ui4" default="" vs:category="Layout" />
+		<!-- Events -->
+		<xsd:attribute name="OnDataBinding" vs:category="Data" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnDisposed" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnInit" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnLoad" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnPreRender" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+		<xsd:attribute name="OnUnload" vs:category="Misc" vs:nonfilterable="true" vs:omtype="event" />
+	</xsd:attributeGroup>
+
+
+	<!-- TOP LEVEL ATTRIBUTES -->
+
+	<xsd:simpleType name="Microsoft.VisualStudio.Web.HTML.Implementation.Schemas.Generation.runatDef">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="server" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="System.Web.UI.ClientIDModeDef">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Inherit" />
+			<xsd:enumeration value="AutoID" />
+			<xsd:enumeration value="Predictable" />
+			<xsd:enumeration value="Static" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="System.Web.UI.WebControls.BorderStyleDef">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NotSet" />
+			<xsd:enumeration value="None" />
+			<xsd:enumeration value="Dotted" />
+			<xsd:enumeration value="Dashed" />
+			<xsd:enumeration value="Solid" />
+			<xsd:enumeration value="Double" />
+			<xsd:enumeration value="Groove" />
+			<xsd:enumeration value="Ridge" />
+			<xsd:enumeration value="Inset" />
+			<xsd:enumeration value="Outset" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="System.Web.UI.WebControls.LiteralModeDef">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Transform" />
+			<xsd:enumeration value="PassThrough" />
+			<xsd:enumeration value="Encode" />
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

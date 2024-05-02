@@ -1,0 +1,55 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlIoPassive2
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x0002000B
+
+Description:
+
+    The IrqlIoPassive2 rule specifies that the driver calls the following 
+    I/O Manager routines only at IRQL = PASSIVE_LEVEL:
+        IoCheckShareAccess
+        IoConnectInterrupt
+        IoCreateController
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216028
+
+--*/
+
+
+#include "slic_base.h"
+
+
+IoCheckShareAccess.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+IoConnectInterrupt.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+IoCreateController.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+

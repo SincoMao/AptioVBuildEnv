@@ -1,0 +1,27 @@
+[$RootKey$\Packages\{198E76C1-34C0-424D-9957-B3EBD80265FB}]
+"Assembly"="Microsoft.VisualStudio.ServerExplorer,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VSDesigner.ServerExplorer.VsServerExplorerPackage"
+"InprocServer32"="$System$\mscoree.dll"
+@="Microsoft Visual Studio Server Explorer Package"
+[$RootKey$\Menus]
+"{198E76C1-34C0-424D-9957-B3EBD80265FB}"=", Menus.ctmenu, 1"
+[$RootKey$\Services\{7494682C-37A0-11D2-A273-00C04F8EF4FF}]
+"Name"="IVsServerExplorer"
+@="{198E76C1-34C0-424D-9957-B3EBD80265FB}"
+[$RootKey$\ToolWindows\{74946827-37A0-11D2-A273-00C04F8EF4FF}]
+@="{198E76C1-34C0-424D-9957-B3EBD80265FB}"
+"Name"="Server Explorer"
+[$RootKey$\ServerExplorer]
+[$RootKey$\ServerExplorer\Nodes]
+[$RootKey$\ServerExplorer\Nodes\{0A39504D-9674-4a25-A114-403A0155E9FA}]
+"ClassName"="Microsoft.VSDesigner.ServerExplorer.ServicesNode"
+[$RootKey$\ServerExplorer\Nodes\{731A71A9-3346-48df-A9DE-E4EC49335D81}]
+"ClassName"="Microsoft.VSDesigner.ServerExplorer.DataConnectionsNode"
+[$RootKey$\ServerExplorer\Nodes\{8D8514C2-B29C-4d79-83A3-7233374A6ED7}]
+"ClassName"="Microsoft.VSDesigner.ServerExplorer.PerformanceNode"
+[$RootKey$\ServerExplorer\Nodes\{9875FAD6-21DD-4577-991F-46B51EE21FEB}]
+"ClassName"="Microsoft.VSDesigner.ServerExplorer.MessageQueuingNode"
+[$RootKey$\ServerExplorer\Nodes\{F30D61B4-2B0C-4790-96FD-831F4A38BE5F}]
+"ClassName"="Microsoft.VSDesigner.ServerExplorer.EventLogNode"
+[$RootKey$\ServerExplorer\Nodes\{FE611259-649A-4e89-9495-BA2DEA0B3E34}]
+"ClassName"="Microsoft.VSDesigner.ServerExplorer.ServersNode"

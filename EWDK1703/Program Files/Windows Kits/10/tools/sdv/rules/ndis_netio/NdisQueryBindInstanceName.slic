@@ -1,0 +1,62 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NdisQueryBindInstanceName
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    NdisQueryBindInstanceName allocates memory for the string that specifies 
+    the friendly name. After the caller finishes using this memory, the caller 
+    must call the NdisFreeMemory function to release the memory.
+
+    Related Rule:
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507202
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state{
+   enum {initial,allocated} s = initial;
+}
+watch NdisQueryBindInstanceName.exit.$1;
+
+NdisQueryBindInstanceName.exit[guard $1]
+{
+    if (NDIS_SUCCESS($return))
+    {
+        s = allocated;
+    }else{
+        s = initial;
+    }
+}
+
+NdisFreeMemory.entry[guard $1]
+{
+  s = initial;
+}
+
+[sdv_PROTOCOL_UNLOAD].exit
+{
+  if (s == allocated)
+  {
+    abort "Buffer allocate by NdisQueryBindInstanceName should be freed.";
+  }
+}

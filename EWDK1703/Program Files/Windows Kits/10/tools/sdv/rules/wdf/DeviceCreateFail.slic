@@ -1,0 +1,70 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DeviceCreateFail
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    The Rule verifies that EVT_WDF_DRIVER_DEVICE_ADD returns an error status
+    when the call to WdfDeviceCreate fails.
+
+    In order for the driver to service a device, the device object must be
+    created successfully. 
+    
+    Rule diagnostics:
+    The Rule verifies that EVT_WDF_DRIVER_DEVICE_ADD returns an error status
+    when the call to WdfDeviceCreate fails.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507060
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state{
+     enum {CALLED, NOTCALLED} devCreate=NOTCALLED;
+}
+
+
+select one 
+{
+   case fun_WDF_DRIVER_DEVICE_ADD:
+   sdv_WdfDeviceCreate.entry
+   {
+	devCreate=CALLED;
+   }
+   sdv_WdfDeviceCreate.exit
+   {
+       if (NT_SUCCESS($return))
+       {
+           halt;
+       }
+   } 
+   fun_WDF_DRIVER_DEVICE_ADD.exit
+   { 
+       if (NT_SUCCESS($return) && devCreate==CALLED)
+       {
+	    abort "$fname returns STATUS_SUCCESS even if device object creation fails.";
+       }
+       else
+       {
+           halt;
+       }
+   }
+} 

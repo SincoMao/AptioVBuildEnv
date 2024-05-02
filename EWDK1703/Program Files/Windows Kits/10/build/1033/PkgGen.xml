@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <Rule Name="PkgGen" PageTemplate="tool" DisplayName="PackageGen"  Order="300">
+    <Rule.Categories>
+      <Category Name="General">
+        <Category.DisplayName>
+          <sys:String>General</sys:String>
+        </Category.DisplayName>
+      </Category>
+      <Category Name="Command Line" Subtype="CommandLine">
+        <Category.DisplayName>
+          <sys:String>Command Line</sys:String>
+        </Category.DisplayName>
+      </Category>
+    </Rule.Categories>
+    <Rule.DataSource>
+      <DataSource Persistence="ProjectFile" ItemType="PkgGen" HasConfigurationCondition="true"/>
+    </Rule.DataSource>
+    <BoolProperty Name="EnablePkgGen" DisplayName="Run PkgGen" Description="Run the PkgGen tool on any pkg.xml files of type PkgGen in the project" Category="General" F1Keyword="driver.pkggen.properties">
+      <BoolProperty.DataSource>
+        <DataSource Persistence="ProjectFile" ItemType="" Label="" HasConfigurationCondition="true" />
+      </BoolProperty.DataSource>
+    </BoolProperty>
+    <StringProperty Name="ConfigurationFile" Category="General" Switch="/config:&quot;[value]&quot;" >
+      <StringProperty.DisplayName>
+        <sys:String>Configuration File</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>The file with globally defined variables. (/config:[configurationfile]) </sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="XsdPath" Category="General" Switch="/xsd:&quot;[value]&quot;">
+      <StringProperty.DisplayName>
+        <sys:String>Xsd Path</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>The path to write the PkgGen auto-generated schema to. (/xsd:[xsdpath]) </sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="OutputDirectory" Category="General" Switch="/output:&quot;[value]&quot;" Visible="False">
+      <StringProperty.DisplayName>
+        <sys:String>Output Directory</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>The path to the output directory (/output:[outputdirectory])</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="Version" Category="General" Switch="/version:[value]" >
+      <StringProperty.DisplayName>
+        <sys:String>Version</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Version string in the form of major.minor.qfe.build. This should be incremented for every version to be installable on a target device where an older version of the package is already installed. (/version:[version])</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <EnumProperty Name="BuildType" Category="General" >
+      <EnumProperty.DisplayName>
+        <sys:String>Build Type</sys:String>
+      </EnumProperty.DisplayName>
+      <EnumProperty.Description>
+        <sys:String>Build type string(/build:[buildtype])</sys:String>
+      </EnumProperty.Description>
+      <EnumValue Name="fre" DisplayName="fre" Switch="/build:fre"/>
+      <EnumValue Name="chk" DisplayName="chk" Switch="/build:chk"/>
+    </EnumProperty>
+    <EnumProperty Name="CPU" Category="General" >
+      <EnumProperty.DisplayName>
+        <sys:String>CPU</sys:String>
+      </EnumProperty.DisplayName>
+      <EnumProperty.Description>
+        <sys:String>CPU Type(/cpu:[cpu])</sys:String>
+      </EnumProperty.Description>
+      <EnumValue Name="ARM" DisplayName="ARM" Switch="/cpu:ARM"/>
+      <EnumValue Name="ARM64" DisplayName="ARM64" Switch="/cpu:ARM64" />
+      <EnumValue Name="Win32" DisplayName="x86" Switch="/cpu:x86"/>
+      <EnumValue Name="x64" DisplayName="amd64" Switch="/cpu:amd64"/>
+    </EnumProperty>
+    <StringProperty Name="Languages" Category="General" Switch="/languages:[value]">
+      <StringProperty.DisplayName>
+        <sys:String>Languages</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Supported language identifier list, separated by ';'. (/languages:[languages;*])</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="Resolutions" Category="General" Switch="/resolutions:[value]">
+      <StringProperty.DisplayName>
+        <sys:String>Resolutions</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Supported resolution identifier list, separated by ';'. (/resolutions:[resolution;*])</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="Variables" Category="General" Switch="/variables:[value]">
+      <StringProperty.DisplayName>
+        <sys:String>Variables</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Additional variables used in the project file, syntax:name=value;name=value;...(/variables:[name=value;*])</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <BoolProperty Name="TOC" Category="General" Switch="+toc" >
+      <BoolProperty.DisplayName>
+        <sys:String>Build TOC file</sys:String>
+      </BoolProperty.DisplayName>
+      <BoolProperty.Description>
+        <sys:String>Build TOC files instead of the actual package. (+toc)</sys:String>
+      </BoolProperty.Description>
+    </BoolProperty>
+    <BoolProperty Name="Compress" Category="General" Switch="+compress" >
+      <BoolProperty.DisplayName>
+        <sys:String>Compress package</sys:String>
+      </BoolProperty.DisplayName>
+      <BoolProperty.Description>
+        <sys:String>Compress the generated package. (+toc)</sys:String>
+      </BoolProperty.Description>
+    </BoolProperty>
+    <BoolProperty Name="Diagnostic" Category="General" Switch="+diagnostic" >
+      <BoolProperty.DisplayName>
+        <sys:String>Diagnostic</sys:String>
+      </BoolProperty.DisplayName>
+      <BoolProperty.Description>
+        <sys:String>Enable debug output. (+diagnostic)</sys:String>
+      </BoolProperty.Description>
+    </BoolProperty>
+    <StringProperty Name="CommandLineTemplate" DisplayName="Command Line" Category="Command Line"
+                    Visible="False" IncludeInCommandLine="False" />
+    <StringProperty Name="Inputs" Category="Command Line" IsRequired="True">
+      <StringProperty.DataSource>
+        <DataSource
+          Persistence="ProjectFile"
+          ItemType="PkgGen"
+          SourceType="Item" />
+      </StringProperty.DataSource>
+    </StringProperty>
+    <StringProperty Name="AdditionalOptions" Category="Command Line" F1Keyword="vc.project.AdditionalOptionsPage">
+      <StringProperty.DisplayName>
+        <sys:String>Additional Options</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Additional Options</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+  </Rule>
+  <ItemType Name="PkgGen" DisplayName="PkgGen" />
+  <FileExtension Name="*.pkg.xml" ContentType="Xml" />
+  <ContentType Name="Xml" ItemType="PkgGen" />
+</ProjectSchemaDefinitions>

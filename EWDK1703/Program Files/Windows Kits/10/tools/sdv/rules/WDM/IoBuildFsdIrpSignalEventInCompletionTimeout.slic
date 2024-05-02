@@ -1,0 +1,80 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoBuildFsdIrpSignalEventInCompletionTimeout
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule warns that the driver will wait indefinitely until the lower driver returns, as the IRP's event is required to be signalled in the completion routine.
+    This rule is for locally created async. irps.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507373
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+   enum {initial,required_in_completion} signal_location = initial;
+   enum {notsignaled,signaled,initialized} SignalState = initialized;
+} 
+watch KeInitializeEvent.entry.$1;
+
+
+KeInitializeEvent.entry[guard $1]
+{
+    if($3)
+    {
+        halt;
+    }
+    else
+    {
+        
+        SignalState=notsignaled;
+    }
+}
+IoSetCompletionRoutineEx.entry
+{
+    if(SignalState==notsignaled&&($2==sdv_IoBuildAsynchronousFsdRequest_irp))
+    {
+        signal_location = required_in_completion;
+    }
+}
+
+IoSetCompletionRoutine.entry
+{
+    if(SignalState==notsignaled&&($1==sdv_IoBuildAsynchronousFsdRequest_irp))
+    {
+        signal_location = required_in_completion;
+    }
+}
+
+KeWaitForSingleObject.entry[guard $1]
+{
+   if (signal_location==required_in_completion&&($5==NULL))
+   {
+       abort "This driver will wait indefinitely until the lower driver returns, as the IRP's event is required to be signalled in the completion routine.";
+   }
+   else
+   {
+       halt;
+   }
+}
+
+
+

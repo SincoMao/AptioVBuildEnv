@@ -1,0 +1,99 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    
+  <PropertyGroup>
+    <KitOS Condition="'$(KitOS)' == ''">$(CurrentKitOS)</KitOS>
+  </PropertyGroup>
+  
+  <Import Condition="Exists('$(WDKContentRoot)build\WindowsDriver.Shared.props')" Project="$(WDKContentRoot)build\WindowsDriver.Shared.props"/>
+  
+  <!-- Platform properties for lib, inc paths of various types -->
+  <PropertyGroup>
+
+    <CodeAnalysisVSInstallDir Condition="'$(CodeAnalysisVSInstallDir)' == ''">$(Registry:HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\VisualStudio\$(VisualStudioVersion)@InstallDir)</CodeAnalysisVSInstallDir>
+    <CodeAnalysisVSInstallDir Condition="'$(CodeAnalysisVSInstallDir)' == ''">$(Registry:HKEY_LOCAL_MACHINE\Software\Microsoft\VisualStudio\$(VisualStudioVersion)@InstallDir)</CodeAnalysisVSInstallDir>
+    <!-- code analysis -->
+    <CodeAnalysisRuleSet Condition="'$(CodeAnalysisRuleSet)' == '' AND '$(CodeAnalysisVSInstallDir)' != ''">$(WDKContentRoot)CodeAnalysis\DriverRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(CodeAnalysisRuleSet)' == ''">$(WDKContentRoot)CodeAnalysis\DriverMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <CAExcludePath>$(CAExcludePath);$(WDKContentRoot)Include</CAExcludePath>
+  </PropertyGroup>
+
+    <PropertyGroup>
+      <TimestampServer Condition="'$(TimestampServer)' == ''">http://timestamp.verisign.com/scripts/timstamp.dll</TimestampServer>
+    </PropertyGroup>
+
+
+  <PropertyGroup>
+  <!-- Turn off all manifest related linker options -->
+    <GenerateManifest>false</GenerateManifest>
+    <LegacyManifestEmbedding>true</LegacyManifestEmbedding>
+  </PropertyGroup>
+
+  <!-- Default compiler settings for a driver project for all architectures and configurations -->
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <BufferSecurityCheck>true</BufferSecurityCheck> 
+      <OmitFramePointers>false</OmitFramePointers>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <CallingConvention>StdCall</CallingConvention>
+      <CompileAs></CompileAs>
+      <DisableSpecificWarnings>4603;4627;4986;4987;4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>false</ExceptionHandling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <RuntimeLibrary></RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <AdditionalOptions>/d1import_no_registry /d2AllowCompatibleILVersions /d2Zi+ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <!-- Default chk only settings across all architectures -->
+  <ItemDefinitionGroup Condition="'$(UseDebugLibraries)' == 'true'">
+    <ClCompile>
+      <DisableSpecificWarnings>4748;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>DEPRECATE_DDK_FUNCTIONS=1;MSC_NOOPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>DEPRECATE_DDK_FUNCTIONS=1;MSC_NOOPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+
+  <!-- Default fre only settings across all architectures -->
+  <ItemDefinitionGroup Condition="'$(UseDebugLibraries)' == 'false'">
+    <ClCompile>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <Optimization>Full</Optimization>
+      <AdditionalOptions Condition="'$(ALLOW_DATE_TIME)' != '1'"> /d1nodatetime %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+
+  </ItemDefinitionGroup>
+
+  <!-- Default linker settings for a driver project for all architectures and configurations -->
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies></AdditionalDependencies>
+      <AdditionalOptions>/osversion:10.0 /pdbcompress /debugtype:pdata %(AdditionalOptions)</AdditionalOptions>
+      <Profile>true</Profile>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LinkIncremental>false</LinkIncremental>
+      <MergeSections>_TEXT=.text;_PAGE=PAGE</MergeSections>
+      <OptimizeReferences>true</OptimizeReferences>
+      <SetChecksum>true</SetChecksum>
+      <SpecifySectionAttributes>INIT,d</SpecifySectionAttributes>
+      <Version>10.0</Version>
+      <ManifestFile></ManifestFile>
+      <AllowIsolation></AllowIsolation>
+      <EnableUAC></EnableUAC>
+      <UACExecutionLevel></UACExecutionLevel>
+      <UACUIAccess></UACUIAccess>
+      <TypeLibraryResourceID></TypeLibraryResourceID>
+    </Link>
+  </ItemDefinitionGroup>
+    
+  <Import Condition="Exists('$(WDKContentRoot)build\WindowsDriver.$(Platform).props')" Project="$(WDKContentRoot)build\WindowsDriver.$(Platform).props"/>
+</Project>
+

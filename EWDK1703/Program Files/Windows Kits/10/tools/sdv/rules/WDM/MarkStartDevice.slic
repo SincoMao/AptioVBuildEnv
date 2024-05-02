@@ -1,0 +1,98 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    MarkStartDevice
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that a Start Device IRP_MJ_PNP with IRP_MN_START_DEVICE is pended correctly.
+    This rule only applies to FDO and FIDO drivers.
+	
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507285
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {initial,forwarded} s = initial;
+    enum {true,false} completion = false;
+}
+watch sdv_RunStartDevice.entry.$2;
+
+[IoAcquireRemoveLock,IoAcquireRemoveLockEx,IoSetCompletionRoutineEx].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+
+IoAllocateIrp.exit
+{
+    if($return==NULL)
+    {
+        halt;
+    }
+}
+
+
+[IoRegisterPlugPlayNotification,IoGetDeviceInterfaces].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+
+[IoMarkIrpPending].exit[guard $1]
+{  
+   halt;
+}
+
+[IoSetCompletionRoutine,IoSetCompletionRoutineEx].entry[guard $1]
+{
+    completion = true;
+    
+}
+
+
+[IoCallDriver,PoCallDriver,IofCallDriver].exit[guard $2]
+{  
+   s = forwarded;
+   
+}
+
+
+[sdv_RunStartDevice].exit[guard $2]
+{
+    if($return!=STATUS_DELETE_PENDING&&$2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP&&completion==true)
+    {
+        if(($return!=STATUS_INVALID_DEVICE_STATE&&$return!=STATUS_NOT_SUPPORTED&&$return!=STATUS_NO_SUCH_DEVICE)&&s==forwarded)
+        {
+             abort "Start Device Irp is not pended.";
+        }
+    }
+    else
+    {
+        halt;
+    }
+}

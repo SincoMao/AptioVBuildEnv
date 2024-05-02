@@ -1,0 +1,51 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    MultRemoveLock
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that IoAcquireRemoveLock is called with only one Remove Lock. This is a warning rule.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507286
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {initial,set} s = initial;
+    int *cur_remove_lock = 0;             
+}
+
+IoAcquireRemoveLock.exit
+{
+    if ($return==STATUS_SUCCESS) 
+    {
+        if((cur_remove_lock != *$1)&&(s==set))
+        {
+            abort "Warning:The driver is calling $fname using multiple Removelocks.";
+        }
+        else
+        {
+            cur_remove_lock = *$1;
+            s=set;
+        }
+    } 
+    
+}

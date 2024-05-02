@@ -1,0 +1,36 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    ObsoleteDDIs
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies drivers do not call any of these obsolete functions.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507290
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+
+}
+
+FsRtlPrivateLock.entry{ abort "$fname is obsolete should not be used.";}
+
+

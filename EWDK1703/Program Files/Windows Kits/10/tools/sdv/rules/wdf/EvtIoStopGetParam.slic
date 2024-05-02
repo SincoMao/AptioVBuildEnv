@@ -1,0 +1,64 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    evtiostopgetparam
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule checks that WdfRequestGetParameters is not called within EvtIoStop callback.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507072
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state
+{
+     enum {init,instop} s = init;
+}
+
+[fun_WDF_IO_QUEUE_IO_STOP].entry
+{
+    s = instop;               
+}
+
+[sdv_WdfRequestGetParameters].entry
+{
+   if(s == instop)
+   {
+      abort "Warning:$fname should not be called within EvtIoStop.";
+   }
+   else
+   {
+      halt;
+   }
+}
+
+
+
+
+[fun_WDF_IO_QUEUE_IO_STOP].exit
+{   
+	halt;
+}
+
+
+
+

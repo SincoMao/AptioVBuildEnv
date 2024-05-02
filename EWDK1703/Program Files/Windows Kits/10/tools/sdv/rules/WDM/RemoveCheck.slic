@@ -1,0 +1,68 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    RemoveCheck
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    Driver property to check if IRP_MJ_PNP with MinorFunction IRP_MN_REMOVE_DEVICE is supported.  
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {initial,supported} s = initial;
+   enum {init,deleted} t = init;
+}
+
+
+[IoDeleteDevice].entry
+{  
+   if($1==sdv_p_devobj_fdo) 
+   {
+       t = deleted;
+   }
+}
+
+[IoCallDriver,PoCallDriver].exit
+{
+   if((NT_SUCCESS($2->IoStatus.Status))&&($2->PendingReturned))
+   {
+       s = supported;
+   }
+   else
+   {
+       halt;
+   }
+}
+
+
+[sdv_RunRemoveDevice].exit
+{
+   if (s == supported&&t==deleted&&$2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP) 
+   {
+       abort "The remove device irp is supported.";
+   }
+   else
+   {
+       halt;
+   }
+}

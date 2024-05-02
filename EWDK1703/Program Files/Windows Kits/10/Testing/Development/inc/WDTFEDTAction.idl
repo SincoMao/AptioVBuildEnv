@@ -1,0 +1,111 @@
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Microsoft Confidential
+// Copyright 2009 Microsoft Corporation. All Rights Reserved.
+//
+// WDTFEDT.idl
+//
+// Collection: WDTF Internals - WDTFEDT Reference
+// 
+// Environment: User mode
+// 
+// DLL: WDTFEDT.dll
+//
+//---------------------------------------------------------------------------
+
+// This file will be processed by the MIDL tool to
+// produce the type library (WDTFEDTAction.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    uuid(713537CC-2913-4174-A080-63908E78DBB8),
+    version(1.0),
+    helpstring("WDTFEDT 1.0 Type Library")
+]
+library WDTFEDTActionLib
+{
+    importlib("stdole2.tlb");
+    importlib("WDTF.tlb");
+    importlib("WDTFInterfaces.tlb");
+
+   
+    [
+        object,
+        uuid(85874C6E-7806-4CFD-BBDA-3FDBD3A8A675),
+        dual,
+        nonextensible,
+        helpstring("IWDTFEnhancedDeviceTestSupportAction2 Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFEnhancedDeviceTestSupportAction2 : IWDTFAction2
+    {
+    
+    [id(12), propput, helpstring(" If set to TRUE on Enable/Disable ( if required ) we will attempt to restart target")]
+    HRESULT SkipRestart([in] VARIANT_BOOL bSkipRestart);
+    
+    [id(13), helpstring("To enable the feature this interface represent")] 
+    HRESULT Enable([out, retval] VARIANT_BOOL * pbRebootRequired);
+    
+    [id(14), helpstring("To disable the feature this interface represents")] 
+    HRESULT Disable ([out, retval] VARIANT_BOOL * pbRebootRequired);
+    
+    [id(15), helpstring("To determnin if the feature this interface represents is enabled")] 
+    HRESULT IsEnabled([out, retval] VARIANT_BOOL *  pbEnabled);
+    
+    [id(16), helpstring("To determnin if a  reboot is still required")] 
+    HRESULT IsRebootRequired([out, retval] VARIANT_BOOL *  pbRebootRequired);
+    };
+
+    [
+        object,
+        uuid(42B60B75-1EA3-483D-A596-B96ABDFE1FCB),
+        dual,
+        nonextensible,
+        helpstring("IWDTFEnhancedDeviceTestSupportActions2 Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFEnhancedDeviceTestSupportActions2 : IWDTFActionsCustom2
+    {
+
+    [id(12), propput, helpstring(" If set to TRUE on Enable/Disable ( if required ) we will attempt to restart target")]
+    HRESULT SkipRestart([in] VARIANT_BOOL bSkipRestart);
+    
+    [id(13), helpstring("To enable the feature this interface represent")] 
+    HRESULT Enable([out, retval] VARIANT_BOOL * pbRebootRequired);
+    
+    [id(14), helpstring("To disable the feature this interface represents")] 
+    HRESULT Disable ([out, retval] VARIANT_BOOL * pbRebootRequired);
+    
+    [id(15), helpstring("To determnin if the feature this interface represents is enabled")] 
+    HRESULT IsEnabled([out, retval] VARIANT_BOOL *  pbEnabled);
+    
+    [id(16), helpstring("To determnin if a  reboot is still required")] 
+    HRESULT IsRebootRequired([out, retval] VARIANT_BOOL *  pbRebootRequired);
+
+
+    }
+      
+   
+
+    [
+        uuid(F6694E02-5AD0-476D-BD2D-43F7E5D10AF6),
+        helpstring("WDTFEnhancedDeviceTestSupportAction2 Class")
+    ]
+    coclass WDTFEnhancedDeviceTestSupportAction2
+    {
+        [default] interface IWDTFEnhancedDeviceTestSupportAction2;
+    };
+
+
+    [
+        uuid(0438C02B-EB9C-4E42-81AD-407F6CD6CDE1),
+        helpstring("WDTFEnhancedDeviceTestSupportActions2 class")
+    ]
+    coclass WDTFEnhancedDeviceTestSupportActions2
+    {
+        [default] interface IWDTFEnhancedDeviceTestSupportActions2;
+    };
+};

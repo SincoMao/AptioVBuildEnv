@@ -1,0 +1,53 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DanglingDeviceObjectCheck
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule is statisfied if ObDereferenceObject is called while processing IRP_MJ_PNP with MinorFunction IRP_MN_REMOVE_DEVICE.  
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {initial,on} s = initial;
+}
+
+[sdv_RunRemoveDevice].entry
+{
+    s=on;
+}
+
+[ObDereferenceObject].entry
+{  
+    if(s==on)
+    {
+        abort "This rule is statisfied if ObDereferenceObject is called while processing IRP_MJ_PNP with MinorFunction IRP_MN_REMOVE_DEVICE.";
+    }
+}
+
+
+
+[sdv_RunRemoveDevice].exit
+{
+    halt;
+}

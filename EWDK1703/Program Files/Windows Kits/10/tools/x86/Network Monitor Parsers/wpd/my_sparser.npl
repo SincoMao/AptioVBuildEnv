@@ -1,0 +1,14 @@
+// Personal NPL Files
+//WPDAPI parser
+include "etl_WPDAPI.events.npl"
+
+//WPDMTP Class driver parser
+include "etl_WPDMTP.events.npl"
+
+//WPDMTP Transport parsers
+// USB
+include "etl_WPDMTPUS.events.npl"
+// IP
+include "etl_WPDMTPIP.events.npl"
+// BT
+include "etl_WPDMTPBT.events.npl"

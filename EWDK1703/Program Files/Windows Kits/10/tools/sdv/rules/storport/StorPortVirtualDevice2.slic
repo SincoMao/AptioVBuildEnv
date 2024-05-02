@@ -1,0 +1,51 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StorPortVirtualDevice2
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that upon exit from the FindAdapter routine, 
+    the VirtualDevice field in the PORT_CONFIGURATION_INFORMATION stucture 
+    has been set to TRUE. The rule applies only to virtual StorPort miniports.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507248
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+state {
+	enum { success, failure } findAdapter = failure;
+}
+
+fun_SP_VIRTUAL_HW_FIND_ADAPTER.exit
+{
+	if ($return == SP_RETURN_FOUND) {
+		findAdapter = success;
+	}
+	else {
+		halt;
+	}
+}
+
+sdv_CheckVirtual.exit {
+	if ( (findAdapter == success) && (! ($return)) ) {
+		abort "The VirtualDevice field of the PORT_CONFIGURATION_INFORMATION structure must be set to TRUE for a virtual miniport."; 
+	}
+}

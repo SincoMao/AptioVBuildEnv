@@ -1,0 +1,79 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlKeApcLte2
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020010
+
+Description:
+
+    The IrqlKeApcLte2 rule specifies that the driver calls the following 
+    kernel routines only when it is executing at IRQL <= APC_LEVEL:
+        KeDeregisterNmiCallback
+        KeEnterCriticalRegion
+        KeEnterGuardedRegion
+        KeLeaveCriticalRegion
+        KeLeaveGuardedRegion
+        KeRegisterNmiCallback
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216033
+
+--*/
+
+
+#include "slic_base.h"
+
+
+KeDeregisterNmiCallback.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+KeEnterCriticalRegion.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+KeEnterGuardedRegion.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+KeLeaveCriticalRegion.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+KeLeaveGuardedRegion.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+KeRegisterNmiCallback.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+

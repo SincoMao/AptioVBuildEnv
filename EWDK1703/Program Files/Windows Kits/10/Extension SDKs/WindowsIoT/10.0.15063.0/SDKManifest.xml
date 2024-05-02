@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FileList TargetPlatform="UAP" TargetPlatformMinVersion="10.0.15063.0" TargetPlatformVersion="10.0.15063.0" SDKType="Platform" DisplayName="Windows IoT Extensions for the UWP" AppliesTo="WindowsAppContainer" MinVSVersion="14.0" ProductFamilyName="Windows.IoT" SupportsMultipleVersion="Error" TargetFramework=".NETCore, version=v4.5.3;" SupportPrefer32Bit="True" MoreInfo="http://www.microsoft.com/en-us/server-cloud/internet-of-things.aspx">
+	<ContainedApiContracts>
+		<ApiContract name="Windows.System.SystemManagementContract" version="3.0.0.0"/>
+	</ContainedApiContracts>
+</FileList>

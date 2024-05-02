@@ -1,0 +1,38 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoBuildSynchronousFsdRequest
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This Driver property is satisfied this is a Driver that allocates local synchronous irps.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+}
+
+[IoBuildSynchronousFsdRequest].entry 
+{ 
+      abort "This Driver property is satisfied this is a Driver that allocates local synchronous irps.";
+}
+

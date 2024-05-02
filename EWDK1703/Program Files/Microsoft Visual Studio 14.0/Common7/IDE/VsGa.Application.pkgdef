@@ -1,0 +1,46 @@
+[$RootKey$]
+"ThisVersionDTECLSID"="{3529305E-98EB-4166-9BF0-AF3A017065AA}"
+"InstallDir"="$RootFolder$"
+"ShellFolder"="$ShellFolder$"
+
+[$RootKey$\AppCommandLine\FirstLaunchSetup]
+@="First Launch Setup"
+
+[$RootKey$\Menus]
+"{5C22BD45-89FC-49CE-BE9B-3E1761A709F8}"=",1000,1"
+
+[$RootKey$\Packages\{5C22BD45-89FC-49CE-BE9B-3E1761A709F8}]
+"InprocServer32"="$PackageFolder$\VsGraphicsMnu.dll"
+@="VsGraphics Menu Package"
+
+[$RootKey$\Packages\{5C22BD45-89FC-49CE-BE9B-3E1761A709F8}\SatelliteDll]
+"DllName"="VsGraphicsMUI.dll"
+"Path"="$PackageFolder$"
+
+[$RootKey$\Profile]
+"AppIdSupportsProfiles"=dword:00000001
+"DefaultVsProfile"="$ShellFolder$\Common7\IDE\VsGraphics\Profiles\VsGraphics.vssettings"
+"DefaultSettingsLocation"="$ShellFolder$\Common7\IDE\VsGraphics\Profiles\"
+
+[$RootKey$\Services\{0C539790-12E4-11CF-B661-00AA004CD6D8}]
+"Name"="SApplicationObject Service"
+@="{5C22BD45-89FC-49CE-BE9B-3E1761A709F8}"
+
+[$RootKey$\AutoLoadPackages\{5C22BD45-89FC-49CE-BE9B-3E1761A709F8}]
+@="UICONTEXT_Debugging"
+
+// Restrict the supported fx to those which defines runtime version in redist list.
+// The result is "silverlight" and ".net portable" are excluded.
+[$RootKey$\SupportedRuntimesForFxFamily]
+"RequireRuntimeVersionInRedistList"=dword:00000001
+
+[$RootKey$\SupportedRuntimesForFxFamily\.NETCore\4.5.1]
+@=""
+
+[$RootKey$]
+"MsEnvLocation"="$ShellFolder$\Common7\IDE\msenv.dll"
+
+[$RootKey$\ShellFileAssociations\.vsglog]
+"DefaultIcon"="pack://application:,,,/VsGraphicsStandalonePkg;component/Resources/File.ico"
+@="VsGraphics.vsglog.14.0"
+

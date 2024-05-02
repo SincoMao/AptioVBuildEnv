@@ -1,0 +1,74 @@
+//#  (c) 2009 Microsoft Corporation
+//#
+//#  Title:                  Microsoft-Windows-bthusb.events
+//#
+//#  Details:                
+//#
+//#  Public References:      bthusb.events.man
+//#
+//#  Comments:               
+//#
+//#  Revision Class and Date:Minor, 7/13/2010
+//#
+//####
+[RegisterBefore(NetEvent.UserData, MicrosoftWindowsBTHBTHUSB, "{33693e1d-246a-471b-83be-3e75f47a832d}")]
+Protocol BTHUSB_MicrosoftWindowsBTHBTHUSB = property.ETLSummary
+{
+	[BuildConversationWithParent, conversation.ConversationDescription = ""]
+	switch(property.EventID)
+	{
+		case 1: [property.ETLSummary = this.ToString] BTHUSB_BTHUSB_ETW_EVENT_HC_INFORMATION BTHUSB_ETW_EVENT_HC_INFORMATION;
+		case 2: [property.ETLSummary = this.ToString] BTHUSB_BTHUSB_ETW_EVENT_BIP_SEND BTHUSB_ETW_EVENT_BIP_SEND;
+		case 3: [property.ETLSummary = this.ToString] BTHUSB_BTHUSB_ETW_EVENT_BIP_RECEIVE BTHUSB_ETW_EVENT_BIP_RECEIVE;
+		default: [property.ETLSummary = "Not exist EventID"]struct{};
+	}
+}
+Table BTHUSB_BIP_Type(value)
+{
+	switch(value)
+	{
+		case 0: "NULL_PKT";
+		case 1: "CMND_PKT";
+		case 2: "EVENT_PKT";
+		case 3: "DATA_PKT_R";
+		case 4: "DATA_PKT_W";
+		case 5: "SCO_PKT_R";
+		case 6: "SCO_PKT_W";
+		case 7: "POWER_PKT_ENTER_SUSPEND";
+		default:
+			FormatString("Unknown value: %d", value);
+	}
+}
+Struct BTHUSB_BTHUSB_ETW_EVENT_HC_INFORMATION = FormatString("Radio Host Controller Information")
+{
+	struct 	fid_BTHUSB_HC
+	{
+		UINT16 USBVendorId;
+		UINT16 USBDeviceId;
+	}
+	struct 	fid_BTHUSB_HC_SELECTIVE_SUSPEND
+	{
+		BOOL RemoteWakeCapable;
+		BOOL SelfPoweredCapable;
+		BOOL SelfPoweredStatus;
+		BOOL SelectiveSuspendDisabledViaRegistry;
+		BOOL SelectiveSuspendEnabled;
+	}
+	UnicodeString fid_BTHUSB_HC_Pdo_Name;
+}
+Struct BTHUSB_BTHUSB_ETW_EVENT_BIP_SEND = FormatString("BTHUSB Sending BIP to USB")
+{
+	UINT8 BIP_Type = BTHUSB_BIP_Type(this);
+	UINT32 BIP_Length;
+}
+Struct BTHUSB_BTHUSB_ETW_EVENT_BIP_RECEIVE = FormatString("BTHUSB Receiving BIP from USB")
+{
+	UINT8 BIP_Type = BTHUSB_BIP_Type(this);
+	UINT32 BIP_Length;
+}
+[RegisterBefore(EventDescriptor.DefaultKeyword, MicrosoftWindowsBTHBTHUSB_Keyword, "{33693e1d-246a-471b-83be-3e75f47a832d}")]
+struct BTHUSB_MicrosoftWindowsBTHBTHUSB_Keyword
+{
+	UINT64 Diagnostic:1 = FormatString("(%s) %s", this.ToBitString, this? "BTHUSB_ETW_KEYWORD_DIAGNOSTIC":"");
+	UINT64 Reserved1:63 = FormatString(" (%s)", this.ToBitString);
+}

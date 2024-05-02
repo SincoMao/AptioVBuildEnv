@@ -1,0 +1,24 @@
+[$RootKey$\CLSID\{f1e4cfca-4573-4345-8718-7bde2b1f0be8}]
+@="Visual Studio Export Template Wizard Package"
+"InprocServer32"="$WinDir$\system32\mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="Microsoft.VisualStudio.ExportTemplate.ExportTemplatePackage"
+"Assembly"="Microsoft.VisualStudio.ExportTemplate,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"CodeBase"="$ShellFolder$\Common7\IDE\Microsoft.VisualStudio.ExportTemplate.dll"
+[$RootKey$\CLSID\{f1e4cfca-4573-4345-8718-7bde2b1f0be8}\InprocServer32\14.0.0.0]
+"Class"="Microsoft.VisualStudio.ExportTemplate.ExportTemplateWizard"
+"Assembly"="Microsoft.VisualStudio.ExportTemplate,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"CodeBase"="$ShellFolder$\Common7\IDE\Microsoft.VisualStudio.ExportTemplate.dll"
+[$RootKey$\CLSID\{f1e4cfca-4573-4345-8718-7bde2b1f0be8}\ProgId]
+@="Microsoft.VisualStudio.ExportTemplate.ExportTemplateWizard.8.0"
+[$RootKey$\Menus]
+"{f1e4cfca-4573-4345-8718-7bde2b1f0be8}"=",101,1"
+[$RootKey$\Packages\{f1e4cfca-4573-4345-8718-7bde2b1f0be8}]
+@="Export Template Package"
+"InprocServer32"="$WinDir$\system32\mscoree.dll"
+"Class"="Microsoft.VisualStudio.ExportTemplate.ExportTemplatePackage"
+"Assembly"="Microsoft.VisualStudio.ExportTemplate,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"CodeBase"="$ShellFolder$\Common7\IDE\Microsoft.VisualStudio.ExportTemplate.dll"
+[$RootKey$\Packages\{f1e4cfca-4573-4345-8718-7bde2b1f0be8}\SatelliteDll]
+"Path"="$ShellFolder$\Common7\IDE\"
+"DllName"="Microsoft.VisualStudio.ExportTemplateUI.dll"

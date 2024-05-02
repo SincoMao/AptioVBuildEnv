@@ -1,0 +1,6 @@
+DanglingDeviceObjectReference
+PnpSameDeviceObject
+TargetRelationNeedsRef
+ZwRegistryCreate
+ZwRegistryOpen
+AddDevice

@@ -1,0 +1,8 @@
+[$RootKey$]
+
+[$RootKey$\CLSID]
+
+[$RootKey$\CLSID\{A91589BD-688C-4a29-914A-EDC7953D43C7}]
+@="Pfx Task Provider"
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\PfxTaskProvider.dll"
+"ThreadingModel"="Both"

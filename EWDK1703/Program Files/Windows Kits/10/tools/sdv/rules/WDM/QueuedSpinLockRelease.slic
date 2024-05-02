@@ -1,0 +1,75 @@
+/*++
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    QueuedSpinLockRelease
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00040007
+
+Description: 
+
+    This rule verifies that calls to
+    KeAcquireInStackQueuedSpinLock and
+    KeReleaseInStackQueuedSpinLock are 
+    used in the correct manner within a WDM entry point.
+
+Help Link:
+
+     http://go.microsoft.com/fwlink/?LinkId=216059
+    
+--*/
+
+#include "slic_base.h"
+
+state{
+   int LockDepth = 0;
+}
+
+
+[
+  KeReleaseInStackQueuedSpinLock,
+  KeReleaseInStackQueuedSpinLockFromDpcLevel@XDV
+].entry
+{
+        if ( LockDepth == 0 ) {
+        
+            abort "$fname is called without KeAcquireInStackQueuedSpinLock called first.";
+            
+        } else {
+        
+            LockDepth = LockDepth - 1;
+        }
+}
+
+[
+  KeAcquireInStackQueuedSpinLock,
+  KeAcquireInStackQueuedSpinLockAtDpcLevel@XDV
+].exit
+{   
+        LockDepth = LockDepth + 1;
+}
+
+[SDV_STANDARD_DRIVER_ROUTINES].exit
+{
+        if (LockDepth != 0) 
+        {
+            abort "$fname returned with an invalid QueuedSpinLock state.";
+        }
+}
+
+[SDV_SPECIAL_DRIVER_ROUTINES]@SDV.exit
+{
+        if (LockDepth != 0) 
+        {
+            abort "$fname returned with an invalid QueuedSpinLock state.";
+        }
+}
+
+

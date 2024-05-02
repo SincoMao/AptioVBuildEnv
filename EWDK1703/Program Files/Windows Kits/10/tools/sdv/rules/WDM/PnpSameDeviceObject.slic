@@ -1,0 +1,66 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    PnpSameDeviceObject
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that IoAttachDeviceToDeviceStack is called
+    with an appropriate device object.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507295
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {enabled, disabled} rule_state = disabled;
+    enum {on, off} check = off;
+}
+
+
+fun_DriverEntry.entry
+{
+    check=off;
+}
+
+fun_DriverEntry.exit
+{
+    check=on;
+}
+
+
+
+fun_AddDevice.entry
+{
+    rule_state=enabled;
+}
+
+fun_AddDevice.exit
+{
+    halt;
+}
+
+IoAttachDeviceToDeviceStack.entry 
+{
+    if (rule_state == enabled && $2 != sdv_p_devobj_pdo&&check==on) 
+    {
+        abort "The driver is calling IoAttachDeviceToDeviceStack on an unexpected device object.";
+    }
+}

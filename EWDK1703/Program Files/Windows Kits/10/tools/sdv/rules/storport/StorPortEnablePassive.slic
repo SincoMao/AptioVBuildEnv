@@ -1,0 +1,56 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StorPortEnablePassive
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that StorPortEnablePassiveInitialization is not called 
+    from any StorPort miniport driver routine other than HwInitialize.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507234
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+state {
+	enum { yes, no } insideHwInitialize = no;
+}
+
+fun_SP_HW_INITIALIZE.entry
+{
+	insideHwInitialize = yes;
+}
+
+fun_SP_HW_INITIALIZE.exit
+{
+	insideHwInitialize = no;
+}
+
+StorPortEnablePassiveInitialization.entry
+{
+	if (insideHwInitialize != yes) 
+	{
+		abort "$fname must not be called from any miniport driver routine other than HwInitialize.";
+	}
+	else 
+	{
+		halt;
+	}
+}

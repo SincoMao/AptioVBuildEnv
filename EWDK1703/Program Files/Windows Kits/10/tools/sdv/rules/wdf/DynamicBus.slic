@@ -1,0 +1,54 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DynamicBus
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    The Driver Property is satisfied if WdfDeviceCreate is called in EVT_WDF_CHILD_LIST_CREATE_DEVICE.
+    This is a Bus Driver that supports Dynamic Enumeration.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+     
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {initial,entered} s = initial;
+}
+
+fun_WDF_CHILD_LIST_CREATE_DEVICE.entry
+{
+    s=entered;
+}
+sdv_WdfDeviceCreate.exit
+{
+	  if ($return==STATUS_SUCCESS&&s==entered) 
+    { 
+       abort "The Driver Property is satisfied.This is a Bus Driver that supports Dynamic Enumeration."; 
+    }
+}
+
+fun_WDF_CHILD_LIST_CREATE_DEVICE.exit
+{
+    halt;
+}
+      

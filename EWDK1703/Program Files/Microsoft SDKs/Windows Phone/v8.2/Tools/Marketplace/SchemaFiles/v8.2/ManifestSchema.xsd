@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" ?>
+<!--
+Copyright (c) Microsoft Corporation.  All rights reserved.
+-->
+<!--
+Use of this source code is subject to the terms of the Microsoft
+premium shared source license agreement under which you licensed
+this source code. If you did not accept the terms of the license
+agreement, you are not authorized to use this source code.
+For the terms of the license, please see the license agreement
+signed by you and Microsoft.
+THE SOURCE CODE IS PROVIDED "AS IS", WITH NO WARRANTIES OR INDEMNITIES.
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://schemas.microsoft.com/windowsphone/2014/deployment"
+           xmlns="http://schemas.microsoft.com/windowsphone/2014/deployment"
+           xmlns:c="http://WPCommontypes"
+           xmlns:t="http://WPTokens">
+    <xs:import namespace="http://WPCommontypes" schemaLocation="YamanoteCommonTypes.xsd"/>
+    <xs:import namespace="http://WPTokens" schemaLocation="ShellTokens.xsd"/>
+    <xs:annotation>
+        <xs:documentation>
+            We have not imposed string length restrictions in the manifest and expect the tool that is generating the
+            manifest and the ingestion pipe-line to ensure that the strings are reasonably sized
+        </xs:documentation>
+    </xs:annotation>
+    <xs:element name="Deployment">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="DefaultLanguage" type="ST_LanguageCode" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="Languages" maxOccurs="1" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Language" type="ST_LanguageCode" maxOccurs="unbounded" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="AppExtra" type="c:CT_AppExtra" maxOccurs="unbounded" minOccurs="0"/>
+                <xs:element name="App">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="IconPath" type="t:CT_ResourcePath"/>
+                            <xs:element name="Capabilities" type="c:CT_Capabilities"/>
+                            <xs:element name="Tasks" type="c:CT_ThirdPartyAppTasks" minOccurs="1" maxOccurs="1"/>
+                            <!--Add a token array here..-->
+                            <xs:element name="Tokens" type="c:CT_ThirdPartyAppTokens"  minOccurs="1" maxOccurs="1"/>
+                            <xs:element name="Extensions" type="c:CT_Extensions" maxOccurs="1" minOccurs="0"/>
+                            <xs:element name="ActivatableClasses" type="c:CT_WinRTActivatableClass" maxOccurs="1" minOccurs="0"/>
+                            <xs:element name="ScreenResolutions " type="c:CT_ScreenResolutions" maxOccurs="1" minOccurs="1"/>
+                            <xs:element name="Requirements" type="c:CT_Requirements" maxOccurs="1" minOccurs="0"/>
+                            <xs:element name="FunctionalCapabilities" type="c:CT_FunctionalCapabilities" maxOccurs="1" minOccurs="0"/>
+                        </xs:sequence>
+                        <!-- App element attributes -->
+                        <xs:attribute name="Author" use="required" type="t:ST_String"/>
+                        <xs:attribute name="Description" use="required" type="t:ST_String"/>
+                        <xs:attribute name="Genre" use="optional" type="t:ST_String"/>
+                        <xs:attribute name="HubType" use="optional" type="c:ST_HubType"/>
+                        <xs:attribute name="ProductID" use="required" type="c:ST_Guid" />
+                        <xs:attribute name="Publisher" use="required" type="t:ST_String"/>
+                        <xs:attribute name="PublisherID" use="required" type="c:ST_Guid" />
+                        <xs:attribute name="RuntimeType" use="required" type="c:ST_RuntimeType"/>
+                        <xs:attribute name="Title" use="required" type= "t:ST_ResourceID"/>
+                        <xs:attribute name="Version" use="required" type="t:ST_String"/>
+                        <xs:attribute name="HasSettings" type="xs:boolean" use="optional" default="false"/>
+                        <xs:attribute name="BitsPerPixel" type="c:ST_BitsPerPixel" use="optional" default="16"/>
+                        <xs:attribute name="MultiCore" use ="optional" type="xs:boolean" default="true"/>
+                        <xs:attribute name="SingleInstanceHost" use ="optional" type="xs:boolean" default="false"/>
+                        <xs:attribute name="IsBeta" use ="optional" type="xs:boolean" default="false"/>
+                        <xs:attribute name="SDOptOut" use ="optional" type="xs:boolean" default="false"/>
+                        <xs:attribute name="BackUpOptOut" use ="optional" type="xs:boolean" default="false"/>
+                        <xs:attribute name="NotificationService" use ="optional" type="c:ST_NotificationType" default="MPN"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <!-- Deployment element attributes -->
+            <xs:attribute name="AppPlatformVersion" use="required" type="c:ST_AppPlatformVersion"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="ST_LanguageCode">
+        <xs:attribute name="code" type="xs:string" default ="en-US"/>
+    </xs:complexType>
+</xs:schema>

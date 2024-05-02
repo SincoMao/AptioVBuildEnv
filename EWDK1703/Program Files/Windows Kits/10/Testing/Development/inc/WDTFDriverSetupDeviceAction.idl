@@ -1,0 +1,84 @@
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Microsoft Confidential
+// Copyright 2009 Microsoft Corporation. All Rights Reserved.
+//
+// WDTFDriverSetupDevice.idl
+//
+// Collection: WDTF Internals - WDTFDriverSetupDevice Reference
+// 
+// Environment: User mode
+// 
+// DLL: WDTFDriverSetupDevice.dll
+//
+//---------------------------------------------------------------------------
+
+// This file will be processed by the MIDL tool to
+// produce the type library (WDTFDriverSetupDeviceAction.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    uuid(05548A42-BF35-419A-B803-5D04DD5A8D7A),
+    version(1.0),
+    helpstring("WDTFDriverSetupDevice 1.0 Type Library")
+]
+library WDTFDriverSetupActionLib
+{
+    importlib("stdole2.tlb");
+    importlib("WDTF.tlb");
+    importlib("WDTFInterfaces.tlb");
+    importlib("WDTFDriverPackageAction.tlb");
+
+    [
+        object,
+        uuid(18475180-97D6-4F74-AF7B-83299DE855AF),
+        dual,
+        nonextensible,
+        helpstring("IWDTFDriverSetupDevice Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFDriverSetupAction2 : IWDTFAction2
+    {
+
+    HRESULT UpdateDriver([in] IWDTFDriverPackageAction2* pDp, [out,retval] VARIANT_BOOL* pbReboot);
+    HRESULT UnInstallDriverPermanently([out,retval] VARIANT_BOOL* pbReboot);
+    };
+    
+    [
+        object,
+        uuid(B505B2B5-0199-4746-A1F9-6E50105C47D1),
+        dual,
+        nonextensible,
+        helpstring("IWDTFDriverSetupActions2 Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFDriverSetupActions2 : IWDTFActionsCustom2
+    {
+
+    HRESULT UpdateDriver([in] IWDTFDriverPackageAction2* pDp, [out,retval] VARIANT_BOOL* pbReboot);
+    HRESULT UnInstallDriverPermanently([out,retval] VARIANT_BOOL* pbReboot);
+    };
+    
+
+    [
+        uuid(0FA57208-5100-4CD6-955C-FE69F8898973),
+        helpstring("WDTFDriverSetupDevice Class")
+    ]
+    coclass WDTFDriverSetupAction2
+    {
+        [default] interface IWDTFDriverSetupAction2;
+    };
+    
+    [
+        uuid(CA3D2EED-743D-40BC-9EE5-8768F0EBCFC1),
+        helpstring("WDTFDriverSetupActions2 Class")
+    ]
+    coclass WDTFDriverSetupActions2
+    {
+        [default] interface IWDTFDriverSetupActions2;
+    };
+   
+};

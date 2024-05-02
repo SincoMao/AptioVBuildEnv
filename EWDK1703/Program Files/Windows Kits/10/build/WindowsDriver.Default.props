@@ -1,0 +1,86 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Predefined versioning constants -->
+  <PropertyGroup> 
+
+    <!-- Current KitOS property -->
+    <CurrentKitOS>winv10.0</CurrentKitOS>
+
+    <!-- Latest Target Version property -->
+    <LatestTargetVersion>Windows10</LatestTargetVersion>
+    
+    <TargetVersion Condition="'$(TargetVersion)' == ''">$(LatestTargetVersion)</TargetVersion>
+
+    <LatestTargetPlatformVersion Condition="'$(VisualStudioVersion)' == '14.0'">$([Microsoft.Build.Utilities.ToolLocationHelper]::GetLatestSDKTargetPlatformVersion('Windows', '10.0'))</LatestTargetPlatformVersion>
+    <LatestTargetPlatformVersion Condition="'$(VisualStudioVersion)' == '12.0'">10.0.15063.0</LatestTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(WindowsTargetPlatformVersion)' == ''">$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
+    <TargetPlatformVersion>$(WindowsTargetPlatformVersion)</TargetPlatformVersion>
+    <OverrideCfgV1 Condition="'$(OverrideCfgV1)' == '' and '$(WindowsTargetPlatformVersion)' &lt;= '10.0.14250.0'">true</OverrideCfgV1>
+    <MatchingSdkPresent Condition="Exists('$(WDKContentRoot)\DesignTime\CommonConfiguration\Neutral\UAP\$(TargetPlatformVersion)\UAP.props')">true</MatchingSdkPresent>
+
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <_NT_TARGET_VERSION_LATEST>0xA000003</_NT_TARGET_VERSION_LATEST>
+    <LATEST_WIN32_WINNT_VERSION>0x0A00</LATEST_WIN32_WINNT_VERSION>
+    <LATEST_SUBSYSTEM_VERSION>10.00</LATEST_SUBSYSTEM_VERSION>
+    <LATEST_NTDDI_VERSION>0x0A000003</LATEST_NTDDI_VERSION>
+  </PropertyGroup>
+
+  <!-- Predefined versioning constants -->
+  <PropertyGroup>
+    <MIDL_TARGET_VISTA>NT60</MIDL_TARGET_VISTA>
+    <MIDL_TARGET_WIN7>NT61</MIDL_TARGET_WIN7>
+    <MIDL_TARGET_WIN8>NT62</MIDL_TARGET_WIN8>
+    <MIDL_TARGET_WINV63>NT63</MIDL_TARGET_WINV63>
+    <MIDL_TARGET_WIN10>NT64</MIDL_TARGET_WIN10>
+    
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="('$(TargetVersion)'=='' OR '$(TargetVersion)'=='Windows10')">
+      <PropertyGroup>
+        <LegacyTargetVersion>false</LegacyTargetVersion>
+        <UnknownTargetPlatformVersion Condition="'$(TargetPlatformVersion)' == ''">true</UnknownTargetPlatformVersion>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <LegacyTargetVersion>true</LegacyTargetVersion>
+      </PropertyGroup>
+      <Choose>
+        <When Condition="('$(TargetVersion)'=='WindowsV6.3')">
+          <PropertyGroup>
+            <DDKSpec>winv6.3</DDKSpec>
+          </PropertyGroup>
+        </When>
+        <When Condition="('$(TargetVersion)'=='Windows8')">
+          <PropertyGroup>
+            <DDKSpec>win8</DDKSpec>
+          </PropertyGroup>
+        </When>
+        <When Condition="('$(TargetVersion)'=='Windows7')">
+          <PropertyGroup>
+            <DDKSpec>win7</DDKSpec>
+          </PropertyGroup>
+        </When>
+        <Otherwise>
+          <PropertyGroup>
+            <UnknownTargetVersion>true</UnknownTargetVersion>
+          </PropertyGroup>
+        </Otherwise>
+      </Choose>
+    </Otherwise>
+  </Choose>
+
+  <PropertyGroup Condition="'$(DriverTargetPlatform)' == ''">
+    <DriverTargetPlatform Condition="$(BuildWindowsPhone) == '' or $(BuildWindowsPhone) == 'false'">Desktop</DriverTargetPlatform>
+    <DriverTargetPlatform Condition="$(BuildWindowsPhone) == 'true'">Mobile</DriverTargetPlatform>
+  </PropertyGroup>
+  
+  <!-- Default driver deployment properties -->
+  <PropertyGroup>
+    <!-- Remove previous version of driver before deployment -->
+    <RemoveDriver Condition="'$(RemoveDriver)' == ''">True</RemoveDriver>
+  </PropertyGroup>
+</Project>
+

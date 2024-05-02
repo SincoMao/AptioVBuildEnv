@@ -1,0 +1,50 @@
+<!--
+***********************************************************************************************
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Default values for user mode class extensions -->
+
+  <!-- Sensors Class Extension -->
+  <PropertyGroup Condition="'$(SensorDriver)' == 'true' and $(UMDF_VERSION_MAJOR) &gt; 1">
+    <SENSOR_VERSION_MAJOR Condition="'$(SENSOR_VERSION_MAJOR)' == ''">1</SENSOR_VERSION_MAJOR>
+    <SENSOR_VERSION_MINOR Condition="'$(SENSOR_VERSION_MINOR)' == ''">1</SENSOR_VERSION_MINOR>
+    <SENSOR_VERSION Condition="'$(SENSOR_VERSION)' == ''">$(SENSOR_VERSION_MAJOR).$(SENSOR_VERSION_MINOR)</SENSOR_VERSION>
+    <SENSOR_IncludePath Condition="'$(SENSOR_IncludePath)' == ''">$(SDK_INC_PATH)sensors\$(SENSOR_VERSION)</SENSOR_IncludePath>
+    <SENSOR_LIB_PATH Condition="'$(SENSOR_LIB_PATH)' == ''">$(SDK_LIB_PATH)sensors\$(SENSOR_VERSION)\</SENSOR_LIB_PATH>
+  </PropertyGroup>
+
+  <!-- NFC Class Extension -->
+  <PropertyGroup Condition="'$(NfcDriver)' == 'true' and $(UMDF_VERSION_MAJOR) &gt; 1">
+    <NFC_VERSION_MAJOR Condition="'$(NFC_VERSION_MAJOR)' == ''">1</NFC_VERSION_MAJOR>
+    <NFC_VERSION_MINOR Condition="'$(NFC_VERSION_MINOR)' == ''">0</NFC_VERSION_MINOR>
+    <NFC_VERSION Condition="'$(NFC_VERSION)' == ''">$(NFC_VERSION_MAJOR).$(NFC_VERSION_MINOR)</NFC_VERSION>
+    <NFC_IncludePath Condition="'$(NFC_IncludePath)' == ''">$(SDK_INC_PATH)nfc\$(NFC_VERSION)</NFC_IncludePath>
+    <NFC_LIB_PATH Condition="'$(NFC_LIB_PATH)' == ''">$(SDK_LIB_PATH)nfc\$(NFC_VERSION)\</NFC_LIB_PATH>
+  </PropertyGroup>
+
+  <!-- UCM Class Extension -->
+  <PropertyGroup Condition="'$(UcmDriver)' == 'true' and $(UMDF_VERSION_MAJOR) &gt; 1">
+    <UCM_VERSION_MAJOR Condition="'$(UCM_VERSION_MAJOR)' == ''">1</UCM_VERSION_MAJOR>
+    <UCM_VERSION_MINOR Condition="'$(UCM_VERSION_MINOR)' == ''">0</UCM_VERSION_MINOR>
+    <UCM_VERSION Condition="'$(UCM_VERSION)' == ''">$(UCM_VERSION_MAJOR).$(UCM_VERSION_MINOR)</UCM_VERSION>
+    <UCM_INC_PATH Condition="'$(UCM_INC_PATH)' == ''">$(SDK_INC_PATH)ucm\$(UCM_VERSION)</UCM_INC_PATH>
+    <UCM_LIB_PATH Condition="'$(UCM_LIB_PATH)' == ''">$(SDK_LIB_PATH)ucm\$(UCM_VERSION)\</UCM_LIB_PATH>
+  </PropertyGroup>
+
+  <!-- Indirect Displays Class Extension -->
+  <PropertyGroup Condition="'$(IndirectDisplayDriver)' == 'true' and $(UMDF_VERSION_MAJOR) &gt; 1">
+    <IDDCX_VERSION_MAJOR Condition="'$(IDDCX_VERSION_MAJOR)' == ''">1</IDDCX_VERSION_MAJOR>
+    <IDDCX_VERSION_MINOR Condition="'$(IDDCX_VERSION_MINOR)' == ''">0</IDDCX_VERSION_MINOR>
+    <IDDCX_VERSION Condition="'$(IDDCX_VERSION)' == ''">$(IDDCX_VERSION_MAJOR).$(IDDCX_VERSION_MINOR)</IDDCX_VERSION>
+    <IDDCX_INC_PATH Condition="'$(IDDCX_INC_PATH)' == ''">$(SDK_INC_PATH)iddcx\$(IDDCX_VERSION)</IDDCX_INC_PATH>
+    <IDDCX_LIB_PATH Condition="'$(IDDCX_LIB_PATH)' == ''">$(SDK_LIB_PATH)iddcx\$(IDDCX_VERSION)\</IDDCX_LIB_PATH>
+  </PropertyGroup>
+
+</Project>

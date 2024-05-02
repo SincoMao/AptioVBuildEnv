@@ -1,0 +1,13 @@
+fltkernel.h=_SDV_FLT_KERNEL_CONTEXT_
+dsm.h=_SDV_DSM_CONTEXT_
+storport.h=_SDV_SP_CONTEXT_
+wdf.h=_SDV_WDF_CONTEXT_
+wdfusb.h=_SDV_WDF_USB_CONTEXT_
+ndis.h=_SDV_NDIS_CONTEXT_
+wdm.h=_SDV_WDM_CONTEXT_
+wdmsec.h=_SDV_WDMSEC_CONTEXT_
+ntifs.h=_SDV_NTIFS_CONTEXT_
+csq.h=_SDV_CSQ_CONTEXT_
+ntddk.h=_SDV_NTDDK_CONTEXT_
+ntosp.h=_SDV_NTOSP_CONTEXT_
+netioapi.h=_SDV_NETIO_CONTEXT_

@@ -1,0 +1,61 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrpCancelField
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule checks the basic cancellation protocol: Irp->Cancel field
+    must be checked by the driver when it marks the Irp as pending.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state {
+  int IrpCancelChecked = 0;
+  int IrpPended = 0;
+  int IoSetCancelRoutineCalled = 0;
+}
+with guard (sdv_main,sdv_irp)
+
+
+IoSetCancelRoutine.entry [guard $1] {
+   if ( $2 != NULL ) {		
+         IoSetCancelRoutineCalled = 1;
+   }
+}
+
+IoMarkIrpPending.entry [guard $1] {
+      IrpPended = 1;
+}  
+
+(main, &(sdv_irp->Cancel)).read {
+	IrpCancelChecked = 1;	
+}
+
+[IoCsqInsertIrp,IoCsqInsertIrpEx].entry [guard $1] {
+	IrpCancelChecked = 1;
+}
+
+[fun_DriverStartIo,SDV_RunDispatchFunction].exit [guard $2] {
+   if ( IrpPended && IoSetCancelRoutineCalled && !IrpCancelChecked ) {
+	abort "It is a bug to pend Irp without checking Irp->Cancel";	
+   }
+}

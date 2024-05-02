@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device name="Desktop" width="1280" height="720" scale="100" size="13.3" default="true" resize="true" icon="Assets/desktop_icon.ico" generic="Generic/generic.xaml" MinVersion="10.0.0.0">
+	<Device.Qualifiers>
+		<Qualifier Name="DeviceFamily">Desktop</Qualifier>
+	</Device.Qualifiers>
+</Device>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

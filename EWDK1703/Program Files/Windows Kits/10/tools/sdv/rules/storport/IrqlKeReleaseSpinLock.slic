@@ -1,0 +1,41 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlKeReleaseSpinLock
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    The IrqlKeReleaseSpinLock rule verifies that KeReleaseSpinLock is called at
+    IRQL = DISPATCH_LEVEL only. It must also set the IRQL to the previous IRQL level. 
+    Typically this call would be preceded by a call to KeAcquireSpinLock.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507219
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+KeReleaseSpinLock.entry 
+{
+	if (sdv_irql_current != DISPATCH_LEVEL) {
+		abort "$fname should only be called at IRQL = DISPATCH_LEVEL.";
+	} 
+	else if ($2 != sdv_irql_previous) {
+		abort "$fname must restore the previous IRQL value.";
+	}
+}

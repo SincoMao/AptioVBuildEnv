@@ -1,0 +1,69 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    PnpIrpCompletion
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule is not applicable to bus drivers.  It verifies that
+    the driver passes PnP IRPs to the lower driver. 
+    The following PNP Irps are excluded from this rule.
+
+        IRP_MN_QUERY_INTERFACE
+        IRP_MN_QUERY_STOP_DEVICE
+        IRP_MN_QUERY_REMOVE_DEVICE
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+
+state {
+     int completed = 0;   
+}  with guard(sdv_main,sdv_irp)
+
+
+
+[IoCallDriver,PoCallDriver,IoForwardIrpSynchronously].entry [guard $2]
+{
+    halt;
+}
+
+
+[IoCompleteRequest,IofCompleteRequest].entry [guard $1]
+{
+    completed = 1;
+}
+
+
+
+fun_IRP_MJ_PNP.exit [guard $2]
+{
+    if ($return != STATUS_NOT_SUPPORTED
+       && NT_SUCCESS($return)
+       && completed
+       && $2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP
+       ) {
+         abort "The driver is completing an IRP without passing it down.";
+    } 
+    else
+    {
+        halt;
+    }
+}

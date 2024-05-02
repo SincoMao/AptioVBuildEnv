@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Vsix Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="Microsoft.VisualStudio.Language.GenerateType">
+    <Name>Generate Type User Interface</Name>
+    <Author>Microsoft</Author>
+    <Version>11.0</Version>
+    <Description>Generate Type User Interface</Description>
+    <Locale>1033</Locale>
+    <SupportedProducts>
+      <VisualStudio Version="11.0">
+        <Edition>Pro</Edition>
+        <Edition>VCSExpress</Edition>
+        <Edition>VBExpress</Edition>
+        <Edition>VWDExpress</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.5" />
+    <SystemComponent>true</SystemComponent>
+  </Identifier>
+
+  <References />
+
+  <Content>
+    <MefComponent>Microsoft.VisualStudio.Language.GenerateType.Implementation.dll</MefComponent>
+  </Content>
+</Vsix>

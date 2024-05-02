@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Microsoft Driver Must Fix Rules" Description="This rule set contains rules that must be fixed for certain driver submissions." ToolsVersion="10.0">
+  <Include Path="DriverRecommendedRules.ruleset" Action="Default" />
+  <Rules AnalyzerId="Microsoft.Analyzers.NativeCodeAnalysis" RuleNamespace="Microsoft.Rules.Native">
+    <Rule Id="C6053" Action="Error" />
+    <Rule Id="C6063" Action="Error" />
+    <Rule Id="C6201" Action="Error" />
+    <Rule Id="C6214" Action="Error" />
+    <Rule Id="C6215" Action="Error" />
+    <Rule Id="C6216" Action="Error" />
+    <Rule Id="C6230" Action="Error" />
+    <Rule Id="C6248" Action="Error" />
+    <Rule Id="C6259" Action="Error" />
+    <Rule Id="C6260" Action="Error" />
+    <Rule Id="C6262" Action="Error" />
+    <Rule Id="C6268" Action="Error" />
+    <Rule Id="C6276" Action="Error" />
+    <Rule Id="C6277" Action="Error" />
+    <Rule Id="C6281" Action="Error" />
+    <Rule Id="C6282" Action="Error" />
+    <Rule Id="C6284" Action="Error" />
+    <Rule Id="C6287" Action="Error" />
+    <Rule Id="C6288" Action="Error" />
+    <Rule Id="C6289" Action="Error" />
+    <Rule Id="C6290" Action="Error" />
+    <Rule Id="C6291" Action="Error" />
+    <Rule Id="C6293" Action="Error" />
+    <Rule Id="C6295" Action="Error" />
+    <Rule Id="C6296" Action="Error" />
+    <Rule Id="C6299" Action="Error" />
+    <Rule Id="C6305" Action="Error" />
+    <Rule Id="C6306" Action="Error" />
+    <Rule Id="C6308" Action="Error" />
+    <Rule Id="C6312" Action="Error" />
+    <Rule Id="C6318" Action="Error" />
+    <Rule Id="C6328" Action="Error" />
+    <Rule Id="C6384" Action="Error" />
+    <Rule Id="C28163" Action="Error" />
+    <Rule Id="C28164" Action="Error" />
+    <Rule Id="C28208" Action="Error" />
+  </Rules>
+</RuleSet>

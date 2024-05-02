@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html" />
+    <script type="text/javascript" src="plugin.js"></script>
+    <script type="text/javascript" src="DiagnosticsHub.js"></script>
+    <script type="text/javascript" src="ManagedMemoryHelpers.js"></script>
+    <script type="text/javascript" src="ManagedSummaryViewer.js"></script>
+    <link id="ManagedMemorySummaryView.css" rel="stylesheet" href="ManagedMemorySummaryView.css" type="text/css" data-plugin-theme="true" />
+
+    <!--Template for snapshot tiles. HTML extracted in TypeScript and populated there.-->
+    <script id="SnapshotTileTemplate" type="text/html">
+        <div id="snapshotTile" class="snapshotTile snapshotTileTaken">
+            <div id="snapshotTileInner" class="snapshotTileInner">
+                <div id="snapshotTileHeader" class="snapshotTileHeader" tabindex="0">
+                    <div id="snapshotTileTitle" class="snapshotTileTitle"></div>
+                    <div id="snapshotTakenDate" class="snapshotTakenDate"></div>
+                    <div id="snapshotTileMoreOptions" class="snapshotTileMoreOptions" data-plugin-is-contextmenu="true">
+                        <a class="moreOptionsLink" href="#">6</a><!-- The 6 shows up as a down caret with the font defined in the css. -->
+                    </div>
+                </div>
+                <div id="snapshotInfoDiv" class="snapshotInfoDiv"></div>
+                <div id="snapshotTileProgress" class="snapshotTileProgress hidden">
+                    <progress></progress>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <!--Template for summary subsection of snapshot tiles. HTML extracted in TypeScript and populated there.-->
+    <script id="SnapshotSummaryTemplate" type="text/html">
+        <div id="snapshotTileInfo" class="snapshotTileInfo">
+            <div id="snapshotSummaryType" class="topRow snapshotSummaryType hidden"></div>
+            <div class="middleRow rightAlign inactiveLink">
+                <a id="snapshotSize" class="snapshotLink" href="#"></a>
+                <div class="snapshotArrowDiv"></div>
+            </div>
+            <div class="middleRow rightColumn inactiveLink">
+                <a id="snapshotCount" class="snapshotLink" href="#"></a>
+                <div class="snapshotArrowDiv"></div>
+            </div>
+            <div id="sizeDiffDiv" class="bottomRow rightAlign inactiveLink">
+                <div id="sizeBaselineDiv" class="inactiveLink baselineLink hidden"></div>
+                <a id="sizeDiffLink" class="snapshotLink" href="#"></a>
+                <div class="ImageTile">
+                    <img class="Spacer" alt="" src="spacer.png" />
+                    <img id="sizeDiffImage" class="Image" alt="" src="mma_icons.png" />
+                </div>
+            </div>
+            <div id="countDiffDiv" class="bottomRow rightColumn inactiveLink">
+                <div id="countBaselineDiv" class="inactiveLink baselineLink hidden"></div>
+                <a id="countDiffLink" class="snapshotLink" href="#"></a>
+                <div class="ImageTile">
+                    <img class="Spacer" alt="" src="spacer.png" />
+                    <img id="countDiffImage" class="Image" alt="" src="mma_icons.png" />
+                </div>
+            </div>
+        </div>
+    </script>
+
+</head>
+<body>
+    <!--Enable / disable snapshot control, only shown when we are taking native snapshots (i.e. native & mixed mode debugging)-->
+    <div id="enableSnapshotsDiv" class="enableSnapshotsDiv hidden">
+        <input type="checkbox" id="enableSnapshotsCheckBox" class="enableSnapshotsCheckBox"/>
+        <label id="enableSnapshotsCaption"></label>
+    </div>
+    <div id="viewDisabledMessageDiv" class="hidden"><p id="viewDisabledMessage"></p></div>
+    <div id="snapshotContainer" class="snapshotContainer">
+        <!--Other tiles added in the TypeScript using the above templates.-->
+        <div id="takeSnapshotTile" class="snapshotTile takeSnapshotTile">
+            <div class="snapshotTileInner">
+                <div id="takeSnapshotButtonDiv" class="takeSnapshotButtonDiv">
+                    <button id="takeSnapshotButton" class="takeSnapshotButton">
+                        <img id="takeSnapshotIcon" class="takeSnapshotButtonIcon" alt="" src="camera.png" />
+                        <div id="takeSnapshotCaption" class="takeSnapshotButtonCaption"></div>
+                    </button>
+                </div>
+                <div id="takeSnapshotProgressDiv" class="takeSnapshotButtonDiv snapshotProgressDiv hidden">
+                    <div class="snapshotProgress">
+                        <progress id="takeSnapshotProgress"></progress>
+                    </div>
+                    <div class="snapshotProgressCaptionDiv">
+                        <div id="snapshotProgressCaption" class="snapshotProgressCaption"></div>
+                        <div id="snapshotProgressCancelDiv" class="snapshotProgressCancelDiv hidden">
+                            <a id="snapshotProgressCancel" class="snapshotLink" href="#"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

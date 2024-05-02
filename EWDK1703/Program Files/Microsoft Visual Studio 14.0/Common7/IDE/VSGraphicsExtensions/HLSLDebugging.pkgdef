@@ -1,0 +1,35 @@
+[$RootKey$\AD7Metrics\Engine\{5627CEDD-323F-4f83-8197-FB0DE9B9E783}]
+@="guidDxDebugEngine"
+"CLSID"="{AEAE7166-4C78-4278-B5DA-E06A4961D90D}"
+"Attach"=dword:00000000
+"AddressBP"=dword:00000000
+"AutoSelectPriority"=dword:00000004
+"CallstackBP"= dword:00000001
+"Name"="HLSL Trace Debug Engine"
+"Disassembly"=dword:00000001
+"ExcludeManualSelect"=dword:00000001
+"EngineCanWatchProcess"=dword:00000000
+"LoadUnderWOW64"=dword:00000001
+
+[$RootKey$\AD7Metrics\Engine\{5627CEDD-323F-4f83-8197-FB0DE9B9E783}\IncompatibleList]
+"guidCOMPlusNativeEng"="{92EF0900-2251-11D2-B72E-0000F87572EF}"
+"guidCOMPlusOnlyEng"="{449EC4CC-30D2-4032-9256-EE18EB41B62B}"
+"guidNativeOnlyEng"="{449EC4CC-30D2-4032-9256-EE18EB41B62B}"
+"guidScriptEng"="{F200A7E7-DEA5-11D0-B854-00A0244A1DE2}"
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{166A4C3E-8AD0-4465-945A-A97B9BA5AA86}\{994B45C4-E6E9-11D2-903F-00C04FA302A1}]
+"Language"="HLSL"
+"Name"="HLSL"
+
+[$RootKey$\CLSID\{AEAE7166-4C78-4278-B5DA-E06A4961D90D}]
+"Assembly"="DxDebugEngine"
+"Class"="DxDebugEngine.AD7Engine"
+"InprocServer32"="$System$\mscoree.dll"   
+"CodeBase"="$PackageFolder$\DxDebugEngine.dll"
+
+[$RootKey$\CLSID\{75033635-81B6-4ba3-8821-1AAB071C7DE7}]
+"Assembly"="DxDebugEngine"
+"Class"="DxDebugEngine.AD7ProgramProvider"
+"InprocServer32"="$System$\mscoree.dll"   
+"CodeBase"="$PackageFolder$\DxDebugEngine.dll"
+

@@ -1,0 +1,24 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <!-- Find the Windows SDK using the known registry location to find the root -->
+    <WindowsDesktopSdkDir_81A Condition="'$(WindowsDesktopSdkDir_81A)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v8.1A@InstallationFolder)</WindowsDesktopSdkDir_81A>
+    <WindowsDesktopSdkDir_81A Condition="'$(WindowsDesktopSdkDir_81A)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v8.1A@InstallationFolder)</WindowsDesktopSdkDir_81A>
+
+    <WindowsDesktopSdkDir_81 Condition="'$(WindowsDesktopSdkDir_81)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v8.1@InstallationFolder)</WindowsDesktopSdkDir_81>
+    <WindowsDesktopSdkDir_81 Condition="'$(WindowsDesktopSdkDir_81)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v8.1@InstallationFolder)</WindowsDesktopSdkDir_81>
+
+    <!-- Now that we have a candidate, use it unless we already had one or the user has asked that we respect the environment -->
+    <WindowsDesktopSdkDir Condition="'$(UseEnv)' != 'true' or  '$(WindowsDesktopSdkDir)' == ''">$(WindowsDesktopSdkDir_81)</WindowsDesktopSdkDir>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- We intentionally do not set WindowsSdkDir as well as other properties in windows.props since they are not needed for targets used by portable -->
+
+    <!-- Executables are from the Windows Desktop SDK -->
+    <WindowsSDK_ExecutablePath_x86>$(WindowsDesktopSdkDir)bin\x86;</WindowsSDK_ExecutablePath_x86>
+    <WindowsSDK_ExecutablePath_x64>$(WindowsDesktopSdkDir)bin\x64;</WindowsSDK_ExecutablePath_x64>
+  </PropertyGroup>
+
+  <Import Condition="Exists('windows.arm.props')" Project="windows.arm.props"/>
+</Project>

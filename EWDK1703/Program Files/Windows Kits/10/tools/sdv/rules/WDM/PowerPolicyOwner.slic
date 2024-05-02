@@ -1,0 +1,41 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    PowerPolicyOwner
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00080013
+
+Description:
+
+    The PowerPolicyOwner driver property is statisfied if a device driver 
+    calls PoRequestPowerIrpe to send a wait/wake, query, or set-power IRP
+    to the top of the device stack:
+       PoFxRegisterDevice
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkID=218192
+
+--*/
+
+#include "slic_base.h"
+
+
+PoRequestPowerIrp.entry
+{
+    abort "A device power policy owner calls $fname to send a wait/wake, query, or set-power IRP.";
+}
+
+sdv_RunSetPowerUp.exit
+{
+    halt;
+}

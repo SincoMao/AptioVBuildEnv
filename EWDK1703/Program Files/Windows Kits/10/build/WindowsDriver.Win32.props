@@ -1,0 +1,51 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ExecutablePath >$(ExecutablePath);$(WDKContentRoot)bin\x86;$(WDKContentRoot)tools\tracing\x86</ExecutablePath>
+  </PropertyGroup>
+
+  <!-- Default x86 settings across chk and fre -->
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <MinimalRebuild>false</MinimalRebuild>
+      <PreprocessorDefinitions>_X86_=1;i386=1;STD_CALL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_X86_=1;i386=1;STD_CALL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Lib>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Lib>
+  </ItemDefinitionGroup>
+
+  <!-- Default x86 settings across chk and fre -->
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalOptions>/IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <!-- Default x86 link settings for a driver project -->
+  <ItemDefinitionGroup Condition="'$(IsDriverAppToolset)'=='false'">
+    <Link>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(IsKernelModeToolset)'=='true' and '$(_NT_TARGET_VERSION)' &lt; '$(_NT_TARGET_VERSION_WIN8)' and '$(DriverTargetPlatform)' == 'Desktop'">
+    <Link>
+      <AdditionalDependencies>$(DDK_LIB_PATH)memcmp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup>
+    <Midl>
+      <PreprocessorDefinitions>i386;_X86_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-sal /win32  %(AdditionalOptions) </AdditionalOptions>
+    </Midl>
+  </ItemDefinitionGroup>  
+</Project>
+

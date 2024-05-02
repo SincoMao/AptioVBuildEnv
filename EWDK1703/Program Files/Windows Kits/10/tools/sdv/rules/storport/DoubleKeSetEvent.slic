@@ -1,0 +1,44 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DoubleKeSetEvent
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that KeSetEvent is not called twice on the same event object.
+    If the same event object is passed to the routine, the driver fails the rule.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507215
+
+--*/
+
+
+#include "ntddk_slic.h"
+
+state {
+	enum {initial, eventSet} s = initial;
+	int *cur_memory = 0;
+} 
+
+KeSetEvent.entry {
+	if ((s == eventSet) && ($1 == cur_memory)) {
+		abort "$fname was called twice on the same event object.";    
+	}
+	else {
+		cur_memory = $1;
+		s = eventSet;
+	}
+}

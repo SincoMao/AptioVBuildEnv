@@ -1,0 +1,42 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StorPortDeprecated
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the driver does not call any of these deprecated routines:
+    StorPortValidateRange, StorPortLogError.
+	
+    Note: the latter two are only deprecated starting in Win8.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507233
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+[StorPortValidateRange].entry
+{
+	abort "Warning. The $fname routine is deprecated and is a nop.";
+}
+
+[StorPortLogError].entry
+{
+	abort "Warning. The $fname routine is deprecated. Use StorPortLogSystemEvent instead.";
+}

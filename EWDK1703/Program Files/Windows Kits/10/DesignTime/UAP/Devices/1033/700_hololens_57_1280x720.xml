@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device name="HoloLens 2D App" width="1280" height="720" scale="150" size="57" default="true" resize="true" icon="Assets/box_icon.ico" generic="Generic/generic.xaml" MinVersion="10.0.0.0">
+	<Device.Qualifiers>
+		<Qualifier Name="DeviceFamily">HoloLens</Qualifier>
+	</Device.Qualifiers>
+</Device>

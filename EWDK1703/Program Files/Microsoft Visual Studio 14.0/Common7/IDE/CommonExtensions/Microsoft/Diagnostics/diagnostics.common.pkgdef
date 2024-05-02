@@ -1,0 +1,13 @@
+[$RootKey$\Editors\{0CFE1250-6CC8-4267-AEAF-BE5E47391C79}\Extensions]
+"iTrace"=dword:00001000
+[$RootKey$\Editors\{0CFE1250-6CC8-4267-AEAF-BE5E47391C79}]
+@="IntelliTraceEditorFactoryChooser"
+"Package"="{55838653-1598-42E2-B251-B8BF7F864826}"
+"DisplayName"="IntelliTrace editor factory chooser"
+"EditorTrustLevel"=dword:00000000
+[$RootKey$\Packages\{55838653-1598-42E2-B251-B8BF7F864826}]
+@="Microsoft.VisualStudio.Diagnostics.Common.Package.DiagnosticsPackage,Microsoft.VisualStudio.Diagnostics.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"InprocServer32"="$System$\mscoree.dll"
+"Class"="Microsoft.VisualStudio.Diagnostics.Common.Package.DiagnosticsPackage"
+"Assembly"="Microsoft.VisualStudio.Diagnostics.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+

@@ -1,0 +1,54 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DoubleExFreePool
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the driver does not attempt to free the same 
+    block of pool memory twice. The rule keeps track of the memory pointer
+    first passed to ExFreePool. If the same pointer is passed again, the 
+    driver fails the rule. If the driver calls RemoveHeadList or RemoveEntryList,
+    the rule passes.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507214
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+state {
+	enum {INIT, FREED} t = INIT;
+	int *cur_memory = 0;
+}
+
+[RemoveHeadList, RemoveEntryList, sdv_containing_record].entry
+{
+	halt;
+}
+
+ExFreePool.entry
+{
+	if ( (t == FREED) && ($1 == cur_memory) ) {
+		abort "$fname was called twice on the same memory pointer.";
+	}
+	else {
+		t = FREED;
+		cur_memory = $1;
+	}
+}

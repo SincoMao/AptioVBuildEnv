@@ -1,0 +1,104 @@
+<!--
+***********************************************************************************************
+InitialStateRules.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file defines the steps/targets required to build driver projects.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Predefined build properties -->
+  <PropertyGroup>
+
+    <LIB_ARCH Condition="'$(Platform)'!='Win32'">$(Platform)</LIB_ARCH>
+    <LIB_ARCH Condition="'$(Platform)'=='Win32'">x86</LIB_ARCH>
+	
+    <TARGET_DIRECTORY Condition="'$(Platform)'!='Win32'">$(Platform)</TARGET_DIRECTORY> <!-- Used to always be i386, amd64 or ia64 -->
+    <TARGET_DIRECTORY Condition="'$(Platform)'=='Win32'">x86</TARGET_DIRECTORY>
+	
+    <InfArch>$(Platform)</InfArch>
+    <InfArch Condition="'$(Platform)'=='Win32'">x86</InfArch>
+    <InfArch Condition="'$(Platform)'=='x64'">amd64</InfArch>
+	
+    <_NT_TARGET_VERSION_WINXP>$(_NT_TARGET_VERSION_VISTA)</_NT_TARGET_VERSION_WINXP> <!-- Not supported by toolset, upgrade to Vista by default -->
+    <_NT_TARGET_VERSION_WS03>$(_NT_TARGET_VERSION_VISTA)</_NT_TARGET_VERSION_WS03>
+    <_NT_TARGET_VERSION_WLH>$(_NT_TARGET_VERSION_VISTA)</_NT_TARGET_VERSION_WLH>
+  
+	
+    <DDK_TARGET_OS>WinLH</DDK_TARGET_OS>
+    <DDK_TARGET_OS Condition="$(_NT_TARGET_VERSION)==$(_NT_TARGET_VERSION_WIN8)">Win8</DDK_TARGET_OS>
+    <DDK_TARGET_OS Condition="$(_NT_TARGET_VERSION)==$(_NT_TARGET_VERSION_WIN7)">Win7</DDK_TARGET_OS>
+    
+    <HOST_TARGETCPU>$(InfArch)</HOST_TARGETCPU>
+    
+    <_BUILDARCH >$(InfArch)</_BUILDARCH>
+    
+    <RAZZLETOOLPATH>$(WDKContentRoot)\bin</RAZZLETOOLPATH>
+    
+    <!-- Build Paths -->
+    <O>$(IntDir)</O>
+    <OBJ_PATH>.</OBJ_PATH>          <!-- Will CD to $(ProjectDir) in the first task in a converted project -->
+    <_OBJ_DIR>$(IntDir)</_OBJ_DIR>
+
+    <!-- ATL_LIB_PATH\foo.lib needs to be repalced to foo.lib. But since ATL_LIB_PATH evaluates to empty but leaves a slashes in the path. 
+    So ATL_LIB_PATH needs to be populated with some random value as a place holder not to replace any slash accidentally.-->
+    <ATL_LIB_PATH Condition="'$(ATL_LIB_PATH)'==''">DUMMY_ATL_LIB_PATH$([System.Guid]::NewGuid())</ATL_LIB_PATH>
+    <DDK_LIB_PATH Condition="'$(DDK_LIB_PATH)'==''">DUMMY_DDK_LIB_PATH$([System.Guid]::NewGuid())</DDK_LIB_PATH>
+
+    <IFSKIT_LIB_PATH>$(DDK_LIB_PATH)</IFSKIT_LIB_PATH>
+    <IFSKIT_INC_PATH>$(DDK_INC_PATH)</IFSKIT_INC_PATH>
+
+     <!-- Default valud for some properties as well as relevant properties not set by the platform tooset, as these are not used in thew new build environment-->
+
+    <CPU>$(PROCESSOR_ARCHITECTURE)</CPU>            <!-- From the environment variable -->
+   
+    <!-- Msbuild does not support property names that begin with a number. Hence 386 is not valid. The conversion tool
+         prepends CoercedMacro_ to such macro names -->
+    <CoercedMacro_386 Condition="'$(Platform)'=='win32'">1</CoercedMacro_386> 
+    <ARM Condition="'$(Platform)'=='Arm'">1</ARM>
+    <AMD64 Condition="'$(Platform)'=='x64'">1</AMD64>
+    <WIN64>$(AMD64)</WIN64>
+   
+    <DDKBUILDENV Condition="'$(UseDebugLibraries)'=='False'">fre</DDKBUILDENV>
+    <DDKBUILDENV Condition="'$(UseDebugLibraries)'=='True'"  >chk</DDKBUILDENV>
+
+    <FREEBUILD Condition="'$(UseDebugLibraries)'=='False'">1</FREEBUILD>
+    <FREEBUILD Condition="'$(UseDebugLibraries)'=='True'" >0</FREEBUILD>
+    
+    <PUBLIC_ROOT>$(WDKContentRoot)</PUBLIC_ROOT>
+    
+    <USE_OBJECT_ROOT>1</USE_OBJECT_ROOT>
+
+    <BASEDIR>$(WDKContentRoot)</BASEDIR>
+    
+    <NTDEBUG>ntsdnodbg</NTDEBUG>
+    
+    <MSC_WARNING_LEVEL>/W3</MSC_WARNING_LEVEL>  <!-- Assign the default value-->
+
+
+    <_IsNativeEnvironment Condition="'$(PROCESSOR_ARCHITECTURE)' == 'AMD64' and '$(Platform)' == 'X64'">true</_IsNativeEnvironment>    
+
+    <MC>mc.exe</MC>
+    <MC Condition="'$(_IsNativeEnvironment)' == 'true'">&quot;$(WDKContentRoot)\bin\x64\mc.exe&quot;</MC>
+    <MC Condition="'$(_IsNativeEnvironment)' != 'true'">&quot;$(WDKContentRoot)\bin\x86\mc.exe&quot;</MC>
+    
+    <MC_WINMETAPATH>&quot;$(SDK_INC_PATH)\winmeta.xml&quot;</MC_WINMETAPATH>
+    
+    <!-- The following is used in postToolsetRules.props to determine if RUN_WPP is ever defined in sources,
+    even if it is set to empty. -->
+    <INITIAL_RUN_WPP>DUMMY_RUN_WPP$([System.Guid]::NewGuid())</INITIAL_RUN_WPP>
+    <RUN_WPP>$(INITIAL_RUN_WPP)</RUN_WPP>
+
+    
+  </PropertyGroup>
+</Project>
+
+
+

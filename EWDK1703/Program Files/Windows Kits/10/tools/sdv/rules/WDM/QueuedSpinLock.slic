@@ -1,0 +1,76 @@
+/*++
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    QueuedSpinLock
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00040006
+    
+Description: 
+
+    This rule verifies that calls to
+    KeAcquireInStackQueuedSpinLock and
+    KeReleaseInStackQueuedSpinLock are used in strict alternation.
+    Moreover, at the end of a dispatch or cancel routine, the
+    driver should not hold the queued spinlock.
+    The lock handle is tracked (a.k.a., TRACKED_OBJECT).
+    
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216058
+    
+--*/
+
+#include "slic_base.h"
+
+state{
+   enum {initial,locked} s = initial;
+}
+watch KeAcquireInStackQueuedSpinLock.entry.$2;
+watch KeAcquireInStackQueuedSpinLockAtDpcLevel@XDV.entry.$2;
+
+[
+  KeAcquireInStackQueuedSpinLock,
+  KeAcquireInStackQueuedSpinLockAtDpcLevel@XDV
+].entry [guard $2]
+{   
+        if (s == locked) {
+            abort "The driver is calling $fname after already acquiring the queued spinlock.";
+        } else {
+            s = locked;
+        }
+}
+
+[
+  KeReleaseInStackQueuedSpinLock,
+  KeReleaseInStackQueuedSpinLockFromDpcLevel@XDV
+].entry [guard $1]
+{
+        if (s != locked) {
+            abort "The driver is calling $fname without first acquiring the queued spinlock.";
+        } else {
+            s = initial;
+            halt "XDV_CLEAN_STATE";
+        }
+}
+
+[SDV_STANDARD_DRIVER_ROUTINES].exit
+{
+        if(s == locked) {
+            abort "The dispatch routine has returned without releasing a queued spinlock.";
+        }
+}
+
+[SDV_SPECIAL_DRIVER_ROUTINES]@SDV.exit
+{
+        if(s == locked) {
+            abort "The dispatch routine has returned without releasing a queued spinlock.";
+        }
+}

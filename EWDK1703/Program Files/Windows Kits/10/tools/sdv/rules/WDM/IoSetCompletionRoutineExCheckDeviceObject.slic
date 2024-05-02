@@ -1,0 +1,42 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoSetCompletionRoutineExCheckDeviceObject
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    If the current device object is not passed to IoSetCompletionRoutineEx and the lower device object is. 
+    Then this can lead to a race condition where the current device object could be unloaded even though the completion routine has not run.
+	
+
+    Background:
+    If the current device object is not passed to IoSetCompletionRoutineEx and the lower device object is. 
+    Then this can lead to a race condition where the current device object could be unloaded even though the completion routine has not run.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507275
+
+--*/
+
+
+#include "slic_base.h"
+
+IoSetCompletionRoutineEx.entry
+{
+     if ($1!=sdv_p_devobj_fdo) 
+     {
+        abort "If the current device object is not passed to $fname and the lower device object is. Then this can lead to a race condition where the current device object could be unloaded even though the completion routine has not run.";
+     }
+}

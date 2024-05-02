@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <Rule Name="ApiValidator" PageTemplate="tool" DisplayName="ApiValidator"  Order="310">
+    <Rule.Categories>
+      <Category Name="General">
+        <Category.DisplayName>
+          <sys:String>General</sys:String>
+        </Category.DisplayName>
+      </Category>
+      <Category Name="Command Line" Subtype="CommandLine">
+        <Category.DisplayName>
+          <sys:String>Command Line</sys:String>
+        </Category.DisplayName>
+      </Category>
+    </Rule.Categories>
+    <Rule.DataSource>
+      <DataSource Persistence="ProjectFile" HasConfigurationCondition="true"/>
+    </Rule.DataSource>
+    <BoolProperty Name="ApiValidator_Enable" DisplayName="Run ApiValidator" Description="Run the ApiValidator tool on driver files in the project" Category="General"/>
+    <StringProperty Name="ApiValidator_DriverPackagePath" Category="General" Visible ="False" Switch="-DriverPackagePath:" >
+      <StringProperty.DisplayName>
+        <sys:String>Driver Package Path</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Path to a folder containing driver package to be checked. (-DriverPackagePath:[DriverFolder]) </sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="ApiValidator_SupportedApisFile" Category="General" Switch="-SupportedApiXmlFiles:">
+      <StringProperty.DisplayName>
+        <sys:String>Supported Apis File</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Path to XML files containing supported APIs for universal drivers. (-SupportedApiXmlFiles:[SupportedApiFilePath]) </sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+	<StringProperty Name="ApiValidator_ModuleWhiteListFile" Category="General" Switch="-ModuleWhiteListXmlFiles:">
+      <StringProperty.DisplayName>
+        <sys:String>White List Files</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Path to XML files containing modules that should be excluded from validation. (-ModuleWhiteListXmlFiles:[ModuleWhiteListFilePath]) </sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="ApiValidator_ApiExtractorExePath" Category="General" Visible ="False" Switch="-ApiExtractorExePath:">
+      <StringProperty.DisplayName>
+        <sys:String>Api Extractor Exe Path</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Path to the Api Extractor Exe (AitStatic.exe) (-ApiExtractorExePath:[ApiExtractorExeFolderPath]) </sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="AdditionalOptions" Category="Command Line" F1Keyword="vc.project.AdditionalOptionsPage">
+      <StringProperty.DisplayName>
+        <sys:String>Additional Options</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Additional Options</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+  </Rule>
+</ProjectSchemaDefinitions>

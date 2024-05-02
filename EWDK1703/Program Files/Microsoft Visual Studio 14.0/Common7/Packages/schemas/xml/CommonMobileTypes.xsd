@@ -1,0 +1,990 @@
+﻿<xsd:schema 
+	xmlns:xsd='http://www.w3.org/2001/XMLSchema' 
+	xmlns:vs='http://schemas.microsoft.com/Visual-Studio-Intellisense'>
+
+	<!-- Attributes inherrited from WebControl -->
+	<xsd:attributeGroup name="WebControlAttributes">
+		<xsd:attribute name="ClientIDMode" type="System.Web.UI.ClientIDModeDef" vs:category="Behavior" default="Inherit" />
+		<xsd:attribute name="EnableTheming" type="xsd:boolean" vs:nonbrowseable="true" vs:category="Behavior" vs:disallowedonmobilepages="true" />
+		<xsd:attribute name="EnableViewState" type="xsd:boolean" vs:category="Behavior" />
+		<xsd:attribute name="ID" type="xsd:string" />
+		<xsd:attribute name="Visible" type="xsd:boolean" vs:category="Behavior" />
+		<xsd:attribute name="Runat" use="required" type="RunatType" />
+		<xsd:attribute name="SkinID" type="xsd:string" vs:nonbrowseable="true" vs:category="Behavior" vs:disallowedonmobilepages="true" />
+
+		<!-- Events --> 
+		<xsd:attribute name="OnInit" vs:omtype="event" />
+		<xsd:attribute name="OnUnload" vs:omtype="event" />
+		<xsd:attribute name="OnDisposed" vs:omtype="event" />
+		<xsd:attribute name="OnPreRender" vs:omtype="event" />
+		<xsd:attribute name="OnLoad" vs:omtype="event" />
+		<xsd:attribute name="OnDataBinding" vs:omtype="event" vs:category="Data" />
+	</xsd:attributeGroup>
+
+	<!-- Style Attributes -->
+	<xsd:attributeGroup name="StyleAttributes">
+		<!-- BEGIN SYNC: PagerStyleAttributes, CommandStyleAttributes, LabelStyleAttributes -->
+		<xsd:attribute name="StyleReference" type="xsd:string" vs:category="Appearance" />
+		<xsd:attribute name="Font-Name" type="xsd:string" vs:category="Appearance" />
+		<xsd:attribute name="Font-Size" vs:category="Appearance">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="NotSet" />
+					<xsd:enumeration value="Normal" />
+					<xsd:enumeration value="Small" />
+					<xsd:enumeration value="Large" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="Font-Bold" vs:category="Appearance">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="NotSet" />
+					<xsd:enumeration value="False" />
+					<xsd:enumeration value="True" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="Font-Italic" vs:category="Appearance">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="NotSet" />
+					<xsd:enumeration value="False" />
+					<xsd:enumeration value="True" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="ForeColor" type="xsd:string" vs:builder="color" vs:category="Appearance" />
+		<xsd:attribute name="BackColor" type="xsd:string" vs:builder="color" vs:category="Appearance" />
+		<xsd:attribute name="Alignment" vs:category="Appearance">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="NotSet" />
+					<xsd:enumeration value="Left" />
+					<xsd:enumeration value="Center" />
+					<xsd:enumeration value="Right" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="Wrapping" vs:category="Appearance">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="NotSet" />
+					<xsd:enumeration value="Wrap" />
+					<xsd:enumeration value="NoWrap" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<!-- END SYNC -->
+	</xsd:attributeGroup>
+
+	<!-- LabelStyle Attributes -->
+	<xsd:attributeGroup name="LabelStyleAttributes">
+		<!-- BEGIN SYNC: StyleAttributes -->
+		<xsd:attribute name="LabelStyle-StyleReference" type="xsd:string" vs:category="Appearance" />
+		<xsd:attribute name="LabelStyle-Font-Name" type="xsd:string" vs:category="Appearance" />
+		<xsd:attribute name="LabelStyle-Font-Size" vs:category="Appearance">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="NotSet" />
+					<xsd:enumeration value="Normal" />
+					<xsd:enumeration value="Small" />
+					<xsd:enumeration value="Large" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="LabelStyle-Font-Bold" vs:category="Appearance">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="NotSet" />
+					<xsd:enumeration value="False" />
+					<xsd:enumeration value="True" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="LabelStyle-Font-Italic" vs:category="Appearance">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="NotSet" />
+					<xsd:enumeration value="False" />
+					<xsd:enumeration value="True" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="LabelStyle-ForeColor" type="xsd:string" vs:builder="color" vs:category="Appearance" />
+		<xsd:attribute name="LabelStyle-BackColor" type="xsd:string" vs:builder="color" vs:category="Appearance" />
+		<xsd:attribute name="LabelStyle-Alignment" vs:category="Appearance">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="NotSet" />
+					<xsd:enumeration value="Left" />
+					<xsd:enumeration value="Center" />
+					<xsd:enumeration value="Right" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="LabelStyle-Wrapping" vs:category="Appearance">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="NotSet" />
+					<xsd:enumeration value="Wrap" />
+					<xsd:enumeration value="NoWrap" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<!-- END SYNC -->
+	</xsd:attributeGroup>
+
+		<!-- CommandStyle Attributes -->
+		<xsd:attributeGroup name="CommandStyleAttributes">
+				<!-- BEGIN SYNC: StyleAttributes -->
+				<xsd:attribute name="CommandStyle-StyleReference" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="CommandStyle-Font-Name" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="CommandStyle-Font-Size" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="NotSet" />
+										<xsd:enumeration value="Normal" />
+										<xsd:enumeration value="Small" />
+										<xsd:enumeration value="Large" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="CommandStyle-Font-Bold" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="NotSet" />
+										<xsd:enumeration value="False" />
+										<xsd:enumeration value="True" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="CommandStyle-Font-Italic" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="NotSet" />
+										<xsd:enumeration value="False" />
+										<xsd:enumeration value="True" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="CommandStyle-ForeColor" type="xsd:string" vs:builder="color" vs:category="Appearance" />
+				<xsd:attribute name="CommandStyle-BackColor" type="xsd:string" vs:builder="color" vs:category="Appearance" />
+				<xsd:attribute name="CommandStyle-Alignment" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="NotSet" />
+										<xsd:enumeration value="Left" />
+										<xsd:enumeration value="Center" />
+										<xsd:enumeration value="Right" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="CommandStyle-Wrapping" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="NotSet" />
+										<xsd:enumeration value="Wrap" />
+										<xsd:enumeration value="NoWrap" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<!-- END SYNC -->
+		</xsd:attributeGroup>
+		<!-- PagerStyle Attributes -->
+		<xsd:attributeGroup name="PagerStyleAttributes">
+				<!-- BEGIN SYNC: StyleAttributes -->
+				<xsd:attribute name="PagerStyle-StyleReference" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="PagerStyle-Font-Name" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="PagerStyle-Font-Size" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="NotSet" />
+										<xsd:enumeration value="Normal" />
+										<xsd:enumeration value="Small" />
+										<xsd:enumeration value="Large" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="PagerStyle-Font-Bold" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="NotSet" />
+										<xsd:enumeration value="False" />
+										<xsd:enumeration value="True" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="PagerStyle-Font-Italic" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="NotSet" />
+										<xsd:enumeration value="False" />
+										<xsd:enumeration value="True" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="PagerStyle-ForeColor" type="xsd:string" vs:builder="color" vs:category="Appearance" />
+				<xsd:attribute name="PagerStyle-BackColor" type="xsd:string" vs:builder="color" vs:category="Appearance" />
+				<xsd:attribute name="PagerStyle-Alignment" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="NotSet" />
+										<xsd:enumeration value="Left" />
+										<xsd:enumeration value="Center" />
+										<xsd:enumeration value="Right" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="PagerStyle-Wrapping" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="NotSet" />
+										<xsd:enumeration value="Wrap" />
+										<xsd:enumeration value="NoWrap" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<!-- END SYNC -->
+				<xsd:attribute name="PagerStyle-Name" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="PagerStyle-NextPageText" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="PagerStyle-PreviousPageText" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="PagerStyle-PageLabel" type="xsd:string" vs:category="Appearance" />
+		</xsd:attributeGroup>
+		<!-- Attributes inherrited from MobileControl -->
+		<xsd:attributeGroup name="MobileControlAttributes">
+				<!-- NOTE: Mobile:Form does not inherrit to avoid inherriting
+						 BreakAfter -->
+				<xsd:attributeGroup ref="StyleAttributes" />
+				<xsd:attributeGroup ref="WebControlAttributes" />
+				<xsd:attribute name="BreakAfter" type="boolean" vs:category="Behavior" />
+		</xsd:attributeGroup>
+		<!-- Attributes inherrited from TextControl -->
+		<xsd:attributeGroup name="TextControlAttributes">
+				<xsd:attribute name="Text" type="xsd:string" vs:nonbrowseable="true" vs:category="Appearance" />
+				<xsd:attributeGroup ref="MobileControlAttributes" />
+		</xsd:attributeGroup>
+		<!-- Attributes inherrited from PagedControl -->
+		<xsd:attributeGroup name="PagedControlAttributes">
+				<xsd:attributeGroup ref="MobileControlAttributes" />
+				<xsd:attribute name="ItemsPerPage" type="UI4" vs:category="Paging" />
+				<xsd:attribute name="OnLoadItems" vs:omtype="event" vs:category="Paging" />
+				<xsd:attribute name="ItemCount" type="UI4" vs:category="Paging" />
+		</xsd:attributeGroup>
+		<!-- Attributes inherrited from BaseValidator -->
+		<xsd:attributeGroup name="BaseValidatorAttributes">
+				<xsd:attributeGroup ref="TextControlAttributes" />
+				<xsd:attribute name="ErrorMessage" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="ControlToValidate" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="Display" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="None" />
+										<xsd:enumeration value="Static" />
+										<xsd:enumeration value="Dynamic" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+		</xsd:attributeGroup>
+		<!-- <mobile:Form> -->
+		<xsd:complexType name="FormType" mixed="true">
+				<!-- Does not inherrit from MobileControlAttributes to avoid
+						 inherriting BreakAfter -->
+				<xsd:attributeGroup ref="StyleAttributes" />
+				<xsd:attributeGroup ref="WebControlAttributes" />
+				<xsd:attributeGroup ref="PagerStyleAttributes" />
+				<xsd:attribute name="Action" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="Method" vs:category="Behavior">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Get" />
+										<xsd:enumeration value="Post" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="Paginate" type="boolean" vs:category="Behavior" />
+				<xsd:attribute name="Title" type="xsd:string" vs:category="Appearance" />
+	<!-- Events --> 
+				<xsd:attribute name="OnActivate" type="xsd:string" vs:omtype="event" vs:category="Action" />
+				<xsd:attribute name="OnDeactivate" type="xsd:string" vs:omtype="event" vs:category="Action" />
+				<xsd:attribute name="OnPaginated" type="xsd:string" vs:omtype="event" vs:category="Action" />
+				<xsd:choice>
+						<!-- Form, Panel, Nested Literals and Template need to be kept in sync -->
+						<xsd:element name="Label" type="LabelType" />
+						<xsd:element name="TextBox" type="TextBoxType" />
+						<xsd:element name="PhoneCall" type="PhoneCallType" />
+						<xsd:element name="Command" type="CommandType" />
+						<xsd:element name="Link" type="LinkType" />
+						<xsd:element name="Panel" type="PanelType" />
+						<xsd:element name="Image" type="ImageType" />
+						<xsd:element name="TextView" type="TextViewType" />
+						<xsd:element name="List" type="ListType" />
+						<xsd:element name="SelectionList" type="SelectionListType" />
+						<xsd:element name="ObjectList" type="ObjectListType" />
+						<xsd:element name="AdRotator" type="AdRotatorType" />
+						<xsd:element name="Calendar" type="CalendarType" />
+						<xsd:element name="RangeValidator" type="RangeValidatorType" />
+						<xsd:element name="RequiredFieldValidator" type="RequiredFieldValidatorType" />
+						<xsd:element name="CompareValidator" type="CompareValidatorType" />
+						<xsd:element name="RegularExpressionValidator" type="RegularExpressionValidatorType" />
+						<xsd:element name="CustomValidator" type="CustomValidatorType" />
+						<xsd:element name="ValidationSummary" type="ValidationSummaryType" />
+						<!-- End sync -->
+						<xsd:element name="DeviceSpecific" type="FormDeviceSpecificType" />
+						<xsd:element name="a" type="aNestedType" form="unqualified" />
+						<xsd:element name="b" type="bNestedType" form="unqualified" />
+						<xsd:element name="br" type="brType" form="unqualified" />
+						<xsd:element name="i" type="iNestedType" form="unqualified" />
+						<xsd:element name="p" type="pNestedType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:Panel> -->
+		<xsd:complexType name="PanelType" mixed="true">
+				<xsd:attributeGroup ref="MobileControlAttributes" />
+				<xsd:attribute name="Paginate" type="boolean" vs:category="Behavior" />
+				<xsd:choice>
+						<!-- Form, Panel, Nested Literals and Template need to be kept in sync -->
+						<xsd:element name="Label" type="LabelType" />
+						<xsd:element name="TextBox" type="TextBoxType" />
+						<xsd:element name="PhoneCall" type="PhoneCallType" />
+						<xsd:element name="Command" type="CommandType" />
+						<xsd:element name="Link" type="LinkType" />
+						<xsd:element name="Panel" type="PanelType" />
+						<xsd:element name="Image" type="ImageType" />
+						<xsd:element name="TextView" type="TextViewType" />
+						<xsd:element name="List" type="ListType" />
+						<xsd:element name="SelectionList" type="SelectionListType" />
+						<xsd:element name="ObjectList" type="ObjectListType" />
+						<xsd:element name="AdRotator" type="AdRotatorType" />
+						<xsd:element name="Calendar" type="CalendarType" />
+						<xsd:element name="RangeValidator" type="RangeValidatorType" />
+						<xsd:element name="RequiredFieldValidator" type="RequiredFieldValidatorType" />
+						<xsd:element name="CompareValidator" type="CompareValidatorType" />
+						<xsd:element name="RegularExpressionValidator" type="RegularExpressionValidatorType" />
+						<xsd:element name="CustomValidator" type="CustomValidatorType" />
+						<xsd:element name="ValidationSummary" type="ValidationSummaryType" />
+						<!-- End sync -->
+						<xsd:element name="DeviceSpecific" type="PanelDeviceSpecificType" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <Template> -->
+		<xsd:complexType name="TemplateType" mixed="true" vs:parsechildren="true" vs:itemplatederived="true" vs:additionalchildcontent="http://schemas.microsoft.com/AspNet/WebControls">
+				<xsd:choice>
+						<!-- Form, Panel, Nested Literals and Template need to be kept in sync -->
+						<xsd:element name="Label" type="LabelType" />
+						<xsd:element name="TextBox" type="TextBoxType" />
+						<xsd:element name="PhoneCall" type="PhoneCallType" />
+						<xsd:element name="Command" type="CommandType" />
+						<xsd:element name="Link" type="LinkType" />
+						<xsd:element name="Panel" type="PanelType" />
+						<xsd:element name="Image" type="ImageType" />
+						<xsd:element name="TextView" type="TextViewType" />
+						<xsd:element name="List" type="ListType" />
+						<xsd:element name="SelectionList" type="SelectionListType" />
+						<xsd:element name="ObjectList" type="ObjectListType" />
+						<xsd:element name="AdRotator" type="AdRotatorType" />
+						<xsd:element name="Calendar" type="CalendarType" />
+						<xsd:element name="RangeValidator" type="RangeValidatorType" />
+						<xsd:element name="RequiredFieldValidator" type="RequiredFieldValidatorType" />
+						<xsd:element name="CompareValidator" type="CompareValidatorType" />
+						<xsd:element name="RegularExpressionValidator" type="RegularExpressionValidatorType" />
+						<xsd:element name="CustomValidator" type="CustomValidatorType" />
+						<xsd:element name="ValidationSummary" type="ValidationSummaryType" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:Label> -->
+		<xsd:complexType name="LabelType" mixed="true">
+				<xsd:attributeGroup ref="TextControlAttributes" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:TextBox> -->
+		<xsd:complexType name="TextBoxType" mixed="true">
+				<xsd:attributeGroup ref="TextControlAttributes" />
+				<xsd:attribute name="Size" type="UI4" vs:category="Behavior" />
+				<xsd:attribute name="Numeric" type="boolean" vs:category="Behavior" />
+				<xsd:attribute name="MaxLength" type="UI4" vs:category="Behavior" />
+				<xsd:attribute name="Password" type="boolean" vs:category="Behavior" />
+				<xsd:attribute name="Title" type="xsd:string" vs:category="Appearance" />
+	<!-- Events -->
+				<xsd:attribute name="OnTextChanged" vs:omtype="event" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:Call> -->
+		<xsd:complexType name="PhoneCallType" mixed="true">
+				<xsd:attributeGroup ref="TextControlAttributes" />
+				<xsd:attribute name="AlternateFormat" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="PhoneNumber" type="xsd:string" vs:category="Navigation" />
+				<xsd:attribute name="AlternateUrl" type="xsd:anyURI" vs:category="Navigation" />
+				<xsd:attribute name="SoftKeyLabel" type="xsd:string" vs:category="Behavior" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:Command> -->
+		<xsd:complexType name="CommandType" mixed="true">
+				<xsd:attributeGroup ref="TextControlAttributes" />
+				<xsd:attribute name="SoftkeyLabel" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="CausesValidation" type="boolean" vs:category="Behavior" />
+				<xsd:attribute name="CommandName" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="CommandArgument" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="ImageUrl" type="xsd:anyURI" vs:category="Appearance" />
+				<xsd:attribute name="Format">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Button" />
+										<xsd:enumeration value="Link" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+	<!-- Events -->
+				<xsd:attribute name="OnClick" vs:omtype="event" vs:category="Action" />
+				<xsd:attribute name="OnItemCommand" vs:omtype="event" vs:category="Action" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:Link> -->
+		<xsd:complexType name="LinkType" mixed="true">
+				<xsd:attributeGroup ref="TextControlAttributes" />
+				<xsd:attribute name="SoftkeyLabel" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="NavigateUrl" type="xsd:anyURI" vs:category="Navigation" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:StyleSheet> -->
+		<xsd:complexType name="StyleSheetType">
+				<xsd:attribute name="ID" type="xsd:string" />
+				<xsd:attribute name="ReferencePath" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="Runat" type="RunatType" />
+				<xsd:choice>
+						<xsd:element name="Style" type="StyleType" />
+						<xsd:element name="PagerStyle" type="PagerStyleType" form="unqualified"/>
+				</xsd:choice>
+	<!-- Events --> 
+				<xsd:attribute name="OnInit" vs:omtype="event" />
+				<xsd:attribute name="OnUnload" vs:omtype="event" />
+				<xsd:attribute name="OnDisposed" vs:omtype="event" />
+				<xsd:attribute name="OnPreRender" vs:omtype="event" />
+				<xsd:attribute name="OnLoad" vs:omtype="event" />
+				<xsd:attribute name="OnDataBinding" vs:omtype="event" vs:category="Data" />
+		</xsd:complexType>
+		<!-- <mobile:Image> -->
+		<xsd:complexType name="ImageType">
+				<xsd:attributeGroup ref="MobileControlAttributes" />
+				<xsd:attribute name="AlternateText" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="ImageUrl" type="xsd:anyURI" vs:category="Appearance" />
+				<xsd:attribute name="NavigateUrl" type="xsd:anyURI" vs:category="Navigation" />
+				<xsd:attribute name="SoftKeyLabel" type="xsd:string" vs:category="Behavior" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:TextView> -->
+		<xsd:complexType name="TextViewType" mixed="true">
+				<xsd:attributeGroup ref="MobileControlAttributes" />
+				<xsd:attribute name="OnLoadItems" vs:omtype="event" />
+				<xsd:attribute name="Text" type="xsd:string" vs:nonbrowseable="true" vs:category="Appearance" />
+				<xsd:choice>
+						<xsd:element name="a" type="aType" form="unqualified" />
+						<xsd:element name="b" type="bType" form="unqualified" />
+						<xsd:element name="br" type="brType" form="unqualified" />
+						<xsd:element name="i" type="iType" form="unqualified" />
+						<xsd:element name="p" type="pType" form="unqualified" />
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:List> -->
+		<xsd:complexType name="ListType">
+				<xsd:attributeGroup ref="PagedControlAttributes" />
+				<xsd:attribute name="Decoration" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="None" />
+										<xsd:enumeration value="Bulleted" />
+										<xsd:enumeration value="Numbered" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="DataSource" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="DataTextField" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="DataMember" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="DataValueField" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="ItemsAsLinks" type="boolean" vs:category="Behavior" />
+				<xsd:choice>
+						<xsd:element name="Item" type="MobileListItemType" form="unqualified" />
+						<xsd:element name="DeviceSpecific" type="ListDeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+	<!-- Events -->
+				<xsd:attribute name="OnItemCommand" vs:omtype="event" vs:category="Action" />
+				<xsd:attribute name="OnItemDataBind" vs:omtype="event" vs:category="Action" />
+		</xsd:complexType>
+		<!-- <mobile:SelectionList> -->
+		<xsd:complexType name="SelectionListType">
+				<xsd:attributeGroup ref="MobileControlAttributes" />
+				<xsd:attribute name="SelectType" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="DropDown" />
+										<xsd:enumeration value="ListBox" />
+										<xsd:enumeration value="Radio" />
+										<xsd:enumeration value="MultiSelectListBox" />
+										<xsd:enumeration value="CheckBox" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="Rows" type="i4" vs:category="Appearance" />
+				<xsd:attribute name="DataSource" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="DataTextField" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="DataValueField" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="DataMember" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="DataValueField" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="Title" type="xsd:string" vs:category="Appearance" />
+				<xsd:choice>
+						<xsd:element name="Item" type="MobileSelectionListItemType" form="unqualified" />
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+	<!-- Events -->
+				<xsd:attribute name="OnItemDataBind" vs:omtype="event" vs:category="Action" />
+				<xsd:attribute name="OnSelectedIndexChanged" vs:omtype="event" vs:category="Action" />
+		</xsd:complexType>
+		<!-- <mobile:ObjectList> -->
+		<xsd:complexType name="ObjectListType">
+				<xsd:attributeGroup ref="PagedControlAttributes" />
+				<xsd:attributeGroup ref="LabelStyleAttributes" />
+				<xsd:attributeGroup ref="CommandStyleAttributes" />
+				<xsd:attribute name="DefaultCommand" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="DataSource" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="DataMember" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="AutoGenerateFields" type="boolean" vs:category="Behavior" />
+				<xsd:attribute name="TableFields" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="LabelField" type="xsd:string" vs:category="Data" />
+				<xsd:attribute name="BackCommandText" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="DetailsCommandText" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="MoreText" type="xsd:string" vs:category="Appearance" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="ObjectListDeviceSpecificType" form="unqualified" />
+						<xsd:element name="Field" type="ObjectListFieldType" form="unqualified" />
+						<xsd:element name="Command" type="ObjectListCommandType" form="unqualified" />
+				</xsd:choice>
+	<!-- Events -->
+				<xsd:attribute name="OnItemCommand" vs:omtype="event" />
+				<xsd:attribute name="OnItemSelect" vs:omtype="event" />
+				<xsd:attribute name="OnShowItemCommands" vs:omtype="event" />
+				<xsd:attribute name="OnItemDataBind" vs:omtype="event" />
+		</xsd:complexType>
+		<!-- <mobile:AdRotator> -->
+		<xsd:complexType name="AdRotatorType">
+				<xsd:attributeGroup ref="MobileControlAttributes" />
+				<xsd:attribute name="KeywordFilter" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="AdvertisementFile" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="ImageKey" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="NavigateUrlKey" type="xsd:string" vs:category="Behavior" />
+			 <xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+	<!-- Events -->
+				<xsd:attribute name="OnAdCreated" vs:omtype="event" vs:category="Action" />
+		</xsd:complexType>
+		<!-- <mobile:Calendar> -->
+		<xsd:complexType name="CalendarType">
+				<xsd:attributeGroup ref="MobileControlAttributes" />
+				<xsd:attribute name="VisibleDate" type="xsd:string" />
+				<xsd:attribute name="SelectionMode" vs:category="Behavior">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="None" />
+										<xsd:enumeration value="Day" />
+										<xsd:enumeration value="DayWeek" />
+										<xsd:enumeration value="DayWeekMonth" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="FirstDayOfWeek" vs:category="Appearance">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Sunday" />
+										<xsd:enumeration value="Monday" />
+										<xsd:enumeration value="Tuesday" />
+										<xsd:enumeration value="Wednesday" />
+										<xsd:enumeration value="Thursday" />
+										<xsd:enumeration value="Friday" />
+										<xsd:enumeration value="Saturday" />
+										<xsd:enumeration value="Default" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="ShowDayHeader" type="boolean" vs:category="Appearance" />
+				<xsd:attribute name="SelectedDate" type="xsd:string" />
+				<xsd:attribute name="CalendarEntryText" type="xsd:string" vs:category="Appearance" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+	<!-- Events -->
+				<xsd:attribute name="OnSelectionChanged" vs:omtype="event" vs:category="Action" />
+		</xsd:complexType>
+		<!-- <mobile:RangeValidator> -->
+		<xsd:complexType name="RangeValidatorType" mixed="true">
+				<xsd:attributeGroup ref="BaseValidatorAttributes" />
+				<xsd:attribute name="Type" vs:category="Behavior">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="String" />
+										<xsd:enumeration value="Integer" />
+										<xsd:enumeration value="Double" />
+										<xsd:enumeration value="Date" />
+										<xsd:enumeration value="Currency" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="MinimumValue" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="MaximumValue" type="xsd:string" vs:category="Behavior" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:RequiredFieldValidator> -->
+		<xsd:complexType name="RequiredFieldValidatorType" mixed="true">
+				<xsd:attributeGroup ref="BaseValidatorAttributes" />
+				<xsd:attribute name="InitialValue" type="xsd:string" vs:category="Behavior" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:CompareValidator> -->
+		<xsd:complexType name="CompareValidatorType" mixed="true">
+				<xsd:attributeGroup ref="BaseValidatorAttributes" />
+				<xsd:attribute name="Type" vs:category="Behavior">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="String" />
+										<xsd:enumeration value="Integer" />
+										<xsd:enumeration value="Double" />
+										<xsd:enumeration value="Date" />
+										<xsd:enumeration value="Currency" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="Operator" vs:category="Behavior">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Equal" />
+										<xsd:enumeration value="NotEqual" />
+										<xsd:enumeration value="GreaterThan" />
+										<xsd:enumeration value="GreaterThanEqual" />
+										<xsd:enumeration value="LessThan" />
+										<xsd:enumeration value="LessThanEqual" />
+										<xsd:enumeration value="DataTypeCheck" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="ValueToCompare" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="ControlToCompare" type="xsd:string" vs:category="Behavior" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:RegularExpressionValidator> -->
+		<xsd:complexType name="RegularExpressionValidatorType" mixed="true">
+				<xsd:attributeGroup ref="BaseValidatorAttributes" />
+				<xsd:attribute name="ValidationExpression" type="xsd:string" vs:category="Behavior" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:CustomValidator> -->
+		<xsd:complexType name="CustomValidatorType" mixed="true">
+				<xsd:attributeGroup ref="BaseValidatorAttributes" />
+				<xsd:attribute name="OnServerValidate" type="xsd:string" vs:omtype="event" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <mobile:ValidationSummary> -->
+		<xsd:complexType name="ValidationSummaryType" mixed="true">
+				<xsd:attributeGroup ref="MobileControlAttributes" />
+				<xsd:attribute name="FormToValidate" type="xsd:string" vs:category="Behavior" />
+				<xsd:attribute name="HeaderText" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="BackLabel" type="xsd:string" vs:category="Appearance" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="DeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- Non-prefixed tabs -->
+		<!-- <Style> -->
+		<xsd:attributeGroup name="StyleElementAttributes">
+				<xsd:attributeGroup ref="StyleAttributes" />
+				<xsd:attribute name="Name" type="xsd:string" />
+		</xsd:attributeGroup>
+		<xsd:complexType name="StyleType">
+				<xsd:attributeGroup ref="StyleElementAttributes" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="StyleDeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<xsd:complexType name="PagerStyleType">
+				<xsd:attributeGroup ref="StyleElementAttributes" />
+				<xsd:attribute name="NextPageText" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="PreviousPageText" type="xsd:string" vs:category="Appearance" />
+				<xsd:attribute name="PageLabel" type="xsd:string" vs:category="Appearance" />
+				<xsd:choice>
+						<xsd:element name="DeviceSpecific" type="StyleDeviceSpecificType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- <Item> -->
+		<xsd:attributeGroup name="MobileListItemAttributes">
+				<xsd:attribute name="Text" type="xsd:string" />
+				<xsd:attribute name="Value" type="xsd:string" />
+		</xsd:attributeGroup>
+		<xsd:complexType name="MobileListItemType">
+				<xsd:attributeGroup ref="MobileListItemAttributes" />
+		</xsd:complexType>
+		<xsd:complexType name="MobileSelectionListItemType">
+				<xsd:attributeGroup ref="MobileListItemAttributes" />
+				<xsd:attribute name="Selected" type="boolean" />
+		</xsd:complexType>
+		<!-- <Field> -->
+		<xsd:complexType name="ObjectListFieldType">
+				<xsd:attribute name="Name" type="xsd:string" />
+				<xsd:attribute name="Title" type="xsd:string" />
+				<xsd:attribute name="DataField" type="xsd:string" />
+				<xsd:attribute name="DataFormatString" type="xsd:string" />
+				<xsd:attribute name="Visible" type="boolean" />
+		</xsd:complexType>
+		<!-- <Command> -->
+		<xsd:complexType name="ObjectListCommandType">
+				<xsd:attribute name="Name" type="xsd:string" />
+				<xsd:attribute name="Text" type="xsd:string" />
+		</xsd:complexType>
+		<!-- <DeviceSpecific> -->
+		<xsd:complexType name="DeviceSpecificType">
+				<xsd:attribute name="ID" type="xsd:string" />
+				<xsd:attribute name="Runat" type="RunatType" />
+				<xsd:choice>
+						<xsd:element name="Choice" form="unqualified">
+								<xsd:complexType vs:anyattribute="true">
+										<xsd:attribute name="Filter" type="xsd:string" />
+										<xsd:attribute name="Argument" type="xsd:string" />
+								</xsd:complexType>
+						</xsd:element>
+				</xsd:choice>
+		</xsd:complexType>
+		<xsd:complexType name="PanelDeviceSpecificType">
+			<xsd:attribute name="ID" type="xsd:string" />
+			<xsd:attribute name="Runat" type="RunatType" />
+			<xsd:choice>
+				<xsd:element name="Choice" form="unqualified">
+					<xsd:complexType vs:anyattribute="true">
+						<xsd:attribute name="Filter" type="xsd:string" />
+						<xsd:attribute name="Argument" type="xsd:string" />
+						<xsd:attribute name="Xmlns" />
+						<xsd:choice>
+							<xsd:element name="ContentTemplate" type="TemplateType" form="unqualified" />
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+		<xsd:complexType name="FormDeviceSpecificType">
+			<xsd:attribute name="ID" type="xsd:string" />
+			<xsd:attribute name="Runat" type="RunatType" />
+			<xsd:choice>
+				<xsd:element name="Choice" form="unqualified">
+					<xsd:complexType vs:anyattribute="true">
+						<xsd:attribute name="Filter" type="xsd:string" />
+						<xsd:attribute name="Argument" type="xsd:string" />
+						<xsd:attribute name="Xmlns" />
+						<xsd:choice>
+							<xsd:element name="HeaderTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="FooterTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="ScriptTemplate" type="TemplateType" form="unqualified" />
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+		<xsd:complexType name="ListDeviceSpecificType">
+			<xsd:attribute name="ID" type="xsd:string" />
+			<xsd:attribute name="Runat" type="RunatType" />
+			<xsd:choice>
+				<xsd:element name="Choice" form="unqualified">
+					<xsd:complexType vs:anyattribute="true">
+						<xsd:attribute name="Filter" type="xsd:string" />
+						<xsd:attribute name="Argument" type="xsd:string" />
+						<xsd:attribute name="Xmlns" />
+						<xsd:choice>
+							<xsd:element name="HeaderTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="FooterTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="ItemTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="SeparatorTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="AlternatingItemTemplate" type="TemplateType" form="unqualified" />
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+		<xsd:complexType name="ObjectListDeviceSpecificType">
+			<xsd:attribute name="ID" type="xsd:string" />
+			<xsd:attribute name="Runat" type="RunatType" />
+			<xsd:choice>
+				<xsd:element name="Choice" form="unqualified">
+					<xsd:complexType vs:anyattribute="true">
+						<xsd:attribute name="Filter" type="xsd:string" />
+						<xsd:attribute name="Argument" type="xsd:string" />
+						<xsd:attribute name="Xmlns" />
+						<xsd:choice>
+							<xsd:element name="HeaderTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="FooterTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="ItemTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="ItemDetailsTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="SeparatorTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="AlternatingItemTemplate" type="TemplateType" form="unqualified" />
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+		<xsd:complexType name="StyleDeviceSpecificType">
+			<xsd:attribute name="ID" type="xsd:string" />
+			<xsd:attribute name="Runat" type="RunatType" />
+			<xsd:choice>
+				<xsd:element name="Choice" form="unqualified">
+					<xsd:complexType vs:anyattribute="true">
+						<xsd:attribute name="Filter" type="xsd:string" />
+						<xsd:attribute name="Argument" type="xsd:string" />
+						<xsd:attribute name="Xmlns" />
+						<xsd:choice>
+							<xsd:element name="ContentTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="HeaderTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="FooterTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="ItemTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="ItemDetailsTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="SeparatorTemplate" type="TemplateType" form="unqualified" />
+							<xsd:element name="AlternatingItemTemplate" type="TemplateType" form="unqualified" />
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+		<!-- Literals -->
+		<xsd:complexType name="brType" />
+		<xsd:complexType name="aType" mixed="true">
+				<xsd:attribute name="href" type="xsd:string" />
+		</xsd:complexType>
+		<xsd:complexType name="bType" mixed="true">
+				<xsd:choice>
+						<xsd:element name="a" type="aType" form="unqualified" />
+						<xsd:element name="br" type="brType" form="unqualified" />
+						<xsd:element name="i" type="iType" form="unqualified" />
+						<xsd:element name="p" type="pType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<xsd:complexType name="iType" mixed="true">
+				<xsd:choice>
+						<xsd:element name="a" type="aType" form="unqualified" />
+						<xsd:element name="b" type="bType" form="unqualified" />
+						<xsd:element name="br" type="brType" form="unqualified" />
+						<xsd:element name="p" type="pType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<xsd:complexType name="pType" mixed="true">
+				<xsd:choice>
+						<xsd:element name="a" type="aType" form="unqualified" />
+						<xsd:element name="b" type="bType" form="unqualified" />
+						<xsd:element name="br" type="brType" form="unqualified" />
+						<xsd:element name="i" type="iType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<xsd:complexType name="aNestedType" mixed="true">
+				<xsd:attribute name="href" type="xsd:string" />
+		</xsd:complexType>
+		<xsd:complexType name="bNestedType" mixed="true">
+				<xsd:choice>
+						<xsd:element name="a" type="aNestedType" form="unqualified" />
+						<xsd:element name="br" type="brNestedType" form="unqualified" />
+						<xsd:element name="i" type="iNestedType" form="unqualified" />
+						<xsd:element name="p" type="pNestedType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<xsd:complexType name="iNestedType" mixed="true">
+				<xsd:choice>
+						<xsd:element name="a" type="aNestedType" form="unqualified" />
+						<xsd:element name="b" type="bNestedType" form="unqualified" />
+						<xsd:element name="br" type="brNestedType" form="unqualified" />
+						<xsd:element name="p" type="pNestedType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<xsd:complexType name="pNestedType" mixed="true">
+				<xsd:choice>
+						<!-- Form, Panel, Nested Literals and Template need to be kept in sync -->
+						<xsd:element name="Label" type="LabelType" />
+						<xsd:element name="TextBox" type="TextBoxType" />
+						<xsd:element name="PhoneCall" type="PhoneCallType" />
+						<xsd:element name="Command" type="CommandType" />
+						<xsd:element name="Link" type="LinkType" />
+						<xsd:element name="Panel" type="PanelType" />
+						<xsd:element name="Image" type="ImageType" />
+						<xsd:element name="TextView" type="TextViewType" />
+						<xsd:element name="List" type="ListType" />
+						<xsd:element name="SelectionList" type="SelectionListType" />
+						<xsd:element name="ObjectList" type="ObjectListType" />
+						<xsd:element name="AdRotator" type="AdRotatorType" />
+						<xsd:element name="Calendar" type="CalendarType" />
+						<xsd:element name="RangeValidator" type="RangeValidatorType" />
+						<xsd:element name="RequiredFieldValidator" type="RequiredFieldValidatorType" />
+						<xsd:element name="CompareValidator" type="CompareValidatorType" />
+						<xsd:element name="RegularExpressionValidator" type="RegularExpressionValidatorType" />
+						<xsd:element name="CustomValidator" type="CustomValidatorType" />
+						<xsd:element name="ValidationSummary" type="ValidationSummaryType" />
+						<!-- End sync -->
+						<xsd:element name="a" type="aNestedType" form="unqualified" />
+						<xsd:element name="b" type="bNestedType" form="unqualified" />
+						<xsd:element name="br" type="brNestedType" form="unqualified" />
+						<xsd:element name="i" type="iNestedType" form="unqualified" />
+				</xsd:choice>
+		</xsd:complexType>
+		<!-- Primitives -->
+		<xsd:simpleType name="i2">
+				<xsd:restriction base="xsd:integer">
+						<xsd:minInclusive value="-32768" />
+						<xsd:maxInclusive value="32767" />
+				</xsd:restriction>
+		</xsd:simpleType>
+		<xsd:simpleType name="i4">
+				<xsd:restriction base="xsd:integer">
+						<xsd:minInclusive value="-2147483648" />
+						<xsd:maxInclusive value="2147483647" />
+				</xsd:restriction>
+		</xsd:simpleType>
+		<xsd:simpleType name="ui4">
+				<xsd:restriction base="xsd:non-negative-integer">
+						<xsd:minInclusive value="0" />
+						<xsd:maxInclusive value="4294967295" />
+				</xsd:restriction>
+		</xsd:simpleType>
+		<xsd:simpleType name="boolean">
+				<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="True" />
+						<xsd:enumeration value="False" />
+				</xsd:restriction>
+		</xsd:simpleType>
+		<xsd:simpleType name="RunatType">
+				<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="server" />
+				</xsd:restriction>
+		</xsd:simpleType>
+
+		<xsd:simpleType name="System.Web.UI.ClientIDModeDef">
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Inherit" />
+				<xsd:enumeration value="AutoID" />
+				<xsd:enumeration value="Predictable" />
+				<xsd:enumeration value="Static" />
+			</xsd:restriction>
+		</xsd:simpleType>
+
+</xsd:schema>

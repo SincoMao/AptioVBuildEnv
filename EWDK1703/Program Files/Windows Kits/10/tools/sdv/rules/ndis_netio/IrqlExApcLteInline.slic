@@ -1,0 +1,45 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlExApcLteInline
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that DDIs are only called at proper IRQL levels.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507277
+
+--*/
+
+
+#include "slic_base.h"
+
+
+
+ExAllocateFromPagedLookasideList.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL && sdv_irql_current != APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+ExFreeToPagedLookasideList.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL && sdv_irql_current != APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+

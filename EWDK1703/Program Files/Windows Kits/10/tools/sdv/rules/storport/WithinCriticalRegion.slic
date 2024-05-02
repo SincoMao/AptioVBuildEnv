@@ -1,0 +1,66 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    WithinCriticalRegion
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the driver's calls to the following 
+    synchronization functions are made only while normal kernel APC delivery 
+    is disabled:
+
+    * ExAcquireResourceSharedLite 
+    * ExAcquireResourceExclusiveLite 
+    * ExAcquireSharedStarveExclusive 
+    * ExAcquireSharedWaitForExclusive 
+    * ExReleaseResourceLite 
+    * ExReleaseResourceForThreadLite
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507249
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+state{
+	int regionDepth = 0;
+}
+
+KeEnterCriticalRegion.entry
+{
+	regionDepth = regionDepth + 1 ;
+}
+
+KeLeaveCriticalRegion.entry
+{
+	regionDepth = regionDepth - 1;
+}
+
+[
+ExAcquireResourceSharedLite,
+ExAcquireResourceExclusiveLite,
+ExAcquireSharedStarveExclusive,
+ExAcquireSharedWaitForExclusive,
+ExReleaseResourceLite,
+ExReleaseResourceForThreadLite
+].entry
+{
+	if (regionDepth == 0 && sdv_irql_current == PASSIVE_LEVEL) {      
+		abort "The driver is calling $fname without first disabling normal kernel APC delivery by calling KeEnterCriticalRegion or raising IRQL to APC_LEVEL.";
+	}
+}

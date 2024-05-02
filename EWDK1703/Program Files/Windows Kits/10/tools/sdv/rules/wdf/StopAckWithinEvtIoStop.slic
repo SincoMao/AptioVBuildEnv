@@ -1,0 +1,55 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StopAckWithinEvtIoStop
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule checks that WdfRequestStopAcknowledge is only called from within EvtIoStop callback.
+
+    Rule diagnostics:
+    "WdfRequestStopAcknowledge must be called from within EvtIoStop callback."
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507140
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state{
+     enum {INIT, INSTOP} s = INIT;
+}
+                   
+
+[fun_WDF_IO_QUEUE_IO_STOP].entry
+{
+    s = INSTOP;               
+}
+[fun_WDF_IO_QUEUE_IO_STOP].exit
+{
+    s = INIT;
+}
+sdv_WdfRequestStopAcknowledge.entry
+{
+   if (s != INSTOP) {
+     abort "WdfRequestStopAcknowledge must be called from within EvtIoStop callback.";
+   }
+}
+
+

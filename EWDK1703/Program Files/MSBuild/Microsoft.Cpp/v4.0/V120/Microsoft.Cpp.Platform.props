@@ -1,0 +1,77 @@
+﻿<!--
+***********************************************************************************************
+Microsoft.Cpp.Platform.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <_PlatformFolder Condition="'$(_PlatformFolder)' == ''">$(VCTargetsPath)\Platforms\$(Platform)\</_PlatformFolder>
+    <_ToolsetPropsPath>$(_PlatformFolder)PlatformToolsets\$(PlatformToolset)\Toolset.props</_ToolsetPropsPath>
+    <ToolsetPropsFound Condition="Exists('$(_ToolsetPropsPath)')">true</ToolsetPropsFound>
+  </PropertyGroup>
+
+  <!-- v110 platform toolset in cpp targets supported store and desktop projects, but different VS SKUs installed diffferent subsets of the Windows SDKs and other tools.
+       Determine what we have on the machine to know actual redirect options -->
+
+  <PropertyGroup>
+    <_CheckDev11ToolsInstalled Condition="'$(_CheckDev11ToolsInstalled)' == ''">true</_CheckDev11ToolsInstalled>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(_CheckDev11ToolsInstalled)' == 'true'">
+    <_Dev11Installed Condition="'$(_Dev11Installed)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\DevDiv\vs\Servicing\11.0\professional@Version)</_Dev11Installed>
+    <_Dev11Installed Condition="'$(_Dev11Installed)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\DevDiv\vs\Servicing\11.0\professional@Version)</_Dev11Installed>
+
+    <_Dev11StoreToolInstalled Condition="'$(_Dev11Installed)' != ''">true</_Dev11StoreToolInstalled>
+    <_Dev11DesktopToolsInstalled  Condition="'$(_Dev11Installed)' != ''">true</_Dev11DesktopToolsInstalled>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(_CheckDev11ToolsInstalled)' == 'true' and '$(_Dev11StoreToolInstalled)' == ''">
+    <!-- check if installed with dev12  -->
+    <_Dev11Win8ExpressInstalled Condition="'$(_Dev11Win8ExpressInstalled)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\12.0\Win8DevTools@Installed)</_Dev11Win8ExpressInstalled>
+    <_Dev11Win8ExpressInstalled Condition="'$(_Dev11Win8ExpressInstalled)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VisualStudio\12.0\Win8DevTools@Installed)</_Dev11Win8ExpressInstalled>
+    <!-- check if Win8Express is installed -->
+    <_Dev11Win8ExpressInstalled Condition="'$(_Dev11Win8ExpressInstalled)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\DevDiv\win8express\Servicing\11.0\coremsi@Version)</_Dev11Win8ExpressInstalled>
+    <_Dev11Win8ExpressInstalled Condition="'$(_Dev11Win8ExpressInstalled)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\DevDiv\win8express\Servicing\11.0\coremsi@Version)</_Dev11Win8ExpressInstalled>
+
+    <_Dev11StoreToolInstalled Condition="'$(_Dev11Win8ExpressInstalled)' != ''">true</_Dev11StoreToolInstalled>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(_CheckDev11ToolsInstalled)' == 'true' and '$(_Dev11DesktopToolsInstalled)' == ''">
+    <!-- check if WDExpress is installed -->
+    <_Dev11WDExpressInstalled Condition="'$(_Dev11WDExpressInstalled)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\DevDiv\wdexpress\Servicing\11.0\coremsi@Version)</_Dev11WDExpressInstalled>
+    <_Dev11WDExpressInstalled Condition="'$(_Dev11WDExpressInstalled)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\DevDiv\wdexpress\Servicing\11.0\coremsi@Version)</_Dev11WDExpressInstalled>
+
+    <_Dev11DesktopToolsInstalled Condition="'$(_Dev11WDExpressInstalled)' != ''">true</_Dev11DesktopToolsInstalled>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(_CheckDev11ToolsInstalled)' == 'true'">
+    <_IgnoreInstalledPlatformToolset_v110 Condition="'$(WindowsAppContainer)' == 'true' and '$(_Dev11StoreToolInstalled)' != 'true'">true</_IgnoreInstalledPlatformToolset_v110>
+    <_IgnoreInstalledPlatformToolset_v110 Condition="'$(WindowsAppContainer)' != 'true' and '$(_Dev11DesktopToolsInstalled)' != 'true'">true</_IgnoreInstalledPlatformToolset_v110>
+    <_IgnoreInstalledPlatformToolset_v110_xp Condition="'$(_Dev11DesktopToolsInstalled)' != 'true'">true</_IgnoreInstalledPlatformToolset_v110_xp>
+    <!-- block redirection to v110 if required tools are not installed -->
+    <MinSupportedVCTargetsVersion Condition="'$(PlatformToolset)' == 'v110' and '$(_IgnoreInstalledPlatformToolset_v110)' == 'true'">v120</MinSupportedVCTargetsVersion>
+    <MinSupportedVCTargetsVersion Condition="'$(PlatformToolset)' == 'v110_xp' and '$(_IgnoreInstalledPlatformToolset_v110_xp)' == 'true'">v120</MinSupportedVCTargetsVersion>
+  </PropertyGroup>
+
+  <!-- end of v110 check -->
+
+  <!-- Import Before -->
+  <Import Condition="Exists('$(_PlatformFolder)ImportBefore')" Project="$(_PlatformFolder)ImportBefore\*.props" />
+  <!-- Import Toolset specific properties -->
+  <Import Condition="'$(ToolsetPropsFound)' == 'true'" Project="$(_ToolsetPropsPath)" />
+  <!-- Try to find the toolset in older versions if MinSupportedVCTargetsVersion allows -->
+  <Import Condition="'$(ToolsetPropsFound)' != 'true' and '$(MinSupportedVCTargetsVersion)' != 'v120'" Project="Microsoft.Cpp.Platform.Redirect.props" />
+  <!-- If ToolsetPropsFound still not found, then fallback to current Toolset so the project can still load. -->
+  <Import Condition="'$(ToolsetPropsFound)' != 'true'" Project="$(_PlatformFolder)PlatformToolsets\$(DefaultPlatformToolset)\Toolset.props" />
+
+    <!-- Import After -->
+  <Import Condition="Exists('$(_PlatformFolder)ImportAfter')" Project="$(_PlatformFolder)ImportAfter\*.props" />
+</Project>

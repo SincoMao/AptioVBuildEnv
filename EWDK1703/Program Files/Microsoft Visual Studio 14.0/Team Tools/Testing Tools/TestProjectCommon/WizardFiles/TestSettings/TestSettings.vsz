@@ -1,0 +1,4 @@
+VSWIZARD 7.0
+Wizard=VsWizard.TestWizard.14.0
+Param="ItemType = TestSettings"
+Param="VsTemplatePath = Test\<LCID>\TestSettings\"

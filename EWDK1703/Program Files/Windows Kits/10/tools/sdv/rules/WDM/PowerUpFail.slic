@@ -1,0 +1,92 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    PowerUpFail
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that a IRP_MJ_POWER with IRP_MN_SET_POWER Irp is not failed by a driver.
+    When the device is powered up and powered down.
+    This rule only applies to FDO and FIDO drivers.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507300
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+}
+
+IoAcquireRemoveLock.exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+[IoCallDriver,PoCallDriver].exit
+{  
+   if($2->IoStatus.Status != STATUS_SUCCESS)
+   {
+        halt;
+   }
+}
+[IoAllocateAdapterChannel,
+ExAllocatePool,
+ExAllocatePoolWithTag,
+ExAllocatePoolWithQuotaTag,
+ExAllocatePoolWithQuota].exit
+{
+    if($return==NULL)
+    {
+        halt;
+    }
+}
+
+
+PoRequestPowerIrp.exit
+{
+   if(!NT_SUCCESS($return))
+   {
+        halt;
+   }
+}
+
+sdv_RunSetPowerUp.exit
+{
+    if($2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_POWER)
+    {
+      if($return==STATUS_DELETE_PENDING)
+      {
+          halt;
+      }
+      else if(!NT_SUCCESS($return))
+      {
+          abort "IRP_MJ_POWER with IRP_MN_SET_POWER Irp should not be failed by the driver when powering up the device.";
+      }
+      else
+      {
+          halt;
+      }
+    }
+    else
+    {
+        halt;
+    }
+}

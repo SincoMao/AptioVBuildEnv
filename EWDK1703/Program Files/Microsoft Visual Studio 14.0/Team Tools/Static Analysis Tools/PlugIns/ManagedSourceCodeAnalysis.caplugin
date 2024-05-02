@@ -1,0 +1,13 @@
+<CodeAnalysisPlugIn>
+  <ResultService Id="Microsoft.ResultServices.ManagedSource">
+    <Assembly>..\ManagedSourceCodeAnalysis.dll</Assembly>
+    <Type>Microsoft.VisualStudio.CodeAnalysis.ManagedSourceResultService</Type>
+  </ResultService>
+  <Analyzer Id="Microsoft.Analyzers.ManagedSourceCodeAnalysis">
+    <RuleProvider>
+      <Assembly>..\ManagedSourceCodeAnalysis.dll</Assembly>
+      <Type>Microsoft.VisualStudio.CodeAnalysis.ManagedSourceRuleProvider</Type>
+    </RuleProvider>
+    <ResultServiceReference>Microsoft.ResultServices.ManagedSource</ResultServiceReference>
+  </Analyzer>
+</CodeAnalysisPlugIn>

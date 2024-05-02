@@ -1,0 +1,45 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    InitializeDpcRequest
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    The property is statisfied if IoInitializeDpcRequest or KeInitializeDpc is called from the AddDevice routine.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+    
+}
+
+[IoInitializeDpcRequest,KeInitializeDpc].entry 
+{
+    abort "The property is statisfied as IoInitializeDpcRequest or KeInitializeDpc is called from the AddDevice routine.";    
+}
+
+fun_AddDevice.exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}    

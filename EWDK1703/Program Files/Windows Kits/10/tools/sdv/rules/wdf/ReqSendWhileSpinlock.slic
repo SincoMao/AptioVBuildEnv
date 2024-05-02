@@ -1,0 +1,67 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    ReqSendWhileSpinlock
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that no requests are sent while the driver holds a spinlock.
+    
+    If the driver sends any requests while holding a spinlock, this could cause a 
+    deadlock or clash with the lower driver that receives the requests, if the lower
+    driver also attempts to acquire a lock or access shared resources.
+    
+    
+    Rule diagnostics:
+    This rule assumes the driver makes correct use of acquiring and releasing spinlocks.
+    If WdfRequestSend is called while holding a spinlock, this rule reports a defect.
+    
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507129
+
+--*/
+
+
+
+
+
+#include "slic_base.h"
+
+state
+{
+	enum {LOCKED, UNLOCKED} spinLock=UNLOCKED;
+}
+
+	[sdv_WdfSpinLockAcquire,
+	KeAcquireSpinLock].exit
+	{
+		spinLock=LOCKED;
+	}
+        
+        [sdv_WdfSpinLockRelease,
+	KeReleaseSpinLock].exit
+	{
+		spinLock=UNLOCKED;
+	}
+	
+	sdv_WdfRequestSend.entry
+	{	
+                if (spinLock==LOCKED)
+		{
+			abort "A request cannot be sent while holding spinlock.";
+		}
+	}

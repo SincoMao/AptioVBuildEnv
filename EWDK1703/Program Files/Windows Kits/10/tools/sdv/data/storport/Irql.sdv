@@ -1,0 +1,5 @@
+IrqlDispatch
+IrqlKeReleaseSpinLock
+SpChangeIrql
+SpIrql
+StorPortIrql

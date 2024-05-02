@@ -1,0 +1,42 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    Pre_NoKmdfDispatch
+
+Domain:
+
+    WDF_NDIS
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This is a driver property check that is statisfied if the driver does not use WDF Dispatching.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state{
+}
+
+WdfDriverCreate.entry
+{
+     if($4->DriverInitFlags&WdfDriverInitNoDispatchOverride)
+     {
+         abort "The precondition is statisfied as this driver does not allow WDF to intercept IRPs on it's behalf.";
+     }    
+}
+
+

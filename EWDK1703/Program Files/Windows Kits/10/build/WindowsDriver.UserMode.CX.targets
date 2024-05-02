@@ -1,0 +1,49 @@
+<!--
+***********************************************************************************************
+WindowsDriver.UserMode.CX.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file defines the steps/targets required to build driver projects.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="CXErrorChecking" >
+    <Error Condition="$(UMDF_VERSION_MAJOR) &lt; '2' and '$(SensorDriver)' == 'true'" Text="Sensor Class Extensions can only be enabled for UMDF Version 2.0 or higher." />
+    <Error Condition="$(UMDF_VERSION_MAJOR) &lt; '2' and '$(NfcDriver)' == 'true'" Text="NFC Class Extensions can only be enabled for UMDF Version 2.0 or higher." />
+    <Error Condition="$(UMDF_VERSION_MAJOR) &lt; '2' and '$(UcmDriver)' == 'true'" Text="USB Connector Manager Class Extensions can only be enabled for UMDF Version 2.0 or higher." />
+    <Error Condition="$(UMDF_VERSION_MAJOR) &lt; '2' and '$(IndirectDisplayDriver)' == 'true'" Text="Indirect Displays Class Extensions can only be enabled for UMDF Version 2.0 or higher." />
+  </Target>
+
+  <Target Name="SetLinkLibraryPathsForCX"
+         Condition="'$(UseEnv)' != 'true'"
+         BeforeTargets="Link" DependsOnTargets="CXErrorChecking">
+    <ItemGroup>
+      <Link>
+        <AdditionalDependencies Condition="'$(SensorDriver)' == 'true'">%(AdditionalDependencies);$(SENSOR_LIB_PATH)sensorscxstub.lib;</AdditionalDependencies>
+      </Link>
+    </ItemGroup>
+    <ItemGroup>
+      <Link>
+        <AdditionalDependencies Condition="'$(NfcDriver)' == 'true'">%(AdditionalDependencies);$(NFC_LIB_PATH)nfccxstub.lib;</AdditionalDependencies>
+      </Link>
+    </ItemGroup>
+    <ItemGroup>
+      <Link>
+        <AdditionalDependencies Condition="'$(UcmDriver)' == 'true'">%(AdditionalDependencies);$(UCM_LIB_PATH)UcmCxStub.lib;</AdditionalDependencies>
+      </Link>
+    </ItemGroup>
+    <ItemGroup>
+      <Link>
+        <AdditionalDependencies Condition="'$(IndirectDisplayDriver)' == 'true'">%(AdditionalDependencies);$(IDDCX_LIB_PATH)IddCxStub.lib;</AdditionalDependencies>
+      </Link>
+    </ItemGroup>
+  </Target>
+
+</Project>

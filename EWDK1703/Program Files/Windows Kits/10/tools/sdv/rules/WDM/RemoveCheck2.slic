@@ -1,0 +1,62 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    RemoveCheck2
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that calls to IoAcquireRemoveLock and IoReleaseRemoveLockAndWait are present when processing
+    IRP_MJ_PNP with MinorFunction IRP_MN_REMOVE_DEVICE.  
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {unlocked,released} LockState = unlocked;
+   enum {false,true} forwarded = false;
+   enum {no,yes} deleted = no;
+}
+with guard(sdv_main,sdv_p_devobj_fdo)
+
+
+[IoReleaseRemoveLockAndWait].entry
+{
+    LockState=released;
+}
+
+[IoCallDriver,PoCallDriver].entry
+{  
+   forwarded = true;
+}
+
+
+[IoDeleteDevice].entry[guard $1]
+{  
+   deleted=yes;
+}
+
+[sdv_RunRemoveDevice].exit
+{
+    if($2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP&&LockState==released&&deleted==yes&&forwarded==true)
+    {
+        abort "Remove Device is supported and Removelock is used";
+    }
+}

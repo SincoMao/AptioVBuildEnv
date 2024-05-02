@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- This file was generated using the dtd2xsd tool -->
+<xs:schema xmlns="http://schemas.microsoft.com/Visual-Studio-Intellisense" elementFormDefault="qualified"  attributeFormDefault="qualified"
+  targetNamespace="http://schemas.microsoft.com/Visual-Studio-Intellisense" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- global attributes for annotating schemas with information for intellisense -->
+  <xs:attribute name="builder" type="xs:string"  />
+
+  <!-- global attributes for annotating schemas with information for code snippets -->
+  <xs:attribute name="snippet" fixed="yes" type="xs:string"/>
+
+  <!-- global attributes for providing custom help keywords -->
+  <xs:attribute name="help" type="xs:string"/>
+
+  <!-- global attributes for specifying that a given type should be hidden from intellisense -->
+  <xs:attribute name="nonbrowsable" type="xs:boolean" default="true"/>
+  
+</xs:schema>

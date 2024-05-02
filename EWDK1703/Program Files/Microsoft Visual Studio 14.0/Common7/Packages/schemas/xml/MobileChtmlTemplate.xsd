@@ -1,0 +1,661 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Portions of this schema are based on the note, Compact HTML for Small Information Appliances at http://www.w3.org/TR/1998/NOTE-compactHTML-19980209/. Copyright (c) 1998 World Wide Web Consortium, (Massachusetts Institute of Technology, Institut National de Recherche en Informatique et en Automatique, Keio University). All Rights Reserved. http://www.w3.org/Consortium/Legal/ -->
+<xsd:schema targetNamespace='http://schemas.microsoft.com/mobile/chtml10template'
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		xmlns='http://schemas.microsoft.com/mobile/chtml10template'
+		xmlns:vs='urn:schemas-microsoft-com:HTML-Intellisense'
+		vs:ishtmlschema="true"
+		vs:isserverschema="false"
+		vs:SuccinctFriendlyName="Mobile HTML">
+
+		<xsd:element name="br">
+				<xsd:complexType>
+						<xsd:attribute name="clear" use="default" default="none">
+								<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="left"/>
+												<xsd:enumeration value="all"/>
+												<xsd:enumeration value="right"/>
+												<xsd:enumeration value="none"/>
+										</xsd:restriction>
+								</xsd:simpleType>
+						</xsd:attribute>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="div">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="h1"/>
+								<xsd:element ref="h2"/>
+								<xsd:element ref="h3"/>
+								<xsd:element ref="h4"/>
+								<xsd:element ref="h5"/>
+								<xsd:element ref="h6"/>
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+						<xsd:attribute name="align" use="optional">
+								<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="left"/>
+												<xsd:enumeration value="center"/>
+												<xsd:enumeration value="right"/>
+										</xsd:restriction>
+								</xsd:simpleType>
+						</xsd:attribute>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="center">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="h1"/>
+								<xsd:element ref="h2"/>
+								<xsd:element ref="h3"/>
+								<xsd:element ref="h4"/>
+								<xsd:element ref="h5"/>
+								<xsd:element ref="h6"/>
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="a">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+						</xsd:choice>
+						<xsd:sequence>
+								<xsd:element ref="a"/>
+						</xsd:sequence>
+						<xsd:attribute name="name" type="xsd:string" use="optional"/>
+						<xsd:attribute name="href" type="xsd:string" use="optional"/>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="img">
+				<xsd:complexType>
+						<xsd:attribute name="src" type="xsd:string" use="required"/>
+						<xsd:attribute name="align" use="optional">
+								<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="top"/>
+												<xsd:enumeration value="middle"/>
+												<xsd:enumeration value="bottom"/>
+												<xsd:enumeration value="left"/>
+												<xsd:enumeration value="right"/>
+										</xsd:restriction>
+								</xsd:simpleType>
+						</xsd:attribute>
+						<xsd:attribute name="width" type="xsd:string" use="optional"/>
+						<xsd:attribute name="height" type="xsd:string" use="optional"/>
+						<xsd:attribute name="hspace" type="xsd:string" use="optional"/>
+						<xsd:attribute name="vspace" type="xsd:string" use="optional"/>
+						<xsd:attribute name="alt" type="xsd:string" use="optional"/>
+						<xsd:attribute name="border" type="xsd:string" use="optional"/>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="hr">
+				<xsd:complexType>
+						<xsd:attribute name="align" use="optional">
+								<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="left"/>
+												<xsd:enumeration value="right"/>
+												<xsd:enumeration value="center"/>
+										</xsd:restriction>
+								</xsd:simpleType>
+						</xsd:attribute>
+						<xsd:attribute name="size" type="xsd:string" use="optional"/>
+						<xsd:attribute name="width" type="xsd:string" use="optional"/>
+						<xsd:attribute name="noshade" use="optional">
+								<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="noshade"/>
+										</xsd:restriction>
+								</xsd:simpleType>
+						</xsd:attribute>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="p">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+						</xsd:choice>
+						<xsd:attribute name="align" use="optional">
+								<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="left"/>
+												<xsd:enumeration value="center"/>
+												<xsd:enumeration value="right"/>
+										</xsd:restriction>
+								</xsd:simpleType>
+						</xsd:attribute>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="plaintext">
+				<xsd:complexType mixed="true">
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="pre">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+						</xsd:choice>
+						<xsd:sequence>
+								<xsd:element ref="img"/>
+						</xsd:sequence>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="blockquote">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="h1"/>
+								<xsd:element ref="h2"/>
+								<xsd:element ref="h3"/>
+								<xsd:element ref="h4"/>
+								<xsd:element ref="h5"/>
+								<xsd:element ref="h6"/>
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="dl">
+				<xsd:complexType>
+						<xsd:choice maxOccurs="unbounded">
+								<xsd:element ref="dt"/>
+								<xsd:element ref="dd"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="dt">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="dd">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="ol">
+				<xsd:complexType>
+						<xsd:sequence maxOccurs="unbounded">
+								<xsd:element ref="li"/>
+						</xsd:sequence>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="dir">
+				<xsd:complexType>
+						<xsd:sequence maxOccurs="unbounded">
+								<xsd:element ref="li"/>
+						</xsd:sequence>
+						<xsd:choice>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="li">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="form">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="h1"/>
+								<xsd:element ref="h2"/>
+								<xsd:element ref="h3"/>
+								<xsd:element ref="h4"/>
+								<xsd:element ref="h5"/>
+								<xsd:element ref="h6"/>
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+						<xsd:sequence>
+								<xsd:element ref="form"/>
+						</xsd:sequence>
+						<xsd:attribute name="action" type="xsd:string" use="optional"/>
+						<xsd:attribute name="method" use="default" default="GET">
+								<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="GET"/>
+												<xsd:enumeration value="POST"/>
+										</xsd:restriction>
+								</xsd:simpleType>
+						</xsd:attribute>
+						<xsd:attribute name="enctype" type="xsd:string" use="default" default="application/x-www-form-urlencoded"/>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="input">
+				<xsd:complexType>
+						<xsd:attribute name="type" use="default" default="TEXT">
+								<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="TEXT"/>
+												<xsd:enumeration value="PASSWORD"/>
+												<xsd:enumeration value="CHECKBOX"/>
+												<xsd:enumeration value="RADIO"/>
+												<xsd:enumeration value="HIDDEN"/>
+												<xsd:enumeration value="IMAGE"/>
+												<xsd:enumeration value="SUBMIT"/>
+												<xsd:enumeration value="RESET"/>
+										</xsd:restriction>
+								</xsd:simpleType>
+						</xsd:attribute>
+						<xsd:attribute name="name" type="xsd:string" use="optional"/>
+						<xsd:attribute name="value" type="xsd:string" use="optional"/>
+						<xsd:attribute name="checked" use="optional">
+								<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="checked"/>
+										</xsd:restriction>
+								</xsd:simpleType>
+						</xsd:attribute>
+						<xsd:attribute name="size" type="xsd:string" use="optional"/>
+						<xsd:attribute name="maxlength" type="xsd:string" use="optional"/>
+						<xsd:attribute name="src" type="xsd:string" use="optional"/>
+						<xsd:attribute name="align" use="optional">
+								<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="top"/>
+												<xsd:enumeration value="middle"/>
+												<xsd:enumeration value="bottom"/>
+												<xsd:enumeration value="left"/>
+												<xsd:enumeration value="right"/>
+										</xsd:restriction>
+								</xsd:simpleType>
+						</xsd:attribute>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="select">
+				<xsd:complexType>
+						<xsd:sequence>
+								<xsd:element name="option" type="optionType" maxOccurs="unbounded"/>
+						</xsd:sequence>
+						<xsd:attribute name="name" type="xsd:string" use="required"/>
+						<xsd:attribute name="size" type="xsd:string" use="optional"/>
+						<xsd:attribute name="multiple" use="optional">
+								<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="multiple"/>
+										</xsd:restriction>
+								</xsd:simpleType>
+						</xsd:attribute>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="option" type="optionType" />
+		<xsd:complexType name="optionType" mixed="true">
+				<xsd:attribute name="selected" use="optional">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="selected"/>
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="value" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+		<xsd:element name="textarea">
+				<xsd:complexType mixed="true">
+						<xsd:attribute name="name" type="xsd:string" use="required"/>
+						<xsd:attribute name="rows" type="xsd:string" use="required"/>
+						<xsd:attribute name="cols" type="xsd:string" use="required"/>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="ul">
+				<xsd:complexType>
+						<xsd:sequence maxOccurs="unbounded">
+								<xsd:element ref="li"/>
+						</xsd:sequence>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="menu">
+				<xsd:complexType>
+						<xsd:sequence maxOccurs="unbounded">
+								<xsd:element ref="li"/>
+						</xsd:sequence>
+						<xsd:choice>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="h1">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="h1"/>
+								<xsd:element ref="h2"/>
+								<xsd:element ref="h3"/>
+								<xsd:element ref="h4"/>
+								<xsd:element ref="h5"/>
+								<xsd:element ref="h6"/>
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="h2">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="h1"/>
+								<xsd:element ref="h2"/>
+								<xsd:element ref="h3"/>
+								<xsd:element ref="h4"/>
+								<xsd:element ref="h5"/>
+								<xsd:element ref="h6"/>
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="h3">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="h1"/>
+								<xsd:element ref="h2"/>
+								<xsd:element ref="h3"/>
+								<xsd:element ref="h4"/>
+								<xsd:element ref="h5"/>
+								<xsd:element ref="h6"/>
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="h4">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="h1"/>
+								<xsd:element ref="h2"/>
+								<xsd:element ref="h3"/>
+								<xsd:element ref="h4"/>
+								<xsd:element ref="h5"/>
+								<xsd:element ref="h6"/>
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="h5">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="h1"/>
+								<xsd:element ref="h2"/>
+								<xsd:element ref="h3"/>
+								<xsd:element ref="h4"/>
+								<xsd:element ref="h5"/>
+								<xsd:element ref="h6"/>
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="h6">
+				<xsd:complexType mixed="true">
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element ref="h1"/>
+								<xsd:element ref="h2"/>
+								<xsd:element ref="h3"/>
+								<xsd:element ref="h4"/>
+								<xsd:element ref="h5"/>
+								<xsd:element ref="h6"/>
+								<xsd:element ref="a"/>
+								<xsd:element ref="img"/>
+								<xsd:element ref="br"/>
+								<xsd:element ref="input"/>
+								<xsd:element ref="select"/>
+								<xsd:element ref="textarea"/>
+								<xsd:element ref="p"/>
+								<xsd:element ref="ul"/>
+								<xsd:element ref="ol"/>
+								<xsd:element ref="dir"/>
+								<xsd:element ref="menu"/>
+								<xsd:element ref="pre"/>
+								<xsd:element ref="plaintext"/>
+								<xsd:element ref="dl"/>
+								<xsd:element ref="div"/>
+								<xsd:element ref="center"/>
+								<xsd:element ref="blockquote"/>
+								<xsd:element ref="form"/>
+								<xsd:element ref="hr"/>
+						</xsd:choice>
+				</xsd:complexType>
+		</xsd:element>
+</xsd:schema>

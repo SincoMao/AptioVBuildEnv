@@ -1,0 +1,23 @@
+[$RootKey$]
+[$RootKey$\Projects]
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}]
+"DisplayProjectFileExtensions"="#2030"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\Filters]
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\Filters\XAML Files]
+"SortPriority"=dword:0000041A
+@="#2073"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\Filters\Data Files]
+"SortPriority"=dword:0000044C
+@="#2045"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\Filters\Audio Files]
+"SortPriority"=dword:00000514
+@="#2076"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\Filters\Image Files]
+"SortPriority"=dword:000004B0
+@="#2075"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\Filters\Video Files]
+"SortPriority"=dword:00000578
+@="#2077"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\Filters\Executable Files]
+"SortPriority"=dword:000005DC
+@="#2080"

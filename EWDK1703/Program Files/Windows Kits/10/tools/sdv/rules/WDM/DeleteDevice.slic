@@ -1,0 +1,79 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DeleteDevice
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    Drivers should not rely on the IoManager or PnpManager keeping the DeviceObject alive after a call to IoDeleteDevice. 
+    Drivers should call IoDeleteDevice after the lower driver has returned. This is the recommended behaviour.
+    This rule applies to FDO and FIDO drivers.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507256
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+  enum {init,on} t = init;
+  enum {exists,deleted} device = exists;
+}
+watch sdv_RunRemoveDevice.entry.$2;
+
+
+sdv_RunRemoveDevice.entry[guard $2]
+{
+    if($2->Tail.Overlay.CurrentStackLocation->MajorFunction!=IRP_MJ_PNP)
+    {
+        halt;
+    }
+    else
+    {
+        t=on;
+    }
+}
+
+[IoDeleteDevice].entry
+{  
+   if($1==sdv_p_devobj_fdo && t==on)
+   {
+       device = deleted;
+   }   
+}
+
+[IoCallDriver,PoCallDriver].exit[guard $2]
+{  
+    if(device == deleted)
+    {
+        abort "Warning: IoDeleteDevice should only be called after IoCallDriver and PoCallDriver has returned when processing IRP_MJ_PNP with MinorFunction IRP_MN_REMOVE_DEVICE.";
+    } 
+    else
+    {
+        halt;
+    }
+}
+
+sdv_RunRemoveDevice.exit[guard $2]
+{
+    halt;
+}
+
+
+
+

@@ -1,0 +1,194 @@
+[$RootKey$]
+[$RootKey$\AppCommandLine]
+[$RootKey$\AppCommandLine\DebugExe]
+"Arguments"="*"
+"DemandLoad"=dword:00000001
+"HelpString"="#10000"
+"Package"="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\CLSID]
+[$RootKey$\CLSID\{7199ED2C-0B58-4D00-BC75-BEC5A3B46D5D}]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.UserNotifications.DebugUserNotificationImpl"
+"InprocServer32"="$System$\mscoree.dll"
+@="DebugUserNotificationUI110 CoClass"
+[$RootKey$\CLSID\{919D7FA1-9CE2-4d9f-896D-E7B38D47E562}]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.ProjectSystem.Forms.ProjectDesignerFacade.ConcreteTabs.ConcreteProjectDesignerTab_1"
+"InprocServer32"="$System$\mscoree.dll"
+@="Project Designer Tab CoClass"
+[$RootKey$\CLSID\{919D7FA2-9CE2-4d9f-896D-E7B38D47E562}]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.ProjectSystem.Forms.ProjectDesignerFacade.ConcreteTabs.ConcreteProjectDesignerTab_2"
+"InprocServer32"="$System$\mscoree.dll"
+@="Project Designer Tab CoClass"
+[$RootKey$\CLSID\{919D7FA3-9CE2-4d9f-896D-E7B38D47E562}]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.ProjectSystem.Forms.ProjectDesignerFacade.ConcreteTabs.ConcreteProjectDesignerTab_3"
+"InprocServer32"="$System$\mscoree.dll"
+@="Project Designer Tab CoClass"
+[$RootKey$\CLSID\{919D7FA4-9CE2-4d9f-896D-E7B38D47E562}]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.ProjectSystem.Forms.ProjectDesignerFacade.ConcreteTabs.ConcreteProjectDesignerTab_4"
+"InprocServer32"="$System$\mscoree.dll"
+@="Project Designer Tab CoClass"
+[$RootKey$\CLSID\{919D7FA5-9CE2-4d9f-896D-E7B38D47E562}]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.ProjectSystem.Forms.ProjectDesignerFacade.ConcreteTabs.ConcreteProjectDesignerTab_5"
+"InprocServer32"="$System$\mscoree.dll"
+@="Project Designer Tab CoClass"
+[$RootKey$\CLSID\{919D7FA6-9CE2-4d9f-896D-E7B38D47E562}]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.ProjectSystem.Forms.ProjectDesignerFacade.ConcreteTabs.ConcreteProjectDesignerTab_6"
+"InprocServer32"="$System$\mscoree.dll"
+@="Project Designer Tab CoClass"
+[$RootKey$\CLSID\{919D7FA7-9CE2-4d9f-896D-E7B38D47E562}]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.ProjectSystem.Forms.ProjectDesignerFacade.ConcreteTabs.ConcreteProjectDesignerTab_7"
+"InprocServer32"="$System$\mscoree.dll"
+@="Project Designer Tab CoClass"
+[$RootKey$\CLSID\{919D7FA8-9CE2-4d9f-896D-E7B38D47E562}]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.ProjectSystem.Forms.ProjectDesignerFacade.ConcreteTabs.ConcreteProjectDesignerTab_8"
+"InprocServer32"="$System$\mscoree.dll"
+@="Project Designer Tab CoClass"
+[$RootKey$\CLSID\{919D7FA9-9CE2-4d9f-896D-E7B38D47E562}]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.ProjectSystem.Forms.ProjectDesignerFacade.ConcreteTabs.ConcreteProjectDesignerTab_9"
+"InprocServer32"="$System$\mscoree.dll"
+@="Project Designer Tab CoClass"
+[$RootKey$\CLSID\{E82F32A8-074E-465A-86E5-D68A87284F61}]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.ClrCustomVisualizerVSHost"
+"InprocServer32"="$System$\mscoree.dll"
+@="CLR Custom Visualizer VS Host Class"
+[$RootKey$\Debugger]
+[$RootKey$\Debugger\ProjectExtensions]
+[$RootKey$\Debugger\ProjectExtensions\.Exe]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.ProjectSystem.StandardProjectExtensions.Exe.ProjectExtension"
+@="Executable"
+[$RootKey$\Editors]
+[$RootKey$\Editors\{FF0A863B-6F9C-46BF-9684-DBE4C0A3ED6D}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DisplayName"="#1002"
+"EditorTrustLevel"=dword:00000000
+"Package"="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+@="Dump File Viewer"
+[$RootKey$\Editors\{FF0A863B-6F9C-46BF-9684-DBE4C0A3ED6D}\Extensions]
+"dmp"=dword:00000080
+"hdmp"=dword:00000080
+"mdmp"=dword:00000080
+[$RootKey$\Editors\{FCA054B5-CC17-47C9-9D29-8256EE7137CE}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DisplayName"="#1003"
+"EditorTrustLevel"=dword:00000000
+"Package"="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+@="Diag Package Viewer"
+[$RootKey$\Editors\{FCA054B5-CC17-47C9-9D29-8256EE7137CE}\Extensions]
+"diagsession"=dword:00002000
+[$RootKey$\Menus]
+"{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"=", 1000.ctmenu, 1"
+[$RootKey$\NewProjectTemplates]
+[$RootKey$\NewProjectTemplates\TemplateDirs]
+[$RootKey$\NewProjectTemplates\TemplateDirs\{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}]
+[$RootKey$\NewProjectTemplates\TemplateDirs\{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}\/1]
+"SortPriority"=dword:00000020
+"TemplatesDir"="$BaseInstallDir$\Common7\IDE\CommonExtensions\Platform\Debugger\ProjectTemplates\Debugger"
+@="#1007"
+[$RootKey$\Packages]
+[$RootKey$\Packages\{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}]
+"Assembly"="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.RazorPackage"
+"CompanyName"="Microsoft"
+"ID"=dword:00000001
+"InprocServer32"="$System$\mscoree.dll"
+"ProductName"="Visual Studio Debugger Managed Package"
+"ProductVersion"="14.0"
+@="VsDebugPresentationPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+[$RootKey$\Projects]
+[$RootKey$\Projects\{911E67C6-3D85-4fce-B560-20A9C3E3FF48}]
+"DefaultProjectExtension"="exe"
+"Package"="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+@="Exe Projects"
+[$RootKey$\Projects\{5600DBA8-E3D8-42CB-B290-4CFFE16ACD2D}]
+[$RootKey$\Projects\{5600DBA8-E3D8-42CB-B290-4CFFE16ACD2D}\Filters]
+[$RootKey$\Projects\{5600DBA8-E3D8-42CB-B290-4CFFE16ACD2D}\Filters\/1]
+@="#3001"
+[$RootKey$\Projects\{5600DBA8-E3D8-42CB-B290-4CFFE16ACD2D}\Filters\/2]
+@="#3002"
+[$RootKey$\Projects\{5600DBA8-E3D8-42CB-B290-4CFFE16ACD2D}\Filters\/2]
+"Package"="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\Projects\{5600DBA8-E3D8-42CB-B290-4CFFE16ACD2D}\Filters\/1]
+"Package"="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\Projects\{911E67C6-3D85-4fce-B560-20A9C3E3FF48}]
+"DisplayProjectFileExtensions"="#1001"
+"PossibleProjectExtensions"="exe"
+[$RootKey$\Services]
+[$RootKey$\Services\{448CE517-DEAA-4b1e-B2B5-B3265B66127B}]
+"Name"="IVsDataTip Measuring Service"
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\Services\{9A6BEB07-1AF1-4A8E-AB22-7A6F61EA19DB}]
+"Name"="IVsTextView Measuring Service"
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\Services\{C237820F-D3E3-41e5-836B-AD3E964E23AB}]
+"Name"="Razor Disassembly Window Provider"
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\Services\{75A81C9F-DAC3-408C-80F6-ADD4CEA3B381}]
+"Name"="Breakpoint Settings Window Provider"
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\Services\{4C1207A4-2B59-426b-8F31-980D0E7A427C}]
+"Name"="Remote Discovery UI Service"
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\Services\{C81BB4CC-3792-4DC2-BCFA-18E4FB2340BD}]
+"Name"="JSON Visualizer Service"
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\Services\{5ED643EE-A2CE-4250-900A-1315BBF84CF4}]
+"Name"="Heap View Window Provider"
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\Services\{98230B1E-5E92-4553-85FA-4EA67FB42FC1}]
+"Name"="Breakpoint Settings Import/Export Helper"
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\SolutionPersistence]
+[$RootKey$\SolutionPersistence\DebuggerProjectSystem]
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\ToolsOptionsPages]
+[$RootKey$\ToolsOptionsPages\Debugger]
+[$RootKey$\ToolsOptionsPages\Debugger\OutputWindow]
+"Package"="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+"Page"="{82C13516-664F-4F52-8EEE-3F90E80CEA9A}"
+"Keywords"="@OutputWindowToolsOptionsKeywords"
+@="#1009"
+[$RootKey$\ToolWindows]
+[$RootKey$\ToolWindows\{1820BAE5-C385-4492-9DE5-E35C9CF17B18}]
+"Name"="NoSource"
+"Style"="MDI"
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\ToolWindows\{CF577B8C-4134-11D2-83E5-00C04F9902C1}]
+"Name"="Disassembly"
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\ToolWindows\{CF577B8C-4134-11D2-83E5-00C04F9902C1}\Visibility]
+"{ADFC4E61-0397-11D1-9F4E-00A0C911004F}"=dword:00000000
+[$RootKey$\ToolWindows\{E62CE6A0-B439-11D0-A79D-00A0C9110051}]
+"Name"="Threads"
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+[$RootKey$\ToolWindows\{E62CE6A0-B439-11D0-A79D-00A0C9110051}\Visibility]
+"{ADFC4E61-0397-11D1-9F4E-00A0C911004F}"=dword:00000000
+[$RootKey$\ToolWindows\{497A7D24-3B23-4BF5-9C35-4B82E7A499FA}]
+@="{BEB01DDF-9D2B-435B-A9E7-76557E2B6B52}"
+"Name"="ManagedMemorySummaryWindow"
+"Style"="Linked"
+"Window"="{E62CE6A0-B439-11D0-A79D-00A0C9110051}"
+[$RootKey$\ManagedMemoryAnalysis]
+[$RootKey$\ManagedMemoryAnalysis]
+"FoldPaths"="System\.String$;\[\];System\.Object$;Microsoft\..*Runtime;System\._;System\..*Metadata;System\..*Entry;System\.Reflection;MS\.Utility;MS\.Internal;System\.Windows\.EventHandlersStore"
+"HeapMaxObjectCount"=dword:00989680
+"SmallObjectFoldPercentage"="0.005"
+"NumObjectsPerType"=dword:0000C350
+[$RootKey$\Debugger]
+"PerformanceTip"=dword:00000001
+[$RootKey$\FeatureFlags\Debugger\LiveMemoryTool]
+"Value"=dword:00000001
+[$RootKey$\FeatureFlags\Debugger\LiveMemoryToolSwimLanes]
+"Value"=dword:00000001
+[$RootKey$\FeatureFlags\Debugger\LiveMemoryToolNativeMemoryUsage]
+"Value"=dword:00000001

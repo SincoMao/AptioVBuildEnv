@@ -1,0 +1,82 @@
+/*++
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SpinlockRelease
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x0004000A
+    
+Description:
+
+    This rule verifies that calls to
+    KeAquireSpinlock,KeAcquireSpinLockAtDpcLevel and KeAcquireSpinLockRaiseToDpc and
+    KeReleaseSpinLock or KeReleaseSpinLockFromDpcLevel are used in the correct manner.
+    Moreover, at the end of WDM entry point, the driver should not hold the spinlock.
+  
+ Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216063
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+   int LockDepth = 0;
+}
+
+
+[
+KeAcquireSpinLock,                
+KeAcquireSpinLockAtDpcLevel,
+KeAcquireSpinLockRaiseToDpc@SDV,  
+KefAcquireSpinLockAtDpcLevel@SDV,
+KfAcquireSpinLock@SDV
+].exit
+{  
+   LockDepth = LockDepth + 1;
+}
+
+KeTryToAcquireSpinLockAtDpcLevel.exit
+{
+    if($return)
+    {
+        LockDepth = LockDepth + 1;
+    }
+}
+
+
+[
+KeReleaseSpinLock,
+KeReleaseSpinLockFromDpcLevel,
+KefReleaseSpinLockFromDpcLevel@SDV,
+KfReleaseSpinLock@SDV
+].exit
+{
+   LockDepth = LockDepth - 1;
+}
+
+
+[SDV_STANDARD_DRIVER_ROUTINES, SDV_SPECIAL_DRIVER_ROUTINES]@SDV.exit
+{
+        if (LockDepth != 0) 
+        {
+            abort "$fname returned with an invalid SpinLock state";
+        }
+}
+
+[SDV_STANDARD_DRIVER_ROUTINES]@XDV.exit
+{
+        if (LockDepth > 0) 
+        {
+            abort "$fname returned with an invalid SpinLock state";
+        }
+}

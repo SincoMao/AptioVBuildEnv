@@ -1,0 +1,62 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    EvtSurpriseRemoveNoSuspendQueue
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    WDF Drivers shouldn't drain/stop/purge the Queue from EvtDeviceSurpriseRemoval callback, instead self-managed I/O callbacks should be used. EvtDeviceSurpriseRemoval callback isn't synchronized with the power-down path.
+
+    Rule diagnostics:
+    If driver drains/stops/purges the Queue from EvtDeviceSurpriseRemoval callback, then rule fails.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507075
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {init, surprise_remove_called} s = init;
+}
+
+[fun_WDF_DEVICE_SURPRISE_REMOVAL].entry
+{
+    s = surprise_remove_called;
+}
+
+[fun_WDF_DEVICE_SURPRISE_REMOVAL].exit
+{
+    halt;
+}
+
+[WdfIoQueueStopSynchronously,
+WdfIoQueueDrainSynchronously,
+WdfIoQueuePurgeSynchronously,
+WdfIoQueueStopAndPurgeSynchronously,
+WdfIoQueueStop,
+WdfIoQueueDrain,
+WdfIoQueuePurge,
+WdfIoQueueStopAndPurge
+].entry
+{
+    if (s == surprise_remove_called) {
+        abort "$fname is called from the EvtDeviceSurpriseRemoval callback, EvtDeviceSurpriseRemoval isn't syncrhonized with the power down path. Use Self-managed I/O callbacks for cancelling requests.";
+    }
+}

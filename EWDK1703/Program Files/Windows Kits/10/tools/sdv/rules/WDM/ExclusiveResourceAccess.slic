@@ -1,0 +1,88 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    ExclusiveResourceAccess
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that calls to
+    ExAcquireResourceExclusiveLite and ExReleaseResourceLite or
+    ExReleaseResourceForThreadLite are used in strict alternation.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+    enum {acquired, notAcquired} accessState = notAcquired;
+}
+watch ExAcquireResourceExclusiveLite.entry.$1;
+
+ExAcquireResourceExclusiveLite.exit[guard $1]
+{
+    if (accessState == acquired) {
+       abort "The driver is calling $fname after already acquiring exclusive access to the resource.";
+    } else if ($return == 1) {
+       accessState = acquired;                
+    }
+}
+
+[ExReleaseResourceLite,ExReleaseResourceForThreadLite,ExReleaseResourceForThread].entry [guard $1]
+{   
+    if (accessState == notAcquired) {
+        abort "The driver is calling $fname without first acquiring exclusive access to the resource.";
+    } else {
+        halt;
+    }
+}
+
+[fun_DriverEntry
+,fun_AddDevice
+,fun_DriverStartIo
+,SDV_KDEFERRED_ROUTINE
+,SDV_KSERVICE_ROUTINE
+,SDV_DRIVER_CANCEL
+,SDV_WORKER_THREAD_ROUTINE
+,SDV_IO_COMPLETION_ROUTINE
+,SDV_IO_DPC_ROUTINE
+,fun_IRP_MJ_CLEANUP
+,fun_IRP_MJ_CLOSE
+,fun_IRP_MJ_CREATE
+,fun_IRP_MJ_DEVICE_CONTROL
+,fun_IRP_MJ_FILE_SYSTEM_CONTROL
+,fun_IRP_MJ_FLUSH_BUFFERS
+,fun_IRP_MJ_INTERNAL_DEVICE_CONTROL
+,fun_IRP_MJ_LOCK_CONTROL
+,fun_IRP_MJ_QUERY_INFORMATION
+,fun_IRP_MJ_READ
+,fun_IRP_MJ_SET_INFORMATION
+,fun_IRP_MJ_SYSTEM_CONTROL
+,fun_IRP_MJ_WRITE
+,fun_IRP_MJ_PNP
+,fun_IRP_MJ_POWER
+,fun_DriverUnload
+,SDV_IO_WORKITEM_ROUTINE
+,SDV_IO_WORKITEM_ROUTINE_EX
+,SDV_REQUEST_POWER_COMPLETE].exit
+{
+    if (accessState == acquired) {
+       abort "The driver has returned without releasing exclusive access to the resource.";
+    }
+}
+

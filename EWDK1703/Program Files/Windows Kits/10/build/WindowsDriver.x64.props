@@ -1,0 +1,53 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ExecutablePath>$(ExecutablePath);$(WDKContentRoot)bin\x86;$(WDKContentRoot)tools\tracing\x64</ExecutablePath>
+  </PropertyGroup>    
+
+  <!-- Default amd64 settings across chk and fre -->
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <MinimalRebuild>false</MinimalRebuild>
+      <PreprocessorDefinitions>_WIN64;_AMD64_;AMD64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WIN64;_AMD64_=1;AMD64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <Lib>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Lib>
+  </ItemDefinitionGroup>
+
+
+  <!-- Drivers for x64 should be built with epilog unwind information -->
+  <ItemDefinitionGroup Condition="'$(IsKernelModeToolset)'=='true'">
+    <ClCompile>
+      <AdditionalOptions>-d2epilogunwind %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <!-- Default amd64 chk only settings -->
+  <ItemDefinitionGroup Condition="'$(UseDebugLibraries)' == 'true' and '$(IsDriverAppToolset)'=='false'">
+    <ClCompile>
+      <AdditionalOptions>/homeparams %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalOptions>/IGNORE:4198,4010,4037,4039,4065,4070,4078,4087,4089,4221,4108,4088,4218,4218,4235 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <!-- Default x64 link settings for a driver project -->
+  <ItemDefinitionGroup>
+    <Midl>
+      <PreprocessorDefinitions>_AMD64_;_WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-sal /amd64  %(AdditionalOptions) </AdditionalOptions>
+    </Midl>
+  </ItemDefinitionGroup>
+
+</Project>

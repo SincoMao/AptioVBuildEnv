@@ -1,0 +1,11 @@
+/sdv
+/recursionBound:3
+/newStratifiedInlining
+/di
+/useHoudiniLite
+/useInlineDepth
+/bv
+/pruneCounterLoops:15
+/timeLimit:86400
+/memLimit:1000
+/catchAll

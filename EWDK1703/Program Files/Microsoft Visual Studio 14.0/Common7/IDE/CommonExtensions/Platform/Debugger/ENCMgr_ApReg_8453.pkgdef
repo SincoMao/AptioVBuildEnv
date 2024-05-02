@@ -1,0 +1,8 @@
+[$RootKey$]
+
+[$RootKey$\CLSID]
+
+[$RootKey$\CLSID\{99A426F1-AF1D-11d2-922C-00A02448799A}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\encmgr.dll"
+"ThreadingModel"="Both"
+

@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+<Rule Name="MC" PageTemplate="tool" DisplayName="Message Compiler"  Order="170">
+  <Rule.Categories>
+    <Category Name="General">
+      <Category.DisplayName>
+        <sys:String>General</sys:String>
+      </Category.DisplayName>
+    </Category>
+    <Category Name="File Options">
+      <Category.DisplayName>
+        <sys:String>File Options</sys:String>
+      </Category.DisplayName>
+    </Category>
+    <Category Name="Command Line" Subtype="CommandLine">
+      <Category.DisplayName>
+        <sys:String>Command Line</sys:String>
+      </Category.DisplayName>
+    </Category>
+    <Category Name="All Options" DisplayName="All Options" Subtype="Search" />
+  </Rule.Categories>
+  <Rule.DataSource>
+    <DataSource Persistence="ProjectFile" ItemType="MessageCompile" Label="" HasConfigurationCondition="true"/>
+  </Rule.DataSource>
+  <BoolProperty Name="AnsiInputFile" Category="General" Switch="-a" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Ansi Input File</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Use this argument to specify that the input file contains Ansi content (this is the default). (-a)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="AnsiMessageInBinFile" Category="General" Switch="-A" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Ansi Message In Bin File</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Use this argument to specify that the messages in the output .bin file should be Ansi. (-A)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="GenerateKernelModeLoggingMacros" Category="General" Switch="-km" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Generate Kernel Mode Logging Macros</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Generate kernel mode logging macros. (-km)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="GenerateMofFile" Category="General" Switch="-mof" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Generate MOF File</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Generate down-level support for all function/macros generated. MOF file will be generated from the manifest. MOF file will be placed in the location specified by the -h switch.</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="GenerateUserModeLoggingMacros" Category="General" Switch="-um" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Generate User Mode Logging Macros</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Generate user mode logging macros. (-um)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="GenerateOle2Header" Category="General" Switch="-o" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Generate OLE2 Header</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Generate OLE2 header file. (-o)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="EnableCalloutMacro" Category="General" Switch="-co" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Enable Callout Macro</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Add callout macro to invoke user code at logging. Not available for C#, and ignored. (-co)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <IntProperty Name="MaximumMessageLength" Category="General" Switch="-m" F1Keyword="driver.mc.general.properties">
+    <IntProperty.DisplayName>
+      <sys:String>Maximum Message Length</sys:String>
+    </IntProperty.DisplayName>
+    <IntProperty.Description>
+      <sys:String>Use this argument to have the compiler generate a warning if any message exceeds length characters. (-m length)</sys:String>
+    </IntProperty.Description>
+  </IntProperty>
+  <BoolProperty Name="ValidateAgainstBaselineResource" Category="File Options" F1Keyword="driver.mc.fileoptions.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Validate Against Baseline Resource</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Use this argument when you create a new version of your manifest and want to check it for application compatibility against the baseline that you created using the -s argument.</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="BaselinePath" Category="File Options" Switch="-t" F1Keyword="driver.mc.fileoptions.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Baseline Path</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>The path must point to the folder that contains the .BIN files that the baseline operation created. (-t directory)</sys:String>
+    </StringProperty.Description>
+    <StringProperty.ValueEditors>
+        <ValueEditor EditorType="DefaultFolderPropertyEditor" DisplayName="&lt;Browse...&gt;"/>
+    </StringProperty.ValueEditors>
+  </StringProperty>
+  <BoolProperty Name="GenerateBaselineResource" Category="File Options" F1Keyword="driver.mc.fileoptions.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Generate Baseline Resource</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Use this argument to create a baseline of your instrumentation.</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="BaselineResourcePath" Category="File Options" Switch="-s" F1Keyword="driver.mc.fileoptions.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Baseline Resource Path</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>The folder which contains the baseline manifest files. (-s directory)</sys:String>
+    </StringProperty.Description>
+    <StringProperty.ValueEditors>
+        <ValueEditor EditorType="DefaultFolderPropertyEditor" DisplayName="&lt;Browse...&gt;"/>
+    </StringProperty.ValueEditors>
+  </StringProperty>
+  <BoolProperty Name="EnableDebugOutputPath" Category="File Options" F1Keyword="driver.mc.fileoptions.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Enable Debug Output Path</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Use this argument to enable the compiler to place the .dbg C include file specified by 'Debug Output Path' property.</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="DebugOutputPath" Category="File Options" Switch="-x" F1Keyword="driver.mc.fileoptions.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Debug Output Path</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>The path in which to place the .dbg C include file. (-x path)</sys:String>
+    </StringProperty.Description>
+    <StringProperty.ValueEditors>
+        <ValueEditor EditorType="DefaultFolderPropertyEditor" DisplayName="&lt;Browse...&gt;"/>
+    </StringProperty.ValueEditors>
+  </StringProperty>
+  <BoolProperty Name="GeneratedHeaderPath" Category="File Options" F1Keyword="driver.mc.fileoptions.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Generate header file for containing counter names and GUIDs</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Use this argument to specify the folder into which you want the compiler to place the generated header file.</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="HeaderFilePath" Category="File Options" Switch="-h" F1Keyword="driver.mc.fileoptions.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Header File Path</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>The path in which to create the header file. (-h path)</sys:String>
+    </StringProperty.Description>
+    <StringProperty.ValueEditors>
+        <ValueEditor EditorType="DefaultFolderPropertyEditor" DisplayName="&lt;Browse...&gt;"/>
+    </StringProperty.ValueEditors>
+  </StringProperty>
+  <BoolProperty Name="GeneratedRCAndMessagesPath" Category="File Options" F1Keyword="driver.mc.fileoptions.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Generated RC and Binary Message Files Path</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Specifies the path in which to generate the RC and binary message files.</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="RCFilePath" Category="File Options" Switch="-r" F1Keyword="driver.mc.fileoptions.properties">
+    <StringProperty.DisplayName>
+      <sys:String>RC File Path</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>The folder into which you want the compiler to place the generated resource compiler script (.rc file) and the generated .bin files. (-r path)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="GeneratedFilesBaseName" Category="File Options" Switch="-z" F1Keyword="driver.mc.fileoptions.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Generated Files Base Name</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Specifies the base name of all generated files. (-z basename)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="GenerateCSharpLoggingClass" Category="General" Switch="-cs" F1Keyword="driver.mc.general.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Generate C# (managed) logging class</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Generate C# (managed) logging class. (-cs namespace)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="GenerateStaticCSharpLoggingClass" Category="General" Switch="-css" F1Keyword="driver.mc.general.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Generate static C# (managed) logging class</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Generate static C# (managed) logging class. (-css namespace)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="HeaderExtension" Category="General" Switch="-e" F1Keyword="driver.mc.general.properties">
+    <StringProperty.DisplayName>
+      <sys:String>File extension for the generated header</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Specifies the extension of the generated header file. (-e extension)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="PrefixMacroName" Category="General" Switch="-p" F1Keyword="driver.mc.general.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Prefix Macro Name</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Use this argument to override the default prefix that the compiler uses for the logging macro names and method names. (-p prefix)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="RemoveCharsFromSymbolName" Category="General" Switch="-P" F1Keyword="driver.mc.general.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Remove Characters From Symbolic Name</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Use this argument to remove characters from the beginning of the symbolic name that you specified for the event. (-P prefix)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <BoolProperty Name="SetCustomerbit" Category="General" Switch="-c" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Set Customer Bit</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Sets the Customer bit in the entire message Ids. (-c)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="TerminateMessageWithNull" Category="General" Switch="-n" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Terminate Message With Null</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Terminates all strings with nulls in the message tables. (-n)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="UnicodeInputFile" Category="General" Switch="-u" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Unicode Input File</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Input file is Unicode. (-u)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="UnicodeMessageInBinFile" Category="General" Switch="-U" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Unicode Message In Bin File</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Messages in .BIN file should be Unicode. (-U)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="UseBaseNameOfInput" Category="General" Switch="-b" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Use Base Name Of Input</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Use this argument to have the compiler use the base name of the filename input file for the .bin file names. (-b)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="UseDecimalValues" Category="General" Switch="-d" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Use Decimal Values</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Use this argument to use decimal values for the Severity and Facility constants in the header file instead of hexadecimal values. (-d)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="Verbose" Category="General" Switch="-v" F1Keyword="driver.mc.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Verbose</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Verbose. (-v)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="AdditionalOptions" Category="Command Line" F1Keyword="vc.project.AdditionalOptionsPage">
+    <StringProperty.DisplayName>
+      <sys:String>Additional Options</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Additional Options</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Subtype="file" Name="EventmanPath" Category="General" Switch="-w" F1Keyword="driver.mc.general.properties">
+    <StringProperty.DisplayName>
+        <sys:String>EventmanPath</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Specifies the path to eventman.xsd file.</sys:String>
+    </StringProperty.Description>
+    <StringProperty.ValueEditors>
+        <ValueEditor EditorType="DefaultFilePropertyEditor" DisplayName="&lt;Browse...&gt;"/>
+    </StringProperty.ValueEditors>
+  </StringProperty>
+  <StringProperty Subtype="file" Name="WinmetaPath" Category="General" Switch="-W" F1Keyword="driver.mc.general.properties">
+    <StringProperty.DisplayName>
+        <sys:String>WinmetaPath</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Specifies the path to the winmeta.xml file.</sys:String>
+    </StringProperty.Description>
+    <StringProperty.ValueEditors>
+        <ValueEditor EditorType="DefaultFilePropertyEditor" DisplayName="&lt;Browse...&gt;"/>
+    </StringProperty.ValueEditors>
+  </StringProperty>
+</Rule>
+  <ItemType Name="MessageCompile" DisplayName="MessageCompile" />
+  <FileExtension Name=".mc"   ContentType="MessageCompile" />
+  <FileExtension Name=".man"   ContentType="MessageCompile" />
+  <ContentType Name="MessageCompile" DisplayName="MessageCompile" ItemType="MessageCompile" />
+</ProjectSchemaDefinitions>

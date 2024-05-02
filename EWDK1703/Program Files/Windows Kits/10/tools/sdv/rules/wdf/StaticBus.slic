@@ -1,0 +1,42 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StaticBus
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    The Driver Property is satisfied if WdfPdoInitAllocate is called.
+    This is a Bus Driver that supports Static Enumeration.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+  
+
+
+#include "slic_base.h"
+
+state
+{
+}
+sdv_WdfPdoInitAllocate.exit
+{
+	  if ($return!=NULL)
+    { 
+       abort "The Driver Property is satisfied.This is a Bus Driver that supports Static Enumeration."; 
+    }
+}
+      

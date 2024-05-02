@@ -1,0 +1,59 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    WmiComplete
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that before returning from a dispatch
+    routine, if the IRP is a WMI_IRP, then the driver should
+    complete it by calling IoCompleteRequest.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state {
+    int not_completed = 0;
+} with guard(sdv_main,sdv_irp) 
+
+
+WmiSystemControl@SDV.exit [guard $3]
+{
+    if(*$4==IrpNotCompleted)
+    {
+        not_completed = 1;
+    }
+}
+
+
+[IoCompleteRequest,IofCompleteRequest].entry [guard $1]
+{
+    not_completed = 0;
+}
+
+
+
+[SDV_RunDispatchFunction].exit [guard $2]
+{
+    if (not_completed) {
+        abort "The dispatch routine has not completed its WMI processing.";
+    }
+}

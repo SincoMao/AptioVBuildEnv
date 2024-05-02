@@ -1,0 +1,64 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    RequestGetStatusValid
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    WdfRequestGetStatus should only be called for a request just two cases: 
+        1. When WdfRequestSend returns failure,
+        2. When the request has been sent with WDF_REQUEST_SEND_OPTION_SYNCHRONOUS.  
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507134
+
+--*/
+
+
+
+#include "slic_base.h"
+#define FALSE 0
+
+state 
+{
+    enum {CALLED, NOTCALLED} s = NOTCALLED;
+}
+
+watch sdv_WdfRequestSend.entry.$1;
+
+WdfRequestSend.entry[guard $1]
+{    
+    if($3 != NULL)
+    {
+        if (($3->Flags & 2) == 2)
+        {
+            s = CALLED;
+        }
+    }
+}
+
+WdfRequestSend.exit[guard $1]
+{
+    if($return == FALSE) {
+        s = CALLED;            
+    }
+}
+
+WdfRequestGetStatus.entry[guard $1]
+{
+    if(s != CALLED) {
+      abort "WdfRequestGetStatus can only be called for requests that are send with WDF_REQUEST_SEND_OPTION_SYNCHRONOUS flag.";
+    }
+}

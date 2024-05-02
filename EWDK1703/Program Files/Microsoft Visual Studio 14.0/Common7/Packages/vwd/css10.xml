@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<cssmd:cssmd xmlns:cssmd="http://schemas.microsoft.com/CSS-Intellisense" version="VS8" description="CSS1 validation data" friendly-name="CSS 1.0">
+	<cssmd:property-set>
+		<!-- http://www.w3.org/TR/CSS1 -->
+
+		<!-- Font Properties -->
+		<cssmd:property-def _locID="color" _locAttrData="description,syntax" type="color"
+			description="Color of an element's text" 
+			syntax="#RRGGBB | Named Color" 
+			enum="aqua black blue fuchsia gray green lime maroon navy olive purple red silver teal white yellow"
+			group="Font"
+			/>
+		<cssmd:property-def _locID="font" _locAttrData="description,syntax" type="composite"
+			description="Font used for an element's text" 
+			syntax="font-style font-variant font-weight font-size/line-height font-family"
+			group="Font"
+			/>
+		<cssmd:property-def _locID="font-family" _locAttrData="description,syntax" type="font" 
+			description="Name of the font used for an element's text" 
+			syntax="A font face name sequence"
+			group="Font"
+			/>
+		<cssmd:property-def _locID="font-style" _locAttrData="description,syntax" type="enum" 
+			description="Style of the font used for an element's text" 
+			syntax="One of the font-style values" 
+			enum="italic normal oblique"
+			group="Font"
+			/>
+		<cssmd:property-def _locID="font-variant" _locAttrData="description,syntax" type="enum" 
+			description="Variant of the font used for an element's text" 
+			syntax="One of the font-variant values" 
+			enum="normal small-caps"
+			group="Font"
+			/>
+		<cssmd:property-def _locID="font-size" _locAttrData="description,syntax" type="enum-length" 
+			description="Size of the font used for an element's text" 
+			syntax="length | percentage | standard font size value" 
+			enum="xx-small x-small small medium large x-large xx-large smaller larger"
+			group="Font"
+			/>
+		<cssmd:property-def _locID="font-weight" _locAttrData="description,syntax" type="enum" 
+			description="Boldness of the font used for an element's text" 
+			syntax="One of the font-weight values" 
+			enum="normal bold lighter bolder 100 200 300 400 500 600 700 800 900"
+			group="Font"
+			/>
+		<cssmd:property-def _locID="text-decoration" _locAttrData="description,syntax" type="enum-list" 
+			description="Decorations applied to font used for an element's text" 
+			syntax="none | combination of 'underline', 'overline', 'line-through' and 'blink'"
+			enum="none underline overline line-through blink"
+			group="Font"
+			/>
+
+		<!-- Background Properties -->
+		<cssmd:property-def _locID="background" _locAttrData="description,syntax" type="composite" 
+			description="Background of an element" 
+			syntax="[background-color] [background-image] [background-repeat] [background-attachment] [background-position]"
+			group="Background"
+			/>
+		<cssmd:property-def _locID="background-color" _locAttrData="description,syntax" type="color" 
+			description="Color used for an element's background" 
+			syntax="#RRGGBB | Transparent | Named Color" 
+			enum="transparent aqua black blue fuchsia gray green lime maroon navy olive purple red silver teal white yellow"
+			group="Background"
+			/>
+		<cssmd:property-def _locID="background-image" _locAttrData="description,syntax" type="url" 
+			description="Image used for an element's background" 
+			syntax="none | url([url to image])"
+			enum="none"
+			group="Background"
+			/>
+		<cssmd:property-def _locID="background-attachment" _locAttrData="description,syntax" type="enum" 
+			description="How the background image is attached to an element within the document" 
+			syntax="One of the background-attachment values" 
+			enum="fixed scroll"
+			group="Background"
+			/>
+		<cssmd:property-def _locID="background-repeat" _locAttrData="description,syntax" type="enum" 
+			description="How the background image is tiled within an element" 
+			syntax="One of the background-repeat values" 
+			enum="no-repeat repeat repeat-x repeat-y"
+			group="Background"
+			/>
+		<cssmd:property-def _locID="background-position" _locAttrData="description,syntax" type="composite" 
+			description="How the background is positioned within an element" 
+			syntax="[horizontal position] [vertical position]"
+			enum="bottom center left right top"
+			group="Background"
+			/>
+		<cssmd:property-def _locID="background-position-x" _locAttrData="description,syntax" type="enum-length" 
+			nonbrowseable="true"
+			description="How the background is positioned within an element" 
+			enum="left right center"
+			group="Background"
+			/>
+		<cssmd:property-def _locID="background-position-y" _locAttrData="description,syntax" type="enum-length" 
+			nonbrowseable="true"
+			description="How the background is positioned within an element" 
+			enum="top bottom center"
+			group="Background"
+			/>
+
+		<!-- Text Properties -->
+		<cssmd:property-def _locID="text-align" _locAttrData="description,syntax" type="enum" 
+			description="The horizontal alignment of an element's text" 
+			syntax="One of the text-align values" 
+			enum="center justify left right"
+			group="Block"
+			/>
+		<cssmd:property-def _locID="vertical-align" _locAttrData="description,syntax" type="enum-length" 
+			description="The vertical alignment of an element's text" 
+			syntax="One of the vertical-align values | a unit" 
+			enum="baseline bottom middle sub super text-bottom text-top top"
+			group="Block"
+			/>
+		<cssmd:property-def _locID="letter-spacing" _locAttrData="description,syntax" type="enum-length" 
+			description="The spacing between characters" 
+			syntax="normal | a unit" 
+			enum="normal"
+			group="Block"
+			/>
+		<cssmd:property-def _locID="line-height" _locAttrData="description,syntax" type="enum-length" 
+			description="The spacing between lines" 
+			syntax="normal | a unit" 
+			enum="normal"
+			group="Block"
+			/>
+		<cssmd:property-def _locID="text-indent" _locAttrData="description,syntax" type="length" 
+			description="The indentation of text" 
+			syntax="a unit"
+			group="Block"
+			/>
+		<cssmd:property-def _locID="text-transform" _locAttrData="description,syntax" type="enum" 
+			description="Letter case of the text" 
+			syntax="One of the text-transform values" 
+			enum="capitalize lowercase none uppercase"
+			group="Font"
+			/>
+		<cssmd:property-def _locID="word-spacing" _locAttrData="description,syntax" type="enum-length" 
+			description="The spacing between words" 
+			syntax="normal | a unit" 
+			enum="normal"
+			group="Block"
+			/>
+		<cssmd:property-def _locID="white-space" _locAttrData="description,syntax" type="enum" 
+			description="A value that indicates whether lines are automatically broken inside the object" 
+			syntax="One of the white-space values" 
+			enum="normal nowrap pre"
+			group="Block"
+			/>
+
+		<!-- Position Properties -->
+		<cssmd:property-def _locID="height" _locAttrData="description,syntax" type="enum-length" 
+			description="The height of a positioned element" 
+			syntax="auto | a unit" 
+			enum="auto"
+			group="Position"
+			/>
+		<cssmd:property-def _locID="width" _locAttrData="description,syntax" type="enum-length" 
+			description="The width of a positioned element" 
+			syntax="auto | a unit" 
+			enum="auto"
+			group="Position"
+			/>
+
+		<!-- Layout Properties -->
+		<cssmd:property-def _locID="display" _locAttrData="description,syntax" type="enum" 
+			description="The display mode of an element" 
+			syntax="One of the display values" 
+			enum="block inline list-item none"
+			group="Layout"
+			/>
+		<cssmd:property-def _locID="float" _locAttrData="description,syntax" type="enum" 
+			description="Edge of the object on which text will flow" 
+			syntax="One of the float values" 
+			enum="left none right"
+			group="Layout"
+			/>
+		<cssmd:property-def _locID="clear" _locAttrData="description,syntax" type="enum" 
+			description="Sides on which floating objects will not be allowed" 
+			syntax="One of the clear values" 
+			enum="both left none right"
+			group="Layout"
+			/>
+
+		<!-- Edges Properties -->
+		<cssmd:property-def _locID="padding" _locAttrData="description,syntax" type="composite" 
+			description="The padding around all four edges of an element" 
+			syntax="[top unit] [right unit] [bottom unit] [left unit]"
+			group="Box"
+			/>
+		<cssmd:property-def _locID="padding-left" _locAttrData="description,syntax" type="enum-length" 
+			description="The padding on the left edge of an element" 
+			syntax="a unit"
+			group="Box"
+			/>
+		<cssmd:property-def _locID="padding-right" _locAttrData="description,syntax" type="enum-length" 
+			description="The padding on the right edge of an element" 
+			syntax="a unit"
+			group="Box"
+			/>
+		<cssmd:property-def _locID="padding-top" _locAttrData="description,syntax" type="enum-length" 
+			description="The padding on the top edge of an element" 
+			syntax="a unit"
+			group="Box"
+			/>
+		<cssmd:property-def _locID="padding-bottom" _locAttrData="description,syntax" type="enum-length" 
+			description="The padding on the bottom edge of an element" 
+			syntax="a unit"
+			group="Box"
+			/>
+		<cssmd:property-def _locID="margin" _locAttrData="description,syntax" type="composite" 
+			description="The margin around all four edges of an element" 
+			syntax="[top unit] [right unit] [bottom unit] [left unit]"
+			group="Box"
+			/>
+		<cssmd:property-def _locID="margin-left" _locAttrData="description,syntax" type="enum-length" 
+			description="The margin on the left edge of an element" 
+			syntax="auto | a unit" enum="auto"
+			group="Box"
+			/>
+		<cssmd:property-def _locID="margin-right" _locAttrData="description,syntax" type="enum-length" 
+			description="The margin on the right edge of an element" 
+			syntax="auto | a unit" enum="auto"
+			group="Box"
+			/>
+		<cssmd:property-def _locID="margin-top" _locAttrData="description,syntax" type="enum-length" 
+			description="The margin on the top edge of an element" 
+			syntax="auto | a unit" enum="auto"
+			group="Box"
+			/>
+		<cssmd:property-def _locID="margin-bottom" _locAttrData="description,syntax" type="enum-length" 
+			description="The margin on the bottom edge of an element" 
+			syntax="auto | a unit" enum="auto"
+			group="Box"
+			/>
+		<cssmd:property-def _locID="border" _locAttrData="description,syntax" type="composite" 
+			description="The border around all four edges of an element" 
+			syntax="[border-style] [border-width] [border-color]"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-left" _locAttrData="description,syntax" type="composite" 
+			description="The border on the left edge of an element" 
+			syntax="[border-style] [border-width] [border-color]"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-right" _locAttrData="description,syntax" type="composite" 
+			description="The border on the right edge of an element" 
+			syntax="[border-style] [border-width] [border-color]"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-top" _locAttrData="description,syntax" type="composite" 
+			description="The border on the top edge of an element" 
+			syntax="[border-style] [border-width] [border-color]"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-bottom" _locAttrData="description,syntax" type="composite" 
+			description="The border on the bottom edge of an element" 
+			syntax="[border-style] [border-width] [border-color]"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-color" _locAttrData="description,syntax" type="color" 
+			iscomposite="true"
+			description="The color of the border around all four edges of an element" 
+			syntax="#RRGGBB | Named Color" 
+			enum="aqua black blue fuchsia gray green lime maroon navy olive purple red silver teal white yellow"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-style" _locAttrData="description,syntax" type="enum" 
+			iscomposite="true"
+			description="The style of the border around all four edges of an element" 
+			syntax="One of the border-style values" 
+			enum="dashed dotted double groove inset none outset ridge solid"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-width" _locAttrData="description,syntax" type="enum-length" 
+			iscomposite="true"
+			description="The width of the border around all four edges of an element" 
+			syntax="a unit | One of the border-width values" enum="thin medium thick"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-left-color" _locAttrData="description,syntax" type="color" 
+			nonbrowseable="true"
+			description="The color of the border on the left edge of an element" 
+			syntax="#RRGGBB | Named Color" 
+			enum="aqua black blue fuchsia gray green lime maroon navy olive purple red silver teal white yellow"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-left-width" _locAttrData="description,syntax" type="enum-length" 
+			description="The width of the border on the left edge of an element" 
+			syntax="a unit | One of the border-width values" enum="thin medium thick"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-left-style" _locAttrData="description,syntax" type="enum" 
+			nonbrowseable="true"
+			description="The style of the border on the left edge of an element" 
+			syntax="One of the border-style values" 
+			enum="dashed dotted double groove inset none outset ridge solid"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-right-color" _locAttrData="description,syntax" type="color" 
+			nonbrowseable="true"
+			description="The color of the border on the right edge of an element" 
+			syntax="#RRGGBB | Named Color" 
+			enum="aqua black blue fuchsia gray green lime maroon navy olive purple red silver teal white yellow"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-right-width" _locAttrData="description,syntax" type="enum-length" 
+			description="The width of the border on the right edge of an element" 
+			syntax="a unit | One of the border-width values" 
+			enum="thin medium thick"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-right-style" _locAttrData="description,syntax" type="enum" 
+			nonbrowseable="true"
+			description="The style of the border on the right edge of an element" 
+			syntax="One of the border-style values" 
+			enum="dashed dotted double groove inset none outset ridge solid"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-top-color" _locAttrData="description,syntax" type="color" 
+			nonbrowseable="true"
+			description="The color of the border on the top edge of an element" 
+			syntax="#RRGGBB | Named Color" 
+			enum="aqua black blue fuchsia gray green lime maroon navy olive purple red silver teal white yellow"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-top-width" _locAttrData="description,syntax" type="enum-length" 
+			description="The width of the border on the top edge of an element" 
+			syntax="a unit | One of the border-width values" 
+			enum="thin medium thick"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-top-style" _locAttrData="description,syntax" type="enum" 
+			nonbrowseable="true"
+			description="The style of the border on the top edge of an element" 
+			syntax="One of the border-style values" 
+			enum="dashed dotted double groove inset none outset ridge solid"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-bottom-color" _locAttrData="description,syntax" type="color" 
+			nonbrowseable="true"
+			description="The color of the border on the bottom edge of an element" 
+			syntax="#RRGGBB | Named Color" 
+			enum="aqua black blue fuchsia gray green lime maroon navy olive purple red silver teal white yellow"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-bottom-width" _locAttrData="description,syntax" type="enum-length" 
+			description="The width of the border on the bottom edge of an element" 
+			syntax="a unit | One of the border-width values" 
+			enum="thin medium thick"
+			group="Border"
+			/>
+		<cssmd:property-def _locID="border-bottom-style" _locAttrData="description,syntax" type="enum" 
+			nonbrowseable="true"
+			description="The style of the border on the bottom edge of an element" 
+			syntax="One of the border-style values" 
+			enum="dashed dotted double groove inset none outset ridge solid"
+			group="Border"
+			/>
+
+		<!-- Lists Properties -->
+		<cssmd:property-def _locID="list-style" _locAttrData="description,syntax" type="composite" 
+			description="The bullet characteristics of a list item" 
+			syntax="[list-style-type] [list-style-image] [list-style-position]"
+			group="List"
+			/>
+		<cssmd:property-def _locID="list-style-type" _locAttrData="description,syntax" type="enum" 
+			description="The bullet style of a list item" 
+			syntax="One of the list-style-type values" 
+			enum="circle decimal disc lower-alpha lower-roman none square upper-alpha upper-roman"
+			group="List"
+			/>
+		<cssmd:property-def _locID="list-style-image" _locAttrData="description,syntax" type="url" 
+			description="The bullet image of a list item" 
+			syntax="none | url([url to bullet image])"
+			enum="none"
+			group="List"
+			/>
+		<cssmd:property-def _locID="list-style-position" _locAttrData="description,syntax" type="enum" 
+			description="The bullet position of a list item" 
+			syntax="One of the list-style-position values" 
+			enum="inside outside"
+			group="List"
+			/>
+	</cssmd:property-set>
+	
+	<cssmd:pseudoclass-set>
+		<cssmd:pseudoclass-def _locID="link"
+			description="Unvisited link" 
+			/>
+		<cssmd:pseudoclass-def _locID="visited"
+			description="Visited link" 
+			/>
+		<cssmd:pseudoclass-def _locID="active"
+			description="Active link" 
+			/>
+		<cssmd:pseudoclass-def _locID="first-line"
+			description="First line as formatted on the canvas" 
+			/>
+		<cssmd:pseudoclass-def _locID="first-letter"
+			description="Initial caps or drop caps"
+			/>
+	</cssmd:pseudoclass-set>
+</cssmd:cssmd>

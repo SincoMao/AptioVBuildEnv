@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device name="Phone" width="1080" height="1920" scale="250" size="6" default="false" resize="false" icon="Assets/phone_icon.ico" generic="Generic/generic.xaml" MinVersion="10.0.0.0">
+	<Device.Qualifiers>
+		<Qualifier Name="DeviceFamily">Mobile</Qualifier>
+		<Qualifier Name="Orientation">Portrait|Landscape</Qualifier>
+	</Device.Qualifiers>
+</Device>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

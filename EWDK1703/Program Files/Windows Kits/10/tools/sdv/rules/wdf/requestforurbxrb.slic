@@ -1,0 +1,77 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    RequestForUrbXrb
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    If the driver calls the WdfUsbTargetDeviceCreateWithConfig DDI with the contract version in order to use an XRB then DDIs that use a URB
+    internally would only use an XRB only when any of the below preconditions apply:
+         1. Request parameter has the Wdf device in its parent object tree.
+         2. Request is represented via the I/O queue.
+         3. Request has another I/O queue represented request in its parent object tree.
+    
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507133
+
+--*/
+
+
+#include "slic_base.h"
+
+#define USBD_CLIENT_CONTRACT_VERSION_602 1538
+
+state
+{
+    enum{INIT, DRVPARENT} reqsParent = INIT;
+
+    enum{INITIAL, XRB} urbtype = INITIAL;
+} 
+
+watch WdfRequestCreate.exit.(*$3);
+
+WdfUsbTargetDeviceCreateWithParameters.entry
+{
+    if($2->USBDClientContractVersion == USBD_CLIENT_CONTRACT_VERSION_602)
+    {
+        urbtype = XRB;
+    }
+
+}
+
+WdfRequestCreate.exit[guard *$3]
+{
+    if($1 == NULL || $1->ParentObject == hparent_object)
+    {
+        reqsParent = DRVPARENT;        
+    }
+}
+
+
+[WdfUsbTargetPipeAbortSynchronously,
+WdfUsbTargetPipeFormatRequestForAbort,
+WdfUsbTargetPipeResetSynchronously,
+WdfUsbTargetPipeFormatRequestForReset,
+WdfUsbTargetDeviceSendControlTransferSynchronously,
+WdfUsbTargetDeviceFormatRequestForControlTransfer,
+WdfUsbTargetDeviceFormatRequestForString].entry[guard $2]
+{
+    if(reqsParent == DRVPARENT && urbtype == XRB)
+    {
+        abort "WARNING: Request is parented to the driver object, due to this instead of an XRB Wdf will use a URB.";
+    }
+}

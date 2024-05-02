@@ -1,0 +1,38 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    PagedCode
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that when the PAGED_CODE macro is called,
+    the driver is at IRQL < DISPATCH_LEVEL. Any code executing at IRQL >= DISPATCH_LEVEL
+    must be in non-paged memory to avoid causing page faults.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507220
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+sdv_do_paged_code_check.entry 
+{
+	if (sdv_irql_current >= DISPATCH_LEVEL) {
+		abort "The driver is calling PAGED_CODE() at IRQL >= DISPATCH_LEVEL.";
+	}
+}

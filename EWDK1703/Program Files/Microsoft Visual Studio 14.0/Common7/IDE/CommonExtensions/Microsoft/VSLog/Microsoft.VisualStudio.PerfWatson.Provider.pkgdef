@@ -1,0 +1,11 @@
+﻿[$RootKey$\Packages\{b466091b-94ad-416f-bb8a-42534d423a67}]
+@="PerfWatson Event Provider Package"
+"InprocServer32"="$ShellFolder$\Common7\IDE\PrivateAssemblies\Microsoft.VisualStudio.PerfWatson.Provider.dll"
+"CompanyName"="Microsoft"
+"ProductName"="Microsoft.VisualStudio.PerfWatson.Provider"
+"ProductVersion"="1.1"
+
+[$RootKey$\AutoLoadPackages\{adfc4e64-0397-11d1-9f4e-00a0c911004f}]
+"{b466091b-94ad-416f-bb8a-42534d423a67}"=dword:00000000
+[$RootKey$\AutoLoadPackages\{f1536ef8-92ec-443c-9ed7-fdadf150da82}]
+"{b466091b-94ad-416f-bb8a-42534d423a67}"=dword:00000000

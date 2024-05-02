@@ -1,0 +1,17 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PropertySheetDisplayName>Windows IoT Extension SDK</_PropertySheetDisplayName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <WindowsIoTExtensionSDKDir Condition="'$(WindowsIoTExtensionSDKDir)' == ''">$([MSBUILD]::GetDirectoryNameOfFileAbove('$(MSBUILDTHISFILEDIRECTORY)', 'SDKManifest.xml'))\</WindowsIoTExtensionSDKDir>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(WindowsIoTExtensionSDKDir)Include\winrt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  
+</Project> 
+

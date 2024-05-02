@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Rule Name="DbgengRemoteDebugger"
+      DisplayName="Debugging Tools for Windows - Remote Debugger"
+      PageTemplate="debugger"
+      Description="Debugging Tools for Windows options"
+      xmlns="http://schemas.microsoft.com/build/2009/properties">
+  <Rule.DataSource>
+    <DataSource Persistence="UserFile" />
+  </Rule.DataSource>
+  <StringProperty Name="DbgengRemoteCommand" DisplayName="Remote Command"
+                  Description="The debug command to execute."
+                  F1Keyword="VC.Project.IVCLocalDebugPageObject.Command">
+    <StringProperty.ValueEditors>
+      <ValueEditor EditorType="DefaultStringPropertyEditor" DisplayName="&lt;Edit...&gt;"/>
+    </StringProperty.ValueEditors>
+  </StringProperty>
+
+
+  <StringProperty Name="DbgengRemoteCommandArguments" DisplayName="Remote Command Arguments"
+                  Description="The command line arguments to pass to the application."
+                  F1Keyword="VC.Project.IVCLocalDebugPageObject.CommandArguments">
+    <Argument Property="DbgengRemoteCommand" />
+  </StringProperty>
+  <StringProperty Name="DbgengRemoteWorkingDirectory" DisplayName="Remote Working Directory"
+                Description="The application's working directory."
+                Subtype="folder"
+                F1Keyword="VC.Project.IVCLocalDebugPageObject.WorkingDirectory"/>
+
+  <StringProperty Name="DbgengRemoteMachineName" DisplayName="Remote Computer Name"
+                Description="The remote computer to connect to.">
+    <StringProperty.ValueEditors>
+      <ValueEditor EditorType="DriverTargetValueEditor" DisplayName="&lt;Configure...&gt;"/>
+    </StringProperty.ValueEditors>
+  </StringProperty>
+
+
+</Rule>
+
+

@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- This file is used for setup projects to turn library imports into associated WinSxS .msm files -->
+<VCMergeModules
+	Version="11.00"
+	>
+  <VCMergeModule
+		Name="Visual C++ ATL Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_ATL_x86.msm"
+		Architecture="x86"
+		>
+    <File Name="atl110.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ Debug MFC Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_DebugMFC_x86.msm"
+		Architecture="x86"
+		>
+    <File Name="mfc110d.dll"/>
+    <File Name="mfc110ud.dll"/>
+    <File	Name="mfcm110d.dll"/>
+    <File Name="mfcm110ud.dll"/>
+    <File	Name="mfcmifc80d.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ MFC Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_MFC_x86.msm"
+		Architecture="x86"
+		>
+    <File	Name="mfc110.dll"/>
+    <File	Name="mfc110u.dll"/>
+    <File	Name="mfcm110.dll"/>
+    <File	Name="mfcm110u.dll"/>
+    <File	Name="mfcmifc80.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ Debug CRT Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_DebugCRT_x86.msm"
+		Architecture="x86"
+		>
+    <File	Name="msvcm110d.dll"/>
+    <File	Name="msvcp110d.dll"/>
+    <File	Name="msvcr110d.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ CRT Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_CRT_x86.msm"
+		Architecture="x86"
+		>
+    <File	Name="msvcm110.dll"/>
+    <File	Name="msvcp110.dll"/>
+    <File	Name="msvcr110.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ Debug OpenMP Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_DebugOpenMP_x86.msm"
+		Architecture="x86"
+		>
+    <File	Name="vcomp110d.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ OpenMP Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_OpenMP_x86.msm"
+		Architecture="x86"
+		>
+    <File	Name="vcomp110.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ ATL Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_ATL_x64.msm"
+		Architecture="x64"
+		>
+    <File	Name="atl110.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ Debug MFC Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_DebugMFC_x64.msm"
+		Architecture="x64"
+		>
+    <File	Name="mfc110d.dll"/>
+    <File	Name="mfc110ud.dll"/>
+    <File	Name="mfcm110d.dll"/>
+    <File	Name="mfcm110ud.dll"/>
+    <File	Name="mfcmifc80d.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ MFC Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_MFC_x64.msm"
+		Architecture="x64"
+		>
+    <File	Name="mfc110.dll"/>
+    <File	Name="mfc110u.dll"/>
+    <File	Name="mfcm110.dll"/>
+    <File	Name="mfcm110u.dll"/>
+    <File	Name="mfcmifc80.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ Debug CRT Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_DebugCRT_x64.msm"
+		Architecture="x64"
+		>
+    <File	Name="msvcm110d.dll"/>
+    <File	Name="msvcp110d.dll"/>
+    <File	Name="msvcr110d.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ CRT Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_CRT_x64.msm"
+		Architecture="x64"
+		>
+    <File	Name="msvcm110.dll"/>
+    <File	Name="msvcp110.dll"/>
+    <File	Name="msvcr110.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ Debug OpenMP Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_DebugOpenMP_x64.msm"
+		Architecture="x64"
+		>
+    <File	Name="vcomp110d.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ OpenMP Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_OpenMP_x64.msm"
+		Architecture="x64"
+		>
+    <File	Name="vcomp110.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ ATL Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_ATL_ia64.msm"
+		Architecture="ia64"
+		>
+    <File	Name="atl110.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ Debug MFC Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_DebugMFC_ia64.msm"
+		Architecture="ia64"
+		>
+    <File	Name="mfc110d.dll"/>
+    <File	Name="mfc110ud.dll"/>
+    <File	Name="mfcm110d.dll"/>
+    <File	Name="mfcm110ud.dll"/>
+    <File	Name="mfcmifc80d.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ MFC Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_MFC_ia64.msm"
+		Architecture="ia64"
+		>
+    <File	Name="mfc110.dll"/>
+    <File	Name="mfc110u.dll"/>
+    <File	Name="mfcm110.dll"/>
+    <File	Name="mfcm110u.dll"/>
+    <File	Name="mfcmifc80.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ Debug CRT Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_DebugCRT_ia64.msm"
+		Architecture="ia64"
+		>
+    <File	Name="msvcm110d.dll"/>
+    <File	Name="msvcp110d.dll"/>
+    <File	Name="msvcr110d.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ CRT Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_CRT_ia64.msm"
+		Architecture="ia64"
+		>
+    <File	Name="msvcm110.dll"/>
+    <File	Name="msvcp110.dll"/>
+    <File	Name="msvcr110.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ Debug OpenMP Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_DebugOpenMP_ia64.msm"
+		Architecture="ia64"
+		>
+    <File	Name="vcomp110d.dll"/>
+  </VCMergeModule>
+  <VCMergeModule
+		Name="Visual C++ OpenMP Runtime Libraries"
+		Path="$(CommonProgramFiles)\Merge Modules\Microsoft_VC110_OpenMP_ia64.msm"
+		Architecture="ia64"
+		>
+    <File	Name="vcomp110.dll"/>
+  </VCMergeModule>
+</VCMergeModules>

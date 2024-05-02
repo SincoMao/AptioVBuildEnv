@@ -1,0 +1,47 @@
+﻿<!--
+***********************************************************************************************
+Microsoft.Cpp.Redirect.10.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file is used to build Visual C++ projects with the VS2010 toolset.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <VCTargetsPath>$(VCTargetsPath10)</VCTargetsPath>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <!-- In VS2010, OutputPath was set in the Defaults.props.  Later version of VS, it was moved to .targets 
+    Since Redirection doesn't redirect Defaults.props, add it here. -->
+    <OutputPath>$(OutDir)</OutputPath>
+  </PropertyGroup>
+
+  <!-- An empty target in case some old toolsets did not import vc common targets -->
+  <Target Name="_DetermineManagedStateFromCL" />
+
+  <PropertyGroup>
+    <!-- targets which define WinMDAssembly and/or ManagedAssembly properties -->
+    <DetermineProjectTypeTargets>_DetermineManagedStateFromCL;$(DetermineProjectTypeTargets)</DetermineProjectTypeTargets>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.cpp.targets" />
+
+  <!-- Targets required by this VS version, but missing in old toolsets -->
+  <Import Condition="'$(PlatformTargetsFound)' == 'true'" Project="Microsoft.Cpp.Redirect.Common.targets" />
+
+  <!-- If the VCTargetPath was redirected to VCTargetsPath10, then general_file.xml doesn't exists. To correct this, use the current version of the xml instead.-->
+  <ItemGroup Condition="'$(VCTargetsPathEffective)'=='$(VCTargetsPath10)'">
+    <PropertyPageSchema Include="$(VCTargetsPathActual)$(LangID)\general_file.xml">
+      <Context>File</Context>
+    </PropertyPageSchema>
+  </ItemGroup>  
+  
+</Project>

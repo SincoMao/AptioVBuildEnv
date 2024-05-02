@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PropertySheetDisplayName>Microsoft Desktop Extension SDK for Universal App Platform</_PropertySheetDisplayName>
+    <DesktopExtSdkDir Condition="'$(DesktopExtSdkDir)' == ''">$([MSBUILD]::GetDirectoryNameOfFileAbove('$(MSBUILDTHISFILEDIRECTORY)', 'sdkmanifest.xml'))\</DesktopExtSdkDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LIB_Platform Condition="'$(Platform)'=='WIN32'">x86</LIB_Platform>
+    <LIB_Platform Condition="'$(Platform)'!='WIN32'">$(Platform)</LIB_Platform>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(DesktopExtSdkDir)INCLUDE\UM;$(DesktopExtSdkDir)INCLUDE\WinRT;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WINAPI_PARTITION_PC_APP=1</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(DesktopExtSdkDir)LIB\um\$(LIB_Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+</Project>

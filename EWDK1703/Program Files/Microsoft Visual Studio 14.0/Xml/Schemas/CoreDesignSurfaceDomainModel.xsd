@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema id="CoreDesignSurfaceSchema" targetNamespace="http://schemas.microsoft.com/VisualStudio/2008/DslTools/CoreDesignSurface" elementFormDefault="qualified" xmlns="http://schemas.microsoft.com/VisualStudio/2008/DslTools/CoreDesignSurface" xmlns:core="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import id="CoreSchema" namespace="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" />
+  <!-- PresentationElement -->
+  <xsd:element name="PresentationElement" abstract="true" type="PresentationElement" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="PresentationElement" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: PresentationViewsSubject -->
+          <xsd:choice minOccurs="0" maxOccurs="1" >
+            <xsd:element ref="presentationViewsSubject">
+              <xsd:annotation>
+                <xsd:documentation>[Relationship deriving from PresentationViewsSubject needs to be serialized in full-form]</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element ref="core:modelElementMoniker" >
+              <xsd:annotation>
+                <xsd:documentation>[Target role-player]</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:choice>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- PresentationElement Moniker -->
+  <xsd:element name="presentationElementMoniker" abstract="true" type="PresentationElementMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="PresentationElementMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for PresentationElement instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- ShapeElement -->
+  <xsd:element name="shapeElement" abstract="true" type="ShapeElement" />
+  <xsd:complexType name="ShapeElement" abstract="true" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- ShapeElement Moniker -->
+  <xsd:element name="shapeElementMoniker" abstract="true" type="ShapeElementMoniker" substitutionGroup="presentationElementMoniker" />
+  <xsd:complexType name="ShapeElementMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for ShapeElement instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="PresentationElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- NodeShape -->
+  <xsd:element name="NodeShape" abstract="true" type="NodeShape" />
+  <xsd:complexType name="NodeShape" abstract="true" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- NodeShape Moniker -->
+  <xsd:element name="nodeShapeMoniker" abstract="true" type="NodeShapeMoniker" substitutionGroup="shapeElementMoniker" />
+  <xsd:complexType name="NodeShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for NodeShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ShapeElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Diagram -->
+  <xsd:element name="diagram" abstract="true" type="Diagram" />
+  <xsd:complexType name="Diagram" abstract="true" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- Diagram Moniker -->
+  <xsd:element name="diagramMoniker" abstract="true" type="DiagramMoniker" substitutionGroup="nodeShapeMoniker" />
+  <xsd:complexType name="DiagramMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for Diagram instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="NodeShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LinkShape -->
+  <xsd:element name="linkShape" abstract="true" type="LinkShape" />
+  <xsd:complexType name="LinkShape" abstract="true" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- LinkShape Moniker -->
+  <xsd:element name="linkShapeMoniker" abstract="true" type="LinkShapeMoniker" substitutionGroup="shapeElementMoniker" />
+  <xsd:complexType name="LinkShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for LinkShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ShapeElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- BinaryLinkShape -->
+  <xsd:element name="binaryLinkShape" abstract="true" type="BinaryLinkShape" />
+  <xsd:complexType name="BinaryLinkShape" abstract="true" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- BinaryLinkShape Moniker -->
+  <xsd:element name="binaryLinkShapeMoniker" abstract="true" type="BinaryLinkShapeMoniker" substitutionGroup="linkShapeMoniker" />
+  <xsd:complexType name="BinaryLinkShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for BinaryLinkShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="LinkShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GenericLinkShape -->
+  <xsd:element name="genericLinkShape" type="GenericLinkShape" />
+  <xsd:complexType name="GenericLinkShape" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- GenericLinkShape Moniker -->
+  <xsd:element name="genericLinkShapeMoniker" abstract="true" type="GenericLinkShapeMoniker" substitutionGroup="binaryLinkShapeMoniker" />
+  <xsd:complexType name="GenericLinkShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for GenericLinkShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="BinaryLinkShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LabelShape -->
+  <xsd:element name="labelShape" type="LabelShape" />
+  <xsd:complexType name="LabelShape" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- LabelShape Moniker -->
+  <xsd:element name="labelShapeMoniker" type="LabelShapeMoniker" substitutionGroup="nodeShapeMoniker" />
+  <xsd:complexType name="LabelShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for LabelShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="NodeShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LineLabelShape -->
+  <xsd:element name="lineLabelShape" type="LineLabelShape" />
+  <xsd:complexType name="LineLabelShape" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- LineLabelShape Moniker -->
+  <xsd:element name="lineLabelShapeMoniker" type="LineLabelShapeMoniker" substitutionGroup="labelShapeMoniker" />
+  <xsd:complexType name="LineLabelShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for LineLabelShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="LabelShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- CommentShape -->
+  <xsd:element name="cdsCommentShape" type="cdsCommentShape" />
+  <xsd:complexType name="cdsCommentShape" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- CommentShape Moniker -->
+  <xsd:element name="cdsCommentShapeMoniker" type="cdsCommentShapeMoniker" substitutionGroup="labelShapeMoniker" />
+  <xsd:complexType name="cdsCommentShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for CommentShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="LabelShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- PortShape -->
+  <xsd:element name="portShape" abstract="true" type="PortShape" />
+  <xsd:complexType name="PortShape" abstract="true" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- PortShape Moniker -->
+  <xsd:element name="portShapeMoniker" abstract="true" type="PortShapeMoniker" substitutionGroup="nodeShapeMoniker" />
+  <xsd:complexType name="PortShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for PortShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="NodeShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- CompartmentShape -->
+  <xsd:element name="compartmentShape" abstract="true" type="CompartmentShape" />
+  <xsd:complexType name="CompartmentShape" abstract="true" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- CompartmentShape Moniker -->
+  <xsd:element name="compartmentShapeMoniker" abstract="true" type="CompartmentShapeMoniker" substitutionGroup="nodeShapeMoniker" />
+  <xsd:complexType name="CompartmentShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for CompartmentShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="NodeShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- ImageShape -->
+  <xsd:element name="imageShape" abstract="true" type="ImageShape" />
+  <xsd:complexType name="ImageShape" abstract="true" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- ImageShape Moniker -->
+  <xsd:element name="imageShapeMoniker" abstract="true" type="ImageShapeMoniker" substitutionGroup="nodeShapeMoniker" />
+  <xsd:complexType name="ImageShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for ImageShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="NodeShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- SwimlaneShape -->
+  <xsd:element name="swimlaneShape" abstract="true" type="SwimlaneShape" />
+  <xsd:complexType name="SwimlaneShape" abstract="true" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- SwimlaneShape Moniker -->
+  <xsd:element name="swimlaneShapeMoniker" abstract="true" type="SwimlaneShapeMoniker" substitutionGroup="nodeShapeMoniker" />
+  <xsd:complexType name="SwimlaneShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for SwimlaneShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="NodeShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Port -->
+  <xsd:element name="port" abstract="true" type="Port" />
+  <xsd:complexType name="Port" abstract="true" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- Port Moniker -->
+  <xsd:element name="portMoniker" abstract="true" type="PortMoniker" substitutionGroup="nodeShapeMoniker" />
+  <xsd:complexType name="PortMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for Port instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="NodeShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Compartment -->
+  <xsd:element name="compartment" abstract="true" type="Compartment" />
+  <xsd:complexType name="Compartment" abstract="true" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- Compartment Moniker -->
+  <xsd:element name="compartmentMoniker" abstract="true" type="CompartmentMoniker" substitutionGroup="nodeShapeMoniker" />
+  <xsd:complexType name="CompartmentMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for Compartment instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="NodeShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- ListCompartment -->
+  <xsd:element name="listCompartment" abstract="true" type="ListCompartment" />
+  <xsd:complexType name="ListCompartment" abstract="true" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- ListCompartment Moniker -->
+  <xsd:element name="listCompartmentMoniker" abstract="true" type="ListCompartmentMoniker" substitutionGroup="compartmentMoniker" />
+  <xsd:complexType name="ListCompartmentMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for ListCompartment instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="CompartmentMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- ElementListCompartment -->
+  <xsd:element name="elementListCompartment" type="ElementListCompartment" />
+  <xsd:complexType name="ElementListCompartment" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- ElementListCompartment Moniker -->
+  <xsd:element name="elementListCompartmentMoniker" type="ElementListCompartmentMoniker" substitutionGroup="listCompartmentMoniker" />
+  <xsd:complexType name="ElementListCompartmentMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for ElementListCompartment instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ListCompartmentMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- DecoratorHostShape -->
+  <xsd:element name="decoratorHostShape" type="DecoratorHostShape" />
+  <xsd:complexType name="DecoratorHostShape" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- DecoratorHostShape Moniker -->
+  <xsd:element name="decoratorHostShapeMoniker" type="DecoratorHostShapeMoniker" substitutionGroup="nodeShapeMoniker" />
+  <xsd:complexType name="DecoratorHostShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for DecoratorHostShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="NodeShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- MoveableDecoratorHostShape -->
+  <xsd:element name="moveableDecoratorHostShape" type="MoveableDecoratorHostShape" />
+  <xsd:complexType name="MoveableDecoratorHostShape" mixed="true">
+    <xsd:annotation>
+      <xsd:documentation>[This class or one of its base class has custom implementation, so the content is unbounded]</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xsd:sequence>
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  
+  <!-- MoveableDecoratorHostShape Moniker -->
+  <xsd:element name="moveableDecoratorHostShapeMoniker" type="MoveableDecoratorHostShapeMoniker" substitutionGroup="decoratorHostShapeMoniker" />
+  <xsd:complexType name="MoveableDecoratorHostShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for MoveableDecoratorHostShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="DecoratorHostShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- PresentationViewsSubject -->
+  <xsd:element name="presentationViewsSubject" abstract="true" type="PresentationViewsSubject" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="PresentationViewsSubject" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end ModelElement -->
+          <xsd:element ref="core:modelElementMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- PresentationViewsSubject Moniker -->
+  <xsd:element name="presentationViewsSubjectMoniker" abstract="true" type="PresentationViewsSubjectMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="PresentationViewsSubjectMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for PresentationViewsSubject instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LinkConnectsToNode -->
+  <xsd:element name="linkConnectsToNode" abstract="true" type="LinkConnectsToNode" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="LinkConnectsToNode" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end NodeShape -->
+          <xsd:element ref="nodeShapeMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LinkConnectsToNode Moniker -->
+  <xsd:element name="linkConnectsToNodeMoniker" abstract="true" type="LinkConnectsToNodeMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="LinkConnectsToNodeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for LinkConnectsToNode instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Enum ShapeDecoratorPosition -->
+  <xsd:simpleType name="ShapeDecoratorPosition">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="InnerTopLeft"/>
+      <xsd:enumeration value="InnerTopCenter"/>
+      <xsd:enumeration value="InnerTopRight"/>
+      <xsd:enumeration value="InnerMiddleLeft"/>
+      <xsd:enumeration value="Center"/>
+      <xsd:enumeration value="InnerMiddleRight"/>
+      <xsd:enumeration value="InnerBottomLeft"/>
+      <xsd:enumeration value="InnerBottomCenter"/>
+      <xsd:enumeration value="InnerBottomRight"/>
+      <xsd:enumeration value="OuterTopLeft"/>
+      <xsd:enumeration value="OuterTopCenter"/>
+      <xsd:enumeration value="OuterTopRight"/>
+      <xsd:enumeration value="OuterMiddleLeft"/>
+      <xsd:enumeration value="OuterMiddleRight"/>
+      <xsd:enumeration value="OuterBottomLeft"/>
+      <xsd:enumeration value="OuterBottomCenter"/>
+      <xsd:enumeration value="OuterBottomRight"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <!-- Enum ConnectorDecoratorPosition -->
+  <xsd:simpleType name="ConnectorDecoratorPosition">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="SourceTop"/>
+      <xsd:enumeration value="SourceBottom"/>
+      <xsd:enumeration value="TargetTop"/>
+      <xsd:enumeration value="TargetBottom"/>
+      <xsd:enumeration value="CenterTop"/>
+      <xsd:enumeration value="CenterBottom"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <!-- Enum ConnectorArrowStyle -->
+  <xsd:simpleType name="ConnectorArrowStyle">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Custom"/>
+      <xsd:enumeration value="EmptyArrow"/>
+      <xsd:enumeration value="FilledArrow"/>
+      <xsd:enumeration value="HollowArrow"/>
+      <xsd:enumeration value="EmptyDiamond"/>
+      <xsd:enumeration value="FilledDiamond"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <!-- Enum RoutingStyle -->
+  <xsd:simpleType name="RoutingStyle">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Rectilinear"/>
+      <xsd:enumeration value="Straight"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+</xsd:schema>
+

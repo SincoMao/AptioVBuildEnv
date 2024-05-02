@@ -1,0 +1,81 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    FailD0EntryIoTargetState
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that an I/O target for a USB continuous reader is started within the EvtDeviceD0Entry will get stopped correctly from the same callback 
+    if the EvtDeviceDoEntry fails.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507076
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+    enum {INIT, IND0ENTRY} s = INIT;
+    enum {STOPPED, STARTED} s1 = STOPPED;
+    int* io_target = 0;
+}
+watch WdfUsbTargetPipeConfigContinuousReader.entry.$1;
+
+fun_WDF_DEVICE_D0_ENTRY.entry
+{
+    s = IND0ENTRY;
+}
+
+WdfUsbTargetPipeConfigContinuousReader.exit[guard $1]
+{
+    if($return != STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+WdfUsbTargetPipeGetIoTarget.exit[guard $1]{
+    io_target = $return;
+}
+
+WdfIoTargetStart.exit
+{
+    if($return != STATUS_SUCCESS)
+    {
+        halt;
+    }  
+    else if(s == IND0ENTRY && io_target == $1 && io_target != NULL){
+        s1 = STARTED;         
+    }
+}
+
+WdfIoTargetStop.entry
+{
+    if(io_target == $1)
+    {
+        s1 = STOPPED;        
+    }
+
+} 
+
+fun_WDF_DEVICE_D0_ENTRY.exit
+{
+    if( $return != STATUS_SUCCESS && s1 == STARTED)
+    {
+        abort "I/O target for a continuous reader is started from the EvtDeviceD0Entry, but this callback is failed. Since EvtDeviceD0Exit won't be called when EvtDeviceD0Entry fails, I/O target for the continous reader needs to be stopped when EvtDeviceD0Entry fails.";
+    }
+}

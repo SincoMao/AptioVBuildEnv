@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Product xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper" ProductCode=".NETFramework,Version=v4.0,KB2468871">
+  <!-- Defines list of files to be copied on build -->
+  <PackageFiles CopyAllPackageFiles="false">
+    <PackageFile Name="dotNetFx40_Full_x86_x64.exe" HomeSite="DotNetFX40FullWebBootstrapper" PublicKey="3082010A0282010100BD3089FB4572A8536B9E894F0023C0BED41D3DB1594038F373918226E696120053D91C820E3CCE1DBBBDF7428D97D4FC381AE4B9F9E3ECD36103BFA0D3D6754D5C46A9ED5EF0D2E2695B1A73EAB31C8D04CD2944A064592F1E985D6EC7AB18398265C4A7BCAB758819EA87971426B37F2676A4D4383984E3B326D518F92BE9D2C9165A5421F2978D878629FEF4492CE68BF8043F7DCDCD9692860D7103E2D0FE0C4235FFD7B83FDD8E450A7DF6D74BAD5BF076721D77237D8935C41C5DB250034B476D07A75588980680A681AD544ED881D6FABF42C031BE550D99D553491230EBE5A5887C5EC47A5A148708B43769A0EB32248C08EBF9D414BAE0FCCDEAA4150203010001"/>
+    <PackageFile Name="dotNetFx40_Full_setup.exe" HomeSite="DotNetFX40FullWebBootstrapper" CopyOnBuild="False" PublicKey="3082010A0282010100BD3089FB4572A8536B9E894F0023C0BED41D3DB1594038F373918226E696120053D91C820E3CCE1DBBBDF7428D97D4FC381AE4B9F9E3ECD36103BFA0D3D6754D5C46A9ED5EF0D2E2695B1A73EAB31C8D04CD2944A064592F1E985D6EC7AB18398265C4A7BCAB758819EA87971426B37F2676A4D4383984E3B326D518F92BE9D2C9165A5421F2978D878629FEF4492CE68BF8043F7DCDCD9692860D7103E2D0FE0C4235FFD7B83FDD8E450A7DF6D74BAD5BF076721D77237D8935C41C5DB250034B476D07A75588980680A681AD544ED881D6FABF42C031BE550D99D553491230EBE5A5887C5EC47A5A148708B43769A0EB32248C08EBF9D414BAE0FCCDEAA4150203010001"/>
+    <PackageFile Name="NDP40-KB2468871-v2-x86.exe" HomeSite="DotNetFx40FullKB2468871X86" CopyOnBuild="False" PublicKey="3082010A0282010100A5717418CBDB9C2FFAF1631980A38EFFC870830CA1472AFAFA5AB0CE4D0FBD3BDA21CD05D57D7C3FB59976253ADCA04F20E572D34371E6FF6C14F99F84B22587BD14B55DBE37892EC5AB856071858127B93303F9ADD69302EEB6551102CB8385F6C185636119A0149C9D9F9C466337D8113C57C748205316F7CC58FEF6C01ACAB6466C0DE83A05CEA61CE388F0DDAAC270835BD1F2F23FB8D9A49DA3006EAA81CDEE3A04ADC04A922C13E0E941760980016C6720B431B03E6BD2400883D570308D30E7BE8CD02FEED4863F1A5AA5C06885E8897C91034A6E594320489C88FEC945B7E84C04010B62CEA2EC1C9325FDD0B10EC6F8B6241A7BFB7CD65C4ED167E90203010001" />
+    <PackageFile Name="NDP40-KB2468871-v2-x64.exe" HomeSite="DotNetFx40FullKB2468871X64" CopyOnBuild="False" PublicKey="3082010A0282010100A5717418CBDB9C2FFAF1631980A38EFFC870830CA1472AFAFA5AB0CE4D0FBD3BDA21CD05D57D7C3FB59976253ADCA04F20E572D34371E6FF6C14F99F84B22587BD14B55DBE37892EC5AB856071858127B93303F9ADD69302EEB6551102CB8385F6C185636119A0149C9D9F9C466337D8113C57C748205316F7CC58FEF6C01ACAB6466C0DE83A05CEA61CE388F0DDAAC270835BD1F2F23FB8D9A49DA3006EAA81CDEE3A04ADC04A922C13E0E941760980016C6720B431B03E6BD2400883D570308D30E7BE8CD02FEED4863F1A5AA5C06885E8897C91034A6E594320489C88FEC945B7E84C04010B62CEA2EC1C9325FDD0B10EC6F8B6241A7BFB7CD65C4ED167E90203010001" />
+  </PackageFiles>
+
+  <RelatedProducts>
+    <EitherProducts>
+      <DependsOnProduct Code="Microsoft.Windows.Installer.3.1" />
+      <DependsOnProduct Code="Microsoft.Windows.Installer.4.5" />
+    </EitherProducts>
+    <IncludesProduct Code=".NETFramework,Version=v4.0" />
+    <IncludesProduct Code=".NETFramework,Version=v4.0,Profile=Client" />
+    <IncludesProduct Code=".NETFramework,Version=v4.0,Profile=Client,KB2468871" />
+  </RelatedProducts>
+
+  <InstallChecks>
+    <RegistryCheck Property="DotNet40Full_TargetVersion" Key="HKLM\Software\Microsoft\NET Framework Setup\NDP\v4\Full" Value="Version" />
+    <RegistryCheck Property="KB2468871Full_Installed" Key="HKLM\Software\Microsoft\Updates\Microsoft .NET Framework 4 Extended\KB2468871" Value="ThisVersionInstalled" />
+  </InstallChecks>
+
+  <!-- Defines how to invoke the setup for .NET Framework redist -->
+  <Commands Reboot="Immediate">
+    <Command PackageFile="dotNetFx40_Full_x86_x64.exe"
+            Arguments=" /q /norestart /ChainingPackage FullKB2468871X64ClickOnce /msioptions &quot;NONGEN=1&quot;"
+            EstimatedInstalledBytes="1909616640"
+            EstimatedInstallSeconds="900"
+            EstimatedTempBytes="303106560">
+        <!-- These checks determine whether the package is to be installed -->
+        <InstallConditions>
+            <!-- This command is only for Samesite -->
+            <BypassIf Property="InstallMode" Compare="ValueEqualTo" Value="HomeSite" />
+            <!-- This indicates .NET Framework Full is already installed -->
+            <BypassIf Property="DotNet40Full_TargetVersion" Compare="VersionGreaterThanOrEqualTo" Value="4.0.30129"/>
+            <!-- Block install if user does not have admin privileges -->
+            <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired"/>
+            <!-- Block install on less than Windows XP SP2 -->
+            <FailIf Property="VersionNT" Compare="VersionLessThan" Value="5.1.2" String="InvalidPlatformWinNT"/>
+            <!-- Block install if the platform is IA-64 -->
+            <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture" />
+        </InstallConditions>
+        <ExitCodes>
+            <ExitCode Value="0" Result="Success"/>
+            <ExitCode Value="3010" Result="SuccessReboot"/>
+            <ExitCode Value="1223" Result="Fail" String="UACPromptCanceled" />
+            <DefaultExitCode Result="Fail" FormatMessageFromSystem="false" String="GeneralFailure" />
+        </ExitCodes>
+    </Command>
+
+    <Command PackageFile="dotNetFx40_Full_setup.exe"
+             Arguments=" /q /norestart /ChainingPackage FullKB2468871X64ClickOnce /lcid 1033 /msioptions &quot;NONGEN=1&quot;"
+             EstimatedInstalledBytes="1909616640"
+             EstimatedInstallSeconds="900"
+             EstimatedTempBytes="303106560">
+      <!-- These checks determine whether the package is to be installed -->
+      <InstallConditions>
+        <!-- This command is only for Samesite -->
+        <BypassIf Property="InstallMode" Compare="ValueNotEqualTo" Value="HomeSite" />
+        <!-- This indicates .NET Framework Full is already installed -->
+        <BypassIf Property="DotNet40Full_TargetVersion" Compare="VersionGreaterThanOrEqualTo" Value="4.0.30129" />
+        <!-- Block install if user does not have admin privileges -->
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired" />
+        <!-- Block install on less than Windows XP SP2 -->
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="5.1.2" String="InvalidPlatformWinNT" />
+        <!-- Block install if the platform is IA-64 -->
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture" />
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success" />
+        <ExitCode Value="3010" Result="SuccessReboot" />
+        <ExitCode Value="1223" Result="Fail" String="UACPromptCanceled" />
+        <DefaultExitCode Result="Fail" FormatMessageFromSystem="false" String="GeneralFailure" />
+      </ExitCodes>
+    </Command>
+
+    <!-- x86 version of KB2468871 -->
+    <Command PackageFile="NDP40-KB2468871-v2-x86.exe"
+             Arguments=" /q /norestart /ChainingPackage FullKB2468871X86ClickOnce"
+             EstimatedInstalledBytes="0"
+             EstimatedInstallSeconds="1800"
+             EstimatedTempBytes="123313664">
+      <InstallConditions>
+        <BypassIf Property="ProcessorArchitecture" Compare="ValueNotEqualTo" Value="Intel"/>
+        <BypassIf Property="KB2468871Full_Installed" Compare="ValueEqualTo" Value="Y" />
+
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired" />
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="5.1.2" String="InvalidPlatformWinNT" />
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture" />
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success" />
+        <ExitCode Value="3010" Result="SuccessReboot" />
+        <ExitCode Value="1223" Result="Fail" String="UACPromptCanceled"/>
+        <DefaultExitCode Result="Fail" FormatMessageFromSystem="false" String="GeneralFailure" />
+      </ExitCodes>
+    </Command>
+
+    <!-- x64 version of KB2468871 -->
+    <Command PackageFile="NDP40-KB2468871-v2-x64.exe"
+             Arguments=" /q /norestart /ChainingPackage FullKB2468871X64ClickOnce"
+             EstimatedInstalledBytes="0"
+             EstimatedInstallSeconds="1800"
+             EstimatedTempBytes="194340864">
+      <InstallConditions>
+        <BypassIf Property="ProcessorArchitecture" Compare="ValueNotEqualTo" Value="amd64"/>
+        <BypassIf Property="KB2468871Full_Installed" Compare="ValueEqualTo" Value="Y" />
+
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired" />
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="5.1.2" String="InvalidPlatformWinNT" />
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture" />
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success" />
+        <ExitCode Value="3010" Result="SuccessReboot" />
+        <ExitCode Value="1223" Result="Fail" String="UACPromptCanceled"/>
+        <DefaultExitCode Result="Fail" FormatMessageFromSystem="false" String="GeneralFailure" />
+      </ExitCodes>
+    </Command>
+  </Commands>
+</Product>

@@ -1,0 +1,80 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    CheckBusDriver
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This driver property checks if IRP_MN_QUERY_DEVICE_RELATIONS is completed without forwarding. If this is the case then the driver is classified as a bus driver.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+#include "slic_base.h"
+
+
+state 
+{
+     enum {init,query_device_relations} irp_type = init;
+     enum {initial,completed} irp_state = initial;
+}with guard(sdv_main,sdv_irp)
+
+fun_IRP_MJ_PNP.entry [guard $2]
+{
+    if ($2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP && $2->STACKL->MinorFunction==IRP_MN_QUERY_DEVICE_RELATIONS) 
+    {
+         irp_type = query_device_relations;
+    } 
+    else
+    {
+        halt;
+    }
+}
+
+
+
+
+[IoCallDriver,PoCallDriver,IoForwardIrpSynchronously].entry [guard $2]
+{
+    if(irp_type == query_device_relations)
+    {
+        halt;
+    }
+}
+
+
+[IoCompleteRequest,IofCompleteRequest].entry [guard $1]
+{
+    if(irp_type == query_device_relations)
+    {
+      irp_state = completed;
+    }
+}
+
+fun_IRP_MJ_PNP.exit [guard $2]
+{
+    if ($2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP && $2->STACKL->MinorFunction==IRP_MN_QUERY_DEVICE_RELATIONS&&$return==STATUS_SUCCESS&&irp_state == completed) 
+    {
+         abort "The driver property is statisfied.";
+    } 
+    else
+    {
+        halt;
+    }
+}
+
+         

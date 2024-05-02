@@ -1,0 +1,44 @@
+﻿<!--
+***********************************************************************************************
+Toolset.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file defines the steps/targets required to build Visual C++ (version 14.0) projects
+specifically on X64 platforms.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildThisFileDirectory)ImportBefore\*.targets" Condition="Exists('$(MSBuildThisFileDirectory)ImportBefore')" />
+
+  <!-- Force TargetFrameworkVersion to v4.0 to support XP-->
+  <PropertyGroup>
+    <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' != '' and '$(TargetFrameworkVersion)' != 'v2.0' and '$(TargetFrameworkVersion)' != 'v3.0' and '$(TargetFrameworkVersion)' != 'v3.5'">v4.0</TargetFrameworkVersion>
+    <BeforeClCompileTargets>NoSupportCodeAnalysisXP;$(BeforeClCompileTargets)</BeforeClCompileTargets>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.CppCommon.targets" />
+
+  <Target Name="NoSupportCodeAnalysisXP" Condition="'$(ErrorNoSupportCodeAnalysisXP)' != 'false'">
+    <VCMessage Condition="'$(DesignTimeBuild)' != 'true' and '@(ClCompile->AnyHaveMetadataValue('EnablePREfast', 'true'))'=='true'" Code="MSB8026" Type="Error"/>
+  </Target>
+
+  <PropertyGroup>
+    <PrepareForBuildDependsOn>CheckWindowsSDK71A;$(PrepareForBuildDependsOn)</PrepareForBuildDependsOn>
+  </PropertyGroup>
+
+  <Target Name="CheckWindowsSDK71A">
+    <VCMessage Code="MSB8003" Type="Warning" Arguments="WindowsSdkDir_71A" Condition="'$(WindowsSdkDir_71A)'=='' and '$(UseEnv)' != 'true'" />
+  </Target>
+
+  <PropertyGroup>
+    <RequiredBundles>$(RequiredBundles);VC_140XpSupport</RequiredBundles>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)ImportAfter\*.targets" Condition="Exists('$(MSBuildThisFileDirectory)ImportAfter')" />
+</Project>

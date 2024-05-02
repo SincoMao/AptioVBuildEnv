@@ -1,0 +1,132 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlMmApcLte
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020019
+
+Description:
+
+    The IrqlMmApcLte rule specifies that the driver calls the following memory 
+    manager routines only when it is executing at IRQL <= APC_LEVEL:
+        MmAllocateNonCachedMemory
+        MmFreeNonCachedMemory
+        MmLockPagableDataSection
+        MmLockPagableSectionByHandle
+        MmPageEntireDriver
+        MmResetDriverPaging
+        MmSecureVirtualMemory
+        MmUnlockPagableImageSection
+        MmUnsecureVirtualMemory
+   and the following routines only when it is executing at IRQL <= DISPATCH_LEVEL:
+        MmFreePagesFromMdl
+        MmAllocatePagesForMdl
+        MmAllocatePagesForMdlEx
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216042
+
+--*/
+
+
+#include "slic_base.h"
+
+
+MmAllocateNonCachedMemory.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+MmFreeNonCachedMemory.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+MmAllocatePagesForMdl.entry
+{
+    if ( sdv_irql_current > DISPATCH_LEVEL) 
+    {
+        abort "$fname should only be called at IRQL <= DISPATCH_LEVEL.";
+    }
+}
+
+
+MmFreePagesFromMdl.entry
+{
+    if ( sdv_irql_current > DISPATCH_LEVEL) 
+    {
+        abort "$fname should only be called at IRQL <= DISPATCH_LEVEL.";
+    }
+}
+
+MmAllocatePagesForMdlEx.entry
+{
+    if ( sdv_irql_current > DISPATCH_LEVEL) 
+    {
+        abort "$fname should only be called at IRQL <= DISPATCH_LEVEL.";
+    }
+}
+
+MmLockPagableDataSection.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+MmLockPagableSectionByHandle.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+MmPageEntireDriver.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+MmResetDriverPaging.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+MmSecureVirtualMemory.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+MmUnlockPagableImageSection.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+MmUnsecureVirtualMemory.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+

@@ -1,0 +1,66 @@
+{
+    "start_url": "ManagedMemorySummaryView.html",
+    "domain": "http://microsoft.com",
+    "resource_aliases": {
+        "Resources": {
+            "path": "ScriptResources",
+            "is_default": true
+        }
+    },
+    "vs": {
+        "theme_token_aliases": {
+            "vs-command-bar-mouse-down-background-begin-color": {
+                "category": "624ed9c3-bdfd-41fa-96c3-7c824ea32e3d",
+                "key_type": "BackgroundColor",
+                "name": "CommandBarMouseDownBackgroundBegin"
+            },
+            "vs-command-bar-mouse-over-background-begin-color": {
+                "category": "624ed9c3-bdfd-41fa-96c3-7c824ea32e3d",
+                "key_type": "BackgroundColor",
+                "name": "CommandBarMouseOverBackgroundBegin"
+            },
+            "vs-command-bar-options-background-color": {
+                "category": "624ed9c3-bdfd-41fa-96c3-7c824ea32e3d",
+                "key_type": "BackgroundColor",
+                "name": "CommandBarOptionsBackground"
+            },
+            "vs-tool-window-background-color": {
+                "category": "624ed9c3-bdfd-41fa-96c3-7c824ea32e3d",
+                "key_type": "BackgroundColor",
+                "name": "ToolWindowBackground"
+            },
+            "vs-tab-title-link": {
+                "category": "624ed9c3-bdfd-41fa-96c3-7c824ea32e3d",
+                "key_type": "BackgroundColor",
+                "name": "ControlLinkText"
+            }
+        },
+
+        "themed_images": {
+            "vs-mma-icons": {
+                "bitmap_source": "mma_icons.png",
+                "background_color": "plugin-contextmenu-background-color"
+            },
+            "vs-mma-spacer": {
+                "bitmap_source": "spacer.png",
+                "background_color": "plugin-contextmenu-background-color"
+            },
+            "vs-mma-camera": {
+                "bitmap_source": "camera.png",
+                "background_color": "plugin-contextmenu-background-color"
+            },
+            "vs-mma-delete": {
+                "bitmap_source": "delete.png",
+                "background_color": "plugin-contextmenu-background-color"
+            },
+            "vs-mma-gc-glyph": {
+                "bitmap_source": "gcGlyph.png",
+                "background_color": "plugin-contextmenu-background-color"
+            },
+            "vs-mma-snapshot-glyph": {
+                "bitmap_source": "snapshotGlyph.png",
+                "background_color": "plugin-contextmenu-background-color"
+            }
+        }
+    }
+}

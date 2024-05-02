@@ -1,0 +1,270 @@
+﻿<xsd:schema 
+	xmlns:xsd='http://www.w3.org/2001/XMLSchema' 
+	xmlns:vs='http://schemas.microsoft.com/Visual-Studio-Intellisense'>
+
+	<xsd:attributeGroup name="runatAttributeGroup">
+		<xsd:attributeGroup ref="coreServerAttributeGroup" />
+		<xsd:attribute name="Id" vs:nonfilterable="true" vs:renametype="classmember" vs:serverattribute="true" />
+		<xsd:attribute name="RunAt" type="runatType" vs:readonly="true" vs:nonfilterable="true" vs:serverattribute="true" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="coreServerAttributeGroup">
+		<!-- Attributes -->
+		<xsd:attribute name="ClientIDMode" type="System.Web.UI.ClientIDModeDef" vs:category="ASP.NET" default="Inherit" />
+		<xsd:attribute name="EnableTheming" type="xsd:boolean" vs:nonbrowseable="true" vs:category="ASP.NET" vs:disallowedonmobilepages="true" default="True" vs:serverattribute="true" />
+		<xsd:attribute name="EnableViewState" type="xsd:boolean" vs:category="ASP.NET" default="True" vs:serverattribute="true" />
+		<xsd:attribute name="SkinID" type="xsd:string" vs:nonbrowseable="true" vs:category="ASP.NET" vs:nonfilterable="true" vs:disallowedonmobilepages="true" default="" vs:serverattribute="true" />
+		<xsd:attribute name="Visible" type="xsd:boolean" vs:category="ASP.NET" default="True" vs:serverattribute="true" />
+		<!-- Events --> 
+		<xsd:attribute name="OnDataBinding" vs:omtype="event" vs:category="ASP.NET" vs:nonfilterable="true" vs:serverattribute="true" />
+		<xsd:attribute name="OnDisposed" vs:omtype="event" vs:category="ASP.NET" vs:nonfilterable="true" vs:serverattribute="true" />
+		<xsd:attribute name="OnInit" vs:omtype="event" vs:category="ASP.NET" vs:nonfilterable="true" vs:serverattribute="true" />
+		<xsd:attribute name="OnLoad" vs:omtype="event" vs:category="ASP.NET" vs:nonfilterable="true" vs:serverattribute="true" />
+		<xsd:attribute name="OnPreRender" vs:omtype="event" vs:category="ASP.NET" vs:nonfilterable="true" vs:serverattribute="true" />
+		<xsd:attribute name="OnUnload" vs:omtype="event" vs:category="ASP.NET" vs:nonfilterable="true" vs:serverattribute="true" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="aServerAttributeGroup">
+		<xsd:attribute name="OnServerClick" vs:omtype="event" vs:category="ASP.NET" vs:nonfilterable="true" vs:serverattribute="true" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="buttonServerAttributeGroup">
+		<xsd:attribute name="CausesValidation" type="xsd:boolean" vs:category="ASP.NET" default="True" vs:serverattribute="true" />
+		<xsd:attribute name="ValidationGroup" type="xsd:string" vs:category="ASP.NET" default="" vs:serverattribute="true" />
+		<xsd:attribute name="OnServerClick" vs:omtype="event" vs:category="ASP.NET" vs:nonfilterable="true" vs:serverattribute="true" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="formServerAttributeGroup">
+		<xsd:attribute name="DefaultButton" type="xsd:string" vs:category="ASP.NET" default="" vs:serverattribute="true" />
+		<xsd:attribute name="DefaultFocus" type="xsd:string" vs:category="ASP.NET" default="" vs:serverattribute="true" />
+		<xsd:attribute name="SubmitDisabledControls" type="xsd:boolean" vs:category="ASP.NET" default="False" vs:serverattribute="true" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="inputServerAttributeGroup">
+		<xsd:attribute name="CausesValidation" type="xsd:boolean" vs:inputtype="button image submit" vs:category="ASP.NET" vs:serverattribute="true" />
+		<xsd:attribute name="OnServerClick" vs:omtype="event" vs:inputtype="button image submit" vs:category="ASP.NET" vs:nonfilterable="true" vs:serverattribute="true" />
+		<xsd:attribute name="OnServerChange" vs:omtype="event" vs:inputtype="checkbox hidden radio text" vs:category="ASP.NET" vs:nonfilterable="true" vs:serverattribute="true" />
+		<xsd:attribute name="ValidationGroup" type="xsd:string" vs:inputtype="button image submit" vs:category="ASP.NET" vs:serverattribute="true" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="multipleServerAttributeGroup">
+		<xsd:attribute name="multiple" type="xsd:boolean" vs:serverattribute="true" />
+	</xsd:attributeGroup>
+	
+	<xsd:attributeGroup name="selectServerAttributeGroup">
+		<xsd:attribute name="DataSourceID" type="xsd:string" vs:category="ASP.NET" default="" vs:serverattribute="true" />
+		<xsd:attribute name="DataTextField" type="xsd:string" vs:category="ASP.NET" default="" vs:serverattribute="true" />
+		<xsd:attribute name="DataValueField" type="xsd:string" vs:category="ASP.NET" default="" vs:serverattribute="true" />
+		<xsd:attribute name="OnServerChange" vs:omtype="event" vs:category="ASP.NET" vs:nonfilterable="true" vs:serverattribute="true" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="textareaServerAttributeGroup">
+		<xsd:attribute name="OnServerChange" vs:omtype="event" vs:category="ASP.NET" vs:nonfilterable="true" vs:serverattribute="true" />
+	</xsd:attributeGroup>
+
+	<xsd:simpleType name="linkType">
+		<xsd:union>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="Alternate" />
+					<xsd:enumeration value="Appendix" />
+					<xsd:enumeration value="Bookmark" />
+					<xsd:enumeration value="Chapter" />
+					<xsd:enumeration value="Contents" />
+					<xsd:enumeration value="Copyright" />
+					<xsd:enumeration value="Glossary" />
+					<xsd:enumeration value="Help" />
+					<xsd:enumeration value="Index" />
+					<xsd:enumeration value="Next" />
+					<xsd:enumeration value="Prev" />
+					<xsd:enumeration value="Section" />
+					<xsd:enumeration value="Shortcut Icon" />
+					<xsd:enumeration value="Start" />
+					<xsd:enumeration value="Stylesheet" />
+					<xsd:enumeration value="Subsection" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string" />
+			</xsd:simpleType>
+		</xsd:union>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="colorType" vs:builder="color">
+		<xsd:union>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="black" />
+					<xsd:enumeration value="silver" />
+					<xsd:enumeration value="gray" />
+					<xsd:enumeration value="white" />
+					<xsd:enumeration value="maroon" />
+					<xsd:enumeration value="red" />
+					<xsd:enumeration value="purple" />
+					<xsd:enumeration value="fuchsia" />
+					<xsd:enumeration value="green" />
+					<xsd:enumeration value="lime" />
+					<xsd:enumeration value="olive" />
+					<xsd:enumeration value="yellow" />
+					<xsd:enumeration value="navy" />
+					<xsd:enumeration value="blue" />
+					<xsd:enumeration value="teal" />
+					<xsd:enumeration value="aqua" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string" />
+			</xsd:simpleType>
+		</xsd:union>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="contentType">
+		<xsd:union>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="text/asp" />
+					<xsd:enumeration value="text/asa" />
+					<xsd:enumeration value="text/css" />
+					<xsd:enumeration value="text/html" />
+					<xsd:enumeration value="text/javascript" />
+					<xsd:enumeration value="text/jscript" />
+					<xsd:enumeration value="text/plain" />
+					<xsd:enumeration value="text/scriptlet" />
+					<xsd:enumeration value="text/vbscript" />
+					<xsd:enumeration value="text/x-component" />
+					<xsd:enumeration value="text/x-html-insertion" />
+					<xsd:enumeration value="text/xml" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string" />
+			</xsd:simpleType>
+		</xsd:union>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="simpleContentType">
+		<xsd:union>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="text/asp" />
+					<xsd:enumeration value="text/asa" />
+					<xsd:enumeration value="text/html" />
+					<xsd:enumeration value="text/plain" />
+					<xsd:enumeration value="text/xml" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string" />
+			</xsd:simpleType>
+		</xsd:union>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="scriptLanguage">
+		<xsd:union>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="ecmascript" />
+					<xsd:enumeration value="jscript" />
+					<xsd:enumeration value="javascript" />
+					<xsd:enumeration value="vbscript" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string" />
+			</xsd:simpleType>
+		</xsd:union>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="scriptType">
+		<xsd:union>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="text/ecmascript" />
+					<xsd:enumeration value="text/jscript" />
+					<xsd:enumeration value="text/javascript" />
+					<xsd:enumeration value="text/vbscript" />
+					<xsd:enumeration value="text/VB" />
+					<xsd:enumeration value="text/C#" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string" />
+			</xsd:simpleType>
+		</xsd:union>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="mediaType">
+		<xsd:union>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="screen" />
+					<xsd:enumeration value="print" />
+					<xsd:enumeration value="tty" />
+					<xsd:enumeration value="tv" />
+					<xsd:enumeration value="projection" />
+					<xsd:enumeration value="handheld" />
+					<xsd:enumeration value="braille" />
+					<xsd:enumeration value="aural" />
+					<xsd:enumeration value="all" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string" />
+			</xsd:simpleType>
+		</xsd:union>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="i2">
+		<xsd:restriction base="xsd:integer">
+			<xsd:minInclusive Value="-32768" />
+			<xsd:maxInclusive Value="32767" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="ui4">
+		<xsd:restriction base="xsd:nonNegativeInteger">
+			<xsd:minInclusive Value="0" />
+			<xsd:maxInclusive Value="4294967295" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="positiveInteger">
+		<xsd:restriction base="xsd:nonNegativeInteger">
+			<xsd:minInclusive Value="1" />
+			<xsd:maxInclusive Value="4294967295" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="runatType">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="server" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="frameTarget">
+		<xsd:union>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="_blank" />
+					<xsd:enumeration value="_parent" />
+					<xsd:enumeration value="_search" />
+					<xsd:enumeration value="_self" />
+					<xsd:enumeration value="_top" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string" />
+			</xsd:simpleType>
+		</xsd:union>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="System.Web.UI.ClientIDModeDef">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Inherit" />
+			<xsd:enumeration value="AutoID" />
+			<xsd:enumeration value="Predictable" />
+			<xsd:enumeration value="Static" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema> 	

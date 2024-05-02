@@ -1,0 +1,65 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    PendedCompletedRequest2
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    Wait is required as the dispatch routine could complete a pending irp.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507292
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+	enum {false,true} wait_required=false;
+} with guard(sdv_main,sdv_irp)
+
+[IoCallDriver,PoCallDriver].exit[guard $2]
+{
+    if($return==STATUS_PENDING)
+    {
+        wait_required=true;
+    }
+}
+KeWaitForSingleObject.entry
+{
+   if (wait_required==true)
+   {
+      wait_required=false;
+   }
+}
+IoCompleteRequest.entry[guard $1]
+{
+    if(wait_required==true)
+    {
+         abort "Wait is required as the dispatch routine could complete a pending irp.";
+    }
+    else
+    {
+        halt;
+    }
+}      
+
+[RemoveHeadList,sdv_containing_record].entry
+{
+    halt;
+}
+

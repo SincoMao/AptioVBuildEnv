@@ -1,0 +1,9 @@
+﻿<job id="main">
+	<script language="JScript">
+		WScript.Echo("JScript");
+	</script>
+	
+	<script language="VBScript">
+		WScript.Echo "VBScript"
+	</script>
+</job>

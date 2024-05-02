@@ -1,0 +1,104 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoAllocateIrpSignalEventInCompletionTimeout
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule warns that the driver will wait indefinitely until the lower driver returns, as the IRPs event is required to be signalled in the completion routine.
+    This rule is for locally created async. IRPs.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507371
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+   enum {initial,required_in_completion} signal_location = initial;
+   enum {notsignaled,signaled,initialized} SignalState = initialized;
+} 
+watch KeInitializeEvent.entry.$1;
+
+
+KeInitializeEvent.entry[guard $1]
+{
+    if($3)
+    {
+        halt;
+    }
+    else
+    {
+        
+        SignalState=notsignaled;
+    }
+}
+
+IoAllocateIrp.exit
+{
+    if($return==NULL)
+    {
+        halt;
+    }
+}
+IoSetCompletionRoutineEx.entry
+{
+    if(SignalState==notsignaled&&($2==sdv_other_irp))
+    {
+        signal_location = required_in_completion;
+    }
+    else
+    {
+        signal_location = initial;
+    }
+}
+
+IoSetCompletionRoutine.entry
+{
+    if(SignalState==notsignaled&&($1==sdv_other_irp))
+    {
+        signal_location = required_in_completion;
+    }
+    else
+    {
+        signal_location = initial;
+    }
+}
+
+[IoCallDriver,PoCallDriver].entry
+{
+    if($2!=sdv_other_irp)
+    {
+        signal_location = initial;
+    }
+}
+
+KeWaitForSingleObject.entry[guard $1]
+{
+   if (signal_location==required_in_completion&&($5==NULL))
+   {
+       abort "This driver will wait indefinitely until the lower driver returns, as the IRPs event is required to be signalled in the completion routine.";
+   }
+   else
+   {
+       halt;
+   }
+}
+
+
+

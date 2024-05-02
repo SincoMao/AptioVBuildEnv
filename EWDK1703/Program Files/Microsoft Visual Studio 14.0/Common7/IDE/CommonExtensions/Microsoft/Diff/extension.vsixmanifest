@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="8de3f279-5341-44b9-afd8-f429920df4ae">
+    <Name>Visual Studio Diff</Name>
+    <Author>Microsoft Corporation</Author>
+    <Version>2.0</Version>
+    <Description xml:space="preserve">A diff viewer built on the Visual Studio editor.</Description>
+    <Locale>1033</Locale>
+    <InstalledByMsi>false</InstalledByMsi>
+    <SystemComponent>true</SystemComponent>
+    <SupportedProducts>
+      <VisualStudio Version="11.0">
+        <Edition>Pro</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" />
+  </Identifier>
+  <References>
+    <Reference Id="Microsoft.VisualStudio.MPF" MinVersion="11.0">
+      <Name>Visual Studio MPF</Name>
+    </Reference>
+  </References>
+  <Content>
+    <VsPackage>Microsoft.VisualStudio.Diff.pkgdef</VsPackage>
+    <VsPackage>Microsoft.VisualStudio.Diff.CommandLineSwitch.pkgdef</VsPackage>
+    <MefComponent>Microsoft.VisualStudio.Diff.dll</MefComponent>
+  </Content>
+</Vsix>

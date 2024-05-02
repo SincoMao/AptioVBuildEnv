@@ -1,0 +1,64 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    ChildListConfiguration
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    For Drivers that support Dynamic Enumeration WdfFdoInitSetDefaultChildListConfig must be called before $fname.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507051
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {initial,entered,configured} childlist_state = initial;
+}
+
+fun_WDF_DRIVER_DEVICE_ADD.entry
+{
+    childlist_state=entered;
+}
+
+sdv_WdfFdoInitSetDefaultChildListConfig.entry
+{
+    if(childlist_state==entered)
+    {
+        childlist_state=configured;
+    }
+}
+sdv_WdfDeviceCreate.entry
+{
+	  if (childlist_state!=configured) 
+    { 
+       abort "For Drivers that support Dynamic Enumeration WdfFdoInitSetDefaultChildListConfig must be called before $fname."; 
+    }
+    else
+    {
+        halt;
+    }
+}
+
+fun_WDF_DRIVER_DEVICE_ADD.exit
+{
+    halt;
+}
+      

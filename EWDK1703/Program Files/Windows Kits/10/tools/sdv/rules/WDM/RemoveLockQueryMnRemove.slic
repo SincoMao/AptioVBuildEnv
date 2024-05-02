@@ -1,0 +1,123 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    RemoveLockQueryMnRemove
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that calls to IoAcquireRemoveLock and IoReleaseRemoveLock are used correctly when processing
+    IRP_MJ_PNP with MinorFunction IRP_MN_QUERY_REMOVE_DEVICE.The driver should acquire the removelock before forwarding the IRP down the stack.
+	
+    This rule only applies to FDO and FIDO drivers.
+	
+	
+    here is the pnp stack
+ 
+    filter
+     |
+    fdo
+     |
+    pdo
+ 
+    pnp manager has sent a query remove through the stack 
+    fdo is enabled to idle while the system is running.  it decides to power down in the query removed state so it requests a D0 irp 
+    before the d0 irp arrives, the pnp manager sends a pnp remove irp and that is processed by the filter.  the filter detaches from the stack and cleans up its state 
+    d0 arrives at the top of the stack, filter does not send it down the stack b/c it has no context/data to know where to send it anymore 
+    fdo is hung waiting for the d0 irp to arrive and it never will
+
+
+    1.	Before a device is detached from the device stack IoAcquireRemoveLock must succeed before the IRP is forwarded down the stack.For the following Irp Types IRP_MN_QUERY_REMOVE,IRP_MN_SUPRISE_REMOVAL and IRP_MN_REMOVE_DEVICE.
+    2.	IoReleaseRemoveLockAndWait should be called before calling IoDetachDevice or IoDeleteDevice. (This makes sure that all removelocks are released in device drivers).
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507315
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state{
+   int LockDepth = 0;
+   enum {init,on} t = init;
+}
+
+
+
+[sdv_RunQueryRemoveDevice].entry
+{
+    if($2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP)
+    {
+        t=on;
+    }
+    else
+    {
+        halt;
+    }
+}
+
+IoAcquireRemoveLock.exit
+{
+    if(LockDepth > 0 && $return!=STATUS_SUCCESS)
+    {
+       halt;
+    }
+    else if($return==STATUS_SUCCESS)
+    {
+       LockDepth = LockDepth + 1;
+    }
+}
+
+[IoReleaseRemoveLock].entry
+{
+    if (LockDepth == 0&&t==on) 
+    {
+       abort "The driver is calling $fname without first acquiring the Removelock.";
+    } 
+    else 
+    {
+       LockDepth = LockDepth - 1;
+    }
+}
+
+[IoCallDriver,PoCallDriver].entry
+{  
+    if(t==on)
+    {
+        if(LockDepth == 0&&t==on)
+        {
+            abort "$fname should not be called without first acquiring the Removelock.";
+        }
+        else 
+        {
+            halt;
+        }
+    }
+    else
+    {
+        halt;
+    }
+}
+
+
+
+[sdv_RunQueryRemoveDevice].exit
+{
+    if($2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP)
+    {
+        halt;
+    }
+}

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html" />
+    <link href="Capture.css" type="text/css" rel="stylesheet" data-plugin-theme="true" />
+    <script src="plugin.js"></script>
+    <script src="DiagnosticsHub.js"></script>
+    <script src="VsGraphics.js"></script>
+    <title>Gpu Capture View</title>
+
+  <script id="AnalysisViewTemplate" type="text/html">
+    <div class="analysisView">
+      <div id="warningSection" class="warningMessage"></div>
+      <div id="tilesContainer" class="frameTilesContainer">
+      </div>
+    </div>
+  </script>
+
+  <script id="FrameTileTemplate" type="text/html">
+        <div id="frameTile" class="frameTile">
+            <div class="frameTileInner">
+                <div id="frameTileHeader" class="frameTileHeader">
+                    <div id="frameTileTitle" class="frameTileTitle">
+                        <a id="seeFrameDetailsButton" tabindex="0" class="clickableLink" data-plugin-vs-tooltip='{"resource":"AnalyzeFrameTooltip"}'>Frame X</a>
+                    </div>
+                    <div id="frameTakenDate" class="frameTakenDate">Right now</div>
+                </div>
+                <div id="frameTileImageHolder" class="frameTileMiddle frameTileImageHolder">
+                    <img src="" id="frameTileImage" class="frameTileImage" alt="Frame not renderable"/>
+                </div>
+            </div>
+        </div>
+  </script>
+</head>
+<body tabindex="-1">
+  <div id="mainContainer">
+  </div>
+  <script type="text/javascript">
+      (function () {
+          VsGraphics.Capture.AnalysisViewHostInstance.loadView();
+      })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+/*++
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlRtlPassive2
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020023
+
+Description:
+
+    The IrqlRtlPassive rule specifies that the driver calls 
+    Rtl* functions only when it is executing at 
+    IRQL = PASSIVE_LEVEL.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=251707
+
+--*/
+
+
+#include "slic_base.h"
+
+
+[RtlAnsiStringToUnicodeString
+,RtlUnicodeStringToAnsiString
+,RtlUpcaseUnicodeStringToAnsiString
+,RtlOemStringToUnicodeString
+,RtlUnicodeStringToOemString
+,RtlUpcaseUnicodeStringToOemString
+,RtlOemStringToCountedUnicodeString
+,RtlUnicodeStringToCountedOemString
+,RtlUpcaseUnicodeStringToCountedOemString
+,RtlUpcaseUnicodeString
+,RtlDowncaseUnicodeString
+,RtlDuplicateUnicodeString
+,RtlCompareUnicodeString
+,RtlEqualUnicodeString
+,RtlHashUnicodeString
+,RtlUpcaseUnicodeChar
+,RtlDowncaseUnicodeChar
+,RtlFreeUnicodeString
+,RtlxAnsiStringToUnicodeSize
+,RtlxUnicodeStringToAnsiSize
+,RtlUnicodeToUTF8N
+,RtlUTF8ToUnicodeN
+,RtlStringFromGUID
+,RtlGUIDFromString
+,RtlGenerateClass5Guid
+].entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}

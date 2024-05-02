@@ -1,0 +1,84 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NdisAllocateFromNPagedLookasideList_InitFail
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule checks that NdisAllocateFromNPagedLookasideList and NdisFreeToNPagedLookasideList are called 
+    in alternate order. The ultimate goal is to make sure all LookasideList are freed.
+
+    The rule uses three different states. state changes when a LookasideList entry is allocated or freed.
+    
+    Related Rule:
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+   enum {initial, allocated, free} s = initial;
+}
+watch NdisAllocateFromNPagedLookasideList.exit.$return;
+
+NdisAllocateFromNPagedLookasideList.exit[guard $return]
+{  
+    if ($return != 0)
+    {
+        s = allocated;
+    }
+}
+
+NdisFreeToNPagedLookasideList.exit[guard $2]
+{
+    if ( s == free)
+    {
+        abort "Freeing a LookasideList that was not allocated.";
+    }
+  
+    s = free;
+}
+
+/*
+Need a new rule for look aside list cleanup
+NdisDeleteNPagedLookasideList.exit[guard $1]
+{
+    if ( s == allocated)
+    {
+        abort "Deleting a LookasideList that was not freed.";
+    }
+  
+    s = deleted;
+}*/
+
+[fun_MINIPORT_INITIALIZE,
+fun_FILTER_ATTACH,
+fun_PROTOCOL_BIND_ADAPTER_EX].exit
+{
+    if ($return == NDIS_STATUS_FAILURE || $return == NDIS_STATUS_RESOURCES)
+    {
+        if (s == allocated) 
+        {
+                   abort "You are halting, detaching or unloading the miniport but still have a LookasideList entry that has not been freed.";
+        }
+    }
+}
+
+
+

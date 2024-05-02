@@ -1,0 +1,79 @@
+/*++
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoSetCompletionExCompleteIrp
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x0004100F
+
+Description:
+
+    IoSetCompletionRoutineEx routine returns an NTSTATUS value. 
+    The driver must check this value to determine if the IoCompletion routine 
+    was successfully registered before calling IoCallDriver or PoCallDriver and 
+    if IoSetCompletionRoutineEx fails then the IRP should be completed and 
+    the dispatch routine should return .
+    
+    Background: IoSetCompletionRoutineEx routine returns an NTSTATUS value. 
+    The driver must check this value to determine if the IoCompletion routine 
+    was successfully registered before calling IoCallDriver or PoCallDriver and 
+    if IoSetCompletionRoutineEx fails then the IRP should be completed and the 
+    dispatch routine should return .
+    
+    The IRP is tracked (a.k.a., TRACKED_OBJECT). Use !irp .
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216101
+    
+--*/
+
+#include "slic_base.h"
+
+state 
+{
+    enum {no_set,failed,set,completed} completion_state = no_set;
+} 
+watch IoSetCompletionRoutineEx.entry.$2;
+
+IoSetCompletionRoutineEx.exit[guard $2]
+{
+     if ($return == STATUS_SUCCESS) 
+     {
+        completion_state = set;
+        halt "XDV_CLEAN_STATE";
+     }
+     else
+     {
+         completion_state = failed;
+     }
+}
+
+IoCompleteRequest.entry[guard $1]
+{
+    if (completion_state == failed && ($1->IoStatus.Status==STATUS_PENDING||$1->IoStatus.Status==STATUS_SUCCESS))
+    {
+        abort "The driver needs to call IoCompleteRequest and fail the current IRP if the call to IoSetCompletionRoutineEx returns unsuccessfully.";
+    }
+    else
+    {
+        completion_state = completed;
+    }
+}
+
+
+
+[SDV_RunDispatchFunction].exit[guard $2]
+{
+    if (completion_state == failed) 
+    {
+        abort "If the IoCompletion routine is successfully registered, IoSetCompletionRoutineEx allocates memory that remains allocated until the IoCompletion routine executes. Drivers must ensure that their IoCompletion routine executes by calling IoCallDriver or PoCallDriver otherwise, the kernel will leak memory.";
+    }
+}

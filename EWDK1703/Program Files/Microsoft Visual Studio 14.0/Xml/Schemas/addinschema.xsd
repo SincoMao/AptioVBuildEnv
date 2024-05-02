@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This schema is used by the Add-in manager to validate xml files that describe an add-in. -->
+<xs:schema targetNamespace="http://schemas.microsoft.com/AutomationExtensibility" 
+           xmlns='http://schemas.microsoft.com/AutomationExtensibility' 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           attributeFormDefault="unqualified" 
+           elementFormDefault="qualified" >
+
+    <xs:simpleType name="non-empty-string">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="Extensibility">
+        <xs:complexType>
+            <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="HostApplication" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:choice maxOccurs="unbounded">
+                                <xs:element name="Name" type="xs:string"/>
+                                <xs:element name="Version" type="xs:string"/>
+                            </xs:choice>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="Addin" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:choice maxOccurs="unbounded">
+                                <xs:element name="FriendlyName" type="xs:string" minOccurs="0" maxOccurs="1" />
+                                <xs:element name="Description" type="xs:string" minOccurs="0" maxOccurs="1" />
+                                <xs:element name="AboutBoxDetails" type="xs:string" minOccurs="0" maxOccurs="1" />
+                                <xs:element name="AboutIconLocation" type="xs:string" minOccurs="0" maxOccurs="1" />
+                                <xs:element name="AboutIconData" type="xs:string" minOccurs="0" maxOccurs="1" />
+                                <xs:element name="Assembly" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                <xs:element name="FullClassName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                                <xs:element name="LoadBehavior" type="xs:integer" minOccurs="0" maxOccurs="1" />
+                                <xs:element name="CommandPreload" type="xs:integer" minOccurs="0" maxOccurs="1" /> 
+                                <xs:element name="CommandLineSafe" type="xs:integer" minOccurs="0" maxOccurs="1" /> 
+                            </xs:choice>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="ToolsOptionsPage" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Category" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="SubCategory" minOccurs="1" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:choice maxOccurs="unbounded">
+                                                        <xs:element name="Assembly" type="xs:string"/>
+                                                        <xs:element name="FullClassName" type="xs:string"/>
+                                                    </xs:choice>
+                                                </xs:sequence>
+                                                <xs:attribute name="Name" type="xs:string" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="Name" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                </xs:choice>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

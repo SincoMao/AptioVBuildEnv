@@ -1,0 +1,48 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoBuildFsdComplete
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    A driver should not call IoCompleteRequest if the irp was created with IoBuildAsynchronousFsdRequest.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507265
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+}
+watch IoBuildAsynchronousFsdRequest.exit.$return;
+
+IoBuildAsynchronousFsdRequest.exit[guard $return]
+{
+    if($return==NULL)
+    {
+        halt;
+    }
+}
+
+
+IoCompleteRequest.entry[guard $1]
+{
+    abort "A driver should not call $fname if the irp was created with IoBuildAsynchronousFsdRequest.";
+}
+

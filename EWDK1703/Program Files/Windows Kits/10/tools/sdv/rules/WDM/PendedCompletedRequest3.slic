@@ -1,0 +1,92 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    PendedCompletedRequest3
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    A pending Irp should not be completed with a call to IoCompleteRequest.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507293
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+    int io_complete_request_called = 0;
+} with guard(sdv_main,sdv_irp)
+
+[IoMarkIrpPending].entry[guard $1]
+{
+    halt;
+}
+
+[IoCallDriver,PoCallDriver].entry[guard $2]
+{
+    halt;
+}
+
+[IoCallDriver,PoCallDriver].exit
+{
+    if($2->IoStatus.Status==STATUS_PENDING)
+    {
+          halt;
+    }
+}
+
+
+
+KeWaitForSingleObject.exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;    
+    }
+}
+
+
+IoCompleteRequest.entry[guard $1]
+{
+    if ($1->IoStatus.Status==STATUS_PENDING)  
+    {
+        abort "A pending Irp should not be completed with a call to IoCompleteRequest.";
+    }
+    else
+    {
+        io_complete_request_called=1;
+    }
+}      
+
+[SDV_RunDispatchFunction].exit [guard $2]
+{
+    if (io_complete_request_called && $return == STATUS_PENDING) 
+    {
+        abort "The dispatch routine is returning STATUS_PENDING, but it has also called IoCompleteRequest on the incoming IRP.";
+    }
+    else
+    {
+        halt;
+    }
+}
+
+[RemoveHeadList,sdv_containing_record].entry
+{
+    halt;
+}
+

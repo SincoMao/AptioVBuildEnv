@@ -1,0 +1,107 @@
+/*++
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SpinLock
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00040009
+    
+Description:
+
+    This rule verifies that calls to KeAcquireSpinLock or
+    KeAcquireSpinLockRaiseToDpc and KeReleaseSpinlock are used in
+    strict alternation.  Moreover, at the end of the dispatch or
+    cancel routine driver should not hold the spinlock.
+    The lock handle is tracked (a.k.a., TRACKED_OBJECT).
+    
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216061
+    
+--*/
+
+
+#include "slic_base.h"
+
+state{
+   enum {initial,locked} s = initial;
+}
+
+watch KeAcquireSpinLock.entry.$1;
+watch KeAcquireSpinLockAtDpcLevel@XDV.entry.$1;
+watch KeTryToAcquireSpinLockAtDpcLevel@XDV.entry.$1;
+
+
+[
+KeAcquireSpinLock,
+KeAcquireSpinLockAtDpcLevel,
+KeAcquireSpinLockRaiseToDpc@SDV,  
+KefAcquireSpinLockAtDpcLevel@SDV,
+KfAcquireSpinLock@SDV
+].entry[guard $1]
+{  
+        if (s == locked) {
+            abort "The driver is calling $fname after already acquiring the spinlock.";
+        }
+}
+
+[
+KeAcquireSpinLock,
+KeAcquireSpinLockAtDpcLevel,
+KeAcquireSpinLockRaiseToDpc@SDV,  
+KefAcquireSpinLockAtDpcLevel@SDV,
+KfAcquireSpinLock@SDV
+].exit[guard $1]
+{  
+        s = locked;
+}
+
+KeTryToAcquireSpinLockAtDpcLevel.exit
+{
+    if($return)
+    {
+        s = locked;
+    } 
+}
+
+
+[
+KeReleaseSpinLock,
+KeReleaseSpinLockFromDpcLevel,
+KefReleaseSpinLockFromDpcLevel@SDV,
+KfReleaseSpinLock@SDV
+].entry[guard $1]
+{
+        if (s != locked) {
+            abort "The driver is calling $fname without first acquiring the spinlock.";
+        } else {
+            s = initial;
+            halt "XDV_CLEAN_STATE";
+        }
+}
+
+
+[SDV_STANDARD_DRIVER_ROUTINES].exit
+{
+        if (s == locked) {
+            abort "The dispatch routine has returned without releasing a spinlock.";
+        } else {
+            halt;
+        }
+}
+
+[SDV_SPECIAL_DRIVER_ROUTINES]@SDV.exit
+{
+        if (s == locked) {
+            abort "The dispatch routine has returned without releasing a spinlock.";
+        } else {
+            halt;
+        }
+}

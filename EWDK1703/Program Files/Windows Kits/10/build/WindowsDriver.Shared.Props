@@ -1,0 +1,356 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   
+  <PropertyGroup>
+    <UnknownDriverTargetPlatform Condition="'$(DriverTargetPlatform)' != 'Desktop' and '$(DriverTargetPlatform)' != 'Mobile' and '$(DriverTargetPlatform)' != 'Universal'">true</UnknownDriverTargetPlatform>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ConversionToolVersion)' == ''">
+    <ConfigurationName>$(Configuration.Replace(' ',''))</ConfigurationName>
+    <ProjectDir Condition="'$(ProjectDir)' == ''">$(MSBuildProjectDirectory)\</ProjectDir>
+    <SolutionDir Condition="'$(SolutionDir)'==''">$(ProjectDir)</SolutionDir>
+    <IntDir Condition="'$(Platform)' == 'Win32'">$(ConfigurationName)\</IntDir>
+    <IntDir Condition="'$(Platform)' != 'Win32'">$(Platform)\$(ConfigurationName)\</IntDir>
+    <OutDir Condition="'$(SolutionDir)' != '' AND '$(Platform)' == 'Win32'">$(SolutionDir)$(ConfigurationName)\</OutDir>
+    <OutDir Condition="'$(SolutionDir)' != '' AND '$(Platform)' != 'Win32'">$(SolutionDir)$(Platform)\$(ConfigurationName)\</OutDir>
+    <OutDir Condition="'$(SolutionDir)' == '' or '$(SampleIdentifier)' != ''">$(IntDir)</OutDir>    
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <KitOS Condition="'$(KitOS)' == ''">$(CurrentKitOS)</KitOS>
+    <_NT_TARGET_VERSION Condition="'$(_NT_TARGET_VERSION)' == ''">$(_NT_TARGET_VERSION_LATEST)</_NT_TARGET_VERSION>
+    <ActiveDeployProvider>WdkDeployProvider</ActiveDeployProvider>  <!-- CPS external deploy provider for VC++ -->
+  </PropertyGroup>
+
+  <Import Condition="Exists('$(WDKContentRoot)build\WindowsDriver.OS.props')" Project="$(WDKContentRoot)build\WindowsDriver.OS.props"/>
+
+  <PropertyGroup>
+    <TargetName>$(TargetName.Replace(' ',''))</TargetName>
+    <OutDir Condition="'$(OutDir)' == ''">$(IntDir)</OutDir>
+  </PropertyGroup>
+
+  <!-- WPP related properties -->
+  <PropertyGroup>
+    <WPP_CONFIG_PATH Condition="'$(WPP_CONFIG_PATH)' == ''">$(WDKContentRoot)bin\wppconfig\</WPP_CONFIG_PATH>
+    <WPP_REVISION Condition="'$(WPP_REVISION)' == ''">rev1</WPP_REVISION>
+    <!-- Current thinking is that we build RUN_WPP from a variety of attributes on ClInclude and other item groups vs what we do today in build -->
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Always make sure LinkIncremental property is set to false -->
+    <LinkIncremental>false</LinkIncremental>	
+    
+    <!-- For Test signing, enable minimal build. For production signing, by default always sign, even if inputs have not changed -->
+    <DriverTestSignMinimalRebuildFromTracking Condition="'$(DriverTestSignMinimalRebuildFromTracking)' == ''">true</DriverTestSignMinimalRebuildFromTracking>
+    <DriverProductionSignMinimalRebuildFromTracking Condition="'$(DriverProductionSignMinimalRebuildFromTracking)' == ''">false</DriverProductionSignMinimalRebuildFromTracking>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SampleIdentifier Condition="'$(SampleGuid)' != ''">$(SampleGuid)</SampleIdentifier>
+    <SampleIdentifier Condition="'$(TemplateGuid)' != ''">$(TemplateGuid)</SampleIdentifier>
+  </PropertyGroup>
+  
+  <!-- Send Sample Identifier via RC command line.-->
+  <ItemDefinitionGroup Condition="'$(SampleIdentifier)' != ''">
+    <ResourceCompile>
+      <PreprocessorDefinitions>SMP_ID=\"$(SampleIdentifier)\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+
+  <!-- Default compiler settings for a driver project for all architectures and configurations -->
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <WarningLevel>Level4</WarningLevel>
+    </ClCompile>
+    <Link>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <!-- Default linker settings for universal applications -->
+  <ItemDefinitionGroup Condition="'$(DriverTargetPlatform)' == 'Universal' AND '$(IsDriverAppToolset)' == 'true'">
+    <Link>
+      <AdditionalDependencies></AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+    
+  <!-- Default chk only settings across all architectures -->
+  <ItemDefinitionGroup Condition="'$(UseDebugLibraries)' == 'true'">
+    <ClCompile>
+      <PreprocessorDefinitions>DBG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>DBG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CallingConvention>StdCall</CallingConvention>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <ForcedIncludeFiles>$(KIT_SHARED_IncludePath)\warning.h</ForcedIncludeFiles>
+      <PreprocessorDefinitions Condition="'$(OverrideTargetVersionDefines)' != 'true'">_WIN32_WINNT=$(WIN32_WINNT_VERSION);WINVER=$(WINVER_VERSION);WINNT=1;NTDDI_VERSION=$(NTDDI_VERSION);%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(IsKernelModeToolset)' != 'true'">WIN32_LEAN_AND_MEAN=1;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions Condition="'$(OverrideTargetVersionDefines)' != 'true'">_WIN32_WINNT=$(WIN32_WINNT_VERSION);WINVER=$(WINVER_VERSION);WINNT=1;NTDDI_VERSION=$(NTDDI_VERSION);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(IsKernelModeToolset)' != 'true'">WIN32_LEAN_AND_MEAN=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <!-- Define defaults for all driver tools for property page-->
+
+  <!-- Define defaults for Message Compiler -->
+  <ItemDefinitionGroup>
+    <MessageCompile>
+      <GeneratedFilesBaseName      Condition="'%(MessageCompile.GeneratedFilesBaseName)'     == ''">%(Filename)</GeneratedFilesBaseName>
+      <GeneratedHeaderPath         Condition="'%(MessageCompile.GeneratedHeaderPath)'        == ''">true</GeneratedHeaderPath>
+      <HeaderFilePath              Condition="'%(MessageCompile.HeaderFilePath)'             == ''">$(IntDir)</HeaderFilePath>
+      <GeneratedRCAndMessagesPath  Condition="'%(MessageCompile.GeneratedRCAndMessagesPath)' == ''">true</GeneratedRCAndMessagesPath>
+      <RCFilePath                  Condition="'%(MessageCompile.RCFilePath)'                 == ''">$(IntDir)</RCFilePath>
+      <TrackerLogDirectory         Condition="'%(MessageCompile.TrackerLogDirectory)'        == ''">$(TLogLocation)</TrackerLogDirectory>
+	  <MinimalRebuildFromTracking  Condition="'%(MessageCompile.MinimalRebuildFromTracking)'   == ''">true</MinimalRebuildFromTracking>
+    </MessageCompile>
+  </ItemDefinitionGroup>
+
+  <!-- Define defaults for Wpp -->
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <WppEnabled                    Condition="'%(ClCompile.WppEnabled)'                    == ''">false</WppEnabled>
+      <WppConfigurationDirectories   Condition="'%(ClCompile.WppConfigurationDirectories)'   == ''">$(WPP_CONFIG_PATH)$(WPP_REVISION)</WppConfigurationDirectories>
+      <WppEnableOutputDirectory      Condition="'%(ClCompile.WppEnableOutputDirectory)'      == ''">true</WppEnableOutputDirectory>
+      <WppOutputDirectory            Condition="'%(ClCompile.WppOutputDirectory)'            == ''">$(IntDir)</WppOutputDirectory>
+      <WppTrackerLogDirectory        Condition="'%(ClCompile.WppTrackerLogDirectory)'        == ''">$(TLogLocation)</WppTrackerLogDirectory>
+      <WppMinimalRebuildFromTracking Condition="'%(ClCompile.WppMinimalRebuildFromTracking)' == ''">true</WppMinimalRebuildFromTracking>
+      <WppModuleName                 Condition="'%(ClCompile.WppModuleName)' == '' and '%(ClCompile.WppAddAlternateNameToMessageGUID)' != ''">%(ClCompile.WppAddAlternateNameToMessageGUID)</WppModuleName>
+      <WppKernelMode                 Condition="'$(IsKernelModeToolset)' == 'true'">true</WppKernelMode>
+      <WppDllMacro                   Condition="'$(IsUserModeToolset)' == 'true'">true</WppDllMacro>
+    </ClCompile>
+    <OtherWpp>
+      <WppEnabled                    Condition="'%(OtherWpp.WppEnabled)'                    == ''">false</WppEnabled>
+      <WppConfigurationDirectories   Condition="'%(OtherWpp.WppConfigurationDirectories)'   == ''">$(WPP_CONFIG_PATH)$(WPP_REVISION)</WppConfigurationDirectories>
+      <WppEnableOutputDirectory      Condition="'%(OtherWpp.WppEnableOutputDirectory)'      == ''">true</WppEnableOutputDirectory>
+      <WppOutputDirectory            Condition="'%(OtherWpp.WppOutputDirectory)'            == ''">$(IntDir)</WppOutputDirectory>
+      <WppTrackerLogDirectory        Condition="'%(OtherWpp.WppTrackerLogDirectory)'        == ''">$(TLogLocation)</WppTrackerLogDirectory>
+      <WppMinimalRebuildFromTracking Condition="'%(OtherWpp.WppMinimalRebuildFromTracking)' == ''">true</WppMinimalRebuildFromTracking>
+      <WppModuleName                 Condition="'%(OtherWpp.WppModuleName)' == '' and '%(OtherWpp.WppAddAlternateNameToMessageGUID)' != ''">%(OtherWpp.WppAddAlternateNameToMessageGUID)</WppModuleName>
+      <WppKernelMode                 Condition="'$(IsKernelModeToolset)' == 'true'">true</WppKernelMode>
+      <WppDllMacro                   Condition="'$(IsUserModeToolset)' == 'true'">true</WppDllMacro>
+    </OtherWpp>
+  </ItemDefinitionGroup>
+
+  <!-- Define defaults for Midl -->
+  <PropertyGroup>
+    <IdlType Condition="'$(IdlType)' == ''">OLE</IdlType >
+  </PropertyGroup>
+
+  <ItemDefinitionGroup Condition="$(IdlType)=='OLE'">
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <StructMemberAlignment>8</StructMemberAlignment>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <OutputDirectory              Condition="'%(Midl.OutputDirectory)'                    == ''">$(IntDir)</OutputDirectory>
+      <InterfaceIdentifierFileName  Condition="'%(Midl.InterfaceIdentifierFileName)'        == ''">%(Filename)_i.c</InterfaceIdentifierFileName>
+      <DllDataFileName              Condition="'%(Midl.DllDataFileName)'                    == ''">dlldata.c</DllDataFileName>
+      <ProxyFileName                Condition="'%(Midl.ProxyFileName)'                      == ''">%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="$(IdlType)=='RPC'">
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <StructMemberAlignment>8</StructMemberAlignment>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <OutputDirectory              Condition="'%(Midl.OutputDirectory)'                    == ''">$(IntDir)</OutputDirectory>
+      <ClientStubFile               Condition="'%(Midl.ClientStubFile)'                     == ''">%(Filename)_c.c</ClientStubFile>
+      <ServerStubFile               Condition="'%(Midl.ServerStubFile)'                     == ''">%(Filename)_s.c</ServerStubFile>
+    </Midl>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup>
+    <Midl>
+      <AdditionalOptions>/no_stamp -target $(MIDL_TARGET)  %(AdditionalOptions) </AdditionalOptions>
+      <PreprocessorDefinitions Condition="'$(OverrideTargetVersionDefines)' != 'true'">NTDDI_VERSION=$(NTDDI_VERSION);_WCHAR_T_DEFINED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(IsKernelModeToolset)' != 'true'">WIN32_LEAN_AND_MEAN=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SDK_LibraryPath_DDKPlatform);$(IntDir);$(IncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </Midl>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(UseDebugLibraries)' == 'true'">
+    <Midl>
+      <PreprocessorDefinitions>DEPRECATE_DDK_FUNCTIONS=1;MSC_NOOPT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+  </ItemDefinitionGroup>
+
+  <!-- Define defaults for Binplace -->
+  <ItemDefinitionGroup>
+    <BinplaceGenerated>
+      <SymbolCheck                  Condition="'%(BinplaceGenerated.SymbolCheck)'                    == ''">true</SymbolCheck>
+      <LogPdb                       Condition="'%(BinplaceGenerated.LogPdb)'                         == ''">true</LogPdb>
+      <PreventDbgfilesBinplace      Condition="'%(BinplaceGenerated.PreventDbgfilesBinplace)'        == ''">true</PreventDbgfilesBinplace>
+      <NoCheckInCodeView            Condition="'%(BinplaceGenerated.NoCheckInCodeView)'              == ''">true</NoCheckInCodeView>
+      <MinimalRebuildFromTracking   Condition="'$(BuildType)' != 'Build' or '$(ForceRebuild)' == 'true'">false</MinimalRebuildFromTracking>
+      <TrackerLogDirectory Condition="'%(BinplaceGenerated.TrackerLogDirectory)' == ''">$(TLogLocation)</TrackerLogDirectory>
+    </BinplaceGenerated>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup>
+    <BinplaceCompiled>
+      <SymbolCheck                  Condition="'%(BinplaceCompiled.SymbolCheck)'                    == ''">true</SymbolCheck>
+      <LogPdb                       Condition="'%(BinplaceCompiled.LogPdb)'                         == ''">true</LogPdb>
+      <PreventDbgfilesBinplace      Condition="'%(BinplaceCompiled.PreventDbgfilesBinplace)'        == ''">true</PreventDbgfilesBinplace>
+      <NoCheckInCodeView            Condition="'%(BinplaceCompiled.NoCheckInCodeView)'              == ''">true</NoCheckInCodeView>
+      <MinimalRebuildFromTracking   Condition="'$(BuildType)' != 'Build' or '$(ForceRebuild)' == 'true'">false</MinimalRebuildFromTracking>
+      <TrackerLogDirectory Condition="'%(BinplaceCompiled.TrackerLogDirectory)' == ''">$(TLogLocation)</TrackerLogDirectory>
+    </BinplaceCompiled>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup>
+    <BinplaceLinked>
+      <SymbolCheck                  Condition="'%(BinplaceLinked.SymbolCheck)'                    == ''">true</SymbolCheck>
+      <LogPdb                       Condition="'%(BinplaceLinked.LogPdb)'                         == ''">true</LogPdb>
+      <PreventDbgfilesBinplace      Condition="'%(BinplaceLinked.PreventDbgfilesBinplace)'        == ''">true</PreventDbgfilesBinplace>
+      <NoCheckInCodeView            Condition="'%(BinplaceLinked.NoCheckInCodeView)'              == ''">true</NoCheckInCodeView>
+      <MinimalRebuildFromTracking   Condition="'$(BuildType)' != 'Build' or '$(ForceRebuild)' == 'true'">false</MinimalRebuildFromTracking>
+      <TrackerLogDirectory Condition="'%(BinplaceLinked.TrackerLogDirectory)' == ''">$(TLogLocation)</TrackerLogDirectory>
+    </BinplaceLinked>
+  </ItemDefinitionGroup>
+
+  <!-- Define defaults for Mofcomp -->
+  <ItemDefinitionGroup>
+    <Mofcomp>
+      <CreateBinaryMofFile          Condition="'%(Mofcomp.CreateBinaryMofFile)'                    == ''">$(IntDir)%(FileName).bmf</CreateBinaryMofFile>
+      <TrackerLogDirectory          Condition="'%(Mofcomp.TrackerLogDirectory)'                    == ''">$(TLogLocation)</TrackerLogDirectory>
+    <MinimalRebuildFromTracking   Condition="'%(Mofcomp.MinimalRebuildFromTracking)'             == ''">true</MinimalRebuildFromTracking>
+    </Mofcomp>
+  </ItemDefinitionGroup>
+
+  <!-- Define defaults for Wmimofck -->
+  <ItemDefinitionGroup>
+    <Wmimofck>
+      <GenerateStructureDefinitionsForMethodParameters Condition="'%(Wmimofck.GenerateStructureDefinitionsForMethodParameters)'  == ''">true</GenerateStructureDefinitionsForMethodParameters>
+      <HtmlUIOutputDirectory                           Condition="'%(Wmimofck.HtmlUIOutputDirectory)'                            == ''">true</HtmlUIOutputDirectory>
+      <HtmlOutputDirectory                             Condition="'%(Wmimofck.HtmlOutputDirectory)'                              == ''">$(IntDir)htm</HtmlOutputDirectory>
+      <TrackerLogDirectory                             Condition="'%(Wmimofck.TrackerLogDirectory)'                              == ''">$(TLogLocation)</TrackerLogDirectory>
+      <MinimalRebuildFromTracking                      Condition="'%(Wmimofck.MinimalRebuildFromTracking)'                       == ''">true</MinimalRebuildFromTracking>
+    </Wmimofck>
+  </ItemDefinitionGroup>
+
+  <!-- Define defaults for Ctrpp -->
+  <ItemDefinitionGroup>
+    <Ctrpp>
+      <GenerateHeaderFileForProvider Condition="'%(Ctrpp.GenerateHeaderFileForProvider)'    == ''">true</GenerateHeaderFileForProvider>
+      <HeaderFileNameForProvider     Condition="'%(Ctrpp.HeaderFileNameForProvider)'        == ''">%(Filename).h</HeaderFileNameForProvider>
+      <GenerateHeaderFileForCounter  Condition="'%(Ctrpp.GenerateHeaderFileForCounter)'     == ''">true</GenerateHeaderFileForCounter>
+      <HeaderFileNameForCounter      Condition="'%(Ctrpp.HeaderFileNameForCounter)'         == ''">%(Filename)_counters.h</HeaderFileNameForCounter>
+      <GenerateHeaderFileForProvider Condition="'%(Ctrpp.GenerateResourceSourceFile)'       == ''">true</GenerateHeaderFileForProvider>
+      <HeaderFileNameForProvider     Condition="'%(Ctrpp.ResourceFile)'                     == ''">%(Filename).rc</HeaderFileNameForProvider>
+      <TrackerLogDirectory           Condition="'%(Ctrpp.TrackerLogDirectory)'              == ''">$(TLogLocation)</TrackerLogDirectory>
+      <MinimalRebuildFromTracking    Condition="'%(Ctrpp.MinimalRebuildFromTracking)'       == ''">true</MinimalRebuildFromTracking>
+    </Ctrpp>
+  </ItemDefinitionGroup>
+
+  <Choose>
+    <When Condition="'$(Platform)'=='win32'">
+      <PropertyGroup>
+        <InfArch>x86</InfArch>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Platform)'=='x64'">
+      <PropertyGroup>
+        <InfArch>amd64</InfArch>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <InfArch>$(PlatformShortName)</InfArch>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+  
+  <PropertyGroup Label="PropertySheets">
+    <InvalidInf2CatConfig Condition="'$(DriverTargetPlatform)' == 'Mobile'">true</InvalidInf2CatConfig>
+    <EnableInf2cat Condition="'$(EnableInf2cat)' == '' and '$(SupportsPackaging)' != 'false' and '$(DriverTargetPlatform)' == 'Mobile'">false</EnableInf2cat>
+    <EnableInf2cat Condition="'$(EnableInf2cat)' == '' and '$(SupportsPackaging)' != 'false' and '$(DriverTargetPlatform)' != 'Mobile'">true</EnableInf2cat>
+    <Inf2CatMinimalRebuildFromTracking Condition="'$(Inf2CatMinimalRebuildFromTracking)' == ''">true</Inf2CatMinimalRebuildFromTracking>
+  </PropertyGroup>
+
+  <PropertyGroup Label="PropertySheets">
+    <EnablePkgGen Condition="'$(EnablePkgGen)' == '' and '$(DriverTargetPlatform)' != 'Desktop'">true</EnablePkgGen>
+    <EnablePkgGen Condition="'$(EnablePkgGen)' == '' and '$(DriverTargetPlatform)' == 'Desktop'">false</EnablePkgGen>
+  </PropertyGroup>
+  
+  <Choose>
+    <When Condition="'$(IsKernelModeToolset)' == 'true'">
+      <PropertyGroup>
+        <PkgGen_DefaultDriverDest>DRIVER_DEST=drivers</PkgGen_DefaultDriverDest>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(IsUserModeToolset)' == 'true'">
+      <PropertyGroup>
+        <PkgGen_DefaultDriverDest>DRIVER_DEST=drivers\umdf</PkgGen_DefaultDriverDest>
+      </PropertyGroup>
+    </When>
+  </Choose>
+  
+  <ItemDefinitionGroup>
+    <PkgGen>
+      <ConfigurationFile>$(WDKContentRoot)Tools\bin\i386\pkggen.cfg.xml</ConfigurationFile>
+      <Version>1.0.0.0</Version>
+      <BuildType>fre</BuildType>
+      <CPU>$(Platform)</CPU>
+      <Variables>&quot;HIVE_ROOT=$(CoreSystem_HivesPath);WIM_ROOT=$(CoreSystem_HivesPath);_RELEASEDIR=$(PackageDir);TARGETNAME=$(TargetName);TARGETEXT=$(TargetExt);$(PkgGen_DefaultDriverDest)&quot;</Variables>
+      <TOC>false</TOC>
+      <Compress>false</Compress>
+      <Diagnostic>false</Diagnostic>
+      <CommandLineTemplate>&quot;$(WDKContentRoot)Tools\bin\i386\pkggen.exe&quot; [Inputs] [AllOptions] [AdditionalOptions]</CommandLineTemplate>
+    </PkgGen>
+  </ItemDefinitionGroup>
+
+  <!-- 
+      The version of ApiValidator.exe needs to match the OS architecture to run correctly, so this figures out where
+      the correct ApiValidator.exe is placed (based on the OS architecture). 
+  -->
+  <Choose>
+    <When Condition="'$(PROCESSOR_ARCHITECTURE)' != 'AMD64' and '$(PROCESSOR_ARCHITEW6432)' != 'AMD64'">
+      <PropertyGroup>
+        <ApiValidator_Arch>x86</ApiValidator_Arch>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <ApiValidator_Arch>x64</ApiValidator_Arch>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+  <PropertyGroup Label="PropertySheets">
+    <ApiValidator_SupportedApisFile>$(WDKContentRoot)build\universalDDIs\$(DDKPlatform)\UniversalDDIs.xml</ApiValidator_SupportedApisFile>
+    <ApiValidator_ModuleWhiteListFile>$(WDKContentRoot)build\universalDDIs\$(DDKPlatform)\ModuleWhiteList.xml</ApiValidator_ModuleWhiteListFile>
+    <ApiValidator_ApiExtractorExePath>$(WDKContentRoot)bin\$(ApiValidator_Arch)</ApiValidator_ApiExtractorExePath>
+    <ApiValidator_CmdLine>&quot;$(WDKContentRoot)bin\$(ApiValidator_Arch)\ApiValidator.exe&quot; [AllOptions]</ApiValidator_CmdLine>
+    <ApiValidator_Enable Condition="'$(ApiValidator_Enable)' == ''">true</ApiValidator_Enable>
+  </PropertyGroup>
+    
+  <PropertyGroup Label="PropertySheets">
+    <DiagnosticMode>false</DiagnosticMode>
+  </PropertyGroup>
+  
+  <PropertyGroup Label="PropertySheets">
+    <DisableProductionSignDebugWarnings>false</DisableProductionSignDebugWarnings>
+  </PropertyGroup>
+  
+  <Import Condition="Exists('$(WDKContentRoot)build\$(Platform)\Dbgeng.props')" Project="$(WDKContentRoot)build\Dbgeng.props"/>
+
+  <Import Condition="Exists('$(VCTargetsPath)BuildCustomizations\masm.props') and ('$(Platform)' != 'arm') and ('$(Platform)' != 'arm64')" Project="$(VCTargetsPath)BuildCustomizations\masm.props" />
+
+  <Import Condition="Exists('$(WDKContentRoot)build\windowsdriver.$(Platform).props') and ('$(IsDriverAppToolset)'=='true')" Project="$(WDKContentRoot)build\windowsdriver.$(Platform).props"/>
+</Project>
+

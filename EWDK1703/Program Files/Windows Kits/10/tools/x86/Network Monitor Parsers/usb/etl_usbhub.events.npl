@@ -1,0 +1,1582 @@
+//#  (c) 2009 CodePlex Foundation
+//#
+//#  Title:                  Microsoft-Windows-usbhub.events
+//#
+//#  Details:                
+//#
+//#  Public References:      usbhub.events.man
+//#
+//#  Comments:               
+//#
+//#  Revision Class and Date:Minor, 07/15/2010
+//#
+//####
+Protocol USBHub = property.ETLSummary
+{
+	switch(property.EventID)
+	{
+		case 1: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_START USBHUB_ETW_EVENT_HUB_START;
+		case 2: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_REMOVE USBHUB_ETW_EVENT_HUB_REMOVE;
+		case 3: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_INFORMATION USBHUB_ETW_EVENT_HUB_INFORMATION;
+		case 10: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_START USBHUB_ETW_EVENT_HUB_ENUM_START;
+		case 11: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_DEBOUNCE_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_DEBOUNCE_FAILURE;
+		case 12: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_CREATE_PDO_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_CREATE_PDO_FAILURE;
+		case 13: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_CREATE_DEVICE_OBJECT_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_CREATE_DEVICE_OBJECT_FAILURE;
+		case 14: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_CREATE_PNP_ID_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_CREATE_PNP_ID_FAILURE;
+		case 15: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_RESET_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_RESET_FAILURE;
+		case 16: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_RESET_BAD_ENABLE USBHUB_ETW_EVENT_HUB_ENUM_RESET_BAD_ENABLE;
+		case 17: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_RESET_TIMEOUT USBHUB_ETW_EVENT_HUB_ENUM_RESET_TIMEOUT;
+		case 18: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_CREATE_DEVICE_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_CREATE_DEVICE_FAILURE;
+		case 19: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_INITIALIZE_DEVICE_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_INITIALIZE_DEVICE_FAILURE;
+		case 20: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_GET_DESCRIPTORS_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_GET_DESCRIPTORS_FAILURE;
+		case 21: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_CONFIG_DESC_VALIDATION_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_CONFIG_DESC_VALIDATION_FAILURE;
+		case 22: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_DEVICE_DESC_VALIDATION_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_DEVICE_DESC_VALIDATION_FAILURE;
+		case 23: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_MSOS_DESC_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_MSOS_DESC_FAILURE;
+		case 24: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_SERIAL_NUMBER_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_SERIAL_NUMBER_FAILURE;
+		case 25: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_BUILD_PNP_ID USBHUB_ETW_EVENT_HUB_ENUM_BUILD_PNP_ID;
+		case 26: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_DUPE_SERIAL_NUMBER USBHUB_ETW_EVENT_HUB_ENUM_DUPE_SERIAL_NUMBER;
+		case 27: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_REPLICANT_TIMEOUT USBHUB_ETW_EVENT_HUB_ENUM_REPLICANT_TIMEOUT;
+		case 28: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_REGISTRY_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_REGISTRY_FAILURE;
+		case 29: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_RETRY USBHUB_ETW_EVENT_HUB_ENUM_RETRY;
+		case 30: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_HUB_DISCONNECT USBHUB_ETW_EVENT_HUB_ENUM_HUB_DISCONNECT;
+		case 31: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_DEBOUNCE_COMPLETE USBHUB_ETW_EVENT_HUB_ENUM_DEBOUNCE_COMPLETE;
+		case 32: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_CREATE_PDO_COMPLETE USBHUB_ETW_EVENT_HUB_ENUM_CREATE_PDO_COMPLETE;
+		case 33: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_RESET1_COMPLETE USBHUB_ETW_EVENT_HUB_ENUM_RESET1_COMPLETE;
+		case 34: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_ENUM_CREATE_DEVICE_COMPLETE USBHUB_ETW_EVENT_ENUM_CREATE_DEVICE_COMPLETE;
+		case 35: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_RESET2_COMPLETE USBHUB_ETW_EVENT_HUB_ENUM_RESET2_COMPLETE;
+		case 36: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_INITIALIZE_DEVICE_COMPLETE USBHUB_ETW_EVENT_HUB_ENUM_INITIALIZE_DEVICE_COMPLETE;
+		case 37: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_SETUP_DEVICE_COMPLETE USBHUB_ETW_EVENT_HUB_ENUM_SETUP_DEVICE_COMPLETE;
+		case 39: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_COMPLETE USBHUB_ETW_EVENT_HUB_ENUM_COMPLETE;
+		case 40: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_HARD_RESET_START USBHUB_ETW_EVENT_HUB_HARD_RESET_START;
+		case 41: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_HARD_RESET_QUEUE USBHUB_ETW_EVENT_HUB_HARD_RESET_QUEUE;
+		case 49: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_HARD_RESET_COMPLETE USBHUB_ETW_EVENT_HUB_HARD_RESET_COMPLETE;
+		case 50: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_SUSPEND_START USBHUB_ETW_EVENT_HUB_SUSPEND_START;
+		case 51: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_SUSPEND_BUS_PAUSE_FAILED USBHUB_ETW_EVENT_HUB_SUSPEND_BUS_PAUSE_FAILED;
+		case 59: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_SUSPEND_COMPLETE USBHUB_ETW_EVENT_HUB_SUSPEND_COMPLETE;
+		case 60: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_RESUME_START USBHUB_ETW_EVENT_HUB_RESUME_START;
+		case 61: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_RESUME_COMPLETE USBHUB_ETW_EVENT_HUB_RESUME_COMPLETE;
+		case 62: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_RESUME_PROPAGATE USBHUB_ETW_EVENT_HUB_RESUME_PROPAGATE;
+		case 63: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_RESUME_PORT USBHUB_ETW_EVENT_HUB_RESUME_PORT;
+		case 64: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_RESUME_UPSTREAM USBHUB_ETW_EVENT_HUB_RESUME_UPSTREAM;
+		case 70: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_QUERY_BUSRELATIONS_DISPATCH USBHUB_ETW_EVENT_HUB_QUERY_BUSRELATIONS_DISPATCH;
+		case 71: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_QUERY_BUSRELATIONS_COMPLETE USBHUB_ETW_EVENT_HUB_QUERY_BUSRELATIONS_COMPLETE;
+		case 80: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_PORT_ATTRIBUTES USBHUB_ETW_EVENT_HUB_PORT_ATTRIBUTES;
+		case 81: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_PORT_ACPI_UPC_VALUE USBHUB_ETW_EVENT_HUB_PORT_ACPI_UPC_VALUE;
+		case 82: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_PORT_ACPI_PLD_VALUE USBHUB_ETW_EVENT_HUB_PORT_ACPI_PLD_VALUE;
+		case 83: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_PORT_ACPI_UPC_FAILURE USBHUB_ETW_EVENT_HUB_PORT_ACPI_UPC_FAILURE;
+		case 84: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_PORT_ACPI_PLD_FAILURE USBHUB_ETW_EVENT_HUB_PORT_ACPI_PLD_FAILURE;
+		case 100: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_ADD USBHUB_ETW_EVENT_DEVICE_ADD;
+		case 101: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_REMOVE USBHUB_ETW_EVENT_DEVICE_REMOVE;
+		case 102: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_INFORMATION USBHUB_ETW_EVENT_DEVICE_INFORMATION;
+		case 110: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_START_DISPATCH USBHUB_ETW_EVENT_DEVICE_START_DISPATCH;
+		case 111: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_START_FAILED_RESET USBHUB_ETW_EVENT_DEVICE_START_FAILED_RESET;
+		case 112: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_START_REGISTRY_FAILURE USBHUB_ETW_EVENT_DEVICE_START_REGISTRY_FAILURE;
+		case 113: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_START_SYMBOLIC_LINK_FAILURE USBHUB_ETW_EVENT_DEVICE_START_SYMBOLIC_LINK_FAILURE;
+		case 119: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_START_COMPLETE USBHUB_ETW_EVENT_DEVICE_START_COMPLETE;
+		case 120: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_POWER_SET_D0_DISPATCH USBHUB_ETW_EVENT_DEVICE_POWER_SET_D0_DISPATCH;
+		case 121: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_POWER_SET_D0_COMPLETE USBHUB_ETW_EVENT_DEVICE_POWER_SET_D0_COMPLETE;
+		case 122: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_POWER_SET_DX_DISPATCH USBHUB_ETW_EVENT_DEVICE_POWER_SET_DX_DISPATCH;
+		case 123: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_POWER_SET_DX_COMPLETE USBHUB_ETW_EVENT_DEVICE_POWER_SET_DX_COMPLETE;
+		case 130: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_IDLE_NOTIFICATION_DISPATCH USBHUB_ETW_EVENT_DEVICE_IDLE_NOTIFICATION_DISPATCH;
+		case 139: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_IDLE_NOTIFICATION_COMPLETE USBHUB_ETW_EVENT_DEVICE_IDLE_NOTIFICATION_COMPLETE;
+		case 140: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_WAIT_WAKE_DISPATCH USBHUB_ETW_EVENT_DEVICE_WAIT_WAKE_DISPATCH;
+		case 149: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_WAIT_WAKE_COMPLETE USBHUB_ETW_EVENT_DEVICE_WAIT_WAKE_COMPLETE;
+		case 150: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_WAIT_WAKE_START USBHUB_ETW_EVENT_HUB_WAIT_WAKE_START;
+		case 151: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_WAIT_WAKE_DISPATCH USBHUB_ETW_EVENT_HUB_WAIT_WAKE_DISPATCH;
+		case 159: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_WAIT_WAKE_COMPLETE USBHUB_ETW_EVENT_HUB_WAIT_WAKE_COMPLETE;
+		case 160: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_DX_START USBHUB_ETW_EVENT_HUB_POWER_SET_DX_START;
+		case 161: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_DX_DISPATCH USBHUB_ETW_EVENT_HUB_POWER_SET_DX_DISPATCH;
+		case 169: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_DX_COMPLETE USBHUB_ETW_EVENT_HUB_POWER_SET_DX_COMPLETE;
+		case 170: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_START USBHUB_ETW_EVENT_HUB_POWER_SET_D0_START;
+		case 171: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_DISPATCH USBHUB_ETW_EVENT_HUB_POWER_SET_D0_DISPATCH;
+		case 172: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_START USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_START;
+		case 173: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_HUB_DISCONNECT USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_HUB_DISCONNECT;
+		case 174: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_PORT_DISCONNECT USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_PORT_DISCONNECT;
+		case 175: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_PORT_CONNECT USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_PORT_CONNECT;
+		case 176: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_PORT_LOST_POWER USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_PORT_LOST_POWER;
+		case 177: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_PORT_RESET USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_PORT_RESET;
+		case 178: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_COMPLETE USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_COMPLETE;
+		case 179: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_WARM_START USBHUB_ETW_EVENT_HUB_POWER_SET_D0_WARM_START;
+		case 180: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_WARM_PORT_RESUME_ERROR USBHUB_ETW_EVENT_HUB_POWER_SET_D0_WARM_PORT_RESUME_ERROR;
+		case 181: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_WARM_RESET_ON_RESUME USBHUB_ETW_EVENT_HUB_POWER_SET_D0_WARM_RESET_ON_RESUME;
+		case 183: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_WARM_COMPLETE USBHUB_ETW_EVENT_HUB_POWER_SET_D0_WARM_COMPLETE;
+		case 184: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_D0_WORKER_HUB_FAIL_AFTER_SUSPEND USBHUB_ETW_EVENT_HUB_POWER_D0_WORKER_HUB_FAIL_AFTER_SUSPEND;
+		case 185: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_D0_WORKER_HUB_DISCONNECT_AFTER_SUSPEND USBHUB_ETW_EVENT_HUB_POWER_D0_WORKER_HUB_DISCONNECT_AFTER_SUSPEND;
+		case 189: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COMPLETE USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COMPLETE;
+		case 190: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_SX_DISPATCH USBHUB_ETW_EVENT_HUB_POWER_SET_SX_DISPATCH;
+		case 199: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_SX_COMPLETE USBHUB_ETW_EVENT_HUB_POWER_SET_SX_COMPLETE;
+		case 200: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_S0_DISPATCH USBHUB_ETW_EVENT_HUB_POWER_SET_S0_DISPATCH;
+		case 209: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_S0_COMPLETE USBHUB_ETW_EVENT_HUB_POWER_SET_S0_COMPLETE;
+		case 210: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_EXCEPTION USBHUB_ETW_EVENT_HUB_EXCEPTION;
+		case 211: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_PORT_STATUS_CHANGE USBHUB_ETW_EVENT_HUB_PORT_STATUS_CHANGE;
+		case 212: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_DISABLE_TIMER USBHUB_ETW_EVENT_HUB_DISABLE_TIMER;
+		case 213: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENABLE_TIMER USBHUB_ETW_EVENT_HUB_ENABLE_TIMER;
+		case 214: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_TIMER_CALLBACK USBHUB_ETW_EVENT_HUB_TIMER_CALLBACK;
+		case 220: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_SYNC_RESET_DEVICE_INTERNAL_START USBHUB_ETW_EVENT_DEVICE_SYNC_RESET_DEVICE_INTERNAL_START;
+		case 229: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_SYNC_RESET_DEVICE_INTERNAL_COMPLETE USBHUB_ETW_EVENT_DEVICE_SYNC_RESET_DEVICE_INTERNAL_COMPLETE;
+		case 230: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_PAST_EXCEPTION USBHUB_ETW_EVENT_HUB_PAST_EXCEPTION;
+		case 231: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_IOCTL_INTERNAL_USB_RESET_PORT_START USBHUB_ETW_EVENT_DEVICE_IOCTL_INTERNAL_USB_RESET_PORT_START;
+		case 232: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_DEVICE_IOCTL_INTERNAL_USB_RESET_PORT_COMPLETE USBHUB_ETW_EVENT_DEVICE_IOCTL_INTERNAL_USB_RESET_PORT_COMPLETE;
+		case 233: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_MSOS20_DESC_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_MSOS20_DESC_FAILURE;
+		case 234: [property.ETLSummary = this.ToString] USBHub_USBHUB_ETW_EVENT_HUB_ENUM_MSOS20_DESC_VALIDATION_FAILURE USBHUB_ETW_EVENT_HUB_ENUM_MSOS20_DESC_VALIDATION_FAILURE;
+		default: [property.ETLSummary = "Not exist EventID"]struct{};
+	}
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_START = FormatString("USB Hub Added")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	struct 	fid_USBHUB_Hub_State
+	{
+		UINT32 fid_DevicePowerState;
+		UINT32 fid_HubSuspendState;
+	}
+	struct 	fid_USB_HubDescriptor
+	{
+		UINT8 fid_bDescriptorLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bNumberOfPorts;
+		UINT16 fid_wHubCharacteristics;
+		UINT8 fid_bPowerOnToGood;
+		UINT8 fid_bHubControlCurrent;
+		UINT8 fid_bRemoveAndPowerMask[64];
+	}
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_REMOVE = FormatString("USB Hub Removed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_INFORMATION = FormatString("USB Hub Information")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	struct 	fid_USBHUB_Hub_State
+	{
+		UINT32 fid_DevicePowerState;
+		UINT32 fid_HubSuspendState;
+	}
+	struct 	fid_USB_HubDescriptor
+	{
+		UINT8 fid_bDescriptorLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bNumberOfPorts;
+		UINT16 fid_wHubCharacteristics;
+		UINT8 fid_bPowerOnToGood;
+		UINT8 fid_bHubControlCurrent;
+		UINT8 fid_bRemoveAndPowerMask[64];
+	}
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_START = FormatString("Start Enumeration of Port")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_DEBOUNCE_FAILURE = FormatString("Enumeration Port Debounce Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_CREATE_PDO_FAILURE = FormatString("Create PDO Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_CREATE_DEVICE_OBJECT_FAILURE = FormatString("IoCreateDevice Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_CREATE_PNP_ID_FAILURE = FormatString("Create PnP ID Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_RESET_FAILURE = FormatString("Enumeration Port Reset Failure")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_RESET_BAD_ENABLE = FormatString("Port Enabled but not Connected After First Reset")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_RESET_TIMEOUT = FormatString("First Enumeration Port Reset Timed Out")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_CREATE_DEVICE_FAILURE = FormatString("Create Device Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	struct 	fid_USBHUB_CD_Error_Information
+	{
+		UINT32 fid_Version;
+		UINT32 fid_PathError;
+		UINT32 fid_UlongArg1;
+		UINT32 fid_UlongArg2;
+		UINT32 fid_NtStatus;
+		UINT8 fid_XtraInfo[64];
+	}
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_INITIALIZE_DEVICE_FAILURE = FormatString("Initialize Device Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	struct 	fid_USBHUB_ID_Error_Information
+	{
+		UINT32 fid_Version;
+		UINT32 fid_PathError;
+		UINT32 fid_Arg1;
+		UINT32 fid_UsbAddress;
+		UINT32 fid_NtStatus;
+		UINT32 fid_UsbdStatus;
+		UINT8 fid_XtraInfo[64];
+	}
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_GET_DESCRIPTORS_FAILURE = FormatString("Get Descriptors Request Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_CONFIG_DESC_VALIDATION_FAILURE = FormatString("Valdiation of USB Configuration Descriptor Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_DEVICE_DESC_VALIDATION_FAILURE = FormatString("Validation of USB Device Descriptor Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_MSOS_DESC_FAILURE = FormatString("Request for Microsoft OS Descriptor Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_SERIAL_NUMBER_FAILURE = FormatString("Request for Serial Number String Descriptor Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_BUILD_PNP_ID = FormatString("Build PnP ID failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_DUPE_SERIAL_NUMBER = FormatString("Duplicate Serial Number Detected")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_REPLICANT_TIMEOUT = FormatString("Enumeration Timed Out Waiting for Previous Instance of USB Device to be Removed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_REGISTRY_FAILURE = FormatString("Enumeration Failed Due to Registry Failure")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_RETRY = FormatString("Retrying Enumeration of Port")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_HUB_DISCONNECT = FormatString("Hub Disconnected During Enumeration of Port")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_DEBOUNCE_COMPLETE = FormatString("Enumeration Debounce Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_CREATE_PDO_COMPLETE = FormatString("PDO Created for Enumeration")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_RESET1_COMPLETE = FormatString("First Enumeration Port Reset Complete")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_ENUM_CREATE_DEVICE_COMPLETE = FormatString("Enumeration - CreateDevice Complete")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_RESET2_COMPLETE = FormatString("Second Enumeration Port Reset Complete")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_INITIALIZE_DEVICE_COMPLETE = FormatString("Enumeration - InitializeDevice Complete")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_SETUP_DEVICE_COMPLETE = FormatString("Enumeration - SetupDevice Complete")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_COMPLETE = FormatString("Enumeration of Port Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_HARD_RESET_START = FormatString("Reset Recovery of Hub Started")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_HARD_RESET_QUEUE = FormatString("Reset Recovery of Hub Queued")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_HARD_RESET_COMPLETE = FormatString("Reset Recovery of Hub Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_SUSPEND_START = FormatString("Started Selective Suspend of Hub")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_SUSPEND_BUS_PAUSE_FAILED = FormatString("Selective Suspend of Hub Failed to Pause Bus")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_SUSPEND_COMPLETE = FormatString("Completed Selective Suspend of Hub")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_RESUME_START = FormatString("Started Resume of Hub from Selective Suspend")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_RESUME_COMPLETE = FormatString("Resume of Hub Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_RESUME_PROPAGATE = FormatString("Propagated Resume of Hub Downstream")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_RESUME_PORT = FormatString("Resumed Port for Hub Resume")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_RESUME_UPSTREAM = FormatString("Propagated Resume of Hub Upstream")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_QUERY_BUSRELATIONS_DISPATCH = FormatString("USB Hub Query Device Relations (BusRelations) IRP Dispatched")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_QUERY_BUSRELATIONS_COMPLETE = FormatString("USB Hub Query Device Relations IRP Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_PORT_ATTRIBUTES = FormatString("USB Hub Port Attributes")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT16 fid_PortAttributes;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_PORT_ACPI_UPC_VALUE = FormatString("ACPI USB Port Capabilities (_UPC)")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	struct 	fid_USBHUB_Acpi_Upc_Package
+	{
+		UINT8 fid_PortIsConnectable;
+		UINT8 fid_PortConnectorType;
+		UINT32 fid_Reserved0;
+		UINT32 fid_Reserved1;
+	}
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_PORT_ACPI_PLD_VALUE = FormatString("ACPI Physical Device Location (_PLD)")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	struct 	fid_USBHUB_Acpi_Pld
+	{
+		UINT64 fid_PortPath[2];
+	}
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_PORT_ACPI_UPC_FAILURE = FormatString("Query for ACPI USB Port Capabilities (_UPC) Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_PORT_ACPI_PLD_FAILURE = FormatString("Query for ACPI Physical Device Location (_PLD) Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_ADD = FormatString("USB Device Added")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	struct 	fid_USBHUB_Device_State
+	{
+		UINT32 fid_DevicePowerState;
+	}
+	struct 	fid_DeviceDescriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT16 fid_bcdUSB;
+		UINT8 fid_bDeviceClass;
+		UINT8 fid_bDeviceSubClass;
+		UINT8 fid_bDeviceProtocol;
+		UINT8 fid_bMaxPacketSize0;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UINT16 fid_bcdDevice;
+		UINT8 fid_iManufacturer;
+		UINT8 fid_iProduct;
+		UINT8 fid_iSerialNumber;
+		UINT8 fid_bNumConfigurations;
+	}
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_REMOVE = FormatString("USB Device Removed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_INFORMATION = FormatString("USB Device Information")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	struct 	fid_USBHUB_Device_State
+	{
+		UINT32 fid_DevicePowerState;
+	}
+	struct 	fid_DeviceDescriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT16 fid_bcdUSB;
+		UINT8 fid_bDeviceClass;
+		UINT8 fid_bDeviceSubClass;
+		UINT8 fid_bDeviceProtocol;
+		UINT8 fid_bMaxPacketSize0;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UINT16 fid_bcdDevice;
+		UINT8 fid_iManufacturer;
+		UINT8 fid_iProduct;
+		UINT8 fid_iSerialNumber;
+		UINT8 fid_bNumConfigurations;
+	}
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_START_DISPATCH = FormatString("USB Device Start IRP Dispatched")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_START_FAILED_RESET = FormatString("Restart of USB Device Failed Due to Device Reset Failure")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_START_REGISTRY_FAILURE = FormatString("Start Device Failed for USB Device Due to Registry Failure")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_START_SYMBOLIC_LINK_FAILURE = FormatString("Unable to Create Symbolic Link for USB Device")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_START_COMPLETE = FormatString("USB Device Start IRP Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_POWER_SET_D0_DISPATCH = FormatString("USB Device Set D0 Device Power IRP Dispatched")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_POWER_SET_D0_COMPLETE = FormatString("USB Device Set D0 Device Power IRP Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_POWER_SET_DX_DISPATCH = FormatString("USB Device Set Dx Device Power IRP Dispatched")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_POWER_SET_DX_COMPLETE = FormatString("USB Device Set Dx Device Power IRP Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_IDLE_NOTIFICATION_DISPATCH = FormatString("USB Device IOCTL_INTERNAL_USB_SUBMIT_IDLE_NOTIFICATION Dispatched")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_IDLE_NOTIFICATION_COMPLETE = FormatString("USB Device IOCTL_INTERNAL_USB_SUBMIT_IDLE_NOTIFICATION Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_WAIT_WAKE_DISPATCH = FormatString("USB Device Wait Wake IRP Dispatched")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_WAIT_WAKE_COMPLETE = FormatString("USB Device Wait Wake IRP Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_WAIT_WAKE_START = FormatString("USB Hub Wait Wake IRP Started")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_WAIT_WAKE_DISPATCH = FormatString("USB Hub Wait Wake IRP Dispatched")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_WAIT_WAKE_COMPLETE = FormatString("USB Hub Wait Wake IRP Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_DX_START = FormatString("USB Hub Set Dx Device Power IRP Started")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_DX_DISPATCH = FormatString("USB Hub Set Dx Device Power IRP Dispatched")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_DX_COMPLETE = FormatString("USB Hub Set Dx Device Power IRP Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_START = FormatString("USB Hub Set D0 Device Power IRP Started")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_DISPATCH = FormatString("USB Hub Set D0 Device Power IRP Dispatched")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_START = FormatString("USB Hub Cold Start")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_HUB_DISCONNECT = FormatString("USB Hub Disconnected During Cold Start")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_PORT_DISCONNECT = FormatString("USB Device Disconnected During Cold Start of Hub")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_PORT_CONNECT = FormatString("USB Device Connected During Cold Start of Hub")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_PORT_LOST_POWER = FormatString("Device Lost Power During Cold Start of Hub")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_PORT_RESET = FormatString("USB Device Needs to be Reset During Cold Start of Hub")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COLD_COMPLETE = FormatString("USB Hub Cold Start Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_WARM_START = FormatString("USB Hub Warm Start")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_WARM_PORT_RESUME_ERROR = FormatString("USB Device Failed to Resume During Warm Start of Hub")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_WARM_RESET_ON_RESUME = FormatString("USB Device Requires Reset During Warm Start of Hub")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_WARM_COMPLETE = FormatString("USB Hub Warm Start Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_D0_WORKER_HUB_FAIL_AFTER_SUSPEND = FormatString("USB Hub Lost Power During System Suspend")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_D0_WORKER_HUB_DISCONNECT_AFTER_SUSPEND = FormatString("USB Hub Was Disconnected During System Suspend")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_D0_COMPLETE = FormatString("USB Hub Set D0 Device Power IRP Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_SX_DISPATCH = FormatString("USB Hub Set Sx System Power IRP Dispatched")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_SX_COMPLETE = FormatString("USB Hub Set Sx System Power IRP Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_S0_DISPATCH = FormatString("USB Hub Set S0 System Power IRP Dispatched")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_POWER_SET_S0_COMPLETE = FormatString("USB Hub Set S0 System Power IRP Complete")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PowerState;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_EXCEPTION = FormatString("USB Hub Exception Logged")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Class;
+	UINT32 fid_NtStatus;
+	UINT32 fid_UsbdStatus;
+	AsciiString fid_DebugText;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_PORT_STATUS_CHANGE = FormatString("USB Hub Port Status Change")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT16 fid_PortStatusChange;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_DISABLE_TIMER = FormatString("USB Hub Timer Disabled")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_TimerTag;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENABLE_TIMER = FormatString("USB Hub Timer Enabled")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_TimerTag;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_TIMER_CALLBACK = FormatString("USB Hub Timer Callback")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_TimerTag;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_SYNC_RESET_DEVICE_INTERNAL_START = FormatString("USB Device Internal Reset Started")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_SYNC_RESET_DEVICE_INTERNAL_COMPLETE = FormatString("USB Device Internal Reset Completed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_PAST_EXCEPTION = FormatString("USB Hub Past Exception Logged")
+{
+	UINT64 fid_TimeElapsedBeforeLogStart;
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Class;
+	UINT32 fid_NtStatus;
+	UINT32 fid_UsbdStatus;
+	AsciiString fid_DebugText;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_IOCTL_INTERNAL_USB_RESET_PORT_START = FormatString("Start IOCTL_INTERNAL_USB_RESET_PORT")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_DEVICE_IOCTL_INTERNAL_USB_RESET_PORT_COMPLETE = FormatString("Complete IOCTL_INTERNAL_USB_RESET_PORT")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Device
+	{
+		EtlPtr fid_DeviceHandle;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_MSOS20_DESC_FAILURE = FormatString("Request for Microsoft OS 2.0 Descriptor Set Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+Struct USBHub_USBHUB_ETW_EVENT_HUB_ENUM_MSOS20_DESC_VALIDATION_FAILURE = FormatString("Validation of Microsoft OS 2.0 Descriptor Set Failed")
+{
+	USBPort_HostController HostController;
+	struct 	fid_USBHUB_Hub
+	{
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UsbPortPath PortPath;
+		UINT32 fid_DeviceSpeed;
+	}
+	UINT32 fid_PortNumber;
+	UINT32 fid_Status;
+}
+[RegisterBefore(EventDescriptor.DefaultKeyword, MicrosoftWindowsUSBUSBHUB_Keyword, "{7426a56b-e2d5-4b30-bdef-b31815c1a74a}")]
+struct USBHub_MicrosoftWindowsUSBUSBHUB_Keyword
+{
+	UINT64 Diagnostics:1 = FormatString("(%s) %s", this.ToBitString, this? "USBHUB_ETW_KEYWORD_DIAGNOSTIC":"");
+	UINT64 Reserved1:63 = FormatString("  (%s)", this.ToBitString);
+}

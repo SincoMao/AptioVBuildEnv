@@ -1,0 +1,92 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    AddPdoToStaticChildList
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    For a PDO device, the framework function WdfFdoAddStaticChild must be called after the 
+    driver calls WdfPdoInitAllocate and WdfDeviceCreate successfully.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507040
+
+--*/
+
+     
+
+#include "slic_base.h"
+
+state
+{
+        enum {initial,allocated,created,added} device_state = initial;
+}
+
+
+sdv_WdfPdoInitAllocate.exit
+{
+    if($return!=NULL)
+    {
+        device_state=allocated;
+    }
+}
+
+sdv_WdfDeviceCreate.entry
+{
+    if ((*$1 == hpdo_deviceinit)&&device_state!=allocated) 
+    { 
+         abort "Cannot call $func without first calling WdfPdoInitAllocate successfully."; 
+    }
+}
+
+
+sdv_WdfDeviceCreate.exit
+{
+    if ((*$1 == hpdo_deviceinit)&&(NT_SUCCESS($return))&&device_state==allocated) 
+    { 
+          device_state = created; 
+    }
+}
+
+sdv_WdfObjectDelete.entry
+{
+    if (device_state == created)
+    {
+        halt;
+    }
+}
+
+
+[sdv_WdfFdoAddStaticChild].entry
+{
+   if (device_state ==created)
+   {
+      device_state=added;
+   }
+   else 
+   {
+      abort "$fname could only be called after WdfDeviceCreate has succeeded."; 
+   }
+}
+
+sdv_main.exit
+{
+   if (device_state==created)
+   {
+      abort "WdfFdoAddStaticChild should be called after WdfDeviceCreate has succeeded.";
+   }
+
+}
+

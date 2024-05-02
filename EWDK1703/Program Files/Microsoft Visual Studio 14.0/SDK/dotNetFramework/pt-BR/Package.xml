@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper" Name="DisplayName" Culture="Culture" LicenseAgreement="eula.rtf">
+  <!-- Defines list of files to be copied on build -->
+  <PackageFiles CopyAllPackageFiles="false">
+    <PackageFile Name="eula.rtf"/>
+    <PackageFile Name="dotNetFx45LP_Full_x86_x64pt-BR.exe" HomeSite="DotNetFX45FullLanguagePackBootstrapper" PublicKey="3082010A0282010100B37474D0823C87A79AD48EB204428097252EE441CE9363365F13F2B4789880C6287ECC8A13EF3D378C3B09A0D814C55C5ED8A91D7F01C1B3981B5077ECFEEA7C45CF7FE1210EC584CA9F0F6BB30938B774C4571EBEF048A8795ADF0E9B1C9AA8BCC852B50C698F84CE71557BFF0920BF4077372130745B95DF77CBA0E5C17212063DF2C8556CAFC1FB6A1627C8F5B361E3D9CE1B0F1EF4E4CD4C346C3E4711E7022B5F147A0407F5D73D8BDB677D573E35EB6D8D01408D1A8796E20F774C89BA389CFB8E0291DB220FE5D036A9B83745D02AFC968DC1607133A588B1F6C20430875BC3D72FB27911D88B6562A28A11665D7E7F057A738A1F7A85E5CD2810D13D0203010001"/>
+  </PackageFiles>
+  <InstallChecks>
+    <RegistryCheck Property="DotNet45FullLangPack_TargetVersion" Key="HKLM\Software\Microsoft\NET Framework Setup\NDP\v4\Full\1046" Value="Version"/>
+  </InstallChecks>
+  <!-- Defines how to invoke the setup for .NET Framework redist -->
+  <Commands>
+    <Command PackageFile="dotNetFx45LP_Full_x86_x64pt-BR.exe" Arguments=" /q /norestart /ChainingPackage FullX64ClickOnce" EstimatedInstalledBytes="189583271" EstimatedTempBytes="3203161" EstimatedInstallSeconds="40">
+      <!-- These checks determine whether the package is to be installed -->
+      <InstallConditions>
+        <!-- This indicates .NET Framework is already installed -->
+        <BypassIf Property="DotNet45FullLangPack_TargetVersion" Compare="VersionGreaterThanOrEqualTo" Value="4.5.50709"/>
+        <!-- Block install if user does not have admin privileges -->
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired"/>
+        <!-- Block install on less than Windows Vista -->
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="6.0.0" String="InvalidPlatformWinNT"/>
+        <!-- Block install if the platform is IA-64 -->
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture"/>
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success"/>
+        <ExitCode Value="3010" Result="SuccessReboot"/>
+        <DefaultExitCode Result="Success" FormatMessageFromSystem="false" String="GeneralFailure"/>
+      </ExitCodes>
+    </Command>
+  </Commands>
+  <!-- Defines a localizable string table for error messages-->
+  <Strings>
+    <String Name="DisplayName">Microsoft .NET Framework 4.5 (x86 e x64)</String>
+    <String Name="Culture">pt-BR</String>
+    <String Name="AdminRequired">São necessárias permissões de administrador para a instalação do Microsoft .NET Framework 4.5. Entre em contato com seu administrador.</String>
+    <String Name="InvalidPlatformWinNT">Não há suporte para a instalação do Microsoft .NET Framework 4.5 neste sistema operacional. Entre em contato com o fornecedor do aplicativo.</String>
+    <String Name="InvalidPlatformArchitecture">Não há suporte para esta versão do Microsoft .NET Framework 4.5 em um sistema operacional IA-64. Entre em contato com o fornecedor do aplicativo.</String>
+    <String Name="DotNetFX45FullWebBootstrapper">http://go.microsoft.com/fwlink/?linkid=249113</String>
+    <String Name="DotNetFX45FullLanguagePackBootstrapper">http://go.microsoft.com/fwlink/?linkid=249114&amp;clcid=0x416</String>
+    <String Name="GeneralFailure">Ocorreu uma falha durante a tentativa de instalação do .NET Framework 4.5.</String>
+  </Strings>
+</Package>

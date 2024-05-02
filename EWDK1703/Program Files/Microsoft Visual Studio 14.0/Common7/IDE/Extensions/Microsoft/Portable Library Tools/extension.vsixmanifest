@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+    <Identifier Id="10143FCD-81D4-434C-8360-6557F1C053E9">
+        <Name>Microsoft Portable Library Tools</Name>
+        <Author>Microsoft</Author>
+        <Version>11.0</Version>
+		<Description>Microsoft Portable Library Tools</Description>
+        <Locale>1033</Locale>
+        <InstalledByMsi>true</InstalledByMsi>
+		<SystemComponent>true</SystemComponent>
+        <SupportedProducts>
+            <VisualStudio Version="11.0">
+                <Edition>Ultimate</Edition>
+                <Edition>Premium</Edition>
+                <Edition>Pro</Edition>
+                <Edition>VSTS</Edition>
+                <Edition>VSTD</Edition>
+            </VisualStudio>
+        </SupportedProducts>
+        <SupportedFrameworkRuntimeEdition MinVersion="4.0" />
+    </Identifier>
+    <References />
+    <Content>
+		<VsPackage>Microsoft.VisualStudio.PortableLibrary.pkgdef</VsPackage>
+		<Assembly AssemblyName="Microsoft.VisualStudio.PortableLibrary, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">Microsoft.VisualStudio.PortableLibrary.dll</Assembly>
+	</Content>
+</Vsix>

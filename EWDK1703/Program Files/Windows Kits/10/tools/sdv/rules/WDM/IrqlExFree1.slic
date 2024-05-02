@@ -1,0 +1,73 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlExFree1
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule specifies that ExFreePool and
+    ExFreePoolWithTag is called at proper IRQL.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507278
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+   enum {initial,allocated_paged} s = initial;
+}
+watch ExAllocatePoolWithTag.exit.$return;
+
+[ExAllocatePoolWithTag].exit[guard $return]
+{
+    if($return!=NULL)
+    {
+        if(($1 & NonPagedPoolNx)||($1 & NonPagedPool)||($1 & NonPagedPoolSession)||($1 & NonPagedPoolCacheAlignedMustS)||($1 & NonPagedPoolSessionNx)||($1 & NonPagedPoolMustSucceed)||($1 & NonPagedPoolCacheAligned)||($1 & NonPagedPoolMustSucceedSession)||($1 & NonPagedPoolCacheAlignedSession)||($1 & NonPagedPoolCacheAlignedMustSSession)||($1 & NonPagedPoolNxCacheAligned))
+        {
+            halt;
+        }
+        else if(($1 & PagedPool) || ($1 & PagedPoolCacheAligned) || ($1 & PagedPoolCacheAlignedSession) || ($1 & PagedPoolSession) || ($1 & PagedPoolCacheAligned))
+        {
+            s=allocated_paged;
+        
+        }
+    }
+    else
+    {
+        halt;
+    }
+}
+
+[ExFreePool]@X86.entry[guard $1]
+{
+    if ((sdv_irql_current == DISPATCH_LEVEL)&&(s==allocated_paged)) 
+    {
+        abort "$fname can be called at IRQL = DISPATCH_LEVEL only if a NonPagedXxx value is specified for PoolType.";
+    }
+}
+
+[ExFreePoolWithTag].entry[guard $1]
+{
+    if ((sdv_irql_current == DISPATCH_LEVEL)&&(s==allocated_paged)) 
+    {
+        abort "$fname can be called at IRQL = DISPATCH_LEVEL only if a NonPagedXxx value is specified for PoolType.";
+    }
+}
+
+
+

@@ -1,0 +1,16 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <IncludePath>$(UM_IncludePath);$(IncludePath)</IncludePath> 
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies);$(DDK_LIB_PATH)BufferOverflowGDI.lib;$(DDK_LIB_PATH)win32k.lib</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Platform)' == 'Win32'">%(AdditionalDependencies);$(SDK_LIB_PATH)int64.lib</AdditionalDependencies>
+      <EntryPointSymbol Condition="'$(Platform)' == 'Win32'">GsDrvEnableDriver@12</EntryPointSymbol>
+      <!-- x64 does not mangle the entrypoint name -->
+      <EntryPointSymbol Condition="'$(Platform)' != 'Win32'">GsDrvEnableDriver</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+</Project>

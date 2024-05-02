@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<Rule Name="XAML"
+    DisplayName="XAML Compiler"
+    Order="75"
+    PageTemplate="tool"
+    xmlns="http://schemas.microsoft.com/build/2009/properties"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    >
+
+  <Rule.Categories>
+    <Category Name="XamlCompiler" DisplayName="XAML Compiler" />
+  </Rule.Categories>
+  
+  <!-- no ItemType because this is a project global property, not an item property -->
+  <Rule.DataSource>
+    <DataSource Persistence="ProjectFile" HasConfigurationCondition="true" />
+  </Rule.DataSource>
+
+  <StringProperty Name="SuppressXamlWarnings"
+                  DisplayName="Suppressed XAML Warnings"
+                  Description="XAML Compiler warning to suppress.  List as decimal integer values seperated with ';'"
+                  Category="XamlCompiler"
+                >
+  </StringProperty>
+
+ </Rule>

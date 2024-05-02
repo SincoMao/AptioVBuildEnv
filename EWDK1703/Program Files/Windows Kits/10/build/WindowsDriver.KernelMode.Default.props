@@ -1,0 +1,55 @@
+<!--
+***********************************************************************************************
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Default target framework values for kernel mode drivers -->
+  <Choose>
+    <!-- Windows v10.0 -->
+    <When Condition="$(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WIN10)">
+      <PropertyGroup>
+        <KMDF_VERSION_MAJOR Condition="'$(KMDF_VERSION_MAJOR)' == ''">1</KMDF_VERSION_MAJOR>
+        <KMDF_VERSION_MINOR Condition="'$(KMDF_VERSION_MINOR)' == ''">15</KMDF_VERSION_MINOR>
+        <SPB_VERSION_MAJOR Condition="'$(SPB_VERSION_MAJOR)' == ''">1</SPB_VERSION_MAJOR>
+        <SPB_VERSION_MINOR Condition="'$(SPB_VERSION_MINOR)' == ''">0</SPB_VERSION_MINOR>
+      </PropertyGroup>
+    </When>
+    <!-- Windows 8.1 -->
+    <When Condition="$(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WINV63)">
+      <PropertyGroup>
+        <KMDF_VERSION_MAJOR Condition="'$(KMDF_VERSION_MAJOR)' == ''">1</KMDF_VERSION_MAJOR>
+        <KMDF_VERSION_MINOR Condition="'$(KMDF_VERSION_MINOR)' == ''">11</KMDF_VERSION_MINOR>
+        <SPB_VERSION_MAJOR Condition="'$(SPB_VERSION_MAJOR)' == ''">1</SPB_VERSION_MAJOR>
+        <SPB_VERSION_MINOR Condition="'$(SPB_VERSION_MINOR)' == ''">0</SPB_VERSION_MINOR>
+      </PropertyGroup>
+    </When>
+    <!-- Windows 8 -->
+    <When Condition="$(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WIN8)">
+      <PropertyGroup>
+        <KMDF_VERSION_MAJOR Condition="'$(KMDF_VERSION_MAJOR)' == ''">1</KMDF_VERSION_MAJOR>
+        <KMDF_VERSION_MINOR Condition="'$(KMDF_VERSION_MINOR)' == ''">11</KMDF_VERSION_MINOR>
+        <SPB_VERSION_MAJOR Condition="'$(SPB_VERSION_MAJOR)' == ''">1</SPB_VERSION_MAJOR>
+        <SPB_VERSION_MINOR Condition="'$(SPB_VERSION_MINOR)' == ''">0</SPB_VERSION_MINOR>
+      </PropertyGroup>
+    </When>
+    <!-- Windows 7 -->
+    <When Condition="$(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WIN7)">
+      <PropertyGroup>
+        <KMDF_VERSION_MAJOR Condition="'$(KMDF_VERSION_MAJOR)' == ''">1</KMDF_VERSION_MAJOR>
+        <KMDF_VERSION_MINOR Condition="'$(KMDF_VERSION_MINOR)' == ''">9</KMDF_VERSION_MINOR>
+        <SPB_VERSION_MAJOR Condition="'$(SPB_VERSION_MAJOR)' == ''">1</SPB_VERSION_MAJOR>
+        <SPB_VERSION_MINOR Condition="'$(SPB_VERSION_MINOR)' == ''">0</SPB_VERSION_MINOR>
+      </PropertyGroup>
+    </When>
+  </Choose>
+  
+  <Import Condition="Exists('$(WDKContentRoot)build\WindowsDriver.KernelMode.CX.Default.props')" Project="$(WDKContentRoot)build\WindowsDriver.KernelMode.CX.Default.props"/>
+
+</Project>
+

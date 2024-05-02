@@ -1,0 +1,102 @@
+<!--
+***********************************************************************************************
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">  
+<!-- *******************************************************************************************
+        This file is for properties specific to the user mode driver toolset.
+        
+        These item metadata and properties depend on properties that are specific to each project. 
+        The values must be updated after the project has been loaded and evaluated. 
+        Hence we update the properties using a target, which is evaluated after the project
+       ******************************************************************************************* -->
+  <PropertyGroup>
+    <UmdfVersion Condition="'$(UmdfVersion)' == ''">$(UMDF_VERSION_MAJOR).$(UMDF_VERSION_MINOR)</UmdfVersion>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="'$(UmdfVersion)' == '2.21' and $(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WIN10_RS2)">
+      <PropertyGroup>
+        <UMDF_VERSION_MAJOR>2</UMDF_VERSION_MAJOR>
+        <UMDF_VERSION_MINOR>21</UMDF_VERSION_MINOR>
+        <UMDF_VERSION_MAJOR_STRING>02</UMDF_VERSION_MAJOR_STRING>
+        <UMDF_VERSION_MINOR_STRING>021</UMDF_VERSION_MINOR_STRING>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UmdfVersion)' == '2.19' and $(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WIN10_RS1)">
+      <PropertyGroup>
+        <UMDF_VERSION_MAJOR>2</UMDF_VERSION_MAJOR>
+        <UMDF_VERSION_MINOR>19</UMDF_VERSION_MINOR>
+        <UMDF_VERSION_MAJOR_STRING>02</UMDF_VERSION_MAJOR_STRING>
+        <UMDF_VERSION_MINOR_STRING>019</UMDF_VERSION_MINOR_STRING>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UmdfVersion)' == '2.17' and $(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WIN10_TH2)">
+      <PropertyGroup>
+        <UMDF_VERSION_MAJOR>2</UMDF_VERSION_MAJOR>
+        <UMDF_VERSION_MINOR>17</UMDF_VERSION_MINOR>
+        <UMDF_VERSION_MAJOR_STRING>02</UMDF_VERSION_MAJOR_STRING>
+        <UMDF_VERSION_MINOR_STRING>017</UMDF_VERSION_MINOR_STRING>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UmdfVersion)' == '2.15' and $(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WIN10)">
+      <PropertyGroup>
+        <UMDF_VERSION_MAJOR>2</UMDF_VERSION_MAJOR>
+        <UMDF_VERSION_MINOR>15</UMDF_VERSION_MINOR>
+        <UMDF_VERSION_MAJOR_STRING>02</UMDF_VERSION_MAJOR_STRING>
+        <UMDF_VERSION_MINOR_STRING>015</UMDF_VERSION_MINOR_STRING>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UmdfVersion)' == '2.0' and $(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WINV63)">
+      <PropertyGroup>
+        <UMDF_VERSION_MAJOR>2</UMDF_VERSION_MAJOR>
+        <UMDF_VERSION_MINOR>0</UMDF_VERSION_MINOR>
+        <UMDF_VERSION_MAJOR_STRING>02</UMDF_VERSION_MAJOR_STRING>
+        <UMDF_VERSION_MINOR_STRING>000</UMDF_VERSION_MINOR_STRING>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UmdfVersion)' == '1.11'">
+      <PropertyGroup>
+        <UMDF_VERSION_MAJOR>1</UMDF_VERSION_MAJOR>
+        <UMDF_VERSION_MINOR>11</UMDF_VERSION_MINOR>
+        <UMDF_VERSION_MAJOR_STRING>01</UMDF_VERSION_MAJOR_STRING>
+        <UMDF_VERSION_MINOR_STRING>011</UMDF_VERSION_MINOR_STRING>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UmdfVersion)' == '1.9'">
+      <PropertyGroup>
+        <UMDF_VERSION_MAJOR>1</UMDF_VERSION_MAJOR>
+        <UMDF_VERSION_MINOR>9</UMDF_VERSION_MINOR>
+        <UMDF_VERSION_MAJOR_STRING>01</UMDF_VERSION_MAJOR_STRING>
+        <UMDF_VERSION_MINOR_STRING>009</UMDF_VERSION_MINOR_STRING>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <UnknownUmdfVersion>true</UnknownUmdfVersion>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+  <PropertyGroup>
+    <UMDF_VER_PATH>$(UMDF_VERSION_MAJOR).$(UMDF_VERSION_MINOR)</UMDF_VER_PATH>
+    <IncludePath Condition="'$(IsUserModeToolset)'=='true'">$(IncludePath);$(UMDF_INC_PATH)$(UMDF_VER_PATH)</IncludePath>
+  </PropertyGroup>
+
+  <!-- Define user-mode-specific defaults for StampInf -->
+  <ItemDefinitionGroup>
+    <Inf>
+      <UmdfVersionNumber Condition="'%(Inf.UmdfVersionNumber)'  == ''">$(UMDF_VERSION_MAJOR).$(UMDF_VERSION_MINOR).0</UmdfVersionNumber>
+    </Inf>
+  </ItemDefinitionGroup>
+  
+  <Import Condition="Exists('$(WDKContentRoot)build\WindowsDriver.UserMode.CX.LateEvaluation.props')" Project="$(WDKContentRoot)build\WindowsDriver.UserMode.CX.LateEvaluation.props"/>
+  
+</Project>
+

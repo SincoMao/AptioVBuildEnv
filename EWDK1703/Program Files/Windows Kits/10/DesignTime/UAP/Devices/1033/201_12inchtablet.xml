@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device name="Tablet" width="2160" height="1440" scale="150" size="12" default="false" resize="false" icon="Assets/tablet_icon.ico" Generic="Generic/generic.xaml" MinVersion="10.0.0.0">
+	<Device.Qualifiers>
+		<Qualifier Name="DeviceFamily">Mobile</Qualifier>
+		<Qualifier Name="Orientation">Landscape|Portrait</Qualifier>
+	</Device.Qualifiers>
+</Device>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

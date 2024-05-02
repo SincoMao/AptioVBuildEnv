@@ -1,0 +1,53 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    FileObjectConfigured
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    The file object must be configured in the driver before calling WdfRequestGetFileObject.
+
+    This rule verifies that the call to the WdfRequestGetFileObject method is preceded by a call to WdfDeviceInitSetFileObjectConfig.
+
+    Rule diagnostics: 
+    "WdfRequestGetFileObject cannot be called if WdfDeviceInitSetFileObjectConfig was not called." 
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507078
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state{
+     enum {INIT, CONFIG} s = INIT;
+}
+sdv_WdfDeviceInitSetFileObjectConfig.entry
+{
+   s = CONFIG;
+}
+sdv_WdfRequestGetFileObject.entry
+{
+   if (s != CONFIG) 
+   {
+      abort "WdfRequestGetFileObject cannot be called if WdfDeviceInitSetFileObjectConfig was not called.";
+   }
+   else
+   {
+	   halt;
+   }
+}

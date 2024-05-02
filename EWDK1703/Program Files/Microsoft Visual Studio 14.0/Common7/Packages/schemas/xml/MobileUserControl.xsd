@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema targetNamespace='http://schemas.microsoft.com/Mobile/WebUserControl'
+		xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+		xmlns:vs='http://schemas.microsoft.com/Visual-Studio-Intellisense'
+		vs:defaultns='mobile'
+		vs:ishtmlschema='false'
+		vs:isserverschema='true'
+		vs:SuccinctFriendlyName="ASP.Net">
+
+		<xsd:include schemaLocation="CommonMobileTypes.xsd" />
+
+		<!-- valid top-level elements -->
+		<xsd:element name="Form" type="FormType" minOccurs="1" />
+		<xsd:element name="StyleSheet" type="StyleSheetType" maxOccurs="1" />
+
+		<!-- Form, Panel, Nested Literals and Template need to be kept in sync -->
+		<xsd:element name="Label" type="LabelType" />
+		<xsd:element name="TextBox" type="TextBoxType" />
+		<xsd:element name="PhoneCall" type="PhoneCallType" />
+		<xsd:element name="Command" type="CommandType" />
+		<xsd:element name="Link" type="LinkType" />
+		<xsd:element name="Panel" type="PanelType" />
+		<xsd:element name="Image" type="ImageType" />
+		<xsd:element name="TextView" type="TextViewType" />
+		<xsd:element name="List" type="ListType" />
+		<xsd:element name="SelectionList" type="SelectionListType" />
+		<xsd:element name="ObjectList" type="ObjectListType" />
+		<xsd:element name="AdRotator" type="AdRotatorType" />
+		<xsd:element name="Calendar" type="CalendarType" />
+		<xsd:element name="RangeValidator" type="RangeValidatorType" />
+		<xsd:element name="RequiredFieldValidator" type="RequiredFieldValidatorType" />
+		<xsd:element name="CompareValidator" type="CompareValidatorType" />
+		<xsd:element name="RegularExpressionValidator" type="RegularExpressionValidatorType" />
+		<xsd:element name="CustomValidator" type="CustomValidatorType" />
+		<xsd:element name="ValidationSummary" type="ValidationSummaryType" />
+		<!-- End sync -->
+
+		<xsd:element name="script" type="scriptType" form="unqualified" />
+
+		<xsd:complexType name="scriptType" mixed="true">
+				<xsd:attribute name="language" default="jscript">
+						<xsd:union>
+								<xsd:simpleType vs:serverlanguages="true">
+										<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="vbs" />
+												<xsd:enumeration value="vbscript" />
+												<xsd:enumeration value="js" />
+												<xsd:enumeration value="jscript" />
+												<xsd:enumeration value="javascript" />
+										</xsd:restriction>
+								</xsd:simpleType>
+								<xsd:simpleType>
+										<xsd:restriction base="xsd:string" />
+								</xsd:simpleType>
+						</xsd:union>
+				</xsd:attribute>
+				<xsd:attribute name="src" type="xsd:anyURI" />
+				<xsd:attribute name="id" />
+				<xsd:attribute name="runat" vs:readonly="true" type="RunatType" />
+		</xsd:complexType>
+
+</xsd:schema>

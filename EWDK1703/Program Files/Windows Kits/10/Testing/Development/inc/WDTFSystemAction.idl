@@ -1,0 +1,924 @@
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Microsoft Confidential
+// Copyright 2005 Microsoft Corporation. All Rights Reserved.
+//
+// Console.idl
+//
+// Collection: WDTF Internals - Console Reference
+// 
+// Environment: User mode
+// 
+// DLL: Console.dll
+//
+// Creator: Sohail Kadiwala (v-sokadi)
+//
+// Primary Contact: WDTF Team (WDTFTeam)
+//
+// History:
+//   [Date]        -   [Status]
+//   Dec 08 2005   -   Created. Unreviewed
+//   Dec 27 2005   -   Merged TPO methods here.
+//---------------------------------------------------------------------------
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ConsoleAction.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    uuid(365DFDD1-AE08-40C2-9A12-D510C96B27D3),
+    version(1.0),
+    helpstring("Console 1.0 Type Library")
+]
+library ConsoleLib
+{
+    importlib("stdole2.tlb");
+    importlib("WDTF.tlb");
+    importlib("WDTFInterfaces.tlb");
+
+    [
+        object,
+        uuid(B158F4C0-FF92-43E4-8941-6BC686B88199),
+        dual,
+        nonextensible,
+        helpstring("IConsole Interface"),
+        pointer_default(unique)
+    ]
+    interface IConsole : IAction
+    {
+    [helpstring("Locks the workstation")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    //  This method sends a lock request for locking the workstation display. 
+    // This method has the same result as pressing Ctrl+Alt+Del and clicking 
+    // Lock Workstation.
+    //---------------------------------------------------------------------------
+    HRESULT Lock(void);
+
+    [helpstring("LogOff the interactive user.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    //  This method simulates LogOff on the workstation. In order to use this 
+    // method, the user should be an interactive user.
+    //---------------------------------------------------------------------------
+    HRESULT LogOff(void);
+
+    [helpstring("LogOff the interactive user.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    //  This method simulates LogOff on the workstation critically. It forcefully
+    // closes all running application. This might cause in loosing unsaved work 
+    // in these applications. In order to use this method, the user should be an 
+    // interactive user.
+    //---------------------------------------------------------------------------
+    HRESULT CriticalLogOff(void);
+    
+    [helpstring("Initiate system shutdown.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   TimeOutInSeconds   This parameter indicates the time for which the 
+    //                      shutdown dialog box is displayed. The time is in 
+    //                      seconds. While the shutdown dialog is displayed, 
+    //                      the shutdown request can be aborted by using 
+    //                      AbortShutdown method.
+    // Remarks:
+    //  This method initiates shutdown on the workstation. In order to use this 
+    // method, the caller should be running on the interactive console.
+    //---------------------------------------------------------------------------
+    HRESULT Shutdown([in] LONG TimeOutInSeconds);
+    
+    [helpstring("Initiate system shutdown, while forcing applications to close if needed.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   TimeOutInSeconds   This parameter indicates the time for which the 
+    //                      shutdown dialog box is displayed. The time is in 
+    //                      seconds. While the shutdown dialog is displayed, 
+    //                      the shutdown request can be aborted by using 
+    //                      AbortShutdown method.
+    // Remarks:
+    //  This method initiates shutdown on the workstation. In order to use this 
+    // method, the caller should be running on the interactive console.
+    //  Note: There may be loss of unsaved work if you use this method.
+    //---------------------------------------------------------------------------
+    HRESULT CriticalShutdown([in] LONG TimeOutInSeconds);
+
+    [helpstring("Initiate system reboot.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   TimeOutInSeconds   This parameter indicates the time for which the 
+    //                      shutdown dialog box is displayed. The time is in 
+    //                      seconds. While the shutdown dialog is displayed, 
+    //                      the shutdown request can be aborted by using 
+    //                      AbortShutdown method.
+    // Remarks:
+    //  This method initiates reboot on the workstation. In order to use this 
+    // method, the caller should be running on the interactive console.
+    //---------------------------------------------------------------------------
+    HRESULT Reboot([in] LONG TimeOutInSeconds);
+
+    [helpstring("Initiate system reboot, while forcing applications to close if needed.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   TimeOutInSeconds   This parameter indicates the time for which the 
+    //                      shutdown dialog box is displayed. The time is in 
+    //                      seconds. While the shutdown dialog is displayed, 
+    //                      the shutdown request can be aborted by using 
+    //                      AbortShutdown method.
+    // Remarks:
+    //  This method initiates reboot on the workstation. In order to use this 
+    // method, the caller should be running on the interactive console.
+    //  Note: There may be loss of unsaved work if you use this method.
+    //---------------------------------------------------------------------------
+    HRESULT CriticalReboot([in] LONG TimeOutInSeconds);
+    
+    [helpstring("Abort the system shutdown in progress.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    //  This method prevents the shutdown or reboot that is instantiated on the 
+    // workstation by Shutdown or Reboot methods. In order to use this method, 
+    // the caller should be running on an interactive console.
+    //---------------------------------------------------------------------------
+    HRESULT AbortShutdown(void);
+
+    [helpstring("Set wake timers to wakeup the system as quickly as possible from sleep state.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   WakeTimeInSec      The time in seconds. This time is the starting time for
+    //                      multiple timer values.
+    //
+    // Remarks:
+    //  This method sets multiple wake timer which helps the system to wake up
+    // the system as quickly as possible. The multiple timer values start from 
+    // the user specified time.
+    //---------------------------------------------------------------------------
+    HRESULT SetWakeTimer(LONG WakeTimeInSec);
+
+    [helpstring("Put the system on standby.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    //  This method puts the system into standby. It doesn't send PBT_APMQUERYSUSPEND
+    // event to each application to request permission to suspend operation. In 
+    // order to use this method, the caller should be running on the interactive 
+    // console. On completion, this method also all the wake timers set 
+    // by SetWakeTimer method.
+    //---------------------------------------------------------------------------
+    HRESULT Standby(void);
+
+    [helpstring("Critically put the system on standby.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    //  This method puts the system into standby immediately. It doesn't send 
+    // PBT_APMQUERYSUSPEND event to each application to request permission to suspend 
+    // operation. In order to use this method, the caller should be running on the 
+    // interactive console. On completion, this method stops all the wake 
+    // timers set by SetWakeTimer method.
+    //---------------------------------------------------------------------------
+    HRESULT CriticalStandby(void);
+    
+    [helpstring("Put the system into hibernation.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    //  This method puts the system into hibernation. It sends PBT_APMQUERYSUSPEND 
+    // event to each application to request permission to suspend operation. 
+    // In order to use this method, the caller should be running on the interactive 
+    // console. On completion, this method stops all the wake timers set 
+    // by SetWakeTimer method.
+    //---------------------------------------------------------------------------
+    HRESULT Hibernate(void);
+
+    [helpstring("Critically hibernate the system.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    //  This method puts the system into hibernation immediately. It doesn't send 
+    // PBT_APMQUERYSUSPEND event to each application to request permission to suspend 
+    // operation. In order to use this method, the caller should be running on the 
+    // interactive console. On completion, this method stops all the wake timers set 
+    // by SetWakeTimer method.
+    //---------------------------------------------------------------------------
+    HRESULT CriticalHibernate(void);
+
+    [helpstring("Put the system into desired sleep state and auto-wakeup after desired wakeup time.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   WakeTimeInSeconds  Specifies how much time (in seconds) has to pass 
+    //                      before RTC wakes the system.
+    //
+    //   SleepState         Desired sleep state.
+    //
+    // Remarks:
+    //  This method is used to put the system into a desired sleep state and 
+    //  autowake the system after desired wakeup time. 
+    //  This is a wrapper around SetSleepStateInfoEx, EnableAutoWakeIfPossible, 
+    //  and SetSleepState method calls. 
+    //---------------------------------------------------------------------------
+    HRESULT Sleep(
+        [in] LONG WakeTimeInSeconds,
+        [in] LONG SleepState);
+
+    HRESULT SleepEx(
+        [in] LONG WakeTimeInSeconds,
+        [in] LONG SleepState,
+        [in] VARIANT_BOOL bCritical);
+
+    [helpstring("Starts multiple wake timers for quick wakeup and sends machine to sleep.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   SleepState         Desired sleep state.
+    //
+    // Remarks:
+    //  This method puts the system in specified sleepstate and starts multiple
+    //  wake timers for the system to wakeup as quickly as possible.
+    //---------------------------------------------------------------------------
+    HRESULT QuickSleep(
+        [in] LONG SleepState);
+
+    [helpstring("Reset the Display idle timer so that the display won't go into a lower power state.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    //  Deprecated.  This method now wraps the SimulateUserKeyPress method.
+    //---------------------------------------------------------------------------
+    HRESULT ResetDisplayIdleTimer(void);
+
+    [helpstring("Reset the System idle timer so that the system won't go into a lower power state.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    //  Deprecated.  This method now wraps the SimulateUserKeyPress method.
+    //---------------------------------------------------------------------------
+    HRESULT ResetSystemIdleTimer(void);
+
+    [propget, helpstring("Retrieve the password protect status for screen saver.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Remarks:
+    //  This is a get property. It gets the ‘password protect’ option status
+    // when the system resumes from the screen saver.
+    //---------------------------------------------------------------------------
+    HRESULT PasswordProtectScreenSaver([out, retval] VARIANT_BOOL* pVal);
+    
+    [propput, helpstring("Enable or disable password protection when system resume from screen saver.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Remarks:
+    //  This is a put property. It sets the ‘password protect’ option when the 
+    // system resumes from the screen saver. The value set by this property sticks
+    // with the system even after the Console object is destroyed.
+    //---------------------------------------------------------------------------
+    HRESULT PasswordProtectScreenSaver([in] VARIANT_BOOL bNewVal);
+    
+    [propget, helpstring("Retrieve the password protect status for standby.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Remarks:
+    //  This is a get property. It gets the ‘password protect’ option status
+    // when the system resumes from sleep (standby or hibernate). 
+    //---------------------------------------------------------------------------
+    HRESULT PasswordProtectSleep([out, retval] VARIANT_BOOL* pVal);
+    
+    [propput, helpstring("Enable or disable password protection when system resume from standby.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Remarks:
+    //  This is a put property. It sets the ‘password protect’ option when the 
+    // system resumes from sleep (standby or hibernate). The value set by this 
+    // property sticks with the system even after the Console object is destroyed.
+    //---------------------------------------------------------------------------
+    HRESULT PasswordProtectSleep([in] VARIANT_BOOL bNewVal);
+
+    [propget, helpstring("Are wake events disabled when the system is suspended using IConsole methods?")] 
+    //---------------------------------------------------------------------------
+    //
+    // Remarks:
+    //  This is a get property. By default it is set to false. This property allows the consumer of this component 
+    // to find whether the WakeEvents will be disabled when the system is put to 
+    // sleep using - 
+    //  - IConsole::Standby or 
+    //  - IConsole::CriticalStandby or 
+    //  - IConsole::Hibernate or 
+    //  - IConsole::CriticalHibernate
+    //---------------------------------------------------------------------------
+    HRESULT DisableWakeEvents([out, retval] VARIANT_BOOL* pVal);
+    
+    [propput, helpstring("Disable/Enable wake events when the system is suspended using IConsole methods.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Remarks:
+    //  This is a put property. By default it is set to false. It disables/enables the wake events. 
+    // This will be used by IConsole sleep methods - 
+    //  - IConsole::Standby or 
+    //  - IConsole::CriticalStandby or 
+    //  - IConsole::Hibernate or 
+    //  - IConsole::CriticalHibernate
+    //---------------------------------------------------------------------------
+    HRESULT DisableWakeEvents([in] VARIANT_BOOL bNewVal);
+    
+    [propput, helpstring("Enable or disable the 'reset on hibernation' option.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Remarks:
+    //  This is a put property. It sets the ‘reset on hibernation’ option. So when
+    // the system writes the hiber-file, it performs a reset instead of shutting down.
+    //
+    //  This property is set to true automatically when "EnableAutowakeIfPossible()" is
+    // called if RTC wake on S4 isn't supported. EnableAutowakeIfPossible() is also called
+    // by Sleep() and QuickSleep().
+    //
+    //  This property is not initialized on object construction. However, it is reset back to 
+    // it's initial value on object destruction.
+    //---------------------------------------------------------------------------
+    HRESULT ResetOnHibernate([in] VARIANT_BOOL bNewVal);
+    
+    [propput, helpstring("Enable or disable the automatic 'doze back to sleep after automatic wake' Windows feature.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Remarks:
+    //  This is a put property. 
+    // It only functions on Windows Vista and later.
+    // It sets or resets the ‘doze back to sleep after automatic wake’ option. 
+    // If this is set to true, the system will automatically doze back to sleep
+    // after two (2) minutes of low CPU utilization after an automatic wake event. This two minutes
+    // can be held back indefinately as long as the SystemRequired property is set to true (this
+    // only lasts as long as the current thread is still running); it can also be held back
+    // another 2 minutes by calling the ResetSystemIdleTimer() method.
+    //
+    // This property only takes effect at the time a sleep/hibernate method is called, setting
+    // it to false after wake will have no effect (unless you then go to sleep/hibernate
+    // later).
+    //
+    //  This property is set to VARIANT_FALSE on object construction. 
+    // However, it is reset back to it's previous value on object destruction.
+    //---------------------------------------------------------------------------
+    HRESULT DozeAfterAutoWake([in] VARIANT_BOOL bNewVal);
+    
+    [propput, helpstring("Whether or not to require that the display be available from now on.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Remarks:
+    //  This is a put property. When set to true, it uses the SetThreadExecutionState() or
+    // PowerSetRequest() API to keep the display on until it is set to false.
+    //---------------------------------------------------------------------------
+    HRESULT DisplayRequired([in] VARIANT_BOOL bNewVal);
+    
+    [propput, helpstring("Whether or not to require that the system be available from now on.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Remarks:
+    //  This is a put property. When set to true, it uses the SetThreadExecutionState() or
+    // PowerSetRequest() API to keep the system from idling to sleep until it is set to false.
+    //---------------------------------------------------------------------------
+    HRESULT SystemRequired([in] VARIANT_BOOL bNewVal);
+
+    [propget, helpstring("Check whether Standby is supported. (Any combination of S1, S2 or S3).")] 
+    //---------------------------------------------------------------------------
+    //  This is a get property. It checks the system capabilites to see if any Sleep
+    // state (S1, S2, and S3) is supported.
+    //---------------------------------------------------------------------------
+    HRESULT IsStandbySupported([out, retval] VARIANT_BOOL* pVal);
+
+    [propget, helpstring("Check whether S1 is supported.")] 
+    //---------------------------------------------------------------------------
+    //  This is a get property. It checks the system capabilites to see if the S1
+    // state is supported.
+    //---------------------------------------------------------------------------
+    HRESULT IsS1Supported([out, retval] VARIANT_BOOL* pVal);
+
+    [propget, helpstring("Check whether S2 is supported.")] 
+    //---------------------------------------------------------------------------
+    //  This is a get property. It checks the system capabilites to see if the S2
+    // state is supported.
+    //---------------------------------------------------------------------------
+    HRESULT IsS2Supported([out, retval] VARIANT_BOOL* pVal);
+
+    [propget, helpstring("Check whether S3 is supported.")] 
+    //---------------------------------------------------------------------------
+    //  This is a get property. It checks the system capabilites to see if the S3
+    // state is supported.
+    //---------------------------------------------------------------------------
+    HRESULT IsS3Supported([out, retval] VARIANT_BOOL* pVal);
+
+    [propget, helpstring("Check whether hibernate is supported.")] 
+    //---------------------------------------------------------------------------
+    //  This is a get property. It checks the system capabilites to see if the S4
+    // state is supported.
+    //---------------------------------------------------------------------------
+    HRESULT IsHibernateSupported([out, retval] VARIANT_BOOL* pVal);
+
+    [propget, helpstring("Check whether hybrid-sleep is supported.")] 
+    //---------------------------------------------------------------------------
+    //  This is a get property. It checks the system capabilites to see if the FastS4
+    // (Hybrid Sleep) state is supported.
+    //---------------------------------------------------------------------------
+    HRESULT IsHybridSleepSupported([out, retval] VARIANT_BOOL* pVal);
+
+
+
+    [helpstring("Returns the first supported sleep state.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   pSleepState        Variable that will receive the first supported sleep state.
+    //
+    //---------------------------------------------------------------------------
+    HRESULT GetFirstSleepState(
+        [out,retval] LONG* pSleepState);
+
+    [helpstring("Returns the next supported sleep state.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   pSleepState        Variable that will receive the next supported sleep state.
+    //
+    // Remarks:
+    //  This method is used must be called after GetFirstSleepState.
+    //---------------------------------------------------------------------------
+    HRESULT GetNextSleepState(
+        [out,retval] LONG* pSleepState);
+
+    [helpstring("Set desired sleep state and wake timer that will be used by next SetSleepState method call.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   WakeTimeInMinutes  Specifies how much time has to pass before RTC
+    //                      wakes the system.  
+    //
+    //   SleepState         Desired sleep state.
+    //
+    // Remarks:
+    //  This method is used to save sleep state and wake timer parameters that
+    // will be used by SetSleepState method.
+    //---------------------------------------------------------------------------
+    HRESULT SetSleepStateInfo(
+        [in] LONG WakeTimeInMinutes,
+        [in] LONG SleepState);
+
+    [helpstring("Set desired sleep state and wake timer that will be used by next SetSleepState method call.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   WakeTimeInSeconds  Specifies how much time (in seconds) has to pass 
+    //                      before RTC wakes the system.
+    //
+    //   SleepState         Desired sleep state.
+    //
+    // Remarks:
+    //  This method is used to save sleep state and wake timer parameters that
+    // will be used by SetSleepState method.
+    //---------------------------------------------------------------------------
+    HRESULT SetSleepStateInfoEx(
+        [in] LONG WakeTimeInSeconds,
+        [in] LONG SleepState);
+
+    [helpstring("Starts wake timer and sends machine to sleep.")]
+    //---------------------------------------------------------------------------
+    // Remarks:
+    //  This method sends machine to the sleep state previously specified by a
+    // call to SetSleepStateInfo method.
+    //---------------------------------------------------------------------------
+    HRESULT SetSleepState(void);
+
+    [helpstring("Enables automatic waking from a sleep state.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   pVal              Will be set to VARIANT_TRUE if autowake was enabled.
+    //
+    //---------------------------------------------------------------------------
+    HRESULT EnableAutoWakeIfPossible(
+        [out,retval] VARIANT_BOOL* pVal);
+
+    [helpstring("Returns VARIANT_TRUE if the machine is capable of waking up from the specified sleep state automatically using Real Time Clock.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   SleepState         Sleep state to be checked for possibly of RTC wake.
+    //
+    //   pVal               Return value.
+    //
+    // Remarks:
+    //  This method returns TRUE if the machine capable of waking up from the
+    // specified sleep state using Real Time Clock.
+    //---------------------------------------------------------------------------
+    HRESULT IsRtcWakeSupported(
+        [in] LONG SleepState,
+        [out,retval] VARIANT_BOOL* pVal);
+
+
+
+    [helpstring("Causes a breakpoint exception to occur in the current process. This allows the calling thread to signal the debugger to handle the exception.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   MsgReason             A user readable reason for breaking into the debugger. Can be NULL or empty.
+    //
+    // Remarks:
+    //  This method merely outputs a reason to the debugger then causes a debug break
+    // exception. If the process is not being debugged, the search logic of a standard 
+    // exception handler is invoked. In most cases, this causes the calling process to 
+    // terminate because of an unhandled breakpoint exception.
+    //---------------------------------------------------------------------------
+    HRESULT DebugBreak(
+        [in] BSTR MsgReason);
+
+    [helpstring("Causes a breakpoint exception to occur in the current process if and only if IsDebuggerPresent() returns true.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   MsgReason             A user readable reason for breaking into the debugger. Can be NULL or empty.
+    //
+    // Remarks:
+    //  This method merely calls Console.DebugBreak() if and only if the IsDebuggerPresent()
+    // Win32 function returns true.
+    //  IsDebuggerPresent() will return true if and only if a user-mode debugger is presently
+    // attached to the process.
+    //---------------------------------------------------------------------------
+    HRESULT DebugBreakIfPresent(
+        [in] BSTR MsgReason);
+
+
+    [helpstring("Sends a string to the debugger for display.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   Msg                The message to print out to the debugger.
+    //
+    // Remarks:
+    //  This method is merely a wrapper for the OutputDebugStringW() Win32 function. 
+    // If the application has no debugger, the system debugger displays the string. 
+    // If the application has no debugger and the system debugger is not active, 
+    // OutputDebugString does nothing.
+    //
+    //  See MSDN for more information.
+    //---------------------------------------------------------------------------
+    HRESULT DebugPrint(
+        [in] BSTR Msg);
+
+    
+    [helpstring("Calls SendInput() to simulate the user pressing a key in order to reset idle timers, power on the monitor, and cause user presence.")]
+    //---------------------------------------------------------------------------
+    //
+    // Remarks:
+    //  This method invokes SendInput() to send a key press that is as innocuous as
+    // possible (to cause user presence but not have any UI side effects). Currently
+    // it sends a ctrl key down and key up.
+    //---------------------------------------------------------------------------
+    HRESULT SimulateUserKeyPress(void);
+
+    
+    [propput, helpstring("Set reason string used by the SetWakeTimer() method.")] 
+    //---------------------------------------------------------------------------
+    //
+    // Remarks:
+    //  This put property sets the reason string used by the SetWakeTimer() method. If
+    // this property is not set by the client, a default string is used.
+    //
+    // Note:
+    //  This can be set any time but the reason string will only apply the next
+    // time the SetWakeTimer() method is called.
+    //---------------------------------------------------------------------------
+    HRESULT WakeTimerReason([in] BSTR MsgReason);
+    
+    [propput, helpstring("Set reason string used when the DisplayRequired or SystemRequired properties are set to True.")] 
+    //---------------------------------------------------------------------------
+    // Remarks:
+    //  This put property sets the reason string used when the DisplayRequired or
+    // SystemRequired properties are set to True. If this property is not set by the
+    // client, a default string is used.
+    //
+    // Note:
+    //  When this is set, any currently open Display or System requests will
+    // be cleared, so it needs to be set before setting DisplayRequired or
+    // SystemRequired to True.
+    //---------------------------------------------------------------------------
+    HRESULT PowerRequestReason([in] BSTR MsgReason);
+
+    };
+
+    [
+        object,
+        uuid(9B04B9DD-F15C-42F1-A227-4BE9D29AFEE1),
+        dual,
+        nonextensible,
+        helpstring("IWDTFSystemAction Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFSystemAction2 : IWDTFAction2
+    {
+
+    [helpstring("Returns the first supported sleep state.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   pSleepState        Variable that will receive the first supported sleep state.
+    //
+    //---------------------------------------------------------------------------
+    HRESULT GetFirstSleepState(
+        [out,retval] LONG* pnSleepState);
+
+    [helpstring("Returns the next supported sleep state.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   pSleepState        Variable that will receive the next supported sleep state.
+    //
+    // Remarks:
+    //  This method is used must be called after GetFirstSleepState.
+    //---------------------------------------------------------------------------
+    HRESULT GetNextSleepState(
+        [out,retval] LONG* pnSleepState);
+
+    [helpstring("Put the system into desired sleep state and auto-wakeup after desired wakeup time.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   WakeTimeInSeconds  Specifies how much time (in seconds) has to pass 
+    //                      before RTC wakes the system.
+    //
+    //   SleepState         Desired sleep state.
+    //
+    // Remarks:
+    //  This method is used to put the system into a desired sleep state and 
+    //  autowake the system after desired wakeup time. 
+    //  This is a wrapper around SetSleepStateInfoEx, EnableAutoWakeIfPossible, 
+    //  and SetSleepState method calls. 
+    //---------------------------------------------------------------------------
+    HRESULT Sleep(
+        [in] LONG nSleepState);
+
+    [propput] 
+    HRESULT SleepWakeTimeInSeconds ([in] LONG nWakeTimeInSeconds );
+
+    [propget] 
+    HRESULT SleepWakeTimeInSeconds ([out, retval] LONG* pnWakeTimeInSeconds);
+
+    [propput] 
+    HRESULT Critical  ([in] VARIANT_BOOL  bCritical );
+
+    [propget] 
+    HRESULT Critical  ([out, retval] VARIANT_BOOL * pbCritical);
+
+
+    [helpstring("Reboot system and restart script.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks: Call this method to reboot the system and restart the current test.
+    //---------------------------------------------------------------------------
+    HRESULT RebootRestart(void);
+    
+    [helpstring("Reboot system and restart script with context.")]
+    HRESULT RebootRestartWithContext([in]BSTR psContextName);
+
+    [propget, helpstring("IsRestart.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks: Use this method to determine the reason for the test starting.
+    // If it returns TRUE the reason the test started is a reboot initiated 
+    // by a RebootRestart() or RebootRestartWithContext() call.
+    // 
+    //---------------------------------------------------------------------------
+    HRESULT IsRestarted([out, retval] VARIANT_BOOL* pbIsRestarted);
+
+    [helpstring("IsRestartWithContext.")]
+    HRESULT IsRestartedWithContext([in]BSTR psContextName,[out, retval] VARIANT_BOOL* pbIsRestarted);
+
+    [helpstring("GetRestartContextData")]
+    HRESULT GetRestartedContextData([in] BSTR Tag, [out, retval] BSTR * ppsContextData);
+
+    [helpstring("HasRestartedContextData.")]
+    HRESULT HasRestartedContextData([in] BSTR Tag, [out, retval] VARIANT_BOOL* pResult);
+
+        
+    [helpstring("SetRestartContextData")]
+    HRESULT SetRestartContextData([in] BSTR Tag, [in] BSTR psContextData);   
+
+   
+    [propget, helpstring("RestartCount")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks: The method to retrieves the number of restarts 
+    //          that occurred and where initiated with 
+    //             RebootRestart() 
+    //             RebootRestartWithContext() 
+    //             KernelCrashRestart()
+    // 
+    //---------------------------------------------------------------------------
+    HRESULT RestartCount([out, retval] LONG* pnRestartCount);
+
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   TimeInMs  Specifies how much time (in milliseconds) has to pass 
+    //                  before exiting Connected Standby
+    //
+    // Remarks:
+    //  This method is used to put the system into Connected Standby state and 
+    //  exit Connected Standby state after the desired time has passed. This method
+    //  only works on a platform that supports AoAc 
+    // (If Target->Eval(PowerStates::AoAc) == TRUE).
+    //---------------------------------------------------------------------------
+    HRESULT ConnectedStandby(
+        [in] LONG TimeInMs);
+
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None
+    //
+    // Remarks:
+    //  This method is used to put the system into Connected Standby. This 
+    //  method only works on a platform that supports AoAc 
+    //  (If Target->Eval(PowerStates::AoAc) == TRUE).
+    //---------------------------------------------------------------------------
+    HRESULT EnterConnectedStandby();
+
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None
+    //
+    // Remarks:
+    //  This method is used to exit Connected Standby. This method only works
+    //  on a platform that supports AoAc 
+    //  (If Target->Eval(PowerStates::AoAc) == TRUE).
+    //---------------------------------------------------------------------------
+    HRESULT ExitConnectedStandby();
+
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   EventFilePath  Specifies an explicit file location where the .etl
+    //                      log file will be stored
+    //
+    // Remarks:
+    //  This method is used to start a power trace session with the given path
+    //  used to store the associated .etl log file. This method will only work
+    //  on Windows 8 and above.
+    //---------------------------------------------------------------------------
+    HRESULT PowerTracingStartByFile([in] BSTR EventFilePath);
+    
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None
+    //
+    // Remarks:
+    //  This method is used to start a power trace session with the default path
+    //  used to store the associated .etl log file (.\Wdtfpwr.etl). This method
+    //  will only work on Windows 8 and above.
+    //---------------------------------------------------------------------------
+    HRESULT PowerTracingStart(void);
+    
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None
+    //
+    // Remarks:
+    //  This method is used to end a power trace session. Any power state events
+    //  which occured between the last PowerTracingStart(ByFile)() method and this
+    //  end method will be captured in the associated .etl log file. In addition
+    //  the related namespaces and fields for the system and any applicable devices
+    //  will now be queryable.
+    //---------------------------------------------------------------------------
+    HRESULT PowerTracingEnd(void);
+
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   EventFilePath  Specifies an explicit file location where the .etl
+    //                      log file to be processed is stored
+    //
+    // Remarks:
+    //  This method is used to analyze a power trace session that has already been 
+    //  collected and stored in the associated .etl log file. This method will only 
+    //  work on Windows 8 and above. In addition the related namespaces and fields 
+    //  for the system and any applicable devices will now be queryable.
+    //---------------------------------------------------------------------------
+    HRESULT PowerAnalyzeTraceByFile([in] BSTR EventFilePath);
+
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   EventFilePath  Specifies an explicit file location where the .etl
+    //                      log file to be processed is stored
+    //
+    //   ullAnalyzeStartTime    Absolute ETW timestamp that specifies when in the log to start the analysis
+    //
+    //   ullAnalyzeStopTime     Absolute ETW timestamp that specifies when in the log to stop the analysis
+    //
+    // Remarks:
+    //  This method is used to analyze a power trace session that has already been 
+    //  collected and stored in the associated .etl log file. This method will only 
+    //  work on Windows 8 and above. In addition the related namespaces and fields 
+    //  for the system and any applicable devices will now be queryable.
+    //---------------------------------------------------------------------------
+    HRESULT PowerAnalyzeTraceByFileByTime([in] BSTR EventFilePath, [in]ULONGLONG ullAnalyzeStartTimeStamp, [in]ULONGLONG ullAnalyzeStopTimeStamp);
+
+    };
+
+     [
+        object,
+        uuid(4180A858-8E1E-4304-83F6-9744AE9675F6),
+        dual,
+        nonextensible,
+        helpstring("IWDTFInternalSystemAction2 Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFInternalSystemAction2 : IWDTFSystemAction2
+    {
+
+    HRESULT KernelCrashTest(
+        void);
+
+    HRESULT KernelCrash(
+        void);
+
+    HRESULT KernelCrashRestart(
+        void);
+
+    HRESULT KernelCrashRestartWithContext(
+        [in]BSTR psContext);
+
+    HRESULT KernelDebugBreak(
+        [in] BSTR MsgReason);
+
+    };
+   
+
+
+    [
+        uuid(23440924-1AB0-41F2-A732-B75069E5C823),
+        helpstring("Console Class")
+    ]
+    coclass Console
+    {
+        [default] interface IConsole;
+    };
+
+
+    [
+        uuid(D30E1E07-AA39-4086-A7E6-9245FBD0A730),
+        helpstring("WDTFSystemAction2")
+    ]
+    coclass WDTFSystemAction2
+    {
+        [default] interface IWDTFSystemAction2;
+    };
+};

@@ -1,0 +1,24 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <VCRuntimeFramework Include="CRT_AppX_x86">
+      <ComponentName>MSVCR110.dll</ComponentName>
+      <FrameworkIdentity></FrameworkIdentity>
+      <FrameworkArchitecture>x86</FrameworkArchitecture>
+    </VCRuntimeFramework>
+    <VCRuntimeFramework Include="CRT_AppX_x86_Debug">
+      <ComponentName>MSVCR110D.dll</ComponentName>
+      <FrameworkIdentity></FrameworkIdentity>
+      <FrameworkArchitecture>x86</FrameworkArchitecture>
+    </VCRuntimeFramework>
+    <VCRuntimeFramework Include="CRT_AppX_x64">
+      <ComponentName>MSVCR110.dll</ComponentName>
+      <FrameworkIdentity></FrameworkIdentity>
+      <FrameworkArchitecture>x64</FrameworkArchitecture>
+    </VCRuntimeFramework>
+    <VCRuntimeFramework Include="CRT_AppX_x64_Debug">
+      <ComponentName>MSVCR110D.dll</ComponentName>
+      <FrameworkIdentity></FrameworkIdentity>
+      <FrameworkArchitecture>x64</FrameworkArchitecture>
+    </VCRuntimeFramework>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Rule
+  Name="umdfVerifierPage"
+  PageTemplate="tool"
+  DisplayName="Driver Install"
+  SwitchPrefix="/"
+  Order="40"
+  xmlns="http://schemas.microsoft.com/build/2009/properties"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+  xmlns:my="http://schemas.microsoft.com/developer/msbuild/tasks/2005">
+
+  <Rule.Categories>
+    <Category Name="umdfVerifier" DisplayName= "UMDF Verifier"/>
+  </Rule.Categories>
+  
+  <Rule.DataSource>
+    <DataSource Persistence="UserFile" HasConfigurationCondition="true" />
+  </Rule.DataSource>
+ <BoolProperty
+      Name="UmdfVEnabled"
+      Category="umdfVerifier"
+      DisplayName="Deploy UMDF Verifier"
+      Description="Option that will deploy UMDF verifier settings on the remote computer."
+      F1Keyword="driver.install.UMDFV.properties"
+    />
+  <StringListProperty 
+      Name="UmdfServiceNamesToVerify"
+      Category="umdfVerifier"
+      DisplayName="UMDF Service Names"
+      Description="List of UMDF service names for which we shall enable the verifier."
+      F1Keyword="driver.install.UMDFV.properties"
+   />
+  <BoolProperty
+      Name="UmdfVTrackObjects"
+      Category="umdfVerifier"
+      DisplayName="Enable Object Tracking"
+      Description="Track all created UMDF objects."
+      F1Keyword="driver.install.UMDFV.properties"
+    />
+  <BoolProperty
+      Name="UmdfVTrackRefCount"
+      Category="umdfVerifier"
+      DisplayName="Enable Reference Count Tracking"
+      Description="Track all UMDF object references."
+      F1Keyword="driver.install.UMDFV.properties"
+    />
+  <IntProperty
+    Name="UmdfVMaxRestarts"
+    Category="umdfVerifier"
+    DisplayName="Maximum Restart Attempts"
+    Description="Maximum number of times UMDF will restart a failed host process."
+    F1Keyword="driver.install.UMDFV.properties"/>
+
+  <EnumProperty
+     Name="UmdfVLogLevel"
+    Category="umdfVerifier"
+     DisplayName="UMDF Logging level"
+     Description="Amount of information logged by UMDF for the drivers it is hosting."
+     F1Keyword="driver.install.UMDFV.properties">
+    <EnumValue
+      Name="1"
+      DisplayName="Only Critical and Fatal Errors"
+      Description="Logs only critical and fatal errors."
+      IsDefault="true">
+    </EnumValue>
+    <EnumValue
+      Name="2"
+      DisplayName="All Errors"
+      Description="Log all errors.">
+    </EnumValue>
+    <EnumValue
+      Name="3"
+      DisplayName="Warnings and all Errors"
+      Description="Log warnings and all errors.">
+    </EnumValue>
+    <EnumValue
+      Name="4"
+      DisplayName="Informational events, Warnings and all Errors"
+      Description="Log informational events, warnings and all errors.">
+    </EnumValue>
+    <EnumValue
+      Name="5"
+      DisplayName="Verbose Output (All Events of any Sort)"
+      Description="Log all events of any sort.">
+    </EnumValue>
+  </EnumProperty>
+  <BoolProperty
+      Name="UmdfVLogKd"
+      Category="umdfVerifier"
+      DisplayName="Log to Kernel Debugger"
+      Description="Logs verifier output to kernel debugger."
+      F1Keyword="driver.install.UMDFV.properties"
+    />
+  <BoolProperty
+      Name="UmdfVHostFailKdBreak"
+      Category="umdfVerifier"
+      DisplayName="Break into Kernel Debugger"
+      Description="Break into kernel debugger when UMDF host process fails."
+      F1Keyword="driver.install.UMDFV.properties"
+    />
+  <BoolProperty
+      Name="UmdfVAttachToKd"
+      Category="umdfVerifier"
+      DisplayName="Attach to Kernel Debugger"
+      Description="Attach to kernel debugger if no user mode debugger is attached."
+      F1Keyword="driver.install.UMDFV.properties"
+    />
+  <IntProperty
+      Name="UmdfVBreakOnDriverLoad"
+      Category="umdfVerifier"
+      DisplayName="Timeout on Driver Load (sec)"
+      Description="Debugger attach timeout before driver load."
+      F1Keyword="driver.install.UMDFV.properties"
+    />
+  <IntProperty
+      Name="UmdfVBreakOnDriverStart"
+      Category="umdfVerifier"
+      DisplayName="Timeout on Driver Start (sec)"
+      Description="Debugger attach timeout before driver start."
+      F1Keyword="driver.install.UMDFV.properties"
+    />  
+  <BoolProperty
+    Name="UmdfVerifyDownLevel"
+    Category="umdfVerifier"
+    DisplayName="Verify at Current Level"
+    Description="Verify downlevel drivers against current framework versions rules."
+    F1Keyword="driver.install.UMDFV.properties"
+    />
+</Rule>

@@ -1,0 +1,73 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SpNoWait
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that waits or data allocation are not performed inside StartIo.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507227
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+state{
+	enum {INIT,ENABLE} s = INIT;
+}
+
+fun_SP_HW_STARTIO.entry
+{
+	s = ENABLE;
+}
+
+[
+StorPortStallExecution,
+ExAllocatePool,
+ExAllocatePoolWithQuota,
+ExAllocatePoolWithQuotaTag,
+ExAllocatePoolWithTag,
+ExAllocatePoolWithTagPriority,
+FsRtlAllocateFileLock,
+IoAllocateController,
+IoAllocateIrp,
+IoWMIAllocateInstanceIds,
+MmAllocateNonCachedMemory,
+MmAllocatePagesForMdl,
+ZwAllocateLocallyUniqueId,
+ZwAllocateVirtualMemory,
+ExAcquireSharedWaitForExclusive,
+KeWaitForMutexObject,
+KeWaitForMultipleObjects,
+KeWaitForSingleObject,
+FsRtlCancellableWaitForMultipleObjects,
+FsRtlCancellableWaitForSingleObject,
+ExEnterCriticalRegionAndAcquireSharedWaitForExclusive,
+ExWaitForRundownProtectionReleaseCacheAware,
+ExWaitForRundownProtectionRelease,
+ZwWaitForSingleObject,
+FsRtlIncrementCcFastReadWait,
+CcWaitForCurrentLazyWriterActivity,
+IoReleaseRemoveLockAndWaitEx
+].entry
+{
+	if(s == ENABLE){
+		abort "$fname should not be called from HwStorStartIo.";
+	}
+}

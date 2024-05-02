@@ -1,0 +1,162 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    RemoveLockCheck
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that calls to IoAcquireRemoveLock and IoReleaseRemoveLockAndWait are used correctly when processing
+    IRP_MJ_PNP with MinorFunction IRP_MN_REMOVE_DEVICE.
+	
+    This rule only applies to FDO and FIDO drivers.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507302
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+   int LockDepth = 0;
+   enum {initial,locked,released} lock_state = initial;
+   enum {init,detached,deleted} device_state = init;
+}
+watch sdv_RunRemoveDevice.entry.$1;
+
+
+[IoCsqInsertIrp,
+IoCsqInsertIrpEx].entry
+{
+    halt;
+}
+
+
+[ExInterlockedInsertHeadList
+,ExInterlockedInsertTailList
+,ExInterlockedPushEntryList
+,ExfInterlockedInsertHeadList
+,ExfInterlockedInsertTailList
+,ExfInterlockedPushEntryList].entry 
+{
+    halt;
+}
+
+[InsertHeadList
+,InsertTailList].entry
+{
+    halt;
+}
+
+[RemoveHeadList,sdv_containing_record].entry
+{
+    halt;
+}
+
+IoAcquireRemoveLock.exit
+{
+    if($return==STATUS_SUCCESS)
+    {
+       LockDepth = LockDepth + 1;
+       lock_state = locked;
+    }
+    else
+    {
+       halt;
+    }
+}
+
+[IoReleaseRemoveLockAndWait].entry
+{
+    if(LockDepth==0)
+    {
+        abort "The routine was called without first acquiring the Removelock.";
+    }
+    else 
+    {
+        LockDepth = LockDepth - 1;
+        lock_state = released;
+    }
+}
+
+[IoReleaseRemoveLock].entry
+{
+     LockDepth = LockDepth - 1;
+     lock_state = released;
+}
+
+
+IoDetachDevice.entry
+{
+   if (lock_state == initial)
+   {
+       abort "The routine was called without acquiring the Removelock.";
+   }
+   else if (LockDepth>0)
+   {
+       abort "The routine was called without releasing all the Removelocks via IoReleaseRemoveLockAndWait or IoReleaseRemoveLock.";
+   }
+   else
+   {
+       device_state = detached;
+   }
+
+}
+
+
+[IoDeleteDevice].entry[guard $1]
+{  
+   if (lock_state == initial)
+   {
+       abort "The routine was called without acquiring the Removelock.";
+   }
+   else if (LockDepth>0)
+   {
+       abort "The routine was called without releasing all the Removelocks via IoReleaseRemoveLockAndWait or IoReleaseRemoveLock.";
+   }
+   else if (device_state != detached) 
+   {
+       abort "The routine was called without detaching the device from the device stack.";
+   }
+   else
+   {
+       device_state=deleted;
+   }
+}
+
+
+
+[sdv_RunRemoveDevice].exit[guard $1]
+{
+      if(LockDepth>0)
+      {
+          abort "The routine was called without releasing all the Removelocks via IoReleaseRemoveLockAndWait or IoReleaseRemoveLock.";
+      }
+      else if(device_state==init)
+      {
+          abort "The driver exited IRP_MJ_PNP without calling IoDetachDevice or IoDeleteDevice.";
+      }
+      else if(device_state==detached)
+      {
+          abort "The driver exited IRP_MJ_PNP and called IoDetachDevice without calling IoDeleteDevice.";
+      }
+      else
+      {
+          halt;
+      }
+
+}

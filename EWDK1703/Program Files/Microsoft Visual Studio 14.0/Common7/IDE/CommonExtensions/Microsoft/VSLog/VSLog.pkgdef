@@ -1,0 +1,34 @@
+[$RootKey$]
+
+[$RootKey$\Menus]
+"{2DC9DAA9-7F2D-11d2-9BFC-00C04F9901D1}"=", 1000, 1"
+
+[$RootKey$\Packages]
+
+[$RootKey$\Packages\{2DC9DAA9-7F2D-11d2-9BFC-00C04F9901D1}]
+"EnableLog"="1"
+"InprocServer32"="$ShellFolder$\Common7\IDE\vslog.dll"
+"Server"="http://sqm.microsoft.com/sqm/vstudio/sqmserver.dll"
+@="Visual Studio Logging Package"
+
+[$RootKey$\Packages\{2DC9DAA9-7F2D-11d2-9BFC-00C04F9901D1}\SatelliteDll]
+"DllName"="VsLogUI.dll"
+
+[$RootKey$\Services]
+
+[$RootKey$\Services\{48641AEE-990C-4D0A-8E34-F36CC4D5CB1E}]
+"Name"="Response Time Service"
+@="{2DC9DAA9-7F2D-11d2-9BFC-00C04F9901D1}"
+
+[$RootKey$\Services\{2508FDF0-EF80-4366-878E-C9F024B8D981}]
+"Name"="Internal Logging Service"
+@="{2DC9DAA9-7F2D-11d2-9BFC-00C04F9901D1}"
+
+[$RootKey$\Services\{64FF1883-BCDD-41CD-BFDE-0E3143A07F27}]
+"Name"="Vs Fingerprinting Service"
+@="{2DC9DAA9-7F2D-11d2-9BFC-00C04F9901D1}"
+
+[$RootKey$\AppCommandLine\VsWebSqmFlags]
+"Arguments"="1"
+"DemandLoad"=dword:00000000
+"Package"="{2DC9DAA9-7F2D-11d2-9BFC-00C04F9901D1}"

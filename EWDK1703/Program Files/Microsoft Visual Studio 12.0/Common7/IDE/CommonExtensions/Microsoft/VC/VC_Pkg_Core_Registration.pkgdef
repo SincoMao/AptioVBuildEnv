@@ -1,0 +1,525 @@
+[$RootKey$]
+
+[$RootKey$\AutomationProperties]
+
+[$RootKey$\AutomationProperties\TextEditor]
+
+[$RootKey$\AutomationProperties\TextEditor\C/C++]
+"Description"="#9272"
+"Name"="C/C++"
+"Package"="{F5E7E720-1401-11D1-883B-0000F87579D2}"
+"ProfileSave"=dword:00000001
+"ResourcePackage"="{1B027A40-8F43-11D0-8D11-00A0C91BC942}"
+"VSSettingsMigration"=dword:00000001
+@="#9021"
+
+[$RootKey$\AutomationProperties\TextEditor\C/C++ Specific]
+"Description"="#9273"
+"Name"="C/C++ Specific"
+"Package"="{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}"
+"ProfileSave"=dword:00000001
+"VSSettingsMigration"=dword:00000001
+@="#9573"
+
+[$RootKey$\CLSID]
+
+[$RootKey$\CLSID\{30149BE3-8BEA-4DB0-9993-0D32E075E808}]
+"InprocServer32"="$BaseInstallDir$\VC\vcpackages\vcpkg.dll"
+@="VCExtenderFactory Class"
+
+[$RootKey$\CLSID\{5F535F97-A4B2-4A1A-B54A-1E05CFD14A80}]
+"InprocServer32"="$BaseInstallDir$\VC\bin\vcmeta.dll"
+@="VCMetaDataReader Class"
+
+[$RootKey$\Editors]
+
+[$RootKey$\Editors\{1EA28DE2-163E-4e12-AC55-3E53A6F0DB77}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DisplayName"="#10034"
+"EditorTrustLevel"=dword:00000001
+"ExcludeDefTextEditor"=dword:00000001
+"LinkedEditorGuid"="{A6C744A8-0E4A-4fc6-886A-064283054674}"
+"Package"="{1B027A40-8F43-11D0-8D11-00A0C91BC942}"
+@="C++ Source Code Editor (with encoding)"
+
+[$RootKey$\Editors\{1EA28DE2-163E-4e12-AC55-3E53A6F0DB77}\Extensions]
+"c"=dword:00000028
+"cc"=dword:00000028
+"cpp"=dword:00000028
+"cxx"=dword:00000028
+"fx"=dword:00000028
+"h"=dword:00000028
+"hh"=dword:00000028
+"hlsl"=dword:00000028
+"hlsli"=dword:00000028
+"hpp"=dword:00000028
+"hxx"=dword:00000028
+"idl"=dword:00000028
+"inl"=dword:00000028
+"odh"=dword:00000028
+"odl"=dword:00000028
+"rc"=dword:00000028
+"rc2"=dword:00000028
+"tlh"=dword:00000028
+"tli"=dword:00000028
+
+[$RootKey$\Editors\{1EA28DE2-163E-4e12-AC55-3E53A6F0DB77}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"="Form"
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{8B382828-6202-11d1-8870-0000F87579D2}]
+
+[$RootKey$\Editors\{8B382828-6202-11d1-8870-0000F87579D2}\Extensions]
+"c"=dword:00000027
+"cc"=dword:00000027
+"cpp"=dword:00000027
+"cxx"=dword:00000027
+"fx"=dword:00000027
+"h"=dword:00000027
+"hh"=dword:00000027
+"hlsl"=dword:00000027
+"hlsli"=dword:00000027
+"hpp"=dword:00000027
+"hxx"=dword:00000027
+"idl"=dword:00000027
+"inl"=dword:00000027
+"odh"=dword:00000027
+"odl"=dword:00000027
+"rc"=dword:00000027
+"rc2"=dword:00000027
+"tlh"=dword:00000027
+"tli"=dword:00000027
+
+[$RootKey$\Editors\{CFF630F8-2DB3-44ba-9FC9-6489665DE5B8}]
+
+[$RootKey$\Editors\{CFF630F8-2DB3-44ba-9FC9-6489665DE5B8}\Extensions]
+"bsc"=dword:00000032
+
+[$RootKey$\Editors\{D0E1A5C6-B359-4e41-9B60-3365922C2A22}]
+"CommonPhysicalViewAttributes"=dword:00000002
+"DisplayName"="#10032"
+"EditorTrustLevel"=dword:00000001
+"ExcludeDefTextEditor"=dword:00000001
+"Package"="{1B027A40-8F43-11D0-8D11-00A0C91BC942}"
+@="C++ Source Code Editor"
+
+[$RootKey$\Editors\{D0E1A5C6-B359-4e41-9B60-3365922C2A22}\Extensions]
+"c"=dword:00000029
+"cc"=dword:00000029
+"cpp"=dword:00000029
+"cxx"=dword:00000029
+"fx"=dword:00000029
+"h"=dword:00000029
+"hh"=dword:00000029
+"hlsl"=dword:00000029
+"hlsli"=dword:00000029
+"hpp"=dword:00000029
+"hxx"=dword:00000029
+"idl"=dword:00000029
+"inl"=dword:00000029
+"odh"=dword:00000029
+"odl"=dword:00000029
+"rc"=dword:00000029
+"rc2"=dword:00000029
+"tlh"=dword:00000029
+"tli"=dword:00000029
+
+[$RootKey$\Editors\{D0E1A5C6-B359-4e41-9B60-3365922C2A22}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"="Form"
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{D0E1A5C6-B359-4e41-9B60-3365922C2A22}\PhysicalViewAttributes]
+"Form"=dword:00000003
+
+[$RootKey$\FileExtensionMapping]
+
+[$RootKey$\FileExtensionMapping\{7B6645C1-9A9C-41FC-9B66-0B37627AB4F2}]
+"DisplayName"="#16050"
+"EditorGUID"="{8B382828-6202-11d1-8870-0000F87579D2}"
+"LogViewID"="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+"Package"="{1B027A40-8F43-11D0-8D11-00A0C91BC942}"
+"SortPriority"=dword:00000064
+@="Microsoft Visual C++"
+
+[$RootKey$\Languages]
+
+[$RootKey$\Languages\Extensionless Files]
+
+[$RootKey$\Languages\Extensionless Files\{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}]
+"8859_1"=""
+"8859_10"=""
+"8859_13"=""
+"8859_14"=""
+"8859_15"=""
+"8859_16"=""
+"8859_2"=""
+"8859_3"=""
+"8859_4"=""
+"8859_5"=""
+"8859_6"=""
+"8859_7"=""
+"8859_8"=""
+"8859_9"=""
+"algorithm"=""
+"allocators"=""
+"array"=""
+"atomic"=""
+"baltic"=""
+"big5"=""
+"bitset"=""
+"cassert"=""
+"ccomplex"=""
+"cctype"=""
+"cerrno"=""
+"cfenv"=""
+"cfloat"=""
+"chrono"=""
+"cinttypes"=""
+"ciso646"=""
+"climits"=""
+"clocale"=""
+"cmath"=""
+"codecvt"=""
+"complex"=""
+"condition"=""
+"condition_variable"=""
+"cp037"=""
+"cp1006"=""
+"cp1026"=""
+"cp1250"=""
+"cp1251"=""
+"cp1252"=""
+"cp1253"=""
+"cp1254"=""
+"cp1255"=""
+"cp1256"=""
+"cp1257"=""
+"cp1258"=""
+"cp424"=""
+"cp437"=""
+"cp500"=""
+"cp737"=""
+"cp775"=""
+"cp850"=""
+"cp852"=""
+"cp855"=""
+"cp856"=""
+"cp857"=""
+"cp860"=""
+"cp861"=""
+"cp862"=""
+"cp863"=""
+"cp864"=""
+"cp865"=""
+"cp866"=""
+"cp869"=""
+"cp874"=""
+"cp875"=""
+"cp932"=""
+"cp936"=""
+"cp949"=""
+"cp950"=""
+"csetjmp"=""
+"csignal"=""
+"cstdarg"=""
+"cstdbool"=""
+"cstddef"=""
+"cstdint"=""
+"cstdio"=""
+"cstdlib"=""
+"cstring"=""
+"ctgmath"=""
+"ctime"=""
+"cwchar"=""
+"cwctype"=""
+"cyrillic"=""
+"deque"=""
+"ebcdic"=""
+"euc"=""
+"euc_0208"=""
+"exception"=""
+"exceptions"=""
+"filesystem"=""
+"forward_list"=""
+"fstream"=""
+"functional"=""
+"future"=""
+"gb12345"=""
+"gb2312"=""
+"greek"=""
+"hash_map"=""
+"hash_set"=""
+"iceland"=""
+"initializer_list"=""
+"iomanip"=""
+"ios"=""
+"iosfwd"=""
+"iostream"=""
+"istream"=""
+"iterator"=""
+"jis"=""
+"jis_0208"=""
+"jis0201"=""
+"ksc5601"=""
+"latin2"=""
+"limits"=""
+"list"=""
+"locale"=""
+"map"=""
+"memory"=""
+"mutex"=""
+"new"=""
+"numeric"=""
+"once"=""
+"one_one"=""
+"ostream"=""
+"queue"=""
+"random"=""
+"ratio"=""
+"recursive_mutex"=""
+"regex"=""
+"roman"=""
+"scoped_allocator"=""
+"set"=""
+"sjis"=""
+"sjis_0208"=""
+"sstream"=""
+"stack"=""
+"stdexcept"=""
+"streambuf"=""
+"string"=""
+"strstream"=""
+"system_error"=""
+"thread"=""
+"tss"=""
+"tuple"=""
+"turkish"=""
+"type_traits"=""
+"typeindex"=""
+"typeinfo"=""
+"unordered_map"=""
+"unordered_set"=""
+"utf16"=""
+"utf8"=""
+"utf8_utf16"=""
+"utility"=""
+"valarray"=""
+"vector"=""
+"wbuffer"=""
+"wstring"=""
+"xcomplex"=""
+"xdebug"=""
+"xfacet"=""
+"xfunctional"=""
+"xhash"=""
+"xiosbase"=""
+"xjis"=""
+"xlocale"=""
+"xlocbuf"=""
+"xlocinfo"=""
+"xlocmes"=""
+"xlocmon"=""
+"xlocnum"=""
+"xloctime"=""
+"xmemory"=""
+"xmemory0"=""
+"xmutex"=""
+"xone_byte"=""
+"xrefwrap"=""
+"xstddef"=""
+"xstring"=""
+"xtest"=""
+"xthread"=""
+"xtime"=""
+"xtr1common"=""
+"xtree"=""
+"xtwo_byte"=""
+"xutility"=""
+"xxatomic"=""
+
+[$RootKey$\Languages\File Extensions]
+
+[$RootKey$\Languages\File Extensions\.c]
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.cc]
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.cpp]
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.cxx]
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.fx]
+"HLSLFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.h]
+"HeaderFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.hh]
+"HeaderFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.hlsl]
+"HLSLFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.hlsli]
+"HLSLFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.hpp]
+"HeaderFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.hxx]
+"HeaderFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.idl]
+"IDLFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.inl]
+"HeaderFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.odh]
+"IDLFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.odl]
+"IDLFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.rc]
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.rc2]
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.tlh]
+"HeaderFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\File Extensions\.tli]
+"HeaderFile"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\Language Services]
+
+[$RootKey$\Languages\Language Services\C/C++]
+"DesignerLoader"="Microsoft.VisualStudio.Design.Serialization.CodeDom.VSCodeDomDesignerLoader, Microsoft.VisualStudio.Design, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"LangResID"=dword:00000000
+"Packages"="{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}"
+"ShowCompletion"=dword:00000001
+"ShowDropdownBarOption"=dword:00000001
+"ShowSmartIndent"=dword:00000001
+"ShowBraceCompletion"=dword:00000001
+@="{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}"
+
+[$RootKey$\Languages\Language Services\C/C++\Debugger Languages]
+
+[$RootKey$\Languages\Language Services\C/C++\Debugger Languages\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}]
+@="C++"
+
+[$RootKey$\Languages\Language Services\C/C++\EditorToolsOptions]
+
+[$RootKey$\Languages\Language Services\C/C++\EditorToolsOptions\Advanced]
+"Package"="{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}"
+"Page"="{2F4DC042-B440-42cc-A65F-888316531A02}"
+"Keywords"="#12786"
+@="#12808"
+
+[$RootKey$\Languages\Language Services\C/C++\EditorToolsOptions\Formatting]
+"Package"="{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}"
+@="#12790"
+
+[$RootKey$\Languages\Language Services\C/C++\EditorToolsOptions\Formatting\General]
+"Package"="{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}"
+"Page"="{4226A5C6-6AD0-42ed-9F03-ADCEE923A7FD}"
+"Keywords"="#12812"
+@="#12811"
+
+[$RootKey$\Languages\Language Services\C/C++\EditorToolsOptions\Formatting\Indentation]
+"Page"="{548FD527-C453-4EE3-B429-00F7C74ED7AC}"
+"Package"="{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}"
+"Keywords"="#12814"
+@="#12813"
+
+[$RootKey$\Languages\Language Services\C/C++\EditorToolsOptions\Formatting\Newlines]
+"Package"="{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}"
+"Page"="{04D01470-065C-49E1-89C7-073761C82B94}"
+"Keywords"="#12816"
+@="#12815"
+
+[$RootKey$\Languages\Language Services\C/C++\EditorToolsOptions\Formatting\Spacing]
+"Package"="{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}"
+"Page"="{603B7B0B-C2C7-4DF5-AF1B-8C1551D5159C}"
+"Keywords"="#12818"
+@="#12817"
+
+[$RootKey$\Languages\Language Services\C/C++\EditorToolsOptions\Formatting\Wrapping]
+"Package"="{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}"
+"Page"="{3171139E-9211-4F78-A873-E92A7B770185}"
+"Keywords"="#12820"
+@="#12819"
+
+[$RootKey$\Languages\Language Services\C/C++\EditorToolsOptions\View]
+"Package"="{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}"
+"Page"="{835F7805-9A99-4B4B-A6B1-0A1847F7E2B4}"
+"Keywords"="#12785"
+@="#12821"
+
+[$RootKey$\Menus]
+"{1B027A40-8F43-11D0-8D11-00A0C91BC942}"=", 10211, 3"
+"{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}"=", 10212, 3"
+
+[$RootKey$\Packages]
+
+[$RootKey$\Packages\{1B027A40-8F43-11D0-8D11-00A0C91BC942}]
+"About"="Visual C++ Package"
+"InprocServer32"="$BaseInstallDir$\VC\vcpackages\vcpkg.dll"
+@="Visual C++ Package"
+
+[$RootKey$\Packages\{1B027A40-8F43-11D0-8D11-00A0C91BC942}\SatelliteDll]
+"DllName"="vcpkgui.dll"
+"Path"="$BaseInstallDir$\VC\vcpackages"
+
+[$RootKey$\Packages\{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}]
+"About"="Visual C++ Language Manager Package"
+"InprocServer32"="$BaseInstallDir$\VC\vcpackages\vcpkg.dll"
+@="Visual C++ Language Manager Package"
+
+[$RootKey$\Packages\{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}\Automation]
+"VCLanguageManager"="VC++ Language Manager"
+
+[$RootKey$\Packages\{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}\SatelliteDll]
+"DllName"="vcpkgui.dll"
+"Path"="$BaseInstallDir$\VC\vcpackages"
+
+[$RootKey$\RelativePathResolvers]
+
+[$RootKey$\RelativePathResolvers\{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}]
+
+[$RootKey$\Services]
+
+[$RootKey$\Services\{29BF7880-FE8C-11D2-AAE9-00C04F72DB55}]
+"Name"="VCCodeModelService"
+@="{1B027A40-8F43-11D0-8D11-00A0C91BC942}"
+
+[$RootKey$\Services\{411479A0-AC5F-11D0-A4F0-00A0C90A6332}]
+"Name"="VCService"
+@="{1B027A40-8F43-11D0-8D11-00A0C91BC942}"
+
+[$RootKey$\Services\{B2F072B0-ABC1-11D0-9D62-00C04FD9DFD9}]
+"Name"="CPP Language Manager Service"
+@="{8C2EA640-ABC1-11D0-9D62-00C04FD9DFD9}"
+

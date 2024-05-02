@@ -1,0 +1,71 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ArmMasmTool>$(VCInstallDir)bin\x86_arm\armasm.exe</ArmMasmTool>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <DriverSign>
+      <FileDigestAlgorithm Condition="'%(DriverSign.FileDigestAlgorithm)' == ''">sha256</FileDigestAlgorithm>
+    </DriverSign>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup>
+    <Link>
+      <IgnoreSpecificDefaultLibraries>oldnames.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <StackReserveSize>0x40000</StackReserveSize>
+      <StackCommitSize>0x2000</StackCommitSize>
+      <SpecifySectionAttributes></SpecifySectionAttributes>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <AdditionalOptions>/IGNORE:4078,4221,4198 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <PropertyGroup Condition="('$(IsUserModeToolset)'=='true' or '$(IsDriverAppToolset)'=='true')">
+    <IncludePath>$(IncludePath);$(UM_IncludePath);$(KIT_SHARED_IncludePath);$(ProjectDir)</IncludePath>
+    <LibraryPath>$(LibraryPath);$(WindowsSDK_LibraryPath_arm)</LibraryPath>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup Condition="'$(IsKernelModeToolset)'=='true'">
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies);$(SDK_LIB_PATH)armrt.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <ItemDefinitionGroup Condition="('$(IsUserModeToolset)'=='true' or '$(IsDriverAppToolset)'=='true') and '$(DriverTargetPlatform)' == 'Desktop'">
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <MinimalRebuild>false</MinimalRebuild>
+      <PreprocessorDefinitions>_ARM_;ARM;_USE_DECLSPECS_FOR_SAL=1;STD_CALL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <CallingConvention></CallingConvention>
+      <DisableSpecificWarnings>4064;4627;4627;4366;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_ARM_=1;ARM =1;_USE_DECLSPECS_FOR_SAL=1;STD_CALL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <TargetMachine>MachineARM</TargetMachine>
+    </Link>
+    <Lib>
+      <TargetMachine>MachineARM</TargetMachine>
+    </Lib>
+  </ItemDefinitionGroup> 
+  <ItemDefinitionGroup>
+    <Midl> 
+      <TargetEnvironment></TargetEnvironment>
+      <PreprocessorDefinitions>_ARM_;ARM;_USE_DECLSPECS_FOR_SAL=1;STD_CALL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-sal /env arm32  %(AdditionalOptions) </AdditionalOptions>
+    </Midl>
+  </ItemDefinitionGroup>
+ 
+
+  <Import Condition="Exists('$(WDKContentRoot)build\WindowsDriver.masm.props')" Project="$(WDKContentRoot)build\WindowsDriver.masm.props"/>
+</Project>
+

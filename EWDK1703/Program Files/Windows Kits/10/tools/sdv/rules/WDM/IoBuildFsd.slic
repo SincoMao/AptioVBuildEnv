@@ -1,0 +1,37 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoBuildFsd
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This Driver property is satisfied this is a Driver that allocates a local asynchronous FSD irp.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+#include "slic_base.h"
+
+state 
+{
+}
+
+[IoBuildAsynchronousFsdRequest].entry 
+{ 
+      abort "This Driver property is satisfied this is a Driver that allocates a local asynchronous FSD irp.";
+}
+

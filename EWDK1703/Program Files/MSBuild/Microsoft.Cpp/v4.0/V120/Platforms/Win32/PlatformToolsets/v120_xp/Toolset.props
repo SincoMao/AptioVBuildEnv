@@ -1,0 +1,59 @@
+﻿<!--
+***********************************************************************************************
+Toolset.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildThisFileDirectory)ImportBefore\*.props" Condition="Exists('$(MSBuildThisFileDirectory)ImportBefore')" />
+
+  <PropertyGroup>
+    <!-- Required for enabling Team Build for packaging Windows Store app projects -->
+    <OutDirWasSpecified Condition=" '$(OutDir)'!='' AND '$(OutDirWasSpecified)'=='' ">true</OutDirWasSpecified>
+    <OutDirWasSpecified Condition=" '$(OutDir)'=='' AND '$(OutDirWasSpecified)'=='' ">false</OutDirWasSpecified>
+
+    <IntDir Condition="'$(IntDir)'=='' AND '$(IntermediateOutputPath)'!=''">$(IntermediateOutputPath)</IntDir>
+    <IntDir Condition="'$(IntDir)'=='' AND '$(IntermediateOutputPath)'==''">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(OutDir)'=='' AND '$(SolutionDir)' != ''">$(SolutionDir)$(Configuration)\</OutDir>
+    <OutDir Condition="'$(OutDir)'=='' AND '$(SolutionDir)' == ''">$(IntDir)</OutDir>
+    <DefineWindowsSDK_71A>true</DefineWindowsSDK_71A>
+  </PropertyGroup>
+  
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Common.props" />
+
+  <PropertyGroup>
+    <ExecutablePath Condition="'$(ExecutablePath)' == ''">$(VC_ExecutablePath_x86);$(WindowsSdk_71A_ExecutablePath);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
+    <IncludePath Condition="'$(IncludePath)' == ''">$(VC_IncludePath);$(WindowsSdk_71A_IncludePath);</IncludePath>
+    <ReferencePath Condition="'$(ReferencePath)' == ''">$(VC_ReferencesPath_x86);</ReferencePath>
+    <LibraryPath Condition="'$(LibraryPath)' == ''">$(VC_LibraryPath_x86);$(WindowsSdk_71A_LibraryPath_x86);</LibraryPath>
+    <SourcePath Condition="'$(SourcePath)' == ''">$(VC_SourcePath);</SourcePath>
+    <ExcludePath Condition="'$(ExcludePath)' == ''">$(VC_IncludePath);$(WindowsSdk_71A_IncludePath);$(MSBuild_ExecutablePath);$(VC_LibraryPath_x86);</ExcludePath>
+    <DebugCppRuntimeFilesPath Condition="'$(DebugCppRuntimeFilesPath)' == ''">$(VCInstallDir)redist\Debug_NonRedist\x86</DebugCppRuntimeFilesPath>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <!-- Add /D_USING_V110_SDK71_ when targeting XP -->
+      <PreprocessorDefinitions>_USING_V110_SDK71_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_USING_V110_SDK71_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <!-- For legacy reasons, the resource editor doesn't send any defines to the resource compiler.  This property allows for
+           sending special options to solve issues that are known to not introduce other problems that arbitrary defines may cause. -->
+      <DesigntimePreprocessorDefinitions>_USING_V110_SDK71_;%(DesigntimePreprocessorDefinitions)</DesigntimePreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)ImportAfter\*.props" Condition="Exists('$(MSBuildThisFileDirectory)ImportAfter')" />
+
+  <Import Project="$(VCTargetsPath)\Platforms\Win32\Platform.Common.props" />
+</Project>

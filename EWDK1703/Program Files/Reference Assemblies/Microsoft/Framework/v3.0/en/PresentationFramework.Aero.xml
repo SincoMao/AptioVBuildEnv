@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>PresentationFramework.Aero</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Windows.Themes.ButtonChrome">
+      <summary>Creates the theme-specific look for Microsoft .NET Framework <see cref="T:System.Windows.Controls.Button" /> elements.</summary>
+    </member>
+    <member name="M:Microsoft.Windows.Themes.ButtonChrome.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Windows.Themes.ButtonChrome" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ButtonChrome.BorderBrush">
+      <summary>Gets or sets the brush used to draw the outer border of the <see cref="T:System.Windows.Controls.Button" />. This is a dependency property. </summary>
+      <returns>The brush used to draw the outer border of the <see cref="T:System.Windows.Controls.Button" />.</returns>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ButtonChrome.BorderBrushProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ButtonChrome.BorderBrush" /> dependency property.</summary>
+      <returns>The identifier for the <see cref="P:Microsoft.Windows.Themes.ButtonChrome.BorderBrush" /> dependency property.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ButtonChrome.RenderDefaulted">
+      <summary>Gets or sets a value indicating whether the <see cref="T:System.Windows.Controls.Button" /> has the appearance of the default button on the form. This is a dependency property. </summary>
+      <returns>true if the <see cref="T:System.Windows.Controls.Button" /> has the appearance of the default button; otherwise false.</returns>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ButtonChrome.RenderDefaultedProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ButtonChrome.RenderDefaulted" /> dependency property.</summary>
+      <returns>The identifier for the <see cref="P:Microsoft.Windows.Themes.ButtonChrome.RenderDefaulted" /> dependency property.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ButtonChrome.RenderMouseOver">
+      <summary>Gets or sets a value indicating whether the <see cref="T:System.Windows.Controls.Button" /> appears as if the mouse is over it. This is a dependency property. </summary>
+      <returns>true if the <see cref="T:System.Windows.Controls.Button" /> appears as if the mouse is over it; otherwise false.</returns>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ButtonChrome.RenderMouseOverProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ButtonChrome.RenderMouseOver" /> dependency property.</summary>
+      <returns>The identifier for the <see cref="P:Microsoft.Windows.Themes.ButtonChrome.RenderMouseOver" /> dependency property.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ButtonChrome.RenderPressed">
+      <summary>Gets or sets a value indicating whether the <see cref="T:System.Windows.Controls.Button" /> appears pressed. This is a dependency property. </summary>
+      <returns>true if the <see cref="T:System.Windows.Controls.Button" /> appears pressed; otherwise false.</returns>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ButtonChrome.RenderPressedProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ButtonChrome.RenderPressed" /> dependency property.</summary>
+      <returns>The identifier for the <see cref="P:Microsoft.Windows.Themes.ButtonChrome.RenderPressed" /> dependency property.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ButtonChrome.Background">
+      <summary>Gets or sets the brush used to fill the background of the <see cref="T:System.Windows.Controls.Button" />. This is a dependency property. </summary>
+      <returns>The brush used to fill the background of the <see cref="T:System.Windows.Controls.Button" />.</returns>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ButtonChrome.BackgroundProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ButtonChrome.Background" /> dependency property.</summary>
+      <returns>The identifier for the <see cref="P:Microsoft.Windows.Themes.ButtonChrome.Background" /> dependency property.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ButtonChrome.RoundCorners">
+      <summary>Gets or sets a value indicating whether the <see cref="T:System.Windows.Controls.Button" /> has round corners. This is a dependency property. </summary>
+      <returns>true if the <see cref="T:System.Windows.Controls.Button" /> has round corners; otherwise false.</returns>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ButtonChrome.RoundCornersProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ButtonChrome.RoundCorners" /> dependency property.</summary>
+      <returns>The identifier for the <see cref="P:Microsoft.Windows.Themes.ButtonChrome.RoundCorners" /> dependency property.</returns>
+    </member>
+    <member name="T:Microsoft.Windows.Themes.ListBoxChrome">
+      <summary>Creates the theme-specific look for Microsoft .NET Framework <see cref="T:System.Windows.Controls.ListBox" /> elements.</summary>
+    </member>
+    <member name="M:Microsoft.Windows.Themes.ListBoxChrome.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Windows.Themes.ListBoxChrome" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ListBoxChrome.Background">
+      <summary>Gets or sets the brush used to fill the background of the <see cref="T:System.Windows.Controls.ListBox" />. This is a dependency property. </summary>
+      <returns>The brush used to fill the background of the <see cref="T:System.Windows.Controls.ListBox" />.</returns>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ListBoxChrome.BackgroundProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ListBoxChrome.Background" /> dependency property.</summary>
+      <returns>The identifier for the <see cref="P:Microsoft.Windows.Themes.ListBoxChrome.Background" /> dependency property.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ListBoxChrome.BorderBrush">
+      <summary>Gets or sets the brush used to draw the outer border of the <see cref="T:System.Windows.Controls.ListBox" />. This is a dependency property. </summary>
+      <returns>The brush used to draw the outer border of the <see cref="T:System.Windows.Controls.ListBox" />.</returns>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ListBoxChrome.BorderBrushProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ListBoxChrome.BorderBrush" /> dependency property.</summary>
+      <returns>The identifier for the <see cref="P:Microsoft.Windows.Themes.ListBoxChrome.BorderBrush" /> dependency property.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ListBoxChrome.BorderThickness">
+      <summary>Gets or sets the thickness of the border of the <see cref="T:System.Windows.Controls.ListBox" />. This is a dependency property. </summary>
+      <returns>The thickness of the border.</returns>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ListBoxChrome.BorderThicknessProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ListBoxChrome.BorderThickness" /> dependency property.</summary>
+      <returns>The identifier for the <see cref="P:Microsoft.Windows.Themes.ListBoxChrome.BorderThickness" /> dependency property.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ListBoxChrome.RenderFocused">
+      <summary>Gets or sets a value indicating whether the <see cref="T:System.Windows.Controls.ListBox" /> appears as if it has keyboard focus. This is a dependency property. </summary>
+      <returns>true if the <see cref="T:System.Windows.Controls.ListBox" /> appears as if it has keyboard focus; otherwise false.</returns>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ListBoxChrome.RenderFocusedProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ListBoxChrome.RenderFocused" /> dependency property.</summary>
+      <returns>The identifier for the <see cref="P:Microsoft.Windows.Themes.ListBoxChrome.RenderFocused" /> dependency property.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ListBoxChrome.RenderMouseOver">
+      <summary>Gets or sets a value indicating whether the <see cref="T:System.Windows.Controls.ListBox" /> appears as if the mouse is over it. This is a dependency property. </summary>
+      <returns>true if the <see cref="T:System.Windows.Controls.ListBox" /> appears as if the mouse is over it; otherwise false.</returns>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ListBoxChrome.RenderMouseOverProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ListBoxChrome.RenderMouseOver" /> dependency property.</summary>
+      <returns>The identifier for the <see cref="P:Microsoft.Windows.Themes.ListBoxChrome.RenderMouseOver" /> dependency property.</returns>
+    </member>
+    <member name="T:Microsoft.Windows.Themes.PlatformCulture">
+      <summary>Provides culture-specific information used by the Microsoft .NET Framework system themes.</summary>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.PlatformCulture.FlowDirection">
+      <summary>Gets a value that specifies whether the primary text advance direction shall be left-to-right, right-to-left, or top-to-bottom.</summary>
+      <returns>One of the enumeration values.</returns>
+    </member>
+    <member name="T:Microsoft.Windows.Themes.ProgressBarHighlightConverter">
+      <summary>Creates a <see cref="T:System.Windows.Media.DrawingBrush" /> used to draw the highlighting for the <see cref="T:System.Windows.Controls.ProgressBar" />.</summary>
+    </member>
+    <member name="M:Microsoft.Windows.Themes.ProgressBarHighlightConverter.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Windows.Themes.ProgressBarHighlightConverter" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Windows.Themes.ProgressBarHighlightConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+      <summary>Creates the <see cref="T:System.Windows.Media.DrawingBrush" />.</summary>
+      <returns>The <see cref="T:System.Windows.Media.DrawingBrush" />. </returns>
+      <param name="values">The <see cref="T:System.Windows.Media.Brush" /> used for the <see cref="P:System.Windows.Controls.Control.Foreground" /> of the <see cref="T:System.Windows.Controls.ProgressBar" />, the <see cref="T:System.Double" /> defining the <see cref="P:System.Windows.FrameworkElement.Width" />, and the <see cref="T:System.Double" /> defining the <see cref="P:System.Windows.FrameworkElement.Height" />. </param>
+      <param name="targetType">This parameter is not used.</param>
+      <param name="parameter">This parameter is not used.</param>
+      <param name="culture">This parameter is not used.</param>
+    </member>
+    <member name="M:Microsoft.Windows.Themes.ProgressBarHighlightConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+      <summary>Not implemented.</summary>
+      <returns>null.</returns>
+      <param name="value"></param>
+      <param name="targetTypes"></param>
+      <param name="parameter"></param>
+      <param name="culture"></param>
+    </member>
+  </members>
+</doc>

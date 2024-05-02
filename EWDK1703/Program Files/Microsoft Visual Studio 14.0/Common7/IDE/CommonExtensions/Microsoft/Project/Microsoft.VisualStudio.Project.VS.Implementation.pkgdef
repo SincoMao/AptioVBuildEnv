@@ -1,0 +1,42 @@
+; The commented out lines don't work for builds outside Razzle
+;#include "versions.h"
+
+[$RootKey$\Packages\{3347BEE8-D7A1-4082-95E4-38A439553CC2}]
+@="Microsoft.VisualStudio.ProjectSystem.VS.Implementation.Package.ProjectPackage"
+"InprocServer32"="$WinDir$\SYSTEM32\MSCOREE.DLL"
+"Class"="Microsoft.VisualStudio.ProjectSystem.VS.Implementation.Package.ProjectPackage"
+"CodeBase"="$PackageFolder$\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.dll"
+
+[$RootKey$\CLSID\{943A3169-D328-4E42-8AF6-7200E5E8C2E4}]
+;"Assembly"=MICROSOFT_VISUALSTUDIO_PROJECTSYSTEM_UTILITIES_V14_0_ASSEMBLY_IDENTITY_REF_A
+"Assembly"="Microsoft.VisualStudio.ProjectSystem.Utilities.v14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.ProjectSystem.Utilities.VsProjectCapabilityExpressionMatcher"
+"InprocServer32"="$WinDir$\system32\mscoree.dll"
+"ThreadingModel"="Both"
+
+[$RootKey$\CLSID\{83046B3F-8984-444B-A5D2-8029DEE2DB70}]
+;"Assembly"=MICROSOFT_VISUALSTUDIO_PROJECTSYSTEM_VS_IMPLEMENTATION_ASSEMBLY_IDENTITY_REF_A
+"Assembly"="Microsoft.VisualStudio.ProjectSystem.VS.Implementation, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"Class"="Microsoft.VisualStudio.ProjectSystem.VS.Implementation.Build.VsMSBuildTaskFreeThreadedFileManager"
+"InprocServer32"="$WinDir$\system32\mscoree.dll"
+"ThreadingModel"="Both"
+
+[$RootKey$\BindingPaths\{3B48163E-DCB9-4403-8828-A94599D27BBA}]
+"$ShellFolder$Common7\IDE\CommonExtensions\Microsoft\Project"=""
+
+; The following keys have random GUIDs that don't have to match anything, but must be unique.
+; Every assembly not in the VS probing path must be defined here so that the CLR can find the assembly at runtime.
+
+[$RootKey$\RuntimeConfiguration\dependentAssembly\codeBase\{0FAC6242-7187-45BE-9D8C-2FB50CE10B5D}]
+"Name"="Microsoft.VisualStudio.ProjectSystem.Implementation"
+"PublicKeyToken"="b03f5f7f11d50a3a"
+"Culture"="neutral"
+"Version"="14.0.0.0"
+"CodeBase"="$PackageFolder$\Microsoft.VisualStudio.ProjectSystem.Implementation.dll"
+
+[$RootKey$\RuntimeConfiguration\dependentAssembly\codeBase\{3E67564F-09A4-4DA8-A9BA-4404D953473D}]
+"Name"="Microsoft.VisualStudio.ProjectSystem.VS.Implementation"
+"PublicKeyToken"="b03f5f7f11d50a3a"
+"Culture"="neutral"
+"Version"="14.0.0.0"
+"CodeBase"="$PackageFolder$\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.dll"

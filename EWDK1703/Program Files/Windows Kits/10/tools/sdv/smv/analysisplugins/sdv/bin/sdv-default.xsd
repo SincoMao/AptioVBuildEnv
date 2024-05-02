@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:h="http://www.microsoft.com/SDV"
+	xmlns:ms="http://www.microsoft.com/SDV"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified">	
+
+	<xs:import namespace="http://www.microsoft.com/SDV" schemaLocation="sdvdefaulthelper.xsd"/>
+	<xs:element name="SlamConfig"> 
+		<xs:complexType>
+			<xs:all>
+                                <xs:element ref="ms:SDV_frontend" minOccurs="0"/>
+				<xs:element ref="ms:SDV_engine" minOccurs="0"/>
+				<xs:element ref="ms:SDV_SlamConfig_Maximum_Driver_Size" minOccurs="0"/>
+				<xs:element ref="ms:SDV_SlamConfig_Timeout" minOccurs="0"/>
+				<xs:element ref="ms:SDV_SlamConfig_Spaceout" minOccurs="0"/>
+				<xs:element ref="ms:SDV_SlamConfig_NumberOfThreads" minOccurs="0"/>
+				<xs:element ref="ms:SDV_SlamConfig_Osmodel_Libraries" minOccurs="0"/>
+				<xs:element ref="ms:SlamclFlags" minOccurs="0"/>
+				<xs:element ref="ms:ScannerFlags" minOccurs="0"/>
+				<xs:element ref="ms:SlamFlags" minOccurs="0"/>
+				<xs:element ref="ms:SlamCFlags" minOccurs="0"/>
+				<xs:element ref="ms:SDV_SlamConfig_Model_Export_Libraries" minOccurs="0"/>
+				<xs:element ref="ms:SDV_engine_backup" minOccurs="0"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	
+
+</xs:schema>

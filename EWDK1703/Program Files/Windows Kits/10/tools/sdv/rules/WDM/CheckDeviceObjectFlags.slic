@@ -1,0 +1,118 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    CheckDeviceObjectFlags
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    Check the FDO device flags for DO_POWER_PAGABLE and DO_POWER_INRUSH against the child PDOs device flags.
+    This rule only applies to bus drivers.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507252
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    int count=0;
+}
+
+[IoCreateDevice].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+	     halt;
+    }
+    else
+    {
+      count=count+1;
+    }
+}
+
+
+[IoCreateDeviceSecure]@SDV.exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+	     halt;
+    }
+    else
+    {
+      count=count+1;
+    }
+}
+
+
+[fun_AddDevice,
+fun_DriverEntry].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+         halt;
+    }
+}
+
+[IoAllocateAdapterChannel,
+ExAllocatePool,
+ExAllocatePoolWithTag,
+ExAllocatePoolWithQuotaTag,
+ExAllocatePoolWithQuota].exit
+{
+    if($return==NULL)
+    {
+        halt;
+    }
+}
+
+
+sdv_RunDispatchFunction.exit
+{
+    if(count>1)
+    {
+      if($return==STATUS_SUCCESS)
+      { 
+         if((sdv_p_devobj_fdo->Flags&DO_POWER_PAGABLE)&&(!(sdv_p_devobj_child_pdo->Flags&DO_POWER_PAGABLE)))
+         {
+             abort "The flag DO_POWER_PAGABLE must be set consistently for FDO and child PDOs.";
+         }
+         else if((!(sdv_p_devobj_fdo->Flags&DO_POWER_PAGABLE))&&((sdv_p_devobj_child_pdo->Flags&DO_POWER_PAGABLE)))
+         {
+             abort "The flag DO_POWER_PAGABLE must be set consistently for FDO and child PDOs.";
+         }
+         else if((sdv_p_devobj_fdo->Flags&DO_POWER_INRUSH)&&(!(sdv_p_devobj_child_pdo->Flags&DO_POWER_INRUSH)))
+         {
+             abort "The flag DO_POWER_INRUSH must be set consistently for FDO and child PDOs.";
+         }
+         else if((!(sdv_p_devobj_fdo->Flags&DO_POWER_INRUSH))&&((sdv_p_devobj_child_pdo->Flags&DO_POWER_INRUSH)))
+         {
+             abort "The flag DO_POWER_INRUSH must be set consistently for FDO and child PDOs.";
+         }
+         else
+         {
+             halt;
+         }
+      }
+    }
+    else
+    {
+        halt;
+    }
+}
+
+

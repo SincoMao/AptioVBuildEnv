@@ -1,0 +1,15 @@
+<!-- Registration for the Visual Studio CodeMarkers ETW provider -->
+<instrumentationManifest
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events"
+  xmlns="http://schemas.microsoft.com/win/2004/08/events">
+  <instrumentation>
+    <events>
+      <provider name="CodeMarkers" symbol="CodeMarkers" guid="{641D7F6C-481C-42e8-AB7E-D18DC5E5CB9E}"
+                resourceFileName="%SystemRoot%\System32\CodeMarkersEtwRc.dll"
+                messageFileName="%SystemRoot%\System32\CodeMarkersEtwRc.dll">
+      </provider>
+    </events>
+  </instrumentation>
+</instrumentationManifest>

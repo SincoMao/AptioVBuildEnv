@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SMVConfig
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="Config.xsd"
+>
+  <!-- Please don't add any comments with double hyphens in them.                                                                              -->
+  <!-- XML does not support a double hyphen within a comment, since it is a delimiter.                                                         -->
+  <!-- Available variables which can be used inside actions :                                                                                  -->
+  <!-- $assemblyDir         : Directory where SMV binaries are located            [Available in all actions]                                   -->
+  <!-- $workingDir          : Directory where SMV is run                          [Available in all actions]                                   -->
+  <!-- $actionName          : Name of the current action                          [Available in all actions]                                   -->
+  <!-- $actionPath          : Path where the current action is run                [Available in all actions]                                   -->
+  <!-- $configFilePath      : Path of the config file provided to SMV             [Available in all actions]                                   -->
+  <!-- $logFilePath         : Path to the log file                                [Available in all actions, if SMV is run with /log:<path>]   -->
+  <!-- $ModuleName          : Name of the module                                  [Available if SMV is run with /module:<name>]                -->
+  <!-- $ModuleDateCreated   : Date created timestamp of the module                [Available if SMV is run with /module:<name>]                -->
+  <!-- $ModuleId            : Id of the module                                    [Available if SMV is run with /module:<name>]                -->
+  <!-- $ModuleLastModified  : Last modified timestamp of the module               [Available if SMV is run with /module:<name>]                -->
+  <!-- $driverType          : Driver type                                         [Available in all actions following normal build]            -->
+  <!-- $outputDir           : Directory where the build files are generated       [Available in all actions following InterceptedBuild]        -->
+  <!-- $analysisDir         : $outputDir\SMV                                      [Available in all actions following InterceptedBuild]        -->
+  <!-- $ruleDir             : Directory of the rule currently being checked       [Available in all Analysis actions if rules are checked]     -->
+  <!-- Run the normal build, intercepted build and the scan step -->
+
+  <Variables>
+    <SetVar key="projectFile" value="%MSBuildProjectFile_SDV%" />
+    <SetVar key="KmIncludePath" value="%KM_IncludePath_SDV%" />
+    <SetVar key="dev14" value="&quot;%VCINSTALLDIR%&quot;" />
+  </Variables>
+
+  <Build>
+    <!-- Do a normal build first to ensure everything builds correctly. -->
+    <Action name="NormalBuild" breakOnError="true" nextAction="InterceptedBuild">
+      <Command value="msbuild" arguments="/noconsolelogger /fileLoggerParameters:LogFile=[$smvLogFileNamePrefix].log /t:rebuild &quot;[$projectFile]&quot; /p:configuration=&quot;%CONFIGURATION_SDV%&quot; /p:platform=&quot;%PLATFORM_SDV%&quot;"/>
+    </Action>
+    
+    <Action name="InterceptedBuild" nextAction="Scan">
+      <Env key="PATH" value="%sdv%\bin\engine;%PATH%" />
+      <Env key="SMV_OUTPUT_DIR" value="[$outputDir]" />
+      <Env key="PLATFORM_SMV_INTERCEPTOR" value="[$interceptorPlatform]" />
+      <Env key="SMV_CL_ADD_ARG" value="-I\&quot;%sdv%\osmodel\wdm\&quot; -I\&quot;%sdv%\osmodel\wdf\&quot; -I\&quot;%sdv%\osmodel\ndis\&quot; -I\&quot;%sdv%\osmodel\fs\&quot; -I\&quot;%sdv%\osmodel\mpio\&quot; -I\&quot;%sdv%\osmodel\storport\&quot; -I\&quot;[$headersDir]\&quot;" /> 
+      <Command value="msbuild" arguments="/noconsolelogger /fileLoggerParameters:LogFile=[$smvLogFileNamePrefix].log /t:rebuild /p:trackfileaccess=false /p:forcerebuild=true /p:cltoolpath=&quot;%smv%\bin&quot; /p:libtoolpath=&quot;%smv%\bin&quot; /p:linktoolpath=&quot;%smv%\bin&quot; &quot;[$projectFile]&quot; /p:configuration=&quot;%CONFIGURATION_SDV%&quot; /p:platform=&quot;%PLATFORM_SDV%&quot;"/>
+
+    </Action>
+
+    <!-- Scans the entry points and generates sdv-map.h -->
+    <Action name="Scan">
+      <Path value="[$outputDir]" />
+      <Env key="PATH" value="%sdv%\bin\engine;%PATH%" />
+      <!-- Copy the SDV product os model to a location that was
+      established with the legacy SDV product.  This is needed since
+      frontend and engine has filename hardcoded and to minimize
+      regression baseline changes during transition from legacy SDV to
+      SMV-SDV -->
+      <Command value="copy" arguments="&quot;%sdv%\osmodel\[$driverType]\osmodel.c&quot; &quot;[$outputDir]\sdv-harness.c&quot;" />
+      
+      <Command value="slamscan" arguments="[$ScannerFlags]"/>
+    </Action>
+  </Build>
+
+  <!-- Runs a series of steps on the build artifacts or artifacts from the db -->
+  <Analysis>
+
+    <!-- Compile again with the OS model -->
+    <Action name="FinalCompile" nextAction="CheckRule">
+      <Path value="[$analysisDir]\[$analysisProperty]" />
+      <Env key="SDV" value="%sdv%" />
+      <Env key="PATH" value="%sdv%\bin\engine;[$dev14]\bin\[$interceptorPlatform];[$dev14]\bin\;%PATH%" />
+      <Env key="INCLUDE" value="[$workingDir];[$KmIncludePath]\crt;[$KmIncludePath];[$KmIncludePath]\..\Shared" />
+      <Command value="where" arguments="cl"/>
+      <Command value="where" arguments="slamcl"/>
+      <Command value="slamcl" arguments="[$SlamclFlags]"/>
+    </Action>
+
+    <!-- Verify the rule -->
+    <Action name="CheckRule" breakOnError="false">
+      <Path value="[$analysisDir]\[$analysisProperty]" />
+      <Env key="SDV" value="%sdv%" />      
+      <Env key="PATH" value="%sdv%\bin;%sdv%\bin\engine;%sdv%\bin\engine\engineq;%sdv%\bin\engine\engineq\corral;%PATH%" />
+      <Command value="wlimit" arguments="/b /r /c /w [$Timeout] /u [$Timeout] [$Spaceout] slam -no_slamcl -rerun [$sdvPreConditionArg] -platform [$driverType] -target [$platform] -halt_labels -gate RunDispatchFunction [$SlamFlags] -sourcedir &quot;[$workingDir]&quot; -sdvpath &quot;[$workingDir]\sdv&quot;  -display_environment  [$analysisProperty].fsm -tune_entry_points SDV-map.h>wlimit.txt 2>wlimit.err" />
+    </Action>
+
+  </Analysis>
+</SMVConfig>
+

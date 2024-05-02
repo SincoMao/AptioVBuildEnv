@@ -1,0 +1,127 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoAllocateIrpSignalEventInCompletion
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    KeSetEvent needs to be called in the completion routine when Irp->PendingReturned is TRUE and processing a locally created async. irp.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+   enum {initial,required_in_completion} signal_location = initial;
+   enum {not_completed,completed} completion_state = not_completed;
+   enum {notsignaled,signaled,initialized} SignalState = initialized;
+} 
+watch KeInitializeEvent.entry.$1;
+
+
+KeInitializeEvent.entry[guard $1]
+{
+    if($3)
+    {
+        halt;
+    }
+    else
+    {
+        
+        SignalState=notsignaled;
+    }
+}
+
+IoSetCompletionRoutineEx.entry
+{
+    if(SignalState==notsignaled&&($2==sdv_other_irp))
+    {
+        signal_location = required_in_completion;
+    }
+    else
+    {
+        signal_location = initial;
+    }
+
+}
+
+IoSetCompletionRoutine.entry
+{
+    if(SignalState==notsignaled&&($1==sdv_other_irp))
+    {
+        signal_location = required_in_completion;
+        
+    }
+    else
+    {
+        signal_location = initial;
+    }
+
+}
+
+IoAllocateIrp.exit
+{
+    if($return==NULL)
+    {
+        halt;
+    }
+}
+
+[IoBuildDeviceIoControlRequest].entry[guard $8]
+{
+    halt;
+}
+
+
+
+[sdv_RunIoCompletionRoutines].entry
+{
+   if (($2->PendingReturned)&&($2==sdv_other_irp))
+   {
+       completion_state=completed;
+   }
+}
+
+KeSetEvent.entry
+{
+    if(completion_state==completed)
+    {
+        halt;
+        
+    }
+    
+}
+
+[sdv_RunIoCompletionRoutines].exit
+{
+   if(!(*$4))
+   {
+       halt;
+   }
+   else if (signal_location==required_in_completion&&completion_state==completed&&($2==sdv_other_irp))
+   {
+       abort "KeSetEvent needs to be called in the completion routine when Irp->PendingReturned is TRUE and processing a locally created async. irp.";
+   }
+   else
+   {
+       halt;
+   }
+}
+

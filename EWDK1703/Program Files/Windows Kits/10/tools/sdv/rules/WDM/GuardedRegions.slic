@@ -1,0 +1,66 @@
+/*++
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    GuardedRegions
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x0004000E
+    
+Description:
+
+    This rule verifies that calls to KeEnterGuardedRegion and
+    KeLeaveGuardedRegion are used in strict alternation.
+    
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216100
+    
+--*/
+
+#include "slic_base.h"
+
+state
+{
+    int regionDepth = 0;
+}
+
+KeEnterGuardedRegion.entry
+{
+    regionDepth = regionDepth + 1 ;
+}
+
+KeLeaveGuardedRegion.entry
+{
+    if (regionDepth == 0) 
+    {
+        abort "The driver is calling $fname from outside a guarded region.";
+    } 
+    else 
+    {
+        regionDepth = regionDepth - 1;
+    }
+}
+
+[SDV_STANDARD_DRIVER_ROUTINES].exit
+{
+    if (regionDepth != 0) 
+    {
+        abort "The driver has returned without leaving the guarded region.";        
+    }
+}
+
+
+[SDV_SPECIAL_DRIVER_ROUTINES]@SDV.exit
+{
+    if (regionDepth != 0) 
+    {
+        abort "The driver has returned without leaving the guarded region.";        
+    }
+}

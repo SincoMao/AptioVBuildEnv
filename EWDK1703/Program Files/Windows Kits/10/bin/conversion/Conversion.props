@@ -1,0 +1,35 @@
+<!--
+***********************************************************************************************
+Conversion.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file defines the steps/targets required to build driver projects.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<!-- Needed by any VcxProj for conversion -->
+  <PropertyGroup Label="PropertySheets">
+    <SourcesFile>$(MSBuildProjectDirectory)\Sources.props</SourcesFile>
+    <MakeFileInc>$(MSBuildProjectDirectory)\makefile.inc.props</MakeFileInc>
+    <PostToolsetRules>$(WDKContentRoot)\bin\conversion\PostToolsetRules.props</PostToolsetRules>
+    <InitialStateRules>$(WDKContentRoot)\bin\conversion\InitialStateRules.props</InitialStateRules>
+    <ConversionTasks>$(WDKContentRoot)\bin\conversion\TargetConversion.targets</ConversionTasks>
+  </PropertyGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(InitialStateRules)" /> 
+    <Import Project="$(SourcesFile)" />
+    <Import Project="$(ConversionTasks)" />
+  </ImportGroup>
+  <PropertyGroup Label="PropertySheets">
+     <IncludeMakeFile Condition="'$(NTTARGETFILE0)'!='' or '$(NTTARGETFILE1)'!='' or '$(NTTARGETFILE2)'!='' or '$(NTTARGETFILES)'!=''">true</IncludeMakeFile>
+  </PropertyGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(MakeFileInc)"    Condition="'$(IncludeMakeFile)'=='true' and Exists($(MakeFileInc))"/>
+    <Import Project="$(PostToolsetRules)" />  <!-- Import PostToolsetRules to map nmake properties/macros to msbuild properties/items/metadata -->
+  </ImportGroup>
+</Project>

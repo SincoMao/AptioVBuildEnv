@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Product xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper" ProductCode=".NETFramework,Version=v4.5">
+  <!-- Defines list of files to be copied on build -->
+  <PackageFiles CopyAllPackageFiles="false">
+    <PackageFile Name="dotNetFx45_Full_x86_x64.exe" HomeSite="DotNetFX45FullWebBootstrapper" PublicKey="3082010A0282010100B37474D0823C87A79AD48EB204428097252EE441CE9363365F13F2B4789880C6287ECC8A13EF3D378C3B09A0D814C55C5ED8A91D7F01C1B3981B5077ECFEEA7C45CF7FE1210EC584CA9F0F6BB30938B774C4571EBEF048A8795ADF0E9B1C9AA8BCC852B50C698F84CE71557BFF0920BF4077372130745B95DF77CBA0E5C17212063DF2C8556CAFC1FB6A1627C8F5B361E3D9CE1B0F1EF4E4CD4C346C3E4711E7022B5F147A0407F5D73D8BDB677D573E35EB6D8D01408D1A8796E20F774C89BA389CFB8E0291DB220FE5D036A9B83745D02AFC968DC1607133A588B1F6C20430875BC3D72FB27911D88B6562A28A11665D7E7F057A738A1F7A85E5CD2810D13D0203010001"/>
+    <PackageFile Name="dotNetFx45_Full_setup.exe" HomeSite="DotNetFX45FullWebBootstrapper" CopyOnBuild="False" PublicKey="3082010A0282010100B37474D0823C87A79AD48EB204428097252EE441CE9363365F13F2B4789880C6287ECC8A13EF3D378C3B09A0D814C55C5ED8A91D7F01C1B3981B5077ECFEEA7C45CF7FE1210EC584CA9F0F6BB30938B774C4571EBEF048A8795ADF0E9B1C9AA8BCC852B50C698F84CE71557BFF0920BF4077372130745B95DF77CBA0E5C17212063DF2C8556CAFC1FB6A1627C8F5B361E3D9CE1B0F1EF4E4CD4C346C3E4711E7022B5F147A0407F5D73D8BDB677D573E35EB6D8D01408D1A8796E20F774C89BA389CFB8E0291DB220FE5D036A9B83745D02AFC968DC1607133A588B1F6C20430875BC3D72FB27911D88B6562A28A11665D7E7F057A738A1F7A85E5CD2810D13D0203010001"/>
+  </PackageFiles>
+  <RelatedProducts>
+    <IncludesProduct Code=".NETFramework,Version=v4.0,KB2468871" />
+  </RelatedProducts> 
+  <InstallChecks>
+    <RegistryCheck Property="DotNet45Full_TargetVersion" Key="HKLM\Software\Microsoft\NET Framework Setup\NDP\v4\Full" Value="Version" />
+  </InstallChecks>
+  <!-- Defines how to invoke the setup for .NET Framework redist -->
+  <Commands Reboot="Immediate">
+    <Command PackageFile="dotNetFx45_Full_x86_x64.exe" Arguments=" /q /norestart /ChainingPackage FullX64Bootstrapper" EstimatedInstalledBytes="2124693777" EstimatedInstallSeconds="382" EstimatedTempBytes="10952431">
+      <!-- These checks determine whether the package is to be installed -->
+      <InstallConditions>
+        <!-- This command is only for Samesite -->
+        <BypassIf Property="InstallMode" Compare="ValueEqualTo" Value="HomeSite" />
+        <!-- This indicates .NET Framework Full is already installed -->
+        <BypassIf Property="DotNet45Full_TargetVersion" Compare="VersionGreaterThanOrEqualTo" Value="4.5.50709" />
+        <!-- Block install if user does not have admin privileges -->
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired" />
+        <!-- Block install on less than Windows Vista -->
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="6.0.0" String="InvalidPlatformWinNT" />
+        <!-- Block install if the platform is IA-64 -->
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture" />
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success" />
+        <ExitCode Value="3010" Result="SuccessReboot" />
+        <DefaultExitCode Result="Fail" FormatMessageFromSystem="false" String="GeneralFailure" />
+      </ExitCodes>
+    </Command>
+    <Command PackageFile="dotNetFx45_Full_setup.exe" Arguments=" /q /norestart /ChainingPackage FullX64Bootstrapper /lcid 1033" EstimatedInstalledBytes="2124693777" EstimatedInstallSeconds="382" EstimatedTempBytes="10952431">
+      <!-- These checks determine whether the package is to be installed -->
+      <InstallConditions>
+        <!-- This command is only for Samesite -->
+        <BypassIf Property="InstallMode" Compare="ValueNotEqualTo" Value="HomeSite" />
+        <!-- This indicates .NET Framework Full is already installed -->
+        <BypassIf Property="DotNet45Full_TargetVersion" Compare="VersionGreaterThanOrEqualTo" Value="4.5.50709" />
+        <!-- Block install if user does not have admin privileges -->
+        <FailIf Property="AdminUser" Compare="ValueEqualTo" Value="false" String="AdminRequired" />
+        <!-- Block install on less than Windows Vista -->
+        <FailIf Property="VersionNT" Compare="VersionLessThan" Value="6.0.0" String="InvalidPlatformWinNT" />
+        <!-- Block install if the platform is IA-64 -->
+        <FailIf Property="ProcessorArchitecture" Compare="ValueEqualTo" Value="IA64" String="InvalidPlatformArchitecture" />
+      </InstallConditions>
+      <ExitCodes>
+        <ExitCode Value="0" Result="Success" />
+        <ExitCode Value="3010" Result="SuccessReboot" />
+        <DefaultExitCode Result="Fail" FormatMessageFromSystem="false" String="GeneralFailure" />
+      </ExitCodes>
+    </Command>
+  </Commands>
+</Product>

@@ -1,0 +1,70 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NdisAllocateNetBufferPool_InitFail
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule checks that NdisAllocateNetBufferPool and NdisFreeNetBufferListPool are called 
+    in alternate order. The ultimate goal is to make sure all NetBufferPool are freed
+    when the initialization functions fails.
+
+    The rule uses three different states. state changes when a NetBuffer is allocated or freed.
+    If a NetBufferPool is still allocated when the Initialization functions fails this rule will 
+    report a defect.
+    
+    Related Rule:
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state{
+   enum {initial, allocated, free} s = initial;
+}
+watch NdisAllocateNetBufferPool.exit.$return;
+
+NdisAllocateNetBufferPool.exit[guard $return]
+{  
+    if ($return != 0)
+    {
+        s = allocated;
+    }
+}
+
+NdisFreeNetBufferPool.exit[guard $1]
+{
+    if ( s == free)
+    {
+        abort "Freeing a NetBufferPool that was not allocated.";
+    }
+  
+    s = free;
+}
+
+[fun_MINIPORT_INITIALIZE,
+fun_FILTER_ATTACH,
+fun_PROTOCOL_BIND_ADAPTER_EX].exit
+{
+    if (($return == NDIS_STATUS_FAILURE || $return == NDIS_STATUS_RESOURCES) && (s==allocated))
+    {
+        abort "$fname is failing but the driver has a NetBufferPool that is still allocated.";
+    }
+}

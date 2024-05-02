@@ -1,0 +1,231 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    ChangeQueueState
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the WDF driver doesn't try to change the state of the Queue from concurrent threads or subsequent with each other from the same thread. Queue state changing callbacks are WdfIoQueueStop, WdfIoQueueStopSynchronously,WdfIoQueuePurge,WdfIoQueuePurgeSynchronously, WdfIoQueueDrain,
+    WdfIoQueueDrainSyncrhonously, WdfIoQueueStopAndPurge and WdfIoQueueStopAndPurgeSynchronously. If these DDIs are called when a Queue state change is already in
+    progress it'll cause a BSOD or a hang.
+
+    Rule diagnostics:
+    If any I/O Queue state function is called concurrently with another callback this rule will abort.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507049
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {initial,entered1} f1 = initial;
+ 
+    enum {drvnone, drvdevice} drvSyncScope = drvnone;    
+    enum {devnone, devparent, devdevice, devqueue} devSyncScope = devnone;
+    enum {async, sync} reqHandlers = async;
+
+    enum {initialc, queueClbk} callback = initialc;
+    enum {init, read, write, ioctl, intioctl, default} fname1 = init;
+    enum {init2, asyncSet1Called} asyncSet1Ddi = init2;
+    enum {init3, callbackSet1Exist} asyncSet1Callback = init3;
+    enum {init4, asyncSet2Called} asyncSet2Ddi = init4;
+    enum {init5, callbackSet2Exist} asyncSet2Callback = init5;
+
+    int fasyncName1 = 0;
+    int fasyncName2 = 0;
+
+    int readCallback = 0;
+    int writeCallback = 0;
+    int ioctlCallback = 0;
+    int intioctlCallback = 0;
+    int defaultCallback = 0;
+} with guard (sdv_main, hdefqueue)
+
+WdfDriverCreate.entry
+{
+    if ($3 != NULL) {
+        if ($3->SynchronizationScope == WdfSynchronizationScopeDevice) {
+            drvSyncScope = drvdevice;    
+        }   
+    }
+}
+
+WdfDeviceCreate.entry
+{
+    if ($2 != NULL) {
+        if($2->SynchronizationScope == WdfSynchronizationScopeInheritFromParent) {
+            if (drvSyncScope == drvdevice) {           
+                reqHandlers = sync;
+            }
+            devSyncScope = devparent;
+        }
+        else if ($2->SynchronizationScope == WdfSynchronizationScopeDevice) {
+            reqHandlers = sync;
+            devSyncScope = devdevice;
+        }
+        else if ($2->SynchronizationScope == WdfSynchronizationScopeQueue) {
+            devSyncScope = devqueue;
+        }
+    }
+}
+
+WdfIoQueueCreate.entry
+{
+    if ($2->DefaultQueue == 1) {
+        readCallback = $2->EvtIoRead;
+        writeCallback = $2->EvtIoWrite;
+        ioctlCallback = $2->EvtIoDeviceControl;
+        intioctlCallback = $2->EvtIoInternalDeviceControl;
+        defaultCallback = $2->EvtIoDefault;
+
+        if (reqHandlers == async) {
+            if ($3 != NULL) {
+                if ($3->SynchronizationScope == WdfSynchronizationScopeQueue
+                     ||
+                    ($3->SynchronizationScope == WdfSynchronizationScopeInheritFromParent && devSyncScope == devqueue)) {
+                    reqHandlers = sync;
+                }
+            }
+        }
+    }
+}
+
+fun_WDF_IO_QUEUE_IO_READ.entry[guard $1]
+{
+    if (readCallback != 0) {
+        callback = queueClbk;
+        fname1 = read;
+    }
+}
+
+fun_WDF_IO_QUEUE_IO_WRITE.entry[guard $1]
+{
+    if (writeCallback != 0) {
+        callback = queueClbk;
+        fname1 = write;
+    }
+}
+
+fun_WDF_IO_QUEUE_IO_DEVICE_CONTROL.entry[guard $1]
+{
+    if (ioctlCallback != 0) {
+        callback = queueClbk;
+        fname1 = ioctl;
+    }
+}
+
+fun_WDF_IO_QUEUE_IO_INTERNAL_DEVICE_CONTROL.entry[guard $1]
+{
+    if (intioctlCallback != 0) {
+        callback = queueClbk;
+        fname1 = intioctl;
+    }
+}
+
+fun_WDF_IO_QUEUE_IO_DEFAULT.entry[guard $1]
+{
+    if (defaultCallback != 0) {
+        callback = queueClbk;
+        fname1 = default;
+    }
+}
+
+[fun_WDF_IO_QUEUE_IO_READ,
+fun_WDF_IO_QUEUE_IO_WRITE, 
+fun_WDF_IO_QUEUE_IO_DEVICE_CONTROL,
+fun_WDF_IO_QUEUE_IO_INTERNAL_DEVICE_CONTROL,
+fun_WDF_IO_QUEUE_IO_DEFAULT
+].exit[guard $1]
+{
+    callback = initialc;
+    fname1 = 0;
+}
+
+
+[WdfIoQueueStopSynchronously,
+WdfIoQueueDrainSynchronously,
+WdfIoQueuePurgeSynchronously,
+WdfIoQueueStopAndPurgeSynchronously
+].entry[guard $1]
+{
+    if (callback != initialc) {
+        abort "$fname is called to change the I/O queue state but if called from the Wdf I/O Queue request handler callbacks it'll cause system hang.";
+    }
+}
+
+[WdfIoQueueDrain,
+WdfIoQueuePurge].entry[guard $1]
+{
+    if (callback != initialc) {
+        if (reqHandlers == async) {
+            if(asyncSet1Ddi == asyncSet1Called && asyncSet1Callback == callbackSet1Exist && $2 != NULL ) {
+                abort "$fname is called to change the I/O queue state, but another I/O queue state changing function can be called either subsequently or on a different thread. This can cause BSOD or system hang.";
+            }
+        }
+        else if (reqHandlers == sync) {
+            if(asyncSet1Ddi == asyncSet1Called && asyncSet1Callback == callbackSet1Exist && $2 != NULL && fname1 == fasyncName1 ) {
+                abort "$fname is called to change the I/O queue state, but another I/O queue state changing function can be called either subsequently or on a different thread. This can cause BSOD or system hang.";            
+            }            
+        }
+        asyncSet1Ddi = asyncSet1Called;
+        if (reqHandlers == sync) {
+            if (fasyncName1 != 0 && fname1 != fasyncName1) {
+                if($2 == NULL) {
+                    asyncSet1Callback = init3; 
+                }                                        
+            }
+        }
+
+        fasyncName1 = fname1;        
+        if($2 != NULL) {
+           asyncSet1Callback = callbackSet1Exist; 
+        }
+    }
+}
+
+[WdfIoQueueStop,
+WdfIoQueueStopAndPurge].entry[guard $1]
+{
+    if (callback != initialc) {
+        if (reqHandlers == async) {
+            if(asyncSet2Ddi == asyncSet2Called && asyncSet2Callback == callbackSet2Exist && $2 != NULL ) {
+                abort "$fname is called to change the I/O queue state, but another I/O queue state changing function can be called either subsequently or on a different thread. This can cause BSOD or system hang.";
+            }
+        }
+        else if (reqHandlers == sync) {
+            if(asyncSet2Ddi == asyncSet2Called && asyncSet2Callback == callbackSet2Exist && $2 != NULL && fname1 == fasyncName2 ) {
+                abort "$fname is called to change the I/O queue state, but another I/O queue state changing function can be called either subsequently or on a different thread. This can cause BSOD or system hang.";            
+            }            
+        }
+        asyncSet2Ddi = asyncSet2Called;
+        if (reqHandlers == sync) {
+            if (fasyncName2 != 0 && fname1 != fasyncName2) {
+                if($2 == NULL) {
+                    asyncSet2Callback = init5; 
+                }                                        
+            }
+        }
+
+        fasyncName2 = fname1;        
+        if($2 != NULL) {
+           asyncSet2Callback = callbackSet2Exist; 
+        }
+    }
+}

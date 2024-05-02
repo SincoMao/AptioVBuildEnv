@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Package
+    xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper" 
+    Name="DisplayName"
+    Culture="Culture"
+    >
+
+    <!-- Defines a localizable string table for error messages-->
+    <Strings>
+        <String Name="DisplayName">Visual C++ "14" Runtime Libraries (ARM)</String>
+        <String Name="Culture">en</String>
+        <String Name="AdminRequired">You do not have the permissions required to install Visual C++ "14" Runtime Libraries (ARM). Please contact your administrator.</String>
+        <String Name="InvalidOS">Installation of Visual C++ "14" Runtime Libraries (ARM) is supported only on ARM machines.</String>
+        <String Name="GeneralFailure">A failure occurred attempting to install Visual C++ "14" Runtime Libraries (ARM).</String>
+        <String Name="VCRedistExe">http://go.microsoft.com/fwlink/?LinkID=800026&amp;clcid=0x409</String>
+    </Strings>
+
+</Package>

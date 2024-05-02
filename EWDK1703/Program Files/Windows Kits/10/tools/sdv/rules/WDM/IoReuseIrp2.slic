@@ -1,0 +1,39 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoReuseIrp2
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    A driver should use IoReuseIrp only on Irps it previously allocated within the driver.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507273
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+}
+with guard(sdv_main,sdv_irp) 
+
+
+IoReuseIrp.entry[guard $1]
+{
+    abort "A driver should use IoReuseIrp only on Irps it previously allocated within the driver.";
+}

@@ -1,0 +1,60 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StorPortBuildIo
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that if the StorPort miniport's BuildIo routine returns FALSE,
+    the SRB in question is not passed to StartIo. (In such cases, 
+    the miniport driver must complete the SRB by calling StorPortNotification 
+    with a notification type of RequestComplete, from BuildIo or someplace else).
+	
+    Note: this rule is testing StorPort's correct operation, not miniport's.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507230
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+state {
+	int * Srb = 0;
+	enum { vInit, vTrue, vFalse } returnValue = vInit;
+}
+
+fun_SP_HW_BUILDIO.exit
+{
+	if ($return) {
+		returnValue = vTrue;
+		Srb = $2;
+	}
+	else {
+		returnValue = vFalse;
+		Srb = $2;
+	}
+}
+
+fun_SP_HW_STARTIO.entry {
+	if (returnValue == vFalse && $2 == Srb) {
+		abort "StartIo was passed an SRB that BuildIo had returned FALSE for.";
+	}
+	else {
+		halt; 
+	}
+}

@@ -1,0 +1,95 @@
+﻿<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+<?Copyright (c) Microsoft Corporation. All rights reserved.?>
+<assembly
+  xmlns="urn:schemas-microsoft-com:asm.v3"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  manifestVersion="1.0"
+  >
+  <instrumentation
+    xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    >
+    <events xmlns="http://schemas.microsoft.com/win/2004/08/events">
+      <provider
+        guid="{cbd1c3e5-e1f5-4999-b122-676776f99d95}"
+        message="$(string.Provider.Name)"
+        name="Microsoft-WindowsPhone-Bluetooth-OBEXServer"
+        symbol="BLUETOOTH_OBEXSERVER_PROVIDER_GUID"
+        resourceFileName="NetBluetoothObexServerProviderResources.dll"
+        messageFileName="NetBluetoothObexServerProviderResources.dll"
+        >
+        <keywords>
+          <keyword
+            mask="0x0000000000000100"
+            name="debug"
+            message="$(string.Keyword.Debug)"
+            />
+        </keywords>
+        <keywords>
+          <keyword
+            mask="0x0000000000000200"
+            name="response"
+            message="$(string.Keyword.Response)"
+            />
+        </keywords>       
+        <tasks>
+          <task
+            message="$(string.Task.TraceMessage)"
+            name="tracemessage"
+            value="10"
+            />
+        </tasks>
+        <templates>
+          <template tid="tTraceMessage">
+            <data
+              inType="win:Pointer"
+              name="Message"
+              />
+          </template>
+        </templates>
+        <events>
+          <event
+            symbol="_ETWMESSAGE"
+            keywords="debug"
+            task="tracemessage"
+            template="tTraceMessage"
+            value="1000"
+            />
+          <event
+            symbol="_RESPONSEMESSAGE"
+            keywords="response"
+            level="win:Error"
+            task="tracemessage"
+            template="tTraceMessage"
+            value="1001"
+            />  
+        </events>
+      </provider>
+    </events>
+  </instrumentation>
+  <localization>
+    <resources culture="en-US">
+      <stringTable>
+        <string
+          id="Provider.Name"
+          value="Microsoft-WindowsPhone-Bluetooth-OBEXServer"
+          />
+        <string
+          id="Keyword.Debug"
+          value="Debug"
+          />
+        <string
+          id="Keyword.Response"
+          value="Response"
+          />
+        <string
+          id="Task.TraceMessage"
+          value="Trace"
+          />
+      </stringTable>
+    </resources>
+  </localization>
+</assembly>
+

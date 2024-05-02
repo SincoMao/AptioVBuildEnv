@@ -1,0 +1,190 @@
+<!--
+***********************************************************************************************
+WindowsDriver.sdv.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file defines the steps/targets required to build driver projects.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">  
+    <UsingTask TaskName="SetEnv" AssemblyFile="$(MSBuildExtensionsPath)\Microsoft.Cpp\v4.0\V120\Microsoft.Build.CppTasks.Common.V120.dll, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+
+    <Target Name="sdvcommon">
+        <PropertyGroup>
+            <ConfigurationPlatformExists Condition="'%(ProjectConfiguration.Identity)' == '$(Configuration)|$(Platform)'">true</ConfigurationPlatformExists>
+            <SDV Condition="'$(SDV)' == ''">$(WDKContentRoot)TOOLS\SDV</SDV>
+        </PropertyGroup>
+        <ItemGroup>
+            <!-- 
+                  Because linker configuration is stored as item metadata, it is only readable when a Link item exists.  
+                  Create a temporary one to inherit this file's ItemDefinitionGroup defaults if one does not already exist.
+            -->
+            <Link Include="tmp" Condition="'@(Link)'==''">
+                <DeleteSoon>true</DeleteSoon>
+            </Link>
+        </ItemGroup>   
+        <Error text="Configuration/Platform is not present in the project file." Condition="'$(ConfigurationPlatformExists)' != 'true'"/>
+        <!-- set security on binaries-->
+        <SetEnv Name="PATH" Condition="'$(USESMVSDV)' == ''"
+            Value  = "$(SDV)\bin;%PATH%"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="PATH" Condition="'$(USESMVSDV)' != ''"
+            Value  = "$(SDV)\smv\analysisplugins\sdv\bin;%PATH%"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="SDV"
+            Value  = "$(SDV)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="VCTargetsPath"
+            Value  = "$(VCTargetsPath)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="WDKCONTENTROOT_SDV"
+            Value  = "$(WDKContentRoot)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="PLATFORM_SDV"
+            Value  = "$(Platform)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="TARGETNAME_SDV"
+            Value  = "$(TargetName)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="CONFIGURATION_SDV"
+            Value  = "$(Configuration)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="USEDEBUGLIBRARIES_SDV"
+            Value  = "$(UseDebugLibraries)"
+            Prefix = "false"> 
+        </SetEnv>    
+        <SetEnv Name="MSBuildProjectFile_SDV"
+            Value  = "$(MSBuildProjectFile)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="DRIVERTYPE_SDV"
+            Value  = "$(DriverType)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="INCLUDE_SDV"
+            Value  = "$(INCLUDE)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="UmdfVersion_SDV"
+            Value  = "$(UmdfVersion)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="KmdfVersion_SDV"
+            Value  = "$(KmdfVersion)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="PlatformToolset_SDV"
+            Value  = "$(PlatformToolset)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="IsKernelModeToolset_SDV"
+            Value  = "$(IsKernelModeToolset)"
+            Prefix = "false">  
+        </SetEnv>
+        <SetEnv Name="C_DEFINES_SDV"
+            Value  = "$(C_DEFINES)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="ConfigurationType_SDV"
+            Value  = "$(ConfigurationType)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="KM_IncludePath_SDV"
+            Value  = "$(KM_IncludePath)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="SolutionDir_SDV"
+            Value  = "$(SolutionDir)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="AdditionalDependencies_SDV"
+            Value  = "%(Link.AdditionalDependencies)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="OutputFile_SDV"
+            Value  = "%(Link.OutputFile)"
+            Prefix = "false">
+        </SetEnv>
+        <SetEnv Name="PreprocessorDefinitions_SDV"
+            Value  = "%(ClCompile.PreprocessorDefinitions)"
+            Prefix = "false">
+        </SetEnv>
+        <ItemGroup>
+            <Link Remove="@(Link)" Condition="'%(Link.DeleteSoon)'=='true'" />
+        </ItemGroup>  
+    </Target>
+    
+    <Target Name="sdv" Condition="'$(Inputs)' != ''" DependsOnTargets="sdvcommon">
+        <Exec Command="staticdv $(Inputs)"
+              WorkingDirectory="$(MSBuildStartupDirectory)"
+        />
+    </Target>
+
+    <Target Name="sdvViewer" DependsOnTargets="sdvcommon">
+        <Exec Command="sdvcontroller.exe &quot;$(MSBuildProjectFile)&quot; &quot;$(Configuration)&quot; $(Platform)"
+              WorkingDirectory="$(MSBuildStartupDirectory)"
+        />
+    </Target>
+
+    <Target Name="dvl">
+        <PropertyGroup>
+            <ConfigurationPlatformExists Condition="'%(ProjectConfiguration.Identity)' == '$(Configuration)|$(Platform)'">true</ConfigurationPlatformExists>
+        </PropertyGroup>
+        <Error text="Configuration/Platform is not present in the project file." Condition="'$(ConfigurationPlatformExists)' != 'true'"/>
+        <!-- set security on binaries-->
+        <SetEnv Name="PATH"
+            Value  = "$(WDKContentRoot)TOOLS\DVL;%PATH%"
+            Prefix = "false">      
+        </SetEnv>    
+        <SetEnv Name="DVL"
+            Value  = ""
+            Prefix = "false">      
+        </SetEnv>
+        <SetEnv Name="TargetName_DVL"
+            Value  = "$(TargetName)"
+            Prefix = "false">      
+        </SetEnv>   
+        <SetEnv Name="PLATFORM_DVL"
+            Value  = "$(Platform)"
+            Prefix = "false">      
+        </SetEnv>    
+         <SetEnv Name="CONFIGURATION_DVL"
+            Value  = "$(Configuration)"
+            Prefix = "false">      
+        </SetEnv>    
+        <SetEnv Name="USEDEBUGLIBRARIES_DVL"
+            Value  = "$(UseDebugLibraries)"
+            Prefix = "false">      
+        </SetEnv>    
+        <SetEnv Name="OutDir_DVL"
+            Value  = "$(OutDir)"
+            Prefix = "false">      
+        </SetEnv>    
+        <SetEnv Name="IntDir_DVL"
+            Value  = "$(IntDir)"
+            Prefix = "false">      
+        </SetEnv>   
+         <SetEnv Name="USEDEBUGLIBRARIES_SDV"
+            Value  = "$(UseDebugLibraries)"
+            Prefix = "false">      
+        </SetEnv>    
+        <Exec Command="dvl.exe $(Inputs)"
+              WorkingDirectory="$(MSBuildStartupDirectory)"
+        />
+    </Target>
+  
+</Project>

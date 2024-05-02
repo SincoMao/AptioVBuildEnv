@@ -1,0 +1,46 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlIoDispatch
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020022
+
+Description:
+
+    The IrqlIoDispatch rule specifies that the driver calls the following I/O 
+    Manager routines only when it is executing at IRQL <= DISPATCH_LEVEL:
+        IoGetDeviceToVerify
+        IoSetDeviceToVerify
+        
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=251706
+
+--*/
+
+#include "slic_base.h"
+
+
+IoGetDeviceToVerify.entry
+{
+    if ( sdv_irql_current > DISPATCH_LEVEL ) {
+        abort "$fname should only be called at IRQL <= DISPATCH_LEVEL.";
+    }
+}
+
+IoSetDeviceToVerify.entry
+{
+    if ( sdv_irql_current > DISPATCH_LEVEL ) {
+        abort "$fname should only be called at IRQL <= DISPATCH_LEVEL.";
+    }
+}
+

@@ -1,0 +1,17 @@
+StartDeviceWait
+StartDeviceWait2
+StartDeviceWait3
+StartDeviceWait4
+MarkStartDevice
+IoAllocateIrpSignalEventInCompletionTimeout
+IoBuildDeviceControlWaitTimeout
+IoBuildFsdIrpSignalEventInCompletionTimeout
+IoBuildSynchronousFsdRequestWaitTimeout
+PagedCode
+PagedCodeAtPowerTrans
+DeleteDevice
+CheckDeviceObjectFlags
+ReservedDDIs
+MultRemoveLock
+CompletionEventChecking
+MarkingQueuedIrps

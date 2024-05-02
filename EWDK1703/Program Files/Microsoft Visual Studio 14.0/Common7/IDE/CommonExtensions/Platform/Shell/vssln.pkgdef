@@ -1,0 +1,26 @@
+[$RootKey$\ComponentPickerPages\Solution]
+"Package"="{282BD676-8B5B-11D0-8A34-00A0C91E2ACD}"
+"Page"="{9A341D97-5A64-11D3-BFF9-00C04F990235}"
+"Sort"=dword:0000001e
+"ComponentType"="Project"
+@="#5046"
+[$RootKey$\Services\{12B43F9F-8550-4FFA-850F-FE9D4D396C20}]
+"Name"="Structured File I/O Service"
+@="{282BD676-8B5B-11D0-8A34-00A0C91E2ACD}"
+[$RootKey$\Services\{218D0424-9C53-4EA1-A679-A0AED59B0E4F}]
+"Name"="HTML Converter"
+@="{282BD676-8B5B-11D0-8A34-00A0C91E2ACD}"
+[$RootKey$\Services\{2B3B3A2D-4E79-11D3-9477-00C04F683646}]
+"Name"="Group Selection Dialog"
+@="{282BD676-8B5B-11D0-8A34-00A0C91E2ACD}"
+[$RootKey$\Services\{910E8282-F867-11D0-AB36-00A0C90F2713}]
+"Name"="Solution Debugging Assistant"
+@="{282BD676-8B5B-11D0-8A34-00A0C91E2ACD}"
+[$RootKey$\Packages\{282BD676-8B5B-11D0-8A34-00A0C91E2ACD}]
+"InprocServer32"="$ShellFolder$\Common7\IDE\vssln.dll"
+@="Visual Studio Solution Build Package"
+[$RootKey$\Packages\{282BD676-8B5B-11D0-8A34-00A0C91E2ACD}\ExData]
+"{64AC2454-BD18-11d1-87B5-00A0C91E2A46}"="{43B36B80-BE04-11d1-B546-00A0C90F26F7}"
+[$RootKey$\Packages\{282BD676-8B5B-11D0-8A34-00A0C91E2ACD}\SatelliteDll]
+"DllName"="vsslnui.dll"
+"Path"="$ShellFolder$\Common7\IDE"

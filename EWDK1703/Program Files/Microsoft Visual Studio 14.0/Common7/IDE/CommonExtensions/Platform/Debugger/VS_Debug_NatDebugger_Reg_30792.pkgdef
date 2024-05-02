@@ -1,0 +1,24 @@
+[$RootKey$]
+
+[$RootKey$\AD7Metrics]
+
+[$RootKey$\AD7Metrics\Engine]
+
+[$RootKey$\AD7Metrics\Engine\{3B476D35-A401-11D2-AAD4-00C04F990171}]
+"CLSID"="{3B476D36-A401-11D2-AAD4-00C04F990171}"
+
+[$RootKey$\CLSID]
+
+[$RootKey$\CLSID\{3B476D36-A401-11D2-AAD4-00C04F990171}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\NatDbgDE.dll"
+"ThreadingModel"="Free"
+@="FreeNativeOnlyEngine"
+
+[$RootKey$\NativeDE]
+
+[$RootKey$\NativeDE\StepOver]
+"Rpcrt4.dll function that hinders RPC StepOut"="_Invoke@12"
+"Rpcrt4.dll functions that hinder RPC StepInto"="_ObjectStublessClient.*"
+"Run time check function"="_RTC_CheckEsp"
+"Security check function"="__security_check_cookie"
+

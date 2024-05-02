@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            version="1.0"
+            xmlns="urn:schemas-microsoft-com:xslt"
+            xmlns:msxsl="urn:schemas-microsoft-com:xslt"
+            targetNamespace="urn:schemas-microsoft-com:xslt"
+            elementFormDefault="qualified">
+  <xsd:element name="script">
+    <xsd:complexType mixed="true">
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element name="using">
+          <xsd:complexType>
+            <xsd:attribute name="namespace" />
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="assembly">
+          <xsd:complexType>
+            <xsd:attribute name="name" />
+            <xsd:attribute name="href" />
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:attribute name="language" />
+      <xsd:attribute name="implements-prefix" />
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema version="1.1.0" targetNamespace="urn:schemas-microsoft-com:xml-msdata" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	
+	<xs:attribute name="AcceptRejectRule" type="xs:string" default="none">
+	</xs:attribute>
+	<xs:element name="Relationship">
+		<xs:complexType>
+			<xs:sequence />
+			<xs:attribute name="RelationName" type="xs:string">				
+			</xs:attribute>
+			<xs:attribute name="parent" type="xs:string">
+			</xs:attribute>
+			<xs:attribute name="child" type="xs:string">
+			</xs:attribute>
+			<xs:attribute name="parentKey" type="xs:string">
+			</xs:attribute>
+			<xs:attribute name="childKey" type="xs:string">
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attribute name="ColumnName" type="xs:string">
+	</xs:attribute>
+
+	
+	<xs:attribute name="ConstraintName" type="xs:string">
+	</xs:attribute>
+	<xs:attribute name="ConstraintOnly" type="xs:boolean">
+	</xs:attribute>
+
+	<xs:attribute name="CaseSensitive" type="xs:boolean" default="false">
+	</xs:attribute>
+	<xs:attribute name="DeleteRule" type="xs:string" default="cascade">
+	</xs:attribute>
+	
+	
+	<xs:attribute name="Error" type="xs:string">
+	</xs:attribute>
+	<xs:attribute name="IsDataSet" type="xs:boolean" default="false">
+	</xs:attribute>
+	<xs:attribute name="IsNested" type="xs:boolean" default="false">
+	</xs:attribute>
+	<xs:attribute name="Locale" type="xs:string" default="en-us">
+	</xs:attribute>
+	
+	<xs:attribute name="Ordinal" type="xs:integer">
+	</xs:attribute>
+	<xs:attribute name="UpdateRule" type="xs:string" default="cascade">
+	</xs:attribute>
+	
+	
+	<xs:attribute name="rowOrder" type="xs:integer">
+	</xs:attribute>
+	<xs:attribute name="hiddenColumn" type="xs:boolean">
+	</xs:attribute>
+	<xs:attribute name="EnforceConstraints" type="xs:boolean">
+	</xs:attribute>
+	
+	<xs:attribute name="Prefix" type="xs:string" default="">		
+	</xs:attribute>
+	
+	<xs:attribute name="AutoIncrementSeed" type="xs:long">
+	</xs:attribute>
+	<xs:attribute name="AutoIncrement" type="xs:boolean" default="false">
+	</xs:attribute>
+	<xs:attribute name="AutoIncrementStep" type="xs:long" default="1">
+	</xs:attribute>
+	<xs:attribute name="Caption" type="xs:string">
+	</xs:attribute>
+	<xs:attribute name="ReadOnly" type="xs:boolean" default="false">
+	</xs:attribute>
+	
+	<xs:attribute name="Sparse" type="xs:boolean" default="false">
+	</xs:attribute>
+
+	<xs:attribute name="AllowDBNull" type="xs:boolean" default="true">
+	</xs:attribute>
+	<xs:attribute name="DataType" type="xs:string">
+	</xs:attribute>
+	<xs:attribute name="DefaultValue" type="xs:string">
+	</xs:attribute>
+</xs:schema>

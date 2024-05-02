@@ -1,0 +1,102 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    PendedCompletedRequest
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    IoCompleteRequest should not be called for a Pending Irp.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+#include "slic_base.h"
+
+state 
+{
+	enum {no,yes} completion_set=no;
+	enum {init,pending,commpleted} lower_driver_return=init;
+} 
+watch KeInitializeEvent.exit.$1;
+
+KeInitializeEvent.exit[guard $1]
+{
+   completion_set=no;
+}
+
+
+IoSetCompletionRoutine.entry
+{
+    if($1==sdv_irp)
+    {
+        completion_set = yes;
+    }
+}
+
+[IoCallDriver,PoCallDriver].exit
+{
+    
+    if($2==sdv_irp&&($2->PendingReturned==0))
+    {
+        halt;
+    }
+    else if($return==STATUS_PENDING&&$2==sdv_irp&&completion_set==yes)
+    {
+        lower_driver_return=pending;
+    }
+	
+}
+
+
+KeWaitForSingleObject.exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;    
+    }
+    else 
+    {
+       lower_driver_return=init;
+    }
+}
+
+[IoCompleteRequest,IofCompleteRequest].entry
+{
+    if($1==sdv_irp&&(lower_driver_return==pending))
+    {
+        lower_driver_return=commpleted;
+    }
+    
+}      
+
+[SDV_RunDispatchFunction].exit
+{
+    if(lower_driver_return==commpleted&&$2==sdv_irp&&$return==STATUS_PENDING)
+    {
+        abort "IoCompleteRequest should not be called for a Pending Irp.";
+    }
+    else
+    {
+        halt;
+    }
+}
+
+[RemoveHeadList,sdv_containing_record].entry
+{
+    halt;
+}
+

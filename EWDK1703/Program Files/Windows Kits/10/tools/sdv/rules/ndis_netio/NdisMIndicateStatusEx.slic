@@ -1,0 +1,54 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NdisAllocateCloneNetBufferList
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    The driver must not call NdisMIndicateStatusEx after it returns from the MiniportHaltEx function. See MSDN http://msdn.microsoft.com/en-us/library/windows/hardware/ff563600(v=vs.85).aspx
+
+    The NdisMIndicateStatusEx function reports a change in the status of a miniport adapter.
+    When a miniport driver calls NdisMIndicateStatusEx, NDIS calls each bound protocol driver's ProtocolStatusEx function. 
+    This allows a bound protocol driver to log the change in status of an underlying miniport adapter or to take action.
+
+    A miniport driver can call NdisMIndicateStatusEx after setting its registration attributes even if the driver is still in the context of the MiniportInitializeEx function. 
+    The driver must not call NdisMIndicateStatusEx after it returns from the MiniportHaltEx function.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507194
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state{
+    enum {beforeHalt, afterHalt} execution = beforeHalt;
+}
+
+[NdisMIndicateStatusEx].entry
+{
+  if (execution == afterHalt) {
+    abort "$fname should not be called after MiniportHaltEx has returned.";
+  }
+}
+
+
+sdv_MINIPORT_HALT.exit
+{
+  execution = afterHalt;
+}

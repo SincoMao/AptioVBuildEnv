@@ -1,0 +1,105 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    MarkPowerDown
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that a IRP_MJ_POWER with IRP_MN_SET_POWER for SystemPowerState IRP going from s0 to [S1...S5] is pended.
+    This rule only applies to FDO and FIDO drivers.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507283
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {initial,forwarded} s = initial;
+    enum {true,false} completion = false;
+}
+watch sdv_RunSetPowerDown.entry.$2;
+
+[IoAcquireRemoveLock,IoAcquireRemoveLockEx].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+
+IoAllocateIrp.exit
+{
+    if($return==NULL)
+    {
+        halt;
+    }
+}
+
+
+[IoRegisterPlugPlayNotification,IoGetDeviceInterfaces,IoSetCompletionRoutineEx].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+[IoMarkIrpPending].exit[guard $1]
+{  
+   halt;
+}
+
+[IoSetCompletionRoutine,IoSetCompletionRoutineEx].entry[guard $1]
+{
+    completion = true;
+}
+
+
+
+[IoCallDriver,PoCallDriver,IofCallDriver].exit[guard $2]
+{  
+   if ($2->IoStatus.Status==STATUS_PENDING)
+   {
+       s = forwarded;
+   }
+   else
+   {
+       halt;
+   }
+}
+
+[sdv_RunSetPowerDown].exit[guard $2]
+{
+    if($return!=STATUS_DELETE_PENDING&&$2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_POWER&&completion==true)
+    {
+        if(($return!=STATUS_UNSUCCESSFUL&&$return!=STATUS_INVALID_DEVICE_STATE&&$return!=STATUS_NOT_SUPPORTED&&$return!=STATUS_NO_SUCH_DEVICE)&&s==forwarded)
+        {
+             abort "Warning: IRP_MJ_POWER with IRP_MN_SET_POWER Irp is not pended during PowerDown.";
+        }
+        else
+        {
+            abort "IRP_MJ_POWER with IRP_MN_SET_POWER Irp is not pended during PowerDown."; 
+        }
+    }
+    else
+    {
+        halt;
+    }
+}

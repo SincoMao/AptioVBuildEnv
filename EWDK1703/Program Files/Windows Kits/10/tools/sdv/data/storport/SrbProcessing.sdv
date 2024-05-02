@@ -1,0 +1,14 @@
+SpDuplex
+SpNoWait
+SpReturnValue
+StorPortAllocatePool
+StorPortAllocatePool2
+StorPortBuildIo
+StorPortCompleteRequest
+StorPortEnablePassive
+StorPortFindAdapter
+StorPortNotification2
+StorPortPassiveFromHwInit
+StorPortPerfOpts
+StorPortStartIo
+StorPortTimer

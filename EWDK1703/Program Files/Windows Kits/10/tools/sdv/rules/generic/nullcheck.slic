@@ -1,0 +1,15 @@
+/*
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+    Description:
+
+        This rule checks for null-pointer deferences.
+    
+*/
+
+#include "slic_base.h"
+         
+sdv_main.exit
+{
+  abort "This is just a placeholder as the actual rule is defined by the engine"; 
+}

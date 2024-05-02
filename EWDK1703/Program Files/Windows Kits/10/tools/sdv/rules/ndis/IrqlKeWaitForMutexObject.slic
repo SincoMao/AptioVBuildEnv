@@ -1,0 +1,47 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlKeWaitForMutexObject
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020017
+
+Description:
+
+    The IrqlKeWaitForMutexObject rule specifies that the driver calls the 
+    KeWaitForMutexObject routine at the proper IRQL based on the value of 
+    the Timeout parameter: 
+
+        If Timeout points to a zero value, the driver is executing at 
+        IRQL = DISPATCH_LEVEL.
+
+        If Timeout is NULL, or points to any value other than zero, 
+        the driver is executing at IRQL <= APC_LEVEL.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216040
+
+--*/
+
+
+#include "slic_base.h"
+
+[KeWaitForMutexObject,KeWaitForSingleObject].entry 
+{
+    if ( SDV_IRQL_ELEVATED_LEVEL(sdv_irql_current) ) {
+        abort "Callers of $fname must be running at IRQL <= DISPATCH_LEVEL.";
+    } else if (sdv_irql_current == DISPATCH_LEVEL) {
+        if ($5 == NULL || $5->QuadPart != 0) {
+            abort "Callers of $fname must be running at IRQL <= APC_LEVEL when called with a non-zero timeout interval.";
+        }
+    }
+}

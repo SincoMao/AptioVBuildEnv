@@ -1,0 +1,14 @@
+rtlver.lib
+ntstrsafe.lib
+sehupd.lib
+wdmsec.lib
+wdm.lib
+ntoskrnl.lib
+BufferOverflowK.lib
+hal.lib
+wmilib.lib
+memcmp.lib
+csq.lib
+usbd.lib
+athhal.lib
+ksecdd.lib

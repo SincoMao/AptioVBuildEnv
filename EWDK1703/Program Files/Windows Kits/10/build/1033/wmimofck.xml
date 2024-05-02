@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <Rule Name="Wmimofck" PageTemplate="tool" DisplayName="Mof Checker"  Order="180">
+    <Rule.Categories>
+      <Category Name="General">
+        <Category.DisplayName>
+          <sys:String>General</sys:String>
+        </Category.DisplayName>
+      </Category>
+      <Category Name="File Options">
+        <Category.DisplayName>
+          <sys:String>File Options</sys:String>
+        </Category.DisplayName>
+      </Category>
+      <Category Name="Command Line" Subtype="CommandLine">
+        <Category.DisplayName>
+          <sys:String>Command Line</sys:String>
+        </Category.DisplayName>
+      </Category>
+      <Category Name="All Options" DisplayName="All Options" Subtype="Search" />
+    </Rule.Categories>
+    <Rule.DataSource>
+      <DataSource Persistence="ProjectFile" ItemType="Wmimofck" Label="" HasConfigurationCondition="true"/>
+    </Rule.DataSource>
+    <BoolProperty Name="HtmlUIOutputDirectory" Category="File Options" F1Keyword="driver.wmimofck.fileoptions.properties">
+      <BoolProperty.DisplayName>
+        <sys:String>Binplace generated Html files</sys:String>
+      </BoolProperty.DisplayName>
+      <BoolProperty.Description>
+        <sys:String>Use this argument to enable the tool to place the generated Html files in the directory specified by the HtmlOutputDirectory property. </sys:String>
+      </BoolProperty.Description>
+    </BoolProperty>
+    <StringProperty Name="HtmlOutputDirectory" Category="File Options" Switch="-w" F1Keyword="driver.wmimofck.fileoptions.properties">
+      <StringProperty.DisplayName>
+        <sys:String>Html Output Directory</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>The path of where to place Html files that Wmimofck generates. (-wDirectory)</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="SourceOutputFile" Category="File Options" Switch="-c" F1Keyword="driver.wmimofck.fileoptions.properties">
+      <StringProperty.DisplayName>
+        <sys:String>Source Output Configuration File</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Generates C language source file which contains stubs for WMI driver code.  (-cFilename)</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="VBScriptTestOutputFile" Category="File Options" Switch="-t" F1Keyword="driver.wmimofck.fileoptions.properties">
+      <StringProperty.DisplayName>
+        <sys:String>VBScript Test Output File</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>A VBScript program is created that will query all data blocks and properties specified in the MOF file.  (-tFilename)</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="MofFile" Category="File Options" Switch="-y" F1Keyword="driver.wmimofck.fileoptions.properties">
+      <StringProperty.DisplayName>
+        <sys:String>Mof File</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Specifies a file containing language-independent WMI class declarations.  (-yMOFFile)</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="MflFile" Category="General" Switch="-z" F1Keyword="driver.wmimofck.general.properties">
+      <StringProperty.DisplayName>
+        <sys:String>Mfl File</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Specifies a file containing language-independent WMI class declarations.  (-yMOFFile)</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="HexdumpOutputFile" Category="File Options" Switch="-x" F1Keyword="driver.wmimofck.fileoptions.properties">
+      <StringProperty.DisplayName>
+        <sys:String>Generated Counter Files Path</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Path to generate binary counter files. (-sumPath path)</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <StringProperty Name="HeaderOutputFile" Category="File Options" Switch="-h" F1Keyword="driver.wmimofck.fileoptions.properties">
+      <StringProperty.DisplayName>
+        <sys:String>Hexdump Output File</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Generates Hex version of .bmf data which can be included in the driver source for supplying dynamic MOF data at runtime.  (-xFilename)</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+    <BoolProperty Name="GenerateStructureDefinitionsForMethodParameters" Category="General" Switch="-m" F1Keyword="driver.wmimofck.general.properties">
+      <BoolProperty.DisplayName>
+        <sys:String>Generate Structure Definitions For Method Parameters</sys:String>
+      </BoolProperty.DisplayName>
+      <BoolProperty.Description>
+        <sys:String>The header file will include structure definitions for the input and output of each WMI method. (-m)</sys:String>
+      </BoolProperty.Description>
+    </BoolProperty>
+    <BoolProperty Name="GenerateStructureDefinitionsForDatablocks" Category="General" Switch="-u" F1Keyword="driver.wmimofck.general.properties">
+      <BoolProperty.DisplayName>
+        <sys:String>Generate Structure Definitions For Datablocks Unconditionally</sys:String>
+      </BoolProperty.DisplayName>
+      <BoolProperty.Description>
+        <sys:String>Wmimofck will generate member definitions for every property that has a fixed size, including string properties that specify a MaxLen qualifier   (-u)</sys:String>
+      </BoolProperty.Description>
+    </BoolProperty>
+    <StringProperty Name="AdditionalOptions" Category="Command Line" F1Keyword="vc.project.AdditionalOptionsPage">
+      <StringProperty.DisplayName>
+        <sys:String>Additional Options</sys:String>
+      </StringProperty.DisplayName>
+      <StringProperty.Description>
+        <sys:String>Additional Options</sys:String>
+      </StringProperty.Description>
+    </StringProperty>
+  </Rule>
+</ProjectSchemaDefinitions>

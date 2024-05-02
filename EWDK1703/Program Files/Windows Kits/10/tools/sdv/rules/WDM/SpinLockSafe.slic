@@ -1,0 +1,77 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SpinLockSafe
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x0004000C
+
+Description:
+
+    The SpinLockSafe rule specifies that IoStartNextPacket and 
+    IoCompleteRequest are not called while holding a spin lock. 
+
+    This rule also specifies that the driver calls KeAcquireSpinLock or 
+    KeAcquireSpinLockAtDpcLevel before calling KeReleaseSpinLockFromDpcLevel 
+    or KeReleaseSpinLock, and that it calls IoAcquireCancelSpinLock before 
+    calling IoReleaseCancelSpinLock.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216064
+
+--*/
+
+
+#include "slic_base.h"
+
+state {
+    int LockDepth = 0;
+}
+
+
+[ KeAcquireSpinLockAtDpcLevel
+, KeAcquireSpinLock
+, IoAcquireCancelSpinLock
+, KeAcquireSpinLockRaiseToDpc].exit
+{
+    LockDepth = LockDepth + 1;
+}
+
+[ KeReleaseSpinLockFromDpcLevel
+, KeReleaseSpinLock
+, IoReleaseCancelSpinLock].entry
+{
+    LockDepth = LockDepth - 1;
+}
+
+
+[ IoStartNextPacket@SDV
+, IoCompleteRequest@SDV
+, IofCompleteRequest@SDV
+].entry
+{
+
+    if (LockDepth != 0) {
+        abort "$fname has been called with an invalid spinlock state";
+    }
+}
+
+[ IoStartNextPacket@XDV
+, IoCompleteRequest@XDV
+, IofCompleteRequest@XDV
+].entry
+{
+
+    if (LockDepth > 0) {
+        abort "$fname has been called with an invalid spinlock state";
+    }
+}

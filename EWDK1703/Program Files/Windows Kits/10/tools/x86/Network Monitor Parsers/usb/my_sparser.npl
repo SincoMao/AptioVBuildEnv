@@ -1,0 +1,4 @@
+//
+// Include only USB3 parser. Netmon already calls include on the USB2 parser filenames
+//
+include "etl_usb3.npl"

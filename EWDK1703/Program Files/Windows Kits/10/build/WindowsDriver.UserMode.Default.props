@@ -1,0 +1,51 @@
+<!--
+***********************************************************************************************
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Default target framework values for user mode drivers -->
+  <Choose>
+    <!-- Windows v10.0 -->
+    <When Condition="$(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WIN10)">
+      <PropertyGroup>
+        <UMDF_VERSION_MAJOR Condition="'$(UMDF_VERSION_MAJOR)' == ''">2</UMDF_VERSION_MAJOR>
+        <UMDF_VERSION_MINOR Condition="'$(UMDF_VERSION_MINOR)' == '' and '$(UMDF_VERSION_MAJOR)' == '1'">11</UMDF_VERSION_MINOR>
+        <UMDF_VERSION_MINOR Condition="'$(UMDF_VERSION_MINOR)' == '' and '$(UMDF_VERSION_MAJOR)' == '2'">15</UMDF_VERSION_MINOR>
+      </PropertyGroup>
+    </When>
+    <!-- Windows 8.1 -->
+    <When Condition="$(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WINV63)">
+      <PropertyGroup>
+        <UMDF_VERSION_MAJOR Condition="'$(UMDF_VERSION_MAJOR)' == ''">2</UMDF_VERSION_MAJOR>
+        <UMDF_VERSION_MINOR Condition="'$(UMDF_VERSION_MINOR)' == '' and '$(UMDF_VERSION_MAJOR)' == '1'">11</UMDF_VERSION_MINOR>
+        <UMDF_VERSION_MINOR Condition="'$(UMDF_VERSION_MINOR)' == '' and '$(UMDF_VERSION_MAJOR)' == '2'">0</UMDF_VERSION_MINOR>
+      </PropertyGroup>
+    </When>
+    <!-- Windows 8 -->
+    <When Condition="$(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WIN8)">
+      <PropertyGroup>
+        <UMDF_VERSION_MAJOR Condition="'$(UMDF_VERSION_MAJOR)' == ''">1</UMDF_VERSION_MAJOR>
+        <UMDF_VERSION_MINOR Condition="'$(UMDF_VERSION_MINOR)' == '' and '$(UMDF_VERSION_MAJOR)' == '1'">11</UMDF_VERSION_MINOR>
+        <UMDF_VERSION_MINOR Condition="'$(UMDF_VERSION_MINOR)' == '' and '$(UMDF_VERSION_MAJOR)' == '2'">0</UMDF_VERSION_MINOR>
+      </PropertyGroup>
+    </When>
+    <!-- Windows 7 -->
+    <When Condition="$(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WIN7)">
+      <PropertyGroup>
+        <UMDF_VERSION_MAJOR Condition="'$(UMDF_VERSION_MAJOR)' == ''">1</UMDF_VERSION_MAJOR>
+        <UMDF_VERSION_MINOR Condition="'$(UMDF_VERSION_MINOR)' == '' and '$(UMDF_VERSION_MAJOR)' == '1'">9</UMDF_VERSION_MINOR>
+        <UMDF_VERSION_MINOR Condition="'$(UMDF_VERSION_MINOR)' == '' and '$(UMDF_VERSION_MAJOR)' == '2'">0</UMDF_VERSION_MINOR>
+      </PropertyGroup>
+    </When>
+  </Choose>
+  
+  <Import Condition="Exists('$(WDKContentRoot)build\WindowsDriver.UserMode.CX.Default.props')" Project="$(WDKContentRoot)build\WindowsDriver.UserMode.CX.Default.props"/>
+  
+</Project>
+

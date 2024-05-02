@@ -1,0 +1,75 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DriverCreate
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the driver calls WdfDriverCreate from within 
+    its DriverEntry routine.
+
+    A driver that uses Kernel-Mode Driver Framework must call 
+    WdfDriverCreate from within its DriverEntry routine.
+
+    Diagnostics: "The driver is not calling WdfDriverCreate in its DriverEntry routine. 
+    This is not a WDF driver and no WDF API can be called."
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507067
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {INIT0, INDRVENTRY} s0 = INIT0;
+    enum {INIT, ENTERED} s = INIT;
+}
+
+fun_DriverEntry.entry
+{
+    s0 = INDRVENTRY;
+}
+
+fun_DriverEntry.exit
+{
+    s0 = INIT0;
+    if (s != ENTERED&&$return==STATUS_SUCCESS) 
+    {
+        abort "The driver is not calling WdfDriverCreate in its DriverEntry routine. This is not a WDF driver and no WDF API can be called.";
+    }
+    else
+    {
+	halt;
+    }
+}
+
+sdv_WdfDriverCreate.entry
+{
+    s = ENTERED;
+}
+
+[SDV_WDFDDIs_Excluding_WdfDriverCreate].entry
+{
+    if (s0 == INDRVENTRY && s != ENTERED) 
+    {
+        abort "Driver haven't called WdfDriverCreate yet, before driver object is created no other WDF API can be called.";
+    }
+}

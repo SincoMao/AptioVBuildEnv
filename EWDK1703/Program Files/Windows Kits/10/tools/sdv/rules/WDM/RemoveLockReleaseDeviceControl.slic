@@ -1,0 +1,105 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    RemoveLockReleaseDeviceControl
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that calls to IoAcquireRemoveLock and IoReleaseRemoveLock are used in
+    strict alternation.  Moreover, at the end of the Dispatch routine the driver should not hold the Removelock.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507320
+
+--*/
+
+
+#include "slic_base.h"
+state{
+   int LockDepth = 0;
+}
+
+[IoCsqInsertIrp,
+IoCsqInsertIrpEx].entry
+{
+    halt;
+}
+
+[sdv_RunIoCompletionRoutines].exit
+{
+   if(!(*$4))
+   {
+       halt;
+   }
+}
+
+
+[ExInterlockedInsertHeadList
+,ExInterlockedInsertTailList
+,ExInterlockedPushEntryList
+,ExfInterlockedInsertHeadList
+,ExfInterlockedInsertTailList
+,ExfInterlockedPushEntryList].entry 
+{
+    halt;
+}
+
+[InsertHeadList
+,InsertTailList].entry
+{
+    halt;
+}
+
+
+[RemoveHeadList,sdv_containing_record].entry
+{
+    halt;
+}
+
+IoAcquireRemoveLock.exit
+{
+    if(LockDepth > 0 && $return!=STATUS_SUCCESS)
+    {
+       halt;
+    }
+    else if($return==STATUS_SUCCESS)
+    {
+       LockDepth = LockDepth + 1;
+    }
+}
+
+[IoReleaseRemoveLock,IoReleaseRemoveLockAndWait].entry
+{
+        if (LockDepth == 0) 
+        {
+            abort "The driver is calling $fname without first acquiring the Removelock.";
+        } 
+        else 
+        {
+           LockDepth = LockDepth - 1;
+        }
+}
+
+[SDV_RunDispatchFunction].exit
+{
+      if (LockDepth != 0 && $2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_DEVICE_CONTROL) 
+      {
+          abort "Dispatch returned with an invalid RemoveLock state";
+      }
+      else
+      {
+          halt;
+      }
+}

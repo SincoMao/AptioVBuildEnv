@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense" elementFormDefault="qualified" attributeFormDefault="unqualified" vs:helpNamespace="http://schemas.microsoft.com/.NetConfiguration/v2.0">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:any namespace="##any" processContents="lax" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="boolean_Type">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="false" />
+      <xs:enumeration value="true" />
+      <xs:enumeration value="True" />
+      <xs:enumeration value="False" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="system.serviceModel" vs:help="configuration/system.serviceModel">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="bindings" vs:help="configuration/system.serviceModel/bindings">
+          <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="basicHttpBinding" vs:help="configuration/system.serviceModel/bindings/basicHttpBinding">
+                <xs:complexType>
+                  <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="binding" vs:help="configuration/system.serviceModel/bindings/basicHttpBinding/binding">
+                      <xs:complexType>
+                        <xs:choice minOccurs="0" maxOccurs="unbounded">
+                          <xs:element name="security" vs:help="configuration/system.serviceModel/bindings/basicHttpBinding/binding/security">
+                            <xs:complexType>
+                              <xs:choice minOccurs="0" maxOccurs="1">
+                                <xs:element name="transport" vs:help="configuration/system.serviceModel/bindings/basicHttpBinding/binding/transport">
+                                  <xs:complexType>
+                                    <xs:choice minOccurs="0" maxOccurs="1">
+                                      <xs:element name="extendedProtectionPolicy" vs:help="configuration/system.serviceModel/bindings/basicHttpBinding/binding/transport/extendedProtectionPolicy">
+                                        <xs:complexType>
+                                          <xs:attribute name="policyEnforcement" use="required">
+                                            <xs:simpleType>
+                                              <xs:restriction base="xs:string">
+                                                <xs:enumeration value="Never" />
+                                              </xs:restriction>
+                                            </xs:simpleType>
+                                          </xs:attribute>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:choice>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:choice>
+                              <xs:attribute name="mode" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:enumeration value="None" />
+                                    <xs:enumeration value="Transport" />
+                                    <xs:enumeration value="TransportWithMessageCredential" />
+                                    <xs:enumeration value="TransportCredentialOnly" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:choice>
+                        <xs:attribute name="enableHttpCookieContainer" type="boolean_Type" use="optional" />
+                        <xs:attribute name="transferMode" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:enumeration value="Buffered" />
+                              <xs:enumeration value="StreamedResponse" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="maxBufferSize" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:int">
+                              <xs:minInclusive value="1" />
+                              <xs:maxInclusive value="2147483647" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="maxReceivedMessageSize" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:long">
+                              <xs:minInclusive value="1" />
+                              <xs:maxInclusive value="9223372036854775807" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="textEncoding" type="xs:string" use="optional" />
+                        <xs:attribute name="name" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:minLength value="1" />
+                              <xs:maxLength value="2147483647" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="closeTimeout" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="openTimeout" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="receiveTimeout" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="sendTimeout" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:choice>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="customBinding" vs:help="configuration/system.serviceModel/bindings/customBinding">
+                <xs:complexType>
+                  <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="binding" vs:help="configuration/system.serviceModel/bindings/customBinding/binding">
+                      <xs:complexType>
+                        <xs:choice minOccurs="0" maxOccurs="unbounded">
+                          <xs:element name="binaryMessageEncoding" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/binaryMessageEncoding">
+                            <xs:complexType>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="httpCookieContainer" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/httpCookieContainer">
+                            <xs:complexType>
+                            </xs:complexType>
+                          </xs:element>                          
+                          <xs:element name="pollingDuplex" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/pollingDuplex">
+                            <xs:complexType>
+                              <xs:attribute name="duplexMode" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:enumeration value="SingleMessagePerPoll" />
+                                    <xs:enumeration value="MultipleMessagesPerPoll" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="inactivityTimeout" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="clientPollTimeout" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="httpTransport" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/httpTransport">
+                            <xs:complexType>
+                              <xs:choice minOccurs="0" maxOccurs="1">
+                                <xs:element name="extendedProtectionPolicy" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/httpTransport/extendedProtectionPolicy">
+                                  <xs:complexType>
+                                    <xs:attribute name="policyEnforcement" use="required">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:enumeration value="Never" />
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:choice>
+                              <xs:attribute name="transferMode" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Buffered" />
+                                    <xs:enumeration value="StreamedResponse" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="maxBufferSize" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:int">
+                                    <xs:minInclusive value="1" />
+                                    <xs:maxInclusive value="2147483647" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="maxReceivedMessageSize" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:long">
+                                    <xs:minInclusive value="1" />
+                                    <xs:maxInclusive value="9223372036854775807" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="httpsTransport" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/httpsTransport">
+                            <xs:complexType>
+                              <xs:choice minOccurs="0" maxOccurs="1">
+                                <xs:element name="extendedProtectionPolicy" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/httpsTransport/extendedProtectionPolicy">
+                                  <xs:complexType>
+                                    <xs:attribute name="policyEnforcement" use="required">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:enumeration value="Never" />
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:choice>
+                              <xs:attribute name="transferMode" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:enumeration value="Buffered" />
+                                    <xs:enumeration value="StreamedResponse" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="maxBufferSize" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:int">
+                                    <xs:minInclusive value="1" />
+                                    <xs:maxInclusive value="2147483647" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="maxReceivedMessageSize" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:long">
+                                    <xs:minInclusive value="1" />
+                                    <xs:maxInclusive value="9223372036854775807" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="security" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/security">
+                            <xs:complexType>
+                              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                                <xs:element name="secureConversationBootstrap" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/security/secureConversationBootstrap">
+                                  <xs:complexType>
+                                    <!--tag is empty-->
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="localClientSettings" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/security/localClientSettings">
+                                  <xs:complexType>
+                                    <xs:attribute name="maxClockSkew" use="optional">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="replayWindow" use="optional">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="timestampValidityDuration" use="optional">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:choice>
+                              <xs:attribute name="authenticationMode" use="required">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:enumeration value="UserNameOverTransport" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="includeTimestamp" type="boolean_Type" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="tcpTransport" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/tcpTransport">
+                            <xs:complexType>
+                              <xs:choice minOccurs="0" maxOccurs="unbounded">
+                                <xs:element name="connectionPoolSettings" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/tcpTransport/connectionPoolSettings">
+                                  <xs:complexType>
+                                    <xs:attribute name="groupName" use="optional" type="xs:string" />
+                                    <xs:attribute name="leaseTimeout" use="optional">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="idleTimeout" use="optional">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="maxOutboundConnectionsPerEndpoint" use="optional">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:int">
+                                          <xs:minInclusive value="0" />
+                                          <xs:maxInclusive value="2147483647" />
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="lockAttributes" type="xs:string" use="optional" />
+                                    <xs:attribute name="lockAllAttributesExcept" type="xs:string" use="optional" />
+                                    <xs:attribute name="lockElements" type="xs:string" use="optional" />
+                                    <xs:attribute name="lockAllElementsExcept" type="xs:string" use="optional" />
+                                    <xs:attribute name="lockItem" type="boolean_Type" use="optional" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:choice>
+                              <xs:attribute name="connectionBufferSize" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:int">
+                                    <xs:minInclusive value="1" />
+                                    <xs:maxInclusive value="2147483647" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="maxBufferSize" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:int">
+                                    <xs:minInclusive value="1" />
+                                    <xs:maxInclusive value="2147483647" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="maxReceivedMessageSize" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:long">
+                                    <xs:minInclusive value="1" />
+                                    <xs:maxInclusive value="9223372036854775807" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="lockAttributes" type="xs:string" use="optional" />
+                              <xs:attribute name="lockAllAttributesExcept" type="xs:string" use="optional" />
+                              <xs:attribute name="lockElements" type="xs:string" use="optional" />
+                              <xs:attribute name="lockAllElementsExcept" type="xs:string" use="optional" />
+                              <xs:attribute name="lockItem" type="boolean_Type" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="textMessageEncoding" vs:help="configuration/system.serviceModel/bindings/customBinding/binding/textMessageEncoding">
+                            <xs:complexType>
+                              <xs:attribute name="messageVersion" type="xs:string" use="optional" />
+                              <xs:attribute name="writeEncoding" type="xs:string" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:choice>
+                        <xs:attribute name="closeTimeout" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="openTimeout" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="receiveTimeout" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="sendTimeout" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="([0-9.]+:){0,1}([0-9]+:){0,1}[0-9.]+" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="name" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:minLength value="1" />
+                              <xs:maxLength value="2147483647" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:choice>
+                </xs:complexType>
+              </xs:element>
+            </xs:choice>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="client" vs:help="configuration/system.serviceModel/client">
+          <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="endpoint" vs:help="configuration/system.serviceModel/client/endpoint">
+                <xs:complexType>
+                  <xs:attribute name="address" type="xs:string" use="optional" />
+                  <xs:attribute name="binding" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:minLength value="1" />
+                        <xs:maxLength value="2147483647" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="bindingConfiguration" use="optional" type="xs:string" />
+                  <xs:attribute name="contract" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:minLength value="1" />
+                        <xs:maxLength value="2147483647" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="name" use="optional" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+            </xs:choice>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="extensions" vs:help="configuration/system.serviceModel/extensions" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

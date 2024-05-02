@@ -1,0 +1,393 @@
+' Windows Installer utility to manage the summary information stream
+' For use with Windows Scripting Host, CScript.exe or WScript.exe
+' Copyright (c) Microsoft Corporation. All rights reserved.
+' Demonstrates the use of the database summary information methods
+
+Option Explicit
+
+Const msiOpenDatabaseModeReadOnly     = 0
+Const msiOpenDatabaseModeTransact     = 1
+Const msiOpenDatabaseModeCreate       = 3
+
+Dim propList(19, 1)
+propList( 1,0) = "Codepage"    : propList( 1,1) = "ANSI codepage of text strings in summary information only"
+propList( 2,0) = "Title"       : propList( 2,1) = "Package type, e.g. Installation Database"
+propList( 3,0) = "Subject"     : propList( 3,1) = "Product full name or description"
+propList( 4,0) = "Author"      : propList( 4,1) = "Creator, typically vendor name"
+propList( 5,0) = "Keywords"    : propList( 5,1) = "List of keywords for use by file browsers"
+propList( 6,0) = "Comments"    : propList( 6,1) = "Description of purpose or use of package"
+propList( 7,0) = "Template"    : propList( 7,1) = "Target system: Platform(s);Language(s)"
+propList( 8,0) = "LastAuthor"  : propList( 8,1) = "Used for transforms only: New target: Platform(s);Language(s)"
+propList( 9,0) = "Revision"    : propList( 9,1) = "Package code GUID, for transforms contains old and new info"
+propList(11,0) = "Printed"     : propList(11,1) = "Date and time of installation image, same as Created if CD"
+propList(12,0) = "Created"     : propList(12,1) = "Date and time of package creation"
+propList(13,0) = "Saved"       : propList(13,1) = "Date and time of last package modification"
+propList(14,0) = "Pages"       : propList(14,1) = "Minimum Windows Installer version required: Major * 100 + Minor"
+propList(15,0) = "Words"       : propList(15,1) = "Source and Elevation flags: 1=short names, 2=compressed, 4=network image, 8=LUA package"
+propList(16,0) = "Characters"  : propList(16,1) = "Used for transforms only: validation and error flags"
+propList(18,0) = "Application" : propList(18,1) = "Application associated with file, ""Windows Installer"" for MSI"
+propList(19,0) = "Security"    : propList(19,1) = "0=Read/write 2=Readonly recommended 4=Readonly enforced"
+
+Dim iArg, iProp, property, value, message
+Dim argCount:argCount = Wscript.Arguments.Count
+If argCount > 0 Then If InStr(1, Wscript.Arguments(0), "?", vbTextCompare) > 0 Then argCount = 0
+If (argCount = 0) Then
+	message = "Windows Installer utility to manage summary information stream" &_
+		vbNewLine & " 1st argument is the path to the storage file (installer package)" &_
+		vbNewLine & " If no other arguments are supplied, summary properties will be listed" &_
+		vbNewLine & " Subsequent arguments are property=value pairs to be updated" &_
+		vbNewLine & " Either the numeric or the names below may be used for the property" &_
+		vbNewLine & " Date and time fields use current locale format, or ""Now"" or ""Date""" &_
+		vbNewLine & " Some properties have specific meaning for installer packages"
+	For iProp = 1 To UBound(propList)
+		property = propList(iProp, 0)
+		If Not IsEmpty(property) Then
+			message = message & vbNewLine & Right(" " & iProp, 2) & "  " & property & " - " & propLIst(iProp, 1)
+		End If
+	Next
+	message = message & vbNewLine & vbNewLine & "Copyright (C) Microsoft Corporation.  All rights reserved."
+
+	Wscript.Echo message
+	Wscript.Quit 1
+End If
+
+' Connect to Windows Installer object
+On Error Resume Next
+Dim installer : Set installer = Nothing
+Set installer = Wscript.CreateObject("WindowsInstaller.Installer") : If CheckError("MSI.DLL not registered") Then Wscript.Quit 2
+
+' Evaluate command-line arguments and open summary information
+Dim cUpdate:cUpdate = 0 : If argCount > 1 Then cUpdate = 20
+Dim sumInfo  : Set sumInfo = installer.SummaryInformation(Wscript.Arguments(0), cUpdate) : If CheckError(Empty) Then Wscript.Quit 2
+
+' If only package name supplied, then list all properties in summary information stream
+If argCount = 1 Then
+	For iProp = 1 to UBound(propList)
+		value = sumInfo.Property(iProp) : CheckError(Empty)
+		If Not IsEmpty(value) Then message = message & vbNewLine & Right(" " & iProp, 2) & "  " &  propList(iProp, 0) & " = " & value
+	Next
+	Wscript.Echo message
+	Wscript.Quit 0
+End If
+
+' Process property settings, combining arguments if equal sign has spaces before or after it
+For iArg = 1 To argCount - 1
+	property = property & Wscript.Arguments(iArg)
+	Dim iEquals:iEquals = InStr(1, property, "=", vbTextCompare) 'Must contain an equals sign followed by a value
+	If iEquals > 0 And iEquals <> Len(property) Then
+		value = Right(property, Len(property) - iEquals)
+		property = Left(property, iEquals - 1)
+		If IsNumeric(property) Then
+			iProp = CLng(property)
+		Else  ' Lookup property name if numeric property ID not supplied
+			For iProp = 1 To UBound(propList)
+				If propList(iProp, 0) = property Then Exit For
+			Next
+		End If
+		If iProp > UBound(propList) Then
+			Wscript.Echo "Unknown summary property name: " & property
+			sumInfo.Persist ' Note! must write even if error, else entire stream will be deleted
+			Wscript.Quit 2
+		End If
+		If iProp = 11 Or iProp = 12 Or iProp = 13 Then
+			If UCase(value) = "NOW"  Then value = Now
+			If UCase(value) = "DATE" Then value = Date
+			value = CDate(value)
+		End If
+		If iProp = 1 Or iProp = 14 Or iProp = 15 Or iProp = 16 Or iProp = 19 Then value = CLng(value)
+		sumInfo.Property(iProp) = value : CheckError("Bad format for property value " & iProp)
+		property = Empty
+	End If
+Next
+If Not IsEmpty(property) Then
+	Wscript.Echo "Arguments must be in the form: property=value  " & property
+	sumInfo.Persist ' Note! must write even if error, else entire stream will be deleted
+	Wscript.Quit 2
+End If
+
+' Write new property set. Note! must write even if error, else entire stream will be deleted
+sumInfo.Persist : If CheckError("Error persisting summary property stream") Then Wscript.Quit 2
+Wscript.Quit 0
+
+
+Function CheckError(message)
+	If Err = 0 Then Exit Function
+	If IsEmpty(message) Then message = Err.Source & " " & Hex(Err) & ": " & Err.Description
+	If Not installer Is Nothing Then
+		Dim errRec : Set errRec = installer.LastErrorRecord
+		If Not errRec Is Nothing Then message = message & vbNewLine & errRec.FormatText
+	End If
+	Wscript.Echo message
+	CheckError = True
+	Err.Clear
+End Function
+
+'' SIG '' Begin signature block
+'' SIG '' MIIiUAYJKoZIhvcNAQcCoIIiQTCCIj0CAQExDzANBglg
+'' SIG '' hkgBZQMEAgEFADB3BgorBgEEAYI3AgEEoGkwZzAyBgor
+'' SIG '' BgEEAYI3AgEeMCQCAQEEEE7wKRaZJ7VNj+Ws4Q8X66sC
+'' SIG '' AQACAQACAQACAQACAQAwMTANBglghkgBZQMEAgEFAAQg
+'' SIG '' bn8llKyfjYiHNwaF/UnnU74Wl84HND+puok0mU7lHYug
+'' SIG '' gguPMIIFFzCCA/+gAwIBAgITMwAAAVVp/7a3A86SrgAA
+'' SIG '' AAABVTANBgkqhkiG9w0BAQsFADB+MQswCQYDVQQGEwJV
+'' SIG '' UzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4GA1UEBxMH
+'' SIG '' UmVkbW9uZDEeMBwGA1UEChMVTWljcm9zb2Z0IENvcnBv
+'' SIG '' cmF0aW9uMSgwJgYDVQQDEx9NaWNyb3NvZnQgQ29kZSBT
+'' SIG '' aWduaW5nIFBDQSAyMDEwMB4XDTE3MDExODE3MzcxNVoX
+'' SIG '' DTE4MDQxMjE3MzcxNVowgY4xCzAJBgNVBAYTAlVTMRMw
+'' SIG '' EQYDVQQIEwpXYXNoaW5ndG9uMRAwDgYDVQQHEwdSZWRt
+'' SIG '' b25kMR4wHAYDVQQKExVNaWNyb3NvZnQgQ29ycG9yYXRp
+'' SIG '' b24xDTALBgNVBAsTBE1PUFIxKTAnBgNVBAMTIE1pY3Jv
+'' SIG '' c29mdCBXaW5kb3dzIEtpdHMgUHVibGlzaGVyMIIBIjAN
+'' SIG '' BgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtWlP6kJd
+'' SIG '' 2OeI8GBCw3xSZqk5jmpNr2s9nflfnX9H5yIeZKX2VH6x
+'' SIG '' TWXwGsin5MigTbyIStQqo7LAWv4G9tOQ4zcrHZc3vgpe
+'' SIG '' 4RnoMbpibkLgmCNNwZJ2PV7NtZPkxurz42tm+XT9dWXT
+'' SIG '' Gn42yIpiaT8kGrs5VLvqi7a5QzUbm5IhAfZfpAn4K4FZ
+'' SIG '' 47lqJ3gTmbkQ4ODC/3whJTngCi1UJMmDP7kEFLm4J6GC
+'' SIG '' DZgnNoZRlbNdxL9Y0pJtsbm+EdZuy1cx+O7YaWmrjJi8
+'' SIG '' ghcvaxZuZEzAPX9bEfCnRoF5PFnsBFH84qcoHbkUhEMI
+'' SIG '' m1DFIvyFWcfchz0pGOZCkwj5pQIDAQABo4IBezCCAXcw
+'' SIG '' HwYDVR0lBBgwFgYKKwYBBAGCNwoDFAYIKwYBBQUHAwMw
+'' SIG '' HQYDVR0OBBYEFD5mS2iWthzVVdM+D3JrW9fwwEmbMFIG
+'' SIG '' A1UdEQRLMEmkRzBFMQ0wCwYDVQQLEwRNT1BSMTQwMgYD
+'' SIG '' VQQFEysyMjk5MDMrZjY5MzBlOGEtMDZjZi00ZTFkLThi
+'' SIG '' ZGMtMjE0OGE3YTk5OTFmMB8GA1UdIwQYMBaAFOb8X3u7
+'' SIG '' IgBY5HJOtfQhdCMy5u+sMFYGA1UdHwRPME0wS6BJoEeG
+'' SIG '' RWh0dHA6Ly9jcmwubWljcm9zb2Z0LmNvbS9wa2kvY3Js
+'' SIG '' L3Byb2R1Y3RzL01pY0NvZFNpZ1BDQV8yMDEwLTA3LTA2
+'' SIG '' LmNybDBaBggrBgEFBQcBAQROMEwwSgYIKwYBBQUHMAKG
+'' SIG '' Pmh0dHA6Ly93d3cubWljcm9zb2Z0LmNvbS9wa2kvY2Vy
+'' SIG '' dHMvTWljQ29kU2lnUENBXzIwMTAtMDctMDYuY3J0MAwG
+'' SIG '' A1UdEwEB/wQCMAAwDQYJKoZIhvcNAQELBQADggEBAOge
+'' SIG '' oOdvZVXDSb0HtYATwNXxJ3qcSKlgcvQVAJ+oRz9uixUK
+'' SIG '' j02r4LZTPZFIQJM3ELa6lhz9AgPDQnuaJwZ6OarFlinx
+'' SIG '' yKap4iA3ofxnwnLA7TXZ4jcMXMRdiD/a0/5YqzWSgC1d
+'' SIG '' uUK/7Swv33Sz1zUqekaMui4c8cejmVknme4i05YpJTPJ
+'' SIG '' G5hS0l6ZAx90cz795+o+pEwOZ4wiyf/8JVQXvJ9uHXy6
+'' SIG '' LKuck+dsEUnbJ4eE9TcSrk9Ab2EshixEVUl1Mtal8r0Z
+'' SIG '' LlFUH4Di3pnt+J2a81WhZcsjst1lNJcqThyoZwqhYSFr
+'' SIG '' qpRHvadd2K3FNEuuZwYLEMOxc5vwrGgwggZwMIIEWKAD
+'' SIG '' AgECAgphDFJMAAAAAAADMA0GCSqGSIb3DQEBCwUAMIGI
+'' SIG '' MQswCQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3Rv
+'' SIG '' bjEQMA4GA1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWlj
+'' SIG '' cm9zb2Z0IENvcnBvcmF0aW9uMTIwMAYDVQQDEylNaWNy
+'' SIG '' b3NvZnQgUm9vdCBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkg
+'' SIG '' MjAxMDAeFw0xMDA3MDYyMDQwMTdaFw0yNTA3MDYyMDUw
+'' SIG '' MTdaMH4xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpXYXNo
+'' SIG '' aW5ndG9uMRAwDgYDVQQHEwdSZWRtb25kMR4wHAYDVQQK
+'' SIG '' ExVNaWNyb3NvZnQgQ29ycG9yYXRpb24xKDAmBgNVBAMT
+'' SIG '' H01pY3Jvc29mdCBDb2RlIFNpZ25pbmcgUENBIDIwMTAw
+'' SIG '' ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDp
+'' SIG '' DmRQeWe1xOP9CQBMnpSs91Zo6kTYz8VYT6mldnxtRbrT
+'' SIG '' OZK0pB75+WWC5BfSj/1EnAjoZZPOLFWEv30I4y4rqEEr
+'' SIG '' GLeiS25JTGsVB97R0sKJHnGUzbV/S7SvCNjMiNZrF5Q6
+'' SIG '' k84mP+zm/jSYV9UdXUn2siou1YW7WT/4kLQrg3TKK7M7
+'' SIG '' RuPwRknBF2ZUyRy9HcRVYldy+Ge5JSA03l2mpZVeqyiA
+'' SIG '' zdWynuUDtWPTshTIwciKJgpZfwfs/w7tgBI1TBKmvlJb
+'' SIG '' 9aba4IsLSHfWhUfVELnG6Krui2otBVxgxrQqW5wjHF9F
+'' SIG '' 4xoUHm83yxkzgGqJTaNqZmN4k9Uwz5UfAgMBAAGjggHj
+'' SIG '' MIIB3zAQBgkrBgEEAYI3FQEEAwIBADAdBgNVHQ4EFgQU
+'' SIG '' 5vxfe7siAFjkck619CF0IzLm76wwGQYJKwYBBAGCNxQC
+'' SIG '' BAweCgBTAHUAYgBDAEEwCwYDVR0PBAQDAgGGMA8GA1Ud
+'' SIG '' EwEB/wQFMAMBAf8wHwYDVR0jBBgwFoAU1fZWy4/oolxi
+'' SIG '' aNE9lJBb186aGMQwVgYDVR0fBE8wTTBLoEmgR4ZFaHR0
+'' SIG '' cDovL2NybC5taWNyb3NvZnQuY29tL3BraS9jcmwvcHJv
+'' SIG '' ZHVjdHMvTWljUm9vQ2VyQXV0XzIwMTAtMDYtMjMuY3Js
+'' SIG '' MFoGCCsGAQUFBwEBBE4wTDBKBggrBgEFBQcwAoY+aHR0
+'' SIG '' cDovL3d3dy5taWNyb3NvZnQuY29tL3BraS9jZXJ0cy9N
+'' SIG '' aWNSb29DZXJBdXRfMjAxMC0wNi0yMy5jcnQwgZ0GA1Ud
+'' SIG '' IASBlTCBkjCBjwYJKwYBBAGCNy4DMIGBMD0GCCsGAQUF
+'' SIG '' BwIBFjFodHRwOi8vd3d3Lm1pY3Jvc29mdC5jb20vUEtJ
+'' SIG '' L2RvY3MvQ1BTL2RlZmF1bHQuaHRtMEAGCCsGAQUFBwIC
+'' SIG '' MDQeMiAdAEwAZQBnAGEAbABfAFAAbwBsAGkAYwB5AF8A
+'' SIG '' UwB0AGEAdABlAG0AZQBuAHQALiAdMA0GCSqGSIb3DQEB
+'' SIG '' CwUAA4ICAQAadO9XTyl7xBaFeLhQ0yL8CZ2sgpf4NP8q
+'' SIG '' LJeVEuXkv8+/k8jjNKnbgbjcHgC+0jVvr+V/eZV35QLU
+'' SIG '' 8evYzU4eG2GiwlojGvCMqGJRRWcI4z88HpP4MIUXyDlA
+'' SIG '' ptcOsyEp5aWhaYwik8x0mOehR0PyU6zADzBpf/7SJSBt
+'' SIG '' b2HT3wfV2XIALGmGdj1R26Y5SMk3YW0H3VMZy6fWYcK/
+'' SIG '' 4oOrD+Brm5XWfShRsIlKUaSabMi3H0oaDmmp19zBftFJ
+'' SIG '' cKq2rbtyR2MX+qbWoqaG7KgQRJtjtrJpiQbHRoZ6GD/o
+'' SIG '' xR0h1Xv5AiMtxUHLvx1MyBbvsZx//CJLSYpuFeOmf3Zb
+'' SIG '' 0VN5kYWd1dLbPXM18zyuVLJSR2rAqhOV0o4R2plnXjKM
+'' SIG '' +zeF0dx1hZyHxlpXhcK/3Q2PjJst67TuzyfTtV5p+qQW
+'' SIG '' BAGnJGdzz01Ptt4FVpd69+lSTfR3BU+FxtgL8Y7tQgnR
+'' SIG '' DXbjI1Z4IiY2vsqxjG6qHeSF2kczYo+kyZEzX3EeQK+Y
+'' SIG '' Zcki6EIhJYocLWDZN4lBiSoWD9dhPJRoYFLv1keZoIBA
+'' SIG '' 7hWBdz6c4FMYGlAdOJWbHmYzEyc5F3iHNs5Ow1+y9T1H
+'' SIG '' U7bg5dsLYT0q15IszjdaPkBCMaQfEAjCVpy/JF1RAp1q
+'' SIG '' edIX09rBlI4HeyVxRKsGaubUxt8jmpZ1xTGCFhkwghYV
+'' SIG '' AgEBMIGVMH4xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpX
+'' SIG '' YXNoaW5ndG9uMRAwDgYDVQQHEwdSZWRtb25kMR4wHAYD
+'' SIG '' VQQKExVNaWNyb3NvZnQgQ29ycG9yYXRpb24xKDAmBgNV
+'' SIG '' BAMTH01pY3Jvc29mdCBDb2RlIFNpZ25pbmcgUENBIDIw
+'' SIG '' MTACEzMAAAFVaf+2twPOkq4AAAAAAVUwDQYJYIZIAWUD
+'' SIG '' BAIBBQCgggEEMBkGCSqGSIb3DQEJAzEMBgorBgEEAYI3
+'' SIG '' AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
+'' SIG '' MC8GCSqGSIb3DQEJBDEiBCCXOQuu22APe+VxGKlOf5lQ
+'' SIG '' M4PdH4v4d+8MMca4kzDPbDA8BgorBgEEAYI3CgMcMS4M
+'' SIG '' LDFoaTdJU085cks3SXNhZWV2WkQyRjllQjJNTzNxdklr
+'' SIG '' eWFIdkJtYnYzYnM9MFoGCisGAQQBgjcCAQwxTDBKoCSA
+'' SIG '' IgBNAGkAYwByAG8AcwBvAGYAdAAgAFcAaQBuAGQAbwB3
+'' SIG '' AHOhIoAgaHR0cDovL3d3dy5taWNyb3NvZnQuY29tL3dp
+'' SIG '' bmRvd3MwDQYJKoZIhvcNAQEBBQAEggEAV7qpphQ4ZJVh
+'' SIG '' LxJzUAZ9ryhK5sotbCOUHGnSQkU1bpZ6EFM/GaCtd5K6
+'' SIG '' 5brFmTgUnYIlUJe+0/d133FZa2+NCj0ovTsFqwGWydXe
+'' SIG '' VGZYdHTCzprpZlmKbI3v0o3qsJGnsJSPzL0BOhjaY7HI
+'' SIG '' OXIjv38KI1cSJKnKN4njv1es3Cu65K282QZNXLIcBn8f
+'' SIG '' ifY7p6H/gEt35TVY2hATa7ndpGBLokxGgGj0pPexnK9V
+'' SIG '' FYE6zDAFV2hPfZUIPSEXPv4mIlkCuDAP8MAAwcut1T44
+'' SIG '' AMVCr12CtXGYJ86DdKX0jw/Vkp88qbS/5pp5emsJcaeV
+'' SIG '' WqcrvDWJ3F2+zDQFY92djKGCE0wwghNIBgorBgEEAYI3
+'' SIG '' AwMBMYITODCCEzQGCSqGSIb3DQEHAqCCEyUwghMhAgED
+'' SIG '' MQ8wDQYJYIZIAWUDBAIBBQAwggE9BgsqhkiG9w0BCRAB
+'' SIG '' BKCCASwEggEoMIIBJAIBAQYKKwYBBAGEWQoDATAxMA0G
+'' SIG '' CWCGSAFlAwQCAQUABCCQ4gFj/1iLEwal1APoSaYLi8PW
+'' SIG '' SqM6Gb0GEqs6yyZSZAIGWK+MLZQNGBMyMDE3MDMxOTEy
+'' SIG '' MzExNC43NjFaMAcCAQGAAgH0oIG5pIG2MIGzMQswCQYD
+'' SIG '' VQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4G
+'' SIG '' A1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9zb2Z0
+'' SIG '' IENvcnBvcmF0aW9uMQ0wCwYDVQQLEwRNT1BSMScwJQYD
+'' SIG '' VQQLEx5uQ2lwaGVyIERTRSBFU046NzI4RC1DNDVGLUY5
+'' SIG '' RUIxJTAjBgNVBAMTHE1pY3Jvc29mdCBUaW1lLVN0YW1w
+'' SIG '' IFNlcnZpY2Wggg7PMIIGcTCCBFmgAwIBAgIKYQmBKgAA
+'' SIG '' AAAAAjANBgkqhkiG9w0BAQsFADCBiDELMAkGA1UEBhMC
+'' SIG '' VVMxEzARBgNVBAgTCldhc2hpbmd0b24xEDAOBgNVBAcT
+'' SIG '' B1JlZG1vbmQxHjAcBgNVBAoTFU1pY3Jvc29mdCBDb3Jw
+'' SIG '' b3JhdGlvbjEyMDAGA1UEAxMpTWljcm9zb2Z0IFJvb3Qg
+'' SIG '' Q2VydGlmaWNhdGUgQXV0aG9yaXR5IDIwMTAwHhcNMTAw
+'' SIG '' NzAxMjEzNjU1WhcNMjUwNzAxMjE0NjU1WjB8MQswCQYD
+'' SIG '' VQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4G
+'' SIG '' A1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9zb2Z0
+'' SIG '' IENvcnBvcmF0aW9uMSYwJAYDVQQDEx1NaWNyb3NvZnQg
+'' SIG '' VGltZS1TdGFtcCBQQ0EgMjAxMDCCASIwDQYJKoZIhvcN
+'' SIG '' AQEBBQADggEPADCCAQoCggEBAKkdDbx3EYo6IOz8E5f1
+'' SIG '' +n9plGt0VBDVpQoAgoX77XxoSyxfxcPlYcJ2tz5mK1vw
+'' SIG '' FVMnBDEfQRsalR3OCROOfGEwWbEwRA/xYIiEVEMM1024
+'' SIG '' OAizQt2TrNZzMFcmgqNFDdDq9UeBzb8kYDJYYEbyWEeG
+'' SIG '' MoQedGFnkV+BVLHPk0ySwcSmXdFhE24oxhr5hoC732H8
+'' SIG '' RsEnHSRnEnIaIYqvS2SJUGKxXf13Hz3wV3WsvYpCTUBR
+'' SIG '' 0Q+cBj5nf/VmwAOWRH7v0Ev9buWayrGo8noqCjHw2k4G
+'' SIG '' kbaICDXoeByw6ZnNPOcvRLqn9NxkvaQBwSAJk3jN/LzA
+'' SIG '' yURdXhacAQVPIk0CAwEAAaOCAeYwggHiMBAGCSsGAQQB
+'' SIG '' gjcVAQQDAgEAMB0GA1UdDgQWBBTVYzpcijGQ80N7fEYb
+'' SIG '' xTNoWoVtVTAZBgkrBgEEAYI3FAIEDB4KAFMAdQBiAEMA
+'' SIG '' QTALBgNVHQ8EBAMCAYYwDwYDVR0TAQH/BAUwAwEB/zAf
+'' SIG '' BgNVHSMEGDAWgBTV9lbLj+iiXGJo0T2UkFvXzpoYxDBW
+'' SIG '' BgNVHR8ETzBNMEugSaBHhkVodHRwOi8vY3JsLm1pY3Jv
+'' SIG '' c29mdC5jb20vcGtpL2NybC9wcm9kdWN0cy9NaWNSb29D
+'' SIG '' ZXJBdXRfMjAxMC0wNi0yMy5jcmwwWgYIKwYBBQUHAQEE
+'' SIG '' TjBMMEoGCCsGAQUFBzAChj5odHRwOi8vd3d3Lm1pY3Jv
+'' SIG '' c29mdC5jb20vcGtpL2NlcnRzL01pY1Jvb0NlckF1dF8y
+'' SIG '' MDEwLTA2LTIzLmNydDCBoAYDVR0gAQH/BIGVMIGSMIGP
+'' SIG '' BgkrBgEEAYI3LgMwgYEwPQYIKwYBBQUHAgEWMWh0dHA6
+'' SIG '' Ly93d3cubWljcm9zb2Z0LmNvbS9QS0kvZG9jcy9DUFMv
+'' SIG '' ZGVmYXVsdC5odG0wQAYIKwYBBQUHAgIwNB4yIB0ATABl
+'' SIG '' AGcAYQBsAF8AUABvAGwAaQBjAHkAXwBTAHQAYQB0AGUA
+'' SIG '' bQBlAG4AdAAuIB0wDQYJKoZIhvcNAQELBQADggIBAAfm
+'' SIG '' iFEN4sbgmD+BcQM9naOhIW+z66bM9TG+zwXiqf76V20Z
+'' SIG '' MLPCxWbJat/15/B4vceoniXj+bzta1RXCCtRgkQS+7lT
+'' SIG '' jMz0YBKKdsxAQEGb3FwX/1z5Xhc1mCRWS3TvQhDIr79/
+'' SIG '' xn/yN31aPxzymXlKkVIArzgPF/UveYFl2am1a+THzvbK
+'' SIG '' egBvSzBEJCI8z+0DpZaPWSm8tv0E4XCfMkon/VWvL/62
+'' SIG '' 5Y4zu2JfmttXQOnxzplmkIz/amJ/3cVKC5Em4jnsGUpx
+'' SIG '' Y517IW3DnKOiPPp/fZZqkHimbdLhnPkd/DjYlPTGpQqW
+'' SIG '' hqS9nhquBEKDuLWAmyI4ILUl5WTs9/S/fmNZJQ96LjlX
+'' SIG '' dqJxqgaKD4kWumGnEcua2A5HmoDF0M2n0O99g/DhO3EJ
+'' SIG '' 3110mCIIYdqwUB5vvfHhAN/nMQekkzr3ZUd46PioSKv3
+'' SIG '' 3nJ+YWtvd6mBy6cJrDm77MbL2IK0cs0d9LiFAR6A+xuJ
+'' SIG '' KlQ5slvayA1VmXqHczsI5pgt6o3gMy4SKfXAL1QnIffI
+'' SIG '' rE7aKLixqduWsqdCosnPGUFN4Ib5KpqjEWYw07t0Mkvf
+'' SIG '' Y3v1mYovG8chr1m1rtxEPJdQcdeh0sVV42neV8HR3jDA
+'' SIG '' /czmTfsNv11P6Z0eGTgvvM9YBS7vDaBQNdrvCScc1bN+
+'' SIG '' NR4Iuto229Nfj950iEkSMIIE2jCCA8KgAwIBAgITMwAA
+'' SIG '' ALI1BWg3IhwNpwAAAAAAsjANBgkqhkiG9w0BAQsFADB8
+'' SIG '' MQswCQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3Rv
+'' SIG '' bjEQMA4GA1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWlj
+'' SIG '' cm9zb2Z0IENvcnBvcmF0aW9uMSYwJAYDVQQDEx1NaWNy
+'' SIG '' b3NvZnQgVGltZS1TdGFtcCBQQ0EgMjAxMDAeFw0xNjA5
+'' SIG '' MDcxNzU2NTdaFw0xODA5MDcxNzU2NTdaMIGzMQswCQYD
+'' SIG '' VQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4G
+'' SIG '' A1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9zb2Z0
+'' SIG '' IENvcnBvcmF0aW9uMQ0wCwYDVQQLEwRNT1BSMScwJQYD
+'' SIG '' VQQLEx5uQ2lwaGVyIERTRSBFU046NzI4RC1DNDVGLUY5
+'' SIG '' RUIxJTAjBgNVBAMTHE1pY3Jvc29mdCBUaW1lLVN0YW1w
+'' SIG '' IFNlcnZpY2UwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAw
+'' SIG '' ggEKAoIBAQCYSgG70Vj1f3SRQumhLlNd8iwgbxIum9PX
+'' SIG '' lZXcnW+JfA5rcClNsC4PNVb2jwJL+HxVbVDNP8eqePIQ
+'' SIG '' B6gHawO7/CvwqiWd3fzxY3AkZW+E+ktEXs5yKH3Csx/F
+'' SIG '' b4ZqmYeuuv7MBZi+b74Vgkdlty91yrzaEHqbOzJP2h1I
+'' SIG '' kg4i57GxQm1ZwmKeLCoK8DU3IAIJ7OEU47UX44B+VO5d
+'' SIG '' UQ6T2ZpKM8mvJg3r9msjlS8/XRIhN0okz469D5tTP+7p
+'' SIG '' 7oxwe9o79Wq5mTy32wF8Ess/Vc70r9YGuTo833wn1HKU
+'' SIG '' za9KCTbGIuxdc7064oAaHfW9d3CNY3B7wMD27p40aYe3
+'' SIG '' AgMBAAGjggEbMIIBFzAdBgNVHQ4EFgQUM2S+Z2sc3Plj
+'' SIG '' RAZI5MVDyZD2gpUwHwYDVR0jBBgwFoAU1WM6XIoxkPND
+'' SIG '' e3xGG8UzaFqFbVUwVgYDVR0fBE8wTTBLoEmgR4ZFaHR0
+'' SIG '' cDovL2NybC5taWNyb3NvZnQuY29tL3BraS9jcmwvcHJv
+'' SIG '' ZHVjdHMvTWljVGltU3RhUENBXzIwMTAtMDctMDEuY3Js
+'' SIG '' MFoGCCsGAQUFBwEBBE4wTDBKBggrBgEFBQcwAoY+aHR0
+'' SIG '' cDovL3d3dy5taWNyb3NvZnQuY29tL3BraS9jZXJ0cy9N
+'' SIG '' aWNUaW1TdGFQQ0FfMjAxMC0wNy0wMS5jcnQwDAYDVR0T
+'' SIG '' AQH/BAIwADATBgNVHSUEDDAKBggrBgEFBQcDCDANBgkq
+'' SIG '' hkiG9w0BAQsFAAOCAQEAQeCyoKDK9ChvzI3d/tu9IFWJ
+'' SIG '' bCApdnY/1CfJXnuD+8HCRzaN9nohTEQbOnFjqyMmv0Su
+'' SIG '' ohnvJ9ZYhrp6cPovtEvkcUg6V9K1/6MQG5oJw18eCegw
+'' SIG '' zZHrVFzBC1n+9OpSL6h6NWtgtoM4CaaadtuWs9c1h6hk
+'' SIG '' OlwGz0wTDcYiGLcAY4y4dbFF4alHWtv//LsaHVQ52xVf
+'' SIG '' 5lfkNJ54L/203CDf0hMQo849cdnhsF5lWXuObO6Vs5nf
+'' SIG '' 8KgcYQ9MT1eq1sQx9nwNYutsawChCoTSfHEpJyKk2BMP
+'' SIG '' wHrInd06OereJwbcBGGOPGqEmt9OtprtsEzh+lGNgEIF
+'' SIG '' pib2g28B5qGCA3gwggJgAgEBMIHjoYG5pIG2MIGzMQsw
+'' SIG '' CQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQ
+'' SIG '' MA4GA1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9z
+'' SIG '' b2Z0IENvcnBvcmF0aW9uMQ0wCwYDVQQLEwRNT1BSMScw
+'' SIG '' JQYDVQQLEx5uQ2lwaGVyIERTRSBFU046NzI4RC1DNDVG
+'' SIG '' LUY5RUIxJTAjBgNVBAMTHE1pY3Jvc29mdCBUaW1lLVN0
+'' SIG '' YW1wIFNlcnZpY2WiJQoBATAJBgUrDgMCGgUAAxUAvf/F
+'' SIG '' lWOQ8ROcYNYZwK/puJ4eIB2ggcIwgb+kgbwwgbkxCzAJ
+'' SIG '' BgNVBAYTAlVTMRMwEQYDVQQIEwpXYXNoaW5ndG9uMRAw
+'' SIG '' DgYDVQQHEwdSZWRtb25kMR4wHAYDVQQKExVNaWNyb3Nv
+'' SIG '' ZnQgQ29ycG9yYXRpb24xDTALBgNVBAsTBE1PUFIxJzAl
+'' SIG '' BgNVBAsTHm5DaXBoZXIgTlRTIEVTTjo0REU5LTBDNUUt
+'' SIG '' M0UwOTErMCkGA1UEAxMiTWljcm9zb2Z0IFRpbWUgU291
+'' SIG '' cmNlIE1hc3RlciBDbG9jazANBgkqhkiG9w0BAQUFAAIF
+'' SIG '' ANx4jkcwIhgPMjAxNzAzMTkwNDU3NDNaGA8yMDE3MDMy
+'' SIG '' MDA0NTc0M1owdjA8BgorBgEEAYRZCgQBMS4wLDAKAgUA
+'' SIG '' 3HiORwIBADAJAgEAAgFoAgH/MAcCAQACAisbMAoCBQDc
+'' SIG '' ed/HAgEAMDYGCisGAQQBhFkKBAIxKDAmMAwGCisGAQQB
+'' SIG '' hFkKAwGgCjAIAgEAAgMW42ChCjAIAgEAAgMHoSAwDQYJ
+'' SIG '' KoZIhvcNAQEFBQADggEBAHdqrNVwP6a2n+Ye2+kGs+Oz
+'' SIG '' MB4YbVU+T4oJxmY16AmRfxcn0unfXRNWR/60KbxNM1fC
+'' SIG '' JYNxsBaMqpzrnRcYhijczbLEvtZt0zfsHkYl8O8wKd0Y
+'' SIG '' +Mvak5h2VSTfHcwPosMlQANVljZ8LKFFEmFCBmfynyIR
+'' SIG '' oDoUSPiv3wISjE+5/bj7ioilUbo32zIOsrSxRchdYP73
+'' SIG '' 5+BZGxTmSAc3VyMQnMfZNo5U4drRdhZLnMAttm5Cviph
+'' SIG '' F38VK7tq+5IdEepJCAFSpAp84AzSkuKWYPqvTYbyS+uU
+'' SIG '' cyXQ6KsT1Mx/dAb5ySdcUJjN5NZoqrOD1ftyW2ozDQG+
+'' SIG '' W79vU64SYnwxggL1MIIC8QIBATCBkzB8MQswCQYDVQQG
+'' SIG '' EwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4GA1UE
+'' SIG '' BxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9zb2Z0IENv
+'' SIG '' cnBvcmF0aW9uMSYwJAYDVQQDEx1NaWNyb3NvZnQgVGlt
+'' SIG '' ZS1TdGFtcCBQQ0EgMjAxMAITMwAAALI1BWg3IhwNpwAA
+'' SIG '' AAAAsjANBglghkgBZQMEAgEFAKCCATIwGgYJKoZIhvcN
+'' SIG '' AQkDMQ0GCyqGSIb3DQEJEAEEMC8GCSqGSIb3DQEJBDEi
+'' SIG '' BCCXkjlbqU/g9UJ1jKNGIHAM9BLwS5E4UMj/IWt/sDhS
+'' SIG '' 7jCB4gYLKoZIhvcNAQkQAgwxgdIwgc8wgcwwgbEEFL3/
+'' SIG '' xZVjkPETnGDWGcCv6bieHiAdMIGYMIGApH4wfDELMAkG
+'' SIG '' A1UEBhMCVVMxEzARBgNVBAgTCldhc2hpbmd0b24xEDAO
+'' SIG '' BgNVBAcTB1JlZG1vbmQxHjAcBgNVBAoTFU1pY3Jvc29m
+'' SIG '' dCBDb3Jwb3JhdGlvbjEmMCQGA1UEAxMdTWljcm9zb2Z0
+'' SIG '' IFRpbWUtU3RhbXAgUENBIDIwMTACEzMAAACyNQVoNyIc
+'' SIG '' DacAAAAAALIwFgQUPf0drBlROvuzYjMtg0A0mV5XDlAw
+'' SIG '' DQYJKoZIhvcNAQELBQAEggEASJibVQ0WuSrDbNYu3UCm
+'' SIG '' moJaNIN78EL6ZiEKHdktk3bcSlO65QfaMZpueE3H+UwG
+'' SIG '' qWdJGrUkwhLbTg7EuHhttcD7zrTYsZ7PuX7hKiRVf1fb
+'' SIG '' ykbtcmbumC8mcjfT2fEax2GNhpGQ6cbxjEK66WS6UHIG
+'' SIG '' c63ylVXNeg4vq4fWw2iN/r+5OyRW1zIR3XuloCWc0VMt
+'' SIG '' TR8U3CRVD6ZBG6Xiju493ZKQo3Bs1GBLtnelHn5Llb0J
+'' SIG '' tOUy1KR5zkVXPwyM+EDq5GQs+Vn0HP1KR0gEU4eZSHzp
+'' SIG '' OhNDUAcwqr5Vqva+O0ZimHAoImV5G+31XhufxMRHpKWL
+'' SIG '' giMJMMXAvfsXiw==
+'' SIG '' End signature block

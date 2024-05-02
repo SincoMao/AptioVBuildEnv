@@ -1,0 +1,89 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NdisMRegisterIoPortRange
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    A miniport driver calls NdisMRegisterIoPortRange from its MiniportInitializeEx or MINIPORT_ADD_DEVICE functions.
+    MiniportInitializeEx or MINIPORT_ADD_DEVICE must call NdisMSetMiniportAttributes before calling NdisMRegisterIoPortRange.
+
+    Related Rule:
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507197
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state{
+    enum { initial, in_initialize, after_set_ok, after_set_ko} s= initial;
+}
+
+NdisMSetMiniportAttributes.entry
+{
+   if (s ==initial) 
+   {
+      abort "You can call $fname only from MiniportInitializeEx or MINIPORT_ADD_DEVICE";
+   }
+}
+
+NdisMSetMiniportAttributes.exit
+{
+  if ($return == NDIS_STATUS_SUCCESS )
+  {
+    s = after_set_ok;
+  }
+  else
+  {
+    s = after_set_ko;
+  }
+}
+
+NdisMRegisterIoPortRange.entry
+{ 
+  if ( s == initial) 
+   {
+    abort "You can call $fname only from MiniportInitializeEx or MINIPORT_ADD_DEVICE";
+   }
+   else
+   {  
+      if (s == in_initialize)
+      {
+        abort "You cannot call $fname before NdisMSetMiniportAttributes";
+      } 
+      else
+      {
+        if (s == after_set_ko)
+        {
+          abort "NdisMSetMiniportAttributes call failed, you cannot call $faname";
+        }
+      }
+    }
+}
+
+[sdv_MINIPORT_INITIALIZE,fun_MINIPORT_ADD_DEVICE].entry
+{
+  s =in_initialize;
+}
+
+[sdv_MINIPORT_INITIALIZE,fun_MINIPORT_ADD_DEVICE].exit
+{
+  s =initial;
+}

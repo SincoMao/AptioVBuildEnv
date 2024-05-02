@@ -1,0 +1,47 @@
+<!--
+***********************************************************************************************
+PreToolsetRules.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file defines the steps/targets required to build driver projects.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+  
+    <DriverType>KMDF</DriverType>
+    <DriverType Condition="('$(TARGETTYPE)'=='DRIVER' or ('$(TARGETTYPE)'=='DRIVER_LIBRARY' or '$(KM_LIBRARY)'=='1')) and '$(KMDF_VERSION_MAJOR)' ==''">WDM</DriverType>
+    <DriverType Condition="('$(TARGETTYPE)'=='DRIVER' or ('$(TARGETTYPE)'=='DRIVER_LIBRARY' or '$(KM_LIBRARY)'=='1')) and '$(KMDF_VERSION_MAJOR)' !=''">KMDF</DriverType>
+    <DriverType Condition="'$(TARGETTYPE)'=='DYNLINK' and '$(UMDF_VERSION_MAJOR)' !=''">UMDF</DriverType>
+    <DriverType Condition="'$(TARGETTYPE)'=='EXPORT_DRIVER'">ExportDriver</DriverType>    
+    <DriverType Condition="'$(TARGETTYPE)'=='MINIPORT'">Miniport</DriverType>
+    <DriverType Condition="'$(TARGETTYPE)'=='GDI_DRIVER'">GdiDriver</DriverType>
+    <DriverType Condition="'$(TARGETTYPE)'=='NOTARGET'">None</DriverType>
+    
+    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+    <PlatformToolset  Condition="'$(TARGETTYPE)'=='DRIVER_LIBRARY' or '$(KM_LIBRARY)'=='1'">WindowsKernelModeDriver10.0</PlatformToolset>
+    <PlatformToolset  Condition="'$(TARGETTYPE)'=='DYNLINK' and '$(UMDF_VERSION_MAJOR)' ==''">WindowsApplicationForDrivers10.0</PlatformToolset>
+    <PlatformToolset  Condition="'$(TARGETTYPE)'=='PROGRAM'">WindowsApplicationForDrivers10.0</PlatformToolset>
+    <PlatformToolset  Condition="'$(TARGETTYPE)'=='LIBRARY' and '$(KM_LIBRARY)'==''">WindowsApplicationForDrivers10.0</PlatformToolset>
+    <PlatformToolset  Condition="'$(TARGETTYPE)'=='DYNLINK' and '$(UMDF_VERSION_MAJOR)' !=''">WindowsUserModeDriver10.0</PlatformToolset>
+    <DriverType Condition="'$(PlatformToolset)'=='WindowsApplicationForDrivers10.0'"></DriverType>
+    
+    <ConfigurationType>Driver</ConfigurationType>
+    <ConfigurationType Condition="'$(TARGETTYPE)'=='DRIVER' and '$(DriverType)'!='GdiDriver'">Driver</ConfigurationType>
+    <ConfigurationType Condition="'$(TARGETTYPE)'=='LIBRARY'" >StaticLibrary</ConfigurationType>
+    <ConfigurationType Condition="'$(TARGETTYPE)'=='LIBRARY'" >StaticLibrary</ConfigurationType>
+    <ConfigurationType Condition="'$(TARGETTYPE)'=='PROGRAM'" >Application</ConfigurationType>
+    <ConfigurationType Condition="'$(TARGETTYPE)'=='DRIVER_LIBRARY' or '$(KM_LIBRARY)'=='1'" >StaticLibrary</ConfigurationType>
+    <ConfigurationType Condition="'$(TARGETTYPE)'=='DYNLINK' or '$(TARGETTYPE)'=='GDI_DRIVER' " >DynamicLibrary</ConfigurationType>
+    <ConfigurationType Condition="'$(TARGETTYPE)'=='NOTARGET'" >Utility</ConfigurationType>
+    <!-- <RootNamespace>$(TARGETNAME).vcxproj</RootNamespace> -->
+    
+  </PropertyGroup>
+</Project>
+	  
+	

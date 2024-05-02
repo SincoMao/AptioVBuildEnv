@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema targetNamespace='http://schemas.microsoft.com/Mobile/Page'
+		xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+		xmlns='http://schemas.microsoft.com/Mobile/Page'
+		xmlns:vs='http://schemas.microsoft.com/Visual-Studio-Intellisense'
+		vs:ishtmlschema='true'
+		vs:isserverschema='true'
+		vs:SuccinctFriendlyName="Mobile HTML">
+
+		<xsd:element name="html" type="htmlType" />
+		<xsd:element name="script" type="scriptType" vs:nonbrowseable="true" />
+		<xsd:element name="head" type="headType" vs:nonbrowseable="true" />
+		<xsd:element name="body" type="bodyType" vs:nonbrowseable="true" />
+
+		<xsd:complexType name="htmlType">
+				<xsd:choice>
+						<xsd:element name="body" type="bodyType" />
+						<xsd:element name="head" type="headType" />
+						<xsd:element name="script" type="scriptType" />
+				</xsd:choice>
+		</xsd:complexType>
+
+		<xsd:complexType name="headType" mixed="true">
+				<xsd:choice>
+						<xsd:element name="meta" vs:htmlequivalent="meta">
+								<xsd:complexType mixed="true">
+										<xsd:attribute name="content"/>
+										<xsd:attribute name="http-equiv"/>
+										<xsd:attribute name="name"/>
+										<xsd:attribute name="id"/>
+										<xsd:attribute name="runat" vs:readonly="true">
+												<xsd:simpleType>
+														<xsd:restriction base="xsd:NMTOKEN">
+																<xsd:enumeration value="server"/>
+														</xsd:restriction>
+												</xsd:simpleType>
+										</xsd:attribute>
+								</xsd:complexType>
+						</xsd:element>
+				</xsd:choice>
+		</xsd:complexType>
+
+		<xsd:complexType name="scriptType" mixed="true">
+				<xsd:attribute name="language" default="jscript">
+			<xsd:union>
+							<xsd:simpleType vs:serverlanguages="true">
+									<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="vbs" />
+						<xsd:enumeration value="vbscript" />
+						<xsd:enumeration value="js" />
+						<xsd:enumeration value="jscript" />
+						<xsd:enumeration value="javascript" />
+									</xsd:restriction>
+							</xsd:simpleType>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string" />
+				</xsd:simpleType>
+			</xsd:union>
+				</xsd:attribute>
+				<xsd:attribute name="src" type="xsd:anyURI" />
+				<xsd:attribute name="id" />
+				<xsd:attribute name="runat" vs:readonly="true">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:NMTOKEN">
+										<xsd:enumeration value="server" />
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+		</xsd:complexType>
+
+		<xsd:complexType name="bodyType" mixed="true">
+				<xsd:element name="script" type="scriptType" vs:nonbrowseable="true"/>
+				<xsd:attribute name="runat" vs:readonly="true">
+						<xsd:simpleType>
+								<xsd:restriction base="xsd:NMTOKEN">
+										<xsd:enumeration value="server"/>
+								</xsd:restriction>
+						</xsd:simpleType>
+				</xsd:attribute>
+		</xsd:complexType>
+
+</xsd:schema>

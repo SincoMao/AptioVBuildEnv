@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html" />
+    <link href="GpuProfilingAnalysisViewScripted.css" type="text/css" rel="stylesheet" data-plugin-theme="true" />
+    <script src="plugin.js"></script>
+    <script src="DiagnosticsHub.js"></script>
+    <script src="VsGraphics.js"></script>
+    <title>Gpu Details View</title>
+</head>
+<body>
+    <div class="Analysis-Warnings" id="Analysis-Warnings-Container">
+        <span id="Analysis-Warnings-Span">Gpu usage analysis failed.</span>
+    </div>
+    <div class="Gpu-Details" id="Gpu-Details-Container">
+        <div class="Gpu-Details-Main" id="Gpu-Details-Main">
+            <span id="detailsPrefix1">Select a range of up to three seconds in the timeline above,</span>
+            <span id="detailsPrefix2">and then </span><a href="about:blank" id="detailsLink">view details</a><span id="detailsSuffix"> of GPU usage for that range.</span>
+        </div>
+        <div class="Gpu-Details-Progress" id="Gpu-Details-Progress">
+            <span id="inProgressSpan">Details document loading currently in progress</span>
+        </div>
+    </div>
+    <script type="text/javascript">
+        (function () {
+            Microsoft.Plugin.addEventListener("pluginready", pluginLoaded);
+
+            function pluginLoaded() {
+                var gpuDataControl;
+                // viewId is the GUID of the IDetailsView that is hosting this control
+                gpuDataControl = new Microsoft.GpuProfiling.GpuProfilingDetailsControl(
+                  {
+                      viewId: "FA9B3689-C2E0-4961-AD08-D6E3DB2C9F38"
+                  });
+            }
+        })();
+    </script>
+</body>
+</html>

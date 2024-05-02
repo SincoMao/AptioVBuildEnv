@@ -1,0 +1,56 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NsRemoveLockMnSurpriseRemove
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies a driver does not return STATUS_NOT_SUPPORTED when processing IRP_MJ_PNP with MinorFunction IRP_MN_SUPRISE_REMOVAL.
+    This rule only applies to FDO and FIDO drivers.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507288
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+   
+}
+
+IoAcquireRemoveLock.exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+       halt;
+    }
+}
+
+
+[sdv_RunSurpriseRemoveDevice].exit
+{
+    if($return==STATUS_NOT_SUPPORTED&&$2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP)
+    {
+      abort "Suprise Remove Device Irp is not supported.";
+    }
+    else
+    {
+        halt;
+    }
+}
+

@@ -1,0 +1,34 @@
+﻿[$RootKey$\Projects\{13B669BE-BB05-4DDF-9536-439F39A36129}]
+@="ProjectFactory"
+"DisplayName"="Common Project System"
+"DisplayProjectFileExtensions"="Common Project System Files (*.msbuildproj);*.msbuildproj"
+"Package"="{3347BEE8-D7A1-4082-95E4-38A439553CC2}"
+"DefaultProjectExtension"="msbuildproj"
+"PossibleProjectExtensions"="msbuildproj"
+"ProjectTemplatesDir"="$RootFolder$\Common7\IDE\CommonExtensions\Microsoft\Project\Templates\Projects"
+"Language(VsTemplate)"="CPS Projects"
+"DisableAsynchronousSolutionLoad"=dword:00000000
+[$RootKey$\NewProjectTemplates\TemplateDirs\{3347BEE8-D7A1-4082-95E4-38A439553CC2}\/1]
+@="CPS Projects"
+"SortPriority"=dword:00000064
+"TemplatesDir"="$RootFolder$\Common7\IDE\CommonExtensions\Microsoft\Project\Templates\Projects"
+[$RootKey$\Projects\{13B669BE-BB05-4DDF-9536-439F39A36129}\AddItemTemplates\TemplateDirs\{3347BEE8-D7A1-4082-95E4-38A439553CC2}\/1]
+@="My Items"
+"TemplatesDir"="$RootFolder$\Common7\IDE\CommonExtensions\Microsoft\Project\Templates\Projects\ProjectItems"
+"SortPriority"=dword:000001F4
+
+[$RootKey$\Generators\{13B669BE-BB05-4DDF-9536-439F39A36129}\ResXFileCodeGenerator]
+@="Microsoft ResX File Code Generator"
+"CLSID"="{c77981ec-ba19-3348-878f-6f88745a251e}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+[$RootKey$\Generators\{13B669BE-BB05-4DDF-9536-439F39A36129}\.tt]
+@="TextTemplatingFileGenerator"
+[$RootKey$\Generators\{13B669BE-BB05-4DDF-9536-439F39A36129}\TextTemplatingFileGenerator]
+@="Generator that uses the Text Templating engine"
+"CLSID"="{b9c665d2-0451-4ae2-a38c-443b85d634f2}"
+"GeneratesDesignTimeSource"=dword:00000001
+
+; MSBuild host objects can be registered for CPS just like in C#/VB.  But IHostObjectProvider exports also work.
+; [$RootKey$\Projects\{13B669BE-BB05-4DDF-9536-439F39A36129}\MSBuildHostObjects\CoreCompile;Csc]
+; @="{E2905C7C-4435-4212-9148-BE9614BD377B}"

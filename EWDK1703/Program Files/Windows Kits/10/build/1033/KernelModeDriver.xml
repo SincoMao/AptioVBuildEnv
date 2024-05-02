@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Rule Name="KernelModeDriver" PageTemplate="tool" Order="32" DisplayName="Driver Settings" xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <Rule.Categories>
+    <Category Name="DriverModel" DisplayName="Driver Model" />
+    <Category Name="NetAdapter" DisplayName="Network Adapter Driver" />
+    <Category Name="UCM" DisplayName="USB Connector Manager" />
+    <Category Name="URS" DisplayName="USB Role Switch Driver" />
+    <Category Name="UDE" DisplayName="USB Device Emulation" />
+    <Category Name="UCMTCPCI" DisplayName="USB Type-C Port Controller Interface" />
+  </Rule.Categories>
+  <Rule.DataSource>
+    <DataSource Persistence="ProjectFile" Label="Configuration" HasConfigurationCondition="true" />
+  </Rule.DataSource>
+  <EnumProperty Name="DriverType" DisplayName="Type of driver" Description="Specific type of driver that will be created" Category="DriverModel" F1Keyword="driver.drivermodelsettings.properties">
+    <EnumValue Name="WDM" DisplayName="WDM" Description="A WDM driver (including all miniport/port drivers like NDIS, StorPort, etc)">
+    </EnumValue>
+    <EnumValue Name="KMDF" DisplayName="KMDF" Description="A KMDF driver">
+    </EnumValue>
+    <EnumValue Name="ExportDriver" DisplayName="Export driver (WDM)" Description="A WDM driver which exports functions which other drivers can call">
+    </EnumValue>
+  </EnumProperty>
+  <EnumProperty Name="KMDF_VERSION_MAJOR" DisplayName="KMDF Version Major" Description="Major Version of KMDF that will be used when compiling your driver" Category="DriverModel" F1Keyword="driver.drivermodelsettings.properties">
+    <EnumValue Name="1">
+    </EnumValue>
+  </EnumProperty>
+  <EnumProperty Name="KMDF_VERSION_MINOR" DisplayName="KMDF Version Minor" Description="Minor Version of KMDF that will be used when compiling your driver" Category="DriverModel" F1Keyword="driver.drivermodelsettings.properties">
+    <EnumValue Name="21" />
+    <EnumValue Name="19" />
+    <EnumValue Name="17" />
+    <EnumValue Name="15" />
+    <EnumValue Name="13" />
+    <EnumValue Name="11" />
+    <EnumValue Name="9" />
+  </EnumProperty>
+  <EnumProperty Name="ALLOW_DATE_TIME" DisplayName="Allow Date, Time, and Timestamp" Description="Defines standard C/CPP macros __DATE__, __TIME__, __TIMESTAMP__" Category="DriverModel" F1Keyword="driver.drivermodelsettings.properties">
+    <EnumValue Name="1" DisplayName="Yes">
+    </EnumValue>
+    <EnumValue Name="0" DisplayName="No">
+    </EnumValue>
+  </EnumProperty>
+  <BoolProperty Name="OverrideTargetVersionDefines" DisplayName="Override Target Configuration Preprocessor Definitions" Description="Overrides the default values for preprocessing symbols:_WIN32_WINNT, WINVER, WINNT and NTDDI_VERSION for your source file. Note the default values are controlled by the current target configuration." Category="DriverModel" F1Keyword="driver.drivermodelsettings.properties" />
+  <!-- NetAdapter -->
+  <BoolProperty Name="NetAdapterDriver" DisplayName="Link to the Network Adapter Class Extension" Description="Indicates whether the driver uses the Network Adapter Class Extension.  The Network Adapter Class Extension API may be changed and drivers using the preview version will not receive WHQL certification." Category="NetAdapter" />
+  <EnumProperty Name="NETADAPTER_VERSION_MAJOR" DisplayName="Network Adapter Major Version" Description="Major version of Network Adapter Class Extension that will be used when compiling your driver" Category="NetAdapter" >
+    <EnumValue Name="1" />
+  </EnumProperty>
+  <EnumProperty Name="NETADAPTER_VERSION_MINOR" DisplayName="Network Adapter Minor Version" Description="Minor version of Network Adapter Class Extension that will be used when compiling your driver" Category="NetAdapter" >
+    <EnumValue Name="0" DisplayName="0 (Preview)" />
+  </EnumProperty>
+  <!-- End NetAdapter -->
+  <!-- UCM -->
+  <BoolProperty Name="UcmDriver" DisplayName="Link to the USB Connector Manager Class Extension" Description="Indicates whether the driver uses the USB Connector Manager Class Extension" Category="UCM" />
+  <EnumProperty Name="UCM_VERSION_MAJOR" DisplayName="UCM Major Version" Description="Major version of USB Connector Manager Class Extension that will be used when compiling your driver" Category="UCM" >
+    <EnumValue Name="1" />
+  </EnumProperty>
+  <EnumProperty Name="UCM_VERSION_MINOR" DisplayName="UCM Minor Version" Description="Minor version of USB Connector Manager Class Extension that will be used when compiling your driver" Category="UCM" >
+    <EnumValue Name="0" />
+  </EnumProperty>
+  <!-- End UCM -->
+  <!-- UCM-TCPCI -->
+  <BoolProperty Name="UcmTcpciDriver" DisplayName="Link to the USB Type-C Port Controller Interface Class Extension" Description="Indicates whether the driver uses the USB Type-C Port Controller Interface Class Extension" Category="UCMTCPCI" />
+  <EnumProperty Name="UCMTCPCI_VERSION_MAJOR" DisplayName="UCM-TCPCI Major Version" Description="Major version of USB Type-C Port Controller Interface Class Extension that will be used when compiling your driver" Category="UCMTCPCI" >
+    <EnumValue Name="1" />
+  </EnumProperty>
+  <EnumProperty Name="UCMTCPCI_VERSION_MINOR" DisplayName="UCM-TCPCI Minor Version" Description="Minor version of USB Type-C Port Controller Interface Class Extension that will be used when compiling your driver" Category="UCMTCPCI" >
+    <EnumValue Name="0" />
+  </EnumProperty>
+  <!-- End UCM-TCPCI -->
+  <!-- URS -->
+  <BoolProperty Name="UrsDriver" DisplayName="Link to the USB Role Switch Class Extension" Description="Indicates whether the driver uses the USB Role Switch Class Extension" Category="URS" />
+  <EnumProperty Name="URS_VERSION_MAJOR" DisplayName="URS Major Version" Description="Major version of USB Role Switch Class Extension that will be used when compiling your driver" Category="URS" >
+    <EnumValue Name="1" />
+  </EnumProperty>
+  <EnumProperty Name="URS_VERSION_MINOR" DisplayName="URS Minor Version" Description="Minor version of USB Role Switch Class Extension that will be used when compiling your driver" Category="URS" >
+    <EnumValue Name="0" />
+  </EnumProperty>
+  <!-- End URS -->
+  <!-- UDE -->
+  <BoolProperty Name="UdeDriver" DisplayName="Link to the USB Device Emulation Class Extension" Description="Indicates whether the driver uses the USB Device Emulation Class Extension" Category="UDE" />
+  <EnumProperty Name="UDE_VERSION_MAJOR" DisplayName="UDE Major Version" Description="Major version of USB Device Emulation Class Extension that will be used when compiling your driver" Category="UDE" >
+    <EnumValue Name="1" />
+  </EnumProperty>
+  <EnumProperty Name="UDE_VERSION_MINOR" DisplayName="UDE Minor Version" Description="Minor version of USB Device Emulation Class Extension that will be used when compiling your driver" Category="UDE" >
+    <EnumValue Name="0" />
+  </EnumProperty>
+  <!-- End UDE -->
+</Rule>

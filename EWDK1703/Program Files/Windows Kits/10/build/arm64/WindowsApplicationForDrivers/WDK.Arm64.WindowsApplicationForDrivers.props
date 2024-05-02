@@ -1,0 +1,21 @@
+<!--
+***********************************************************************************************
+WDK.arm64.WindowsApplicationForDrivers
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+<!-- This file contains WDK version specific,$(Platform) specific and $(PlatformToolset) Specific properties -->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+    <NotSupportedForCurrentOS Condition="'$(TargetVersion)'=='Win7' or '$(TargetVersion)'=='Windows7' or
+                                         '$(TargetVersion)'=='Win8' or '$(TargetVersion)'=='Windows8' or
+                                         '$(TargetVersion)'=='WindowsV6.3'">true</NotSupportedForCurrentOS>
+    <TargetVersion Condition="'$(TargetVersion)' == ''">$(LatestTargetVersion)</TargetVersion>
+    <DDKPlatform Condition="'$(Platform)' == 'arm64'">arm64</DDKPlatform>
+  </PropertyGroup>
+</Project>

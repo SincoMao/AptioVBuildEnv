@@ -1,0 +1,789 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) Microsoft Corporation.  All rights reserved.
+-->
+<!--
+Use of this source code is subject to the terms of the Microsoft
+premium shared source license agreement under which you licensed
+this source code. If you did not accept the terms of the license
+agreement, you are not authorized to use this source code.
+For the terms of the license, please see the license agreement
+signed by you and Microsoft.
+THE SOURCE CODE IS PROVIDED "AS IS", WITH NO WARRANTIES OR INDEMNITIES.
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace= "http://WPCommontypes"
+    xmlns="http://WPCommontypes"
+    xmlns:y="http://WPTokens">
+    <xs:import namespace="http://WPTokens" schemaLocation="ShellTokens.xsd"/>
+    <xs:simpleType name="ST_RuntimeType">
+    <xs:annotation>
+        <xs:documentation>
+        Silverlight and XNA apps are managed.
+        This setting is used to set the runtime type of a Task but we haven't currently made provision for
+        an app to have tasks of different run-time types.
+        </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="Native"/>
+        <xs:enumeration value="Silverlight"/>
+        <xs:enumeration value="XNA"/>
+        <xs:enumeration value="Modern Native"/>
+        <xs:enumeration value="XAML"/>
+    </xs:restriction>
+</xs:simpleType>
+
+    <xs:complexType name="CT_Capability">
+    <xs:annotation>
+        <xs:documentation>
+        Defines a list of capabilites that the platform supports
+        </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Name" use="required">
+        <xs:simpleType>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value= "ID_CAP_ACCESSIBILITY"/>
+            <xs:enumeration value= "ID_CAP_APPOINTMENTS"/>
+            <xs:enumeration value= "ID_CAP_CAMERA"/>
+            <xs:enumeration value= "ID_CAP_CONTACTS"/>
+            <xs:enumeration value= "ID_CAP_ENTERPRISE_SHARED_DATA"/>
+            <xs:enumeration value= "ID_CAP_GAMERSERVICES"/>
+            <xs:enumeration value= "ID_CAP_IDENTITY_DEVICE"/>
+            <xs:enumeration value= "ID_CAP_IDENTITY_USER"/>
+            <xs:enumeration value= "ID_CAP_INTEROPSERVICES"/>
+            <xs:enumeration value= "ID_CAP_ISV_CAMERA"/>
+            <xs:enumeration value= "ID_CAP_LOCATION"/>
+            <xs:enumeration value= "ID_CAP_MEDIALIB_AUDIO"/>
+            <xs:enumeration value= "ID_CAP_MEDIALIB_PLAYBACK"/>
+            <xs:enumeration value= "ID_CAP_MEDIALIB_PHOTO"/>
+            <xs:enumeration value= "ID_CAP_MEDIALIB_PHOTO_FULL"/>
+            <xs:enumeration value= "ID_CAP_MICROPHONE"/>
+            <xs:enumeration value= "ID_CAP_MO_CLOUDMESSAGING"/>
+            <xs:enumeration value= "ID_CAP_NETWORKING"/>
+            <xs:enumeration value= "ID_CAP_NETWORKING_ADMIN"/>
+            <xs:enumeration value= "ID_CAP_PEOPLE_EXTENSION"/>
+            <xs:enumeration value= "ID_CAP_PEOPLE_EXTENSION_MOBILE"/>
+            <xs:enumeration value= "ID_CAP_PERSONAL_INFORMATION_IMPORT"/>
+            <xs:enumeration value= "ID_CAP_PHONEDIALER"/>
+            <xs:enumeration value= "ID_CAP_PUSH_NOTIFICATION"/>
+            <xs:enumeration value= "ID_CAP_RINGTONE_ADD"/>
+            <xs:enumeration value= "ID_CAP_SENSORS"/>
+            <xs:enumeration value= "ID_CAP_WEBBROWSERCOMPONENT"/>
+            <xs:enumeration value= "ID_CAP_OEMPUBLICDIRECTORY"/>
+            <xs:enumeration value= "ID_CAP_SHELL_DEVICE_LOCK_UI_API"/>
+            <xs:enumeration value= "ID_CAP_SPEECH_RECOGNITION"/>
+            <xs:enumeration value= "ID_CAP_VOIP" />
+            <xs:enumeration value= "ID_CAP_VOICEMAIL" />
+            <xs:enumeration value= "ID_CAP_PROXIMITY" />
+            <xs:enumeration value= "ID_CAP_WALLET" />
+            <xs:enumeration value= "ID_CAP_WALLET_PAYMENTINSTRUMENTS" />
+            <xs:enumeration value= "ID_CAP_WALLET_SECUREELEMENT" />
+            <xs:enumeration value= "ID_CAP_MAP" />
+            <xs:enumeration value= "ID_CAP_REMOVABLE_STORAGE" />
+            <xs:enumeration value= "ID_CAP_CELL_API_OEM_PASSTHROUGH" />
+            <xs:enumeration value= "ID_CAP_CELL_API_COMMON" />
+            <xs:enumeration value= "ID_CAP_CELL_API_UICC_LOWLEVEL" />
+            <xs:enumeration value= "ID_CAP_CELL_API_LOCATION" />
+            <xs:enumeration value= "ID_CAP_CELL_WNF" />
+            <xs:enumeration value= "ID_CAP_DEVICE_MANAGEMENT_ADMIN" />
+            <xs:enumeration value= "ID_CAP_DEVICE_MANAGEMENT" />
+            <xs:enumeration value= "ID_CAP_NVREADWRITE"/>
+            <xs:enumeration value= "ID_CAP_CSP_MAIL" />
+            <xs:enumeration value= "ID_CAP_CSP_W4_APPLICATION" />
+            <xs:enumeration value= "ID_CAP_DEVICE_MANAGEMENT_SECURITY_POLICIES" />
+            <xs:enumeration value= "ID_CAP_DU_MIGRATOR_STATUS_OEM" />
+            <xs:enumeration value= "ID_CAP_MAP_WRITE" />
+            <xs:enumeration value= "ID_CAP_DEVICE_MANAGEMENT_BOOTSTRAP" />
+            <xs:enumeration value= "ID_CAP_SYNC_EXTENSION" />
+            <xs:enumeration value= "ID_CAP_KIDZONE_CUSTOMIZATION" />
+            <xs:enumeration value= "ID_CAP_OEM_ADC"/>
+            <xs:enumeration value= "ID_CAP_CSP_OEM"/>
+            <xs:enumeration value= "ID_CAP_PEOPLE_EXTENSION_IM" />
+            <xs:enumeration value= "ID_CAP_CELL_API_UICC" />
+            <xs:enumeration value= "ID_CAP_CSP_FOUNDATION" />
+            <xs:enumeration value= "ID_CAP_OEM_DEPLOYMENT" />
+            <xs:enumeration value= "ID_CAP_CSP_WIFI_HOTSPOT" />
+            <xs:enumeration value= "ID_CAP_INTERNET_EXPLORER_FAVORITES" />
+            <xs:enumeration value= "ID_CAP_CALLMESSAGING_FILTER"/>
+            <xs:enumeration value= "ID_CAP_SMS_INTERCEPT_AGENT"/>
+            <xs:enumeration value= "ID_CAP_SMS_INTERCEPT_RECIPIENT"/>
+            <xs:enumeration value= "ID_CAP_RUNTIME_CONFIG"/>
+            <xs:enumeration value= "ID_CAP_WIFI_BASIC"/>
+            <xs:enumeration value= "ID_CAP_INTERNET_EXPLORER_SEARCH_PROVIDER_KEYS_HKCU"/>
+        </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="CT_Capabilities">
+    <xs:sequence>
+        <xs:element name="Capability" type="CT_Capability" minOccurs= "0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CT_AppConnectExtension">
+    <xs:annotation>
+        <xs:documentation>
+        Represents an extension provider
+        </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="ExtensionName" type="y:ST_String" use="required"/>
+    <xs:attribute name="ConsumerID" type="ST_Guid" use="required"/>
+    <xs:attribute name="TaskID" use="optional">
+        <xs:simpleType>
+        <xs:restriction base= "xs:string">
+            <xs:maxLength value = "64"/>
+        </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ExtraFile" type="y:ST_String" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="CT_ProtocolExtension">
+        <xs:attribute name="Name" type="ST_Protocol" use="required"/>
+        <xs:attribute name="TaskID" default="_default">
+            <xs:simpleType>
+                <xs:restriction base= "xs:string">
+                    <xs:maxLength value = "64"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="NavUriFragment" type="y:ST_String" use="optional" default="encodedLaunchUri=%s"/>
+    </xs:complexType>
+
+    <xs:complexType name="CT_FileTypeExtension">
+        <xs:sequence>            
+            <xs:element name="DisplayName" type="y:ST_String" minOccurs= "0" maxOccurs="1"/>
+            <xs:element name="Logos" type="CT_Logos" minOccurs= "0" maxOccurs="1"/>
+            <xs:element name="SupportedFileTypes" type="CT_FileTypes" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="Name" type="y:ST_String" use="required"/>
+        <xs:attribute name="TaskID" default="_default">
+            <xs:simpleType>
+                <xs:restriction base= "xs:string">
+                    <xs:maxLength value = "64"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="NavUriFragment" type="y:ST_String" use="optional" default="fileToken=%s"/>
+    </xs:complexType>
+
+    <xs:complexType name="CT_Logos">
+        <xs:sequence>
+            <xs:element name="Logo" type="CT_Logo" maxOccurs="3" minOccurs ="3"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CT_Logo"> 
+        <xs:complexContent>
+            <xs:extension base="y:CT_ResourcePath">
+                <xs:attribute name="Size" use="required">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="small"/>
+                            <xs:enumeration value="medium"/>
+                            <xs:enumeration value="large"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="CT_FileTypes">
+        <xs:sequence>
+            <xs:element name="FileType" minOccurs= "0" maxOccurs="20">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="ST_FileType">
+                            <xs:attribute name="ContentType" type="ST_ContentType" use="optional"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="CT_Extensions">
+        <xs:sequence>
+            <xs:element name="Extension" type="CT_AppConnectExtension" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="FileTypeAssociation" type="CT_FileTypeExtension" minOccurs="0" maxOccurs="20"/>
+            <xs:element name="Protocol" type="CT_ProtocolExtension" minOccurs="0" maxOccurs="10"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CT_BackgroundServiceAgent">
+    <xs:annotation>
+        <xs:documentation>
+        Represents an entry point container
+        </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Specifier" type="CT_BackgroundServiceAgentSpecifier" use="required"/>
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="Source" type="xs:string" use="required"/>
+    <xs:attribute name="Type" type="xs:string" use="required"/>
+    <xs:attribute name="LaunchOnBoot" type="xs:boolean" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="CT_BackgroundWorker">
+    <xs:annotation>
+        <xs:documentation>
+        Represents an background worker
+        </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="ExpectedRunTime" type="xs:unsignedInt" use="required"/>
+    <xs:attribute name="MaxStartupLatency" type="xs:unsignedInt" use="required"/>
+    <xs:attribute name="BootWorker" type="xs:boolean" use="optional" default="false"/>
+    </xs:complexType>  
+
+    <xs:simpleType name="CT_BackgroundServiceAgentSpecifier">
+    <xs:annotation>
+        <xs:documentation>
+        The background service agent specifier
+        </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="AudioPlayerAgent"/>
+        <xs:enumeration value="AudioStreamingAgent"/>
+        <xs:enumeration value="ScheduledTaskAgent"/>
+        <xs:enumeration value="ServiceAgent"/>
+        <xs:enumeration value="VoIPCallInProgressAgent"/>
+        <xs:enumeration value="VoIPForegroundLifetimeAgent"/>
+        <xs:enumeration value="WalletAgent"/>
+    </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="CT_Task">
+    <xs:annotation>
+        <xs:documentation>
+        Represents an entry point container
+        </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="BackgroundServiceAgent" type="CT_BackgroundServiceAgent" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="BackgroundWorker" type="CT_BackgroundWorker" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="BackgroundExecution" type="CT_BackgroundExecution" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:ID" use="required"/>
+    <!-- Populate Task tables parameters field with this -->
+    <xs:attribute name="NavigationPage" type="y:ST_String" use="optional"/>
+    <xs:attribute name="ActivationPolicy" type="ST_ActivationPolicy" use="optional" default="Resume"/>  
+    <xs:attribute name="DehydrationSuppressing" type="xs:boolean" use="optional"/>
+    <xs:attribute name="ImagePath" type="y:ST_String" use="optional" />
+    <xs:attribute name="ImageParams" type="y:ST_String" use="optional" />
+    </xs:complexType>
+
+    <xs:complexType name="CT_BGExecutionType">
+    <xs:annotation>
+        <xs:documentation>
+        Represents a single background execution ability
+        </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Name" type="xs:ID" use="required"/>
+    </xs:complexType>
+  
+    <xs:complexType name="CT_BackgroundExecution">
+    <xs:annotation>
+        <xs:documentation>
+        Represents a list of background execution abilities
+        </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ExecutionType" type="CT_BGExecutionType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CT_ThirdPartyAppTask">
+    <xs:annotation>
+        <xs:documentation>
+        Represents an entry point container
+        </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+        <xs:element name="BackgroundServiceAgent" type="CT_BackgroundServiceAgent" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="BackgroundExecution" type="CT_BackgroundExecution" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:ID" use="required"/>
+    <!-- Populate Task tables parameters field with this -->
+    <xs:attribute name="NavigationPage" type="y:ST_String" use="optional"/>
+    <!-- These attributes will only be parsed if the runtimetype is ST_RuntimeType::ModernNative -->
+    <xs:attribute name="ImagePath" type="y:ST_String" use="optional" />
+    <xs:attribute name="ImageParams" type="y:ST_String" use="optional" />
+    <xs:attribute name="ActivationPolicy" type="ST_ActivationPolicyThirdParty" use="optional" default="Replace"/>  
+    </xs:complexType>
+
+    <xs:complexType name="CT_ThirdPartyExtendedAppTask">
+    <xs:annotation>
+    <xs:documentation>
+        Represents an entry point container
+    </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+        <xs:element name="BackgroundServiceAgent" type="CT_BackgroundServiceAgent" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:ID" use="required"/>
+    <!-- These attributes will only be parsed if the runtimetype is ST_RuntimeType::ModernNative -->
+    <xs:attribute name="ImagePath" type="y:ST_String" use="optional" />
+    <xs:attribute name="ImageParams" type="y:ST_String" use="optional" />
+    </xs:complexType>
+
+    <xs:complexType name="CT_Tasks">
+    <xs:annotation>
+        <xs:documentation>
+        Represents an 'App' in execution manager terminology.
+        </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+        <xs:sequence>
+        <xs:element name="DefaultTask" type="CT_Task" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="ExtendedTask" type="CT_Task" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="CT_ThirdPartyAppTasks">
+    <xs:annotation>
+        <xs:documentation>
+        For 3rd party app, we only allow Default task
+        </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+        <xs:sequence>
+        <xs:element name="DefaultTask" type="CT_ThirdPartyAppTask" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="ExtendedTask" type="CT_ThirdPartyExtendedAppTask" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="CT_Token">
+    <xs:annotation>
+        <xs:documentation>
+        Represents a token to be displayed on the Quick Launch screen
+        </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+        <!--Token template restrictions are enforced by ingestion-->
+        <xs:group ref ="y:TokenTemplates"/>
+    </xs:sequence>
+    <xs:attribute name= "TokenID" use = "required">
+        <xs:simpleType>
+        <xs:restriction base= "xs:string">
+            <xs:maxLength value = "64"/>
+        </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TaskName" use="required">
+        <xs:simpleType>
+        <xs:restriction base= "xs:string">
+            <xs:maxLength value = "64"/>
+        </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TaskParameters" type="y:ST_String" use="optional" />
+    <!-- The remaining attributes are only used for provisioning in-ROM applications -->
+    <xs:attribute name="UsePlatformTheme" type="xs:boolean" use ="optional" default="false">
+        <xs:annotation>
+        <xs:documentation>
+            Used only by in-ROM applications. Indicates if the token should be drawn using the color theme
+        </xs:documentation>
+        </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="DisplayPosition" type="xs:unsignedShort" use ="optional" default="0">
+        <xs:annotation>
+        <xs:documentation>
+            Used only by in-ROM applications. Represents the position of the application in the shell's QuickLaunch screen
+        </xs:documentation>
+        </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Pinned" type="xs:boolean" use ="optional" default="false">
+        <xs:annotation>
+        <xs:documentation>
+            Used only by in-ROM applications. Indicates if the token should be shown on shell's QuickLaunch screen
+        </xs:documentation>
+        </xs:annotation>
+    </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="CT_ThirdPartyAppToken">
+    <xs:annotation>
+        <xs:documentation>
+        Represents a token to be displayed on the Quick Launch screen, for use by OEMs and 3rd parties
+        </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+        <!--Token template restrictions are enforced by ingestion-->
+        <xs:group ref="y:OEMThirdPartyTokenTemplates"/>
+    </xs:sequence>
+    <xs:attribute name= "TokenID" use = "required">
+        <xs:simpleType>
+        <xs:restriction base= "xs:string">
+            <xs:maxLength value = "64"/>
+        </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="TaskName" use="required">
+        <xs:simpleType>
+        <xs:restriction base= "xs:string">
+            <xs:maxLength value = "64"/>
+        </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+    </xs:complexType>
+  
+    <xs:complexType name="CT_PushToken">
+    <xs:sequence>
+        <!--Token template restrictions are enforced by ingestion-->
+        <xs:group ref ="y:TokenTemplates"/>
+    </xs:sequence>
+    <xs:attribute name= "TokenID" use = "required" >
+        <xs:simpleType>
+        <xs:restriction base= "xs:string">
+            <xs:maxLength value = "64"/>
+        </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+    </xs:complexType>
+
+
+    <xs:complexType name="CT_Tokens">
+    <xs:annotation>
+        <xs:documentation>
+        The collection of tokens of the application
+        3rd party applications cannot have SecondaryTokens. This is not enforced in the schema and secondary tokens in manifest
+        are ignored during parsing
+        </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+        <xs:element name="PrimaryToken" type="CT_Token" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="SecondaryToken" type="CT_Token" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="CT_ThirdPartyAppTokens">
+    <xs:annotation>
+        <xs:documentation>
+        The collection of tokens of the application
+        3rd party applications cannot have SecondaryTokens. This is not enforced in the schema and secondary tokens in manifest
+        are ignored during parsing
+        </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+        <xs:element name="PrimaryToken" type="CT_ThirdPartyAppToken" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ST_Guid">
+    <xs:annotation>
+        <xs:documentation>
+        A 128 bit GUID.
+        </xs:documentation>
+    </xs:annotation>
+
+    <xs:restriction base="xs:token">
+        <xs:pattern value="\{[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}\}"/>
+    </xs:restriction>
+    </xs:simpleType>
+  
+    <xs:simpleType name="ST_HubType">
+    <xs:annotation>
+        <xs:documentation>
+        Defines a list of hub type. We are using different bit to represent the different hub type.
+        So we can use a integer to contain the combinaion of the bit, which allow us to support multiple
+        hub type for one app. The supported hub types are listed here.
+        0 -- not a hub app. This is also the default value if the attribute is absent;
+        1 -- MusicVideoHub, an application is a music + video hub app and is approved for integration with the Media hub;
+        </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:unsignedInt">
+    </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ST_ActivationPolicy">
+    <xs:annotation>
+        <xs:documentation>
+        The activation policy of a task
+        </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="Resume"/>
+        <xs:enumeration value="ResumeSameParams"/>
+        <xs:enumeration value="Replace"/>
+        <xs:enumeration value="ReplaceSameParams"/>
+        <xs:enumeration value="Multisession"/>
+    </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ST_ActivationPolicyThirdParty">
+    <xs:annotation>
+        <xs:documentation>
+        The activation policy of a 3rd party task
+        </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="Resume"/>
+        <xs:enumeration value="Replace"/>
+    </xs:restriction>
+    </xs:simpleType>
+  
+    <xs:simpleType name="ST_AppPlatformVersion">
+    <xs:annotation>
+        <xs:documentation>
+        The version of app platform.
+        </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="7.0"/>
+        <xs:enumeration value="7.1"/>
+        <xs:enumeration value="8.0"/>
+        <xs:enumeration value="8.1"/>
+    </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ST_BitsPerPixel">
+    <xs:annotation>
+        <xs:documentation>
+        Bits per pixel supported by the application (defaults to 16).
+        </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="16"/>
+        <xs:enumeration value="32"/>
+    </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="CT_WinRTActivatableClass">
+        <xs:sequence>
+            <xs:element name="InProcessServer" type="CT_InProcessServer" minOccurs="0" maxOccurs="1000"/>
+            <xs:element name="OutOfProcessServer" type="CT_OutOfProcessServer" minOccurs="0" maxOccurs="1000"/>
+            <xs:element name="ProxyStub" type="CT_ProxyStub" minOccurs="0" maxOccurs="1000"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CT_InProcessServer">
+        <xs:sequence>
+            <xs:element name="Path" type="y:ST_String"/>
+            <xs:element name="ActivatableClass" type="CT_InProcessActivatableClass" maxOccurs="65535"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CT_OutOfProcessServer">
+        <xs:sequence>
+            <xs:element name="Path" type="y:ST_String"/>
+            <xs:element name="Arguments" type="y:ST_String" minOccurs="0"/>
+            <xs:element name="Instancing" type="ST_Instancing"/>
+            <xs:element name="ActivatableClass" type="CT_OutOfProcessActivatableClass" maxOccurs="65535"/>
+        </xs:sequence>
+        <xs:attribute name="ServerName" type="y:ST_String" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="CT_ProxyStub">
+        <xs:sequence>
+            <xs:element name="Path" type="y:ST_String" />
+            <xs:element name="Interface" type="CT_Interface" maxOccurs="65535"/>
+        </xs:sequence>
+        <xs:attribute name="ClassId" type="ST_Guid" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="CT_InProcessActivatableClass">
+        <xs:sequence>
+            <xs:element name="ActivatableClassAttribute" type="CT_ActivatableClassAttribute" minOccurs="0" maxOccurs="1000"/>
+        </xs:sequence>
+        <xs:attribute name="ActivatableClassId" type="y:ST_String" use="required"/>
+        <xs:attribute name="ThreadingModel" type="ST_ThreadingModel" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="CT_OutOfProcessActivatableClass">
+        <xs:sequence>
+            <xs:element name="ActivatableClassAttribute" type="CT_ActivatableClassAttribute" minOccurs="0" maxOccurs="1000"/>
+        </xs:sequence>
+        <xs:attribute name="ActivatableClassId" type="y:ST_String" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="CT_Interface">
+        <xs:attribute name="Name" type="y:ST_String" use="required"/>
+        <xs:attribute name="InterfaceId" type="ST_Guid" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="CT_ActivatableClassAttribute">
+        <xs:attribute name="Name" type="y:ST_String" use="required"/>
+        <xs:attribute name="Type" type="y:ST_String" use="required"/>
+        <xs:attribute name="Value" type="y:ST_String" use="required"/>
+    </xs:complexType>
+
+    <xs:simpleType name="ST_Instancing">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="singleInstance"/>
+            <xs:enumeration value="multipleInstances"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ST_ThreadingModel">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="both"/>
+            <xs:enumeration value="STA"/>
+            <xs:enumeration value="MTA"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+   <xs:complexType name="CT_AppExtraType">
+    <xs:annotation>
+        <xs:documentation>
+        Represents a single feature ability
+        </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Name" type="xs:ID" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="CT_AppExtra">
+        <xs:annotation>
+            <xs:documentation>
+                Represents the elemented supported for a specific target version an 
+                application is intending to lightup
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Extra" type="CT_AppExtraType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="AppPlatformVersion" type="y:ST_String" use="required"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="CT_ScreenResolution">
+        <xs:annotation>
+            <xs:documentation>
+                Represents the element describing a supported resolution
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="Name" use="required">
+            <xs:simpleType>
+                <xs:annotation>
+                    <xs:documentation>
+                        Represents the list of supported resolutions
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value= "ID_RESOLUTION_WVGA"/>
+                    <xs:enumeration value= "ID_RESOLUTION_WXGA"/>
+                    <xs:enumeration value= "ID_RESOLUTION_HD720P"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="CT_ScreenResolutions">
+        <xs:annotation>
+            <xs:documentation>
+                Represents the elements enumerating supported resolutions
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="ScreenResolution" type="CT_ScreenResolution" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CT_Requirement">
+        <xs:attribute name="Name" use="required">
+            <xs:simpleType>
+                <xs:annotation>
+                    <xs:documentation>
+                        Represents the enumeration describing the supported HW requirements
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ID_REQ_MEMORY_90"/>
+                    <xs:enumeration value="ID_REQ_FRONTCAMERA"/>
+                    <xs:enumeration value="ID_REQ_REARCAMERA"/>
+                    <xs:enumeration value="ID_REQ_NFC"/>
+                    <xs:enumeration value="ID_REQ_MAGNETOMETER"/>
+                    <xs:enumeration value="ID_REQ_GYROSCOPE"/>
+                    <xs:enumeration value="ID_REQ_MEMORY_300"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="CT_Requirements">
+        <xs:sequence>
+            <xs:element name="Requirement" type="CT_Requirement" minOccurs= "1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="CT_FunctionalCapability">
+        <xs:attribute name="Name" use="required">
+            <xs:simpleType>
+                <xs:annotation>
+                    <xs:documentation>
+                        Represents the enumeration describing the supported functional capabilities
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ID_FUNCCAP_EXTEND_MEM"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="CT_FunctionalCapabilities">
+        <xs:sequence>
+            <xs:element name="FunctionalCapability" type="CT_FunctionalCapability" minOccurs= "1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ST_Protocol">
+        <xs:restriction base="ST_NonEmptyString">
+            <xs:pattern value="[.\-a-z0-9]*"/>
+            <xs:minLength value="2"/>
+            <xs:maxLength value="39"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    
+    <xs:simpleType name="ST_NonEmptyString">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="32767"/>
+            <xs:pattern value="[^\s]|([^\s].*[^\s])"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ST_FileType">
+        <xs:restriction base="ST_FileNameCharSet">
+            <xs:pattern value="\.[^.\\]+"/>
+            <xs:maxLength value="64"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ST_FileNameCharSet">
+        <xs:restriction base="ST_NonEmptyString">
+            <xs:pattern value="[^&lt;&gt;&quot;:%\|\?\*\x01-\x1f]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ST_ContentTypeCharSet">
+        <xs:restriction base="ST_NonEmptyString">
+            <xs:pattern value="[!#$%&amp;'*+-.^_`|~0-9a-z/]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ST_ContentType">
+        <xs:restriction base="ST_ContentTypeCharSet">
+            <xs:pattern value="[^/]{1,127}/[^/]{1,127}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ST_NotificationType">
+        <xs:annotation>
+            <xs:documentation>
+            The notification service for the app
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MPN"/>
+            <xs:enumeration value="WNS"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    
+</xs:schema>

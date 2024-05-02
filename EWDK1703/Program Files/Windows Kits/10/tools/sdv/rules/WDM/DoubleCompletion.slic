@@ -1,0 +1,49 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DoubleCompletion
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that IoCompleteRequest routine is not
+    called twice in a row.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state {
+    int completion_called = 0;
+} with guard(sdv_main,sdv_irp) 
+
+
+[RemoveHeadList,sdv_containing_record].entry
+{
+    halt;
+}
+
+
+[IoCompleteRequest,IofCompleteRequest].entry[guard $1]
+{
+    if (completion_called) {
+        abort "The driver is calling IoCompleteRequest twice.";
+    } else {
+        completion_called = 1;
+    }
+}

@@ -1,0 +1,38 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    Pre_IsLWF
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rules will pass if the driver is a Filter Driver. 
+
+    Related Rule:
+    Is_Miniport, Is_Protocol
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+NdisFRegisterFilterDriver.entry
+{
+  abort "This is a filter driver";
+}

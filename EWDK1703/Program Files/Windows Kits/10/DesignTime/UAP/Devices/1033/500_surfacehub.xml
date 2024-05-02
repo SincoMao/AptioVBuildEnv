@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device name="Surface Hub" width="1920" height="1080" scale="100" size="55" default="true" resize="false" icon="Assets/ppi_icon.ico" generic="Generic/generic.xaml" MinVersion="10.0.0.0">
+	<Device.Qualifiers>
+		<Qualifier Name="DeviceFamily">PPI</Qualifier>
+	</Device.Qualifiers>
+</Device>
+
+
+
+
+
+
+
+

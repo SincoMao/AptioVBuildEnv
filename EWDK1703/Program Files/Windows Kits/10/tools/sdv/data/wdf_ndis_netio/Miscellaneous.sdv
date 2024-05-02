@@ -1,0 +1,5 @@
+MiniportPause_Return
+NdisOpenConfigurationEx
+NdisQueryBindInstanceName
+NdisReEnumerateProtocolBindings
+PeriodicTimer

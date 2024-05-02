@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Baseline xmlns="http://schemas.microsoft.com/vs/profiler/PerfCounters/1.0">
+  <Category _locID="category.General" _locAttrData="Name" Name="General">
+	<Counter 	_locID="counter.InstructionsRetired" _locAttrData="DisplayName, Description"
+			Name="InstructionsRetired" 
+			Description="This event counts the number of instructions at retirement." 
+			Reload="100000" 
+			DisplayName="Instructions Retired"  />
+
+	<Counter 	_locID="counter.NonHaltedCycles" _locAttrData="DisplayName, Description"
+			Name="NonHaltedCycles" 
+			Description="This event counts core clock cycles whenever the clock signal on the specific core is running (not halted)." 
+			Reload="100000" 
+			DisplayName="Non Halted Cycles"  />
+  </Category>
+
+  <Category _locID="category.MemoryEvents" _locAttrData="Name" Name="Memory Events">
+	<Counter 	_locID="counter.L2References" _locAttrData="DisplayName, Description"
+			Name="L2References" 
+			Description="This event counts each request originating from the core to reference a cache line in the L2 level cache." 
+			Reload="100000" 
+			DisplayName="L2 References"  />
+
+	<Counter 	_locID="counter.L2Misses" _locAttrData="DisplayName, Description"
+			Name="L2Misses" 
+			Description="This event counts each cache miss condition for references to the L2 level cache." 
+			Reload="100000" 
+			DisplayName="L2 Misses"  />
+  </Category>
+
+  <Category _locID="category.FrontEndEvents" _locAttrData="Name" Name="Front End Events">
+	<Counter 	_locID="counter.ITLBMisses" _locAttrData="DisplayName, Description"
+			Name="ITLBMisses" 
+			Description="This event counts misses in the Instruction Translation Lookaside Buffer (ITLB)." 
+			Reload="100000" 
+			DisplayName="ITLB Misses"  />
+  </Category>
+
+  <Category _locID="category.BranchEvents" _locAttrData="Name" Name="Branch Events">
+	<Counter 	_locID="counter.BranchesRetired" _locAttrData="DisplayName, Description"
+			Name="BranchesRetired" 
+			Description="This event counts branch instructions at retirement." 
+			Reload="100000" 
+			DisplayName="Branches Retired"  />
+
+	<Counter 	_locID="counter.MispredictedBranches" _locAttrData="DisplayName, Description"
+			Name="MispredictedBranches" 
+			Description="This event counts mispredicted branch instructions at retirement." 
+			Reload="100000" 
+			DisplayName="Mispredicted Branches"  />
+</Category>
+
+</Baseline>
+

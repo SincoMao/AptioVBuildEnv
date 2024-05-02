@@ -1,0 +1,62 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NdisWdfDriverMiniportUnload
+
+Domain:
+
+    WDF_NDIS
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule checks that WdfDriverMiniportUnload is called in the unload callback of the Miniport. 
+    
+    List of memory allocation functions for NDIS
+    
+     WdfDriverMiniportUnload
+         
+    NDIS Miniport Unload callback
+    
+    fun_MINIPORT_UNLOAD
+   
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state{
+   enum {initial, inside_unload_callback} unload_state = initial;
+   enum {miniport_loaded, miniport_unloaded} miniport_unload_state = miniport_loaded;
+}
+
+[fun_MINIPORT_UNLOAD].entry
+{
+    unload_state = inside_unload_callback;
+}
+
+[WdfDriverMiniportUnload].entry
+{  
+     miniport_unload_state = miniport_unloaded;
+    
+}
+
+[fun_MINIPORT_UNLOAD].exit
+{
+    if(miniport_unload_state == miniport_loaded)
+    {
+        abort "$fname should be called inside the miniport drivers unload callback.";
+    }
+}

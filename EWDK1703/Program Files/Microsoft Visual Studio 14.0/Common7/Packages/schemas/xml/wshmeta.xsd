@@ -1,0 +1,130 @@
+﻿<?xml version='1.0' encoding='utf-8' ?>
+<xsd:schema targetNamespace='http://schemas.microsoft.com/WindowsScriptHost' 
+	xmlns='http://schemas.microsoft.com/WindowsScriptHost' 
+	xmlns:xsd='http://www.w3.org/2001/XMLSchema' 
+	xmlns:vs='urn:schemas-microsoft-com:HTML-Intellisense'
+	vs:ishtmlschema="false" 
+	vs:isserverschema="false" 
+	vs:MultipleScriptLanguages="true"
+	vs:SuccinctFriendlyName="Script">
+
+
+	<xsd:annotation>
+		<xsd:documentation>
+			Windows Script Host schema.
+			Version 5.6
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name='package' minOccurs="1" maxOccurs="1">
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref='comment' />
+				<xsd:element ref='job' />
+			</xsd:choice>
+			<xsd:attribute name='id' type='xsd:string' />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name='job'>
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref='comment' />
+				<xsd:element ref='object' />
+				<xsd:element ref='reference' />
+				<xsd:element ref='resource' />
+				<xsd:element ref='runtime' />
+				<xsd:element ref='script' />
+			</xsd:choice>
+			<xsd:attribute name='id' type='xsd:string' />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name='comment'>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name='id' type='xsd:string' />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name='script'>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name='id' type='xsd:string' />
+			<xsd:attribute name='language'>
+				<xsd:simpleType>
+					<xsd:restriction base='xsd:string'>
+						<xsd:enumeration value='JScript' />
+						<xsd:enumeration value='VBScript' />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name='src' type='xsd:anyURI' />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name='object'>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name='events' type='xsd:string' />
+			<xsd:attribute name='id' type='xsd:string' />
+			<xsd:attribute name='classid' type='xsd:string' />
+			<xsd:attribute name='progid' type='xsd:string' />
+			<xsd:attribute name='reference' type='xsd:boolean' />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name='reference'>
+		<xsd:complexType>
+			<xsd:attribute name='id' type='xsd:string' />
+			<xsd:attribute name='guid' type='xsd:string' />
+			<xsd:attribute name='object' type='xsd:string' />
+			<xsd:attribute name='version' type='xsd:string' />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name='resource'>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name='id' type='xsd:string' />
+			<xsd:attribute name='src' type='xsd:anyURI' />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name='runtime'>
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref='comment' />
+				<xsd:element ref='named' />
+				<xsd:element ref='unnamed' />
+				<xsd:element ref='usage' />
+				<xsd:element ref='example' />
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name='named'>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name='name' type='xsd:string' />
+			<xsd:attribute name='description' type='xsd:string' />
+			<xsd:attribute name='required' type='xsd:boolean' />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name='unnamed'>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name='name' type='xsd:string' />
+			<xsd:attribute name='description' type='xsd:string' />
+			<xsd:attribute name='required' type='xsd:boolean' />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name='usage'>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name='id' type='xsd:string' />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name='example'>
+		<xsd:complexType mixed="true">
+			<xsd:attribute name='id' type='xsd:string' />
+		</xsd:complexType>
+	</xsd:element>
+	
+</xsd:schema>

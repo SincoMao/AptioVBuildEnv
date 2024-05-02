@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema targetNamespace='http://schemas.microsoft.com/Mobile/WebForm'
+		xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+		xmlns='http://schemas.microsoft.com/Mobile/WebForm'
+		xmlns:vs='http://schemas.microsoft.com/Visual-Studio-Intellisense'
+		vs:ishtmlschema='false'
+		vs:isserverschema='true'
+		vs:SuccinctFriendlyName="Mobile HTML">
+
+		<xsd:include schemaLocation="CommonMobileTypes.xsd" />
+
+		<!-- valid top-level elements -->
+		<xsd:element name="Form" type="FormType" minOccurs="1" />
+		<xsd:element name="StyleSheet" type="StyleSheetType" maxOccurs="1" />
+</xsd:schema>

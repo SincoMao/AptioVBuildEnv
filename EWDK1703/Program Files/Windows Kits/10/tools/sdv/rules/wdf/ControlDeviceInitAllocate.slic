@@ -1,0 +1,48 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    ControlDeviceInitAllocate
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    For a control device object, the framework device object 
+    initialization method WdfControlDeviceInitAllocate must 
+    be called before the driver calls WdfDeviceCreate.
+
+	Rule diagnostics:
+	"WdfControlDeviceInitAllocate was not called before WdfDeviceCreate for the device."
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507055
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+sdv_WdfDeviceCreate.entry
+{
+      if(*$1 == hpdo_deviceinit||*$1 == hchild_deviceinit)
+      {
+          halt;
+      }
+      else if (*$1== NULL || ((*$1 != hcontrol_deviceinit) && (*$1 != hdevice_init))) 
+      {
+          abort "WdfControlDeviceInitAllocate was not called before WdfDeviceCreate for the device.";
+      }
+}
+   

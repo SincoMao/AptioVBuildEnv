@@ -1,0 +1,15 @@
+[$RootKey$]
+[$RootKey$\Packages]
+[$RootKey$\Packages\{52f5727d-fe3b-4812-80c4-6a8eebeab94f}]
+@="Microsoft.VisualStudio.Debugger.Parallel.Gpu"
+"InprocServer32"="$System$\mscoree.dll"
+"Assembly"="Microsoft.VisualStudio.Debugger.Parallel.Gpu,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.Parallel.Gpu.GpuPackage"
+[$RootKey$\Menus]
+"{52f5727d-fe3b-4812-80c4-6a8eebeab94f}"=", 1000.ctmenu, 1"
+[$RootKey$\ToolWindows]
+[$RootKey$\ToolWindows\{cb170882-2b60-46b5-9d06-a57667186c95}]
+@="{52f5727d-fe3b-4812-80c4-6a8eebeab94f}"
+"Name"="Microsoft.VisualStudio.Debugger.Parallel.Gpu.GpuThreadsToolWindow"
+"Style"="Linked"
+"Window"="{E62CE6A0-B439-11D0-A79D-00A0C9110051}"

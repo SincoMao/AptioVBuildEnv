@@ -1,0 +1,56 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    ParentObjectCheckLock
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    The driver is calling WdfWaitLockCreate or WdfSpinLockCreate without setting the ParentObject. 
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507116
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+}
+
+sdv_WdfWaitLockCreate.entry
+{  
+        if ($1->ParentObject == hparent_object) 
+        {
+            abort "The driver is calling $fname without setting the ParentObject.";
+        } 
+        else 
+        {
+            halt;
+        }
+}
+
+sdv_WdfSpinLockCreate.entry
+{  
+        if ($1->ParentObject == hparent_object) 
+        {
+            abort "The driver is calling $fname without setting the ParentObject.";
+        } 
+        else 
+        {
+            halt;
+        }
+}

@@ -1,0 +1,5 @@
+#define SDV_IRP_MN_REMOVE_DEVICE
+#define No_DriverEntry
+#define No_AddDevice
+#define SDV_IRP_MN_REMOVE_DEVICE_ONLY
+#define SDV_HARNESS SDV_PNP_BASIC_REMOVE_DEVICE_HARNESS

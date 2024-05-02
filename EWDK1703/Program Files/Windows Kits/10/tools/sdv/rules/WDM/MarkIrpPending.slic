@@ -1,0 +1,97 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    MarkIrpPending
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule specifies that if a dispatch routine calls
+    IoMarkIrpPending it should return STATUS_PENDING. This rule also checks 
+    for correct processing of IRPs pended by lower drivers. See
+    MarkIrpPending2 for a complimentary specification.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+    int pended = 0;
+    int completed = 0;
+} with guard(sdv_main,sdv_irp) 
+
+[SDV_RunDispatchFunction].exit [guard $2]
+{
+	if (pended && $return != STATUS_PENDING) 
+	{
+        abort "The dispatch routine has marked the incoming IRP with IoMarkIrpPending, but it is not returning STATUS_PENDING.";
+    }
+	else
+	{
+		halt;
+	}
+}
+
+[RemoveHeadList,RemoveEntryList,sdv_containing_record].entry
+{
+	halt;
+}
+
+IoMarkIrpPending.entry[guard $1]
+{        
+    pended = 1;
+}
+
+IoCompleteRequest.entry[guard $1]
+{        
+    if($1->IoStatus.Status==STATUS_PENDING)
+    {
+        completed = 1;
+    }
+    else
+    {
+        halt;
+    }
+}
+
+sdv_RunIoCompletionRoutines.exit[guard $2]
+{
+    if(!(*$4))
+    {
+       halt;
+    }
+    else if($return==STATUS_MORE_PROCESSING_REQUIRED)
+    {
+        halt;
+    }
+    else if(($return==STATUS_CONTINUE_COMPLETION&&completed == 1)||($return==STATUS_SUCCESS&&completed == 1))
+    {
+        abort "The completion routine has completed an IRP and returned STATUS_CONTINUE_COMPLETION. This can cause a double completion if the lower driver returns STATUS_PENDING.";
+    }
+}
+
+
+[IoCallDriver,PoCallDriver].exit
+{
+    if($2->IoStatus.Status==STATUS_PENDING)
+    {
+          halt;
+    }
+}
+

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The following parameters are shared for all binaries. If a binary does not use a parameter, it is ignored -->
+<Data>
+   <Table Id="DataDrivenSysfundTable">
+        <ParameterTypes>
+          <!-- This section describes parameter data types.  Do not edit -->
+          <ParameterType Name="SDEL">String</ParameterType>
+          <ParameterType Name="SdelExcludeVMDevnode">String</ParameterType>
+          <ParameterType Name="SdelExcludeDrivers">String</ParameterType>
+          <ParameterType Name="TestCycles">unsigned int</ParameterType>
+          <ParameterType Name="IOPeriod">unsigned int</ParameterType>  
+          <ParameterType Name="ResumeDelay">unsigned int</ParameterType>
+          <ParameterType Name="TMV">bool</ParameterType>
+          <ParameterType Name="Wpa2PskAesSsid">String</ParameterType>
+          <ParameterType Name="Wpa2PskPassword">String</ParameterType>
+          <ParameterType Name="DriverVerifierLevel">unsigned int</ParameterType>
+          <ParameterType Name="AddOnly">bool</ParameterType>
+          <ParameterType Name="NoReboot">bool</ParameterType>
+        </ParameterTypes>
+        <Row>
+          <!-- Edit the data values below to customize the tests for your needs -->
+          <!-- Note that the following three SDEL queries are 'AND'ed to create the final query -->
+          <!-- It is recommended that you leave "SDEL" set to IsDevice and make changes to "SdelExcludeDrivers" instead -->
+          <Parameter Name="SDEL">IsDevice</Parameter>
+          <!-- SdelExcludeVMDevnode excludes devnodes that are critical to VM opertaion and cannot be disabled -->
+          <Parameter Name="SdelExcludeVMDevnode">(DisplayName!='Microsoft Hyper-V Virtual Machine Bus')</Parameter>
+          <!-- SdelExcludeDrivers is the recommended place to use SDEL to exclude drivers/devices -->
+          <!-- Use this to exclude drivers that have bugs or to narrow the scope of the test -->
+          <!-- Running with the default of "(DriverBinaryNames!='')" will target all drivers of all devices -->
+          <!-- For SDEL, see: https://msdn.microsoft.com/en-us/library/windows/hardware/ff538361%28v=vs.85%29.aspx -->
+          <Parameter Name="SdelExcludeDrivers">(DriverBinaryNames!='')</Parameter>
+          <!-- TestCycles specifies for how many iterations the test should run -->
+          <Parameter Name="TestCycles">1</Parameter>
+          <!-- IOPeriod specifies for how many minutes I/O should run -->
+          <Parameter Name="IOPeriod">1</Parameter>
+          <!-- ResumeDelay specifies for for how many seconds to wait before sending I/O after resuming from sleep -->
+          <Parameter Name="ResumeDelay">10</Parameter>
+          <!-- Wpa2PskAesSsid specifies the name of the test WiFi access point -->
+          <Parameter Name="Wpa2PskAesSsid">WiFiRouterName</Parameter>
+          <!-- Wpa2PskPassword specifies the password of the test WiFi access point -->
+          <Parameter Name="Wpa2PskPassword">WiFiRouterPassword</Parameter>
+          <!-- DriverVerifierLevel of 0x209BB is equal to "standard flags" for Driver Verifier -->
+          <Parameter Name="DriverVerifierLevel">0x209BB</Parameter>
+          <!-- The following parameters apply to utility_enabledisabledriververifier_datadriven.dll only: -->
+          <!-- AddOnly specifies that the resulting SDEL query results should add drivers to Driver Verifier without removing any -->
+          <Parameter Name="AddOnly">false</Parameter>
+          <!-- NoReboot specifies that the machine should not reboot automatically to enable Driver Verifier settings -->
+          <Parameter Name="NoReboot">false</Parameter>
+        </Row>
+  </Table>
+</Data>

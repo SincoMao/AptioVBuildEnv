@@ -1,0 +1,47 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SpReturnValue
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the driver's implementations of
+    HwStorFindAdapter and VirtualHwStorFindAdapter return a valid status.
+    A valid status is one of the following: SP_RETURN_FOUND, 
+    SP_RETURN_ERROR, SP_RETURN_BAD_CONFIG, SP_RETURN_NOT_FOUND.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507228
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+[
+fun_SP_HW_FIND_ADAPTER,
+fun_SP_VIRTUAL_HW_FIND_ADAPTER
+].exit
+{  
+	if ($return != SP_RETURN_FOUND &&
+		$return != SP_RETURN_ERROR &&
+		$return != SP_RETURN_BAD_CONFIG &&
+		$return != SP_RETURN_NOT_FOUND ) {
+			abort "$fname returned an illegal value.";
+	} else {
+		halt;
+	}
+}

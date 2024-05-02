@@ -1,0 +1,28 @@
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
+  <Metadata>
+    <Identity Id="B73A99D8-FCAA-4197-9122-F8ABA095A72F" Version="14.0.50616.2" Language="en-US" Publisher="Microsoft Corporation" />
+    <DisplayName>Visual Studio Common Project System</DisplayName>
+    <Description>A general and extensible project system.</Description>
+  </Metadata>
+  <Installation InstalledByMsi="false" SystemComponent="true">
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="14.0" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Premium" Version="14.0" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Ultimate" Version="14.0" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" Version="[4.5,)" />
+    <Dependency Id="Microsoft.VisualStudio.MPF.14.0" DisplayName="Visual Studio MPF 14.0" Version="14.0" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" Path="Microsoft.VisualStudio.Project.VS.Implementation.pkgdef" />
+    <Asset Type="Microsoft.VisualStudio.VsPackage" Path="CPSVsix.pkgdef" />
+    <Asset Type="Microsoft.VisualStudio.VsPackage" Path="codesharingproj.pkgdef" />
+    <Asset Type="Microsoft.VisualStudio.VsPackage" Path="msbuildproj.pkgdef" />
+    <Asset Type="Microsoft.VisualStudio.VsPackage" Path="SharedProjectFilesPackage.pkgdef" />
+    <Asset Type="Microsoft.VisualStudio.MefComponent" Path="Microsoft.VisualStudio.ProjectSystem.Implementation.dll" />
+    <Asset Type="Microsoft.VisualStudio.MefComponent" Path="Microsoft.VisualStudio.ProjectSystem.VS.Implementation.dll" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" Path="Microsoft.VisualStudio.ProjectSystem.V14Only.dll" AssemblyName="Microsoft.VisualStudio.ProjectSystem.V14Only, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" Path="Microsoft.VisualStudio.ProjectSystem.VS.V14Only.dll" AssemblyName="Microsoft.VisualStudio.ProjectSystem.VS.V14Only, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" Path="Microsoft.VisualStudio.ProjectSystem.Utilities.v14.0.dll" AssemblyName="Microsoft.VisualStudio.ProjectSystem.Utilities.v14.0, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </Assets>
+</PackageManifest>

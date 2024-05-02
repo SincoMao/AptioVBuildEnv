@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Rule
+  Name="WdfVerifierPage"
+  PageTemplate="tool"
+  DisplayName="Driver Install"
+  SwitchPrefix="/"
+  Order="39"
+  xmlns="http://schemas.microsoft.com/build/2009/properties"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+  xmlns:my="http://schemas.microsoft.com/developer/msbuild/tasks/2005">
+
+  <Rule.Categories>
+    <Category Name="KmdfVerifier" DisplayName="KMDF Verifier"/>
+  </Rule.Categories>
+
+  <Rule.DataSource>
+    <DataSource Persistence="UserFile" HasConfigurationCondition="true" />
+  </Rule.DataSource>
+  <EnumProperty
+    Name="FrameWorkInteraction"
+    Category="KmdfVerifier"
+    DisplayName="Enable KMDF Verifier"
+    Description="Options to control framework verification process."
+    F1Keyword="driver.install.KMDFV.properties">
+    <EnumValue
+      Name="DvOn"
+      DisplayName="KMDF verifier is off"
+      Description="Framework verifier is not enabled.  Basic framework verification is enabled as part of driver verifier and if KMDF version is 1.9 or higher."
+      IsDefault="true">
+    </EnumValue>
+    <EnumValue
+      Name="FvOn"
+      DisplayName="KMDF verifier is always on"
+      Description="Framework verifier is enabled.">
+    </EnumValue>
+  </EnumProperty>
+  <StringListProperty
+      Name="KmdfServiceNamesToVerify"
+      Category="KmdfVerifier"
+      DisplayName="KMDF Service Names"
+      Description="List of KMDF driver service names to monitor using verifier."
+      F1Keyword="driver.install.KMDFV.properties"
+  />
+  <BoolProperty
+    Name="EnableIrqlChecks"
+    Category="KmdfVerifier"
+    DisplayName="IRQL checks"
+    Description="Enable IRQL checks and critical memory leak checks."
+    F1Keyword="driver.install.KMDFV.properties"
+    />
+
+  <BoolProperty
+    Name="ForwardCompatibleCheck"
+    Category="KmdfVerifier"
+    DisplayName="Forward Compatible Checks"
+    Description="Enable checks created after the current driver version."
+    F1Keyword="driver.install.KMDFV.properties"
+    />
+
+  <!-- TODO: support reboot suppressing
+  <BoolProperty
+    Name="WdfSuppressReboot"
+    Category="KmdfVerifier"
+    DisplayName="Suppress Reboot"
+    Description="Ensure test machine does not reboot after settings changed"
+    F1Keyword="driver.install.KMDFV.properties"
+    />-->
+
+  <EnumProperty
+     Name="ForwardProgressTest"
+     Category="KmdfVerifier"
+     DisplayName="Forward Progress Handler Testing"
+     Description="Options for testing forward progress handling of your driver."
+     F1Keyword="driver.install.KMDFV.properties"
+    >
+    <EnumValue
+        Name="None"
+        DisplayName="No Allocation Failures"
+        Description="No faults will be simulated to test the forward progress handling of your driver."
+        IsDefault="true">
+    </EnumValue>
+    <EnumValue
+        Name="All"
+        DisplayName="Fail All Allocations"
+        Description="All Io requests destined for a forward progress queue will appear to fail, relying on
+        your driver's forward progress handling.">
+    </EnumValue>
+    <EnumValue
+        Name="Random"
+        DisplayName="Randomly Fail Allocations"
+        Description="Randomly fail Io requests destined for a forward progress queue.">
+    </EnumValue>
+  </EnumProperty>
+
+  <StringProperty
+    Name="TrackHandles"
+    Category="KmdfVerifier"
+    DisplayName="Track KMDF Object Handles"
+    Description="List of object handle types to track."
+    F1Keyword="driver.install.KMDFV.properties"
+   >
+    <StringProperty.ValueEditors>
+      <ValueEditor DisplayName="&lt;Choose Handles...&gt;" EditorType="WdfHandlePicker" />
+    </StringProperty.ValueEditors>
+  </StringProperty>
+
+  <BoolProperty
+     Name="EnableKMDFLoaderMessages"
+     Category="KmdfVerifier"
+     DisplayName="Enable KMDF Loader Messages"
+     Description="Enable KMDF loader messages through debugger. A reboot of the target computer is required to enable this."
+     F1Keyword="driver.install.KMDFV.properties"
+    />
+
+  <BoolProperty
+    Name="EnableVerbose"
+    Category="KmdfVerifier"
+    DisplayName="Verbose logging"
+    Description="Enable verbose logging."
+    F1Keyword="driver.install.KMDFV.properties"
+    />
+
+  <EnumProperty
+    Name="LoggingMemPages"
+    Category="KmdfVerifier"
+    DisplayName="Memory Pages for Logs"
+    Description="Number of non-paged pool pages (1-10) to allocate for kernel event trace logs."
+    F1Keyword="driver.install.KMDFV.properties">
+    <EnumValue
+      Name="Runtime"
+      DisplayName="Runtime Choice"
+      Description="Number of pages depends on the KMDF runtime. Starting with KMDF 1.9 the runtime uses
+      more pages when verification is enabled with verbose logging.">
+    </EnumValue>
+    <EnumValue Name="1" DisplayName="1" />
+    <EnumValue Name="2" DisplayName="2" />
+    <EnumValue Name="3" DisplayName="3" />
+    <EnumValue Name="4" DisplayName="4" />
+    <EnumValue Name="5" DisplayName="5" />
+    <EnumValue Name="6" DisplayName="6" />
+    <EnumValue Name="7" DisplayName="7" />
+    <EnumValue Name="8" DisplayName="8" />
+    <EnumValue Name="9" DisplayName="9" />
+    <EnumValue Name="10" DisplayName="10" />
+  </EnumProperty>
+  <StringProperty
+    Name="FailAllocCount"
+    Category="KmdfVerifier"
+    DisplayName="Fail Memory Allocations"
+    Description="Number of succesful memory allocations before starting to fail all memory allocations. "
+    F1Keyword="driver.install.KMDFV.properties"/>
+</Rule>

@@ -1,0 +1,70 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    Irql_IM_Function
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that InterMediate related DDIs are only called at proper IRQL levels.
+
+    Check for the proper IRQL when the function is entering.
+    
+    Related Rule:
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507171
+
+--*/
+
+
+
+#include "slic_base.h"
+
+NdisIMAssociateMiniport.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL  = PASSIVE_LEVEL.";
+    }
+}
+
+NdisIMCancelInitializeDeviceInstance.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL  = PASSIVE_LEVEL.";
+    }
+}
+
+NdisIMDeInitializeDeviceInstance.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL  = PASSIVE_LEVEL.";
+    }
+}
+
+NdisIMGetBindingContext.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL && sdv_irql_current != APC_LEVEL ) {
+        abort "$fname should only be called at IRQL < DISPATCH_LEVEL.";
+    }
+}
+
+NdisIMInitializeDeviceInstanceEx.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL  = PASSIVE_LEVEL.";
+    }
+}
+

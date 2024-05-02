@@ -1,0 +1,77 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    AddDevice
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that IoAttachDeviceToDeviceStack is only
+    called after IoCreateDevice is called.  For non filter drivers.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+    enum {INIT, ENTERED} s = INIT;
+    enum {INITIAL, CREATED} t = INITIAL;
+}
+
+fun_AddDevice.entry
+{
+    s = ENTERED;
+}
+
+[IoCreateDevice].exit 
+{
+    
+    if (s == ENTERED&&$return==STATUS_SUCCESS)
+    {
+        t = CREATED;
+    }
+}
+
+
+[IoCreateDeviceSecure,WdmlibIoCreateDeviceSecure]@SDV.exit 
+{
+    
+    if (s == ENTERED&&$return==STATUS_SUCCESS)
+    {
+        t = CREATED;
+    }
+}
+
+
+IoAttachDeviceToDeviceStack.entry 
+{
+    if ((s == ENTERED)&&(t==INITIAL)) 
+    {
+         abort "The driver is calling IoAttachDeviceToDeviceStack, but it has not first called IoCreateDevice.";
+    }
+    else
+    {
+        t=INITIAL;
+    } 
+           
+}
+
+fun_AddDevice.exit
+{
+    halt;
+}

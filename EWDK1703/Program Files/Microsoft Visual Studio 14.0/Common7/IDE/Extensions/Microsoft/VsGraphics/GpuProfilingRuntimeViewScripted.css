@@ -1,0 +1,13 @@
+﻿#Gpu-Runtime-Div{
+    font-size: 1.25em;
+    font-family: "Segoe UI", Arial, sans-serif; /*[{plugin-font-family} , Arial, sans-serif]*/
+    position: absolute;
+    width: 408px;
+    height: 50px;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
+    text-align: center;
+}​

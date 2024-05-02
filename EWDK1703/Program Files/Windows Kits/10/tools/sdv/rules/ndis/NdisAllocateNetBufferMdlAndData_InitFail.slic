@@ -1,0 +1,68 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NdisAllocateNetBufferMdlAndData_InitFail
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule checks that NdisAllocateNetBufferMdlAndData and NdisFreeNetBuffer are called 
+    in alternate order. The ultimate goal is to make sure all NetBufferMdlAndData are freed
+    when the initialization functions fails.
+
+    The rule uses three different states. state changes when a NetBuffer is allocated or freed.
+    If a NetBufferMdlAndData is still allocated when the Initialization functions fails this 
+    rule will report a defect.
+    
+    Related Rule:
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+#include "slic_base.h"
+
+state{
+   enum {initial, allocated, free} s = initial;
+}
+watch NdisAllocateNetBufferMdlAndData.exit.$return;
+
+NdisAllocateNetBufferMdlAndData.exit[guard $return]
+{  
+    if ($return != 0)
+    {
+        s = allocated;
+    }
+}
+
+NdisFreeNetBuffer.exit[guard $1]
+{
+    if ( s == free)
+    {
+        abort "Freeing a NetBufferMdlAndData that was not allocated.";
+    }
+  
+    s = free;
+}
+
+[fun_MINIPORT_INITIALIZE,
+fun_FILTER_ATTACH,
+fun_PROTOCOL_BIND_ADAPTER_EX].exit
+{
+    if (($return == NDIS_STATUS_FAILURE || $return == NDIS_STATUS_RESOURCES) && (s==allocated))
+    {
+        abort "$fname is failing but the driver has a NetBufferMdlAndData that is still allocated.";
+    }
+}

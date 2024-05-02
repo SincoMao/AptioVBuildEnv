@@ -1,0 +1,157 @@
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Microsoft Confidential
+// Copyright 2009 Microsoft Corporation. All Rights Reserved.
+//
+// WDTFSimulatedBatterySystemAction.idl
+//
+// Collection: WDTF SimulatedBatterySystem Action Plug-in.
+// 
+// Environment: User mode
+// 
+// DLL: WDTFSimulatedBatterySystemAction.DLL
+//
+//---------------------------------------------------------------------------
+
+// This file will be processed by the MIDL tool to
+// produce the type library (SimulatedBatterySystemAction.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    uuid(E0C3F532-C07A-40B3-B6FF-646E2556C77A),
+    version(1.0),
+    helpstring("SimulatedBatterySystem 1.0 Type Library")
+]
+library WDTFSimulatedBatterySystemActionLib
+{
+    importlib("stdole2.tlb");
+    importlib("WDTF.tlb");
+    importlib("WDTFInterfaces.tlb");
+
+    //  Works in VS but not in razzle 
+    //import "WDTF.idl";
+    //import "WDTFInterfaces.idl";
+
+    [
+        object,
+        uuid(953FA710-F78D-4974-B54C-9D22C6E64605),
+        dual,
+        nonextensible,
+        helpstring("IWDTFSimulatedBatterySystemAction Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFSimulatedBatterySystemAction : IWDTFAction2
+    {
+    
+    [helpstring("Enables the simulated battery.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    // This method is used to enable the simulated battery (installs simulated
+    // battery device).  This does not guarantee the ability to simulate DC by
+    // itself, the DisableRealBatteries method must also be called in order to
+    // guarantee a real battery doesn't interfere with the simulation.
+    //---------------------------------------------------------------------------
+    HRESULT EnableSimulatedBattery([out,retval]VARIANT_BOOL* pbSuccess);
+    
+    [helpstring("Disables the simulated battery.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    // This method is used to disable the simulated battery (uninstalls simulated
+    // battery device).  This does not restore the system to its original state,
+    // the EnableRealBatteries method must also be called.
+    //---------------------------------------------------------------------------
+    HRESULT DisableSimulatedBattery([out,retval]VARIANT_BOOL* pbSuccess);
+    
+    [helpstring("Enables real batteries if they are present in the system.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    // This method is used to enable real batteries if they are present in the
+    // system.  If no real batteries are present, this method does nothing. This
+    // method should be called when disabling the simulated battery in order to
+    // return the system to its original state.
+    //---------------------------------------------------------------------------
+    HRESULT EnableRealBatteries([out,retval]VARIANT_BOOL* pbSuccess);
+    
+    [helpstring("Disables real batteries if they are present in the system.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    // This method is used to disable real batteries if they are present in the
+    // system.  If no real batteries are present, this method does nothing. This 
+    // method should be called before calling methods that change the simulated
+    // battery state, otherwise the state changes might not have the desired
+    // effect on OS or software behavior.
+    //---------------------------------------------------------------------------
+    HRESULT DisableRealBatteries([out,retval]VARIANT_BOOL* pbSuccess);
+    
+    [helpstring("Sets the simulated battery status to AC power.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    // This method is used to set the simulated battery status to AC power.  If
+    // real batteries in the system are disabled, this sets the OS status and 
+    // policy to AC power.  This is useful for testing software behavior that
+    // changes depending on the AC/DC state.
+    //---------------------------------------------------------------------------
+    HRESULT SetSimulatedBatteryToAC([out,retval]VARIANT_BOOL* pbSuccess);
+    
+    [helpstring("Sets the simulated battery status to DC power.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   None.
+    //
+    // Remarks:
+    // This method is used to set the simulated battery status to DC power.  If
+    // real batteries in the system are disabled, this sets the OS status and 
+    // policy to DC power.  This is useful for testing software behavior that
+    // changes depending on the AC/DC state.
+    //---------------------------------------------------------------------------
+    HRESULT SetSimulatedBatteryToDC([out,retval]VARIANT_BOOL* pbSuccess);
+    
+    [helpstring("Sets the charge percentage reported to the OS by the simulated battery.")]
+    //---------------------------------------------------------------------------
+    //
+    // Arguments:
+    //   Percent    Specifies charge level percentage, 0-100
+    //
+    // Remarks:
+    // This method is used to change the charge level reported to the OS by the
+    // simulated battery.  This is useful for testing software behavior that
+    // changes based on the battery charge level.
+    //---------------------------------------------------------------------------
+    HRESULT SetSimulatedBatteryChargePercentage([in] ULONG Percent, [out,retval]VARIANT_BOOL* pbSuccess);
+
+    };
+
+
+    [
+        uuid(E4F9B389-F570-4C5F-9CBE-DCFA81A771D3),
+        helpstring("WDTFSimulatedBatterySystemAction Class")
+    ]
+    coclass WDTFSimulatedBatterySystemAction
+    {
+        [default] interface IWDTFSimulatedBatterySystemAction;
+    };
+};

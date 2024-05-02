@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Rule Name="DbgengKernelDebugger"
+      DisplayName="Debugging Tools for Windows - Kernel Debugger"
+      PageTemplate="debugger"
+      Description="Debugging Tools for Windows options"
+      xmlns="http://schemas.microsoft.com/build/2009/properties">
+  <Rule.DataSource>
+    <DataSource Persistence="UserFile" />
+  </Rule.DataSource>
+  <StringProperty Name="DbgengKernelMachineName" DisplayName="Remote Computer Name"
+              Description="The remote computer to connect to.">
+    <StringProperty.ValueEditors>
+      <ValueEditor EditorType="DriverTargetValueEditor" DisplayName="&lt;Configure...&gt;"/>
+    </StringProperty.ValueEditors>
+  </StringProperty>
+  <StringProperty Name="DbgengKernelKDFilesSource" DisplayName="KDFiles Source" Visible="False"/>
+  <StringProperty Name="DbgengKernelKDFilesDestination" DisplayName="KDFiles Destination" Visible="False"/>
+</Rule>
+
+

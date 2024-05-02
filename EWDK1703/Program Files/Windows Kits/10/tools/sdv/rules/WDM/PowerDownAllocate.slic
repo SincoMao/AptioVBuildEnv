@@ -1,0 +1,76 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    PowerDownAllocate
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that a IRP_MJ_POWER with IRP_MN_SET_POWER for SystemPowerState IRP going from s0 to [S1...S5] does not allocate memory.
+    This rule only applies to FDO and FIDO drivers.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507297
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {initial,on} s = initial;
+}
+
+sdv_RunSetPowerDown.entry
+{
+    if($2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_POWER)
+    {
+        s=on;
+    }
+    else
+    {
+        halt;
+    }
+}
+
+IoAcquireRemoveLock.exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+
+[IoAllocateAdapterChannel,
+ExAllocatePool,
+ExAllocatePoolWithTag,
+ExAllocatePoolWithQuotaTag,
+ExAllocatePoolWithQuota].entry
+{
+    if(s==on)
+    {
+        abort "IRP_MJ_POWER with IRP_MN_SET_POWER Irp should not allocate memory during PowerUp.";
+    }
+}
+
+
+[sdv_RunSetPowerDown].exit
+{
+    if($2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_POWER)
+    {
+        halt;
+    }
+}

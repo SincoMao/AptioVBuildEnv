@@ -1,0 +1,61 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    QueuedSpinLock
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that in-stack queued spin locks acquired via KeAcquireInStackQueuedSpinLock 
+    are promptly released via KeReleaseInStackQueuedSpinLock. In addition, at the end of a 
+    dispatch or cancel routine, the driver should not hold any locks.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507221
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+state {
+	enum {unlocked,locked} s = unlocked;
+}
+watch KeAcquireInStackQueuedSpinLock.exit.$2;
+
+KeAcquireInStackQueuedSpinLock.exit[guard $2]
+{   
+	if (s == locked) {
+		abort "The driver is calling $fname after already acquiring the queued spinlock.";
+	} else {
+		s = locked;
+	}
+}
+
+KeReleaseInStackQueuedSpinLock.entry [guard $1]
+{
+	if (s != locked) {
+		abort "The driver is calling $fname without first acquiring the queued spinlock.";
+	} else {
+		s = unlocked;
+	}
+}
+
+[ALL_SP_CALLBACKS].exit
+{
+	if (s == locked) {
+		abort "The dispatch routine has returned without releasing a queued spinlock.";
+	}
+}

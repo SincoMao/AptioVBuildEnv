@@ -1,0 +1,37 @@
+[$RootKey$]
+[$RootKey$\Packages]
+[$RootKey$\Packages\{D277DC8A-AA1E-4303-8C03-1C58DB18E98B}]
+@="Microsoft.VisualStudio.Debugger.Parallel"
+"InprocServer32"="$System$\mscoree.dll"
+"Assembly"="Microsoft.VisualStudio.Debugger.Parallel,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VisualStudio.Debugger.Parallel.ParallelDebug"
+[$RootKey$\Menus]
+"{D277DC8A-AA1E-4303-8C03-1C58DB18E98B}"=", 1000.ctmenu, 1"
+[$RootKey$\ToolWindows]
+[$RootKey$\ToolWindows\{8D263989-FF4B-4a78-90C8-B2BA3FA69311}]
+@="{D277DC8A-AA1E-4303-8C03-1C58DB18E98B}"
+"Name"="Microsoft.VisualStudio.Debugger.Parallel.UI.ParallelTasksToolWindow"
+"Style"="Tabbed"
+"Window"="{E62CE6A0-B439-11D0-A79D-00A0C9110051}"
+"Float"="400,400,600,600"
+[$RootKey$\ToolWindows\{B9A151CE-EF7C-4fe1-A6AA-4777E6E518F3}]
+@="{D277DC8A-AA1E-4303-8C03-1C58DB18E98B}"
+"Name"="Microsoft.VisualStudio.Debugger.Parallel.UI.ParallelStacksToolWindow"
+"Style"="Tabbed"
+"Window"="{6d4078d1-5951-4ed1-ac0e-0a8099c1cce5}"
+[$RootKey$\ToolWindows\{0CF2BFF9-6057-4D23-A51C-A4825B06BFFE}]
+@="{D277DC8A-AA1E-4303-8C03-1C58DB18E98B}"
+"Name"="Microsoft.VisualStudio.Debugger.Parallel.UI.ParallelWatchToolWindow"
+"Style"="Tabbed"
+"Window"="{0504FF91-9D61-11D0-A794-00A0C9110051}"
+[$RootKey$\Services]
+[$RootKey$\Services\{305a20a8-aec0-46a1-a7b3-077516f53946}]
+@="{d277dc8a-aa1e-4303-8c03-1c58db18e98b}"
+"Name"="IVsColorProvider"
+[$RootKey$\FontAndColors]
+[$RootKey$\FontAndColors\Parallel Stacks]
+"Category"="{4330ebb5-2f04-4e03-8414-69f6035087e0}"
+"Package"="{305a20a8-aec0-46a1-a7b3-077516f53946}"
+[$RootKey$\FontAndColors\Parallel Tasks]
+"Category"="{53371a83-c565-4995-817a-166fff2df0d3}"
+"Package"="{305a20a8-aec0-46a1-a7b3-077516f53946}"

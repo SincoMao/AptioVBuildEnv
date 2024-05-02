@@ -1,0 +1,22 @@
+[$RootKey$]
+
+[$RootKey$\AD7Metrics]
+
+[$RootKey$\AD7Metrics\SymbolProvider]
+
+[$RootKey$\AD7Metrics\SymbolProvider\{964F2632-5270-11D2-8FF7-00C04FA302A1}]
+
+[$RootKey$\AD7Metrics\SymbolProvider\{964F2632-5270-11D2-8FF7-00C04FA302A1}\file]
+"CLSID"="{C2E34EBF-8B9D-11D2-9014-00C04FA38338}"
+"Name"="Managed SH"
+
+[$RootKey$\AD7Metrics\SymbolProvider\{964F2632-5270-11D2-8FF7-00C04FA302A1}\metadata]
+"CLSID"="{C2E34EBF-8B9D-11D2-9014-00C04FA38338}"
+"Name"="Managed SH"
+
+[$RootKey$\CLSID]
+
+[$RootKey$\CLSID\{C2E34EBF-8B9D-11D2-9014-00C04FA38338}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\shmetapdb.dll"
+"ThreadingModel"="Free"
+

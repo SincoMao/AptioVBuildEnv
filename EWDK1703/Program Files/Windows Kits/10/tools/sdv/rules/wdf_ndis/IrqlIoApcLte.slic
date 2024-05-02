@@ -1,0 +1,63 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlIoApcLte
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020009
+
+Description:
+
+    The IrqlIoApcLte rule specifies that the driver calls the following 
+    I/O manager routines only when it is executing at IRQL <= APC_LEVEL:
+        IoDeleteDevice
+        IoGetInitialStack
+        IoRaiseHardError
+        IoRaiseInformationalHardError
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216026
+
+--*/
+
+
+#include "slic_base.h"
+
+
+IoDeleteDevice.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+IoGetInitialStack.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+IoRaiseHardError.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+IoRaiseInformationalHardError.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+

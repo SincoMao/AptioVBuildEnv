@@ -1,0 +1,40 @@
+﻿<!--
+***********************************************************************************************
+Microsoft.Cpp.WindowsSDK.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Get the windows 10 and 8.1 SDK root folder from registry -->
+  <PropertyGroup Condition="'$(DisableRegistryUse)' != 'true'">
+    <WindowsSdkDir_10 Condition="'$(WindowsSdkDir_10)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v10.0@InstallationFolder)</WindowsSdkDir_10>
+    <WindowsSdkDir_10 Condition="'$(WindowsSdkDir_10)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0@InstallationFolder)</WindowsSdkDir_10>
+    <!-- Set the WindowsSdkDir to windows 10 path -->
+    <WindowsSdkDir Condition="'$(UseEnv)' != 'true'">$(WindowsSdkDir_10)</WindowsSdkDir>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <!-- This is used as a fall back mechanism ONLY when the WindowsSDKVersion is not explicitly stamped in the project file -->
+    <DefaultWindowsSDKVersion Condition="'$(DefaultWindowsSDKVersion)' == '' and '$(AppContainerApplication)' != 'true'">8.1</DefaultWindowsSDKVersion>
+    <TargetPlatformIdentifier Condition="'$(TargetPlatformIdentifier)' == '' and '$(AppContainerApplication)' == 'true'">UAP</TargetPlatformIdentifier>
+    <TargetPlatformName Condition="'$(TargetPlatformName)' == '' and '$(AppContainerApplication)' == 'true'">UAP</TargetPlatformName>
+    <!-- WindowsSDKVersion is stamped in the project file - It translates to "TargetPlatformVersion" -->
+    <TargetPlatformVersion Condition="'$(TargetPlatformVersion)' == ''">$(WindowsTargetPlatformVersion)</TargetPlatformVersion>
+    <!-- Set the default SDK version Desktop projects, if WindowsSDKVersion is not stamped -->
+    <TargetPlatformVersion Condition="'$(TargetPlatformVersion)' == ''">$(DefaultWindowsSDKVersion)</TargetPlatformVersion>
+    <TargetPlatformMinVersion Condition="'$(TargetPlatformMinVersion)' == ''">$(WindowsTargetPlatformMinVersion)</TargetPlatformMinVersion>
+
+    <SDKIdentifier Condition="'$(SDKIdentifier)' == ''">Windows</SDKIdentifier>
+    <SDKVersion Condition="'$(SDKVersion)' == ''">10.0</SDKVersion>
+    <TargetOsAndVersion Condition="'$(AppContainerApplication)' == 'true'">$([Microsoft.Build.Utilities.ToolLocationHelper]::GetPlatformSDKDisplayName($(SDKIdentifier), $(SDKVersion)))</TargetOsAndVersion>
+    <SDKDisplayName Condition="'$(SDKDisplayName)' == ''">Windows 10</SDKDisplayName>
+  </PropertyGroup>
+ 
+</Project>

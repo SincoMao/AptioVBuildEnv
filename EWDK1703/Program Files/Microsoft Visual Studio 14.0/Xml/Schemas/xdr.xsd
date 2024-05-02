@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xdr="urn:schemas-microsoft-com:xml-data"
+    xmlns:dt="urn:schemas-microsoft-com:datatypes"
+    targetNamespace="urn:schemas-microsoft-com:xml-data"
+    attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xsd:import namespace="urn:schemas-microsoft-com:datatypes"/>
+  <xsd:element name="Schema">
+    <xsd:annotation>
+      <xsd:documentation>The XML-Data Reduced (XDR) schema element </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="xdr:AttributeType"/>
+        <xsd:element ref="xdr:ElementType"/>
+        <xsd:element ref="xdr:description"/>
+        <xsd:any namespace="##other" processContents="skip"/>
+      </xsd:choice>
+      <xsd:attribute name="name" type="xsd:string"/>
+      <xsd:attribute name="id" type="xsd:string"/> <!-- ADO recordsets use this -->
+      <xsd:anyAttribute namespace="##other" processContents="skip"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:attributeGroup name="required">
+    <xsd:attribute name="required">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="yes"/>
+          <xsd:enumeration value="no"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:attributeGroup>
+  <xsd:attributeGroup name="content">
+    <xsd:attribute name="content">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="empty"/>
+          <xsd:enumeration value="textOnly"/>
+          <xsd:enumeration value="eltOnly"/>
+          <xsd:enumeration value="mixed"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:attributeGroup>
+  <xsd:attributeGroup name="model">
+    <xsd:attribute name="model">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="open"/>
+          <xsd:enumeration value="closed"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:attributeGroup>
+  <xsd:attributeGroup name="order">
+    <xsd:attribute name="order">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="one"/>
+          <xsd:enumeration value="seq"/>
+          <xsd:enumeration value="many"/>
+          <xsd:enumeration value="all"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:attributeGroup>
+  <xsd:attributeGroup name="minmax">
+    <xsd:attribute name="minOccurs">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="0"/>
+          <xsd:enumeration value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="maxOccurs">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="1"/>
+          <xsd:enumeration value="*"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:attributeGroup>
+  <xsd:element name="attribute">
+    <xsd:complexType>
+      <xsd:attribute name="type" type="xsd:string"/>
+      <xsd:attribute name="default" type="xsd:string"/>
+      <xsd:attributeGroup ref="xdr:required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="element">
+    <xsd:complexType>
+      <xsd:attribute name="type" type="xsd:string"/>
+      <xsd:attributeGroup ref="xdr:minmax"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AttributeType">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="xdr:datatype"/>
+        <xsd:element ref="xdr:description"/>
+        <xsd:any namespace="##other" processContents="skip"/>
+      </xsd:choice>
+      <xsd:attribute name="default" type="xsd:string"/>
+      <xsd:attribute name="name" type="xsd:string"/>
+      <xsd:attributeGroup ref="xdr:required"/>
+      <xsd:attributeGroup ref="dt:typeAttributes"/>
+      <xsd:anyAttribute namespace="##other"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ElementType">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="xdr:attribute"/>
+        <xsd:element ref="xdr:AttributeType"/>
+        <xsd:element ref="xdr:element"/>
+        <xsd:element ref="xdr:group"/>
+        <xsd:element ref="xdr:datatype"/>
+        <xsd:element ref="xdr:description"/>
+        <xsd:element ref="xdr:extends"/> <!-- ado recordsets use this -->
+        <xsd:any namespace="##other" processContents="skip"/>
+      </xsd:choice>
+      <xsd:attribute name="name" type="xsd:string"/>
+      <xsd:attributeGroup ref="xdr:content"/>
+      <xsd:attributeGroup ref="xdr:model"/>
+      <xsd:attributeGroup ref="xdr:order"/>
+      <xsd:attributeGroup ref="dt:typeAttributes"/>
+      <xsd:anyAttribute namespace="##other"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="group">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="xdr:description"/>
+        <xsd:element ref="xdr:element"/>
+        <xsd:element ref="xdr:group"/>
+        <xsd:any namespace="##other" processContents="skip"/>
+      </xsd:choice>
+      <xsd:attributeGroup ref="xdr:order"/>
+      <xsd:attributeGroup ref="xdr:minmax"/>
+      <xsd:anyAttribute namespace="##other"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="description">
+    <xsd:complexType mixed="true">
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:any processContents="skip" namespace="##any"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="datatype">
+    <xsd:complexType mixed="true">
+      <xsd:attributeGroup ref="dt:typeAttributes"/>
+      <xsd:anyAttribute namespace="##other"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="extends">
+    <xsd:complexType>
+      <xsd:attribute name="type" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>  
+</xsd:schema>

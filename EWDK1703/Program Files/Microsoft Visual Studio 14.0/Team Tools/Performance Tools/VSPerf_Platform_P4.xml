@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Baseline xmlns="http://schemas.microsoft.com/vs/profiler/PerfCounters/1.0">
+
+<Family Name="P4">
+ <Category _locID="category.General" _locAttrData="Name" Name="General">
+  <Counter 	_locID="counter.InstructionsRetired" _locAttrData="DisplayName, Description" Name="InstructionsRetired" 
+		Reload="100000" 
+		DisplayName="Instructions Retired" 
+		Group="IQ" 
+		ESCR="0x04000600" 
+		CCCR="0x00008000" 
+		Description="This event counts instructions that are retired during a clock cycle. Mask bits specify bogus or nonbogus (and whether they are tagged using the front-end tagging mechanism)." />
+
+  <Counter 	_locID="counter.NonHaltedCycles" _locAttrData="DisplayName, Description" Name="NonHaltedCycles" 
+		Reload="100000" 
+		DisplayName="Non Halted Cycles" 
+		Group="BPU" 
+		ESCR="0x26000200" 
+		CCCR="0x0000C000" 
+		Description="This event counts clock cycles in which the processor is not halted and is not in any power-saving state." />
+ </Category>
+
+ <Category _locID="category.MemoryEvents" _locAttrData="Name" Name="Memory Events">
+  <Counter 	_locID="counter.L2References" _locAttrData="DisplayName, Description" Name="L2References" 
+		Reload="100000" 
+		DisplayName="L2 References" 
+		Group="BPU" 
+		ESCR="0x18020E00" 
+		CCCR="0x0000E000" 
+		Description="This event counts each request originating from the core to reference a cache line in the L2 level cache." />
+
+  <Counter 	_locID="counter.L2Misses" _locAttrData="DisplayName, Description" Name="L2Misses" 
+		Reload="100000" 
+		DisplayName="L2 Misses" 
+		Group="BPU" 
+		ESCR="0x18020000" 
+		CCCR="0x0000E000" 
+		Description="This event counts each cache miss condition that happens for references to the L2 level cache" />
+
+  <Counter 	_locID="counter.L3CacheReadMisses" _locAttrData="DisplayName, Description" Name="L3CacheReadMisses" 
+		Reload="100000" 
+		DisplayName="L3 Cache Read Misses" 
+		Group="BPU" 
+		ESCR="0x18040000" 
+		CCCR="0x0000E000" 
+		Description="This event counts each cache miss condition that happens for references to the L3 level cache" />
+
+  <Counter 	_locID="counter.L3CacheReadReferences" _locAttrData="DisplayName, Description" Name="L3CacheReadReferences" 
+		Reload="100000" 
+		DisplayName="L3 Cache Read References" 
+		Group="BPU" 
+		ESCR="0X18047000" 
+		CCCR="0x0000E000" 
+		Description="This event counts each request originating from the core to reference a cache line in the L3 level cache." />
+
+  <Counter 	_locID="counter.64kAliasConflicts" _locAttrData="DisplayName, Description" Name="64kAliasConflicts" 
+		Reload="100000" 
+		DisplayName="64k Alias Conflicts" 
+		Group="FLAME" 
+		ESCR="0x04001000" 
+		CCCR="0x0000A000" 
+		Description="" />
+
+
+  <Counter 	_locID="counter.PageWalkDTLBMiss" _locAttrData="DisplayName, Description" Name="PageWalkDTLBMiss" 
+		Reload="100000" 
+		DisplayName="Page Walk DTLB Miss" 
+		Group="BPU" 
+		ESCR="0x02000200" 
+		CCCR="0x00008000" 
+		Description="" />
+
+  <Counter 	_locID="counter.MOBLoadReplays" _locAttrData="DisplayName, Description" Name="MOBLoadReplays" 
+		Reload="100000" 
+		DisplayName="MOB Load Replays" 
+		Group="BPU" 
+		ESCR="0x06007400" 
+		CCCR="0x00004000" 
+		Description="" />
+
+  <Counter 	_locID="counter.LSSplits" _locAttrData="DisplayName, Description" Name="LSSplits" 
+		Reload="100000" 
+		DisplayName="LS Splits" 
+		Group="BPU" 
+		ESCR="0x10000600" 
+		CCCR="0x00004000" 
+		Description="" />
+
+
+ </Category>
+
+ <Category _locID="category.FrontEndEvents" _locAttrData="Name" Name="Front End Events">
+  <Counter 	_locID="counter.ITLBRefs" _locAttrData="DisplayName, Description" Name="ITLBRefs" 
+		Reload="100000" 
+		DisplayName="ITLB References" 
+		Group="BPU" 
+		ESCR="0x30000E00" 
+		CCCR="0x00006000" 
+		Description="" />
+
+
+  <Counter 	_locID="counter.ITLBMisses" _locAttrData="DisplayName, Description" Name="ITLBMisses" 
+		Reload="100000" 
+		DisplayName="ITLB Misses" 
+		Group="BPU" 
+		ESCR="0x30000400" 
+		CCCR="0x00006000" 
+		Description="" />
+
+  <Counter 	_locID="counter.PageWalkITLBMiss" _locAttrData="DisplayName, Description" Name="PageWalkITLBMiss" 
+		Reload="100000" 
+		DisplayName="PageWalk ITLB Miss" 
+		Group="BPU" 
+		ESCR="0x02000400" 
+		CCCR="0x00008000" 
+		Description="" />
+
+
+ </Category>
+
+    <Category _locID="category.BranchEvents" _locAttrData="Name" Name="Branch Events">
+  <Counter 	_locID="counter.BranchesRetired" _locAttrData="DisplayName, Description" Name="BranchesRetired" 
+		Reload="100000"
+		DisplayName="Branches Retired" 
+		Group="IQ" 
+		ESCR="0x0C001E00" 
+		CCCR="0x0000A000" 
+		Description="" />
+
+  <Counter 	_locID="counter.MispredictedBranches" _locAttrData="DisplayName, Description" Name="MispredictedBranches" 
+		Reload="100000" 
+		DisplayName="Mispredicted Branches" 
+		Group="IQ" 
+		ESCR="0x06000200" 
+		CCCR="0x00008000" 
+		Description="" />
+
+  <Counter 	_locID="counter.TraceCacheLookupMisses" _locAttrData="DisplayName, Description" Name="TraceCacheLookupMisses" 
+		Reload="100000" 
+		DisplayName="Trace Cache Lookup Misses" 
+		Group="BPU" 
+		ESCR="0x06000200" 
+		CCCR="0x00000000" 
+		Description="" />
+
+
+    </Category>
+
+    <Category _locID="category.FloatingPointUnit" _locAttrData="Name" Name="Floating Point Unit">
+
+  <Counter 	_locID="counter.MMXMicroOp" _locAttrData="DisplayName, Description" Name="MMXMicroOp" 
+		Reload="100000" 
+		DisplayName="MMX Micro Op" 
+		Group="FLAME" 
+		ESCR="0x05000000" 
+		CCCR="0x00002000" 
+		Description="" />
+
+
+  <Counter 	_locID="counter.X87SIMDMicroOp" _locAttrData="DisplayName, Description" Name="X87SIMDMicroOp" 
+		Reload="100000" 
+		DisplayName="X87 SIMD Micro Op" 
+		Group="FLAME" 
+		ESCR="0x5C003000" 
+		CCCR="0x00002000" 
+		Description="" />
+
+
+  <Counter 	_locID="counter.X87FPMicroOp" _locAttrData="DisplayName, Description" Name="X87FPMicroOp" 
+		Reload="100000" 
+		DisplayName="X87 FP Micro Op" 
+		Group="FLAME" 
+		ESCR="0x09000000" 
+		CCCR="0x00002000" 
+		Description="" />
+
+
+  <Counter 	_locID="counter.PackedSPMicroOp" _locAttrData="DisplayName, Description" Name="PackedSPMicroOp" 
+		Reload="100000" 
+		DisplayName="Packed SP Micro Op" 
+		Group="FLAME" 
+		ESCR="0x11000000" 
+		CCCR="0x00002000" 
+		Description="" />
+
+
+  <Counter 	_locID="counter.ScalarSPMicroOp" _locAttrData="DisplayName, Description" Name="ScalarSPMicroOp" 
+		Reload="100000" 
+		DisplayName="Scalar S PMicro Op" 
+		Group="FLAME" 
+		ESCR="0x15000000" 
+		CCCR="0x00002000" 
+		Description="" />
+
+
+  <Counter 	_locID="counter.PackedDPMicroOp" _locAttrData="DisplayName, Description" Name="PackedDPMicroOp" 
+		Reload="100000" 
+		DisplayName="Packed DP Micro Op" 
+		Group="FLAME" 
+		ESCR="0x19000000" 
+		CCCR="0x00002000" 
+		Description="" />
+
+
+  <Counter 	_locID="counter.ScalarDPMicroOp" _locAttrData="DisplayName, Description" Name="ScalarDPMicroOp" 
+		Reload="100000" 
+		DisplayName="Scalar DP Micro Op" 
+		Group="FLAME" 
+		ESCR="0x1D000000" 
+		CCCR="0x00002000" 
+		Description="" />
+
+
+  <Counter 	_locID="counter.MMX128MicroOp" _locAttrData="DisplayName, Description" Name="MMX128MicroOp" 
+		Reload="100000" 
+		DisplayName="MMX 128 Micro Op" 
+		Group="FLAME" 
+		ESCR="0x35000000" 
+		CCCR="0x00002000" 
+		Description="" />
+
+
+  <Counter 	_locID="counter.SSEInputAssists" _locAttrData="DisplayName, Description" Name="SSEInputAssists" 
+		Reload="100000" 
+		DisplayName="SSE Input Assists" 
+		Group="FLAME" 
+		ESCR="0x69000000" 
+		CCCR="0x00002000" 
+		Description="" />
+
+
+  </Category>
+
+ </Family>
+
+</Baseline>

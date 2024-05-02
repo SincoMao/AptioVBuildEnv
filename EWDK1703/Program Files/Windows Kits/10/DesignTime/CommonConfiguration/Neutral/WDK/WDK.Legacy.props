@@ -1,0 +1,57 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">  
+
+    <PropertyGroup>
+    <!-- Properties to be appended to the IncludePath should not be treated as paths, hence should not end in a trailing slash -->
+    <!-- These properties can be identified by the trailing _IncludePath in their names -->
+    <UM_IncludePath Condition="'$(UM_IncludePath)' == ''">$(WindowsSdkDir)Include\$(TargetPlatformVersion)\um</UM_IncludePath>
+    <KIT_SHARED_IncludePath Condition="'$(KIT_SHARED_IncludePath)' == ''">$(WindowsSdkDir)Include\$(TargetPlatformVersion)\shared</KIT_SHARED_IncludePath>
+    <WinRT_IncludePath Condition="'$(WinRT_IncludePath)' == ''">$(WindowsSdkDir)Include\$(TargetPlatformVersion)\winrt</WinRT_IncludePath>  
+
+    <!-- These are meant to overwrite the properties set in UAP.props to handle building drivers for legacy (older than Windows 10) OS -->
+    <WindowsSDK_IncludePath>$(UM_IncludePath);$(KIT_SHARED_IncludePath);$(WinRT_IncludePath)</WindowsSDK_IncludePath>
+    <WindowsSDK_MetadataPath>$(WindowsSdkDir)References</WindowsSDK_MetadataPath>
+    <WindowsSDK_ExecutablePath_x86>$(WindowsSdkDir)bin\x86;</WindowsSDK_ExecutablePath_x86>
+    <WindowsSDK_ExecutablePath_x64>$(WindowsSdkDir)bin\x64;</WindowsSDK_ExecutablePath_x64>
+    <WindowsSDK_LibraryPath>$(WindowsSdkDir)lib\$(TargetPlatformVersion)\um</WindowsSDK_LibraryPath>
+    <WindowsSDK_LibraryPath_x86>$(WindowsSdkDir)lib\$(TargetPlatformVersion)\um\x86;</WindowsSDK_LibraryPath_x86>
+    <WindowsSDK_LibraryPath_x64>$(WindowsSdkDir)lib\$(TargetPlatformVersion)\um\x64;</WindowsSDK_LibraryPath_x64>
+    <WindowsSDK_PlatformPath>$(WindowsSdkDir)Platforms\UAP;</WindowsSDK_PlatformPath>
+    <MakePriExtensionPath Condition="'$(MakePriExtensionPath)'==''">$(WindowsSDKDir)\bin\x86\MrmEnvironmentExtDl.dll</MakePriExtensionPath>
+    <MakePriExtensionPath_x64 Condition="'$(MakePriExtensionPath_x64)'==''">$(WindowsSDKDir)\bin\x64\MrmEnvironmentExtDl.dll</MakePriExtensionPath_x64>
+    
+    
+    <!-- Properties to be appended to the IncludePath should not be treated as paths, hence should not end in a trailing slash -->
+    <!-- These properties can be identified by the trailing _IncludePath in their names -->
+    <KM_IncludePath Condition="'$(KM_IncludePath)' == ''">$(WDKContentRoot)Include\$(TargetPlatformVersion)\km</KM_IncludePath>
+    <CRT_IncludePath Condition="'$(CRT_IncludePath)' == ''">$(WDKContentRoot)Include\$(TargetPlatformVersion)\km\crt</CRT_IncludePath>
+    
+    <KMDF_INC_PATH Condition="'$(KMDF_INC_PATH)' == ''">$(WDKContentRoot)Include\wdf\kmdf\</KMDF_INC_PATH> 
+    <UMDF_INC_PATH Condition="'$(UMDF_INC_PATH)' == ''">$(WDKContentRoot)Include\wdf\umdf\</UMDF_INC_PATH> 
+    <SDK_INC_PATH Condition="'$(SDK_INC_PATH)' == ''">$(UM_IncludePath)\</SDK_INC_PATH>
+    <KIT_SHARED_INC_PATH Condition="'$(KIT_SHARED_INC_PATH)' == ''">$(KIT_SHARED_IncludePath)\</KIT_SHARED_INC_PATH>
+    <DDK_INC_PATH Condition="'$(DDK_INC_PATH)' == ''">$(KM_IncludePath)\</DDK_INC_PATH>
+    <SPB_INC_PATH Condition="'$(SPB_INC_PATH)' == ''">$(KM_IncludePath)\spb\</SPB_INC_PATH>
+
+    <!-- lib paths -->
+    <SDK_LibraryPath_DDKPlatform Condition="'$(SDK_LibraryPath_DDKPlatform)' == ''">$(WindowsSDK_LibraryPath)\$(DDKPlatform)</SDK_LibraryPath_DDKPlatform>
+    <WindowsDDK_LibraryPath Condition="'$(WindowsDDK_LibraryPath)' == ''">$(WindowsSdkDir)lib\$(TargetPlatformVersion)\km</WindowsDDK_LibraryPath>
+    <DDK_LibraryPath_DDKPlatform Condition="'$(DDK_LibraryPath_DDKPlatform)' == ''">$(WindowsDDK_LibraryPath)\$(DDKPlatform)</DDK_LibraryPath_DDKPlatform>
+    <SDK_LIB_PATH Condition="'$(SDK_LIB_PATH)' == ''">$(SDK_LibraryPath_DDKPlatform)\</SDK_LIB_PATH>
+    <DDK_LIB_PATH Condition="'$(DDK_LIB_PATH)' == ''">$(DDK_LibraryPath_DDKPlatform)\</DDK_LIB_PATH>
+    <HALKIT_LIB_PATH Condition="'$(HALKIT_LIB_PATH)' == ''">$(DDK_LIB_PATH)</HALKIT_LIB_PATH>
+    <IFSKIT_LIB_PATH Condition="'$(IFSKIT_LIB_PATH)' == ''">$(DDK_LIB_PATH)</IFSKIT_LIB_PATH>
+    <KMDF_LIB_PATH Condition="'$(KMDF_LIB_PATH)' == ''">$(WindowsSdkDir)lib\wdf\kmdf\$(DDKPlatform)\</KMDF_LIB_PATH> 
+    <UMDF_LIB_PATH Condition="'$(UMDF_LIB_PATH)' == ''">$(WindowsSdkDir)lib\wdf\umdf\$(DDKPlatform)\</UMDF_LIB_PATH> 
+    <SPB_LIB_PATH Condition="'$(SPB_LIB_PATH)' == ''">$(DDK_LibraryPath_DDKPlatform)\spb\</SPB_LIB_PATH>
+
+    <!-- Other paths -->
+    <CoreSystem_HivesPath Condition="'$(CoreSystem_HivesPath)' == ''">$(WDKContentRoot)\CoreSystem\$(TargetPlatformVersion)\$(DDKPlatform)</CoreSystem_HivesPath>
+
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '12.0'">
+     <WindowsSDKDesktopARMSupport>true</WindowsSDKDesktopARMSupport>
+     <WindowsSDKDesktopARM64Support>true</WindowsSDKDesktopARM64Support>
+  </PropertyGroup>
+
+</Project>

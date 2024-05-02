@@ -1,0 +1,56 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    AccessHardwareKey
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+  
+    A bus driver should not try to access the hardware key of a child device from EvtChildListCreateDevice.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507039
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {initial,entered} s = initial;
+}
+watch sdv_WdfDeviceCreate.exit.(*$3);
+
+fun_WDF_CHILD_LIST_CREATE_DEVICE.entry
+{
+    s=entered;
+}
+WdfDeviceOpenRegistryKey.entry[guard $1]
+{
+    if (s==entered&&$2==PLUGPLAY_REGKEY_DEVICE) 
+    { 
+       abort "A bus driver should not try to access the hardware key of a child device from EvtChildListCreateDevice."; 
+    }
+}
+
+fun_WDF_CHILD_LIST_CREATE_DEVICE.exit
+{
+    halt;
+}
+      

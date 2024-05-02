@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<Rule 
+  Name="AppHostTetheredDebugger"
+  DisplayName="Tethered Debugger"
+  PageTemplate="debugger"
+  Order="300"
+  Description="Tethered Debugger options"
+  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns="http://schemas.microsoft.com/build/2009/properties">
+
+  <Rule.Metadata>
+    <sys:Guid x:Key="DebugTargetTypeCommandGuid">FEEA6E9D-77D8-423F-9EDE-3970CBB76125</sys:Guid>
+    <sys:UInt32 x:Key="DebugTargetTypeCommandId">0x300</sys:UInt32>
+  </Rule.Metadata>
+  <Rule.DataSource>
+    <DataSource Persistence="UserFile" />
+  </Rule.DataSource>
+  <Rule.Categories>
+    <Category Name="StartOptions" DisplayName="Start Options" Description="Start Options"/>
+  </Rule.Categories>
+  <BoolProperty 
+    Name="DebuggerLaunchApplication" 
+    DisplayName="Launch Application" 
+    Category="StartOptions"
+    F1Keyword="VC.Project.IVCAppHostTetheredDebugPageObject.LaunchApplication"
+    Description="Specifies whether to launch my application immediately or wait to debug my application when it starts running."/>
+  <EnumProperty 
+    Name="DebuggerType" 
+    DisplayName="Debugger Type" 
+    Category="StartOptions"
+    F1Keyword="VC.Project.IVCAppHostTetheredDebugPageObject.DebuggerType"
+    Description="Specifies which debugger to enable. When set to Mixed, the debuggers for both managed and native code are invoked.">
+    <EnumProperty.Metadata>
+      <NameValuePair Name="IsDebugType" Value="true"/>
+    </EnumProperty.Metadata>
+    <EnumValue Name="NativeOnly" DisplayName="Native Only" Description="Native Only" />
+    <EnumValue Name="ManagedOnly" DisplayName="Managed Only" Description="Managed Only" />
+    <EnumValue Name="Script" DisplayName="Script Only" Description="Script Only" />
+    <EnumValue Name="Mixed" DisplayName="Mixed (Managed and Native)" Description="Mixed (Managed and Native)" />
+  </EnumProperty>
+</Rule>

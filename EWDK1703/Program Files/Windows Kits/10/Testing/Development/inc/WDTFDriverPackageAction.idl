@@ -1,0 +1,113 @@
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Microsoft Confidential
+// Copyright 2009 Microsoft Corporation. All Rights Reserved.
+//
+// WDTFDriverPackage.idl
+//
+// Collection: WDTF Internals - WDTFDriverPackage Reference
+// 
+// Environment: User mode
+// 
+// DLL: WDTFDriverPackage.dll
+//
+//---------------------------------------------------------------------------
+
+// This file will be processed by the MIDL tool to
+// produce the type library (WDTFDriverPackageAction.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    uuid(6D3AAC57-E48D-4DE3-B883-322028C0161D),
+    version(1.0),
+    helpstring("WDTFDriverPackage 1.0 Type Library")
+]
+library WDTFDriverPackageLib
+{
+    importlib("stdole2.tlb");
+    importlib("WDTF.tlb");
+    importlib("WDTFInterfaces.tlb");
+
+    [
+        object,
+        uuid(36061CAE-C5E0-4D55-A012-0F666A2B80A4),
+        dual,
+        nonextensible,
+        helpstring("IWDTFDriverPackage Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFDriverPackageAction2 : IWDTFAction2
+    {
+
+    [id(10), helpstring("property SetPath")]
+    HRESULT SetPackageInfFileName([in] BSTR  pDriverPackageInfFileName);
+    [propget, id(11), helpstring("property Inf")]
+    HRESULT InfFileName([out, retval] BSTR* pVal);
+    [propget, id(13), helpstring("property ClassGuid")] 
+    HRESULT ClassGuid([out, retval] BSTR* pVal);
+    [propget, id(14), helpstring("property ClassName")] 
+    HRESULT ClassName([out, retval] BSTR* pVal);
+    [propget, id(15), helpstring("property Provider")] 
+    HRESULT Provider([out, retval] BSTR* pVal);
+    [propget, id(16), helpstring("property Version")] 
+    HRESULT Version([out, retval] BSTR* pVal);
+    [propget, id(17), helpstring("property Date")] 
+    HRESULT Date([out, retval] BSTR* pVal);
+    [propget, id(18), helpstring("property CatalogFile")] 
+    HRESULT CatalogFile([out, retval] BSTR* pVal);
+    [propget, id(19), helpstring("property HasCatalog")] 
+    HRESULT HasCatalog ([out, retval] VARIANT_BOOL* pbVal);
+    [propget, id(20), helpstring("property IsImported")] 
+    HRESULT IsImported([out, retval] VARIANT_BOOL* pbImported);
+    [propget, id(21), helpstring("property DigitalSigner")] 
+    HRESULT DigitalSigner([out, retval] BSTR* pVal);
+    [propget, id(22), helpstring("property IsDigitalSigned")] 
+    HRESULT IsDigitalSigned ([out, retval] VARIANT_BOOL* pbVal);
+    [propget, id(23), helpstring("IsDigitalSignerTrusted")] 
+    HRESULT IsDigitalSignerTrusted([out, retval] VARIANT_BOOL* pbVal);
+    [id(24), helpstring("GetQueryForDeviceUsingPackage")] 
+    HRESULT GetQueryForDeviceUsingPackage([out,retval] BSTR* pSDEL);
+    [id(25), helpstring("GetQueryForDeviceThatCanUsePackage")] 
+    HRESULT GetQueryForDeviceThatCanUsePackage([out,retval] BSTR* pSDEL);
+    [id(26), helpstring("Compare")] 
+    HRESULT Compare([in]IWDTFDriverPackageAction2 * pDp, [out, retval] VARIANT_BOOL* pbIsIdentical);
+
+    };
+
+
+
+    [
+        object,
+        uuid(B1B7EA58-3AE2-4F81-926D-EFA7C3F9122B),
+        dual,
+        nonextensible,
+        helpstring("IWDTFDriverPackageInternal Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFInternalDriverPackageAction2 : IWDTFDriverPackageAction2
+    {
+
+    [propget, id(30), helpstring("property DriverStoreInfFileName")]
+    HRESULT InfFileNamePath([out, retval] BSTR* pVal);
+
+    [propput, id(30), helpstring("property DriverStoreInfFileName")]
+    HRESULT InfFileNamePath([in] BSTR pVal);
+
+    [propget, id(31), helpstring("property get_HardwareIDs")]
+    HRESULT HardwareIDs([out, retval] IWDTFStrings2** pStrings);
+   
+    };
+
+
+    [
+        uuid(0D7237E6-930F-4682-AD0A-52EBFFD3AEE3),
+        helpstring("WDTFDriverPackage Class")
+    ]
+    coclass WDTFDriverPackage2
+    {
+        [default] interface IWDTFDriverPackageAction2;
+    };
+};

@@ -1,0 +1,54 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DoubleCompletionLocal
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that drivers do not complete a request twice.
+
+    The WdfCompleteRequest, WdfCompleteRequestWithInformation, or WdfRequestCompleteWithPriorityBoost  
+    must not be called twice in a row for the same request. 
+    This is the same rule as the DoubleCompletion rule, the difference is that this rule
+    is only performed within the default I/O queue callback functions.
+     
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507064
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state{
+     enum {INIT,  COMPLETED} t = INIT;
+} with guard(sdv_main,hrequest) 
+
+
+[sdv_WdfRequestComplete
+,sdv_WdfRequestCompleteWithInformation
+,sdv_WdfRequestCompleteWithPriorityBoost
+].entry[guard $1]
+{
+      if (t == COMPLETED) {
+        abort "The driver is completing the Request twice.";
+      }else{
+        t = COMPLETED; 
+      }
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:annotation>
+    <xs:documentation xml:lang="en">
+            Visual Studio Code Analysis Analyzer Schema Definition Language.
+            Copyright (c) Microsoft Corporation. All rights reserved.
+        </xs:documentation>
+  </xs:annotation>
+
+  <!-- Every time this file changes, be sure to change the Validate method for the corresponding object in the code -->
+  
+  <xs:element name="CodeAnalysisPlugIn" type="TCodeAnalysisPlugIn">
+  </xs:element>
+
+  <xs:complexType name="TTypeReferenceWithId">
+    <xs:sequence>
+      <xs:element name="Assembly" type="TNonEmptyString" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Type" type="TNonEmptyString" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="Id" type="TNonEmptyString" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="TTypeReference">
+    <xs:sequence>
+      <xs:element name="Assembly" type="TNonEmptyString" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Type" type="TNonEmptyString" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TAnalyzer">
+    <xs:sequence>
+      <xs:element name="RuleProvider" type="TTypeReference" minOccurs="1" maxOccurs="1" />
+      <xs:element name="ResultServiceReference" type="TNonEmptyString" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="Id" type="TNonEmptyString" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="TCodeAnalysisPlugIn">
+    <xs:all>
+      <xs:element name="ResultService" type="TTypeReferenceWithId" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Analyzer" type="TAnalyzer" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:simpleType name="TNonEmptyString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>

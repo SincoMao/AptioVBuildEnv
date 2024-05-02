@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FileList TargetPlatform="UAP" TargetPlatformMinVersion="10.0.15063.0" TargetPlatformVersion="10.0.15063.0" SDKType="Platform" DisplayName="Windows Mobile Extensions for the UWP" AppliesTo="WindowsAppContainer" MinVSVersion="14.0" ProductFamilyName="Windows.Mobile" SupportsMultipleVersion="Error" TargetFramework=".NETCore, version=v4.5.3;" SupportPrefer32Bit="True" MoreInfo="http://go.microsoft.com/fwlink/?LinkId=517396">
+	<ContainedApiContracts>
+		<ApiContract name="Windows.ApplicationModel.Activation.WebUISearchActivatedEventsContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.ApplicationModel.Calls.Background.CallsBackgroundContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.ApplicationModel.Calls.CallsPhoneContract" version="3.0.0.0"/>
+		<ApiContract name="Windows.ApplicationModel.CommunicationBlocking.CommunicationBlockingContract" version="2.0.0.0"/>
+		<ApiContract name="Windows.ApplicationModel.Wallet.WalletContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.Devices.SmartCards.SmartCardBackgroundTriggerContract" version="3.0.0.0"/>
+		<ApiContract name="Windows.Devices.SmartCards.SmartCardEmulatorContract" version="4.0.0.0"/>
+		<ApiContract name="Windows.Embedded.DeviceLockdown.DeviceLockdownContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.Gaming.Preview.GamesEnumerationContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.Networking.NetworkOperators.NetworkOperatorsFdnContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.Networking.Sockets.ControlChannelTriggerContract" version="2.0.0.0"/>
+		<ApiContract name="Windows.Phone.PhoneContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.Phone.StartScreen.DualSimTileContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.Services.Maps.GuidanceContract" version="2.0.0.0"/>
+		<ApiContract name="Windows.Services.Maps.LocalSearchContract" version="3.0.0.0"/>
+		<ApiContract name="Windows.Security.EnterpriseData.EnterpriseDataContract" version="4.0.0.0"/>
+		<ApiContract name="Windows.System.Profile.ProfileRetailInfoContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.System.UserProfile.UserProfileContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.UI.WebUI.Core.WebUICommandBarContract" version="1.0.0.0"/>
+	</ContainedApiContracts>
+</FileList>

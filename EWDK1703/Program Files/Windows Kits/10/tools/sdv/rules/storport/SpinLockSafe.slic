@@ -1,0 +1,64 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SpinLockSafe
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the IoStartNextPacket and IoCompleteRequest routines 
+    are not called while holding a spin lock. The rule keeps track of the number
+    of spin locks held at any time, and if that number is not 0 when either 
+    routine is called, the driver fails the rule.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507225
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+state {
+	int LockDepth = 0;
+}
+
+[ 
+KeAcquireSpinLockAtDpcLevel,
+KeAcquireSpinLock,
+IoAcquireCancelSpinLock
+].entry
+{
+	LockDepth = LockDepth + 1;
+}
+
+[ 
+KeReleaseSpinLockFromDpcLevel,
+KeReleaseSpinLock,
+IoReleaseCancelSpinLock
+].entry
+{
+	LockDepth = LockDepth - 1;
+}
+
+[ 
+IoStartNextPacket,
+IoCompleteRequest
+].entry
+{
+	if (LockDepth != 0) {
+		abort "$fname has been called while holding a spin lock.";
+	}
+}

@@ -1,0 +1,369 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+ <UsingTask TaskName="ReplaceNmakeCommandTokens" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" TaskFactory="CodeTaskFactory">
+    <ParameterGroup>
+      <TaskOutputFile Required="true" ParameterType="System.String" />
+      <TaskInputFiles Required="true" ParameterType="Microsoft.Build.Framework.ITaskItem[]" />
+      <Command Required="true" ParameterType="System.String" />
+      <ProcessedCommand ParameterType="System.String" Output="true" />
+      <ShouldExecute ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+    <Using Namespace="System.Text.RegularExpressions"/>
+    <Code Type="Fragment" Language="cs">
+<![CDATA[
+       Regex[] regStripCommandModifiers = new Regex[] { new Regex("^(@)?(?<Command>.*)$"),
+                                                             new Regex("^(-(0-9))?(?<Command>.*)$"),
+                                                             new Regex("^(!)?(?<Command>.*)$"),
+                                                           };
+            
+            // Strip command modifiers
+            foreach (Regex reg in regStripCommandModifiers)
+            {
+                Command = reg.Replace(Command, "${Command}");
+            }
+
+            // Do all the token replacements for inputs/outputs.
+            List<string> inputPaths = new List<string>();
+            for (int i = 0; i < TaskInputFiles.Length; i++)
+            {
+                inputPaths.Add(TaskInputFiles[i].GetMetadata("FullPath"));
+            }
+            
+            //  nmake special macros:
+            //  http://msdn.microsoft.com/en-us/library/cbes8ded(v=VS.80).aspx
+            //
+            
+            string taskOutputFileBase = Path.Combine(Path.GetDirectoryName(TaskOutputFile), Path.GetFileNameWithoutExtension(TaskOutputFile));
+            
+            Dictionary<string, string[]> tokenMap = new Dictionary<string, string[]>();
+            tokenMap.Add(@"@", new string[] { TaskOutputFile });
+            tokenMap.Add(@"\*\*", inputPaths.ToArray());
+            tokenMap.Add(@"\*", new string[] { taskOutputFileBase });  // Tokens are specified to be used with Regex
+            tokenMap.Add(@"<", inputPaths.ToArray());                  // replacements are names of properties 
+            tokenMap.Add(@"\?", inputPaths.ToArray());                 // that will be defined in the target.
+            
+            Match match;
+
+            Func<string,string> pathModifier = (string s) => s;
+            foreach (string token in tokenMap.Keys)
+            {
+                string regexPattern = @"(?<FullToken>\$" + token + @"|\$\(" + token + @"(?<Modifier>D|B|F|R)?\))";
+                while ((match = Regex.Match(Command, regexPattern)).Success)
+                {
+                    string fullToken = match.Groups["FullToken"].Value;
+                    string modifier  = match.Groups["Modifier"].Value;
+                    bool   quotesNeeded = false;  // directory path may contain spaces, file names should not.
+                    switch (modifier)
+                    {
+                        case "D":
+                            pathModifier = (string s) =>Path.GetDirectoryName(Path.GetFullPath(s)); 
+                            quotesNeeded = true;
+                            break;
+                        case "B":
+                            pathModifier = (string s) =>Path.GetFileNameWithoutExtension(s);        // Quoting not necessary
+                            break;
+                        case "F":
+                            pathModifier = (string s) =>Path.GetFileName(s);                        // Quoting not necessary
+                            break;
+                        case "R":
+                            pathModifier = (string s) =>Path.Combine(Path.GetDirectoryName(Path.GetFullPath(s)), Path.GetFileNameWithoutExtension(s));
+                            quotesNeeded = true;
+                            break;
+                        default:
+                            pathModifier = (string s) => s;
+                            quotesNeeded = true;                                         
+                            break;
+                    }
+                    string replacement = string.Empty;
+                    string unquotedReplacement = string.Empty;
+                    foreach (string file in tokenMap[token])
+                    {
+                        replacement += string.Format("\"{0}\" ",pathModifier(file));
+                        unquotedReplacement += string.Format("{0} ", pathModifier(file));
+                    }
+                    if (!string.IsNullOrWhiteSpace(replacement))
+                    {
+                        replacement = replacement.Remove(replacement.Length - 1);
+                        unquotedReplacement = unquotedReplacement.Remove(unquotedReplacement.Length - 1);
+                    }
+                    if (quotesNeeded)
+                    {
+                        //
+                        // Only true for cases D or R which return rooted paths so prepending to those values would not be
+                        // valid. So we can safely quote if the token is FOLLOWED by a space.
+                        //
+                        Command = Regex.Replace(Command, string.Format("(?<left>.){0} ", Regex.Escape(fullToken)), "${left}" + replacement + " " ); // If it is surrounded by whitespace use the quoted version
+                        Command = Regex.Replace(Command, string.Format("^{0} ", Regex.Escape(fullToken)), replacement + " " );  
+                        Command = Regex.Replace(Command, string.Format(" {0}$",Regex.Escape(fullToken)),  " " + replacement); 
+                    }                    
+                    Command = Regex.Replace(Command, Regex.Escape(fullToken), unquotedReplacement);
+                }   
+                
+                       
+            }
+
+
+            ShouldExecute="false";
+            if (TaskInputFiles.Length > 0)
+            {
+                for (int i = 0; i < TaskInputFiles.Length; i++)
+                {
+                    ITaskItem item = TaskInputFiles[i];
+                    string path = item.GetMetadata("FullPath");
+                    if (System.DateTime.Compare(File.GetLastWriteTime(path),File.GetLastWriteTime(TaskOutputFile))>0  ||
+                        !File.Exists(item.GetMetadata("Identity") ) )
+                    {
+                        ShouldExecute="true";
+                    }
+                }
+            }
+            else
+            {
+                ShouldExecute="true";
+            }
+           ProcessedCommand=Command;
+]]>
+    </Code>
+  </Task>
+  </UsingTask>
+  
+  <!-- *******************************************************************************************
+        PreprocessDllDef, generate .Def file from .Src file.
+       ******************************************************************************************* -->
+
+  <Target Name="PreprocessDllDef"
+          Condition="!Exists('$(ConvertedDllDef)') and Exists('$(DllDefInput)')"
+          BeforeTargets="BeforeClCompile">
+
+    <Message Text="Inputs: $(DllDefInput)"/>
+	
+    <!-- ClCompile metadata gets applied only when a ClCompile item exists. We want to run Cl prerprocessor on .asm files even when clCompile Item is empty. 
+         The following is a dummy item so that we can apply the ClCompile metadata to .src files while preprocessing. -->
+    <PropertyGroup>
+      <CLToolArchitecture Condition="'$(CLToolArchitecture)' == ''">$(VCToolArchitecture)</CLToolArchitecture>
+      <CLToolArchitecture Condition="'$(CLToolArchitecture)' == ''">$(DefaultToolArchitecture)</CLToolArchitecture>
+	  <DummyClFileForPreprocessDllDef Condition="'@(ClCompile)'==''">DummyClFileForPreprocessDllDef_$([System.Guid]::NewGuid())</DummyClFileForPreprocessDllDef>
+    </PropertyGroup>	
+	
+	<ItemGroup>
+      <ClCompile Include="$(DummyClFileForPreprocessDllDef)" Condition="'$(DummyClFileForPreprocessDllDef)'!=''"/>
+    </ItemGroup>
+	
+	<!-- The following are passed explicitly to the task to avoid overriding subsequent calls to the CL task 
+    <ItemGroup>
+      <ClCompile>
+          <CompileAs>CompileAsC</CompileAs>
+          <PreprocessToFile>true</PreprocessToFile>
+		  <PreprocessSuppressLineNumbers>true</PreprocessSuppressLineNumbers>
+          <AdditionalOptions>/Fi$(ConvertedDllDef) %(AdditionalOptions)</AdditionalOptions>      
+      </ClCompile>
+    </ItemGroup>
+	-->
+
+    <CL Condition="'$(DllDefInput)' != ''"
+        BuildingInIDE                      ="$(BuildingInsideVisualStudio)"
+        Sources                            ="$(DllDefInput)"
+
+        AdditionalIncludeDirectories       ="%(ClCompile.AdditionalIncludeDirectories)"
+        AdditionalOptions                  ="/Fi$(ConvertedDllDef) %(ClCompile.AdditionalOptions)"
+        AdditionalUsingDirectories         ="%(ClCompile.AdditionalUsingDirectories)"
+        AssemblerListingLocation           ="%(ClCompile.AssemblerListingLocation)"
+        AssemblerOutput                    ="%(ClCompile.AssemblerOutput)"
+        BasicRuntimeChecks                 ="%(ClCompile.BasicRuntimeChecks)"
+        BrowseInformation                  ="%(ClCompile.BrowseInformation)"
+        BrowseInformationFile              ="%(ClCompile.BrowseInformationFile)"
+        BufferSecurityCheck                ="%(ClCompile.BufferSecurityCheck)"
+        CallingConvention                  ="%(ClCompile.CallingConvention)"
+        CompileAsManaged                   ="%(ClCompile.CompileAsManaged)"
+        CompileAs                          ="CompileAsC"
+        DebugInformationFormat             ="%(ClCompile.DebugInformationFormat)"
+        DisableLanguageExtensions          ="%(ClCompile.DisableLanguageExtensions)"
+        DisableSpecificWarnings            ="%(ClCompile.DisableSpecificWarnings)"
+        EnableFiberSafeOptimizations       ="%(ClCompile.EnableFiberSafeOptimizations)"
+        EnablePREfast                      ="%(ClCompile.EnablePREfast)"
+        ErrorReporting                     ="%(ClCompile.ErrorReporting)"
+        ExceptionHandling                  ="%(ClCompile.ExceptionHandling)"
+        ExcludedInputPaths                 ="$(ExcludePath)"
+        ExpandAttributedSource             ="%(ClCompile.ExpandAttributedSource)"
+        FavorSizeOrSpeed                   ="%(ClCompile.FavorSizeOrSpeed)"
+        FloatingPointExceptions            ="%(ClCompile.FloatingPointExceptions)"
+        FloatingPointModel                 ="%(ClCompile.FloatingPointModel)"
+        ForceConformanceInForLoopScope     ="%(ClCompile.ForceConformanceInForLoopScope)"
+        ForcedUsingFiles                   ="%(ClCompile.ForcedUsingFiles)"
+        FunctionLevelLinking               ="%(ClCompile.FunctionLevelLinking)"
+        GenerateXMLDocumentationFiles      ="%(ClCompile.GenerateXMLDocumentationFiles)"
+        IgnoreStandardIncludePath          ="%(ClCompile.IgnoreStandardIncludePath)"
+        InlineFunctionExpansion            ="%(ClCompile.InlineFunctionExpansion)"
+        IntrinsicFunctions                 ="%(ClCompile.IntrinsicFunctions)"
+        MinimalRebuild                     ="%(ClCompile.MinimalRebuild)"
+        MultiProcessorCompilation          ="%(ClCompile.MultiProcessorCompilation)"
+        ObjectFileName                     ="%(ClCompile.ObjectFileName)"
+        OmitDefaultLibName                 ="%(ClCompile.OmitDefaultLibName)"
+        OmitFramePointers                  ="%(ClCompile.OmitFramePointers)"
+        OpenMPSupport                      ="%(ClCompile.OpenMPSupport)"
+        Optimization                       ="%(ClCompile.Optimization)"
+        PrecompiledHeader                  ="%(ClCompile.PrecompiledHeader)"
+        PrecompiledHeaderFile              ="%(ClCompile.PrecompiledHeaderFile)"
+        PrecompiledHeaderOutputFile        ="%(ClCompile.PrecompiledHeaderOutputFile)"
+        PreprocessKeepComments             ="%(ClCompile.PreprocessKeepComments)"
+        PreprocessorDefinitions            ="%(ClCompile.PreprocessorDefinitions)"
+        PreprocessSuppressLineNumbers      ="true"
+        PreprocessToFile                   ="true"
+        ProcessorNumber                    ="%(ClCompile.ProcessorNumber)"
+        ProgramDataBaseFileName            ="%(ClCompile.ProgramDataBaseFileName)"
+        RuntimeLibrary                     ="%(ClCompile.RuntimeLibrary)"
+        RuntimeTypeInfo                    ="%(ClCompile.RuntimeTypeInfo)"
+        ShowIncludes                       ="%(ClCompile.ShowIncludes)"
+        SmallerTypeCheck                   ="%(ClCompile.SmallerTypeCheck)"
+        StringPooling                      ="%(ClCompile.StringPooling)"
+        StructMemberAlignment              ="%(ClCompile.StructMemberAlignment)"
+        SuppressStartupBanner              ="%(ClCompile.SuppressStartupBanner)"
+        TreatSpecificWarningsAsErrors      ="%(ClCompile.TreatSpecificWarningsAsErrors)"
+        TreatWarningAsError                ="%(ClCompile.TreatWarningAsError)"
+        TreatWChar_tAsBuiltInType          ="%(ClCompile.TreatWChar_tAsBuiltInType)"
+        UndefineAllPreprocessorDefinitions ="%(ClCompile.UndefineAllPreprocessorDefinitions)"
+        UndefinePreprocessorDefinitions    ="%(ClCompile.UndefinePreprocessorDefinitions)"
+        UseFullPaths                       ="%(ClCompile.UseFullPaths)"
+        UseUnicodeForAssemblerListing      ="%(ClCompile.UseUnicodeForAssemblerListing)"
+        WarningLevel                       ="%(ClCompile.WarningLevel)"
+        WholeProgramOptimization           ="%(ClCompile.WholeProgramOptimization)"
+        XMLDocumentationFileName           ="%(ClCompile.XMLDocumentationFileName)"
+
+        TrackerLogDirectory                ="%(ClCompile.TrackerLogDirectory)"
+
+        TLogReadFiles                      ="@(CLTLogReadFiles)"
+        TLogWriteFiles                     ="@(CLTLogWriteFiles)"
+        ToolExe                            ="$(CLToolExe)"
+        ToolPath                           ="$(CLToolPath)"
+        TrackFileAccess                    ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking         ="%(ClCompile.MinimalRebuildFromTracking)"
+        ToolArchitecture                   ="$(CLToolArchitecture)"
+        TrackerFrameworkPath               ="$(CLTrackerFrameworkPath)"
+        TrackerSdkPath                     ="$(CLTrackerSdkPath)"
+        TrackedInputFilesToIgnore	   	   ="@(ClNoDependencies)"
+
+        AcceptableNonZeroExitCodes         ="%(ClCompile.AcceptableNonZeroExitCodes)"
+        YieldDuringToolExecution           ="$(ClYieldDuringToolExecution)"
+        >
+    </CL>
+	
+    <!-- Remove the dummy item we added -->
+    <ItemGroup>
+      <ClCompile Remove="$(DummyClFileForPreprocessDllDef)" Condition="'$(DummyClFileForPreprocessDllDef)'!=''"/>
+    </ItemGroup>
+  </Target>
+
+  <!-- *******************************************************************************************
+        PreprocessMofFiles
+       ******************************************************************************************* -->
+
+  <Target Name="PreprocessMofFiles"
+          Condition="'@(GenerateBmf)' != ''"
+          BeforeTargets="GenerateBmfFile">
+
+    <PropertyGroup>
+      <CLToolArchitecture Condition="'$(CLToolArchitecture)' == ''">$(VCToolArchitecture)</CLToolArchitecture>
+      <CLToolArchitecture Condition="'$(CLToolArchitecture)' == ''">$(DefaultToolArchitecture)</CLToolArchitecture>
+    </PropertyGroup>
+
+    <CL Condition="'@(GenerateBmf)' != ''"
+        Sources                            ="%(GenerateBmf.Identity)"
+        PreprocessToFile                   ="true"
+        PreprocessOutputPath               ="$(OBJ_PATH)\$(O)\%(GenerateBmf.FileName)%(GenerateBmf.Extension)"
+        CompileAs                          ="CompileAsC"
+        
+        TrackerLogDirectory                ="$(IntDir)"
+
+        TLogReadFiles                      ="@(CLTLogReadFiles)"
+        TLogWriteFiles                     ="@(CLTLogWriteFiles)"
+        ToolExe                            ="$(CLToolExe)"
+        ToolPath                           ="$(CLToolPath)"
+        TrackFileAccess                    ="$(TrackFileAccess)"
+        ToolArchitecture                   ="$(CLToolArchitecture)"
+        TrackerFrameworkPath               ="$(CLTrackerFrameworkPath)"
+        TrackerSdkPath                     ="$(CLTrackerSdkPath)"
+        TrackedInputFilesToIgnore	         ="@(ClNoDependencies)"
+        YieldDuringToolExecution           ="$(ClYieldDuringToolExecution)"
+        >
+    </CL>
+
+  </Target>
+
+  <!-- *******************************************************************************************
+        GenerateBmfFile
+       ******************************************************************************************* -->
+  <Target Name="GenerateBmfFile"
+        Condition="'@(GenerateBmf)' != ''"
+        BeforeTargets="MofComp">
+    <PropertyGroup>
+      <WmimofckToolArchitecture Condition="'$(WmimofckToolArchitecture)' == ''">Native32Bit</WmimofckToolArchitecture>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <MofcompToolArchitecture Condition="'$(MofcompToolArchitecture)' == ''">Native32Bit</MofcompToolArchitecture>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <MofFilesToBmf Include="$(OBJ_PATH)\$(O)\%(GenerateBmf.FileName)%(GenerateBmf.Extension)"></MofFilesToBmf>
+    </ItemGroup>
+    <!-- We need to run inference rule on those files for which there is no corresponding nmake target.
+         The PreprocessMofFiles target preprocess the mof files listed in the SOURCES macro to $(OBJ_PATH)\$(O).
+         Then we check if the preprocessed file has any corresponding nmake target. If there is one, then we remove those Mof files
+         from MofFilesToBmf item not to run the inference rule.
+         NmakeTarget item contains the list of items for which there is a target associated with. -->
+
+    <FindInList CaseSensitive="false" MatchFileNameOnly="false" List="@(NmakeTarget)" ItemSpecToFind="%(MofFilesToBmf.Identity)">
+
+      <Output TaskParameter="ItemFound" ItemName="FoundMofFiles"/>
+
+    </FindInList>
+
+    <ItemGroup>
+      <MofFilesToBmf Remove="@(FoundMofFiles)"/>
+    </ItemGroup>
+
+    <!-- Inference rule to convert mof files to bmf files [$(OBJ_PATH)\$O\.MOF to $(OBJ_PATH)\$O\.BMF] -->
+    <Mofcomp Condition="'@(MofFilesToBmf)' != ''"
+    LanguageNeutralOutput          ="$(OBJ_PATH)\$(O)\MOF.MOF"
+    LanguageSpecificOutput         ="$(OBJ_PATH)\$(O)\MFL.MFL"
+    NamespacePath                  ="root\wmi"
+    Amendment                      ="ms_409"
+    Sources                        ="%(MofFilesToBmf.Identity)"
+    ToolExe                        ="$(MofcompToolExe)"
+    ToolPath                       ="$(MofcompToolPath)"
+    ToolArchitecture               ="$(MofcompToolArchitecture)"
+    TrackFileAccess                ="$(TrackFileAccess)"
+    />
+
+    <Wmimofck Condition="'@(MofFilesToBmf)' != ''"
+    MofFile                                        ="$(OBJ_PATH)\$(O)\MOF.MOF"
+    MflFile                                        ="$(OBJ_PATH)\$(O)\MFL.MFL"
+    Source                                         ="$(OBJ_PATH)\$(O)\MOFMFL.MOF"
+    ToolExe                                        ="$(WmimofckToolExe)"
+    ToolPath                                       ="$(WmimofckToolPath)"
+    ToolArchitecture                               ="$(WmimofckToolArchitecture)"
+    TrackFileAccess                                ="$(TrackFileAccess)"
+    />
+
+    <Mofcomp Condition="'@(MofFilesToBmf)' != ''"
+    CreateBinaryMofFile            ="$(OBJ_PATH)\$(O)\%(MofFilesToBmf.Filename).bmf"
+    Sources                        ="$(OBJ_PATH)\$(O)\MOFMFL.MOF"
+    ToolExe                        ="$(MofcompToolExe)"
+    ToolPath                       ="$(MofcompToolPath)"
+    ToolArchitecture               ="$(MofcompToolArchitecture)"
+    TrackFileAccess                ="$(TrackFileAccess)"
+    />
+
+    <Wmimofck Condition="'@(MofFilesToBmf)' != ''"
+
+    Source                                         ="$(OBJ_PATH)\$(O)\%(MofFilesToBmf.Filename).bmf"
+    ToolExe                                        ="$(WmimofckToolExe)"
+    ToolPath                                       ="$(WmimofckToolPath)"
+    ToolArchitecture                               ="$(WmimofckToolArchitecture)"
+    TrackFileAccess                                ="$(TrackFileAccess)"
+    />
+
+  </Target>
+  
+</Project>

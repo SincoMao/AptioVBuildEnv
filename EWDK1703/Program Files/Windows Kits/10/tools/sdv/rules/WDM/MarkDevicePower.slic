@@ -1,0 +1,89 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    MarkDevicePower
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that a IRP_MJ_POWER with IRP_MN_SET_POWER for SystemPowerState IRP going to S0 is pended.
+    This rule only applies to FDO and FIDO drivers.
+	
+    Device power irps:
+    STATUS_INVALID_DEVICE_STATE � ok, though I would be curious to see what scenarios you would get this return value.
+    STATUS_NO_SUCH_DEVICE, STATUS_NOT_SUPPORTED - Same as previous.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507281
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {initial,power_irp} s = initial;
+}
+with guard(sdv_main,sdv_irp)
+
+
+PoRequestPowerIrp.exit
+{
+    if($return!=STATUS_PENDING)
+    { 
+        halt;
+    }
+    else
+    {
+        s=power_irp;
+    }
+}
+
+IoAcquireRemoveLock.exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+[IoMarkIrpPending].exit[guard $1]
+{  
+    halt;
+}
+
+[IoCallDriver,PoCallDriver].entry[guard $2]
+{  
+   halt;
+}
+
+[sdv_RunSetPowerUp].exit
+{
+    if(s==power_irp&&$2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_POWER)
+    { 
+      if(($return!=STATUS_DELETE_PENDING)||($return!=STATUS_INVALID_DEVICE_STATE)||($return!=STATUS_NOT_SUPPORTED)||($return!=STATUS_NO_SUCH_DEVICE))
+      {
+        abort "IRP_MJ_POWER with IRP_MN_SET_POWER Irp is not pended during PowerUp.";
+      }
+      else
+      {
+          halt;
+      }
+    }
+    else
+    {
+        halt;
+    }
+}

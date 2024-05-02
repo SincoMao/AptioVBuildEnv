@@ -1,0 +1,12 @@
+CancelSpinLock
+CancelSpinlockRelease
+CriticalRegions
+ExclusiveResourceAccess
+GuardedRegions
+QueuedSpinLock
+QueuedSpinLockRelease
+SpinLock
+SpinLockDpc
+SpinlockRelease
+SpinLockSafe
+WithinCriticalRegion

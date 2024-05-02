@@ -1,0 +1,72 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SpinLockDpc
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that a call to KeAcquireSpinLockRaiseToDpc is promptly 
+    followed by a call to KeReleaseSpinlock. If a driver calls KeAcquireSpinLock or
+    KeAcquireSpinLockRaiseToDpc again prior to releasing the lock, it fails the rule.
+    In addition, before exiting the dispatch or cancel routine, the driver must 
+    release the spin lock.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507368
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+state {
+	enum {unlocked,locked} s = unlocked;
+}
+watch KeAcquireSpinLockRaiseToDpc.exit.$1;
+
+KeAcquireSpinLock.exit[guard $1]
+{  
+	if (s == locked) {
+		abort "The driver is calling $fname after already acquiring the spinlock.";
+	} else {
+		s = locked;
+	}
+}
+
+KeAcquireSpinLockRaiseToDpc.exit[guard $1]
+{   
+	if (s == locked) {
+		abort "The driver is calling $fname after already acquiring the spinlock.";
+	} else {
+		s = locked;
+	}
+}
+
+KeReleaseSpinLock.entry[guard $1]
+{
+	if (s != locked) {
+		abort "The driver is calling $fname without first acquiring the spinlock.";
+	} else {
+		s = unlocked;
+	}
+}
+
+[ALL_SP_CALLBACKS].exit
+{
+	if (s == locked) {
+		abort "The dispatch routine has returned without releasing a spinlock.";
+	}
+}

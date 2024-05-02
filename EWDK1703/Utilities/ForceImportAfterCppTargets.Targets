@@ -1,0 +1,128 @@
+<!--
+***********************************************************************************************
+ForceImportAfterCppTargets.Targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file defines the steps/targets common to building Visual C++ projects.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+  
+    <BuildLab_ToolArchitecture>$(VCToolArchitecture)</BuildLab_ToolArchitecture>
+	<BuildLab_ToolArchitecture Condition="'$(BuildLab_ToolArchitecture)' ==''">$(DefaultToolArchitecture)</BuildLab_ToolArchitecture>
+	
+    <BuildLab_DefaultTrackerSdkPath Condition="'$(BuildLab_ToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</BuildLab_DefaultTrackerSdkPath>
+    <BuildLab_DefaultTrackerSdkPath Condition="'$(BuildLab_ToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</BuildLab_DefaultTrackerSdkPath>
+    <BuildLab_DefaultTrackerSdkPath Condition="'$(BuildLab_DefaultTrackerSdkPath)' == ''">Current BuildLab_ToolArchitecture value is not supported: '$(BuildLab_ToolArchitecture)'</BuildLab_DefaultTrackerSdkPath>
+      
+    <CLTrackerSdkPath Condition="'$(CLToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</CLTrackerSdkPath>
+    <CLTrackerSdkPath Condition="'$(CLToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</CLTrackerSdkPath>
+  
+    <CustomBuildTrackerSdkPath Condition="'$(CustomBuildToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</CustomBuildTrackerSdkPath>
+    <CustomBuildTrackerSdkPath Condition="'$(CustomBuildToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</CustomBuildTrackerSdkPath>
+    
+    <LinkTrackerSdkPath Condition="'$(LinkToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</LinkTrackerSdkPath>
+    <LinkTrackerSdkPath Condition="'$(LinkToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</LinkTrackerSdkPath>
+  
+    <LibTrackerSdkPath Condition="'$(LibToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</LibTrackerSdkPath>
+    <LibTrackerSdkPath Condition="'$(LibToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</LibTrackerSdkPath>
+  
+    <MidlTrackerSdkPath Condition="'$(MidlToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</MidlTrackerSdkPath>
+    <MidlTrackerSdkPath Condition="'$(MidlToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</MidlTrackerSdkPath>
+  
+    <RCTrackerSdkPath Condition="'$(RCToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</RCTrackerSdkPath>
+    <RCTrackerSdkPath Condition="'$(RCToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</RCTrackerSdkPath>
+  
+    <ManifestTrackerSdkPath Condition="'$(ManifestToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</ManifestTrackerSdkPath>
+    <ManifestTrackerSdkPath Condition="'$(ManifestToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</ManifestTrackerSdkPath>
+  
+    <XDCMakeTrackerSdkPath Condition="'$(XDCMakeToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</XDCMakeTrackerSdkPath>
+    <XDCMakeTrackerSdkPath Condition="'$(XDCMakeToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</XDCMakeTrackerSdkPath>
+  
+    <BSCMakeTrackerSdkPath Condition="'$(BSCMakeToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</BSCMakeTrackerSdkPath>
+    <BSCMakeTrackerSdkPath Condition="'$(BSCMakeToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</BSCMakeTrackerSdkPath>
+  
+    <XSDTrackerSdkPath Condition="'$(XSDToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</XSDTrackerSdkPath>
+    <XSDTrackerSdkPath Condition="'$(XSDToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</XSDTrackerSdkPath>
+  
+
+    <CtrppTrackerSdkPath Condition="'$(CtrppToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</CtrppTrackerSdkPath>
+    <CtrppTrackerSdkPath Condition="'$(CtrppToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</CtrppTrackerSdkPath>
+ 
+    <InfTrackerSdkPath Condition="'$(InfToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</InfTrackerSdkPath>
+    <InfTrackerSdkPath Condition="'$(InfToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</InfTrackerSdkPath>
+  
+    <MofcompTrackerSdkPath Condition="'$(MofcompToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</MofcompTrackerSdkPath>
+    <MofcompTrackerSdkPath Condition="'$(MofcompToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</MofcompTrackerSdkPath>
+  
+    <WmimofckTrackerSdkPath Condition="'$(WmimofckToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</WmimofckTrackerSdkPath>
+    <WmimofckTrackerSdkPath Condition="'$(WmimofckToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</WmimofckTrackerSdkPath>
+  
+    <MessageCompileTrackerSdkPath Condition="'$(MessageCompileToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</MessageCompileTrackerSdkPath>
+    <MessageCompileTrackerSdkPath Condition="'$(MessageCompileToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</MessageCompileTrackerSdkPath>
+  
+    <TraceWppTrackerSdkPath Condition="'$(TraceWppToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</TraceWppTrackerSdkPath>
+    <TraceWppTrackerSdkPath Condition="'$(TraceWppToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</TraceWppTrackerSdkPath>
+  
+    <BinplaceTrackerSdkPath Condition="'$(BinplaceToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</BinplaceTrackerSdkPath>
+    <BinplaceTrackerSdkPath Condition="'$(BinplaceToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</BinplaceTrackerSdkPath>
+   
+    <Inf2CatTrackerSdkPath Condition="'$(Inf2CatToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</Inf2CatTrackerSdkPath>
+    <Inf2CatTrackerSdkPath Condition="'$(Inf2CatToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</Inf2CatTrackerSdkPath>
+  
+    <DriverSignTrackerSdkPath Condition="'$(DriverSignToolArchitecture)' == 'Native32Bit'">$(TrackerSdkPathX86)</DriverSignTrackerSdkPath>
+    <DriverSignTrackerSdkPath Condition="'$(DriverSignToolArchitecture)' == 'Native64Bit'">$(TrackerSdkPathX64)</DriverSignTrackerSdkPath>
+    
+    
+    <CLTrackerSdkPath               Condition="'$(CLToolArchitecture)' == ''"           >$(BuildLab_DefaultTrackerSdkPath)</CLTrackerSdkPath>
+    <CustomBuildTrackerSdkPath      Condition="'$(CustomBuildToolArchitecture)' == ''"  >$(BuildLab_DefaultTrackerSdkPath)</CustomBuildTrackerSdkPath>
+    <LinkTrackerSdkPath             Condition="'$(LinkToolArchitecture)' == ''"         >$(BuildLab_DefaultTrackerSdkPath)</LinkTrackerSdkPath>
+    <LibTrackerSdkPath              Condition="'$(LibToolArchitecture)' == ''"          >$(BuildLab_DefaultTrackerSdkPath)</LibTrackerSdkPath>
+    <MidlTrackerSdkPath             Condition="'$(MidlToolArchitecture)' == ''"         >$(BuildLab_DefaultTrackerSdkPath)</MidlTrackerSdkPath>
+    <RCTrackerSdkPath               Condition="'$(RCToolArchitecture)' == ''"           >$(BuildLab_DefaultTrackerSdkPath)</RCTrackerSdkPath>
+    <ManifestTrackerSdkPath         Condition="'$(ManifestToolArchitecture)' == ''"     >$(BuildLab_DefaultTrackerSdkPath)</ManifestTrackerSdkPath>
+    <XDCMakeTrackerSdkPath          Condition="'$(XDCMakeToolArchitecture)' == ''"      >$(BuildLab_DefaultTrackerSdkPath)</XDCMakeTrackerSdkPath>
+    <BSCMakeTrackerSdkPath          Condition="'$(BSCMakeToolArchitecture)' == ''"      >$(BuildLab_DefaultTrackerSdkPath)</BSCMakeTrackerSdkPath>
+    <XSDTrackerSdkPath              Condition="'$(XSDToolArchitecture)' == ''"          >$(BuildLab_DefaultTrackerSdkPath)</XSDTrackerSdkPath>
+    
+    <!-- Reference WindowsDriver.Common.targets to see why the following are set to TrackerSdkPathX86 vs. BuildLab_DefaultTrackerSdkPath -->
+    
+    <CtrppTrackerSdkPath            Condition="'$(CtrppToolArchitecture)' == ''"         >$(TrackerSdkPathX86)</CtrppTrackerSdkPath>
+    <InfTrackerSdkPath              Condition="'$(InfToolArchitecture)' == ''"           >$(TrackerSdkPathX86)</InfTrackerSdkPath>
+    <MofcompTrackerSdkPath          Condition="'$(MofcompToolArchitecture)' == ''"       >$(TrackerSdkPathX86)</MofcompTrackerSdkPath>
+    <WmimofckTrackerSdkPath         Condition="'$(WmimofckToolArchitecture)' == ''"      >$(TrackerSdkPathX86)</WmimofckTrackerSdkPath>
+    <MessageCompileTrackerSdkPath   Condition="'$(MessageCompileToolArchitecture)' == ''">$(TrackerSdkPathX86)</MessageCompileTrackerSdkPath>
+    <TraceWppTrackerSdkPath         Condition="'$(TraceWppToolArchitecture)' == ''"      >$(TrackerSdkPathX86)</TraceWppTrackerSdkPath>
+    <BinplaceTrackerSdkPath         Condition="'$(BinplaceToolArchitecture)' == ''"      >$(TrackerSdkPathX86)</BinplaceTrackerSdkPath>
+    <Inf2CatTrackerSdkPath          Condition="'$(Inf2CatToolArchitecture)' == ''"       >$(TrackerSdkPathX86)</Inf2CatTrackerSdkPath>
+    <DriverSignTrackerSdkPath       Condition="'$(DriverSignToolArchitecture)' == ''"    >$(TrackerSdkPathX86)</DriverSignTrackerSdkPath>
+
+
+  </PropertyGroup>
+
+  <Target Name="SetBuildLabRedistDllPath" BeforeTargets="PrepareForBuild" >
+    
+    <SetEnv
+      Condition="'$(BuildLab_ToolArchitecture)'=='Native64Bit'"
+      Name   ="PATH"
+      Value  ="$(VCInstallDir)redist\x64\Microsoft.VC120.CRT;"
+      Prefix ="true">
+    </SetEnv>
+   
+    <SetEnv
+      Condition="'$(BuildLab_ToolArchitecture)'!='Native64Bit'"
+      Name   ="PATH"
+      Value  ="$(VCInstallDir)redist\x86\Microsoft.VC120.CRT;"
+      Prefix ="true">
+    </SetEnv>
+    
+  </Target>
+
+</Project>

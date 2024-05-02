@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <Rule Name="Mofcomp" PageTemplate="tool" DisplayName="Mof Compiler"  Order="175">
+    <Rule.Categories>
+      <Category Name="General">
+        <Category.DisplayName>
+          <sys:String>General</sys:String>
+        </Category.DisplayName>
+      </Category>
+      <Category Name="File Options">
+        <Category.DisplayName>
+          <sys:String>File Options</sys:String>
+        </Category.DisplayName>
+      </Category>
+      <Category Name="Command Line" Subtype="CommandLine">
+        <Category.DisplayName>
+          <sys:String>Command Line</sys:String>
+        </Category.DisplayName>
+      </Category>
+      <Category Name="All Options" DisplayName="All Options" Subtype="Search" />
+    </Rule.Categories>
+    <Rule.DataSource>
+      <DataSource Persistence="ProjectFile" ItemType="Mofcomp" Label="" HasConfigurationCondition="true"/>
+    </Rule.DataSource>
+    <StringProperty Name="Amendment" Category="General" DisplayName="Amendement" Description="Splits the MOF file into language-neutral and -specific versions. (-AMENDMENT:Locale)" Switch="-AMENDMENT:" F1Keyword="driver.mofcomp.general.properties">
+    </StringProperty>
+    <StringProperty Name="Authority" Category="General" DisplayName="Authority" Description="Specifies Authority as the authority (domain name) to use when logging on to WMI. (-A:Authority)" Switch="-A:" F1Keyword="driver.mofcomp.general.properties">
+    </StringProperty>
+    <StringProperty Name="CreateBinaryMofFile" Category="File Options" DisplayName="Create Binary Mof File" Description="Requests that the compiler create a binary version of the Mof file with the name filename without making any modifications to the WMI repository. (-B:Filename)" Switch="-B:" F1Keyword="driver.mofcomp.fileoptions.properties">
+    </StringProperty>
+    <StringProperty Name="LanguageNeutralOutput" Category="File Options" DisplayName="Language Neutral Output" Description="Name of the language neutral output. (-MOF:Path)" Switch="-MOF:" F1Keyword="driver.mofcomp.fileoptions.properties">
+    </StringProperty>
+    <StringProperty Name="LanguageSpecificOutput" Category="File Options" DisplayName="Language Specific Output" Description="Name of the language specific output. (-MFL:Path)" Switch="-MFL:" F1Keyword="driver.mofcomp.fileoptions.properties">
+    </StringProperty>
+    <EnumProperty Name="MofClass" DisplayName="Mof Class" Description="Allows/Disallows the creation/updation of classes in MOF files; see the documentation on the -class family of switches for details." Category="General" F1Keyword="driver.mofcomp.general.properties">
+      <EnumValue Name="CreateOnly" Switch="-class:createonly" DisplayName="Create Only" Description="Requests that the compiler not make any changes to existing classes. When this switch is used, the compile operation terminates if a class specified in the MOF file already exists.">
+      </EnumValue>
+      <EnumValue Name="ForceUpdate" Switch="-class:forceupdate" DisplayName="Force Update" Description="Forces updates of classes when conflicting child classes exist.">
+      </EnumValue>
+      <EnumValue Name="SafeUpdate" Switch="-class:safeupdate" DisplayName="Safe Update" Description="Allows updates of classes even if there are child classes, as long as the change does not cause conflicts with child classes.">
+      </EnumValue>
+      <EnumValue Name="UpdateOnly" Switch="-class:updateonly" DisplayName="Update Only" Description="Requests that the compiler not create any new classes.">
+      </EnumValue>
+    </EnumProperty>
+    <EnumProperty Name="MofInstance" DisplayName="Mof Instance" Description="Allows the creation/updation of instances in MOF files; see the documentation on the -instance family of switches for details." Category="General" F1Keyword="driver.mofcomp.general.properties">
+      <EnumValue Name="CreateOnly" Switch="-instance:createonly" DisplayName="Create Only" Description="Requests that the compiler not make any changes to existing instances. When this switch is used, the compile operation terminates if an instance specified in the MOF file already exists.">
+      </EnumValue>
+      <EnumValue Name="UpdateOnly" Switch="-instance:updateonly" DisplayName="Update Only" Description="Requests that the compiler not create any new instances. When this switch is used, the compile operation terminates if an instance specified in the MOF file does not exist..">
+      </EnumValue>
+    </EnumProperty>
+    <StringProperty Name="NamespacePath" Category="General" DisplayName="NamespacePath" Description="Requests that the compiler load the MOF file into the namespace specified as namespacepath.  (-N:namespacepath)" Switch="-N:" F1Keyword="driver.mofcomp.general.properties">
+    </StringProperty>
+    <StringProperty Name="ResourceName" Category="General" DisplayName="Resource Name" Description="Extracts binary MOF from a named resource.  (-ER:ResourceName)" Switch="-ER:" F1Keyword="driver.mofcomp.general.properties">
+    </StringProperty>
+    <StringProperty Name="ResourceLocale" Category="General" DisplayName="Resource Locale" Description="Extracts the localized MOF descriptions from the binary MOF when used with -ER switch.  (-L:ResourceLocale)" Switch="-L:" F1Keyword="driver.mofcomp.general.properties">
+    </StringProperty>
+    <StringProperty Name="SyntaxCheck" Category="General" DisplayName="Syntax Check" Description="Requests that the compiler perform a syntax check only and print appropriate error messages. No other switch can be used with this switch.   (-check)" Switch="-check" F1Keyword="driver.mofcomp.general.properties">
+    </StringProperty>
+    <BoolProperty Name="AutoRecover" Category="General" DisplayName="Auto Recover" Description="Adds the named MOF file to the list of files compiled during repository recovery.    (-autorecover)" Switch="-autorecover" F1Keyword="driver.mofcomp.general.properties">
+    </BoolProperty>
+    <BoolProperty Name="WmiSyntaxCheck" Category="General" DisplayName="WMI Syntax Check" Description="Requests that the compiler perform a WMI syntax check. The -B: switch must be used with this switch. (-WMI)" Switch="-WMI" F1Keyword="driver.mofcomp.general.properties">
+    </BoolProperty>
+    <StringProperty Name="AdditionalOptions" DisplayName="Additional Option" Description="Additional Options" Category="Command Line" F1Keyword="vc.project.AdditionalOptionsPage">
+    </StringProperty>
+  </Rule>
+  <ItemType Name="Mofcomp" DisplayName="Mofcomp" />
+  <FileExtension Name=".mof"   ContentType="Mofcomp" />
+  <ContentType Name="Mofcomp" DisplayName="Mofcomp" ItemType="Mofcomp" />
+</ProjectSchemaDefinitions>

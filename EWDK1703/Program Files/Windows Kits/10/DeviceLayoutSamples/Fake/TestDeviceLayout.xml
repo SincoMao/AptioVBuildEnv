@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DeviceLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/embedded/2004/10/ImageUpdate">
+  <Partitions>
+    <!-- EFI System Partition --> 
+    <Partition>
+      <Name>EFIESP</Name>
+      <FileSystem>FAT</FileSystem>
+      <TotalSectors>65536</TotalSectors>
+      <!-- PARTITION_SYSTEM_GUID
+      <Type>{c12a7328-f81f-11d2-ba4b-00a0c93ec93b}</Type> -->
+      <Type>{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}</Type>
+      <RequiredToFlash>true</RequiredToFlash>
+    </Partition>
+
+    <!-- Device Provisioning Partition -->
+    <Partition>
+      <Name>DPP</Name>
+      <!-- PARTITION_BASIC_DATA_GUID -->
+      <Type>{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}</Type>
+      <TotalSectors>20480</TotalSectors>
+      <RequiredToFlash>true</RequiredToFlash>
+    </Partition>
+
+   <Partition>
+      <Name>MainOS</Name>
+      <!-- PARTITION_BASIC_DATA_GUID -->
+      <Type>{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}</Type>
+      <!-- Accounts for 300MB free + 50 MB boot/OEM growth. This number was reduced from 400+50 due to compression ratio
+           + some buffer to decompress files if necessary -->
+      <MinFreeSectors>1445888</MinFreeSectors>
+      <RequiresCompression>true</RequiresCompression>
+      <ByteAlignment>0x800000</ByteAlignment>
+      <ClusterSize>0x1000</ClusterSize>
+      <FileSystem>NTFS</FileSystem>
+      <AttachDriveLetter>false</AttachDriveLetter>
+    </Partition>
+
+    <Partition>
+      <Name>Data</Name>
+      <!-- PARTITION_BASIC_DATA_GUID -->
+      <Type>{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}</Type>
+      <UseAllSpace>true</UseAllSpace>
+      <ByteAlignment>0x800000</ByteAlignment>
+      <ClusterSize>0x4000</ClusterSize>
+      <FileSystem>NTFS</FileSystem>
+    </Partition>
+
+  </Partitions>
+  <SectorSize>512</SectorSize>
+  <ChunkSize>128</ChunkSize>
+</DeviceLayout>

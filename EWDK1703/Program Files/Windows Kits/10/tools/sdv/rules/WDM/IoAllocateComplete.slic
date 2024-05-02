@@ -1,0 +1,56 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoAllocateComplete
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    A driver should not call IoCompleteRequest if the irp was created with IoAllocateIrp.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {initial,allocated} irp_state = initial;
+}
+watch IoAllocateIrp.exit.$return;
+
+IoAllocateIrp.exit[guard $return]
+{
+    if($return==NULL)
+    {
+        halt;
+    }
+    else
+    {
+        irp_state=allocated;
+    }
+}
+
+
+IoCompleteRequest.entry[guard $1]
+{
+    if(irp_state==allocated)
+    {
+        abort "A driver should not call $fname if the irp was created with IoAllocateIrp.";
+    }
+}
+

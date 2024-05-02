@@ -1,0 +1,78 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    wdfioqueueretrievefoundrequest
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule checks that WdfIoQueueRetrieveFoundRequest is called
+    only after WdfIoQueueFindRequest is called and returned STATUS_SUCCESS and
+    no WdfObjectDereference is called on the same request.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507152
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {init,find_called} s = init;
+    int counter=0;
+}
+watch sdv_WdfIoQueueFindRequest.exit.(*$5);
+
+[sdv_WdfIoQueueFindRequest].exit[guard *$5]
+{
+    if($return==STATUS_SUCCESS)
+    {
+            s=find_called;
+            counter=counter+1;
+    }
+    else
+    {
+       halt;
+    }
+}
+
+[sdv_WdfObjectDereference].entry[guard $1]
+{
+      if(s==find_called)
+      {
+        counter=counter-1;
+      }
+}
+
+[sdv_WdfIoQueueRetrieveFoundRequest].entry[guard $2]
+{
+   if( s == find_called && counter==0)
+   {
+          abort "$fname should not be called after droping the reference.";
+   }
+   else
+   {
+      halt;
+   }
+} 
+
+[sdv_main].exit
+{
+	if(counter != 0)
+	{
+		abort "There's an extra reference taken on a request with WdfIoQueueFindRequest which needs to be released with WdfObjectDereference.";
+	}
+}

@@ -1,0 +1,8 @@
+StorPortVirtualDevice
+StorPortVirtualDevice2
+WithinCriticalRegion
+ZwRegistryCreate
+ZwRegistryOpen
+DoubleExFreePool
+DoubleKeSetEvent
+IoFreeIrp

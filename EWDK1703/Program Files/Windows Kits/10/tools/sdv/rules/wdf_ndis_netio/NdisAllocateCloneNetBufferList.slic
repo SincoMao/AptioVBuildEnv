@@ -1,0 +1,68 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NdisAllocateCloneNetBufferList
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule checks that NdisAllocateCloneNetBufferList and NdisFreeCloneNetBufferList are called 
+    in alternate order. The ultimate goal is to make sure all NetBufferLists are freed
+    when MiniportHaltEx ends.
+
+    The rule uses three different states. state changes when a NetBufferList is allocated or freed.
+    If a NetBufferList is still allocated when the MiniportHaltEx exits, then the rule will fail. 
+    
+    Related Rule:
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+   enum {initial, allocated, free} s = initial;
+}
+watch NdisAllocateCloneNetBufferList.exit.$return;
+
+NdisAllocateCloneNetBufferList.exit[guard $return]
+{  
+    if ($return != 0)
+    {
+        s = allocated;
+    }
+}
+
+NdisFreeCloneNetBufferList.exit[guard $1]
+{
+    if ( s == free)
+    {
+        abort "Freeing a NetBufferList that was not allocated.";
+    }
+  
+    s = free;
+}
+
+[sdv_MINIPORT_HALT,
+sdv_FILTER_DETACH,
+sdv_PROTOCOL_UNBIND_ADAPTER_EX].exit
+{
+    if (s == allocated) 
+    {
+        abort "You are halting the miniport but still have a NetBufferList allocated.";
+    }
+}

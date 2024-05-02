@@ -1,0 +1,65 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    wdfioqueueretrievenextrequest
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule checks that WdfIoQueueRetrieveNextRequest is not
+    called after WdfIoQueueFindRequest is called.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507153
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {init,find_called} s = init;
+    
+    
+}
+watch sdv_WdfIoQueueFindRequest.exit.$1;
+
+[sdv_WdfIoQueueFindRequest].exit[guard $1]
+{
+    if($return==STATUS_SUCCESS)
+    {
+            s=find_called;
+    }
+    else
+    {
+       halt;
+    }
+}
+
+
+[sdv_WdfIoQueueRetrieveNextRequest].entry[guard $1]
+{
+   if( s == find_called)
+   {
+          abort "$fname should not be called after WdfIoQueueFindRequest.";
+   }
+   else
+   {
+      halt;
+   }
+} 
+
+
+

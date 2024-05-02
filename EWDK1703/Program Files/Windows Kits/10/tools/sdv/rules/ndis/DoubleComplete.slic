@@ -1,0 +1,59 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DoubleComplete
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    An NDIS miniport should not call NdisMOidRequestComplete on the same request multiple times.
+
+    This rule will report an error if:
+        - MINIPORT_OID_REQUEST exits with NDIS_STATUS_SUCCESS after calling NdisMOidRequestComplete 
+        - NdisMOidRequestComplete is called multiple times when MINIPORT_OID_REQUEST returns pending
+    
+    Related Rule:
+    DoubleCompleteWorkItem: checks for double completion issues when the completion process is deferred to a work item.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507160
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state{
+   int calls = 0;
+}
+
+sdv_MINIPORT_OID_REQUEST.exit
+{
+    if ( (calls > 0) && NDIS_SUCCESS($return) ) 
+    {
+        abort "NdisMOidRequestComplete was called and this MiniportOidRequest is returning SUCCESS";
+    }
+}
+
+NdisMOidRequestComplete.entry
+{
+    if(calls > 0) 
+    {
+        abort "$fname is being called from MiniportOidRequest";
+    }
+
+    calls = calls + 1;
+}

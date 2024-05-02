@@ -1,0 +1,9 @@
+[$RootKey$\Packages\{AC2D3F3C-563E-4308-BC26-E00D49746A74}]
+"Assembly"="Microsoft.VSDesigner.BootstrapPackage,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VSDesigner.BootstrapPackage.VsDesignerBootstrapPackage"
+"InprocServer32"="$System$\mscoree.dll"
+@="Microsoft Visual Studio Designer Bootstrap Package"
+[$RootKey$\AutoLoadPackages\{93694fa0-0397-11d1-9f4e-00a0c911004f}]
+"{AC2D3F3C-563E-4308-BC26-E00D49746A74}"="0"
+[$RootKey$\AutoLoadPackages\{adfc4e66-0397-11d1-9f4e-00a0c911004f}]
+"{AC2D3F3C-563E-4308-BC26-E00D49746A74}"="0"

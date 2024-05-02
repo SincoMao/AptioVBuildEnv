@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns="urn:schemas-microsoft-com:rowset" 
+            targetNamespace="urn:schemas-microsoft-com:rowset" 		
+            attributeFormDefault="unqualified"
+            elementFormDefault="qualified" 
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <!-- converted from schema provided at http://msdn.microsoft.com/archive/default.asp?url=/archive/en-us/dnarado/html/xmlintegrationinado.asp -->
+  <xsd:attribute name="updatable" type="xsd:boolean"/>
+  <xsd:attribute name="updateresync" type="xsd:int" />
+  <xsd:attribute name="uniquetable" type="xsd:string" />
+  <xsd:attribute name="uniqueschema" type="xsd:string" />
+  <xsd:attribute name="uniquecatalog" type="xsd:string" />
+  <xsd:attribute name="customresync" type="xsd:string" />
+  <xsd:attribute name="irowsetchange" type="xsd:boolean" />
+  <xsd:attribute name="irowsetupdate" type="xsd:boolean" />
+  <xsd:attribute name="commandtimeout" type="xsd:int" />
+  <xsd:attribute name="batchsize" type="xsd:int" />
+  <xsd:attribute name="updatecriteria" type="xsd:int" />
+  <xsd:attribute name="reshapename" type="xsd:string" />
+  <xsd:attribute name="autorecalc" type="xsd:int" />
+  <xsd:attribute name="autoincrement" type="xsd:boolean" />
+  <xsd:attribute name="baseschema" type="xsd:string" />
+  <xsd:attribute name="basetable" type="xsd:string" />
+  <xsd:attribute name="basecolumn" type="xsd:string" />
+  <xsd:attribute name="basecatalog" type="xsd:string" />
+  <xsd:attribute name="number" type="xsd:int" />
+  <xsd:attribute name="name" type="xsd:string" />
+  <xsd:attribute name="precision" type="xsd:unsignedByte" />
+  <xsd:attribute name="scale" type="xsd:unsignedByte" />
+  <xsd:attribute name="fixedlength" type="xsd:boolean" />
+  <xsd:attribute name="long" type="xsd:boolean" />
+  <xsd:attribute name="nullable" type="xsd:boolean" />
+  <xsd:attribute name="maybenull" type="xsd:boolean" />
+  <xsd:attribute name="keycolumn" type="xsd:boolean" />
+  <xsd:attribute name="writeunknown" type="xsd:boolean" />
+  <xsd:attribute name="write" type="xsd:boolean" />
+  <xsd:attribute name="rowid" type="xsd:boolean" />
+  <xsd:attribute name="CommandTimeout" type="xsd:string"/>
+  <xsd:attribute name="dbtype" type="xsd:string"/>
+  
+  <xsd:element name="rowbase" type="rowbase" />
+  <xsd:element name="original" type="original" />
+  <xsd:element name="update" type="update" />
+  <xsd:element name="insert" type="insert" />
+  <xsd:element name="delete" type="delete" />
+  <xsd:element name="data" type="data" />
+  
+  <xsd:complexType name="original">
+    <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+      <xsd:element minOccurs="1" maxOccurs="1" name="rowbase" type="rowbase" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##other" processContents="lax" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##local" processContents="lax" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="update">
+    <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+      <xsd:element minOccurs="1" maxOccurs="1" name="original" type="original" />
+      <xsd:element minOccurs="1" maxOccurs="1" name="rowbase" type="rowbase" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##other" processContents="lax" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##local" processContents="lax" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="insert">
+    <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+      <xsd:element minOccurs="1" maxOccurs="unbounded" name="rowbase" type="rowbase" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##other" processContents="lax" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##local" processContents="lax" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="delete">
+    <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+      <xsd:element minOccurs="1" maxOccurs="unbounded" name="rowbase" type="rowbase" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##other" processContents="lax" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##local" processContents="lax" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="rowbase">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:any namespace="##any" processContents="lax" />
+    </xsd:choice>
+    <xsd:attribute name="updatable" type="xsd:boolean" />
+  </xsd:complexType>
+  <xsd:complexType name="data">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="rowbase" type="rowbase" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="update" type="update" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="insert" type="insert" />
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="delete" type="delete" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##other" processContents="lax" />
+      <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##local" processContents="lax" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+ 
+

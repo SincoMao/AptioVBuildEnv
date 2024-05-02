@@ -1,0 +1,47 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    ReservedDDIs
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies drivers do not call any of these reserved functions.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507328
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+
+}
+
+KfAcquireSpinLock.entry{ abort "$fname should not be used.";}
+KeAcquireQueuedSpinLock.entry{ abort "$fname should not be used.";}
+KeTryToAcquireQueuedSpinLock.entry{ abort "$fname should not be used.";}
+KfReleaseSpinLock.entry{ abort "$fname should not be used.";}
+KeReleaseQueuedSpinLock.entry{ abort "$fname should not be used.";}
+FsRtlAcquireFileExclusive.entry{ abort "$fname should not be used.";}
+KeReleaseMutant.entry{ abort "$fname should not be used.";}
+IoReleaseRemoveLockEx.entry{ abort "$fname should not be used.";}
+IoReleaseRemoveLockAndWaitEx.entry{ abort "$fname should not be used.";}
+FsRtlReleaseFile.entry{ abort "$fname should not be used.";}
+IoInitializeRemoveLockEx.entry{ abort "$fname should not be used.";}
+FsRtlPrivateLock.entry{ abort "$fname should not be used.";}
+
+

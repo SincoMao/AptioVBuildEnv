@@ -1,0 +1,61 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlKeReleaseSpinLock
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020015
+
+Description:
+
+    The IrqlKeReleaseSpinLock rule specifies that the driver calls 
+    KeReleaseSpinLock only when it is executing at IRQL = DISPATCH_LEVEL.
+
+    This rule also specifies that the value of the NewIrql parameter in the 
+    call to KeReleaseSpinLock is equal to the IRQL at which the driver was 
+    executing before the call to KeAcquireSpinLock. (This value is also the 
+    value of the OldIrql parameter that is supplied by KeAcquireSpinLock.)
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216038
+
+--*/
+
+
+#include "slic_base.h"
+
+/*
+
+Calls to KeAcquireSpinLock and KeReleaseSpinLock must follow a stack
+protocol (See general discussion of the SDV OS Model IRQL Stack in the
+SDV OS Model).
+
+Notice: The rule does not check that the previous IRQL was set by
+KeAcquireSpinLock.
+
+*/
+
+/* Check that KeReleaseSpinLock is called at DISPATCH_LEVEL and that
+it restores the IRQL to previous level: */
+[KeReleaseSpinLock,KfReleaseSpinLock@X86].entry 
+{
+
+    if (sdv_irql_current != DISPATCH_LEVEL)
+    {
+       abort "$fname should only be called at IRQL = DISPATCH_LEVEL.";
+    } 
+    else if (!(SDV_IRQL_PREVIOUS_EQUAL($2))) 
+    {
+       abort "$fname must restore old IRQL value.";
+    }
+}

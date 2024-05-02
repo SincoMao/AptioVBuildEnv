@@ -1,0 +1,2925 @@
+[$RootKey$]
+
+[$RootKey$\AD7Metrics]
+
+[$RootKey$\AD7Metrics\Engine]
+
+[$RootKey$\AD7Metrics\Engine\{3B476D35-A401-11D2-AAD4-00C04F990171}]
+"AddressBP"=dword:00000001
+"AlwaysLoadLocal"=dword:00000001
+"AlwaysLoadProgramProviderLocal"=dword:00000001
+"AppVerifier"=dword:00000001
+"Attach"=dword:00000001
+"AutoSelectPriority"=dword:00000005
+"CallStackBP"=dword:00000001
+"ClrDebuggingServicesId"=dword:00000000
+"ConditionalBP"=dword:00000001
+"DataBP"=dword:00000001
+"Disassembly"=dword:00000001
+"DumpWriting"=dword:00000001
+"ENC"=dword:00000001
+"EnginePriority"=dword:0000004b
+"EncUseNativeBuilder"=dword:00000001
+"Exceptions"=dword:00000001
+"FunctionBP"=dword:00000001
+"HitCountBP"=dword:00000001
+"JITDebug"=dword:00000001
+"JustMyCodeStepping"=dword:00000001
+"ManagedOnly"=dword:00000000
+"ProgramProvider"="{4FF9DEF4-8922-4D02-9379-3FFA64D1D639}"
+"RemoteProcessListing"=dword:00000001
+"RemoteDebugging"=dword:00000001
+"SetNextStatement"=dword:00000001
+"SuspendThread"=dword:00000001
+
+[$RootKey$\AD7Metrics\Engine\{3B476D35-A401-11D2-AAD4-00C04F990171}\PortSupplier]
+"0"="{708C1ECA-FF48-11D2-904F-00C04FA302A1}"
+"1"="{3B476D38-A401-11D2-AAD4-00C04F990171}"
+
+[$RootKey$\AD7Metrics\Engine\{5FFF7536-0C87-462D-8FD2-7971D948E6DC}]
+"ClrDebuggingServicesId"=dword:00000002
+
+[$RootKey$\AD7Metrics\Engine\{FB0D4648-F776-4980-95F8-BB7F36EBC1EE}]
+"ClrDebuggingServicesId"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception]
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}]
+"*"=dword:00000002
+"Platform::AccessDeniedException ^"=dword:00000001
+"Platform::ChangedStateException ^"=dword:00000001
+"Platform::ClassNotRegisteredException ^"=dword:00000001
+"Platform::COMException ^"=dword:00000001
+"Platform::DisconnectedException ^"=dword:00000001
+"Platform::FailureException ^"=dword:00000001
+"Platform::OutOfMemoryException ^"=dword:00000001
+"Platform::InvalidArgumentException ^"=dword:00000001
+"Platform::InvalidCastException ^"=dword:00000001
+"Platform::NotImplementedException ^"=dword:00000001
+"Platform::NullReferenceException ^"=dword:00000001
+"Platform::OperationCanceledException ^"=dword:00000001
+"Platform::OutOfBoundsException ^"=dword:00000001
+@="DkmExceptionCategory::Cpp"
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions]
+"Code"=dword:00000000
+"State"=dword:00000002
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\_com_error]
+"Code"=dword:00000000
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\ATL::CAtlException]
+"Code"=dword:00000000
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\CException]
+"Code"=dword:00000000
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::AccessDeniedException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::ChangedStateException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::ClassNotRegisteredException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::COMException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::DisconnectedException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::FailureException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::OutOfMemoryException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::InvalidArgumentException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::InvalidCastException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::NotImplementedException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::NullReferenceException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::OperationCanceledException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\Platform::OutOfBoundsException ^]
+"Code"=dword:00000000
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\std::exception]
+"Code"=dword:00000000
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\C++ Exceptions\void]
+"Code"=dword:00000000
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}]
+"0xC0000003"=dword:00000001
+"0xC0000005"=dword:00000001
+"0xC0000008"=dword:00000001
+"0x40010005"=dword:00000001
+"0xC0000420"=dword:00000001
+@="DkmExceptionCategory::Win32"
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions]
+"Code"=dword:00000000
+"State"=dword:00003002
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Access violation]
+"Code"=dword:C0000005
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\An invalid exception disposition was returned by an exception handler]
+"Code"=dword:C0000026
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\An invalid handle was specified]
+"Code"=dword:C0000008
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Array bounds exceeded]
+"Code"=dword:C000008C
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Control-Break]
+"Code"=dword:40010008
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Control-C]
+"Code"=dword:40010005
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\RPC call cancelled]
+"Code"=dword:0000071A
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\WinRT Originate Error]
+"Code"=dword:40080201
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\WinRT Transform Error]
+"Code"=dword:40080202
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Datatype misalignment]
+"Code"=dword:80000002
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\DLL Initialization Failed]
+"Code"=dword:C0000142
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Entry Point Not Found]
+"Code"=dword:C0000139
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Floating-point denormal operand]
+"Code"=dword:C000008D
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Floating-point division by zero]
+"Code"=dword:C000008E
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Floating-point inexact result]
+"Code"=dword:C000008F
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Floating-point invalid operation]
+"Code"=dword:C0000090
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Floating-point overflow]
+"Code"=dword:C0000091
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Floating-point stack check]
+"Code"=dword:C0000092
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Floating-point underflow]
+"Code"=dword:C0000093
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Illegal Instruction]
+"Code"=dword:C000001D
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\In page error]
+"Code"=dword:C0000006
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Integer division by zero]
+"Code"=dword:C0000094
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Integer overflow]
+"Code"=dword:C0000095
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Module not found]
+"Code"=dword:C06D007E
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Not Enough Quota]
+"Code"=dword:C0000017
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Ordinal Not Found]
+"Code"=dword:C0000138
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Privileged instruction]
+"Code"=dword:C0000096
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Procedure not found]
+"Code"=dword:C06D007F
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Stack overflow]
+"Code"=dword:C00000FD
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Unable to Locate DLL]
+"Code"=dword:C0000135
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Windows cannot continue from this exception]
+"Code"=dword:C0000025
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Assertion failed]
+"Code"=dword:C0000420
+"State"=dword:00000001
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Floating-point SSE Multiple Faults]
+"Code"=dword:C00002B4
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{3B476D35-A401-11D2-AAD4-00C04F990171}\Win32 Exceptions\Floating-point SSE Multiple Traps]
+"Code"=dword:C00002B5
+"State"=dword:0000000C
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}]
+"*"=dword:00000020
+"System.AppDomainUnloadedException"=dword:00000002
+"System.Threading.ThreadAbortException"=dword:00000002
+"System.Windows.Markup.XamlParseException"=dword:00000030
+"System.Reflection.MissingMetadataException"=dword:00000030
+"System.Reflection.MissingRuntimeArtifactException"=dword:00000030
+@="DkmExceptionCategory::Clr"
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.AccessViolationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.AggregateException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.AppDomainUnloadedException]
+"Code"=dword:00000000
+"State"=dword:00000000
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.ApplicationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.ArgumentException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.ArgumentNullException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.ArgumentOutOfRangeException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.ArithmeticException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.ArrayTypeMismatchException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.BadImageFormatException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.CannotUnloadAppDomainException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.ContextMarshalException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.DataMisalignedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.DivideByZeroException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.DllNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.DuplicateWaitObjectException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.EntryPointNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.Exception]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.ExecutionEngineException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.FieldAccessException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.FormatException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.IndexOutOfRangeException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.InsufficientMemoryException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.InvalidCastException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.InvalidOperationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.InvalidProgramException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.InvalidTimeZoneException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.MemberAccessException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.MethodAccessException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.MissingFieldException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.MissingMemberException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.MissingMethodException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.MulticastNotSupportedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.NotCancelableException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.NotFiniteNumberException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.NotImplementedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.NotSupportedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.NullReferenceException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.ObjectDisposedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.OperationCanceledException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.OutOfMemoryException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.OverflowException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.PlatformNotSupportedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.RankException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.StackOverflowException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.SystemException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.TimeoutException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.TimeZoneNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.TypeAccessException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.TypeInitializationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.TypeLoadException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.TypeUnloadedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.UnauthorizedAccessException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System\System.UriFormatException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Collections.Generic]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Collections.Generic\System.Collections.Generic.KeyNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel\System.ComponentModel.InvalidEnumArgumentException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel\System.ComponentModel.LicenseException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel\System.ComponentModel.WarningException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel\System.ComponentModel.Win32Exception]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.Composition]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.Composition\System.ComponentModel.Composition.ChangeRejectedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.Composition\System.ComponentModel.Composition.CompositionContractMismatchException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.Composition\System.ComponentModel.Composition.CompositionException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.Composition\System.ComponentModel.Composition.ImportCardinalityMismatchException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.Composition.Primitives]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.Composition.Primitives\System.ComponentModel.Composition.Primitives.ComposablePartException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.DataAnnotations]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.DataAnnotations\System.ComponentModel.DataAnnotations.ValidationException]
+"Code"=dword:00000000
+"State"=dword:00004002
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.Design]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.Design\System.ComponentModel.Design.CheckoutException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.Design\System.ComponentModel.Design.ExceptionCollection]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.Design.Serialization]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ComponentModel.Design.Serialization\System.ComponentModel.Design.Serialization.CodeDomSerializerException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Configuration]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Configuration\System.Configuration.ConfigurationErrorsException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Configuration\System.Configuration.ConfigurationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Configuration\System.Configuration.SettingsPropertyCannotBeSetForAnonymousUserException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Configuration\System.Configuration.SettingsPropertyIsReadOnlyException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Configuration\System.Configuration.SettingsPropertyNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Configuration\System.Configuration.SettingsPropertyWrongTypeException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Configuration.Install]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Configuration.Install\System.Configuration.Install.InstallException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Configuration.Provider]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Configuration.Provider\System.Configuration.Provider.ProviderException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.ConstraintException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.DataException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.DBConcurrencyException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.DeletedRowInaccessibleException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.DuplicateNameException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.EvaluateException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.InRowChangingEventException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.InvalidConstraintException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.InvalidExpressionException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.MissingPrimaryKeyException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.NoNullAllowedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.OperationAbortedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.ReadOnlyException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.RowNotInTableException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.StrongTypingException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.SyntaxErrorException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.TypedDataSetGeneratorException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data\System.Data.VersionNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.Common]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.Common\System.Data.Common.DbException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.Linq]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.Linq\System.Data.Linq.ChangeConflictException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.Linq\System.Data.Linq.DuplicateKeyException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.Linq\System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.Odbc]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.Odbc\System.Data.Odbc.OdbcException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.OleDb]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.OleDb\System.Data.OleDb.OleDbException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.OracleClient]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.OracleClient\System.Data.OracleClient.OracleException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.SqlClient]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.SqlClient\System.Data.SqlClient.SqlException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.SqlTypes]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.SqlTypes\System.Data.SqlTypes.SqlException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.SqlTypes\System.Data.SqlTypes.SqlNotFilledException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.SqlTypes\System.Data.SqlTypes.SqlNullValueException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.SqlTypes\System.Data.SqlTypes.SqlTruncateException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Data.SqlTypes\System.Data.SqlTypes.SqlTypeException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Deployment.Application]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Deployment.Application\System.Deployment.Application.DependentPlatformMissingException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Deployment.Application\System.Deployment.Application.DeploymentDownloadException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Deployment.Application\System.Deployment.Application.DeploymentException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Deployment.Application\System.Deployment.Application.InvalidDeploymentException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Deployment.Application\System.Deployment.Application.TrustNotGrantedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Diagnostics.Eventing.Reader]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Diagnostics.Eventing.Reader\System.Diagnostics.Eventing.Reader.EventLogException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Diagnostics.Eventing.Reader\System.Diagnostics.Eventing.Reader.EventLogInvalidDataException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Diagnostics.Eventing.Reader\System.Diagnostics.Eventing.Reader.EventLogNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Diagnostics.Eventing.Reader\System.Diagnostics.Eventing.Reader.EventLogProviderDisabledException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Diagnostics.Eventing.Reader\System.Diagnostics.Eventing.Reader.EventLogReadingException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices\System.DirectoryServices.DirectoryServicesCOMException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.AccountManagement]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.AccountManagement\System.DirectoryServices.AccountManagement.MultipleMatchesException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.AccountManagement\System.DirectoryServices.AccountManagement.NoMatchingPrincipalException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.AccountManagement\System.DirectoryServices.AccountManagement.PasswordException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.AccountManagement\System.DirectoryServices.AccountManagement.PrincipalException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.AccountManagement\System.DirectoryServices.AccountManagement.PrincipalExistsException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.AccountManagement\System.DirectoryServices.AccountManagement.PrincipalOperationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.AccountManagement\System.DirectoryServices.AccountManagement.PrincipalServerDownException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.ActiveDirectory]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.ActiveDirectory\System.DirectoryServices.ActiveDirectory.ActiveDirectoryObjectExistsException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.ActiveDirectory\System.DirectoryServices.ActiveDirectory.ActiveDirectoryObjectNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.ActiveDirectory\System.DirectoryServices.ActiveDirectory.ActiveDirectoryOperationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.ActiveDirectory\System.DirectoryServices.ActiveDirectory.ActiveDirectoryServerDownException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.ActiveDirectory\System.DirectoryServices.ActiveDirectory.ForestTrustCollisionException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.ActiveDirectory\System.DirectoryServices.ActiveDirectory.SyncFromAllServersOperationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.Protocols]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.Protocols\System.DirectoryServices.Protocols.BerConversionException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.Protocols\System.DirectoryServices.Protocols.DirectoryException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.Protocols\System.DirectoryServices.Protocols.DirectoryOperationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.Protocols\System.DirectoryServices.Protocols.DsmlInvalidDocumentException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.Protocols\System.DirectoryServices.Protocols.ErrorResponseException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.Protocols\System.DirectoryServices.Protocols.LdapException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.DirectoryServices.Protocols\System.DirectoryServices.Protocols.TlsOperationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Drawing.Printing]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Drawing.Printing\System.Drawing.Printing.InvalidPrinterException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.EnterpriseServices]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.EnterpriseServices\System.EnterpriseServices.RegistrationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.EnterpriseServices\System.EnterpriseServices.ServicedComponentException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Selectors]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Selectors\System.IdentityModel.Selectors.CardSpaceException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Selectors\System.IdentityModel.Selectors.IdentityValidationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Selectors\System.IdentityModel.Selectors.PolicyValidationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Selectors\System.IdentityModel.Selectors.ServiceBusyException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Selectors\System.IdentityModel.Selectors.ServiceNotStartedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Selectors\System.IdentityModel.Selectors.StsCommunicationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Selectors\System.IdentityModel.Selectors.UnsupportedPolicyOptionsException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Selectors\System.IdentityModel.Selectors.UntrustedRecipientException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Selectors\System.IdentityModel.Selectors.UserCancellationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Tokens]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Tokens\System.IdentityModel.Tokens.SecurityTokenException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IdentityModel.Tokens\System.IdentityModel.Tokens.SecurityTokenValidationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO\System.IO.DirectoryNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO\System.IO.DriveNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO\System.IO.EndOfStreamException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO\System.IO.FileFormatException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO\System.IO.FileLoadException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO\System.IO.FileNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO\System.IO.InternalBufferOverflowException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO\System.IO.InvalidDataException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO\System.IO.IOException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO\System.IO.PathTooLongException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO\System.IO.PipeException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO.IsolatedStorage]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO.IsolatedStorage\System.IO.IsolatedStorage.IsolatedStorageException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO.Log]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO.Log\System.IO.Log.ReservationNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.IO.Log\System.IO.Log.SequenceFullException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management\System.Management.InstanceNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management\System.Management.InstrumentationBaseException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management\System.Management.InstrumentationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management\System.Management.ManagementException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ActionPreferenceStopException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ApplicationFailedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ArgumentTransformationMetadataException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.CmdletInvocationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.CmdletProviderInvocationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.CommandNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.DriveNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ExtendedTypeSystemException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.GetValueException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.GetValueInvocationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.HaltCommandException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.IncompleteParseException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ItemNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.MetadataException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.MethodException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.MethodInvocationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ParameterBindingException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ParentContainsErrorRecordException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ParseException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ParsingMetadataException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.PipelineClosedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.PipelineStoppedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ProviderInvocationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ProviderNameAmbiguousException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ProviderNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.PSArgumentException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.PSArgumentNullException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.PSArgumentOutOfRangeException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.PSInvalidCastException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.PSInvalidOperationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.PSNotImplementedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.PSNotSupportedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.PSObjectDisposedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.PSSecurityException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.RedirectedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.RemoteException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.RuntimeException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ScriptCallDepthException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ScriptRequiresException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.SessionStateException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.SessionStateOverflowException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.SessionStateUnauthorizedAccessException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.SetValueException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.SetValueInvocationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.ValidationMetadataException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation\System.Management.Automation.WildcardPatternException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation.Host]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation.Host\System.Management.Automation.Host.HostException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation.Host\System.Management.Automation.Host.PromptingException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation.Runspaces]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation.Runspaces\System.Management.Automation.Runspaces.InvalidPipelineStateException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation.Runspaces\System.Management.Automation.Runspaces.InvalidRunspaceStateException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation.Runspaces\System.Management.Automation.Runspaces.PSConsoleLoadException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation.Runspaces\System.Management.Automation.Runspaces.PSSnapInException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation.Runspaces\System.Management.Automation.Runspaces.RunspaceConfigurationAttributeException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Automation.Runspaces\System.Management.Automation.Runspaces.RunspaceConfigurationTypeException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Instrumentation]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Management.Instrumentation\System.Management.Instrumentation.WmiProviderInstallationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Messaging]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Messaging\System.Messaging.MessageQueueException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net\System.Net.CookieException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net\System.Net.HttpListenerException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net\System.Net.ProtocolViolationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net\System.Net.WebException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net.Mail]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net.Mail\System.Net.Mail.SmtpException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net.Mail\System.Net.Mail.SmtpFailedRecipientException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net.Mail\System.Net.Mail.SmtpFailedRecipientsException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net.NetworkInformation]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net.NetworkInformation\System.Net.NetworkInformation.NetworkInformationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net.NetworkInformation\System.Net.NetworkInformation.PingException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net.PeerToPeer]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net.PeerToPeer\System.Net.PeerToPeer.PeerToPeerException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net.Sockets]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Net.Sockets\System.Net.Sockets.SocketException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Printing]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Printing\System.Printing.PrintCommitAttributesException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Printing\System.Printing.PrintingCanceledException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Printing\System.Printing.PrintJobException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Printing\System.Printing.PrintQueueException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Printing\System.Printing.PrintServerException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Printing\System.Printing.PrintSystemException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Reflection]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Reflection\System.Reflection.AmbiguousMatchException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Reflection\System.Reflection.InvalidFilterCriteriaException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Reflection\System.Reflection.MissingMetadataException]
+"Code"=dword:00000000
+"State"=dword:00004033
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Reflection\System.Reflection.MissingRuntimeArtifactException]
+"Code"=dword:00000000
+"State"=dword:00004033
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Reflection\System.Reflection.ReflectionTypeLoadException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Reflection\System.Reflection.TargetException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Reflection\System.Reflection.TargetInvocationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Reflection\System.Reflection.TargetParameterCountException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Resources]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Resources\System.Resources.MissingManifestResourceException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Resources\System.Resources.MissingSatelliteAssemblyException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.InteropServices]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.InteropServices\System.Runtime.InteropServices.COMException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.InteropServices\System.Runtime.InteropServices.ComObjectInUseException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.InteropServices\System.Runtime.InteropServices.ExternalException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.InteropServices\System.Runtime.InteropServices.InvalidComObjectException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.InteropServices\System.Runtime.InteropServices.InvalidOleVariantTypeException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.InteropServices\System.Runtime.InteropServices.MarshalDirectiveException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.InteropServices\System.Runtime.InteropServices.SafeArrayRankMismatchException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.InteropServices\System.Runtime.InteropServices.SafeArrayTypeMismatchException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.InteropServices\System.Runtime.InteropServices.SEHException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.Remoting]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.Remoting\System.Runtime.Remoting.RemotingException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.Remoting\System.Runtime.Remoting.RemotingTimeoutException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.Remoting\System.Runtime.Remoting.ServerException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.Remoting.MetadataServices]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.Remoting.MetadataServices\System.Runtime.Remoting.MetadataServices.SUDSGeneratorException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.Remoting.MetadataServices\System.Runtime.Remoting.MetadataServices.SUDSParserException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.Serialization]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.Serialization\System.Runtime.Serialization.InvalidDataContractException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Runtime.Serialization\System.Runtime.Serialization.SerializationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security\System.Security.HostProtectionException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security\System.Security.SecurityException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security\System.Security.VerificationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security\System.Security.XmlSyntaxException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.AccessControl]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.AccessControl\System.Security.AccessControl.PrivilegeNotHeldException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.Authentication]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.Authentication\System.Security.Authentication.AuthenticationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.Authentication\System.Security.Authentication.InvalidCredentialException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.Cryptography]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.Cryptography\System.Security.Cryptography.CryptographicException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.Cryptography\System.Security.Cryptography.CryptographicUnexpectedOperationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.Policy]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.Policy\System.Security.Policy.PolicyException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.Principal]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.Principal\System.Security.Principal.IdentityNotMappedExceptionn]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.RightsManagement]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Security.RightsManagement\System.Security.RightsManagement.RightsManagementException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.ActionNotSupportedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.AddressAccessDeniedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.AddressAlreadyInUseException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.ChannelTerminatedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.CommunicationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.CommunicationObjectAbortedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.CommunicationObjectFaultedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.EndpointNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.FaultException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.FaultException`1]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.InvalidMessageContractException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.MessageHeaderException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.MsmqException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.MsmqPoisonMessageException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.PoisonMessageException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.ProtocolException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.QuotaExceededException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.ServerTooBusyException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel\System.ServiceModel.ServiceActivationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Channels]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Channels\System.ServiceModel.Channels.InvalidChannelBindingException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Channels\System.ServiceModel.Channels.PnrpPeerResolver+PnrpException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Dispatcher]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Dispatcher\System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Dispatcher\System.ServiceModel.Dispatcher.InvalidBodyAccessException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Dispatcher\System.ServiceModel.Dispatcher.MessageFilterException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Dispatcher\System.ServiceModel.Dispatcher.MultipleFilterMatchesException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Dispatcher\System.ServiceModel.Dispatcher.NavigatorInvalidBodyAccessException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Dispatcher\System.ServiceModel.Dispatcher.XPathNavigatorException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Security]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Security\System.ServiceModel.Security.ExpiredSecurityTokenException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Security\System.ServiceModel.Security.MessageSecurityException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Security\System.ServiceModel.Security.SecurityAccessDeniedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceModel.Security\System.ServiceModel.Security.SecurityNegotiationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceProcess]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.ServiceProcess\System.ServiceProcess.TimeoutException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Text]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Text\System.Text.DecoderFallbackException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Text\System.Text.EncoderFallbackException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Threading]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Threading\System.Threading.AbandonedMutexException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Threading\System.Threading.LockRecursionException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Threading\System.Threading.SemaphoreFullException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Threading\System.Threading.SynchronizationLockException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Threading\System.Threading.Tasks.TaskCanceledException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Threading\System.Threading.ThreadAbortException]
+"Code"=dword:00000000
+"State"=dword:00000000
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Threading\System.Threading.ThreadInterruptedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Threading\System.Threading.ThreadStartException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Threading\System.Threading.ThreadStateException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Threading\System.Threading.WaitHandleCannotBeOpenedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Transactions]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Transactions\System.Transactions.TransactionAbortedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Transactions\System.Transactions.TransactionException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Transactions\System.Transactions.TransactionInDoubtException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Transactions\System.Transactions.TransactionManagerCommunicationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Transactions\System.Transactions.TransactionPromotionException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web\System.Web.HttpCompileException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web\System.Web.HttpException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web\System.Web.HttpParseException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web\System.Web.HttpRequestValidationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web\System.Web.HttpUnhandledException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.Caching]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.Caching\System.Web.Caching.DatabaseNotEnabledForNotificationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.Caching\System.Web.Caching.TableNotEnabledForNotificationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.Management]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.Management\System.Web.Management.SqlExecutionException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.Security]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.Security\System.Web.Security.MembershipCreateUserException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.Security\System.Web.Security.MembershipPasswordException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.Services.Protocols]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.Services.Protocols\System.Web.Services.Protocols.SoapException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.Services.Protocols\System.Web.Services.Protocols.SoapHeaderException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.UI]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Web.UI\System.Web.UI.ViewStateException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows\System.Windows.ResourceReferenceKeyNotFoundException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Automation]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Automation\System.Windows.Automation.ElementNotAvailableException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Automation\System.Windows.Automation.ElementNotEnabledException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Automation\System.Windows.Automation.NoClickablePointException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Automation\System.Windows.Automation.ProxyAssemblyNotLoadedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Controls]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Controls\System.Windows.Controls.PrintDialogException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Forms]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Forms\System.Windows.Forms.AxHost+InvalidActiveXStateException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Markup]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Markup\System.Windows.Markup.XamlParseException]
+"Code"=dword:00000000
+"State"=dword:00004033
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Media]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Media\System.Windows.Media.InvalidWmpVersionException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Media.Animation]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Media.Animation\System.Windows.Media.Animation.AnimationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Xps]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Xps\System.Windows.Xps.XpsException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Xps\System.Windows.Xps.XpsPackagingException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Xps\System.Windows.Xps.XpsSerializationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Windows.Xps\System.Windows.Xps.XpsWriterException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Activities]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Activities\System.Workflow.Activities.EventDeliveryFailedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Activities\System.Workflow.Activities.WorkflowAuthorizationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Activities.Rules]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Activities.Rules\System.Workflow.Activities.Rules.RuleEvaluationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Activities.Rules\System.Workflow.Activities.Rules.RuleEvaluationIncompatibleTypesException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Activities.Rules\System.Workflow.Activities.Rules.RuleException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Activities.Rules\System.Workflow.Activities.Rules.RuleSetValidationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.ComponentModel]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.ComponentModel\System.Workflow.ComponentModel.WorkflowTerminatedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.ComponentModel.Compiler]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.ComponentModel.Compiler\System.Workflow.ComponentModel.Compiler.WorkflowValidationFailedException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.ComponentModel.Serialization]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.ComponentModel.Serialization\System.Workflow.ComponentModel.Serialization.WorkflowMarkupSerializationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Runtime]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Runtime\System.Workflow.Runtime.WorkflowOwnershipException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Runtime.Hosting]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Runtime.Hosting\System.Workflow.Runtime.Hosting.PersistenceException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Runtime.Tracking]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Workflow.Runtime.Tracking\System.Workflow.Runtime.Tracking.TrackingProfileDeserializationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Xml]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Xml\System.Xml.XmlException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Xml.Schema]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Xml.Schema\System.Xml.Schema.XmlSchemaException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Xml.Schema\System.Xml.Schema.XmlSchemaInferenceException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Xml.Schema\System.Xml.Schema.XmlSchemaValidationException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Xml.XPath]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Xml.XPath\System.Xml.XPath.XPathException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Xml.Xsl]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Xml.Xsl\System.Xml.Xsl.XsltCompileException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{449EC4CC-30D2-4032-9256-EE18EB41B62B}\Common Language Runtime Exceptions\System.Xml.Xsl\System.Xml.Xsl.XsltException]
+"Code"=dword:00000000
+"State"=dword:00004022
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}]
+"CallbackOnCollectedDelegate"=dword:00000001
+"ContextSwitchDeadlock"=dword:00000001
+"DateTimeInvalidLocalFormat"=dword:00000001
+"DisconnectedContext"=dword:00000001
+"FatalExecutionEngineError"=dword:00000001
+"InvalidFunctionPointerInDelegate"=dword:00000001
+"InvalidMemberDeclaration"=dword:00000001
+"InvalidVariant"=dword:00000001
+"LoaderLock"=dword:00000001
+"NonComVisibleBaseClass"=dword:00000001
+"PInvokeStackImbalance"=dword:00000001
+"RaceOnRCWCleanup"=dword:00000001
+"Reentrancy"=dword:00000001
+@="DkmExceptionCategory::ManagedDebuggingAssistant"
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\AsynchronousThreadAbort]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\BindingFailure]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\CallbackOnCollectedDelegate]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\ContextSwitchDeadlock]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\DangerousThreadingAPI]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\DateTimeInvalidLocalFormat]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\DisconnectedContext]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\DllMainReturnsFalse]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\ExceptionSwallowedOnCallFromCom]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\FailedQI]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\FatalExecutionEngineError]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\InvalidApartmentStateChange]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\InvalidFunctionPointerInDelegate]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\InvalidMemberDeclaration]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\InvalidOverlappedToPinvoke]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\InvalidVariant]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\LoaderLock]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\LoadFromContext]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\MarshalCleanupError]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\NonComVisibleBaseClass]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\NotMarshalable]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\PInvokeStackImbalance]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\RaceOnRCWCleanup]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\Reentrancy]
+"Code"=dword:00000000
+"State"=dword:00008001
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\ReleaseHandleFailed]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\ReportAvOnComRelease]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{6ECE07A9-0EDE-45C4-8296-818D8FC401D4}\Managed Debugging Assistants\StreamWriterBufferedDataLost]
+"Code"=dword:00000000
+"State"=dword:00008000
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}]
+@="DkmExceptionCategory::ActiveScript"
+"*"=dword:00000022
+; Exception thrown from JavaScript - don't break user unhandled
+"0x800A139E"=dword:00007002
+; Access is denied - break first chance + user unhandled (ex: without documents permission - Windows.Storage.KnownFolders.documentsLibrary.getFileAsync())
+"0x80070005"=dword:00000033
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Access is denied]
+"Code"=dword:80070005
+"State"=dword:00007033
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions]
+"Code"=dword:00000000
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid procedure call or argument]
+"Code"=dword:800A0005
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Overflow]
+"Code"=dword:800A0006
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Out of memory]
+"Code"=dword:800A0007
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Subscript out of range]
+"Code"=dword:800A0009
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\This array is fixed or temporarily locked]
+"Code"=dword:800A000A
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Type mismatch]
+"Code"=dword:800A000D
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Out of string space]
+"Code"=dword:800A000E
+"State"=dword:00007022
+
+; Stack overflows are not reported by the JavaScript engine at present
+; [$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Out of stack space]
+; "Code"=dword:800A001C
+; "State"=dword:00007002
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Internal error]
+"Code"=dword:800A0033
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\File not found]
+"Code"=dword:800A0035
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Device I/O error]
+"Code"=dword:800A0039
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\File already exists]
+"Code"=dword:800A003A
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Disk full]
+"Code"=dword:800A003D
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Too many files]
+"Code"=dword:800A0043
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Permission denied]
+"Code"=dword:800A0046
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Path/File access error]
+"Code"=dword:800A004B
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Path not found]
+"Code"=dword:800A004C
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Automation server can't create object]
+"Code"=dword:800A01AD
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Class doesn't support Automation]
+"Code"=dword:800A01AE
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\File name or class name not found during Automation operation]
+"Code"=dword:800A01B0
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Object doesn't support this property or method]
+"Code"=dword:800A01B6
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Automation error]
+"Code"=dword:800A01B8
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Object doesn't support this action]
+"Code"=dword:800A01BD
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Object doesn't support named arguments]
+"Code"=dword:800A01BE
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Object doesn't support current locale setting]
+"Code"=dword:800A01BF
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Named argument not found]
+"Code"=dword:800A01C0
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Argument not optional]
+"Code"=dword:800A01C1
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Wrong number of arguments or invalid property assignment]
+"Code"=dword:800A01C2
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Object not a collection]
+"Code"=dword:800A01C3
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Specified DLL function not found]
+"Code"=dword:800A01C5
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Variable uses an Automation type not supported in JavaScript]
+"Code"=dword:800A01CA
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Number expected]
+"Code"=dword:800A1389
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Function expected]
+"Code"=dword:800A138A
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Cannot assign to a function result]
+"Code"=dword:800A138B
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\String expected]
+"Code"=dword:800A138D
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Date object expected]
+"Code"=dword:800A138E
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Object expected]
+"Code"=dword:800A138F
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid left-hand side in assignment]
+"Code"=dword:800A1390
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Undefined identifier]
+"Code"=dword:800A1391
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Boolean expected]
+"Code"=dword:800A1392
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Object member expected]
+"Code"=dword:800A1394
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\VBArray expected]
+"Code"=dword:800A1395
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\JavaScript object expected]
+"Code"=dword:800A1396
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Enumerator object expected]
+"Code"=dword:800A1397
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Regular Expression object expected]
+"Code"=dword:800A1398
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Syntax error in regular expression]
+"Code"=dword:800A1399
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Unexpected quantifier]
+"Code"=dword:800A139A
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Expected square bracket in regular expression]
+"Code"=dword:800A139B
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Expected ')' in regular expression]
+"Code"=dword:800A139C
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid range in character set]
+"Code"=dword:800A139D
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Exception thrown from JavaScript]
+"Code"=dword:800A139E
+"State"=dword:00007002
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Function does not have a valid prototype object]
+"Code"=dword:800A139F
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\The URI to be encoded contains an invalid character]
+"Code"=dword:800A13A0
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\The URI to be decoded is not a valid encoding]
+"Code"=dword:800A13A1
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\The number of fractional digits is out of range]
+"Code"=dword:800A13A2
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\The precision is out of range]
+"Code"=dword:800A13A3
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Array length must be a finite positive integer]
+"Code"=dword:800A13A5
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Array length must be assigned a finite positive number]
+"Code"=dword:800A13A6
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Array object expected]
+"Code"=dword:800A13A7
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'eval' is not available in the ECMA 327 Compact Profile]
+"Code"=dword:800A13A8
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Function constructor is not available in the ECMA 327 Compact Profile]
+"Code"=dword:800A13A9
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Circular reference in value argument not supported]
+"Code"=dword:800A13AA
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid replacer argument]
+"Code"=dword:800A13AB
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid attribute (true)]
+"Code"=dword:800A13AC
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid attribute (false)]
+"Code"=dword:800A13AD
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Argument list too large to apply]
+"Code"=dword:800A13AE
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Redeclaration of const property]
+"Code"=dword:800A13AF
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Object member not configurable]
+"Code"=dword:800A13B1
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Variable undefined in strict mode]
+"Code"=dword:800A13B2
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Accessing the 'caller' property of a function or arguments object is not allowed in strict mode]
+"Code"=dword:800A13B3
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Accessing the 'callee' property of an arguments object is not allowed in strict mode]
+"Code"=dword:800A13B4
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Assignment to read-only properties is not allowed in strict mode]
+"Code"=dword:800A13B5
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Cannot create property for a non-extensible object]
+"Code"=dword:800A13B6
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Unable to set value of the property: Object expected]
+"Code"=dword:800A13B7
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Unable to get value of the property: Object expected]
+"Code"=dword:800A13B8
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Unable to delete property: Object expected]
+"Code"=dword:800A13B9
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Unable to access property: Object expected]
+"Code"=dword:800A13BA
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Unable to access property: type 'VarDate' does not support user-defined properties]
+"Code"=dword:800A13BB
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\The value of the property is not a Function object]
+"Code"=dword:800A13BC
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Property cannot have both accessors and a value]
+"Code"=dword:800A13BD
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is null or undefined]
+"Code"=dword:800A13BE
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is not an Object]
+"Code"=dword:800A13BF
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is not a Function Object]
+"Code"=dword:800A13C0
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is not a String Object]
+"Code"=dword:800A13C1
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is not a Boolean Object]
+"Code"=dword:800A13C2
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is not a Date Object]
+"Code"=dword:800A13C3
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is not a Number Object]
+"Code"=dword:800A13C4
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is not a VBArray Object]
+"Code"=dword:800A13C5
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is not a JavaScript Object]
+"Code"=dword:800A13C6
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is not an Enumerator Object]
+"Code"=dword:800A13C7
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is not a RegExp Object]
+"Code"=dword:800A13C8
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid function argument]
+"Code"=dword:800A13C9
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Argument is not an Object]
+"Code"=dword:800A13CA
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Argument is not a JavaScript Object]
+"Code"=dword:800A13CB
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Argument is not a Function Object]
+"Code"=dword:800A13CC
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Argument is not a VBArray Object]
+"Code"=dword:800A13CD
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Argument is null or undefined]
+"Code"=dword:800A13CE
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Argument is not an Object and is not null]
+"Code"=dword:800A13CF
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid 'length' property]
+"Code"=dword:800A13D0
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Array or arguments object expected]
+"Code"=dword:800A13D1
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid Operand - Object expected]
+"Code"=dword:800A13D2
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid Operand - Function expected]
+"Code"=dword:800A13D3
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid property descriptor]
+"Code"=dword:800A13D4
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Cannot define property: object is not extensible]
+"Code"=dword:800A13D5
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Cannot redefine non-configurable property]
+"Code"=dword:800A13D6
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Cannot modify non-writable property]
+"Code"=dword:800A13D7
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Cannot modify property: 'length' is not writable]
+"Code"=dword:800A13D8
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Cannot define property]
+"Code"=dword:800A13D9
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Typed array constructor argument is invalid]
+"Code"=dword:800A13DA
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is not a typed array object]
+"Code"=dword:800A13DB
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid offset/length when creating typed array]
+"Code"=dword:800A13DC
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid begin/end value in typed array subarray method]
+"Code"=dword:800A13DD
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid source in typed array set]
+"Code"=dword:800A13DE
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\'this' is not a DataView object]
+"Code"=dword:800A13DF
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\DataView operation access beyond specified buffer length]
+"Code"=dword:800A13E1
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Invalid arguments in DataView]
+"Code"=dword:800A13E2
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\invalid function signature]
+"Code"=dword:800A13E3
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\invalid property signature]
+"Code"=dword:800A13E4
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\invalid input parameter type]
+"Code"=dword:800A13E5
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\invalid output parameter]
+"Code"=dword:800A13E6
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Accessing the 'arguments' property of a function is not allowed in strict mode]
+"Code"=dword:800A13E7
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Inspectable Object expected]
+"Code"=dword:800A13E8
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Could not convert argument to type 'char']
+"Code"=dword:800A13E9
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Could not convert argument to type 'GUID']
+"Code"=dword:800A13EA
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\IInspectable expected]
+"Code"=dword:800A13EB
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Could not convert object to struct: object missing expected property]
+"Code"=dword:800A13EC
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Unknown type]
+"Code"=dword:800A13ED
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Function called with too few arguments]
+"Code"=dword:800A13EE
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Type is not constructible]
+"Code"=dword:800A13EF
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Could not convert value to PropertyValue: Type not supported by PropertyValue]
+"Code"=dword:800A13F0
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Could not convert value to IInspectable: Type not supported by IInspectable]
+"Code"=dword:800A13F1
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Could not convert Date to Windows.Foundation.DateTime: value outside of valid range]
+"Code"=dword:800A13F2
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\Could not convert value to Windows.Foundation.TimeSpan: value outside of valid range]
+"Code"=dword:800A13F3
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\Exception\{9e32aeae-0a90-49d4-9e2a-041c812eb0cc}\JavaScript Runtime Exceptions\The specified date is not available in the current locale's calendar]
+"Code"=dword:800A802C
+"State"=dword:00007022
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator]
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}]
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}\{994B45C4-E6E9-11D2-903F-00C04FA302A1}]
+"Language"="C++"
+"Name"="C++"
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{63A08714-FC37-11D2-904C-00C04FA302A1}]
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{63A08714-FC37-11D2-904C-00C04FA302A1}\{994B45C4-E6E9-11D2-903F-00C04FA302A1}]
+"Language"="C"
+"Name"="C"
+
+[$RootKey$\AD7Metrics\PortSupplier\{3B476D38-A401-11D2-AAD4-00C04F990171}]
+@="guidNativePortSupplier"
+"Name"="resource=$BaseInstallDir$\Common7\Packages\Debugger\*\vsdebugui.dll#6057"
+"Description"="resource=$BaseInstallDir$\Common7\Packages\Debugger\*\vsdebugui.dll#6058"
+"VsDebugRemoteAuthenticationMode"=dword:00000001
+
+[$RootKey$\CLSID]
+
+[$RootKey$\CLSID\{014D0C8F-3FBD-4A8F-A6F1-14190DD7C090}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\vsdebugeng.impl.dll"
+"ThreadingModel"="Apartment"
+@="vsdebugeng.impl.dll debug engine implementation"
+
+[$RootKey$\CLSID\{3C912BBB-E92B-42CA-B341-CB62A1DBB661}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\vsdebugeng.impl.dll"
+"ThreadingModel"="Apartment"
+@="vsdebugeng.impl.dll debugger deploy manager"
+
+[$RootKey$\Debugger]
+"DefaultEvaluationTimeout"=dword:00002710
+"MaxFrames"=dword:00001388
+
+[$RootKey$\Debugger\CodeView Compilers]
+
+[$RootKey$\Debugger\CodeView Compilers\0:*]
+"LanguageId"="{63A08714-FC37-11D2-904C-00C04FA302A1}"
+"VendorId"="{994B45C4-E6E9-11D2-903F-00C04FA302A1}"
+@="CV_CFL_C (default)"
+
+[$RootKey$\Debugger\CodeView Compilers\0:Microsoft (R) Optimizing Compiler]
+"LanguageId"="{63A08714-FC37-11D2-904C-00C04FA302A1}"
+"VendorId"="{994B45C4-E6E9-11D2-903F-00C04FA302A1}"
+@="CV_CFL_C (cl.exe)"
+
+[$RootKey$\Debugger\CodeView Compilers\1:*]
+"LanguageId"="{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}"
+"VendorId"="{994B45C4-E6E9-11D2-903F-00C04FA302A1}"
+@="CV_CFL_CXX (default)"
+
+[$RootKey$\Debugger\CodeView Compilers\1:Microsoft (R) Optimizing Compiler]
+"LanguageId"="{3A12D0B7-C26C-11D0-B442-00A0244A1DD2}"
+"VendorId"="{994B45C4-E6E9-11D2-903F-00C04FA302A1}"
+@="CV_CFL_CXX (cl.exe)"
+
+[$RootKey$\Debugger\CodeView Compilers\10:*]
+"LanguageId"="{3F5162F8-07C6-11D3-9053-00C04FA302A1}"
+"VendorId"="{994B45C4-E6E9-11D2-903F-00C04FA302A1}"
+@="CV_CFL_CSHARP (default)"
+
+[$RootKey$\Debugger\CodeView Compilers\11:*]
+"LanguageId"="{3A12D0B8-C26C-11D0-B442-00A0244A1DD2}"
+"VendorId"="{994B45C4-E6E9-11D2-903F-00C04FA302A1}"
+@="CV_CFL_VB (default)"
+
+[$RootKey$\Debugger\Image Debug Directory Formats]
+
+[$RootKey$\Debugger\Image Debug Directory Formats\2]
+"SymbolProviderId"="{49D083CD-F393-4383-AD44-A47EB2BC828D}"
+@="IMAGE_DEBUG_TYPE_CODEVIEW"
+
+[$RootKey$\Debugger\RemoteClrPdbNamePatterns]
+"AspNetPdbs"="[a-z]:\\.*\\Temporary ASP\.NET Files\\.*\.pdb"

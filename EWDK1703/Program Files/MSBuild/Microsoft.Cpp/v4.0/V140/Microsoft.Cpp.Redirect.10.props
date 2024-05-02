@@ -1,0 +1,44 @@
+﻿<!--
+***********************************************************************************************
+Microsoft.Cpp.Redirect.10.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <VCTargetsPath>$(VCTargetsPath10)</VCTargetsPath>
+
+    <_PlatformFolder Condition="'$(_PlatformFolder)' == ''">$(VCTargetsPath)\Platforms\$(Platform)\</_PlatformFolder>
+    <PlatformPropsFound Condition="Exists('$(VCTargetsPath)\Microsoft.Cpp.props') and Exists('$(VCTargetsPath)\Platforms\$(Platform)\Microsoft.Cpp.$(Platform).props')">true</PlatformPropsFound>
+    <PlatformTargetsFound Condition="Exists('$(VCTargetsPath)\Platforms\$(Platform)\Microsoft.Cpp.$(Platform).targets')">true</PlatformTargetsFound>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(PlatformPropsFound)' == 'true' and '$(PlatformTargetsFound)' == 'true'">
+    <ToolsetPropsFound Condition="Exists('$(VCTargetsPath)\Platforms\$(Platform)\PlatformToolsets\$(PlatformToolset)\Microsoft.Cpp.$(Platform).$(PlatformToolset).props')">true</ToolsetPropsFound>
+    <ToolsetTargetsFound Condition="Exists('$(VCTargetsPath)\Platforms\$(Platform)\PlatformToolsets\$(PlatformToolset)\Microsoft.Cpp.$(Platform).$(PlatformToolset).targets')">true</ToolsetTargetsFound>
+    <_ToolsetFound Condition="'$(ToolsetPropsFound)' == 'true' and '$(ToolsetTargetsFound)' == 'true'">true</_ToolsetFound>
+    <_RedirectToV100 Condition="$(_ToolsetFound) == 'true'">true</_RedirectToV100>
+    <VCTargetsPathEffective Condition="$(_ToolsetFound) == 'true'">$(VCTargetsPath10)</VCTargetsPathEffective>
+    <_Dev10PlatformDefaultProps>$(VCTargetsPath)\Platforms\$(Platform)\Microsoft.Cpp.$(Platform).default.props</_Dev10PlatformDefaultProps>
+  </PropertyGroup>
+
+  <!-- Import VS2010 platform defaults when redirecting -->
+  <Import Condition="'$(_ToolsetFound)' == 'true' and '$(_Dev10PlatformDefaultProps)' != '$(_PlatformDefaultPropsPath)' and Exists('$(_Dev10PlatformDefaultProps)')" Project="$(_Dev10PlatformDefaultProps)"/>
+  
+  <!-- When redirecting to VS2010, most of the settings are located in the Microsoft.Cpp.props. -->
+  <Import Condition="'$(_ToolsetFound)' == 'true'" Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <!-- MSBuildToolsPath* is not the same as .NET Framework location for MSBuild starting with 12.0, but it was used as such in prev versions of Visual Studio -->
+  <PropertyGroup Condition="'$(_ToolsetFound)' == 'true'">
+    <ExecutablePath>$(ExecutablePath);$(MSBuildFrameworkToolsPath32)</ExecutablePath>
+    <ExcludePath>$(ExcludePath);$(MSBuildFrameworkToolsPath);$(MSBuildFrameworkToolsPath32);</ExcludePath>
+    <NativeExecutablePath>$(NativeExecutablePath);$(MSBuildFrameworkToolsPath);</NativeExecutablePath>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Options>
+  <PlugIns>
+    <string>Microsoft.Phone.Test.WttLogPlugin.dll:WttLogPlugin</string>
+    <string>Microsoft.Phone.Test.DiagnosticCapturePlugin.dll:DiagnosticCapturePlugin</string>
+    <string>Microsoft.Phone.Test.CoreUI.RotationManager.Plugin.dll:RotationManagerPlugin</string>
+    <string>Microsoft.Phone.Test.TuxNet.Plugins.TestTracing.dll:TestTracingPlugin</string>
+  </PlugIns>
+</Options>

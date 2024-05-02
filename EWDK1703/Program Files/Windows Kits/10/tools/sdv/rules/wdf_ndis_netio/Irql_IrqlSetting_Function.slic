@@ -1,0 +1,47 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    Irql_IrqlSetting_Function
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that IRQL Setting related DDIs are only called at proper IRQL levels.
+ 
+    Check for the proper IRQL when the function is entering.
+    
+    Related Rule:
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507174
+
+--*/
+
+
+
+#include "slic_base.h"
+
+NDIS_LOWER_IRQL.entry
+{
+    if ( sdv_irql_current != DISPATCH_LEVEL ) {
+        abort "$fname should only be called at IRQL   = DISPATCH_LEVEL.";
+    }
+}
+
+NDIS_RAISE_IRQL_TO_DISPATCH.entry
+{
+    if ( SDV_IRQL_ELEVATED_LEVEL(sdv_irql_current) ) {
+        abort "$fname should only be called at IRQL <= DISPATCH_LEVEL.";
+    }
+}

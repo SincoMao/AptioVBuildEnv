@@ -1,0 +1,84 @@
+﻿<!--
+***********************************************************************************************
+Toolset.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildThisFileDirectory)ImportBefore\*.props" Condition="Exists('$(MSBuildThisFileDirectory)ImportBefore')" />
+
+  <PropertyGroup>
+    <!-- Required for enabling Team Build for packaging Windows Store app projects -->
+    <OutDirWasSpecified Condition=" '$(OutDir)'!='' AND '$(OutDirWasSpecified)'=='' ">true</OutDirWasSpecified>
+    <OutDirWasSpecified Condition=" '$(OutDir)'=='' AND '$(OutDirWasSpecified)'=='' ">false</OutDirWasSpecified>
+
+    <IntDir Condition="'$(IntDir)'=='' AND '$(IntermediateOutputPath)'!=''">$(IntermediateOutputPath)</IntDir>
+    <IntDir Condition="'$(IntDir)'=='' AND '$(IntermediateOutputPath)'==''">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(OutDir)'=='' AND '$(SolutionDir)' == ''">$(IntDir)</OutDir>
+    <OutDir Condition="'$(OutDir)'=='' AND '$(SolutionDir)' != ''">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.WindowsSDK.props" Condition="Exists('$(VCTargetsPath)\Microsoft.Cpp.WindowsSDK.props')"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Common.props" />
+
+  <PropertyGroup>
+    <VC_ExecutablePath_x86_ARM64>$(VCInstallDir)bin\x86_arm64</VC_ExecutablePath_x86_ARM64>
+    <VC_ExecutablePath_x64_ARM64>$(VCInstallDir)bin\amd64_arm64</VC_ExecutablePath_x64_ARM64>
+    <VC_ReferencesPath_ARM64>$(VCInstallDir)atlmfc\lib\ARM64;$(VCInstallDir)lib\ARM64</VC_ReferencesPath_ARM64>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(WindowsAppContainer)' != 'true'">
+    <VC_LibraryPath_ARM64>$(VCInstallDir)lib\ARM64;$(VCInstallDir)atlmfc\lib\ARM64;$(UniversalCRT_LibraryPath_ARM64);</VC_LibraryPath_ARM64>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(WindowsAppContainer)' == 'true'">
+    <VC_LibraryPath_ARM64>$(VCInstallDir)lib\store\ARM64;$(VCInstallDir)atlmfc\lib\ARM64;$(UniversalCRT_LibraryPath_ARM64);</VC_LibraryPath_ARM64>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(PreferredToolArchitecture)' == 'x64' and '$(_VC_x64_ToolsInstalled)' == 'true'">
+    <VC_ExecutablePath_ARM64>$(VC_ExecutablePath_x64_ARM64);$(VC_ExecutablePath_x64_x64)</VC_ExecutablePath_ARM64>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(VCToolArchitecture)' != 'Native64Bit'">
+    <VC_ExecutablePath_ARM64>$(VC_ExecutablePath_x86_ARM64);$(VC_ExecutablePath_x86_x86)</VC_ExecutablePath_ARM64>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <FxCompile>
+      <DisableOptimizations         Condition="'$(UseDebugLibraries)' == 'true' and '$(Platform)' == 'ARM64'">false</DisableOptimizations>
+      <EnableDebuggingInformation   Condition="'$(UseDebugLibraries)' == 'true' and '$(Platform)' == 'ARM64'">false</EnableDebuggingInformation>
+    </FxCompile>
+  </ItemDefinitionGroup>
+
+  <PropertyGroup>
+    <ExecutablePath Condition="'$(ExecutablePath)' == ''">$(VC_ExecutablePath_ARM64);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(FxCopDir);$(PATH);</ExecutablePath>
+    <IncludePath Condition="'$(IncludePath)' == ''">$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <ReferencePath Condition="'$(ReferencePath)' == ''">$(VC_ReferencesPath_ARM64);</ReferencePath>
+    <LibraryPath Condition="'$(LibraryPath)' == ''">$(VC_LibraryPath_ARM64);$(WindowsSDK_LibraryPath_ARM64);$(NETFXKitsDir)Lib\um\arm64</LibraryPath>
+    <LibraryWPath Condition="'$(LibraryWPath)' == ''">$(WindowsSDK_MetadataPath);</LibraryWPath>
+    <SourcePath Condition="'$(SourcePath)' == ''">$(VC_SourcePath);</SourcePath>
+    <ExcludePath Condition="'$(ExcludePath)' == ''">$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuildToolsPath);$(MSBuildFrameworkToolsPath);$(MSBuild_ExecutablePath);$(VC_LibraryPath_ARM64);</ExcludePath>
+    <DebugCppRuntimeFilesPath Condition="'$(DebugCppRuntimeFilesPath)' == ''">$(VCInstallDir)redist\Debug_NonRedist\ARM64</DebugCppRuntimeFilesPath>
+
+    <!-- ARM64 may not support all the Win32 libraries -->
+    <MinimalCoreWin Condition="'$(MinimalCoreWin)' == ''">true</MinimalCoreWin>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions Condition="'$(WindowsSDKDesktopARM64Support)' == true">_ARM64_WINAPI_PARTITION_DESKTOP_SDK_AVAILABLE=1;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)ImportAfter\*.props" Condition="Exists('$(MSBuildThisFileDirectory)ImportAfter')" />
+  
+  <!-- This is intentionally added after ImportAfter. -->
+  <Import Project="$(_PlatformFolder)Platform.Common.props" />
+</Project>
+

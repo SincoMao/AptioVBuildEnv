@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!--Copyright (c) Microsoft Corporation.  All rights reserved.-->
+
+<ImageCustomizations xmlns="http://schemas.microsoft.com/embedded/2004/10/ImageUpdate"
+                     Name="Customization File"
+                     Description="Customization File"
+                     Owner="Microsoft"
+                     OwnerType="OEM"
+                     Priority="1">
+
+    <Imports>
+        <Import Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\310-150.xml"/>
+        <Import Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\310-160.xml"/>
+    </Imports>
+
+    <Targets>
+        <Target Id="US">
+            <TargetState>
+                <Condition Name="MCC" Value="310" />
+            </TargetState>
+        </Target>
+        <Target Id="8960">
+            <TargetState>
+                <Condition Name="DeviceType" Value="8960" />
+            </TargetState>
+        </Target>
+        <Target Id="8960_LowCost">
+            <TargetState>
+                <Condition Name="DeviceType" Value="8960_LowCost" />
+            </TargetState>
+        </Target>
+        <Target Id="8974">
+            <TargetState>
+                <Condition Name="DeviceType" Value="8974" />
+            </TargetState>
+        </Target>
+        <Target Id="8x26">
+            <TargetState>
+                <Condition Name="DeviceType" Value="8x26" />
+            </TargetState>
+        </Target>
+    </Targets>
+
+    <Static>
+        <Settings Path="Multivariant">
+            <Setting Name="Enable" Value="1" />
+            <Setting Name="PostVariantCleanupDelay" Value="1440" />
+        </Settings>
+        <Settings Path="AutoDataConfig">
+            <Setting Name="Enable" Value="0" />
+        </Settings>
+    </Static>
+
+    <Variant Name="8960 Settings">
+        <TargetRefs>
+            <TargetRef Id="8960" />
+        </TargetRefs>
+
+        <Settings Path="StartLayout">
+            <Setting Name="StartLayout" Value="3" />
+        </Settings>
+    </Variant>
+    <Variant Name="8960_LowCost Settings">
+        <TargetRefs>
+            <TargetRef Id="8960_LowCost" />
+        </TargetRefs>
+
+        <Settings Path="StartLayout">
+            <Setting Name="StartLayout" Value="3" />
+        </Settings>
+        <Settings Path="Maps/Storage">
+            <Setting Name="UseExternalStorage" Value="1" />
+        </Settings>
+    </Variant>
+    <Variant Name="8974 Settings">
+        <TargetRefs>
+            <TargetRef Id="8974" />
+        </TargetRefs>
+
+        <Settings Path="StartLayout">
+            <Setting Name="StartLayout" Value="4" />
+        </Settings>
+    </Variant>
+    <Variant Name="8x26 Settings">
+        <TargetRefs>
+            <TargetRef Id="8x26" />
+        </TargetRefs>
+
+        <Settings Path="StartLayout">
+            <Setting Name="StartLayout" Value="4" />
+        </Settings>
+        <Settings Path="Maps/Storage">
+            <Setting Name="UseExternalStorage" Value="1" />
+        </Settings>
+    </Variant>
+
+    <Variant Name="US Settings">
+        <TargetRefs>
+            <TargetRef Id="US" />
+        </TargetRefs>
+
+        <Settings Path="LockScreen">
+            <Asset Name="Wallpapers"
+                   DisplayName="MSWallpaper"
+                   Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\Microsoft_Lockscreen.jpg"
+                   TargetFileName="Microsoft_Lockscreen.jpg" />
+            <Setting Name="DefaultWallpaper" Value="Microsoft_Lockscreen.jpg" />
+        </Settings>
+
+        <Settings Path="InternetExplorer/Favorites/Windows Phone">
+            <Setting Name="URL" Value="http://www.windowsphone.com/‎" />
+        </Settings>
+
+        <Settings Path="Theme">
+            <Setting Name="DefaultBackgroundColor" Value="Light" />
+            <Setting Name="DefaultAccentColor" Value="Cyan" />
+        </Settings>
+    </Variant>
+</ImageCustomizations>

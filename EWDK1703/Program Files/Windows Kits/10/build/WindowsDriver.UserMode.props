@@ -1,0 +1,36 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <EnableTestSign>true</EnableTestSign>
+  </PropertyGroup>
+  
+  <ItemDefinitionGroup>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <MinimumRequiredVersion>$(SUBSYSTEM_NATVER)</MinimumRequiredVersion>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <!-- UMDF 2.x specific libs, for all target platforms -->
+  <ItemDefinitionGroup Condition="'$(IsUserModeToolset)' == 'true' and '$(UMDF_VERSION_MAJOR)' == '2'">
+    <Link>
+      <AdditionalDependencies >%(AdditionalDependencies);$(UMDF_LIB_PATH)$(UMDF_VER_PATH)\WdfDriverStubUm.lib;ntdll.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <!-- Desktop-specific libs -->
+  <ItemDefinitionGroup Condition="'$(IsUserModeToolset)' == 'true' and '$(UMDF_VERSION_MAJOR)' == '2' and '$(DriverTargetPlatform)' == 'Desktop'">
+    <Link>
+      <AdditionalDependencies >%(AdditionalDependencies);mincore.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+    
+  <!-- Import mobile-specific props file -->
+  <Import Condition="'$(DriverTargetPlatform)' == 'Mobile'" Project="$(WDKContentRoot)build\WindowsPhone.WindowsUserModeDriver.props"/>
+  
+  <!-- Import universal-specific props file -->
+  <Import Condition="'$(DriverTargetPlatform)' == 'Universal'" Project="$(WDKContentRoot)build\Universal.UserMode.props"/>
+  
+  <!-- Import UMDF-specific props file -->
+  <Import Project="$(WDKContentRoot)build\WindowsDriver.UserMode.UMDF.props"/>
+</Project>
+

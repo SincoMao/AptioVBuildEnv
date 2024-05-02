@@ -1,0 +1,39 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlObPassive
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x0002001B
+
+Description:
+
+    The IrqlObPassive rule specifies that the driver calls 
+    ObReferenceObjectByHandle only when it is executing at 
+    IRQL = PASSIVE_LEVEL.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216044
+
+--*/
+
+
+#include "slic_base.h"
+
+
+ObReferenceObjectByHandle.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+

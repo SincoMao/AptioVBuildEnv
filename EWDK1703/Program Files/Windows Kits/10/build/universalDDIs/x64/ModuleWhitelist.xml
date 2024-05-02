@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<API_EXCEPTION_WHITELIST>
+  <APIs>
+    <API Name="AreFileApisANSI" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="CompareStringEx" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="EnumSystemLocalesEx" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="FlsAlloc" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="FlsFree" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="FlsGetValue" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="FlsSetValue" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="GetActiveWindow" ModuleName="user32.dll" AitCategory="ApiDynamic" />
+    <API Name="GetCurrentPackageId" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="GetDateFormatEx" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="GetEnabledXStateFeatures" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="GetFileInformationByHandleEx" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="GetLastActivePopup" ModuleName="user32.dll" AitCategory="ApiDynamic" />
+    <API Name="GetLocaleInfoEx" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="GetProcessWindowStation" ModuleName="user32.dll" AitCategory="ApiDynamic" />
+    <API Name="GetTimeFormatEx" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="GetUserDefaultLocaleName" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="GetUserObjectInformationW" ModuleName="user32.dll" AitCategory="ApiDynamic" />
+    <API Name="GetXStateFeaturesMask" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="InitializeCriticalSectionEx" ModuleName="kernel32.dll" AitCategory="ApiDynamic" /> 
+    <API Name="IsValidLocaleName" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="LCMapStringEx" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="LCIDToLocaleName" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="LocaleNameToLCID" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="LocateXStateFeature" ModuleName="kernel32.dll" AitCategory="ApiDynamic" /> 
+    <API Name="MessageBoxA" ModuleName="user32.dll" AitCategory="ApiDynamic" />
+    <API Name="MessageBoxW" ModuleName="user32.dll" AitCategory="ApiDynamic" />
+    <API Name="SetThreadStackGuarantee" ModuleName="kernel32.dll" AitCategory="ApiDynamic" />
+    <API Name="SystemFunction036" ModuleName="advapi32.dll" AitCategory="ApiDynamic" />
+    <API Name="exp"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="pow"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="log"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="log10"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="sinh"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="cosh"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="tanh"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="asin"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="acos"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="atan"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="atan2"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="sqrt"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="sin"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="cos"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="tan"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="ceil"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="floor"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="fabs"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="modf"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="ldexp"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="_cabs"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="_hypot"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="fmod"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="frexp"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="_y0"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="_y1"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="_yn"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="_logb"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+    <API Name="_nextafter"  ModuleName="ntdll.dll" AitCategory="ApiDynamic" />
+  </APIs>
+</API_EXCEPTION_WHITELIST>

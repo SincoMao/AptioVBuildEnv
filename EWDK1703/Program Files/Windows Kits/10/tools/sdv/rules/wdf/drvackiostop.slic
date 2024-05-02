@@ -1,0 +1,87 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DrvAckIoStop
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that driver is aware of pending requests while its power-managed queue
+    is getting powered-down and acks or completes or cancels them accordingly. In the case of self-managed I/O driver should
+    correctly handle these requests as well from EvtDeviceSelfManagedIoSuspend. Driver failing to handle these requests during a power-down would cause BSOD 9F.
+
+    If driver doesn't hold on to the requests or forward them to other drivers and completes the requests 
+    directly in the queue's handlers then it can use analysis_assume to suppress the SDV warning. 
+    
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507068
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state {
+    enum {INIT1, EVTIOSTOPSPECIFIED, EVTIOSTOPNOTSPECIFIED} s1 = INIT1;
+    enum {INIT2, SELFMANAGEDIOSUSPENDSPECIFIED} s2 = INIT2;
+    enum {INIT3, POWERMANAGEDQUEUEEXIST} s3 = INIT3;
+    enum {INIT4, FILTER} s4 = INIT4;
+}
+
+WdfFdoInitSetFilter.entry
+{
+    s4 = FILTER;
+}
+
+WdfIoQueueCreate.entry
+{
+    if(($2->PowerManaged == 1 || ($2->PowerManaged == 2 && s4 == INIT4)))
+    {
+        if($2->EvtIoStop == 0)
+        {
+            s1 = EVTIOSTOPNOTSPECIFIED;
+        }
+        else if(s1 != EVTIOSTOPNOTSPECIFIED)
+        {
+            s1 = EVTIOSTOPSPECIFIED;
+        }
+    }
+
+    if( ($2->PowerManaged == 2 && s4 == INIT4)
+            ||
+         ($2->PowerManaged == 1)
+        )
+    {
+        s3 = POWERMANAGEDQUEUEEXIST;
+    }
+}
+
+WdfDeviceInitSetPnpPowerEventCallbacks.entry
+{
+    if($2->EvtDeviceSelfManagedIoSuspend != 0)
+    {
+        s2 = SELFMANAGEDIOSUSPENDSPECIFIED;
+    }
+}
+
+sdv_main.exit
+{
+    if(s1 != EVTIOSTOPSPECIFIED && s2 != SELFMANAGEDIOSUSPENDSPECIFIED && s3 == POWERMANAGEDQUEUEEXIST)
+    {
+            abort "WARNING: Driver doesnt specify EvtIoStop for its power-managed queued and it doesnt have EvtDeviceSelfManagedIoSuspend callback. If Driver doesn't ack/complete or cancel I/O during power-down it can cause BC 0x9f.";    
+    } 
+}

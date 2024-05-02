@@ -1,0 +1,44 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    PagedCodeAtPowerTrans
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that PAGED_CODE within a driver is not called
+    while responding to a system IRP_MJ_POWER Irp(IRP_MN_SET_POWER) 
+    and to a device IRP_MJ_POWER Irp(IRP_MN_SET_POWER).
+	
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507291
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+}
+
+[sdv_do_paged_code_check].entry
+{  
+   abort "One should not call Paged routine while processing a POWER Irp.";
+}
+
+[fun_IRP_MJ_POWER].exit
+{
+   halt;
+}

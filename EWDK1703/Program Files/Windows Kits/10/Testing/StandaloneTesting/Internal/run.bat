@@ -1,0 +1,1 @@
+PowerShell -ExecutionPolicy Unrestricted -File %~dp0run.ps1 %1 %2 %3 %4

@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<telemetrymanifest version="1.7" priority="low">
+
+  <providersets>
+    <!-- Machine level information -->
+    <providerset name="Microsoft.Machine">
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.MachineStatContextProviderFactory,Microsoft.VisualStudio.PerfWatson" />
+    </providerset>
+
+    <!-- Visual Studio Context Information -->
+    <providerset name="Microsoft.VisualStudio.Responsiveness.Context">
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.VisualStudioContextProviderFactory,Microsoft.VisualStudio.PerfWatson" />
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.WindowMessageContextProviderFactory,Microsoft.VisualStudio.PerfWatson" />
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.VsFingerprintContextProviderFactory,Microsoft.VisualStudio.PerfWatson" />
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.LightWeightContextProviderFactory,Microsoft.VisualStudio.PerfWatson" />
+      <!-- PerfTrack events -->
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.EtwContextProviderFactory,Microsoft.VisualStudio.PerfWatson">
+        <configuration>
+          <source guid="{030f2f57-abd0-4427-bcf1-3a3587d7dc7d}" level="5" category="PerfTrack" />
+          <events>
+            <event name="ScenarioStart" id="1501">
+              <data name="ScenarioId" type="UInt" />
+              <data name="ControlFlags" type="UInt" />
+              <data name="MatchKey" type="String" />
+              <data name="ScenarioName" type="String" />
+            </event>
+            <event name="ScenarioMetadata" id="1502">
+              <data name="ScenarioId" type="UInt" />
+              <data name="ControlFlags" type="UInt" />
+              <data name="MatchKey" type="String" />
+              <data name="ScenarioName" type="String" />
+              <data name="PackageFullName" type="String" />
+              <data name="PRAID" type="String" />
+              <data name="Dword1" type="UInt" />
+              <data name="Dword2" type="UInt" />
+              <data name="Dword3" type="UInt" />
+              <data name="Dword4" type="UInt" />
+              <data name="Dword5" type="UInt" />
+              <data name="String1" type="String" />
+              <data name="String2" type="String" />
+            </event>
+            <event name="ScenarioStop" id="1503">
+              <data name="ScenarioId" type="UInt" />
+              <data name="ControlFlags" type="UInt" />
+              <data name="MatchKey" type="String" />
+              <data name="ScenarioName" type="String" />
+              <data name="PackageFullName" type="String" />
+              <data name="PRAID" type="String" />
+            </event>
+          </events>
+        </configuration>
+      </provider>
+    </providerset>
+
+    <!-- Default shipping code markers -->
+    <providerset name="Microsoft.VisualStudio.CodeMarkers">
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.CodeMarkerContextProviderFactory,Microsoft.VisualStudio.PerfWatson" />
+      <provider type="etw">
+        <etwprovider source="{641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e}" level="5" logtype="all;scenario" category="VSCodeMarker" name="CodeMarker" />
+      </provider>
+    </providerset>
+
+    <!-- Responsiveness tracking + stack resolution -->
+    <providerset name="Microsoft.VisualStudio.Responsiveness">
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.ResponsivenessEventProcessorFactory,Microsoft.VisualStudio.PerfWatson" />
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.CodeResolutionProcessorFactory,Microsoft.VisualStudio.PerfWatson" />
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.TypingContextProviderFactory,Microsoft.VisualStudio.PerfWatson" />
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.SolutionLoadContextProviderFactory,Microsoft.VisualStudio.PerfWatson" />
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.RosylnContextProviderFactory,Microsoft.VisualStudio.PerfWatson" />
+    </providerset>
+
+    <!-- Retail Assert ETW -->
+    <providerset name="Microsoft.VisualStudio.Diagnostics.Assert">
+      <provider type="implementation" value="Microsoft.Performance.ResponseTime.EtwContextProviderFactory,Microsoft.VisualStudio.PerfWatson">
+        <configuration>
+          <source guid="{E5328C6F-4C94-45F7-ACAF-640C6A447654}" level="5" category="Assert" />
+          <events>
+            <event name="Assert" id="3">
+              <data name="id" type="String" />
+              <data name="callstack" type="Callstack" />
+            </event>
+          </events>
+        </configuration>
+      </provider>
+    </providerset>
+  </providersets>
+  <sessions>
+    <session name="Visual Studio">
+      <rootapplication>devenv;vswinexpress;vwdexpress;wdexpress</rootapplication>
+      <persistentlogging>true</persistentlogging>
+      <upload>true</upload>
+      <enableremoteconfig>true</enableremoteconfig>
+      <configurationuri>http://telescope/</configurationuri>
+      <providers>
+        <providerset name="Microsoft.Machine" />
+        <providerset name="Microsoft.VisualStudio.Responsiveness" />
+        <providerset name="Microsoft.VisualStudio.Responsiveness.Context" />
+        <providerset name="Microsoft.VisualStudio.CodeMarkers" />
+        <providerset name="Microsoft.VisualStudio.Diagnostics.Assert" />
+      </providers>
+      <scenarios>
+        <scenario name="Package Load (metadata)" persistent="true">
+          <metadataDescriptors>
+            <metadata name="Package GUID" markerIndex="1" offset="0" stringsToSkip="0" type="System.Guid" />
+          </metadataDescriptors>
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="7189" type="start" />
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="7190" type="stop" />
+        </scenario>
+        <scenario name="Solution Load (metadata)" persistent="true">
+          <metadataDescriptors>
+            <metadata name="SolutionLoadId" markerIndex="1" offset="0" stringsToSkip="0" type="System.UInt32" />
+            <metadata name="TotalSolutionLoadTimeMs" markerIndex="1" offset="4" stringsToSkip="0" type="System.UInt32" />
+            <metadata name="ModalSolutionLoadTimeMs" markerIndex="1" offset="8" stringsToSkip="0" type="System.UInt32" />
+            <metadata name="TotalProjectCount" markerIndex="1" offset="12" stringsToSkip="0" type="System.UInt32" />
+            <metadata name="ModalProjectCount" markerIndex="1" offset="16" stringsToSkip="0" type="System.UInt32" />
+            <metadata name="ForceLoadProjectCount" markerIndex="1" offset="20" stringsToSkip="0" type="System.UInt32" />
+            <metadata name="OpenProjectCount" markerIndex="1" offset="24" stringsToSkip="0" type="System.UInt32" />
+            <metadata name="ProjectTypes" markerIndex="1" offset="28" stringsToSkip="0" type="System.UInt32" />
+            <metadata name="SolutionLoadFlags" markerIndex="1" offset="32" stringsToSkip="0" type="System.UInt32" />
+            <metadata name="SCCProviderHash" markerIndex="1" offset="36" stringsToSkip="0" type="System.UInt32" />
+            <metadata name="SCCProviderName" markerIndex="1" offset="40" stringsToSkip="0" type="System.String" />
+          </metadataDescriptors>
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="931" type="start" />
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="7447" type="stop" />
+        </scenario>
+        <scenario name="Serialize Notifications (metadata)" persistent="true">
+          <metadataDescriptors>
+            <metadata name="OnUIThread" markerIndex="1" offset="0" stringsToSkip="0" type="System.UInt32" />
+          </metadataDescriptors>
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="18700" type="start" />
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="18701" type="stop" />
+        </scenario>
+        <scenario name="Close LightSwitch Project (metadata)" persistent="true">
+          <metadataDescriptors>
+            <metadata name="SharePointEnabled" markerIndex="1" offset="0" stringsToSkip="0" type="System.Byte" />
+          </metadataDescriptors>
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="26800" type="start" />
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="26801" type="stop" />
+        </scenario>
+        <scenario name="Attach to External Database (metadata)" persistent="true">
+          <metadataDescriptors>
+            <metadata name="SharePointEnabled" markerIndex="1" offset="0" stringsToSkip="0" type="System.Byte" />
+          </metadataDescriptors>
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="26802" type="start" />
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="26803" type="stop" />
+        </scenario>
+        <scenario name="Publish LightSwitch Project (metadata)" persistent="true">
+          <metadataDescriptors>
+            <metadata name="SharePointEnabled" markerIndex="1" offset="0" stringsToSkip="0" type="System.Byte" />
+          </metadataDescriptors>
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="26804" type="start" />
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="26805" type="stop" />
+        </scenario>
+        <scenario name="Create LightSwitch Project (metadata)" persistent="true">
+          <metadataDescriptors>
+            <metadata name="SharePointEnabled" markerIndex="1" offset="0" stringsToSkip="0" type="System.Byte" />
+          </metadataDescriptors>
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="26806" type="start" />
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="26807" type="stop" />
+        </scenario>
+        <scenario name="F5 LightSwitch Project (metadata)" persistent="true">
+          <metadataDescriptors>
+            <metadata name="SharePointEnabled" markerIndex="1" offset="0" stringsToSkip="0" type="System.Byte" />
+          </metadataDescriptors>
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="26808" type="start" />
+          <event source="641d7f6c-481c-42e8-ab7e-d18dc5e5cb9e" id="26809" type="stop" />
+        </scenario>
+      </scenarios>
+    </session>
+  </sessions>
+</telemetrymanifest>

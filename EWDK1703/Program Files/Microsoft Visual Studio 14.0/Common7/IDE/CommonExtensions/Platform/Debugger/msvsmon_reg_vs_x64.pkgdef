@@ -1,0 +1,5 @@
+[$RootKey$]
+
+[$RootKey$\Debugger]
+"msvsmon-amd64"="$BaseInstallDir$\Common7\IDE\Remote Debugger\x64\msvsmon.exe"
+

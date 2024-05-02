@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <Rule Name="DriverGeneral" DisplayName="Driver Settings" PageTemplate="tool" Order="31" Description="General settings for drivers." >
+      <Rule.Categories>
+        <Category Name="General" DisplayName="General" Description="General" />
+      </Rule.Categories>
+      <Rule.DataSource>
+        <DataSource Persistence="ProjectFile" Label="Configuration" HasConfigurationCondition="true" />
+      </Rule.DataSource>
+      <EnumProperty Name="TargetVersion" DisplayName="Target OS Version" Description="Target operating version that this driver will be built for." Category="General" F1Keyword="driver.drivergeneral.targetversion">
+        <EnumValue DisplayName="Windows 10 or higher" Name="" />
+        <EnumValue DisplayName="Windows 8.1" Name="WindowsV6.3" />
+        <EnumValue DisplayName="Windows 8" Name="Windows8" />
+        <EnumValue DisplayName="Windows 7" Name="Windows7" />
+      </EnumProperty>
+      <EnumProperty Name="DriverTargetPlatform" DisplayName="Target Platform" Description="Platform at which the device driver is targeted. A universal driver targets all Windows editions." Category="General" F1Keyword="driver.drivergeneral.targetplatform">
+        <EnumValue Name="Universal" />
+        <EnumValue Name="Desktop" />
+        <EnumValue Name="Mobile" />
+      </EnumProperty>
+      <BoolProperty Name="SupportsPackaging" DisplayName="Build Package" Description="Packages the driver project. The default value for this is yes." Category="General" F1Keyword="driver.drivergeneral.buildpackage" />
+    </Rule>
+</ProjectSchemaDefinitions>

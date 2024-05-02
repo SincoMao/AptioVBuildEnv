@@ -1,0 +1,192 @@
+<!--
+***********************************************************************************************
+Microsoft.Cpp.AppContainerApplication.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <_PropertySheetDisplayName>Windows Store app</_PropertySheetDisplayName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <CompatibilityIssues Include="Use of MFC" Condition="'$(_CompatibilityIssuesUseOfMFC)'!='false'">
+      <Type>Warning</Type>
+      <FirstName>UseOfMFC</FirstName>
+      <FirstValue>$(_CompatibilityIssuesUseOfMFC)</FirstValue>
+      <SecondName>WindowsAppContainer</SecondName>
+      <SecondValue>true</SecondValue>
+    </CompatibilityIssues>
+    <CompatibilityIssues Include="Use of ATL" Condition="'$(_CompatibilityIssuesUseOfATLIssue)'!='false'">
+      <Type>Warning</Type>
+      <FirstName>UseOfATL</FirstName>
+      <FirstValue>$(_CompatibilityIssuesUseOfATLIssue)</FirstValue>
+      <SecondName>WindowsAppContainer</SecondName>
+      <SecondValue>true</SecondValue>
+    </CompatibilityIssues>
+    <CompatibilityIssues Include="Use of Unicode" Condition="'$(_CompatibilityIssuesCharacterSetIssue)'!='Unicode' and '$(_CompatibilityIssuesCharacterSetIssue)'!=''">
+      <Type>Warning</Type>
+      <FirstName>CharacterSet</FirstName>
+      <FirstValue>$(_CompatibilityIssuesCharacterSetIssue)</FirstValue>
+      <SecondName>WindowsAppContainer</SecondName>
+      <SecondValue>true</SecondValue>
+    </CompatibilityIssues>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!-- Because we are disabling the MFC/ATL/CLR, we need to preserve the old values in order to warn the user. -->
+    <_CompatibilityIssuesUseOfMFC>$(UseOfMFC)</_CompatibilityIssuesUseOfMFC>
+    <_CompatibilityIssuesUseOfATLIssue>$(UseOfATL)</_CompatibilityIssuesUseOfATLIssue>
+    <_CompatibilityIssuesCharacterSetIssue>$(CharacterSet)</_CompatibilityIssuesCharacterSetIssue>
+
+    <GeneratedFilesDir Condition=" '$(GeneratedFilesDir)' == ''">Generated Files\</GeneratedFilesDir>
+
+    <!-- Disable features not supported for Windows Store app projects -->
+    <UseOfMFC>false</UseOfMFC>
+    <UseOfATL>false</UseOfATL>
+    <CharacterSet>Unicode</CharacterSet>
+    
+    <!-- else, OutDir needs to have project specific directory in order to handle files with unique names -->
+    <OutDir Condition="'$(Platform)' == 'Win32' and '$(OutDirWasSpecified)' != 'true'">$(SolutionDir)$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    <OutDir Condition="'$(Platform)' != 'Win32' and '$(OutDirWasSpecified)' != 'true'">$(SolutionDir)$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    
+    <IgnoreImportLibrary Condition="'$(AppContainerApplication)' == 'true'">true</IgnoreImportLibrary>
+    <EmbedManifest>false</EmbedManifest>
+    <GenerateManifest>false</GenerateManifest>
+
+    <!-- Disable manage while building AppContainer -->
+    <CLRSupport>false</CLRSupport>
+    <EnableManagedIncrementalBuild>false</EnableManagedIncrementalBuild>
+    <TargetRuntime>Native</TargetRuntime>
+    <!--<TargetFrameworkIdentifier Condition="'$(TargetFrameworkIdentifier)' == ''">.NETCore</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == ''">v4.5</TargetFrameworkVersion>-->
+
+    <TargetPlatformIdentifier Condition="'$(TargetPlatformIdentifier)' == ''">Windows</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition="'$(TargetPlatformVersion)' == ''">8.1</TargetPlatformVersion>
+
+    <!-- If older toolsets are not present in the machine it will fall back to current targets so add the required bundle entry here -->
+    <RequiredBundles Condition="'$(PlatformToolset)' == 'v120' or '$(PlatformToolset)' == 'v120_wp81' or '$(PlatformToolset)' == 'v110' or '$(PlatformToolset)' == 'v110_wp80'">ToolsForWin81_WP80_WP81;$(RequiredBundles)</RequiredBundles>
+
+    <!-- Required bundle for Win10 projects -->
+    <RequiredBundles Condition="'$(PlatformToolset)' == 'v140'">Windows10_ToolsAndSDK_Breadcrumb;$(RequiredBundles)</RequiredBundles>
+
+    <!-- Only 8.2 projects should be consuming these targets so we're only adding the 8.2 group for these -->
+    <AddItemTemplateGuid Condition="'$(AddItemTemplateGuid)' == ''">{FE0B9DF8-A7C2-4687-A235-316C1ACA78D3}</AddItemTemplateGuid>
+
+    <CanReferenceWinRT Condition="'$(CanReferenceWinRT)' == ''">true</CanReferenceWinRT>
+
+    <!-- Windows Store app projects require a different library for delayload -->
+    <DelayImplib>dloadhelper.lib</DelayImplib>
+
+    <!-- Only uses Kernel32.lib -->
+    <MinimalCoreWin Condition="'$(MinimalCoreWin)'==''">KernelOnly</MinimalCoreWin>
+
+    <GPUDebuggerTargetType Condition="'$(GPUDebuggerTargetType)' == ''">{F4453496-1DB8-47F8-A7D5-31EBDDC2EC96}</GPUDebuggerTargetType>
+    <GPURefDebuggerBreakOnAllThreads Condition="'$(GPURefDebuggerBreakOnAllThreads)' == ''">GPURefBreakOncePerWarp</GPURefDebuggerBreakOnAllThreads>
+
+    <!-- Windows Store app exes needs packaging -->
+    <AppxPackage Condition="'$(ConfigurationType)' == 'Application' and '$(AppContainerApplication)' == 'true'">True</AppxPackage>
+    <AppxPackageDir Condition="'$(AppxPackageDir)' == ''">$(SolutionDir)AppPackages\$(ProjectName)\</AppxPackageDir>
+
+    <!-- Use different AppxPriInitialPath, because $(RootNamespace) matches name of the produced WINMD. -->
+    <AppxPriInitialPath Condition="'$(AppxPackage)' != 'true' and '$(AppxPriInitialPath)' == ''">$(RootNamespace)</AppxPriInitialPath>
+
+    <CanBeStartupProject>$(AppxPackage)</CanBeStartupProject>
+
+    <DebuggerFlavor Condition="'$(AppxPackage)' == 'true'">AppHostLocalDebugger</DebuggerFlavor>
+
+    <!-- By default, apps need XAML processing -->
+    <_CppCommonExtensionTargets Condition="'$(_DefaultCppCommonExtensionTargets)' != 'false'">$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.Cpp.targets</_CppCommonExtensionTargets>
+    
+    <!-- These properties are copied from Microsoft.cpp.currentversion.targets as these properties are used in Extension SDK props import and required before targets -->
+    <SDKReferenceRegistryRoot Condition="'$(SDKReferenceRegistryRoot)' == '' and '$(DisableRegistryUse)' != 'true'">Software\Microsoft\Microsoft SDKs</SDKReferenceRegistryRoot>
+    <SDKReferenceDirectoryRoot Condition="'$(SDKReferenceDirectoryRoot)' == ''">$(LocalAppData)\Microsoft SDKs;$(MSBuildProgramFiles32)\Microsoft SDKs</SDKReferenceDirectoryRoot>
+    <!-- Manifest driven extension SDK locations -->
+    <SDKExtensionDirectoryRoot Condition="'$(SDKExtensionDirectoryRoot)' == '' and '$(SDKIdentifier)' != ''">$(MSBuildProgramFiles32)\Microsoft SDKs\Windows Kits\10;$(MSBuildProgramFiles32)\Windows Kits\10</SDKExtensionDirectoryRoot>
+
+  </PropertyGroup>
+
+  <ItemDefinitionGroup Condition="'$(UseDebugLibraries)' == 'true'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions Condition="'$(_NoWinAPIFamilyApp)' != 'true'">%(PreprocessorDefinitions);WINAPI_FAMILY=WINAPI_FAMILY_APP</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);__WRL_NO_DEFAULT_LIB__</PreprocessorDefinitions>
+      <CompileAsWinRT Condition="'%(ClCompile.CompileAsWinRT)' == '' and '$(AppContainerApplication)' == 'true'">true</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WinRTNoStdLib Condition="'%(ClCompile.WinRTNoStdLib)' == ''">true</WinRTNoStdLib>
+      <ExceptionHandling Condition="'%(ClCompile.ExceptionHandling)' == 'Async'">Sync</ExceptionHandling>
+      <!-- /Gm is conflicting with /ZW, disable it -->
+      <MinimalRebuild>false</MinimalRebuild>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <!-- The new templated project will have pch.h, while classic applications will have stdafx.h -->
+      <PrecompiledHeaderFile Condition="'$(AppContainerApplication)' == 'true'">pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <!-- xaml compilation will produce .g.h in the intermediate dir-->
+      <AdditionalIncludeDirectories>$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Midl>
+      <EnableWindowsRuntime Condition="'%(Midl.EnableWindowsRuntime)' == ''">true</EnableWindowsRuntime>
+      <Enumclass Condition="'%(Midl.Enumclass)' == ''">true</Enumclass>
+      <PrependWithABINamepsace Condition="'%(Midl.PrependWithABINamepsace)' == ''">true</PrependWithABINamepsace>
+      <MetadataFileName Condition="'%(Midl.MetadataFileName)' == ''">$(OutDir)%(Filename).winmd</MetadataFileName>
+      <AdditionalMetadataDirectories Condition="'$(WindowsSDK_MetadataFoundationPath)' != ''">$(WindowsSDK_MetadataFoundationPath);%(AdditionalMetadataDirectories)</AdditionalMetadataDirectories>
+      <AdditionalMetadataDirectories Condition="'$(WindowsSDK_MetadataFoundationPath)' == ''">$(WindowsSDK_MetadataPath);%(AdditionalMetadataDirectories)</AdditionalMetadataDirectories>
+    </Midl>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableUAC>false</EnableUAC>
+      <UACExecutionLevel></UACExecutionLevel>
+      <UACUIAccess>false</UACUIAccess>
+      <GenerateDebugInformation Condition="'%(Link.GenerateDebugInformation)' == ''">true</GenerateDebugInformation>
+      <GenerateWindowsMetadata Condition="'%(Link.GenerateWindowsMetadata)' == '' and '$(AppContainerApplication)' == 'true'">true</GenerateWindowsMetadata>
+      <WindowsMetadataFile Condition="'$(RootNamespace)' != '' and '%(Link.WindowsMetadataFile)' == ''">$(OutDir)$(RootNamespace).winmd</WindowsMetadataFile>
+      <WindowsMetadataFile Condition="'%(Link.WindowsMetadataFile)' == ''">$(OutDir)$(TargetName).winmd</WindowsMetadataFile>
+      <AppContainer Condition="'%(Link.AppContainer)' == ''">true</AppContainer>
+    </Link>
+    <Manifest>
+      <OutputManifestFile Condition="'$(EmbedManifest)' == 'false'">$(OutDir)$(TargetName).manifest</OutputManifestFile>
+    </Manifest>
+    <Image>
+      <DeploymentContent Condition="'%(Image.DeploymentContent)'==''">true</DeploymentContent>
+    </Image>
+    <Media>
+      <DeploymentContent Condition="'%(Media.DeploymentContent)'==''">true</DeploymentContent>
+    </Media>
+    <Text>
+      <DeploymentContent Condition="'%(Text.DeploymentContent)'==''">true</DeploymentContent>
+    </Text>
+    <Xml>
+      <DeploymentContent Condition="'%(Xml.DeploymentContent)'==''">true</DeploymentContent>
+    </Xml>
+    <Xsd>
+      <DeploymentContent Condition="'%(Xsd.DeploymentContent)'==''">true</DeploymentContent>
+    </Xsd>
+    <Font>
+      <DeploymentContent Condition="'%(Font.DeploymentContent)'==''">true</DeploymentContent>
+    </Font>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(UseDebugLibraries)' != 'true'">
+    <ClCompile>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+</Project>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SchemaCatalog xmlns="http://schemas.microsoft.com/xsd/catalog">
+    <Schema href="%InstallRoot%/xml/schemas/AppxManifestSchema2010_v3.xsd" targetNamespace="http://schemas.microsoft.com/appx/2010/manifest" />
+    <Schema href="%InstallRoot%/xml/schemas/AppxManifestSchema2013_v2.xsd" targetNamespace="http://schemas.microsoft.com/appx/2013/manifest" />
+    <Schema href="%InstallRoot%/xml/schemas/AppxManifestSchema2014.xsd" targetNamespace="http://schemas.microsoft.com/appx/2014/manifest" />
+    <Schema href="%InstallRoot%/xml/schemas/AppxPhoneManifestSchema2014.xsd" targetNamespace="http://schemas.microsoft.com/appx/2014/phone/manifest" />
+    <Schema href="%InstallRoot%/xml/schemas/StoreManifest.xsd" targetNamespace="http://schemas.microsoft.com/appx/2010/StoreManifest" />
+    <Association extension="appxmanifest" schema="%InstallRoot%/xml/schemas/AppxManifestSchema2010_v3.xsd" />
+</SchemaCatalog>

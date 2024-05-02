@@ -1,0 +1,105 @@
+
+Table ControllerResetState(State)
+{
+    switch(State)
+    {
+    case 0x57A72000: "Maybe_ControllerResetStateBase";
+    case 0x57a72001: "Maybe_ControllerResetStateCallHCDToReset1";
+    case 0x57a72002: "Maybe_ControllerResetStateCallHCDToReset2";
+    case 0x57a72003: "Maybe_ControllerResetStateCompletePendedDeviceMgmtRequests";
+    case 0x57a72004: "Maybe_ControllerResetStateCompleteResetFromHub";
+    case 0x57a72005: "Maybe_ControllerResetStateNotifyUsbDevicesAndEndpointsOfResetComplete1";
+    case 0x57a72006: "Maybe_ControllerResetStateNotifyUsbDevicesAndEndpointsOfResetComplete2";
+    case 0x57a72007: "Maybe_ControllerResetStatePrepareForReset1";
+    case 0x57a72008: "Maybe_ControllerResetStatePrepareForReset2";
+    case 0x57a72009: "Maybe_ControllerResetStatePrepareUsbDevicesAndEndpointsForReset1";
+    case 0x57a7200a: "Maybe_ControllerResetStatePrepareUsbDevicesAndEndpointsForReset2";
+    case 0x57a7200b: "Maybe_ControllerResetStateResetComplete1";
+    case 0x57a7200c: "Maybe_ControllerResetStateResetComplete2";
+    case 0x57a7200d: "Maybe_ControllerResetStateResumeRootHubIO1";
+    case 0x57a7200e: "Maybe_ControllerResetStateResumeRootHubIO2";
+    case 0x57a7200f: "Maybe_ControllerResetStateRHPdoInD0";
+    case 0x57a72010: "Maybe_ControllerResetStateRhPdoInDx";
+    case 0x57a72011: "Maybe_ControllerResetStateRhPdoInDx_ControllerResetCompleted";
+    case 0x57a72012: "Maybe_ControllerResetStateRhPdoInDx_NotifyUsbDevicesAndEndpointsOfResetComplete";
+    case 0x57a72013: "Maybe_ControllerResetStateRhPdoInDx_PendingControllerReset";
+    case 0x57a72014: "Maybe_ControllerResetStateRhPdoInDx_PendingControllerReset_ControllerResetCompleted";
+    case 0x57a72015: "Maybe_ControllerResetStateRhPdoInDx_PrepareUsbDevicesAndEndpointsForReset";
+    case 0x57a72016: "Maybe_ControllerResetStateRhPdoInDx_SimulatePortChanged";
+    case 0x57a72017: "Maybe_ControllerResetStateRhPdoInDx_UnblockControllerResetComplete";
+    case 0x57a72018: "Maybe_ControllerResetStateSignalOKForRHPdoToExitD0_1";
+    case 0x57a72019: "Maybe_ControllerResetStateSignalOKForRHPdoToExitD0_2";
+    case 0x57a7201a: "Maybe_ControllerResetStateStartPendingDeviceMgmtRequests";
+    case 0x57a7201b: "Maybe_ControllerResetStateStopBlockingResetComplete1";
+    case 0x57a7201c: "Maybe_ControllerResetStateStopBlockingResetComplete2";
+    case 0x57a7201d: "Maybe_ControllerResetStateWaitForResetCompleteFromHCD1";
+    case 0x57a7201e: "Maybe_ControllerResetStateWaitForResetCompleteFromHCD2";
+    case 0x57a7201f: "Maybe_ControllerResetStateWaitingForResetFromHub";
+    case 0x57a74001: "ControllerResetStateCallHCDToReset1";
+    case 0x57a74002: "ControllerResetStateCallHCDToReset2";
+    case 0x57a74003: "ControllerResetStateCompletePendedDeviceMgmtRequests";
+    case 0x57a74004: "ControllerResetStateCompleteResetFromHub";
+    case 0x57a74005: "ControllerResetStateNotifyUsbDevicesAndEndpointsOfResetComplete1";
+    case 0x57a74006: "ControllerResetStateNotifyUsbDevicesAndEndpointsOfResetComplete2";
+    case 0x57a74007: "ControllerResetStatePrepareForReset1";
+    case 0x57a74008: "ControllerResetStatePrepareForReset2";
+    case 0x57a74009: "ControllerResetStatePrepareUsbDevicesAndEndpointsForReset1";
+    case 0x57a7400a: "ControllerResetStatePrepareUsbDevicesAndEndpointsForReset2";
+    case 0x57a7400b: "ControllerResetStateResetComplete1";
+    case 0x57a7400c: "ControllerResetStateResetComplete2";
+    case 0x57a7400d: "ControllerResetStateResumeRootHubIO1";
+    case 0x57a7400e: "ControllerResetStateResumeRootHubIO2";
+    case 0x57a7400f: "ControllerResetStateRHPdoInD0";
+    case 0x57a74010: "ControllerResetStateRhPdoInDx";
+    case 0x57a74011: "ControllerResetStateRhPdoInDx_ControllerResetCompleted";
+    case 0x57a74012: "ControllerResetStateRhPdoInDx_NotifyUsbDevicesAndEndpointsOfResetComplete";
+    case 0x57a74013: "ControllerResetStateRhPdoInDx_PendingControllerReset";
+    case 0x57a74014: "ControllerResetStateRhPdoInDx_PendingControllerReset_ControllerResetCompleted";
+    case 0x57a74015: "ControllerResetStateRhPdoInDx_PrepareUsbDevicesAndEndpointsForReset";
+    case 0x57a74016: "ControllerResetStateRhPdoInDx_SimulatePortChanged";
+    case 0x57a74017: "ControllerResetStateRhPdoInDx_UnblockControllerResetComplete";
+    case 0x57a74018: "ControllerResetStateSignalOKForRHPdoToExitD0_1";
+    case 0x57a74019: "ControllerResetStateSignalOKForRHPdoToExitD0_2";
+    case 0x57a7401a: "ControllerResetStateStartPendingDeviceMgmtRequests";
+    case 0x57a7401b: "ControllerResetStateStopBlockingResetComplete1";
+    case 0x57a7401c: "ControllerResetStateStopBlockingResetComplete2";
+    case 0x57a7401d: "ControllerResetStateWaitForResetCompleteFromHCD1";
+    case 0x57a7401e: "ControllerResetStateWaitForResetCompleteFromHCD2";
+    case 0x57a7401f: "ControllerResetStateWaitingForResetFromHub";
+    case 0x57a74020: "ControllerResetStateRhPdoInDx_SimulatePortChanged1";
+    case 0x57a74021: "ControllerResetStateRhPdoInDx_SimulatePortChanged2";
+    case 0x57a74022: "ControllerResetStateControllerFailedAndRHPdoInD0";
+    case 0x57a74023: "ControllerResetStateControllerFailedAndRhPdoInDx";
+    case 0x57a74024: "ControllerResetStateResetComplete3";
+    case 0x57a74025: "ControllerResetStateSignalOKForRHPdoToExitD0_3";
+    case 0x57a74026: "ControllerResetStateStartFailingRootHubAndDeviceMgmtRequests1";
+    case 0x57a74027: "ControllerResetStateStartFailingRootHubAndDeviceMgmtRequests2";
+    case 0x57a74028: "ControllerResetStateStopBlockingResetComplete3";
+    default: "ControllerResetUnknown";
+    }
+}
+
+Table ControllerResetEvent(Event)
+{
+    switch(Event & 0xFFFFFFF0)
+    {
+    case 0xebe20000: "Maybe_ControllerResetEventHCDNeedsReset";
+    case 0xebe20010: "Maybe_ControllerResetEventHubNeedsReset";
+    case 0xebe20020: "Maybe_ControllerResetEventNoActiveResetReferences";
+    case 0xebe20030: "Maybe_ControllerResetEventOperationSuccess";
+    case 0xebe20040: "Maybe_ControllerResetEventResetCompleteFromHCD";
+    case 0xebe20050: "Maybe_ControllerResetEventRHPdoEnteredD0";
+    case 0xebe20060: "Maybe_ControllerResetEventRHPdoWantToExitD0";
+    case 0xebe20070: "Maybe_ControllerResetEventUsbDevicesAndEndpointsReadyForControllerReset";
+    case 0xebe40010: "ControllerResetEventHCDNeedsReset";
+    case 0xebe40020: "ControllerResetEventHubNeedsReset";
+    case 0xebe40030: "ControllerResetEventNoActiveResetReferences";
+    case 0xebe40040: "ControllerResetEventOperationSuccess";
+    case 0xebe40050: "ControllerResetEventResetCompleteFromHCD";
+    case 0xebe40060: "ControllerResetEventRHPdoEnteredD0";
+    case 0xebe40070: "ControllerResetEventRHPdoWantToExitD0";
+    case 0xebe40080: "ControllerResetEventUsbDevicesAndEndpointsReadyForControllerReset";
+    case 0xebe40090: "ControllerResetEventControllerFailed";
+    default: "ControllerResetUnknown";
+    }
+}

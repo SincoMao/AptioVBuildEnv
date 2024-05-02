@@ -1,0 +1,91 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoReuseIrp
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    A driver should use IoReuseIrp only on Irps it previously allocated with IoAllocateIrp.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507272
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    int *cur_reuse_irp = 0;
+     enum {initial,allocated} s = initial;             
+}
+
+
+
+
+[IoCsqInsertIrp,
+IoCsqInsertIrpEx].entry
+{
+    halt;
+}
+
+
+[ExInterlockedInsertHeadList
+,ExInterlockedInsertTailList
+,ExInterlockedPushEntryList
+,ExfInterlockedInsertHeadList
+,ExfInterlockedInsertTailList
+,ExfInterlockedPushEntryList].entry 
+{
+    halt;
+}
+
+[InsertHeadList
+,InsertTailList].entry
+{
+    halt;
+}
+
+[RemoveHeadList,sdv_containing_record].entry
+{
+    halt;
+}
+
+IoInitializeIrp.exit
+{
+   cur_reuse_irp = $1;
+}
+
+IoAllocateIrp.exit
+{
+    if($return!=NULL)
+    {
+         cur_reuse_irp = $return;
+         s = allocated;
+    }
+    else
+    {
+         halt;
+    }
+}
+
+IoReuseIrp.entry
+{
+    if(cur_reuse_irp != $1&&s == allocated)
+    {
+        abort "A driver should use IoReuseIrp only on Irps it previously allocated with IoAllocateIrp.";
+    }
+}

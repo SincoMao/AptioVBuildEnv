@@ -1,0 +1,36 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StorPortCompleteRequest
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that no calls to StorPortCompleteRequest are made by the miniport.
+    Usage of the StorPortCompleteRequest is not recommended; miniports should instead 
+    call StorPortNotification with notificationType = RequestComplete.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507231
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+StorPortCompleteRequest.entry
+{
+	abort "Use of $fname is discouraged. Use StorPortNotification with notification type RequestComplete.";
+}

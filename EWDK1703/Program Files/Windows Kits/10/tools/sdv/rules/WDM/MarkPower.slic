@@ -1,0 +1,101 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    MarkPower
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that a IRP_MJ_POWER with IRP_MN_SET_POWER for SystemPowerState IRP going to S0 is pended.
+    This rule only applies to FDO and FIDO drivers.
+
+    System power irps:
+    STATUS_INVALID_DEVICE_STATE � ok, though I would be curious to see what scenarios you would get this return value.
+    STATUS_NO_SUCH_DEVICE, STATUS_NOT_SUPPORTED - Same as previous.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507282
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+    enum {initial,forwarded_pended} s = initial;
+    enum {true,false} completion = false;
+}
+watch sdv_RunSetPowerUp.entry.$2;
+
+[IoAcquireRemoveLock,IoAcquireRemoveLockEx].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+
+IoAllocateIrp.exit
+{
+    if($return==NULL)
+    {
+        halt;
+    }
+}
+
+[IoSetCompletionRoutine,IoSetCompletionRoutineEx].entry[guard $1]
+{
+	   completion = true;
+}
+
+[IoRegisterPlugPlayNotification,IoGetDeviceInterfaces,IoSetCompletionRoutineEx].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+[IoMarkIrpPending].exit[guard $1]
+{  
+   halt;
+}
+
+[IoCallDriver,PoCallDriver,IofCallDriver].exit[guard $2]
+{  
+   if ($2->PendingReturned)
+   {
+       s = forwarded_pended;
+   }
+}
+
+[sdv_RunSetPowerUp].exit[guard $2]
+{
+    if($return!=STATUS_DELETE_PENDING&&$2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_POWER&&completion==true)
+    {
+        if(($return!=STATUS_INVALID_DEVICE_STATE&&$return!=STATUS_NOT_SUPPORTED&&$return!=STATUS_NO_SUCH_DEVICE)&&s==forwarded_pended)
+        {
+             abort "Warning: IRP_MJ_POWER with IRP_MN_SET_POWER Irp is not pended during PowerUp.";
+        }
+        else if(s==forwarded_pended)
+        {
+            abort "IRP_MJ_POWER with IRP_MN_SET_POWER Irp is not pended during PowerUp.";
+        }
+    }
+    else
+    {
+        halt;
+    }
+}

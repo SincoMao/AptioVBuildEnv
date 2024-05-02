@@ -1,0 +1,321 @@
+[$RootKey$]
+[$RootKey$\AutomationProperties]
+[$RootKey$\AutomationProperties\TextEditor]
+[$RootKey$\AutomationProperties\TextEditor\XML]
+"Description"="#210"
+"Name"="XML"
+"Package"="{F5E7E720-1401-11D1-883B-0000F87579D2}"
+"ProfileSave"=dword:00000001
+"ResourcePackage"="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+"VsSettingsMigration"=dword:00000001
+@="#200"
+[$RootKey$\CLSID]
+[$RootKey$\CLSID\{87569308-4813-40A0-9CD0-D7A30838CA3F}]
+@="Microsoft.XmlEditor.Package"
+[$RootKey$\CLSID\{87569308-4813-40A0-9CD0-D7A30838CA3F}\Implemented Categories]
+[$RootKey$\CLSID\{87569308-4813-40A0-9CD0-D7A30838CA3F}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+[$RootKey$\CLSID\{87569308-4813-40A0-9CD0-D7A30838CA3F}\InprocServer32]
+"Assembly"="Microsoft.XmlEditor,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.XmlEditor.Package"
+"ThreadingModel"="Both"
+@="$System$\mscoree.dll"
+[$RootKey$\CLSID\{87569308-4813-40A0-9CD0-D7A30838CA3F}\InprocServer32\14.0.0.0]
+"Assembly"="Microsoft.XmlEditor,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.XmlEditor.Package"
+[$RootKey$\CLSID\{87569308-4813-40A0-9CD0-D7A30838CA3F}\ProgId]
+@="Microsoft.XmlEditor.Package"
+[$RootKey$\CLSID\{f6819a78-a205-47b5-be1c-675b3c7f0b8e}]
+@="Microsoft.XmlEditor.XmlLanguageService"
+[$RootKey$\CLSID\{f6819a78-a205-47b5-be1c-675b3c7f0b8e}\Implemented Categories]
+[$RootKey$\CLSID\{f6819a78-a205-47b5-be1c-675b3c7f0b8e}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+[$RootKey$\CLSID\{f6819a78-a205-47b5-be1c-675b3c7f0b8e}\InprocServer32]
+"Assembly"="Microsoft.XmlEditor,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.XmlEditor.XmlLanguageService"
+"ThreadingModel"="Both"
+@="$System$\mscoree.dll"
+[$RootKey$\CLSID\{f6819a78-a205-47b5-be1c-675b3c7f0b8e}\InprocServer32\14.0.0.0]
+"Assembly"="Microsoft.XmlEditor,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.XmlEditor.XmlLanguageService"
+[$RootKey$\CLSID\{f6819a78-a205-47b5-be1c-675b3c7f0b8e}\ProgId]
+@="Microsoft.XmlEditor.XmlLanguageService"
+[$RootKey$\Editors]
+[$RootKey$\Editors\{32CC8DFA-2D70-49b2-94CD-22D57349B778}]
+"CommonPhysicalViewAttributes"=dword:00000002
+"DisplayName"="#206"
+"EditorChooser"=dword:00000001
+"EditorTrustLevel"=dword:00000002
+"Package"="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+@="{32CC8DFA-2D70-49b2-94CD-22D57349B778}"
+[$RootKey$\Editors\{32CC8DFA-2D70-49b2-94CD-22D57349B778}\Extensions]
+"*"=dword:00000021
+"addin"=dword:00000021
+"browser"=dword:00000021
+"config"=dword:00000021
+"dtd"=dword:0000002B
+"resx"=dword:00000021
+"sitemap"=dword:00000021
+"vssettings"=dword:00000021
+"vstemplate"=dword:00000021
+"wsdl"=dword:00000021
+"xaml"=dword:00000064
+"xdr"=dword:0000002B
+"xml"=dword:0000002B
+"xsd"=dword:00000021
+"xsl"=dword:0000002B
+"xslt"=dword:0000002B
+[$RootKey$\Editors\{32CC8DFA-2D70-49b2-94CD-22D57349B778}\LogicalViews]
+"{1FCA900B-EDAF-48DD-AF13-10C8289B8F04}"="DataGrid"
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"="Code"
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"="Code"
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"="Form"
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"="Code"
+[$RootKey$\Editors\{32CC8DFA-2D70-49b2-94CD-22D57349B778}\PhysicalViewAttributes]
+"Form"=dword:00000003
+[$RootKey$\Editors\{32CC8DFA-2D70-49b2-94CD-22D57349B778}\UntrustedLogicalViews]
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"="Form"
+[$RootKey$\Editors\{412B8852-4F21-413B-9B47-0C9751D3EBFB}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DisplayName"="#202"
+"EditorTrustLevel"=dword:00000002
+"LinkedEditorGuid"="{fa3cd31e-987b-443a-9b81-186104e8dac1}"
+"Package"="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+@="Microsoft XML Editor With Encoding"
+[$RootKey$\Editors\{412B8852-4F21-413B-9B47-0C9751D3EBFB}\Extensions]
+"*"=dword:0000001F
+"addin"=dword:0000001F
+"browser"=dword:0000001F
+"config"=dword:0000001F
+"dtd"=dword:00000029
+"resx"=dword:0000001F
+"sitemap"=dword:0000001F
+"vssettings"=dword:0000001F
+"vstemplate"=dword:0000001F
+"wsdl"=dword:0000001F
+"xdr"=dword:00000029
+"xml"=dword:00000029
+"xsd"=dword:0000001F
+"xsl"=dword:00000029
+"xslt"=dword:00000029
+[$RootKey$\Editors\{412B8852-4F21-413B-9B47-0C9751D3EBFB}\LogicalViews]
+"{1FCA900B-EDAF-48DD-AF13-10C8289B8F04}"="DataGrid"
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"="Code"
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"="Code"
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"="Form"
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"="Code"
+[$RootKey$\Editors\{412B8852-4F21-413B-9B47-0C9751D3EBFB}\UntrustedLogicalViews]
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"="Form"
+[$RootKey$\Editors\{fa3cd31e-987b-443a-9b81-186104e8dac1}]
+"CommonPhysicalViewAttributes"=dword:00000002
+"DisplayName"="#201"
+"EditorTrustLevel"=dword:00000002
+"Package"="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+@="Microsoft XML Editor"
+[$RootKey$\Editors\{fa3cd31e-987b-443a-9b81-186104e8dac1}\Extensions]
+"*"=dword:00000020
+"addin"=dword:00000020
+"browser"=dword:00000020
+"config"=dword:00000020
+"dtd"=dword:0000002A
+"resx"=dword:00000020
+"sitemap"=dword:00000020
+"vssettings"=dword:00000020
+"vstemplate"=dword:00000020
+"wsdl"=dword:00000020
+"xaml"=dword:00000020
+"xdr"=dword:0000002A
+"xml"=dword:0000002A
+"xsd"=dword:00000020
+"xsl"=dword:0000002A
+"xslt"=dword:0000002A
+[$RootKey$\Editors\{fa3cd31e-987b-443a-9b81-186104e8dac1}\LogicalViews]
+"{1FCA900B-EDAF-48DD-AF13-10C8289B8F04}"="DataGrid"
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"="Code"
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"="Code"
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"="Form"
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"="Code"
+[$RootKey$\Editors\{fa3cd31e-987b-443a-9b81-186104e8dac1}\PhysicalViewAttributes]
+"Form"=dword:00000003
+[$RootKey$\Editors\{fa3cd31e-987b-443a-9b81-186104e8dac1}\UntrustedLogicalViews]
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"="Form"
+[$RootKey$\Languages]
+[$RootKey$\Languages\CodeExpansions]
+[$RootKey$\Languages\CodeExpansions\XML]
+"DisplayName"="#200"
+"IndexPath"="%InstallRoot%\xml\SnippetsIndex.xml"
+"LangStringID"="xml"
+"Package"="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+"ShowRoots"=dword:00000000
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\CodeExpansions\XML\ForceCreateDirs]
+"XML"="%MyDocs%\Code Snippets\XML\My Xml Snippets\"
+[$RootKey$\Languages\CodeExpansions\XML\Paths]
+"XML"="%InstallRoot%\xml\%LCID%\Snippets\;%MyDocs%\Code Snippets\XML\My Xml Snippets\"
+[$RootKey$\Languages\File Extensions]
+[$RootKey$\Languages\File Extensions\.addin]
+"Name"="Add-in definition file"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.browser]
+"Name"="Browser Capabilities File"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.config]
+"Name"=".NET Configuration File"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.dtd]
+"Name"="XML Document Type Definition"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.resx]
+"Name"="Managed Resource File"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.sitemap]
+"Name"="ASP website map"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.vssettings]
+"Name"="Visual Studio User Settings"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.vstemplate]
+"Name"="Template wizard file"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.wsdl]
+"Name"="Web Service Description Language"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.xdr]
+"Name"="XML Data Reduced Schema"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.xml]
+"Name"="Xml File"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.xsd]
+"Name"="XSD File"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.xsl]
+"Name"="Xsl File"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\File Extensions\.xslt]
+"Name"="Xsl File"
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\Language Services]
+[$RootKey$\Languages\Language Services\XML]
+"CodeSenseDelay"=dword:000001F4
+"CodeSenseFastOnLineChange"=dword:00000001
+"DefaultSchemaDir"="%VsInstallDir%\xml\Schemas"
+"LangResId"=dword:00000000
+"MatchBraces"=dword:00000001
+"MatchBracesAtCaret"=dword:00000000
+"MaxErrorMessages"=dword:00000064
+"Package"="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+"QuickInfo"=dword:00000001
+"RequestStockColors"=dword:00000000
+"ShowCompletion"=dword:00000001
+"ShowMatchingBrace"=dword:00000001
+"ShowSmartIndent"=dword:00000001
+"SortMemberList"=dword:00000001
+@="{f6819a78-a205-47b5-be1c-675b3c7f0b8e}"
+[$RootKey$\Languages\Language Services\XML\Debugger Languages]
+[$RootKey$\Languages\Language Services\XML\Debugger Languages\{462D4A3E-B257-4AEE-97CD-5918C7531758}]
+@="XSLT"
+[$RootKey$\Languages\Language Services\XML\EditorToolsOptions]
+[$RootKey$\Languages\Language Services\XML\EditorToolsOptions\Formatting]
+"Package"="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+"Page"="{6d677434-2ccb-4e82-b67b-1b4839cdba81}"
+"Keywords"="#208"
+@="#204"
+[$RootKey$\Languages\Language Services\XML\EditorToolsOptions\Miscellaneous]
+"Package"="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+"Page"="{4E1CDE49-B840-4826-8CC6-8FB80D7EF455}"
+"Keywords"="#209"
+@="#203"
+[$RootKey$\Menus]
+"{87569308-4813-40a0-9cd0-d7a30838ca3f}"=",1000,1"
+[$RootKey$\Packages]
+[$RootKey$\Packages\{87569308-4813-40a0-9cd0-d7a30838ca3f}]
+"Assembly"="Microsoft.XmlEditor,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.XmlEditor.Package"
+"CompanyName"="Microsoft Corporation"
+"ID"=dword:00000001
+"InprocServer32"="$System$\mscoree.dll"
+"MinEdition"="standard"
+"ProductName"="Microsoft XML Editor"
+"ProductVersion"="1.0"
+"ThreadingModel"="Both"
+@="Visual Studio XML Editor Package"
+[$RootKey$\Packages\{87569308-4813-40a0-9cd0-d7a30838ca3f}\Automation]
+"XmlProjects"=""
+[$RootKey$\Packages\{87569308-4813-40a0-9cd0-d7a30838ca3f}\SatelliteDll]
+"DllName"="Microsoft.XmlEditorUI.dll"
+"Path"="$BaseInstallDir$\Common7\IDE\Xml\"
+[$RootKey$\Projects]
+[$RootKey$\Projects\{B11A6AD6-2D76-4C13-BDD7-78ED7004C364}]
+"Package"="{87569308-4813-40A0-9CD0-D7A30838CA3F}"
+@="Xml Project"
+[$RootKey$\Projects\{B11A6AD6-2D76-4C13-BDD7-78ED7004C364}\Filters]
+[$RootKey$\Projects\{B11A6AD6-2D76-4C13-BDD7-78ED7004C364}\Filters\CommonFiles]
+"CommonFindFilesFilter"=dword:00000001
+"SortPriority"="00004264"
+@="#10001"
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}]
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\FileExtensions]
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\FileExtensions\.xsd]
+"EditorFactoryNotify"="{32CC8DFA-2D70-49b2-94CD-22D57349B778}"
+[$RootKey$\Projects\{E6FDF86B-F3D1-11D4-8576-0002A516ECE8}]
+[$RootKey$\Projects\{E6FDF86B-F3D1-11D4-8576-0002A516ECE8}\FileExtensions]
+[$RootKey$\Projects\{E6FDF86B-F3D1-11D4-8576-0002A516ECE8}\FileExtensions\.xsd]
+"EditorFactoryNotify"="{32CC8DFA-2D70-49b2-94CD-22D57349B778}"
+[$RootKey$\Projects\{F184B08F-C81C-45F6-A57F-5ABD9991F28F}]
+[$RootKey$\Projects\{F184B08F-C81C-45F6-A57F-5ABD9991F28F}\FileExtensions]
+[$RootKey$\Projects\{F184B08F-C81C-45F6-A57F-5ABD9991F28F}\FileExtensions\.xsd]
+"EditorFactoryNotify"="{32CC8DFA-2D70-49b2-94CD-22D57349B778}"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}]
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\FileExtensions]
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\FileExtensions\.xsd]
+"EditorFactoryNotify"="{32CC8DFA-2D70-49b2-94CD-22D57349B778}"
+[$RootKey$\Services]
+[$RootKey$\Services\{1A5ACA9F-DFC2-44d4-8E3D-A2ADAC944FAB}]
+"Name"="Xml Editor Schema Services"
+@="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+[$RootKey$\Services\{aee124ba-c826-4486-9a92-990873c96d8e}]
+"Name"="XML Editor Schema Cache Service"
+@="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+[$RootKey$\Services\{F2CA69F1-49CD-4c69-9E73-B625F324596E}]
+"Name"="XML Editor Extensibility Service"
+@="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+[$RootKey$\Services\{f6819a78-a205-47b5-be1c-675b3c7f0b8e}]
+"Name"="XML Language Service"
+@="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+[$RootKey$\UserSettings]
+[$RootKey$\UserSettings\XmlEditor]
+"AlternateParent"="AutomationProperties\TextEditor"
+"Category"="{4E1CDE49-B840-4826-8CC6-8FB80D7EF455}"
+"Description"="#211"
+"Package"="{87569308-4813-40a0-9cd0-d7a30838ca3f}"
+"VsSettingsMigration"=dword:00000001
+@="#205"
+[$RootKey$\XmlChooserFactory]
+"DefaultLogicalView"="{7651A701-06E5-11D1-8EBD-00A0C90F26EA}"
+"Extension"="xml"
+"{7651A700-06E5-11D1-8EBD-00A0C90F26EA}"="{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+"{7651A701-06E5-11D1-8EBD-00A0C90F26EA}"="{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+"{7651A703-06E5-11D1-8EBD-00A0C90F26EA}"="{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+[$RootKey$\XmlChooserFactory\BDC]
+"XmlEditorBlockSxS"="{31ba6090-9669-423c-98b5-7636619cb7d8}"
+[$RootKey$\XmlChooserFactory\EDMX]
+"XmlEditorBlockSxS"="{C99AEA30-8E36-4515-B76F-496F5A48A6AA}"
+[$RootKey$\XmlChooserFactory\RESX]
+"DefaultLogicalView"="{7651A702-06E5-11D1-8EBD-00A0C90F26EA}"
+"Extension"="resx"
+"{7651A700-06E5-11D1-8EBD-00A0C90F26EA}"="{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+"{7651A701-06E5-11D1-8EBD-00A0C90F26EA}"="{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+"{7651A702-06E5-11D1-8EBD-00A0C90F26EA}"="{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
+"{7651A703-06E5-11D1-8EBD-00A0C90F26EA}"="{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+[$RootKey$\XmlChooserFactory\XSD]
+[$RootKey$\XmlChooserFactory\XSD\DataSet]
+"DefaultLogicalView"="{7651A702-06E5-11D1-8EBD-00A0C90F26EA}"
+"Extension"="xsd"
+"IsDataSet"=dword:00000001
+"Match"="both"
+"Namespace"="http://www.w3.org/2001/XMLSchema"
+"{7651A700-06E5-11D1-8EBD-00A0C90F26EA}"="{07AC752B-D2B0-4DCD-AD9C-237BF561A30A}"
+"{7651A701-06E5-11D1-8EBD-00A0C90F26EA}"="{07AC752B-D2B0-4DCD-AD9C-237BF561A30A}"
+"{7651A702-06E5-11D1-8EBD-00A0C90F26EA}"="{07AC752B-D2B0-4DCD-AD9C-237BF561A30A}"
+"{7651A703-06E5-11D1-8EBD-00A0C90F26EA}"="{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+[$RootKey$\XmlEditor]
+"MaxFileSizeSupportedByLanguageService"="10"

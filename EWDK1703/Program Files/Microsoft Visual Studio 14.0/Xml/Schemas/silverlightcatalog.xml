@@ -1,0 +1,3 @@
+<SchemaCatalog xmlns="http://schemas.microsoft.com/xsd/catalog">
+  <Association extension="clientconfig" schema="%InstallRoot%/xml/schemas/SilverlightConfig2.xsd" />
+</SchemaCatalog>

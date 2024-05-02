@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<Rule Name="DriverSign" PageTemplate="tool" DisplayName="Driver Signing" SwitchPrefix="/" Order="145" xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <Rule.Categories>
+    <Category Name="General" DisplayName="General" />
+    <Category Name="Command Line" Subtype="CommandLine">
+      <Category.DisplayName>
+        <sys:String>Command Line</sys:String>
+      </Category.DisplayName>
+    </Category>
+  </Rule.Categories>
+  <Rule.DataSource>
+    <DataSource Persistence="UserFile"  ItemType="DriverSign" Label="" HasConfigurationCondition="true" />
+  </Rule.DataSource>
+  <EnumProperty Name="SignMode" DisplayName="Sign Mode" Description="Specifies the mode used for signing" Category="General" F1Keyword="driver.driversigning.properties">
+    <EnumValue Name="TestSign" Switch="" DisplayName="Test Sign" Description="Test Sign.">
+    </EnumValue>
+    <EnumValue Name="ProductionSign" Switch="" DisplayName="Production Sign" Description="Production sign.">
+    </EnumValue>
+    <EnumValue Name="Off" Switch="" DisplayName="Off" Description="Turns off signing.">
+    </EnumValue>
+    <EnumProperty.DataSource>
+      <DataSource Persistence="UserFile" ItemType="" Label="" HasConfigurationCondition="true" />
+    </EnumProperty.DataSource>
+  </EnumProperty>
+  <StringProperty Name="TestCertificate"   DisplayName="Test Certificate" Description="The test certificate used for test signing." Category="General" F1Keyword="driver.driversigning.properties">
+    <StringProperty.ValueEditors>
+      <ValueEditor DisplayName="&lt;Select From Store...&gt;" EditorType="SelectCertificateEditor" />
+      <ValueEditor DisplayName="&lt;Create Test Certificate...&gt;" EditorType="CreateCertificateEditor" />
+      <ValueEditor DisplayName="&lt;Select From File...&gt;" EditorType="BrowseCertificateFilesEditor" />
+      <ValueEditor DisplayName="&lt;Edit...&gt;" EditorType="DefaultStringPropertyEditor" />
+    </StringProperty.ValueEditors>
+    <StringProperty.DataSource>
+      <DataSource Persistence="UserFile" ItemType="" Label="" HasConfigurationCondition="true" />
+    </StringProperty.DataSource>
+  </StringProperty>
+  <StringProperty Name="CrossCertificateFile" DisplayName="Cross-Signing Certificate" Description="The cross-signing certificate to use for production signing." Category="General" F1Keyword="driver.driversigning.properties">
+    <StringProperty.ValueEditors>
+      <ValueEditor EditorType="DefaultFilePropertyEditor" DisplayName="&lt;Browse...&gt;" />
+    </StringProperty.ValueEditors>
+    <StringProperty.DataSource>
+      <DataSource Persistence="UserFile" ItemType="" Label="" HasConfigurationCondition="true" />
+    </StringProperty.DataSource>
+  </StringProperty>
+  <StringProperty Name="ProductionCertificate"   DisplayName="Production Certificate" Description="The production certificate used for production signing." Category="General" F1Keyword="driver.driversigning.properties">
+    <StringProperty.ValueEditors>
+      <ValueEditor DisplayName="&lt;Select From Store...&gt;" EditorType="SelectCertificateEditor" />
+      <ValueEditor DisplayName="&lt;Select From File...&gt;" EditorType="BrowseCertificateFilesEditor" />
+      <ValueEditor DisplayName="&lt;Edit...&gt;" EditorType="DefaultStringPropertyEditor" />
+    </StringProperty.ValueEditors>
+    <StringProperty.DataSource>
+      <DataSource Persistence="UserFile" ItemType="" Label="" HasConfigurationCondition="true" />
+    </StringProperty.DataSource>
+  </StringProperty>
+  <EnumProperty Name="TimeStampServer"   DisplayName="TimeStampServer" Description="The time stamp server used for production signing." Category="General" Visible="true" F1Keyword="driver.driversigning.properties">
+    <EnumValue Name="http://timestamp.verisign.com/scripts/timstamp.dll" Switch="" DisplayName="Verisign" Description="Verisign time stamp server.">
+    </EnumValue>
+    <EnumValue Name="http://timestamp.globalsign.com/scripts/timstamp.dll" Switch="" DisplayName="Globalsign" Description="Globalsign time stamp server.">
+    </EnumValue>
+    <EnumValue Name="" Switch="" DisplayName="None" Description="No time stamp server is selected.">
+    </EnumValue>
+    <EnumProperty.DataSource>
+      <DataSource Persistence="ProjectFile" ItemType="" Label="" HasConfigurationCondition="true" />
+    </EnumProperty.DataSource>
+  </EnumProperty>
+  <BoolProperty Name="DisableProductionSignDebugWarnings" DisplayName="Disable Warnings" Description="Disables the warnings for production signing in debug mode." Category="General" F1Keyword="driver.driversigning.properties">
+    <BoolProperty.DataSource>
+      <DataSource Persistence="ProjectFile" ItemType="" Label="" HasConfigurationCondition="true" />
+    </BoolProperty.DataSource>
+  </BoolProperty>
+  <BoolProperty Name="DiagnosticMode" DisplayName="Enable Diagnostic Verbosity" Description="Enables verbose tool output." Category="General" F1Keyword="driver.driversigning.properties">
+    <BoolProperty.DataSource>
+      <DataSource Persistence="ProjectFile" ItemType="" Label="" HasConfigurationCondition="true" />
+    </BoolProperty.DataSource>
+  </BoolProperty>  
+  <BoolProperty Name="DriverProductionSignMinimalRebuildFromTracking" DisplayName="Minimal Build For Production Signing" Description="Enable minimal build while production signing. Default is false and the target is signed regardless of whether it was rebuilt or not" Category="General" F1Keyword="driver.driversigning.properties">
+    <BoolProperty.DataSource>
+      <DataSource Persistence="ProjectFile" ItemType="" Label="" HasConfigurationCondition="true" />
+    </BoolProperty.DataSource>
+  </BoolProperty>
+  <StringProperty Name="FileDigestAlgorithm" Category="General" Switch="fd" F1Keyword="driver.driversigning.properties">
+    <StringProperty.DisplayName>
+      <sys:String>File Digest Algorithm</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Specifies the file digest algorithm to use for creating file signatures. (Default is SHA1).(/fd)</sys:String>
+    </StringProperty.Description>
+    <StringProperty.DataSource>
+      <DataSource Persistence="ProjectFile" ItemType="DriverSign" Label="" HasConfigurationCondition="true" />
+    </StringProperty.DataSource>
+  </StringProperty>
+  <StringProperty Name="AdditionalOptions" Category="Command Line" F1Keyword="vc.project.AdditionalOptionsPage">
+    <StringProperty.DisplayName>
+      <sys:String>Additional Options</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Additional Options</sys:String>
+    </StringProperty.Description>
+    <StringProperty.DataSource>
+      <DataSource Persistence="ProjectFile" ItemType="DriverSign" Label="" HasConfigurationCondition="true" />
+    </StringProperty.DataSource>
+  </StringProperty>
+</Rule>

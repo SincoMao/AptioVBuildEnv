@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+<Rule Name="Ctrpp" PageTemplate="tool" DisplayName="Counters Manifest Preprocessor"  Order="190">
+  <Rule.Categories>
+    <Category Name="General">
+      <Category.DisplayName>
+        <sys:String>General</sys:String>
+      </Category.DisplayName>
+    </Category>
+    <Category Name="File Options">
+      <Category.DisplayName>
+        <sys:String>File Options</sys:String>
+      </Category.DisplayName>
+    </Category>
+    <Category Name="Command Line" Subtype="CommandLine">
+      <Category.DisplayName>
+        <sys:String>Command Line</sys:String>
+      </Category.DisplayName>
+    </Category>
+    <Category Name="All Options" DisplayName="All Options" Subtype="Search" />
+  </Rule.Categories>
+  <Rule.DataSource>
+    <DataSource Persistence="ProjectFile" ItemType="Ctrpp" Label="" HasConfigurationCondition="true"/>
+  </Rule.DataSource>
+  <BoolProperty Name="GenerateHeaderFileForCounter" Category="File Options" F1Keyword="driver.ctrpp.fileoptions.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Generate header file for containing counter names and GUIDs</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Creates a header file that assigns symbols to the counter set names and GUIDs for each counter set in the manifest.</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="HeaderFileNameForCounter" Category="File Options" Switch="-ch" F1Keyword="driver.ctrpp.fileoptions.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Header File Name For Counter</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>A user-specified name for the counter header file. (-ch filename)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <BoolProperty Name="GenerateHeaderFileForProvider" Category="File Options" F1Keyword="driver.ctrpp.fileoptions.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Generate header file for provider</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Specifies the name of the header file that the tool generates. If you do not specify a path, the file is generated in the current folder.</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="HeaderFileNameForProvider" Category="File Options" Switch="-o" F1Keyword="driver.ctrpp.fileoptions.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Header FileName For Providerh</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>A user-specified name for the provider header file. It replaces the default name. (-o filename)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <BoolProperty Name="GenerateResourceSourceFile" Category="File Options" F1Keyword="driver.ctrpp.fileoptions.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Generate resource file</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Specifies the name of the resource file that the tool generates. If you do not specify a path, the file is generated in the current folder.</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="ResourceFileName" Category="File Options" Switch="-rc" F1Keyword="driver.ctrpp.fileoptions.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Resource File Name</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>A user-specified name for the resource file. It replaces the default name. (-rc filename)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="AddPrefix" Category="General" Switch="-prefix" F1Keyword="driver.ctrpp.general.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Add Prefix</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Specifies the prefix to use for the global variables and functions defined in the generated header file. (-prefix)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="GeneratedCounterFilesPath" Category="File Options" Switch="-sumPath" F1Keyword="driver.ctrpp.fileoptions.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Generated Counter Files Path</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Path to generate binary counter files. (-sumPath path)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="GenerateSummaryGlobalFile" Category="File Options" Switch="-summary" F1Keyword="driver.ctrpp.fileoptions.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Generate Summary Global File</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Generate binary counter file per provider. (-summary path)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <BoolProperty Name="BackwardCompatibility" Category="General" Switch="-backcompat" F1Keyword="driver.ctrpp.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Backward Compatibility</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Generates code that is binary compatible with OSs prior to Windows 7. (-backcompat)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="EnableLegacy" Category="General" Switch="-legacy" F1Keyword="driver.ctrpp.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Enable Legacy</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Revert to previous ctrpp file. This switch causes ctrpp to generate four output files: two header files, a resource file, and a source code file. (-legacy)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="GenerateMemoryRoutines" Category="General" Switch="-MemoryRoutines" F1Keyword="driver.ctrpp.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Generate Memory Routines</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Generate memory allocation/free routine templates. (-MemoryRoutines)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <BoolProperty Name="GenerateNotificationCallback" Category="General" Switch="-NotificationCallback" F1Keyword="driver.ctrpp.general.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Generate Notification Callback</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Generate customized notification callback template. (-NotificationCallback )</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="AdditionalOptions" Category="Command Line" F1Keyword="vc.project.AdditionalOptionsPage">
+    <StringProperty.DisplayName>
+      <sys:String>Additional Options</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Additional Options</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+</Rule>
+<ItemType Name="Ctrpp" DisplayName="Counters Manifest Preprocessor" />
+<ContentType Name="Ctrpp" DisplayName="Counters Manifest Preprocessor" ItemType="Ctrpp" />
+</ProjectSchemaDefinitions>

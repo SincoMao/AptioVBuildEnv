@@ -1,0 +1,3879 @@
+//GenerateParser CL 159938
+//#  (c) 2009 Microsoft Corporation
+//#
+//#  Title:                  Microsoft-Windows-usbxhci
+//#
+//#  Details:                
+//#
+//#  Public References:      usbxhci.man
+//#
+//#  Comments:               
+//#
+//#  Revision Class and Date:Minor, 6/29/2011
+//#
+//####
+
+include "etl_usb3_Ucx_EndpointStateMachine.npl"
+include "etl_usb3_Ucx_ControllerResetStateMachine.npl"
+include "etl_usb3_HubStateMachines.npl"
+include "etl_mausb.npl"
+include "etl_PalInTransfer.npl"
+include "etl_PalOutTransfer.npl"
+include "etl_PalSession.npl"
+
+[RegisterBefore(NetEvent.UserData, UsbXhci, "{30e1d284-5d88-459c-83fd-6345b39b19ec}")]
+Protocol UsbXhci = property.ETLSummary
+{
+	[BuildConversationWithParent, conversation.ConversationDescription = ""]
+	[Post.Property.USBIsError =
+		((
+			(NetEvent.Header.Descriptor.Level == 0x2) 
+			OR
+			(Property.USBDStatus != "success" && Property.USBDStatus != "" && Property.USBDStatus != "canceled")
+			OR
+			(Property.USBNtStatus != "success" && Property.USBNtStatus != "" && Property.USBNtStatus != "0xC0000120 - STATUS_CANCELLED")
+		) ? 1 : 0)]
+	switch(property.EventID)
+	{
+		case 1: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_RUNDOWN_START USBXHCI_ETW_EVENT_RUNDOWN_START;
+		case 2: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_RUNDOWN_COMPLETE USBXHCI_ETW_EVENT_RUNDOWN_COMPLETE;
+		case 3: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_RUNDOWN_CONTROLLER_INFORMATION USBXHCI_ETW_EVENT_RUNDOWN_CONTROLLER_INFORMATION;
+		case 4: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_RUNDOWN_DEVICE_INFORMATION USBXHCI_ETW_EVENT_RUNDOWN_DEVICE_INFORMATION;
+		case 5: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_RUNDOWN_ENDPOINT_INFORMATION USBXHCI_ETW_EVENT_RUNDOWN_ENDPOINT_INFORMATION;
+		case 6: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_CREATE USBXHCI_ETW_EVENT_CONTROLLER_CREATE;
+		case 7: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_DELETE USBXHCI_ETW_EVENT_CONTROLLER_DELETE;
+		case 8: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_DEVICE_CREATE USBXHCI_ETW_EVENT_DEVICE_CREATE;
+		case 9: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_DEVICE_UPDATE USBXHCI_ETW_EVENT_DEVICE_UPDATE;
+		case 10: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_DEVICE_DELETE USBXHCI_ETW_EVENT_DEVICE_DELETE;
+		case 11: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_ENDPOINT_CREATE USBXHCI_ETW_EVENT_ENDPOINT_CREATE;
+		case 12: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_ENDPOINT_UPDATE USBXHCI_ETW_EVENT_ENDPOINT_UPDATE;
+		case 13: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_ENDPOINT_DELETE USBXHCI_ETW_EVENT_ENDPOINT_DELETE;
+		case 14: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_STARTDEVICE_FAIL USBXHCI_ETW_EVENT_STARTDEVICE_FAIL;
+		case 15: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_FIRMWARE_VERSION_UPDATE USBXHCI_ETW_EVENT_CONTROLLER_FIRMWARE_VERSION_UPDATE;
+		case 16: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_D0_ENTRY_START USBXHCI_ETW_EVENT_CONTROLLER_D0_ENTRY_START;
+		case 17: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_D0_ENTRY_COMPLETE USBXHCI_ETW_EVENT_CONTROLLER_D0_ENTRY_COMPLETE;
+		case 18: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_D0_ENTRY_POST_INTERRUPTS_START USBXHCI_ETW_EVENT_CONTROLLER_D0_ENTRY_POST_INTERRUPTS_START;
+		case 19: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_D0_ENTRY_POST_INTERRUPTS_COMPLETE USBXHCI_ETW_EVENT_CONTROLLER_D0_ENTRY_POST_INTERRUPTS_COMPLETE;
+		case 20: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_D0_EXIT_PRE_INTERRUPTS_START USBXHCI_ETW_EVENT_CONTROLLER_D0_EXIT_PRE_INTERRUPTS_START;
+		case 21: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_D0_EXIT_PRE_INTERRUPTS_COMPLETE USBXHCI_ETW_EVENT_CONTROLLER_D0_EXIT_PRE_INTERRUPTS_COMPLETE;
+		case 22: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_D0_EXIT_START USBXHCI_ETW_EVENT_CONTROLLER_D0_EXIT_START;
+		case 23: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_D0_EXIT_COMPLETE USBXHCI_ETW_EVENT_CONTROLLER_D0_EXIT_COMPLETE;
+		case 24: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_SAVE_STATE_START USBXHCI_ETW_EVENT_CONTROLLER_SAVE_STATE_START;
+		case 25: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_SAVE_STATE_COMPLETE USBXHCI_ETW_EVENT_CONTROLLER_SAVE_STATE_COMPLETE;
+		case 26: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_RESTORE_STATE_START USBXHCI_ETW_EVENT_CONTROLLER_RESTORE_STATE_START;
+		case 27: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_RESTORE_STATE_COMPLETE USBXHCI_ETW_EVENT_CONTROLLER_RESTORE_STATE_COMPLETE;
+		case 28: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_INTERNAL_RESET_START USBXHCI_ETW_EVENT_CONTROLLER_INTERNAL_RESET_START;
+		case 29: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_INTERNAL_RESET_COMPLETE USBXHCI_ETW_EVENT_CONTROLLER_INTERNAL_RESET_COMPLETE;
+		case 30: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_ERROR USBXHCI_ETW_EVENT_CONTROLLER_ERROR;
+		case 31: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_COMMAND_SEND USBXHCI_ETW_EVENT_COMMAND_SEND;
+		case 32: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_COMMAND_WAITLISTED USBXHCI_ETW_EVENT_COMMAND_WAITLISTED;
+		case 33: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_COMMAND_COMPLETE USBXHCI_ETW_EVENT_COMMAND_COMPLETE;
+		case 34: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_COMMAND_COMPLETE_ERROR USBXHCI_ETW_EVENT_COMMAND_COMPLETE_ERROR;
+		case 35: [property.ETLSummary = this.ToString] USBXHCI_ETW_EVENT_CONTROLLER_QUERY_USB_CAPABILITY USBXHCI_ETW_EVENT_CONTROLLER_QUERY_USB_CAPABILITY;
+		default: [property.ETLSummary = "Not exist EventID"]struct{};
+	}
+}
+Table StartDeviceFailReasonTable(value)
+{
+	switch(value)
+	{
+		case 1: "BIOS Handoff failed. Check with your computer manufacturer for an updated BIOS, or an updated firmware for the controller.";
+		case 2: "Controller was not halted after a BIOS handoff. Check with your computer manufacturer for an updated BIOS.";
+		case 3: "Controller reset timed out. Check with your computer manufacturer for an updated firmware for the controller.";
+		default:
+			FormatString("Unknown value: %d", value);
+	}
+}
+// Applies to both Usbxhci and Ucx
+Table MapParentBusType(value)
+{
+	switch(value)
+	{
+		case 1: "ParentBusTypePci";
+		case 2: "ParentBusTypeAcpi";
+		default:
+			FormatString("Unknown value: %d", value);
+	}
+}
+Table S0IdleStatus(value)
+{
+	switch(value)
+	{
+		case 0: "S0IdleConfigured";
+		case 1: "S0IdleNotConfiguredDueToHackFlag";
+		case 2: "NotConfiguredDueToNoS0WakeCapability";
+		default:
+			FormatString("Unknown value: %d", value);
+	}
+}
+Table CommandWaitlistReason(value)
+{
+	switch(value)
+	{
+		case 1: "CommandRingFull";
+		case 2: "CommandsSerialized";
+		case 3: "CommandAbortInProgress";
+		case 4: "ControllerResetInProgress";
+		default:
+			FormatString("Unknown value: %d", value);
+	}
+}
+Table Usb20LpmStatus(value)
+{
+	switch(value)
+	{
+        case 0: "Usb20LpmStatusUnknown";
+        case 1: "Usb20LpmEnabled";
+        case 2: "Usb20LpmDisabledSinceDeviceIsHub";
+        case 3: "Usb20LpmDisabledDueToDeviceHackFlag";
+        case 4: "Usb20LpmDisabledDueToHubHackFlag";
+        case 5: "Usb20LpmDisabledDueToHubGlobalFlag";
+        case 6: "Usb20LpmNotSupportedByDevice";
+        case 7: "Usb20LpmDisabledSinceBESLandAltHIRDNotSupported";
+        case 8: "Usb20LpmNotSupportedOnThisPort";
+        case 9: "Usb20LpmDiabledSinceDeviceOperatingInSuperspeedModeOrHigher";
+		default:
+			FormatString("Unknown 20 Lpm Status: %d", value);
+	}
+}
+Table TrbCompletionCode(value)
+{
+	switch(value)
+	{
+		case 0: "Invalid";
+		case 1: "Success";
+		case 2: "Data Buffer Error";
+		case 3: "Babble Detected Error";
+		case 4: "Usb Transaction Error";
+		case 5: "Trb Error";
+		case 6: "Stall Error";
+		case 7: "Resource Error";
+		case 8: "Bandwidth Error";
+		case 9: "No Slots Available Error";
+		case 10: "Invalid Stream Type Error";
+		case 11: "Slot Not Enabled Error";
+		case 12: "Endpoint Not Enabled Error";
+		case 13: "Short Packet";
+		case 14: "Ring Underrun";
+		case 15: "Ring Overrun";
+		case 16: "Vf Event Ring Full Error";
+		case 17: "Parameter Error";
+		case 18: "Bandwidth Overrun Error";
+		case 19: "Context State Error";
+		case 20: "No Ping Response Error";
+		case 21: "Event Ring Full Error";
+		case 22: "Incompatible Device Error";
+		case 23: "Missed Service Error";
+		case 24: "Command Ring Stopped";
+		case 25: "Command Aborted";
+		case 26: "Stopped";
+		case 27: "Stopped Length Invalid";
+		case 28: "Stopped Short Packet";
+		case 29: "Max Exit Latency Too Large Error";
+		case 31: "Isoch Buffer Overrun";
+		case 32: "Event Lost Error";
+		case 33: "Undefined Error";
+		case 34: "Invalid Stream Id Error";
+		case 35: "Secondary Bandwidth Error";
+		case 36: "Split Transaction Error";
+		default:
+			FormatString("Unknown value: %d", value);
+	}
+}
+Table TrbCompletionStatus(value)
+{
+	switch(value)
+	{
+		case 0: "Success";
+		case 1: "Unsuccessful";
+		case 2: "Timeout";
+		case 3: "Controller Gone";
+		case 4: "Not Complete";
+		default:
+			FormatString("Unknown value: %d", value);
+	}
+}
+Table DescriptorValidationError(value)
+{
+	switch(value)
+	{
+                case 0: "DescriptorValidationError20HubBlengthTooLarge";
+		case 1: "DescriptorValidationError20HubBlengthTooSmall";
+		case 2: "DescriptorValidationError20HubBufferNull";
+		case 3: "DescriptorValidationError20HubBufferTooSmall";
+		case 4: "DescriptorValidationError20HubDeviceRemovableBitOneForNonExistentPorts";
+		case 5: "DescriptorValidationError20HubDeviceRemovableNonZeroReservedBit";
+		case 6: "DescriptorValidationError20HubInvalidType";
+		case 7: "DescriptorValidationError20HubNumberOfPortsZero";
+		case 8: "DescriptorValidationError20HubPortPwrCtrlMaskZero";
+		case 9: "DescriptorValidationError20HubWHubCharacteristicsNonZeroReservedBits";
+		case 10: "DescriptorValidationError30HubBHubHdrDecLatHasReservedValue";
+		case 11: "DescriptorValidationError30HubBlengthTooLarge";
+		case 12: "DescriptorValidationError30HubBlengthTooSmall";
+		case 13: "DescriptorValidationError30HubBufferTooSmall";
+		case 14: "DescriptorValidationError30HubDeviceRemovableBitOneForNonExistentPorts";
+		case 15: "DescriptorValidationError30HubDeviceRemovableNonZeroReservedBit";
+		case 16: "DescriptorValidationError30HubInvalidType";
+		case 17: "DescriptorValidationError30HubNumberOfPortsTooLarge";
+		case 18: "DescriptorValidationError30HubNumberOfPortsZero";
+		case 19: "DescriptorValidationError30HubWHubCharacteristicsNonZeroReservedBits";
+		case 20: "DescriptorValidationErrorBosBlengthTooLarge";
+		case 21: "DescriptorValidationErrorBosBlengthTooSmall";
+		case 22: "DescriptorValidationErrorBosBufferTooLarge";
+		case 23: "DescriptorValidationErrorBosBufferTooSmall";
+		case 24: "DescriptorValidationErrorBosInvalidType";
+		case 25: "DescriptorValidationErrorBosMismatchBetweenBNumDeviceCapsAndDevicCapsFound";
+		case 26: "DescriptorValidationErrorBosNoSuperSpeedCap";
+		case 27: "DescriptorValidationErrorBosNull";
+		case 28: "DescriptorValidationErrorBosUnknownDescriptorType";
+		case 29: "DescriptorValidationErrorBosWTotalLengthTooSmall";
+		case 30: "DescriptorValidationErrorBulkEndpointAtLowSpeed";
+		case 31: "DescriptorValidationErrorBulkEndpointBmAttributesNonZeroReservedBits";
+		case 32: "DescriptorValidationErrorBulkEndpointInvalidWMaxPacketSize";
+		case 33: "DescriptorValidationErrorCompanionBulkEndpointBmAttributesNonZeroReservedBits";
+		case 34: "DescriptorValidationErrorCompanionBulkEndpointBMaxBurstTooLarge";
+		case 35: "DescriptorValidationErrorCompanionBulkEndpointMaxStreamsTooLarge";
+		case 36: "DescriptorValidationErrorCompanionBulkEndpointNonZeroWBytesPerInterval";
+		case 37: "DescriptorValidationErrorCompanionControlEndpointNonZeroBmAttributes";
+		case 38: "DescriptorValidationErrorCompanionControlEndpointNonZeroBMaxBurst";
+		case 39: "DescriptorValidationErrorCompanionControlEndpointNonZeroWBytesPerInterval";
+		case 40: "DescriptorValidationErrorCompanionEndpointAtNonSuperSpeed";
+		case 41: "DescriptorValidationErrorCompanionEndpointAtUnexpectedLocation";
+		case 42: "DescriptorValidationErrorCompanionEndpointBlengthTooLarge";
+		case 43: "DescriptorValidationErrorCompanionEndpointBlengthTooSmall";
+		case 44: "DescriptorValidationErrorCompanionEndpointBufferTooSmall";
+		case 45: "DescriptorValidationErrorCompanionInterruptEndpointBMaxBurstTooLarge";
+		case 46: "DescriptorValidationErrorCompanionInterruptEndpointIncompatibleBMaxBurstAndWMaxPacketSize";
+		case 47: "DescriptorValidationErrorCompanionInterruptEndpointNonZeroBmAttributes";
+		case 48: "DescriptorValidationErrorCompanionInterruptEndpointWBytesPerIntervalTooLarge";
+		case 49: "DescriptorValidationErrorCompanionIoschEndpointBmAttributesNonZeroReservedBits";
+		case 50: "DescriptorValidationErrorCompanionIsochEndpointBMaxBurstTooLarge";
+		case 51: "DescriptorValidationErrorCompanionIsochEndpointIncompatibleBMaxBurstAndWMaxPacketSize";
+		case 52: "DescriptorValidationErrorCompanionIsochEndpointMultTooLarge";
+		case 53: "DescriptorValidationErrorCompanionIsochEndpointWBytesPerIntervalTooLarge";
+		case 54: "DescriptorValidationErrorConfigBlengthTooLarge";
+		case 55: "DescriptorValidationErrorConfigBlengthTooSmall";
+		case 56: "DescriptorValidationErrorConfigBufferTooSmall";
+		case 57: "DescriptorValidationErrorConfigBufferTooSmallToHaveInterface";
+		case 58: "DescriptorValidationErrorConfigInvalidType";
+		case 59: "DescriptorValidationErrorConfigMissingCompanionEndpoint";
+		case 60: "DescriptorValidationErrorConfigNull";
+		case 61: "DescriptorValidationErrorConfigWTotalLengthTooLarge";
+		case 62: "DescriptorValidationErrorConfigWTotalLengthTooSmallToHaveInterface";
+		case 63: "DescriptorValidationErrorContainerIdBlengthTooLarge";
+		case 64: "DescriptorValidationErrorContainerIdBlengthTooSmall";
+		case 65: "DescriptorValidationErrorContainerIdBufferTooSmall";
+		case 66: "DescriptorValidationErrorContainerIdNonZeroReservedBits";
+		case 67: "DescriptorValidationErrorControlEndpointBmAttributesNonZeroReservedBits";
+		case 68: "DescriptorValidationErrorControlEndpointInvalidWMaxPacketSize";
+		case 69: "DescriptorValidationErrorDeviceBcdDeviceHasIncorrectFormat";
+		case 70: "DescriptorValidationErrorDeviceBlengthTooSmall";
+		case 71: "DescriptorValidationErrorDeviceBufferTooSmall";
+		case 72: "DescriptorValidationErrorDeviceCapBlengthTooSmall";
+		case 73: "DescriptorValidationErrorDeviceCapBufferTooSmall";
+		case 74: "DescriptorValidationErrorDeviceCapMultipleContainerId";
+		case 75: "DescriptorValidationErrorDeviceCapMultipleSuperSpeedCap";
+		case 76: "DescriptorValidationErrorDeviceCapMultipleUSB20Cap";
+		case 77: "DescriptorValidationErrorDeviceIncorrectType";
+		case 78: "DescriptorValidationErrorDeviceInvalidBMaxPacketSize";
+		case 79: "DescriptorValidationErrorDeviceNullBuffer";
+		case 80: "DescriptorValidationErrorEndpointBlengthTooLarge";
+		case 81: "DescriptorValidationErrorEndpointBlengthTooSmall";
+		case 82: "DescriptorValidationErrorEndpointBmAttributesNonZeroReservedBits";
+		case 83: "DescriptorValidationErrorEndpointBufferTooSmall";
+		case 84: "DescriptorValidationErrorEndpointNonZeroReservedBits";
+		case 85: "DescriptorValidationErrorEndpointWithNoPreceedingInterface";
+		case 86: "DescriptorValidationErrorEndpointZeroAddress";
+		case 87: "DescriptorValidationErrorHeaderBlengthLargerThanRemainingBuffer";
+		case 88: "DescriptorValidationErrorHeaderBlengthLargerThanWTotalLength";
+		case 89: "DescriptorValidationErrorHeaderBlengthTooSmall";
+		case 90: "DescriptorValidationErrorHeaderBufferTooSmall";
+		case 91: "DescriptorValidationErrorHeaderZeroBlength";
+		case 92: "DescriptorValidationErrorIadBlengthTooLarge";
+		case 93: "DescriptorValidationErrorIadBlengthTooSmall";
+		case 94: "DescriptorValidationErrorIadBufferTooSmall";
+		case 95: "DescriptorValidationErrorIadInterfaceCountTooLargeForTheConfig";
+		case 96: "DescriptorValidationErrorIadInterfaceCountZero";
+		case 97: "DescriptorValidationErrorIadInterfaceNumberTooLarge";
+		case 98: "DescriptorValidationErrorInterfaceBlengthTooLarge";
+		case 99: "DescriptorValidationErrorInterfaceBlengthTooSmall";
+		case 100: "DescriptorValidationErrorInterfaceBufferTooSmall";
+		case 101: "DescriptorValidationErrorInterfaceDuplicateAlternateSetting";
+		case 102: "DescriptorValidationErrorInterfaceDuplicateEndpointAddress";
+		case 103: "DescriptorValidationErrorInterfaceDuplicateInterfaceNumber";
+		case 104: "DescriptorValidationErrorInterfaceFirstDescriptorWithNonZeroAlternateSetting";
+		case 105: "DescriptorValidationErrorInterfaceOutOfSequenceAlternateSetting";
+		case 106: "DescriptorValidationErrorInterfaceOutOfSequenceInterfaceNumber";
+		case 107: "DescriptorValidationErrorInterfaceParsedEndpointCountTooSmall";
+		case 108: "DescriptorValidationErrorInterruptEndpointBmAttributesNonZeroReservedBits";
+		case 109: "DescriptorValidationErrorInterruptEndpointInvalidBInterval";
+		case 110: "DescriptorValidationErrorInterruptEndpointInvalidWMaxPacketSize";
+		case 111: "DescriptorValidationErrorIsochEndpointAtLowSpeed";
+		case 112: "DescriptorValidationErrorIsochEndpointInvalidBInterval";
+		case 113: "DescriptorValidationErrorIsochEndpointInvalidWMaxPacketSize";
+		case 114: "DescriptorValidationErrorMSOSContainerIdAllZeroes";
+		case 115: "DescriptorValidationErrorMSOSContainerIdInvalidBcdVersion";
+		case 116: "DescriptorValidationErrorMSOSContainerIdInvalidBcdWIndex";
+		case 117: "DescriptorValidationErrorMSOSContainerIdInvalidBufferSize";
+		case 118: "DescriptorValidationErrorMSOSContainerIdInvalidDwLength";
+		case 119: "DescriptorValidationErrorMSOSExtendedConfigBFirstInterfaceNumberTooLarge";
+		case 120: "DescriptorValidationErrorMSOSExtendedConfigInvalidBcdVersion";
+		case 121: "DescriptorValidationErrorMSOSExtendedConfigInvalidBCount";
+		case 122: "DescriptorValidationErrorMSOSExtendedConfigInvalidBufferSize";
+		case 123: "DescriptorValidationErrorMSOSExtendedConfigInvalidCompatibleId";
+		case 124: "DescriptorValidationErrorMSOSExtendedConfigInvalidSubCompatibleId";
+		case 125: "DescriptorValidationErrorMSOSExtendedConfigInvalidWIndex";
+		case 126: "DescriptorValidationErrorMSOSExtendedConfigMismatchBetweenBufferSizeAndDwLength";
+		case 127: "DescriptorValidationErrorMSOSExtendedConfigMismatchBetweenDwLengthAndBCount";
+		case 128: "DescriptorValidationErrorStringBlengthNotEven";
+		case 129: "DescriptorValidationErrorStringBlengthTooLarge";
+		case 130: "DescriptorValidationErrorStringBlengthTooSmall";
+		case 131: "DescriptorValidationErrorStringBufferTooSmall";
+		case 132: "DescriptorValidationErrorStringInvalidCharacter";
+		case 133: "DescriptorValidationErrorStringInvalidType";
+		case 134: "DescriptorValidationErrorStringMismatchBetweenBlengthAndBufferLength";
+		case 135: "DescriptorValidationErrorSuperSpeedCapBlengthTooLarge";
+		case 136: "DescriptorValidationErrorSuperSpeedCapBlengthTooSmall";
+		case 137: "DescriptorValidationErrorSuperSpeedCapBmAttributesNonZeroReservedBits";
+		case 138: "DescriptorValidationErrorSuperSpeedCapBU1DevExitLatTooLarge";
+		case 139: "DescriptorValidationErrorSuperSpeedCapBU2DevExitLatTooLarge";
+		case 140: "DescriptorValidationErrorSuperSpeedCapBufferTooSmall";
+		case 141: "DescriptorValidationErrorSuperSpeedCapIncompatibleWSpeedsSupportedAndBFunctionalitySupported";
+		case 142: "DescriptorValidationErrorSuperSpeedCapReservedValueInBFunctionalitySupported";
+		case 143: "DescriptorValidationErrorSuperSpeedCapReservedValueInWSpeedsSupported";
+		case 144: "DescriptorValidationErrorSuperSpeedCapZeroWSpeedsSupported";
+		case 145: "DescriptorValidationErrorUSB20CapBlengthTooLarge";
+		case 146: "DescriptorValidationErrorUSB20CapBlengthTooSmall";
+		case 147: "DescriptorValidationErrorUSB20CapBmAttributesNonZeroReservedBits";
+		case 148: "DescriptorValidationErrorUSB20CapBufferTooSmall";
+		case 149: "DescriptorValidationErrorUSB20CapIncompatibleBaselineBESLValidAndBaselineBESL";
+		case 150: "DescriptorValidationErrorUSB20CapIncompatibleBESLAndAlternateHIRDSupportedAndLPMCapable";
+		case 151: "DescriptorValidationErrorUSB20CapIncompatibleDeepBESLAndBaselineBESL";
+		case 152: "DescriptorValidationErrorUSB20CapIncompatibleDeepBESLValidAndDeepBESL";
+		case 153: "DescriptorValidationErrorContainerIdAllZeros";
+		case 154: "DescriptorValidationErrorMsOs20MultipleDescriptorSetHeaders";
+		case 155: "DescriptorValidationErrorMsOs20DescriptorSetHeaderInvalidwLength";
+		case 156: "DescriptorValidationErrorMsOs20ConfigurationSubsetHeaderInvalidwLength";
+		case 157: "DescriptorValidationErrorMsOs20ConfigurationSubsetHeaderTooSmallwTotalLength";
+		case 158: "DescriptorValidationErrorMsOs20ConfigurationSubsetHeaderTooLargewTotalLength";
+		case 159: "DescriptorValidationErrorMsOs20ConfigurationSubsetHeaderInvalidFeatureDescriptor";
+		case 160: "DescriptorValidationErrorMsOs20ConfigurationSubsetHeaderInvalidFeatureDescriptorLength";
+		case 161: "DescriptorValidationErrorMsOs20FunctionSubsetHeaderInvalidwLength";
+		case 162: "DescriptorValidationErrorMsOs20FunctionSubsetHeaderTooSmallwTotalLength";
+		case 163: "DescriptorValidationErrorMsOs20FunctionSubsetHeaderTooLargewTotalLength";
+		case 164: "DescriptorValidationErrorMsOs20FunctionSubsetHeaderInvalidFeatureDescriptor";
+		case 165: "DescriptorValidationErrorMsOs20FunctionSubsetHeaderInvalidFeatureDescriptorLength";
+		case 166: "DescriptorValidationErrorMsOs20ComatibleIdDescriptorMultipleDescriptors";
+		case 167: "DescriptorValidationErrorMsOs20ComatibleIdDescriptorInvalidwLength";
+		case 168: "DescriptorValidationErrorMsOs20ComatibleIdDescriptorNonNullAfterNullTermination";
+		case 169: "DescriptorValidationErrorMsOs20RegistryValueDescriptorTooSmallwLength";
+		case 170: "DescriptorValidationErrorMsOs20RegistryValueDescriptorTooLargewPropertyNameLength";
+		case 171: "DescriptorValidationErrorMsOs20RegistryValueDescriptorOddOrZerowPropertyNameLength";
+        case 172: "DescriptorValidationErrorMsOs20RegistryValueDescriptorTooLargewPropertyDataLength";
+        case 173: "DescriptorValidationErrorMsOs20RegistryValueDescriptorZerowPropertyDataLength";
+        case 174: "DescriptorValidationErrorMsOs20RegistryValueDescriptorInvalidwPropertyDataType";
+        case 175: "DescriptorValidationErrorMsOs20MinumumResumeTimeDescriptorMultipleDescriptors";
+        case 176: "DescriptorValidationErrorMsOs20MinumumResumeTimeDescriptorInvalidwLength";
+        case 177: "DescriptorValidationErrorMsOs20MinumumResumeTimeDescriptorInvalidbResumeRecoveryTime";
+        case 178: "DescriptorValidationErrorMsOs20MinumumResumeTimeDescriptorInvalidbResumeSignalingTimeValue";
+        case 179: "DescriptorValidationErrorMsOs20RecoveryTimeDescriptorMultipleDescriptors";
+        case 180: "DescriptorValidationErrorMsOs20RecoveryTimeInvalidwLength";
+        case 181: "DescriptorValidationErrorMsOs20ModelIdDescriptorMultipleDescriptors";
+        case 182: "DescriptorValidationErrorMsOs20ModelIdDescriptorInvalidwLength";
+        case 183: "DescriptorValidationErrorMsOs20ModelIdDescriptorNullUuid";
+        case 184: "DescriptorValidationErrorMsOs20AlternateDeviceDescriptorMultipleInstances";
+        case 185: "DescriptorValidationErrorMsOs20AlternateDeviceDescriptorInvalidwLength";
+        case 186: "DescriptorValidationErrorMSOS20AlternateBosDescriptorMultipleInstances";
+        case 187: "DescriptorValidationErrorMSOS20AlternateBosDescriptorwLengthTooSmall";
+        case 188: "DescriptorValidationErrorMSOS20DescriptorSetBytesReturnNotEqualToDescriptorSetwLength";
+        case 189: "DescriptorValidationErrorMSOS20DescriptorSetBytesReturnTooSmall";
+        case 190: "DescriptorValidationErrorMSOS20DescriptorSetHeaderInvalidwLength";
+        case 191: "DescriptorValidationErrorMSOS20DescriptorSetwTotalLengthMismatch";
+        case 192: "DescriptorValidationErrorMSOS20DescriptordwWindowsVersionMismatch";
+        case 193: "DescriptorValidationErrorMSOS20DescriptorOutOfOrderTopLevelFeatureDescriptor";
+        case 194: "DescriptorValidationErrorMSOS20DescriptorRunsPastEndOfDescriptorSet";
+        case 195: "DescriptorValidationErrorPlatformbReservedNonZero";
+        case 196: "DescriptorValidationErrorPlatformIdAllZeros";
+        case 197: "DescriptorValidationErrorMsOS20PlatformDescriptorMultipleDescriptors";
+        case 198: "DescriptorValidationErrorMsOS20PlatformDescriptorInvalidbLength";
+        case 199: "DescriptorValidationErrorMsOS20PlatformDescriptorDuplicateWindowsVersion";
+        case 200: "DescriptorValidationErrorMsOS20PlatformDescriptorNoWindowsVersionMatchFound";
+        case 201: "DescriptorValidationErrorMsOs20CcgpDeviceMultipleDescriptors";
+        case 202: "DescriptorValidationErrorMsOs20CcgpDeviceDescriptorInvalidwLength";
+        case 203: "DescriptorValidationErrorDeviceCapMultipleSuperSpeedPlusCap";
+        case 204: "DescriptorValidationErrorCompanionIsochEndpointWBytesPerIntervalNotOne";
+        case 205: "DescriptorValidationErrorSSPCompanionEndpointAtNonSuperSpeed";
+        case 206: "DescriptorValidationErrorSSPCompanionEndpointAtUnexpectedLocation";
+        case 207: "DescriptorValidationErrorSSPCompanionEndpointBlengthTooLarge";
+        case 208: "DescriptorValidationErrorSSPCompanionEndpointBlengthTooSmall";
+        case 209: "DescriptorValidationErrorSSPCompanionEndpointBufferTooSmall";
+        case 210: "DescriptorValidationErrorSSPCompanionIoschEndpointNonZeroReservedBits";
+        case 211: "DescriptorValidationErrorSSPCompanionIsochEndpointDWBytesPerIntervalTooSmallLarge";
+        case 212: "DescriptorValidationErrorConfigMissingSSPCompanionEndpoint";
+        case 213: "DescriptorValidationErrorSuperSpeedPlusCapBlengthInvalid";
+        case 214: "DescriptorValidationErrorSuperSpeedPlusCapBlengthTooSmall";
+        case 215: "DescriptorValidationErrorSuperSpeedPlusCapBmAttributesNonZeroReservedBits";
+        case 216: "DescriptorValidationErrorSuperSpeedPlusCapWFunctionalitySupportNonZeroReservedBits";
+        case 217: "DescriptorValidationErrorSuperSpeedPlusCapBufferTooSmall";
+        case 218: "DescriptorValidationErrorSuperSpeedPlusCapNonZeroBReserved";
+        case 219: "DescriptorValidationErrorSuperSpeedPlusCapNonZeroWReserved";
+        case 220: "DescriptorValidationErrorSuperSpeedPlusCapAttrRx";
+        case 221: "DescriptorValidationErrorSuperSpeedPlusCapAttrTx";
+        case 222: "DescriptorValidationErrorSuperSpeedPlusCapAttrTxIncomplete";
+        case 223: "DescriptorValidationErrorSuperSpeedPlusCapAttrPairInvalid";
+        case 224: "DescriptorValidationErrorSuperSpeedPlusCapAttrSymmetricPairInvalid";
+        case 225: "DescriptorValidationErrorSuperSpeedPlusCapAttrMinimumSymmetricPairInvalid";
+        case 226: "DescriptorValidationErrorSuperSpeedPlusCapAttrSpeedIDDuplication";
+        case 227: "DescriptorValidationErrorSuperSpeedPlusCapAttrSpeedIDCount";
+        case 228: "DescriptorValidationErrorSuperSpeedPlusCapAttrMinimumNotFound";
+        case 229: "DescriptorValidationErrorPDBlengthTooLarge";
+        case 230: "DescriptorValidationErrorPDBlengthTooSmall";
+        case 231: "DescriptorValidationErrorPDBufferTooSmall";
+        case 232: "DescriptorValidationErrorPDNonZeroReservedBits";
+        case 233: "DescriptorValidationErrorAltSetting0IsochEndpointNonZeroMaxPacketSize";
+        case 234: "DescriptorValidationErrorDuplicateSerialNumber";
+        case 235: "DescriptorValidationErrorBillboardCapBlengthTooSmall";
+        case 236: "DescriptorValidationErrorBillboardCapBlengthInvalid";
+        case 237: "DescriptorValidationErrorBillboardCapBufferTooSmall";
+        case 238: "DescriptorValidationErrorBillboardCapZeroAlternateModes";
+        case 239: "DescriptorValidationErrorBillboardCapTooManyAlternateModes";
+        case 240: "DescriptorValidationErrorBillboardCapPreferredAlternateModeZero";
+        case 241: "DescriptorValidationErrorBillboardCapPreferredAlternateModeInvalid";
+        case 242: "DescriptorValidationErrorBillboardCapNonZeroBReserved";
+        case 243: "DescriptorValidationErrorBillboardCapReservedVconnPowerValueUsed";
+        case 244: "DescriptorValidationErrorBillboardCapNonZeroVConnPowerReserved";
+        case 245: "DescriptorValidationErrorDeviceCapMultipleBillboardCap";
+        case 246: "DescriptorValidationErrorBillboardDeviceIncorrectBcdUsb";
+        case 247: "DescriptorValidationErrorUsbFeaturesPlatformDescriptorInvalidbLength";
+        case 248: "DescriptorValidationErrorUsbFeaturesPlatformDescriptorMultipleDescriptors";
+        case 249: "DescriptorValidationErrorUsbFeaturesPlatformDescriptorInvalidVersionNumber";
+        case 250: "DescriptorValidationErrorUsbFeaturesPlatformDescriptorbLengthTooSmall";
+        case 251: "DescriptorValidationErrorPlatformBlengthTooSmall";
+        case 252: "DescriptorValidationErrorPlatformBlengthTooLarge";
+        case 253: "DescriptorValidationErrorPlatformBufferTooSmall";               
+    }
+
+}
+
+Table MaUsbDescriptorValidationError(value)
+{
+    switch(value)
+    {
+        case 0: "MaUsbDescriptorValidationErrorCapabilityDescriptorInvalidSize";
+        case 1: "MaUsbDescriptorValidationErrorRequiredCapabilityDescriptorMissing";
+        case 2: "MaUsbDescriptorValidationErrorCapabilityDescriptorHeaderZeroSizeLengthField";
+        case 3: "MaUsbDescriptorValidationErrorCapabilityDescriptorOverrunsEndOfCapabilityResponsePacket";
+        case 4: "MaUsbDescriptorValidationErrorDuplicateCapabilityDescriptor";
+        case 5: "MaUsbDescriptorValidationErrorCapabilityResponsePacketNumberOfEndpointsLessThan16";
+        case 6: "MaUsbDescriptorValidationErrorCapabilityResponsePacketNumberOfDevicesNot1";
+        case 7: "MaUsbDescriptorValidationErrorCapabilityResponsePacketUnknownDeviceType";
+        case 8: "MaUsbDescriptorValidationErrorCapabilityResponsePacketMismatchBetweenLengthFieldAndCapabilityDescriptorLengthField";
+        case 9: "MaUsbDescriptorValidationErrorCapabilityResponsePacketMismatchBetweenLengthFieldAndActualCapabilityDescriptorSetLength";
+    }
+}
+
+Struct USBXHCI_ETW_EVENT_RUNDOWN_START = "Start Rundown" {}; // Empty Struct
+Struct USBXHCI_ETW_EVENT_RUNDOWN_COMPLETE = "Complete Rundown" {}; // Empty Struct
+Struct USBXHCI_ETW_EVENT_RUNDOWN_CONTROLLER_INFORMATION = FormatString("USBXHCI Controller Information")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_ParentBusType = MapParentBusType(this);
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+	UINT64 fid_FirmwareVersion;
+	UINT32 fid_S0IdleStatus = S0IdleStatus(this);
+	UINT32 fid_WdfDevicePowerState;
+	UINT32 fid_InstanceNumber;
+}
+Struct USBXHCI_ETW_EVENT_RUNDOWN_DEVICE_INFORMATION = FormatString("USBXHCI Device Information")
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_UsbTtHubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 DeviceSpeed;
+	UINT32 PortPathDepth;
+	UINT32 PortPath[6];
+	UINT32 fid_SlotId;
+	UINT32 fid_DeviceIsHub;
+	UINT32 fid_NumberOfPorts;
+	UINT32 fid_NumberOfTTs;
+	struct 	fid_USB_Device_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT16 fid_bcdUSB;
+		UINT8 fid_bDeviceClass;
+		UINT8 fid_bDeviceSubClass;
+		UINT8 fid_bDeviceProtocol;
+		UINT8 fid_bMaxPacketSize0;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UINT16 fid_bcdDevice;
+		UINT8 fid_iManufacturer;
+		UINT8 fid_iProduct;
+		UINT8 fid_iSerialNumber;
+		UINT8 fid_bNumConfigurations;
+	}
+}
+Struct USBXHCI_ETW_EVENT_RUNDOWN_ENDPOINT_INFORMATION = FormatString("USBXHCI Endpoint Information")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	struct 	fid_USB_Endpoint_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		[Global.InternalUsbTblEndpoint$[Property.USBEndpointPtr] = FormatString("0x%x", this)]
+		[Global.InternalUsbTblEndpoint$[Property.USBPipeHandle] = FormatString("0x%x", this)]
+		UINT8 fid_bEndpointAddress;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wMaxPacketSize;
+		UINT8 fid_bInterval;
+	}
+	struct 	fid_USB_SuperSpeed_Endpoint_Companion_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bMaxBurst;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wBytesPerInterval;
+	}
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_CREATE = FormatString("USBXHCI Controller Create")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_ParentBusType = MapParentBusType(this);
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+	UINT64 fid_FirmwareVersion;
+	UINT32 fid_S0IdleStatus = S0IdleStatus(this);
+	UINT32 fid_WdfDevicePowerState;
+	UINT32 fid_InstanceNumber;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_DELETE = FormatString("USBXHCI Controller Delete")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_ParentBusType = MapParentBusType(this);
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+	UINT64 fid_FirmwareVersion;
+	UINT32 fid_S0IdleStatus = S0IdleStatus(this);
+	UINT32 fid_WdfDevicePowerState;
+	UINT32 fid_InstanceNumber;
+}
+Struct USBXHCI_ETW_EVENT_DEVICE_CREATE = FormatString("USBXHCI Device Create")
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_UsbTtHubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 DeviceSpeed;
+	UINT32 PortPathDepth;
+	UINT32 PortPath[6];
+	UINT32 fid_SlotId;
+	UINT32 fid_DeviceIsHub;
+	UINT32 fid_NumberOfPorts;
+	UINT32 fid_NumberOfTTs;
+	struct 	fid_USB_Device_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT16 fid_bcdUSB;
+		UINT8 fid_bDeviceClass;
+		UINT8 fid_bDeviceSubClass;
+		UINT8 fid_bDeviceProtocol;
+		UINT8 fid_bMaxPacketSize0;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UINT16 fid_bcdDevice;
+		UINT8 fid_iManufacturer;
+		UINT8 fid_iProduct;
+		UINT8 fid_iSerialNumber;
+		UINT8 fid_bNumConfigurations;
+	}
+}
+Struct USBXHCI_ETW_EVENT_DEVICE_UPDATE = FormatString("USBXHCI Device Update")
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_UsbTtHubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 DeviceSpeed;
+	UINT32 PortPathDepth;
+	UINT32 PortPath[6];
+	UINT32 fid_SlotId;
+	UINT32 fid_DeviceIsHub;
+	UINT32 fid_NumberOfPorts;
+	UINT32 fid_NumberOfTTs;
+	struct 	fid_USB_Device_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT16 fid_bcdUSB;
+		UINT8 fid_bDeviceClass;
+		UINT8 fid_bDeviceSubClass;
+		UINT8 fid_bDeviceProtocol;
+		UINT8 fid_bMaxPacketSize0;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UINT16 fid_bcdDevice;
+		UINT8 fid_iManufacturer;
+		UINT8 fid_iProduct;
+		UINT8 fid_iSerialNumber;
+		UINT8 fid_bNumConfigurations;
+	}
+}
+Struct USBXHCI_ETW_EVENT_DEVICE_DELETE = FormatString("USBXHCI Device Delete")
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_UsbTtHubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 DeviceSpeed;
+	UINT32 PortPathDepth;
+	UINT32 PortPath[6];
+	UINT32 fid_SlotId;
+	UINT32 fid_DeviceIsHub;
+	UINT32 fid_NumberOfPorts;
+	UINT32 fid_NumberOfTTs;
+	struct 	fid_USB_Device_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT16 fid_bcdUSB;
+		UINT8 fid_bDeviceClass;
+		UINT8 fid_bDeviceSubClass;
+		UINT8 fid_bDeviceProtocol;
+		UINT8 fid_bMaxPacketSize0;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UINT16 fid_bcdDevice;
+		UINT8 fid_iManufacturer;
+		UINT8 fid_iProduct;
+		UINT8 fid_iSerialNumber;
+		UINT8 fid_bNumConfigurations;
+	}
+}
+Struct USBXHCI_ETW_EVENT_ENDPOINT_CREATE = FormatString("USBXHCI Endpoint Create")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	struct 	fid_USB_Endpoint_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		[Global.InternalUsbTblEndpoint$[Property.USBEndpointPtr] = FormatString("0x%x", this)]
+		[Global.InternalUsbTblEndpoint$[Property.USBPipeHandle] = FormatString("0x%x", this)]
+		UINT8 fid_bEndpointAddress;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wMaxPacketSize;
+		UINT8 fid_bInterval;
+	}
+	struct 	fid_USB_SuperSpeed_Endpoint_Companion_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bMaxBurst;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wBytesPerInterval;
+	}
+}
+Struct USBXHCI_ETW_EVENT_ENDPOINT_UPDATE = FormatString("USBXHCI Endpoint Update")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	struct 	fid_USB_Endpoint_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		[Global.InternalUsbTblEndpoint$[Property.USBEndpointPtr] = FormatString("0x%x", this)]
+		[Global.InternalUsbTblEndpoint$[Property.USBPipeHandle] = FormatString("0x%x", this)]
+		UINT8 fid_bEndpointAddress;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wMaxPacketSize;
+		UINT8 fid_bInterval;
+	}
+	struct 	fid_USB_SuperSpeed_Endpoint_Companion_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bMaxBurst;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wBytesPerInterval;
+	}
+}
+Struct USBXHCI_ETW_EVENT_ENDPOINT_DELETE = FormatString("USBXHCI Endpoint Delete")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	struct 	fid_USB_Endpoint_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bEndpointAddress;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wMaxPacketSize;
+		UINT8 fid_bInterval;
+	}
+	struct 	fid_USB_SuperSpeed_Endpoint_Companion_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bMaxBurst;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wBytesPerInterval;
+	}
+}
+Struct USBXHCI_ETW_EVENT_STARTDEVICE_FAIL = FormatString("Windows failed to start the %s for the following reason: %s", DeviceDescription.ToString, StartDeviceFailReason.ToString)
+{
+	EtlPtr fid_UcxController;
+	UINT32 DeviceDescLength;
+	UnicodeString(DeviceDescLength) DeviceDescription;
+	UINT32 StartDeviceFailReason = StartDeviceFailReasonTable(this); // table must have different name from element
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_FIRMWARE_VERSION_UPDATE = FormatString("USBXHCI Controller Firmware Version Update")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_ParentBusType = MapParentBusType(this);
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+	UINT64 fid_FirmwareVersion;
+	UINT32 fid_S0IdleStatus = S0IdleStatus(this);
+	UINT32 fid_WdfDevicePowerState;
+	UINT32 fid_InstanceNumber;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_D0_ENTRY_START = FormatString("USBXHCI Controller EvtDeviceD0Entry Start")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_DeviceState;
+	UINT32 fid_PowerAction;
+	UINT16 fid_WaitWakePending;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_D0_ENTRY_COMPLETE = FormatString("USBXHCI Controller EvtDeviceD0Entry Complete")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_DeviceState;
+	UINT32 fid_PowerAction;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_D0_ENTRY_POST_INTERRUPTS_START = FormatString("USBXHCI Controller EvtDeviceD0EntryPostInterruptsEnabled Start")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_DeviceState;
+	UINT32 fid_PowerAction;
+	UINT16 fid_WaitWakePending;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_D0_ENTRY_POST_INTERRUPTS_COMPLETE = FormatString("USBXHCI Controller EvtDeviceD0EntryPostInterruptsEnabled Complete")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_DeviceState;
+	UINT32 fid_PowerAction;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_D0_EXIT_PRE_INTERRUPTS_START = FormatString("USBXHCI Controller EvtDeviceD0ExitPreInterruptsDisabled Start")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_DeviceState;
+	UINT32 fid_PowerAction;
+	UINT16 fid_WaitWakePending;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_D0_EXIT_PRE_INTERRUPTS_COMPLETE = FormatString("USBXHCI Controller EvtDeviceD0ExitPreInterruptsDisabled Complete")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_DeviceState;
+	UINT32 fid_PowerAction;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_D0_EXIT_START = FormatString("USBXHCI Controller EvtDeviceD0Exit Start")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_DeviceState;
+	UINT32 fid_PowerAction;
+	UINT16 fid_WaitWakePending;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_D0_EXIT_COMPLETE = FormatString("USBXHCI Controller EvtDeviceD0Exit Complete")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_DeviceState;
+	UINT32 fid_PowerAction;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_SAVE_STATE_START = FormatString("USBXHCI Controller Save State Start")
+{
+	EtlPtr fid_UcxController;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_SAVE_STATE_COMPLETE = FormatString("USBXHCI Controller Save State Complete")
+{
+	EtlPtr fid_UcxController;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_RESTORE_STATE_START = FormatString("USBXHCI Controller Restore State Start")
+{
+	EtlPtr fid_UcxController;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_RESTORE_STATE_COMPLETE = FormatString("USBXHCI Controller Restore State Complete")
+{
+	EtlPtr fid_UcxController;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_INTERNAL_RESET_START = FormatString("USBXHCI Controller Internal Reset Start")
+{
+	EtlPtr fid_UcxController;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_INTERNAL_RESET_COMPLETE = FormatString("USBXHCI Controller Internal Reset Complete")
+{
+	EtlPtr fid_UcxController;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_ERROR = FormatString("USBXHCI Controller Error detected. To recover from this Error, Windows may need to reset the Controller and re-enumerate USB devices downstream of the Controller. Please refer Event Properties for more contextual information about this Error. Hardware Verifier Flag: %s. Detailed description: %s", fid_HWVerifierFlag.ToString, fid_Description.ToString)
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_UcxDevice;
+	EtlPtr fid_UcxEndpoint;
+	UINT64 fid_HWVerifierFlag;
+	AsciiString fid_Description;
+	TRB fid_CommandTRB;
+	TRB fid_EventTRB;
+}
+Struct USBXHCI_ETW_EVENT_COMMAND_SEND = FormatString("xHCI Command sent to Controller: %s", fid_Command_TRB.ToString)
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_CrbPointer;
+	TRB fid_Command_TRB;
+}
+Struct USBXHCI_ETW_EVENT_COMMAND_WAITLISTED = FormatString("xHCI Command waitlisted due to Command Ring full or Command Serialization: %s", fid_Command_TRB.ToString)
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_CrbPointer;
+	TRB fid_Command_TRB;
+	UINT8 fid_CommandWaitlistReason = CommandWaitlistReason(this);
+}
+Struct USBXHCI_ETW_EVENT_COMMAND_COMPLETE = FormatString("xHCI Command Complete: %s, %s", fid_CompletionStatus >= 2 ? fid_CompletionStatus.ToString : fid_CompletionCode.ToString, fid_Command_TRB.ToString)
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_CrbPointer;
+	TRB fid_Command_TRB;
+	UINT32 fid_CompletionStatus = TrbCompletionStatus(this);
+	UINT8 fid_CompletionCode = TrbCompletionCode(this);
+}
+Struct USBXHCI_ETW_EVENT_COMMAND_COMPLETE_ERROR = FormatString("xHCI Command Complete with Error: %s, %s", fid_CompletionStatus >= 2 ? fid_CompletionStatus.ToString : fid_CompletionCode.ToString, fid_Command_TRB.ToString)
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_CrbPointer;
+	TRB fid_Command_TRB;
+	UINT32 fid_CompletionStatus = TrbCompletionStatus(this);
+	UINT8 fid_CompletionCode = TrbCompletionCode(this);
+}
+Struct USBXHCI_ETW_EVENT_CONTROLLER_QUERY_USB_CAPABILITY = FormatString("Query USB capability for controller")
+{
+	EtlPtr fid_UcxController;
+	GUID(true) fid_Capability;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+	UINT32 fid_NumStaticStreams;
+}
+[RegisterBefore(EventDescriptor.DefaultKeyword, MicrosoftWindowsUSBUSBXHCI_Keyword, "{30e1d284-5d88-459c-83fd-6345b39b19ec}")]
+struct MicrosoftWindowsUSBUSBXHCI_Keyword
+{
+	UINT64 Default:1 = FormatString("            (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_DEFAULT":"");
+	UINT64 USBError:1 = FormatString("           (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_USBERROR":"");
+	UINT64 IRP:1 = FormatString("                (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_IRP":"");
+	UINT64 Power:1 = FormatString("              (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_POWER":"");
+	UINT64 PnP:1 = FormatString("                (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_PNP":"");
+	UINT64 Performance:1 = FormatString("        (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_PERFORMANCE":"");
+	UINT64 HeadersBusTrace:1 = FormatString("    (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_HEADERS_BUS_TRACE":"");
+	UINT64 PartialDataBusTrace:1 = FormatString("(%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_PARTIAL_DATA_BUS_TRACE":"");
+	UINT64 FullDataBusTrace:1 = FormatString("   (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_FULL_DATA_BUS_TRACE":"");
+	UINT64 StateMachine:1 = FormatString("       (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_STATEMACHINE":"");
+	UINT64 Enumeration:1 = FormatString("        (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_ENUMERATION":"");
+	UINT64 VerifyDriver:1 = FormatString("       (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_VERIFYDRIVER":"");
+	UINT64 HWVerifyHost:1 = FormatString("       (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_HW_VERIFYHOST":"");
+	UINT64 HWVerifyHub:1 = FormatString("        (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_HW_VERIFYHUB":"");
+	UINT64 HWVerifyDevice:1 = FormatString("     (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_HW_VERIFYDEVICE":"");
+	UINT64 Rundown:1 = FormatString("            (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_RUNDOWN":"");
+	UINT64 Device:1 = FormatString("             (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_DEVICE":"");
+	UINT64 Hub:1 = FormatString("                (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_HUB":"");
+	UINT64 Compat:1 = FormatString("             (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_COMPAT":"");
+	UINT64 ControllerCommand:1 = FormatString("  (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_CONTROLLER_COMMAND":"");
+	UINT64 Reserved1:44 = FormatString("          (%s)", this.ToBitString);
+}
+//#  (c) 2009 Microsoft Corporation
+//#
+//#  Title:                  Microsoft-Windows-mausbhost
+//#
+//#  Details:                
+//#
+//#  Public References:      mausbhost.man
+//#
+//#  Comments:               
+//#
+//#  Revision Class and Date:Minor, 7/5/2016
+//#
+//####
+[RegisterBefore(NetEvent.UserData, MAUSBHOST, "{7725b5f9-1f2e-4e21-baeb-b2af4690bc87}")]
+Protocol MaUsbHost = property.ETLSummary
+{
+	[BuildConversationWithParent, conversation.ConversationDescription = ""]
+	[Post.Property.USBIsError =
+		((
+			(NetEvent.Header.Descriptor.Level == 0x2) 
+			OR
+			(Property.USBNtStatus != "success" && Property.USBNtStatus != "" && Property.USBNtStatus != "0xC0000120 - STATUS_CANCELLED")
+		) ? 1 : 0)]
+	switch(property.EventID)
+	{
+		case 1: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_RUNDOWN_START MAUSBHOST_ETW_EVENT_RUNDOWN_START;
+		case 2: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_RUNDOWN_COMPLETE MAUSBHOST_ETW_EVENT_RUNDOWN_COMPLETE;
+		case 3: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_RUNDOWN_CONTROLLER_INFORMATION MAUSBHOST_ETW_EVENT_RUNDOWN_CONTROLLER_INFORMATION;
+		case 4: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_RUNDOWN_DEVICE_INFORMATION MAUSBHOST_ETW_EVENT_RUNDOWN_DEVICE_INFORMATION;
+		case 5: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_RUNDOWN_ENDPOINT_INFORMATION MAUSBHOST_ETW_EVENT_RUNDOWN_ENDPOINT_INFORMATION;
+		case 6: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_CONTROLLER_CREATE MAUSBHOST_ETW_EVENT_CONTROLLER_CREATE;
+		case 7: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_CONTROLLER_DELETE MAUSBHOST_ETW_EVENT_CONTROLLER_DELETE;
+		case 8: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_DEVICE_CREATE MAUSBHOST_ETW_EVENT_DEVICE_CREATE;
+		case 9: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_DEVICE_UPDATE MAUSBHOST_ETW_EVENT_DEVICE_UPDATE;
+		case 10: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_DEVICE_DELETE MAUSBHOST_ETW_EVENT_DEVICE_DELETE;
+		case 11: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_ENDPOINT_CREATE MAUSBHOST_ETW_EVENT_ENDPOINT_CREATE;
+		case 12: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_ENDPOINT_UPDATE MAUSBHOST_ETW_EVENT_ENDPOINT_UPDATE;
+		case 13: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_ENDPOINT_DELETE MAUSBHOST_ETW_EVENT_ENDPOINT_DELETE;
+		case 15: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_CONTROLLER_D0_ENTRY_START MAUSBHOST_ETW_EVENT_CONTROLLER_D0_ENTRY_START;
+		case 16: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_CONTROLLER_D0_ENTRY_COMPLETE MAUSBHOST_ETW_EVENT_CONTROLLER_D0_ENTRY_COMPLETE;
+		case 17: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_CONTROLLER_D0_EXIT_START MAUSBHOST_ETW_EVENT_CONTROLLER_D0_EXIT_START;
+		case 18: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_CONTROLLER_D0_EXIT_COMPLETE MAUSBHOST_ETW_EVENT_CONTROLLER_D0_EXIT_COMPLETE;
+		case 19: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_CONTROLLER_RESET_START MAUSBHOST_ETW_EVENT_CONTROLLER_RESET_START;
+		case 20: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_CONTROLLER_RESET_COMPLETE MAUSBHOST_ETW_EVENT_CONTROLLER_RESET_COMPLETE;
+		case 21: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_CONTROLLER_QUERY_USB_CAPABILITY MAUSBHOST_ETW_EVENT_CONTROLLER_QUERY_USB_CAPABILITY;
+		case 50: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_SEND_MANAGEMENT_REQUEST MAUSBHOST_ETW_EVENT_PAL_SEND_MANAGEMENT_REQUEST;
+		case 51: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_SEND_MANAGEMENT_RESPONSE MAUSBHOST_ETW_EVENT_PAL_SEND_MANAGEMENT_RESPONSE;
+		case 52: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_RECEIVE_MANAGEMENT_REQUEST MAUSBHOST_ETW_EVENT_PAL_RECEIVE_MANAGEMENT_REQUEST;
+		case 53: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_RECEIVE_MANAGEMENT_RESPONSE MAUSBHOST_ETW_EVENT_PAL_RECEIVE_MANAGEMENT_RESPONSE;
+		case 54: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_DESCRIPTOR_VALIDATION_FAILURE MAUSBHOST_ETW_EVENT_PAL_DESCRIPTOR_VALIDATION_FAILURE;
+		case 55: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_INVALID_SUBTYPE MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_INVALID_SUBTYPE;
+		case 56: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_STATUS_ERROR MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_STATUS_ERROR;
+		case 57: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_RETRIES_TIMEOUT MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_RETRIES_TIMEOUT;
+		case 58: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_HEADER_STATUS_ERROR MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_HEADER_STATUS_ERROR;
+		case 59: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_INCORRECT_SIZE MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_INCORRECT_SIZE;
+		case 60: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_MANAGEMENT_STATE_MACHINE_TRANSITION MAUSBHOST_ETW_EVENT_MANAGEMENT_STATE_MACHINE_TRANSITION;
+		case 61: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_MANAGEMENT_STATE_MACHINE_EXCEPTION MAUSBHOST_ETW_EVENT_MANAGEMENT_STATE_MACHINE_EXCEPTION;
+		case 62: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_IN_TRANSFER_STATE_MACHINE_TRANSITION MAUSBHOST_ETW_EVENT_IN_TRANSFER_STATE_MACHINE_TRANSITION;
+		case 63: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_IN_TRANSFER_STATE_MACHINE_EXCEPTION MAUSBHOST_ETW_EVENT_IN_TRANSFER_STATE_MACHINE_EXCEPTION;
+		case 64: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_OUT_TRANSFER_STATE_MACHINE_TRANSITION MAUSBHOST_ETW_EVENT_OUT_TRANSFER_STATE_MACHINE_TRANSITION;
+		case 65: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_OUT_TRANSFER_STATE_MACHINE_EXCEPTION MAUSBHOST_ETW_EVENT_OUT_TRANSFER_STATE_MACHINE_EXCEPTION;
+		case 70: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_START_USB_TRANSFER MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_START_USB_TRANSFER;
+		case 71: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_COMPLETE_USB_TRANSFER MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_COMPLETE_USB_TRANSFER;
+		case 72: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_TRANSFERREQ MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_TRANSFERREQ;
+		case 73: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_TRANSFERACK MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_TRANSFERACK;
+		case 74: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_TRANSFERRESP MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_TRANSFERRESP;
+		case 75: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_MAUSB_SPEED_DEVICE_CAPABILITY_DESCRIPTOR MAUSBHOST_ETW_EVENT_PAL_MAUSB_SPEED_DEVICE_CAPABILITY_DESCRIPTOR;
+		case 76: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_MAUSB_P_OUT_DEVICE_CAPABILITY_DESCRIPTOR MAUSBHOST_ETW_EVENT_PAL_MAUSB_P_OUT_DEVICE_CAPABILITY_DESCRIPTOR;
+		case 77: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_MAUSB_ISOCH_DEVICE_CAPABILITY_DESCRIPTOR MAUSBHOST_ETW_EVENT_PAL_MAUSB_ISOCH_DEVICE_CAPABILITY_DESCRIPTOR;
+		case 78: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_MAUSB_SYNCH_DEVICE_CAPABILITY_DESCRIPTOR MAUSBHOST_ETW_EVENT_PAL_MAUSB_SYNCH_DEVICE_CAPABILITY_DESCRIPTOR;
+		case 79: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_MAUSB_CONTAINER_ID_DEVICE_CAPABILITY_DESCRIPTOR MAUSBHOST_ETW_EVENT_PAL_MAUSB_CONTAINER_ID_DEVICE_CAPABILITY_DESCRIPTOR;
+		case 80: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_PAL_MAUSB_LINK_SLEEP_DEVICE_CAPABILITY_DESCRIPTOR MAUSBHOST_ETW_EVENT_PAL_MAUSB_LINK_SLEEP_DEVICE_CAPABILITY_DESCRIPTOR;
+		case 100: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_IP_SEND_DATA MAUSBHOST_ETW_EVENT_IP_SEND_DATA;
+		case 101: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_IP_SEND_DATA_COMPLETE MAUSBHOST_ETW_EVENT_IP_SEND_DATA_COMPLETE;
+		case 102: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_IP_READ_DATA MAUSBHOST_ETW_EVENT_IP_READ_DATA;
+		case 103: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_IP_READ_DATA_COMPLETE MAUSBHOST_ETW_EVENT_IP_READ_DATA_COMPLETE;
+		case 104: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_IP_SOCKET_CONNECT MAUSBHOST_ETW_EVENT_IP_SOCKET_CONNECT;
+		case 105: [property.ETLSummary = this.ToString] MAUSBHOST_ETW_EVENT_IP_SOCKET_DISCONNECT MAUSBHOST_ETW_EVENT_IP_SOCKET_DISCONNECT;
+		default: [property.ETLSummary = "Not exist EventID"]struct{};
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_RUNDOWN_START = "Start Rundown" {}; // Empty Struct
+Struct MAUSBHOST_ETW_EVENT_RUNDOWN_COMPLETE = "Complete Rundown" {}; // Empty Struct
+Struct MAUSBHOST_ETW_EVENT_RUNDOWN_CONTROLLER_INFORMATION = FormatString("MAUSB Controller Information")
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_WdfDevicePowerState;
+}
+Struct MAUSBHOST_ETW_EVENT_RUNDOWN_DEVICE_INFORMATION = FormatString("MAUSB Device Information")
+{
+	EtlPtr fid_Controller;
+	EtlPtr fid_UsbTtHubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 DeviceSpeed;
+	UINT32 PortPathDepth;
+	UINT32 PortPath[6];
+	UINT32 fid_MaUsbDeviceHandle;
+	UINT32 fid_DeviceIsHub;
+	UINT32 fid_NumberOfPorts;
+	UINT32 fid_NumberOfTTs;
+	struct 	fid_USB_Device_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT16 fid_bcdUSB;
+		UINT8 fid_bDeviceClass;
+		UINT8 fid_bDeviceSubClass;
+		UINT8 fid_bDeviceProtocol;
+		UINT8 fid_bMaxPacketSize0;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UINT16 fid_bcdDevice;
+		UINT8 fid_iManufacturer;
+		UINT8 fid_iProduct;
+		UINT8 fid_iSerialNumber;
+		UINT8 fid_bNumConfigurations;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_RUNDOWN_ENDPOINT_INFORMATION = FormatString("MAUSB Endpoint Information")
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	struct 	fid_USB_Endpoint_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bEndpointAddress;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wMaxPacketSize;
+		UINT8 fid_bInterval;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_CONTROLLER_CREATE = FormatString("MAUSB Controller Create")
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_WdfDevicePowerState;
+}
+Struct MAUSBHOST_ETW_EVENT_CONTROLLER_DELETE = FormatString("MAUSB Controller Delete")
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_WdfDevicePowerState;
+}
+Struct MAUSBHOST_ETW_EVENT_DEVICE_CREATE = FormatString("MAUSB Device Create")
+{
+	EtlPtr fid_Controller;
+	EtlPtr fid_UsbTtHubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 DeviceSpeed;
+	UINT32 PortPathDepth;
+	UINT32 PortPath[6];
+	UINT32 fid_MaUsbDeviceHandle;
+	UINT32 fid_DeviceIsHub;
+	UINT32 fid_NumberOfPorts;
+	UINT32 fid_NumberOfTTs;
+	struct 	fid_USB_Device_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT16 fid_bcdUSB;
+		UINT8 fid_bDeviceClass;
+		UINT8 fid_bDeviceSubClass;
+		UINT8 fid_bDeviceProtocol;
+		UINT8 fid_bMaxPacketSize0;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UINT16 fid_bcdDevice;
+		UINT8 fid_iManufacturer;
+		UINT8 fid_iProduct;
+		UINT8 fid_iSerialNumber;
+		UINT8 fid_bNumConfigurations;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_DEVICE_UPDATE = FormatString("MAUSB Device Update")
+{
+	EtlPtr fid_Controller;
+	EtlPtr fid_UsbTtHubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 DeviceSpeed;
+	UINT32 PortPathDepth;
+	UINT32 PortPath[6];
+	UINT32 fid_MaUsbDeviceHandle;
+	UINT32 fid_DeviceIsHub;
+	UINT32 fid_NumberOfPorts;
+	UINT32 fid_NumberOfTTs;
+	struct 	fid_USB_Device_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT16 fid_bcdUSB;
+		UINT8 fid_bDeviceClass;
+		UINT8 fid_bDeviceSubClass;
+		UINT8 fid_bDeviceProtocol;
+		UINT8 fid_bMaxPacketSize0;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UINT16 fid_bcdDevice;
+		UINT8 fid_iManufacturer;
+		UINT8 fid_iProduct;
+		UINT8 fid_iSerialNumber;
+		UINT8 fid_bNumConfigurations;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_DEVICE_DELETE = FormatString("MAUSB Device Delete")
+{
+	EtlPtr fid_Controller;
+	EtlPtr fid_UsbTtHubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 DeviceSpeed;
+	UINT32 PortPathDepth;
+	UINT32 PortPath[6];
+	UINT32 fid_MaUsbDeviceHandle;
+	UINT32 fid_DeviceIsHub;
+	UINT32 fid_NumberOfPorts;
+	UINT32 fid_NumberOfTTs;
+	struct 	fid_USB_Device_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT16 fid_bcdUSB;
+		UINT8 fid_bDeviceClass;
+		UINT8 fid_bDeviceSubClass;
+		UINT8 fid_bDeviceProtocol;
+		UINT8 fid_bMaxPacketSize0;
+		UINT16 fid_idVendor;
+		UINT16 fid_idProduct;
+		UINT16 fid_bcdDevice;
+		UINT8 fid_iManufacturer;
+		UINT8 fid_iProduct;
+		UINT8 fid_iSerialNumber;
+		UINT8 fid_bNumConfigurations;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_ENDPOINT_CREATE = FormatString("MAUSB Endpoint Create")
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	struct 	fid_USB_Endpoint_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bEndpointAddress;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wMaxPacketSize;
+		UINT8 fid_bInterval;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_ENDPOINT_UPDATE = FormatString("MAUSB Endpoint Update")
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	struct 	fid_USB_Endpoint_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bEndpointAddress;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wMaxPacketSize;
+		UINT8 fid_bInterval;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_ENDPOINT_DELETE = FormatString("MAUSB Endpoint Delete")
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	struct 	fid_USB_Endpoint_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bEndpointAddress;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wMaxPacketSize;
+		UINT8 fid_bInterval;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_CONTROLLER_D0_ENTRY_START = FormatString("MAUSB Controller EvtDeviceD0Entry Start")
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_DeviceState;
+	UINT32 fid_PowerAction;
+}
+Struct MAUSBHOST_ETW_EVENT_CONTROLLER_D0_ENTRY_COMPLETE = FormatString("MAUSB Controller EvtDeviceD0Entry Complete")
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_DeviceState;
+	UINT32 fid_PowerAction;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_CONTROLLER_D0_EXIT_START = FormatString("MAUSB Controller EvtDeviceD0Exit Start")
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_DeviceState;
+	UINT32 fid_PowerAction;
+}
+Struct MAUSBHOST_ETW_EVENT_CONTROLLER_D0_EXIT_COMPLETE = FormatString("MAUSB Controller EvtDeviceD0Exit Complete")
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_DeviceState;
+	UINT32 fid_PowerAction;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_CONTROLLER_RESET_START = FormatString("MAUSB Controller Internal Reset Start")
+{
+	EtlPtr fid_Controller;
+}
+Struct MAUSBHOST_ETW_EVENT_CONTROLLER_RESET_COMPLETE = FormatString("MAUSB Controller Internal Reset Complete")
+{
+	EtlPtr fid_Controller;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_CONTROLLER_QUERY_USB_CAPABILITY = FormatString("Query USB capability for controller")
+{
+	EtlPtr fid_Controller;
+	GUID(true) fid_Capability;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+	UINT32 fid_NumStaticStreams;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_SEND_MANAGEMENT_REQUEST = FormatString("Send Management Request <%s>", MaUsbManagementSubType(fid_SubType))
+{
+	EtlPtr fid_Controller;
+	EtlPtr fid_WdfRequest;
+	UINT8 fid_SubType;
+	UINT16 fid_DeviceHandle;
+	UINT8 fid_DeviceAddress;
+	UINT8 fid_Ssid;
+	UINT8 fid_StatusCode;
+	UINT16 fid_DialogToken;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_SEND_MANAGEMENT_RESPONSE = FormatString("Send Management Response <%s> %s", MaUsbManagementSubType(fid_SubType), MaUsbStatus(fid_StatusCode))
+{
+	EtlPtr fid_Controller;
+	EtlPtr fid_WdfRequest;
+	UINT8 fid_SubType;
+	UINT16 fid_DeviceHandle;
+	UINT8 fid_DeviceAddress;
+	UINT8 fid_Ssid;
+	UINT8 fid_StatusCode;
+	UINT16 fid_DialogToken;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_RECEIVE_MANAGEMENT_REQUEST = FormatString("Receive Management Request <%s> %s", MaUsbManagementSubType(fid_SubType), MaUsbStatus(fid_StatusCode))
+{
+	EtlPtr fid_Controller;
+	EtlPtr fid_WdfRequest;
+	UINT8 fid_SubType;
+	UINT16 fid_DeviceHandle;
+	UINT8 fid_DeviceAddress;
+	UINT8 fid_Ssid;
+	UINT8 fid_StatusCode;
+	UINT16 fid_DialogToken;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_RECEIVE_MANAGEMENT_RESPONSE = FormatString("Receive Management Response <%s> %s", MaUsbManagementSubType(fid_SubType), MaUsbStatus(fid_StatusCode))
+{
+	EtlPtr fid_Controller;
+	EtlPtr fid_WdfRequest;
+	UINT8 fid_SubType;
+	UINT16 fid_DeviceHandle;
+	UINT8 fid_DeviceAddress;
+	UINT8 fid_Ssid;
+	UINT8 fid_StatusCode;
+	UINT16 fid_DialogToken;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_DESCRIPTOR_VALIDATION_FAILURE = FormatString("MA USB Descriptor Validation Failed Failed For the Following Reason: %s", MaUsbDescriptorValidationError(fid_Error))
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_Error;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_INVALID_SUBTYPE = FormatString("Management Response Invalid Subtype")
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_ExpectedSubtype;
+	UINT32 fid_ActualSubtype;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_STATUS_ERROR = FormatString("Management Response Status Error")
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_Subtype;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_RETRIES_TIMEOUT = FormatString("Management Response Retries Timed Out")
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_Subtype;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_HEADER_STATUS_ERROR = FormatString("Management Response Header Status Error")
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_Subtype;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_MANAGEMENT_RESPONSE_INCORRECT_SIZE = FormatString("Management Response Packet Incorrect Size")
+{
+	EtlPtr fid_Controller;
+	UINT32 fid_Subtype;
+	UINT32 fid_Size;
+}
+Struct MAUSBHOST_ETW_EVENT_MANAGEMENT_STATE_MACHINE_TRANSITION = FormatString("Session State Machine Transition <%s> %s", PalSessionEvents(fid_Event), PalSessionStates(fid_SourceState))
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	EtlPtr fid_ObjectHandle;
+	UINT32 fid_TransitionType;
+	UINT32 fid_SourceState;
+	UINT32 fid_Event;
+	UINT32 fid_TargetState;
+}
+Struct MAUSBHOST_ETW_EVENT_MANAGEMENT_STATE_MACHINE_EXCEPTION = FormatString("Session State Machine Exception <%s> %s", PalSessionEvents(fid_Event), PalSessionStates(fid_State))
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	EtlPtr fid_ObjectHandle;
+	UINT32 fid_Exception;
+	UINT32 fid_State;
+	UINT32 fid_Event;
+}
+Struct MAUSBHOST_ETW_EVENT_IN_TRANSFER_STATE_MACHINE_TRANSITION = FormatString("In Transfer State Machine Transition <%s> %s", PalInTransferEvents(fid_Event), PalInTransferStates(fid_SourceState))
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	EtlPtr fid_ObjectHandle;
+	UINT32 fid_TransitionType;
+	UINT32 fid_SourceState;
+	UINT32 fid_Event;
+	UINT32 fid_TargetState;
+}
+Struct MAUSBHOST_ETW_EVENT_IN_TRANSFER_STATE_MACHINE_EXCEPTION = FormatString("In Transfer State Machine Exception <%s> %s", PalInTransferEvents(fid_Event), PalInTransferStates(fid_State))
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	EtlPtr fid_ObjectHandle;
+	UINT32 fid_Exception;
+	UINT32 fid_State;
+	UINT32 fid_Event;
+}
+Struct MAUSBHOST_ETW_EVENT_OUT_TRANSFER_STATE_MACHINE_TRANSITION = FormatString("Out Transfer State Machine Transition <%s> %s", PalOutTransferEvents(fid_Event), PalOutTransferStates(fid_SourceState))
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	EtlPtr fid_ObjectHandle;
+	UINT32 fid_TransitionType;
+	UINT32 fid_SourceState;
+	UINT32 fid_Event;
+	UINT32 fid_TargetState;
+}
+Struct MAUSBHOST_ETW_EVENT_OUT_TRANSFER_STATE_MACHINE_EXCEPTION = FormatString("Out Transfer State Machine Exception <%s> %s", PalOutTransferEvents(fid_Event), PalOutTransferStates(fid_State))
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	EtlPtr fid_ObjectHandle;
+	UINT32 fid_Exception;
+	UINT32 fid_State;
+	UINT32 fid_Event;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_START_USB_TRANSFER = FormatString("Start USB Transfer")
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	UINT16 fid_MaUsbEndpointHandle;
+	EtlPtr fid_UsbTransferRequest;
+	UINT32 fid_TransferType;
+	UINT32 fid_TransferDirection;
+	UINT32 fid_TransferBufferLength;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_COMPLETE_USB_TRANSFER = FormatString("Complete USB Transfer")
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	UINT16 fid_MaUsbEndpointHandle;
+	EtlPtr fid_UsbTransferRequest;
+	UINT32 fid_BytesTransferred;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_TRANSFERREQ = FormatString("TransferReq")
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	EtlPtr fid_UsbTransferRequest;
+	UINT16 fid_EndpointHandle;
+	UINT32 fid_TransferType;
+	UINT32 fid_TransferDirection;
+	UINT32 fid_RemainingSizeOrCredit;
+	UINT32 fid_BytesTotal;
+	UINT8 fid_RequestId;
+	UINT32 fid_SequenceNumber;
+	UINT8 fid_FlagBitRetry;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_TRANSFERACK = FormatString("TransferAck")
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	EtlPtr fid_UsbTransferRequest;
+	UINT16 fid_EndpointHandle;
+	UINT32 fid_TransferType;
+	UINT32 fid_TransferDirection;
+	UINT8 fid_RequestId;
+	UINT32 fid_SequenceNumber;
+	UINT32 fid_MaUsbStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_ENDPOINT_TRANSFERRESP = FormatString("TransferResp")
+{
+	EtlPtr fid_Controller;
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	UINT16 fid_EndpointHandle;
+	UINT32 fid_TransferType;
+	UINT32 fid_TransferDirection;
+	UINT8 fid_RequestId;
+	UINT32 fid_SequenceNumber;
+	UINT16 fid_Length;
+	UINT32 fid_MaUsbStatus;
+	UINT8 fid_AckRequest;
+	UINT8 fid_FlagBitRetry;
+	UINT32 fid_RemainingSizeOrCredit;
+	UINT8 fid_EndOfTransfer;
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_MAUSB_SPEED_DEVICE_CAPABILITY_DESCRIPTOR = FormatString("MA USB Speed Device Capability Descriptor")
+{
+	EtlPtr fid_Controller;
+	struct 	fid_MAUSB_Device_Speed_Capability_Descriptor
+	{
+		UINT8 fid_Length;
+		UINT8 fid_Type;
+		UINT8 fid_Speed;
+		UINT8 fid_LaneSpeedExponent;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_MAUSB_P_OUT_DEVICE_CAPABILITY_DESCRIPTOR = FormatString("MA USB P-Out Device Capability Descriptor")
+{
+	EtlPtr fid_Controller;
+	struct 	fid_MAUSB_Device_P_Out_Capability_Descriptor
+	{
+		UINT8 fid_Length;
+		UINT8 fid_Type;
+		UINT8 fid_POutCapabilities;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_MAUSB_ISOCH_DEVICE_CAPABILITY_DESCRIPTOR = FormatString("MA USB Isochronous Device Capability Descriptor")
+{
+	EtlPtr fid_Controller;
+	struct 	fid_MAUSB_Device_Speed_Capability_Descriptor
+	{
+		UINT8 fid_Length;
+		UINT8 fid_Type;
+		UINT8 fid_Speed;
+		UINT8 fid_LaneSpeedExponent;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_MAUSB_SYNCH_DEVICE_CAPABILITY_DESCRIPTOR = FormatString("MA USB Synchronization Device Capability Descriptor")
+{
+	EtlPtr fid_Controller;
+	struct 	fid_MAUSB_Device_Synch_Capability_Descriptor
+	{
+		UINT8 fid_SynchCapabilities;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_MAUSB_CONTAINER_ID_DEVICE_CAPABILITY_DESCRIPTOR = FormatString("MA USB Container ID Device Capability Descriptor")
+{
+	EtlPtr fid_Controller;
+	struct 	fid_MAUSB_Device_Container_Id_Capability_Descriptor
+	{
+		GUID(true) fid_ContainerID;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_PAL_MAUSB_LINK_SLEEP_DEVICE_CAPABILITY_DESCRIPTOR = FormatString("MA USB Link Sleep Device Capability Descriptor")
+{
+	EtlPtr fid_Controller;
+	struct 	fid_MAUSB_Device_Link_Sleep_Capability_Descriptor
+	{
+		UINT8 fid_LinkSleepCapabilities;
+	}
+}
+Struct MAUSBHOST_ETW_EVENT_IP_SEND_DATA = FormatString("IP Send Data")
+{
+	EtlPtr fid_WdfRequest;
+	EtlPtr fid_Irp;
+	EtlPtr fid_IoChannelHandle;
+	UINT64 fid_NumberOfBytes;
+}
+Struct MAUSBHOST_ETW_EVENT_IP_SEND_DATA_COMPLETE = FormatString("IP Send Data Complete")
+{
+	EtlPtr fid_WdfRequest;
+	EtlPtr fid_Irp;
+	UINT64 fid_NumberOfBytes;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_IP_READ_DATA = FormatString("IP Read Data")
+{
+	EtlPtr fid_WdfRequest;
+	EtlPtr fid_IoChannelHandle;
+	UINT64 fid_NumberOfBytes;
+}
+Struct MAUSBHOST_ETW_EVENT_IP_READ_DATA_COMPLETE = FormatString("IP Read Data Complete")
+{
+	EtlPtr fid_WdfRequest;
+	UINT64 fid_NumberOfBytes;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_IP_SOCKET_CONNECT = FormatString("IP Socket Connect")
+{
+	EtlPtr fid_FdoContext;
+	UINT32 fid_LocalAddressLength;
+	switch
+	{
+		case fid_LocalAddressLength > 0 :
+			ETL_SOCKADDR_STORAGE fid_LocalAddress;
+	}
+	UINT32 fid_RemoteAddressLength;
+	switch
+	{
+		case fid_RemoteAddressLength > 0 :
+			ETL_SOCKADDR_STORAGE fid_RemoteAddress;
+	}
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct MAUSBHOST_ETW_EVENT_IP_SOCKET_DISCONNECT = FormatString("IP Socket Disconnect")
+{
+	EtlPtr fid_FdoContext;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+[RegisterBefore(EventDescriptor.DefaultKeyword, MicrosoftWindowsUSBMAUSBHOST_Keyword, "{7725b5f9-1f2e-4e21-baeb-b2af4690bc87}")]
+struct MicrosoftWindowsUSBMAUSBHOST_Keyword
+{
+	UINT64 Default:1 = FormatString("            (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_DEFAULT":"");
+	UINT64 USBError:1 = FormatString("           (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_USBERROR":"");
+	UINT64 IRP:1 = FormatString("                (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_IRP":"");
+	UINT64 Power:1 = FormatString("              (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_POWER":"");
+	UINT64 PnP:1 = FormatString("                (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_PNP":"");
+	UINT64 Performance:1 = FormatString("        (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_PERFORMANCE":"");
+	UINT64 HeadersBusTrace:1 = FormatString("    (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_HEADERS_BUS_TRACE":"");
+	UINT64 PartialDataBusTrace:1 = FormatString("(%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_PARTIAL_DATA_BUS_TRACE":"");
+	UINT64 FullDataBusTrace:1 = FormatString("   (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_FULL_DATA_BUS_TRACE":"");
+	UINT64 StateMachine:1 = FormatString("       (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_STATEMACHINE":"");
+	UINT64 Enumeration:1 = FormatString("        (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_ENUMERATION":"");
+	UINT64 VerifyDriver:1 = FormatString("       (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_VERIFYDRIVER":"");
+	UINT64 HWVerifyHost:1 = FormatString("       (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_HW_VERIFYHOST":"");
+	UINT64 HWVerifyHub:1 = FormatString("        (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_HW_VERIFYHUB":"");
+	UINT64 HWVerifyDevice:1 = FormatString("     (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_HW_VERIFYDEVICE":"");
+	UINT64 Rundown:1 = FormatString("            (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_RUNDOWN":"");
+	UINT64 Device:1 = FormatString("             (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_DEVICE":"");
+	UINT64 Hub:1 = FormatString("                (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_HUB":"");
+	UINT64 Compat:1 = FormatString("             (%s) %s", this.ToBitString, this? "MAUSBHOST_ETW_KEYWORD_COMPAT":"");
+	UINT64 Reserved1:45 = FormatString("          (%s)", this.ToBitString);
+}
+//#  (c) 2009 Microsoft Corporation
+//#
+//#  Title:                  Microsoft-Windows-ucx
+//#
+//#  Details:                
+//#
+//#  Public References:      ucx.man
+//#
+//#  Comments:               
+//#
+//#  Revision Class and Date:Minor, 6/6/2011
+//#
+//####
+[RegisterBefore(NetEvent.UserData, UsbUcx, "{36da592d-e43a-4e28-af6f-4bc57c5a11e8}")]
+Protocol UsbUcx = property.ETLSummary
+{
+	[BuildConversationWithParent, conversation.ConversationDescription = ""]
+
+	//
+	// All completion URBs logged by UCX include NTSTATUS
+	//
+	[Property.InternalUsbNtstatusUrbs = 1]
+	[Post.Property.USBIsError =
+		((
+			(NetEvent.Header.Descriptor.Level == 0x2) 
+			OR
+			(Property.USBDStatus != "success" && Property.USBDStatus != "" && Property.USBDStatus != "canceled")
+			OR
+			(Property.USBNtStatus != "success" && Property.USBNtStatus != "" && Property.USBNtStatus != "0xC0000120 - STATUS_CANCELLED")
+		) ? 1 : 0)]
+	switch(property.EventID)
+	{
+		case 1: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_RUNDOWN_START UCX_ETW_EVENT_RUNDOWN_START;
+		case 2: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_RUNDOWN_COMPLETE UCX_ETW_EVENT_RUNDOWN_COMPLETE;
+		case 3: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_RUNDOWN_UCX_CONTROLLER_INFORMATION UCX_ETW_EVENT_RUNDOWN_UCX_CONTROLLER_INFORMATION;
+		case 4: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_RUNDOWN_UCX_ROOTHUB_INFORMATION UCX_ETW_EVENT_RUNDOWN_UCX_ROOTHUB_INFORMATION;
+		case 5: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_RUNDOWN_UCX_DEVICE_INFORMATION UCX_ETW_EVENT_RUNDOWN_UCX_DEVICE_INFORMATION;
+		case 6: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_RUNDOWN_UCX_ENDPOINT_INFORMATION UCX_ETW_EVENT_RUNDOWN_UCX_ENDPOINT_INFORMATION;
+		case 7: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_RUNDOWN_UCX_STATIC_STREAM_INFORMATION UCX_ETW_EVENT_RUNDOWN_UCX_STATIC_STREAM_INFORMATION;
+		case 8: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_CONTROLLER_CREATE UCX_ETW_EVENT_UCX_CONTROLLER_CREATE;
+		case 9: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_CONTROLLER_DELETE UCX_ETW_EVENT_UCX_CONTROLLER_DELETE;
+		case 10: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_ROOTHUB_CREATE UCX_ETW_EVENT_UCX_ROOTHUB_CREATE;
+		case 11: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_ROOTHUB_DELETE UCX_ETW_EVENT_UCX_ROOTHUB_DELETE;
+		case 12: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_ROOTHUB_PREPARE UCX_ETW_EVENT_UCX_ROOTHUB_PREPARE;
+		case 13: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_ROOTHUB_RELEASE UCX_ETW_EVENT_UCX_ROOTHUB_RELEASE;
+		case 14: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_DEVICE_CREATE UCX_ETW_EVENT_UCX_DEVICE_CREATE;
+		case 15: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_DEVICE_DELETE UCX_ETW_EVENT_UCX_DEVICE_DELETE;
+		case 16: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_ENDPOINT_CREATE UCX_ETW_EVENT_UCX_ENDPOINT_CREATE;
+		case 17: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_ENDPOINT_DELETE UCX_ETW_EVENT_UCX_ENDPOINT_DELETE;
+		case 18: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_STATIC_STREAM_CREATE UCX_ETW_EVENT_UCX_STATIC_STREAM_CREATE;
+		case 19: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_STATIC_STREAM_DELETE UCX_ETW_EVENT_UCX_STATIC_STREAM_DELETE;
+		case 20: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CONTROL_TRANSFER UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CONTROL_TRANSFER;
+		case 21: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_CONTROL_TRANSFER UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_CONTROL_TRANSFER;
+		case 22: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_CONTROL_TRANSFER_DATA UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_CONTROL_TRANSFER_DATA;
+		case 23: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CONTROL_TRANSFER_EX UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CONTROL_TRANSFER_EX;
+		case 24: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_CONTROL_TRANSFER_EX UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_CONTROL_TRANSFER_EX;
+		case 25: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_CONTROL_TRANSFER_EX_DATA UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_CONTROL_TRANSFER_EX_DATA;
+		case 26: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER;
+		case 27: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER;
+		case 28: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER_PARTIAL_DATA UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER_PARTIAL_DATA;
+		case 29: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER_FULL_DATA UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER_FULL_DATA;
+		case 30: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_ISOCH_TRANSFER UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_ISOCH_TRANSFER;
+		case 31: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_ISOCH_TRANSFER UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_ISOCH_TRANSFER;
+		case 32: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_ISOCH_TRANSFER_PARTIAL_DATA UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_ISOCH_TRANSFER_PARTIAL_DATA;
+		case 33: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_ISOCH_TRANSFER_FULL_DATA UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_ISOCH_TRANSFER_FULL_DATA;
+		case 34: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_DESCRIPTOR_FROM_DEVICE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_DESCRIPTOR_FROM_DEVICE;
+		case 35: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_DESCRIPTOR_FROM_INTERFACE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_DESCRIPTOR_FROM_INTERFACE;
+		case 36: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_DESCRIPTOR_FROM_ENDPOINT UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_DESCRIPTOR_FROM_ENDPOINT;
+		case 37: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_DESCRIPTOR_TO_DEVICE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_DESCRIPTOR_TO_DEVICE;
+		case 38: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_DESCRIPTOR_TO_INTERFACE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_DESCRIPTOR_TO_INTERFACE;
+		case 39: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_DESCRIPTOR_TO_ENDPOINT UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_DESCRIPTOR_TO_ENDPOINT;
+		case 40: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_FEATURE_TO_DEVICE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_FEATURE_TO_DEVICE;
+		case 41: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_FEATURE_TO_INTERFACE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_FEATURE_TO_INTERFACE;
+		case 42: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_FEATURE_TO_ENDPOINT UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_FEATURE_TO_ENDPOINT;
+		case 43: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_FEATURE_TO_OTHER UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_FEATURE_TO_OTHER;
+		case 44: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLEAR_FEATURE_TO_DEVICE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLEAR_FEATURE_TO_DEVICE;
+		case 45: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLEAR_FEATURE_TO_INTERFACE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLEAR_FEATURE_TO_INTERFACE;
+		case 46: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLEAR_FEATURE_TO_ENDPOINT UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLEAR_FEATURE_TO_ENDPOINT;
+		case 47: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLEAR_FEATURE_TO_OTHER UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLEAR_FEATURE_TO_OTHER;
+		case 48: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_STATUS_FROM_DEVICE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_STATUS_FROM_DEVICE;
+		case 49: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_STATUS_FROM_INTERFACE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_STATUS_FROM_INTERFACE;
+		case 50: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_STATUS_FROM_ENDPOINT UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_STATUS_FROM_ENDPOINT;
+		case 51: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_STATUS_FROM_OTHER UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_STATUS_FROM_OTHER;
+		case 52: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLASS_DEVICE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLASS_DEVICE;
+		case 53: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLASS_INTERFACE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLASS_INTERFACE;
+		case 54: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLASS_ENDPOINT UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLASS_ENDPOINT;
+		case 55: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLASS_OTHER UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLASS_OTHER;
+		case 56: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_VENDOR_DEVICE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_VENDOR_DEVICE;
+		case 57: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_VENDOR_INTERFACE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_VENDOR_INTERFACE;
+		case 58: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_VENDOR_ENDPOINT UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_VENDOR_ENDPOINT;
+		case 59: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_VENDOR_OTHER UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_VENDOR_OTHER;
+		case 60: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_CONFIGURATION UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_CONFIGURATION;
+		case 61: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_INTERFACE UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_INTERFACE;
+		case 62: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_MS_FEATURE_DESCRIPTOR UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_MS_FEATURE_DESCRIPTOR;
+		case 63: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_ENDPOINT_STATE_MACHINE_TRANSITION UCX_ETW_EVENT_UCX_ENDPOINT_STATE_MACHINE_TRANSITION;
+		case 64: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_ENDPOINT_STATE_MACHINE_EVENT UCX_ETW_EVENT_UCX_ENDPOINT_STATE_MACHINE_EVENT;
+		case 65: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_RUNDOWN_UCX_ENDPOINT_STATE_MACHINE_TRANSITION UCX_ETW_EVENT_RUNDOWN_UCX_ENDPOINT_STATE_MACHINE_TRANSITION;
+		case 66: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_RUNDOWN_UCX_ENDPOINT_STATE_MACHINE_EVENT UCX_ETW_EVENT_RUNDOWN_UCX_ENDPOINT_STATE_MACHINE_EVENT;
+		case 67: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_CONTROLLER_STATE_MACHINE_TRANSITION UCX_ETW_EVENT_UCX_CONTROLLER_STATE_MACHINE_TRANSITION;
+		case 68: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_CONTROLLER_STATE_MACHINE_EVENT UCX_ETW_EVENT_UCX_CONTROLLER_STATE_MACHINE_EVENT;
+		case 69: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_RUNDOWN_UCX_CONTROLLER_STATE_MACHINE_TRANSITION UCX_ETW_EVENT_RUNDOWN_UCX_CONTROLLER_STATE_MACHINE_TRANSITION;
+		case 70: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_RUNDOWN_UCX_CONTROLLER_STATE_MACHINE_EVENT UCX_ETW_EVENT_RUNDOWN_UCX_CONTROLLER_STATE_MACHINE_EVENT;
+		case 71: [property.ETLSummary = this.ToString] UCX_ETW_EVENT_UCX_ROOTHUB_INITIATING_WAKE UCX_ETW_EVENT_UCX_ROOTHUB_INITIATING_WAKE;
+		default: [property.ETLSummary = "Not exist EventID"]struct{};
+	}
+}
+Struct UCX_ETW_EVENT_RUNDOWN_START = "Start Rundown" {}; // Empty Struct
+Struct UCX_ETW_EVENT_RUNDOWN_COMPLETE = "Complete Rundown" {}; // Empty Struct
+Struct UCX_ETW_EVENT_RUNDOWN_UCX_CONTROLLER_INFORMATION = FormatString("UCX Controller Information")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_ParentBusType = MapParentBusType(this);
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+	UnicodeString fid_DeviceInterfacePath;
+}
+Struct UCX_ETW_EVENT_RUNDOWN_UCX_ROOTHUB_INFORMATION = FormatString("UCX RootHub Information")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UnicodeString fid_DeviceInterfacePath;
+}
+Struct UCX_ETW_EVENT_RUNDOWN_UCX_DEVICE_INFORMATION = FormatString("UCX Device Information")
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_HubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 DeviceSpeed;
+	UsbPortPath PortPath;
+}
+Struct UCX_ETW_EVENT_RUNDOWN_UCX_ENDPOINT_INFORMATION = FormatString("UCX Endpoint Information")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	UsbPipeHandle fid_PipeHandle;
+	struct 	fid_UCX_Endpoint_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		[Global.InternalUsbTblEndpoint$[Property.USBEndpointPtr] = FormatString("0x%x", this)]
+		[Global.InternalUsbTblEndpoint$[Property.USBPipeHandle] = FormatString("0x%x", this)]
+		UINT8 fid_bEndpointAddress;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wMaxPacketSize;
+		UINT8 fid_bInterval;
+	}
+}
+Struct UCX_ETW_EVENT_RUNDOWN_UCX_STATIC_STREAM_INFORMATION = FormatString("UCX Static Stream Information")
+{
+	UsbDevicePtr fid_UsbDevice;
+	// Look up the endpoint (done within UsbPipeHandle)
+	UsbPipeHandle fid_EndpointPipeHandle;
+	UINT32 fid_StreamID;
+	// Save endpoint address to this stream pipe handle, and show the stream's pipe handle as this
+	// event's pipe handle.
+ 	[Global.InternalUsbTblEndpoint$[fid_StreamPipeHandle.Ptr] = Property.UsbEndpoint]
+ 	[Property.USBPipeHandle = fid_StreamPipeHandle.Ptr]
+	EtlPtr fid_StreamPipeHandle;
+}
+Struct UCX_ETW_EVENT_UCX_CONTROLLER_CREATE = FormatString("UCX Controller Create")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_ParentBusType = MapParentBusType(this);
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+	UnicodeString fid_DeviceInterfacePath;
+}
+Struct UCX_ETW_EVENT_UCX_CONTROLLER_DELETE = FormatString("UCX Controller Delete")
+{
+	EtlPtr fid_UcxController;
+	UINT32 fid_ParentBusType = MapParentBusType(this);
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+	UnicodeString fid_DeviceInterfacePath;
+}
+[Post.Global.InternalUsbTblPortPath$[Property.USBDevicePtr] = "-"]
+[Post.Global.InternalUsbTblDeviceDescription$[Property.USBDevicePtr] = "Root Hub"]
+Struct UCX_ETW_EVENT_UCX_ROOTHUB_CREATE = FormatString("UCX RootHub Create")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UnicodeString fid_DeviceInterfacePath;
+}
+Struct UCX_ETW_EVENT_UCX_ROOTHUB_DELETE = FormatString("UCX RootHub Delete")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UnicodeString fid_DeviceInterfacePath;
+}
+Struct UCX_ETW_EVENT_UCX_ROOTHUB_PREPARE = FormatString("UCX RootHub Prepare Hardware")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UnicodeString fid_DeviceInterfacePath;
+}
+Struct UCX_ETW_EVENT_UCX_ROOTHUB_RELEASE = FormatString("UCX RootHub Release Hardware")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UnicodeString fid_DeviceInterfacePath;
+}
+Struct UCX_ETW_EVENT_UCX_DEVICE_CREATE = FormatString("UCX Device Create")
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_HubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 DeviceSpeed;
+	UsbPortPath PortPath;
+}
+Struct UCX_ETW_EVENT_UCX_DEVICE_DELETE = FormatString("UCX Device Delete")
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_HubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 DeviceSpeed;
+	UsbPortPath PortPath;
+}
+Struct UCX_ETW_EVENT_UCX_ENDPOINT_CREATE = FormatString("UCX Endpoint Create")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	UsbPipeHandle fid_PipeHandle;
+	struct 	fid_UCX_Endpoint_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		[Global.InternalUsbTblEndpoint$[Property.USBEndpointPtr] = FormatString("0x%x", this)]
+		[Global.InternalUsbTblEndpoint$[Property.USBPipeHandle] = FormatString("0x%x", this)]
+		UINT8 fid_bEndpointAddress;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wMaxPacketSize;
+		UINT8 fid_bInterval;
+	}
+}
+Struct UCX_ETW_EVENT_UCX_ENDPOINT_DELETE = FormatString("UCX Endpoint Delete")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UsbEndpointPtr fid_Endpoint;
+	UsbPipeHandle fid_PipeHandle;
+	struct 	fid_UCX_Endpoint_Descriptor
+	{
+		UINT8 fid_bLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bEndpointAddress;
+		UINT8 fid_bmAttributes;
+		UINT16 fid_wMaxPacketSize;
+		UINT8 fid_bInterval;
+	}
+}
+Struct UCX_ETW_EVENT_UCX_STATIC_STREAM_CREATE = FormatString("UCX Static Stream Create")
+{
+	UsbDevicePtr fid_UsbDevice;
+	// Look up the endpoint (done within UsbPipeHandle).
+	UsbPipeHandle fid_EndpointPipeHandle;
+	UINT32 fid_StreamID;
+	// Save endpoint address to this stream pipe handle, and show the stream's pipe handle as this
+	// event's pipe handle.
+	[Global.InternalUsbTblEndpoint$[fid_StreamPipeHandle.Ptr] = Property.UsbEndpoint]
+	[Property.USBPipeHandle = fid_StreamPipeHandle.Ptr]
+	EtlPtr fid_StreamPipeHandle;
+}
+Struct UCX_ETW_EVENT_UCX_STATIC_STREAM_DELETE = FormatString("UCX Static Stream Delete")
+{
+	UsbDevicePtr fid_UsbDevice;
+	// Look up the endpoint (done within UsbPipeHandle).
+	UsbPipeHandle fid_EndpointPipeHandle;
+	UINT32 fid_StreamID;
+	// Save endpoint address to this stream pipe handle, and show the stream's pipe handle as this
+	// event's pipe handle.
+	[Global.InternalUsbTblEndpoint$[fid_StreamPipeHandle.Ptr] = Property.UsbEndpoint]
+	[Property.USBPipeHandle = fid_StreamPipeHandle.Ptr]
+	EtlPtr fid_StreamPipeHandle;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CONTROL_TRANSFER = FormatString("Dispatch URB_FUNCTION_CONTROL_TRANSFER")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+[Property.InternalUsbIsUrbCompletion = 1]
+Struct UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_CONTROL_TRANSFER = FormatString("Complete URB_FUNCTION_CONTROL_TRANSFER")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+[Property.InternalUsbIsUrbCompletion = 1]
+Struct UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_CONTROL_TRANSFER_DATA = FormatString("Complete URB_FUNCTION_CONTROL_TRANSFER with data")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP_AND_DATA fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CONTROL_TRANSFER_EX = FormatString("Dispatch URB_FUNCTION_CONTROL_TRANSFER_EX")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER_EX;
+}
+[Property.InternalUsbIsUrbCompletion = 1]
+Struct UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_CONTROL_TRANSFER_EX = FormatString("Complete URB_FUNCTION_CONTROL_TRANSFER_EX")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER_EX;
+}
+[Property.InternalUsbIsUrbCompletion = 1]
+Struct UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_CONTROL_TRANSFER_EX_DATA = FormatString("Complete URB_FUNCTION_CONTROL_TRANSFER_EX with data")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP_AND_DATA fid_UCX_URB_CONTROL_TRANSFER_EX;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER = FormatString("Dispatch URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	URB fid_UCX_URB_BULK_OR_INTERRUPT_TRANSFER;
+}
+[Property.InternalUsbIsUrbCompletion = 1]
+Struct UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER = FormatString("Complete URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	URB fid_UCX_URB_BULK_OR_INTERRUPT_TRANSFER;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_IRP_NtStatus;
+}
+[Property.InternalUsbIsUrbCompletion = 1]
+Struct UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER_PARTIAL_DATA = FormatString("Complete URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER with partial data")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	URB fid_UCX_URB_BULK_OR_INTERRUPT_TRANSFER;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_IRP_NtStatus;
+	UINT16 fid_URB_TransferDataLength;
+	UINT8 fid_URB_TransferData[fid_URB_TransferDataLength];
+}
+[Property.InternalUsbIsUrbCompletion = 1]
+Struct UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER_FULL_DATA = FormatString("Complete URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER with full data")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	URB fid_UCX_URB_BULK_OR_INTERRUPT_TRANSFER;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_IRP_NtStatus;
+	UINT16 fid_URB_TransferDataLength;
+	UINT8 fid_URB_TransferData[fid_URB_TransferDataLength];
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_ISOCH_TRANSFER = FormatString("Dispatch URB_FUNCTION_ISOCH_TRANSFER")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	UINT16 fid_UCX_URB_NumberOfPackets;
+	URB Urb;
+}
+[Property.InternalUsbIsUrbCompletion = 1]
+Struct UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_ISOCH_TRANSFER = FormatString("Complete URB_FUNCTION_ISOCH_TRANSFER")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	UINT16 fid_UCX_URB_NumberOfPackets;
+	URB Urb;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_IRP_NtStatus;
+}
+[Property.InternalUsbIsUrbCompletion = 1]
+Struct UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_ISOCH_TRANSFER_PARTIAL_DATA = FormatString("Complete URB_FUNCTION_ISOCH_TRANSFER with partial data")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	UINT16 fid_UCX_URB_NumberOfPackets;
+	URB Urb;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_IRP_NtStatus;
+	UINT16 fid_URB_TransferDataLength;
+	UINT8 fid_URB_TransferData[fid_URB_TransferDataLength];
+}
+[Property.InternalUsbIsUrbCompletion = 1]
+Struct UCX_ETW_EVENT_COMPLETE_URB_FUNCTION_ISOCH_TRANSFER_FULL_DATA = FormatString("Complete URB_FUNCTION_ISOCH_TRANSFER with full data")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	UINT16 fid_UCX_URB_NumberOfPackets;
+	URB Urb;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_IRP_NtStatus;
+	UINT16 fid_URB_TransferDataLength;
+	UINT8 fid_URB_TransferData[fid_URB_TransferDataLength];
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_DESCRIPTOR_FROM_DEVICE = FormatString("Dispatch URB_FUNCTION_GET_DESCRIPTOR_FROM_DEVICE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_DESCRIPTOR_FROM_INTERFACE = FormatString("Dispatch URB_FUNCTION_GET_DESCRIPTOR_FROM_INTERFACE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_DESCRIPTOR_FROM_ENDPOINT = FormatString("Dispatch URB_FUNCTION_GET_DESCRIPTOR_FROM_ENDPOINT")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_DESCRIPTOR_TO_DEVICE = FormatString("Dispatch URB_FUNCTION_SET_DESCRIPTOR_TO_DEVICE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_DESCRIPTOR_TO_INTERFACE = FormatString("Dispatch URB_FUNCTION_SET_DESCRIPTOR_TO_INTERFACE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_DESCRIPTOR_TO_ENDPOINT = FormatString("Dispatch URB_FUNCTION_SET_DESCRIPTOR_TO_ENDPOINT")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_FEATURE_TO_DEVICE = FormatString("Dispatch URB_FUNCTION_SET_FEATURE_TO_DEVICE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_FEATURE_TO_INTERFACE = FormatString("Dispatch URB_FUNCTION_SET_FEATURE_TO_INTERFACE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_FEATURE_TO_ENDPOINT = FormatString("Dispatch URB_FUNCTION_SET_FEATURE_TO_ENDPOINT")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_SET_FEATURE_TO_OTHER = FormatString("Dispatch URB_FUNCTION_SET_FEATURE_TO_OTHER")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLEAR_FEATURE_TO_DEVICE = FormatString("Dispatch URB_FUNCTION_CLEAR_FEATURE_TO_DEVICE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLEAR_FEATURE_TO_INTERFACE = FormatString("Dispatch URB_FUNCTION_CLEAR_FEATURE_TO_INTERFACE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLEAR_FEATURE_TO_ENDPOINT = FormatString("Dispatch URB_FUNCTION_CLEAR_FEATURE_TO_ENDPOINT")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLEAR_FEATURE_TO_OTHER = FormatString("Dispatch URB_FUNCTION_CLEAR_FEATURE_TO_OTHER")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_STATUS_FROM_DEVICE = FormatString("Dispatch URB_FUNCTION_GET_STATUS_FROM_DEVICE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_STATUS_FROM_INTERFACE = FormatString("Dispatch URB_FUNCTION_GET_STATUS_FROM_INTERFACE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_STATUS_FROM_ENDPOINT = FormatString("Dispatch URB_FUNCTION_GET_STATUS_FROM_ENDPOINT")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_STATUS_FROM_OTHER = FormatString("Dispatch URB_FUNCTION_GET_STATUS_FROM_OTHER")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLASS_DEVICE = FormatString("Dispatch URB_FUNCTION_CLASS_DEVICE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLASS_INTERFACE = FormatString("Dispatch URB_FUNCTION_CLASS_INTERFACE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLASS_ENDPOINT = FormatString("Dispatch URB_FUNCTION_CLASS_ENDPOINT")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_CLASS_OTHER = FormatString("Dispatch URB_FUNCTION_CLASS_OTHER")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_VENDOR_DEVICE = FormatString("Dispatch URB_FUNCTION_VENDOR_DEVICE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_VENDOR_INTERFACE = FormatString("Dispatch URB_FUNCTION_VENDOR_INTERFACE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_VENDOR_ENDPOINT = FormatString("Dispatch URB_FUNCTION_VENDOR_ENDPOINT")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_VENDOR_OTHER = FormatString("Dispatch URB_FUNCTION_VENDOR_OTHER")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_CONFIGURATION = FormatString("Dispatch URB_FUNCTION_GET_CONFIGURATION")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_INTERFACE = FormatString("Dispatch URB_FUNCTION_GET_INTERFACE")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDeivce;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_DISPATCH_URB_FUNCTION_GET_MS_FEATURE_DESCRIPTOR = FormatString("Dispatch URB_FUNCTION_GET_MS_FEATURE_DESCRIPTOR")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UsbPipeHandle fid_PipeHandle;
+	EtlPtr fid_IRP_Ptr;
+	UsbUrbPtr fid_URB_Ptr;
+	CONTROL_TRANSFER_URB_SETUP fid_UCX_URB_CONTROL_TRANSFER;
+}
+Struct UCX_ETW_EVENT_UCX_ENDPOINT_STATE_MACHINE_TRANSITION = FormatString("Endpoint State Machine Transition <%s> %s", UcxEndpointEvent(fid_Event), UcxEndpointState(fid_State))
+{
+	UsbEndpointPtr fid_Endpoint;
+	EtlPtr fid_URB_PipeHandle;
+	UINT32 fid_Event;
+	UINT32 fid_State;
+}
+Struct UCX_ETW_EVENT_UCX_ENDPOINT_STATE_MACHINE_EVENT = FormatString("Endpoint State Machine Event <%s>", UcxEndpointEvent(fid_Event))
+{
+	UsbEndpointPtr fid_Endpoint;
+	EtlPtr fid_URB_PipeHandle;
+	UINT32 fid_Event;
+}
+Struct UCX_ETW_EVENT_RUNDOWN_UCX_ENDPOINT_STATE_MACHINE_TRANSITION = FormatString("Rundown Endpoint State Machine Transition <%s> %s", UcxEndpointEvent(fid_Event), UcxEndpointState(fid_State))
+{
+	UsbEndpointPtr fid_Endpoint;
+	EtlPtr fid_URB_PipeHandle;
+	UINT32 fid_Event;
+	UINT32 fid_State;
+}
+Struct UCX_ETW_EVENT_RUNDOWN_UCX_ENDPOINT_STATE_MACHINE_EVENT = FormatString("Rundown Endpoint State Machine Event <%s>", UcxEndpointEvent(fid_Event))
+{
+	UsbEndpointPtr fid_Endpoint;
+	EtlPtr fid_URB_PipeHandle;
+	UINT32 fid_Event;
+}
+Struct UCX_ETW_EVENT_UCX_CONTROLLER_STATE_MACHINE_TRANSITION = FormatString("Controller State Machine Transition <%s> %s", ControllerResetEvent(fid_Event), ControllerResetState(fid_State))
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_SmEngineContext;
+	UINT32 fid_Event;
+	UINT32 fid_State;
+}
+Struct UCX_ETW_EVENT_UCX_CONTROLLER_STATE_MACHINE_EVENT = FormatString("Controller State Machine Event <%s>", ControllerResetEvent(fid_Event))
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_SmEngineContext;
+	UINT32 fid_Event;
+}
+Struct UCX_ETW_EVENT_RUNDOWN_UCX_CONTROLLER_STATE_MACHINE_TRANSITION = FormatString("Rundown Controller State Machine Transition <%s> %s", ControllerResetEvent(fid_Event), ControllerResetState(fid_State))
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_SmEngineContext;
+	UINT32 fid_Event;
+	UINT32 fid_State;
+}
+Struct UCX_ETW_EVENT_RUNDOWN_UCX_CONTROLLER_STATE_MACHINE_EVENT = FormatString("Rundown Controller State Machine Event <%s>", ControllerResetEvent(fid_Event))
+{
+	EtlPtr fid_UcxController;
+	EtlPtr fid_SmEngineContext;
+	UINT32 fid_Event;
+}
+Struct UCX_ETW_EVENT_UCX_ROOTHUB_INITIATING_WAKE = FormatString("UCX RootHub Initiating Wake")
+{
+	EtlPtr fid_UcxController;
+	UsbDevicePtr fid_UsbDevice;
+	UnicodeString fid_DeviceInterfacePath;
+}
+// Array Struct
+struct fid_UCX_URB_ISO_PACKETS = FormatString(
+	"%s %d",
+	fid_URB_Packet_Status != 0 ? fid_URB_Packet_Status.ToString : "",
+	fid_URB_Packet_Length)
+{
+	UINT32 fid_URB_Packet_Offset;
+	UINT32 fid_URB_Packet_Length;
+	UINT32 fid_URB_Packet_Status = UsbdStatusTable(this);
+}
+[RegisterBefore(EventDescriptor.DefaultKeyword, MicrosoftWindowsUSBUCX_Keyword, "{36da592d-e43a-4e28-af6f-4bc57c5a11e8}")]
+struct MicrosoftWindowsUSBUCX_Keyword
+{
+	UINT64 Default:1 = FormatString("            (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_DEFAULT":"");
+	UINT64 USBError:1 = FormatString("           (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_USBERROR":"");
+	UINT64 IRP:1 = FormatString("                (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_IRP":"");
+	UINT64 Power:1 = FormatString("              (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_POWER":"");
+	UINT64 PnP:1 = FormatString("                (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_PNP":"");
+	UINT64 Performance:1 = FormatString("        (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_PERFORMANCE":"");
+	UINT64 HeadersBusTrace:1 = FormatString("    (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_HEADERS_BUS_TRACE":"");
+	UINT64 PartialDataBusTrace:1 = FormatString("(%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_PARTIAL_DATA_BUS_TRACE":"");
+	UINT64 FullDataBusTrace:1 = FormatString("   (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_FULL_DATA_BUS_TRACE":"");
+	UINT64 StateMachine:1 = FormatString("       (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_STATEMACHINE":"");
+	UINT64 Enumeration:1 = FormatString("        (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_ENUMERATION":"");
+	UINT64 VerifyDriver:1 = FormatString("       (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_VERIFYDRIVER":"");
+	UINT64 HWVerifyHost:1 = FormatString("       (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_HW_VERIFYHOST":"");
+	UINT64 HWVerifyHub:1 = FormatString("        (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_HW_VERIFYHUB":"");
+	UINT64 HWVerifyDevice:1 = FormatString("     (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_HW_VERIFYDEVICE":"");
+	UINT64 Rundown:1 = FormatString("            (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_RUNDOWN":"");
+	UINT64 Device:1 = FormatString("             (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_DEVICE":"");
+	UINT64 Hub:1 = FormatString("                (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_HUB":"");
+	UINT64 Compat:1 = FormatString("             (%s) %s", this.ToBitString, this? "UCX_ETW_KEYWORD_COMPAT":"");
+	UINT64 ControllerCommand:1 = FormatString("  (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_CONTROLLER_COMMAND":"");
+	UINT64 Reserved1:44 = FormatString("          (%s)", this.ToBitString);
+}
+//#  (c) 2009 Microsoft Corporation
+//#
+//#  Title:                  Microsoft-Windows-usbhub3
+//#
+//#  Details:                
+//#
+//#  Public References:      usbhub3.man
+//#
+//#  Comments:               
+//#
+//#  Revision Class and Date:Minor, 6/6/2011
+//#
+//####
+[RegisterBefore(NetEvent.UserData, UsbHub3, "{AC52AD17-CC01-4F85-8DF5-4DCE4333C99B}")]
+Protocol UsbHub3 = property.ETLSummary
+{
+	[BuildConversationWithParent, conversation.ConversationDescription = ""]
+	[Post.Property.USBIsError =
+		((
+			(NetEvent.Header.Descriptor.Level == 0x2) 
+			OR
+			(Property.USBDStatus != "success" && Property.USBDStatus != "" && Property.USBDStatus != "canceled")
+			OR
+			(Property.USBNtStatus != "success" && Property.USBNtStatus != "" && Property.USBNtStatus != "0xC0000120 - STATUS_CANCELLED")
+		) ? 1 : 0)]
+	switch(property.EventID)
+	{
+		case 1: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_RUNDOWN_START USBHUB3_ETW_EVENT_RUNDOWN_START;
+		case 2: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_RUNDOWN_COMPLETE USBHUB3_ETW_EVENT_RUNDOWN_COMPLETE;
+		case 3: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_RUNDOWN_USB30_HUB_INFORMATION USBHUB3_ETW_EVENT_RUNDOWN_USB30_HUB_INFORMATION;
+		case 4: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_RUNDOWN_USB20_HUB_INFORMATION USBHUB3_ETW_EVENT_RUNDOWN_USB20_HUB_INFORMATION;
+		case 5: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_RUNDOWN_ROOT_HUB_INFORMATION USBHUB3_ETW_EVENT_RUNDOWN_ROOT_HUB_INFORMATION;
+		case 6:
+			Switch(property.EventVersion)
+			{
+				case 0: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_RUNDOWN_DEVICE_INFORMATION USBHUB3_ETW_EVENT_RUNDOWN_DEVICE_INFORMATION;
+				case 1: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_RUNDOWN_DEVICE_INFORMATION_V1 USBHUB3_ETW_EVENT_RUNDOWN_DEVICE_INFORMATION_V1;
+			}
+		case 7: 
+			Switch(property.EventVersion)
+			{
+				case 0: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_RUNDOWN_20_PORT USBHUB3_ETW_EVENT_RUNDOWN_20_PORT;
+				case 1: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_RUNDOWN_20_PORT_V1 USBHUB3_ETW_EVENT_RUNDOWN_20_PORT_V1;
+			}
+		case 8: 
+			Switch(property.EventVersion)
+			{
+				case 0: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_RUNDOWN_30_PORT USBHUB3_ETW_EVENT_RUNDOWN_30_PORT;
+				case 1: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_RUNDOWN_30_PORT_V1 USBHUB3_ETW_EVENT_RUNDOWN_30_PORT_V1;
+			}
+		case 9: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_RUNDOWN_ACPI_UPC USBHUB3_ETW_EVENT_RUNDOWN_ACPI_UPC;
+		case 10: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_RUNDOWN_ACPI_PLD USBHUB3_ETW_EVENT_RUNDOWN_ACPI_PLD;
+		case 20: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_START USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_START;
+		case 21: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_COMPLETE USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_COMPLETE;
+		case 22: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_USB30_HUB_INFORMATION USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_USB30_HUB_INFORMATION;
+		case 23: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_USB20_HUB_INFORMATION USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_USB20_HUB_INFORMATION;
+		case 24: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_ROOT_HUB_INFORMATION USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_ROOT_HUB_INFORMATION;
+		case 25:
+			Switch(property.EventVersion)
+			{
+				case 0: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_20_PORT USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_20_PORT;
+				case 1: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_20_PORT_V1 USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_20_PORT_V1;
+			}
+		case 26:
+			Switch(property.EventVersion)
+			{
+				case 0: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_30_PORT USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_30_PORT;
+				case 1: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_30_PORT_V1 USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_30_PORT_V1;
+			}
+		case 27: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_ACPI_UPC USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_ACPI_UPC;
+		case 28: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_ACPI_PLD USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_ACPI_PLD;
+		case 29: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_ADD_DEVICE_START USBHUB3_ETW_EVENT_HUB_ADD_DEVICE_START;
+		case 30: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_ADD_DEVICE_COMPLETE USBHUB3_ETW_EVENT_HUB_ADD_DEVICE_COMPLETE;
+		case 31: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_RELEASE_HARDWARE_START USBHUB3_ETW_EVENT_HUB_RELEASE_HARDWARE_START;
+		case 32: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_RELEASE_HARDWARE_COMPLETE USBHUB3_ETW_EVENT_HUB_RELEASE_HARDWARE_COMPLETE;
+		case 33: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_D0_ENTRY_START USBHUB3_ETW_EVENT_HUB_D0_ENTRY_START;
+		case 34: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_D0_ENTRY_COMPLETE USBHUB3_ETW_EVENT_HUB_D0_ENTRY_COMPLETE;
+		case 35: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_D0_EXIT_START USBHUB3_ETW_EVENT_HUB_D0_EXIT_START;
+		case 36: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_D0_EXIT_COMPLETE USBHUB3_ETW_EVENT_HUB_D0_EXIT_COMPLETE;
+		case 37: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_SURPRISE_REMOVAL_START USBHUB3_ETW_EVENT_HUB_SURPRISE_REMOVAL_START;
+		case 38: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_SURPRISE_REMOVAL_COMPLETE USBHUB3_ETW_EVENT_HUB_SURPRISE_REMOVAL_COMPLETE;
+		case 39: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_CLEANUP_START USBHUB3_ETW_EVENT_HUB_CLEANUP_START;
+		case 40: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_CLEANUP_COMPLETE USBHUB3_ETW_EVENT_HUB_CLEANUP_COMPLETE;
+		case 41: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_START USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_START;
+		case 42: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_COMPLETE USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_COMPLETE;
+		case 43:
+			Switch(property.EventVersion)
+			{
+				case 0: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_DEVICE_INFORMATION USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_DEVICE_INFORMATION;
+				case 1: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_DEVICE_INFORMATION_V1 USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_DEVICE_INFORMATION_V1;
+			}
+		case 44: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_NESTED_TOO_DEEP USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_NESTED_TOO_DEEP;
+		case 45: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_UNKNOWN_HUB_TYPE USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_UNKNOWN_HUB_TYPE;
+		case 47: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_ADD_DEVICE_START USBHUB3_ETW_EVENT_DEVICE_ADD_DEVICE_START;
+		case 48: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_ADD_DEVICE_COMPLETE USBHUB3_ETW_EVENT_DEVICE_ADD_DEVICE_COMPLETE;
+		case 49: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_RELEASE_HARDWARE_START USBHUB3_ETW_EVENT_DEVICE_RELEASE_HARDWARE_START;
+		case 50: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_RELEASE_HARDWARE_COMPLETE USBHUB3_ETW_EVENT_DEVICE_RELEASE_HARDWARE_COMPLETE;
+		case 51: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_D0_ENTRY_START USBHUB3_ETW_EVENT_DEVICE_D0_ENTRY_START;
+		case 52: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_D0_ENTRY_COMPLETE USBHUB3_ETW_EVENT_DEVICE_D0_ENTRY_COMPLETE;
+		case 53: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_D0_EXIT_START USBHUB3_ETW_EVENT_DEVICE_D0_EXIT_START;
+		case 54: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_D0_EXIT_COMPLETE USBHUB3_ETW_EVENT_DEVICE_D0_EXIT_COMPLETE;
+		case 55: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_SURPRISE_REMOVAL_START USBHUB3_ETW_EVENT_DEVICE_SURPRISE_REMOVAL_START;
+		case 56: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_SURPRISE_REMOVAL_COMPLETE USBHUB3_ETW_EVENT_DEVICE_SURPRISE_REMOVAL_COMPLETE;
+		case 57: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_CLEANUP_START USBHUB3_ETW_EVENT_DEVICE_CLEANUP_START;
+		case 58: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_CLEANUP_COMPLETE USBHUB3_ETW_EVENT_DEVICE_CLEANUP_COMPLETE;
+		case 60: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_START USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_START;
+		case 61: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_COMPLETE USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_COMPLETE;
+		case 62: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_RETRY USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_RETRY;
+		case 63: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_MAXIMUM_RETRY_COUNT_REACHED USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_MAXIMUM_RETRY_COUNT_REACHED;
+		case 64: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_FAILED USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_FAILED;
+		case 65: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_RESET_TIMEOUT USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_RESET_TIMEOUT;
+		case 66: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_WAS_RESET_ON_RESUME USBHUB3_ETW_EVENT_HUB_WAS_RESET_ON_RESUME;
+		case 70: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_MSOS_EXTENDED_PROPERTY_DESCRIPTOR_HEADER USBHUB3_ETW_EVENT_INVALID_MSOS_EXTENDED_PROPERTY_DESCRIPTOR_HEADER;
+		case 71: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_MSOS_EXTENDED_PROPERTY_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_MSOS_EXTENDED_PROPERTY_DESCRIPTOR;
+		case 72: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_BOS_DESCRIPTOR_HEADER USBHUB3_ETW_EVENT_INVALID_BOS_DESCRIPTOR_HEADER;
+		case 73: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_BOS_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_BOS_DESCRIPTOR;
+		case 74: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_CONFIGURATION_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_CONFIGURATION_DESCRIPTOR;
+		case 75: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_DEVICE_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_DEVICE_DESCRIPTOR;
+		case 76: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_DEVICE_QUALIFIER_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_DEVICE_QUALIFIER_DESCRIPTOR;
+		case 77: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_LANGUAGE_ID_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_LANGUAGE_ID_DESCRIPTOR;
+		case 78: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_MSOS_CONTAINER_ID_DESCRIPTOR_HEADER USBHUB3_ETW_EVENT_INVALID_MSOS_CONTAINER_ID_DESCRIPTOR_HEADER;
+		case 79: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_MSOS_CONTAINER_ID_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_MSOS_CONTAINER_ID_DESCRIPTOR;
+		case 80: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_MSOS_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_MSOS_DESCRIPTOR;
+		case 81: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_MSOS_EXTENDED_CONFIGURATION_DESCRIPTOR_HEADER USBHUB3_ETW_EVENT_INVALID_MSOS_EXTENDED_CONFIGURATION_DESCRIPTOR_HEADER;
+		case 82: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_MSOS_EXTENDED_CONFIGURATION_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_MSOS_EXTENDED_CONFIGURATION_DESCRIPTOR;
+		case 83: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_PRODUCT_ID_STRING_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_PRODUCT_ID_STRING_DESCRIPTOR;
+		case 84: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_SERIAL_NUMBER_STRING_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_SERIAL_NUMBER_STRING_DESCRIPTOR;
+		case 85: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_MSOS20_DESCRIPTOR_SET USBHUB3_ETW_EVENT_INVALID_MSOS20_DESCRIPTOR_SET;
+		case 90: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_INTERNAL_IOCTL_START USBHUB3_ETW_EVENT_DEVICE_INTERNAL_IOCTL_START;
+		case 91: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_INTERNAL_IOCTL_COMPLETE USBHUB3_ETW_EVENT_DEVICE_INTERNAL_IOCTL_COMPLETE;
+		case 92: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_URB_START USBHUB3_ETW_EVENT_DEVICE_URB_START;
+		case 93: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_URB_COMPLETE USBHUB3_ETW_EVENT_DEVICE_URB_COMPLETE;
+		case 94: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DISPATCH_URB_INVALID_HEADER_LENGTH_WARNING USBHUB3_ETW_EVENT_DISPATCH_URB_INVALID_HEADER_LENGTH_WARNING;
+		case 95: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DISPATCH_URB_INVALID_FUNCTION USBHUB3_ETW_EVENT_DISPATCH_URB_INVALID_FUNCTION;
+		case 96: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_SUBMIT_IDLE_NOTIFICATION_START USBHUB3_ETW_EVENT_DEVICE_SUBMIT_IDLE_NOTIFICATION_START;
+		case 97: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_SUBMIT_IDLE_NOTIFICATION_COMPLETE USBHUB3_ETW_EVENT_DEVICE_SUBMIT_IDLE_NOTIFICATION_COMPLETE;
+		case 98: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_IDLE_CALLBACK USBHUB3_ETW_EVENT_DEVICE_IDLE_CALLBACK;
+		case 100: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_20_PORT_STATUS USBHUB3_ETW_EVENT_20_PORT_STATUS;
+		case 101: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_30_PORT_STATUS USBHUB3_ETW_EVENT_30_PORT_STATUS;
+		case 102: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_PORT_ACPI_UPC_FAILURE USBHUB3_ETW_EVENT_HUB_PORT_ACPI_UPC_FAILURE;
+		case 103: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_PORT_ACPI_PLD_FAILURE USBHUB3_ETW_EVENT_HUB_PORT_ACPI_PLD_FAILURE;
+		case 110: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_STATE_MACHINE USBHUB3_ETW_EVENT_STATE_MACHINE;
+		case 111: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_UNHANDLED_STATE_MACHINE_EVENT USBHUB3_ETW_EVENT_UNHANDLED_STATE_MACHINE_EVENT;
+		case 120: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_RESET_REQUEST_START USBHUB3_ETW_EVENT_HUB_RESET_REQUEST_START;
+		case 121: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_RESET_REQUEST_COMPLETE USBHUB3_ETW_EVENT_HUB_RESET_REQUEST_COMPLETE;
+		case 122: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_RESET_DUE_TO_PORT_ERROR USBHUB3_ETW_EVENT_HUB_RESET_DUE_TO_PORT_ERROR;
+		case 123:
+			Switch(property.EventVersion)
+			{
+				case 0: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_PORT_STATUS_ERROR USBHUB3_ETW_EVENT_PORT_STATUS_ERROR;
+				case 1: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_PORT_STATUS_ERROR_V1 USBHUB3_ETW_EVENT_PORT_STATUS_ERROR_V1;
+			}
+		case 130: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_CONTROL_TRANSFER_ERROR USBHUB3_ETW_EVENT_HUB_CONTROL_TRANSFER_ERROR;
+		case 131: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_PORT_CONTROL_TRANSFER_ERROR USBHUB3_ETW_EVENT_PORT_CONTROL_TRANSFER_ERROR;
+		case 132: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_CONTROL_TRANSFER_ERROR USBHUB3_ETW_EVENT_DEVICE_CONTROL_TRANSFER_ERROR;
+		case 133: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_PORT_INTERRUPT_TRANSFER_ERROR USBHUB3_ETW_EVENT_PORT_INTERRUPT_TRANSFER_ERROR;
+		case 134: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_SELECTIVE_SUSPEND_NOT_SUPPORTED USBHUB3_ETW_EVENT_HUB_SELECTIVE_SUSPEND_NOT_SUPPORTED;
+		case 140: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_INFORMATION_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_INFORMATION_COMPLETE;
+		case 141: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_DRIVERKEY_NAME_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_DRIVERKEY_NAME_COMPLETE;
+		case 142: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_INFORMATION_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_INFORMATION_COMPLETE;
+		case 143: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_INFORMATION_EX_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_INFORMATION_EX_COMPLETE;
+		case 144: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_ATTRIBUTES_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_ATTRIBUTES_COMPLETE;
+		case 145: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_NAME_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_NAME_COMPLETE;
+		case 146: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_DESCRIPTOR_FROM_NODE_CONNECTION_START USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_DESCRIPTOR_FROM_NODE_CONNECTION_START;
+		case 147: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_DESCRIPTOR_FROM_NODE_CONNECTION_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_DESCRIPTOR_FROM_NODE_CONNECTION_COMPLETE;
+		case 148: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_HUB_CAPABILITIES_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_HUB_CAPABILITIES_COMPLETE;
+		case 149: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_HUB_CAPABILITIES_EX_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_HUB_CAPABILITIES_EX_COMPLETE;
+		case 150: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_HUB_CYCLE_PORT_START USBHUB3_ETW_EVENT_HUB_IOCTL_USB_HUB_CYCLE_PORT_START;
+		case 151: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_HUB_CYCLE_PORT_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_HUB_CYCLE_PORT_COMPLETE;
+		case 152: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_RESET_HUB_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_RESET_HUB_COMPLETE;
+		case 153: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_UNSUPPORTED_IOCTL_COMPLETE USBHUB3_ETW_EVENT_HUB_UNSUPPORTED_IOCTL_COMPLETE;
+		case 154: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_PORT_CONNECTOR_PROPERTIES_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_PORT_CONNECTOR_PROPERTIES_COMPLETE;
+		case 155: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_HUB_INFORMATION_EX_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_HUB_INFORMATION_EX_COMPLETE;
+		case 156: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_INFORMATION_EX_V2_COMPLETE USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_INFORMATION_EX_V2_COMPLETE;
+		case 157: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_UCX_IOCTL_FAILURE USBHUB3_ETW_EVENT_UCX_IOCTL_FAILURE;
+		case 160: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_DESCRIPTOR_FAILURE USBHUB3_ETW_EVENT_DEVICE_DESCRIPTOR_FAILURE;
+		case 161: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_SET_ADDRESS_FAILURE USBHUB3_ETW_EVENT_SET_ADDRESS_FAILURE;
+		case 162: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_CONFIG_DESCRIPTOR_FAILURE USBHUB3_ETW_EVENT_CONFIG_DESCRIPTOR_FAILURE;
+		case 163: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_SET_SEL_FAILURE USBHUB3_ETW_EVENT_SET_SEL_FAILURE;
+		case 164: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_BOS_DESCRIPTOR_FAILURE USBHUB3_ETW_EVENT_BOS_DESCRIPTOR_FAILURE;
+		case 165: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_QUALIFIER_DESCRIPTOR_FAILURE USBHUB3_ETW_EVENT_DEVICE_QUALIFIER_DESCRIPTOR_FAILURE;
+		case 166: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_SERIAL_NUMBER_STRING_FAILURE USBHUB3_ETW_EVENT_SERIAL_NUMBER_STRING_FAILURE;
+		case 167: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_PRODUCT_ID_STRING_FAILURE USBHUB3_ETW_EVENT_PRODUCT_ID_STRING_FAILURE;
+		case 168: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_MS_EXT_CONFIG_DESCRIPTOR_FAILURE USBHUB3_ETW_EVENT_MS_EXT_CONFIG_DESCRIPTOR_FAILURE;
+		case 169: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_MS_CONTAINER_ID_DESCRIPTOR_FAILURE USBHUB3_ETW_EVENT_MS_CONTAINER_ID_DESCRIPTOR_FAILURE;
+		case 170: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_SET_ISOCH_DELAY_FAILURE USBHUB3_ETW_EVENT_SET_ISOCH_DELAY_FAILURE;
+		case 171: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_LANGUAGE_ID_STRING_FAILURE USBHUB3_ETW_EVENT_LANGUAGE_ID_STRING_FAILURE;
+		case 172: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_REGISTRY_FAILURE USBHUB3_ETW_EVENT_REGISTRY_FAILURE;
+		case 173: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_SSDEVICE_CONNECTED_AT_LS USBHUB3_ETW_EVENT_SSDEVICE_CONNECTED_AT_LS;
+		case 174: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_HUB_TOO_MANY_RESETS USBHUB3_ETW_EVENT_HUB_TOO_MANY_RESETS;
+		case 175: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INTERFACE_WAKE_CAPABILITY_MISMATCH USBHUB3_ETW_EVENT_INTERFACE_WAKE_CAPABILITY_MISMATCH;
+		case 176: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DESCRIPTOR_VALIDATION_FAILURE USBHUB3_ETW_EVENT_DESCRIPTOR_VALIDATION_FAILURE;
+		case 177: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_BUS_RENUMERATION USBHUB3_ETW_EVENT_BUS_RENUMERATION;
+		case 178: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_USBENUM_SERIAL_MISMATCH_ON_RENUMERATION USBHUB3_ETW_EVENT_USBENUM_SERIAL_MISMATCH_ON_RENUMERATION;
+		case 179:
+			Switch(property.EventVersion)
+			{
+				case 0: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_CLIENT_INITIATED_RECOVERY_ACTION USBHUB3_ETW_EVENT_CLIENT_INITIATED_RECOVERY_ACTION;
+				case 1: [property.ETLSummary = this.ToString]USBHUB3_ETW_EVENT_CLIENT_INITIATED_RECOVERY_ACTION_V1 USBHUB3_ETW_EVENT_CLIENT_INITIATED_RECOVERY_ACTION_V1;
+			}
+		case 180: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_QUERY_USB_CAPABILITY USBHUB3_ETW_EVENT_DEVICE_QUERY_USB_CAPABILITY;
+		case 181: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_MSOS20_DESCRIPTOR_FAILURE USBHUB3_ETW_EVENT_MSOS20_DESCRIPTOR_FAILURE;
+		case 182: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_MSOS20_SET_ALT_ENUMERATION_FAILURE USBHUB3_ETW_EVENT_MSOS20_SET_ALT_ENUMERATION_FAILURE;
+		case 183: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_SET_U1_ENABLE_FAILURE USBHUB3_ETW_EVENT_SET_U1_ENABLE_FAILURE;
+		case 184: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_SET_U2_ENABLE_FAILURE USBHUB3_ETW_EVENT_SET_U2_ENABLE_FAILURE;
+		case 185: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DESCRIPTOR_VALIDATION_WARNING USBHUB3_ETW_EVENT_DESCRIPTOR_VALIDATION_WARNING;
+		case 186: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_BILLBOARD USBHUB3_ETW_EVENT_BILLBOARD;
+		case 187: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_ALTERNATE_MODE_FAILED USBHUB3_ETW_EVENT_ALTERNATE_MODE_FAILED;
+		case 188: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_ALTERNATE_MODE_ENTERED USBHUB3_ETW_EVENT_ALTERNATE_MODE_ENTERED;
+		case 189: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_BILLBOARD_STRING_FAILURE USBHUB3_ETW_EVENT_BILLBOARD_STRING_FAILURE;
+		case 190: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_ALTERNATE_MODE_STRING_FAILURE USBHUB3_ETW_EVENT_ALTERNATE_MODE_STRING_FAILURE;
+		case 191: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_BILLBOARD_STRING_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_BILLBOARD_STRING_DESCRIPTOR;
+		case 192: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_INVALID_ALTERNATE_MODE_STRING_DESCRIPTOR USBHUB3_ETW_EVENT_INVALID_ALTERNATE_MODE_STRING_DESCRIPTOR;
+		case 194: [property.ETLSummary = this.ToString] USBHUB3_ETW_EVENT_DEVICE_DRIPS_WATCHDOG_COMPLETE USBHUB3_ETW_EVENT_DEVICE_DRIPS_WATCHDOG_COMPLETE;
+		default: [property.ETLSummary = "Not exist EventID"]struct{};
+	}
+}
+Table MapControllerParentBusType(value)
+{
+	switch(value)
+	{
+		case 1: "ControllerParentBusTypePci";
+		case 2: "ControllerParentBusTypeAcpi";
+		default:
+			FormatString("Unknown value: %d", value);
+	}
+}
+Struct USBHUB3_ETW_EVENT_RUNDOWN_START = "Start Rundown" {}; // Empty Struct
+Struct USBHUB3_ETW_EVENT_RUNDOWN_COMPLETE = "Complete Rundown" {}; // Empty Struct
+Struct USBHUB3_ETW_EVENT_RUNDOWN_USB30_HUB_INFORMATION = FormatString("USB 3.0 Hub Information")
+{
+	UsbDevicePtr fid_UsbDevice;
+	struct 	fid_USB30_HubDescriptor
+	{
+		UINT8 fid_bDescriptorLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bNumberOfPorts;
+		UINT16 fid_wHubCharacteristics;
+		UINT8 fid_bPowerOnToGood;
+		UINT8 fid_bHubControlCurrent;
+		UINT8 fid_bHubHdrDecLat;
+		UINT16 fid_wHubDelay;
+		UINT16 fid_DeviceRemovable;
+	}
+	UINT32 fid_CurrentWdfPowerDeviceState;
+}
+Struct USBHUB3_ETW_EVENT_RUNDOWN_USB20_HUB_INFORMATION = FormatString("USB 2.0/1.1 Hub Information")
+{
+	UsbDevicePtr fid_UsbDevice;
+	struct 	fid_USB20_HubDescriptor
+	{
+		UINT8 fid_bDescriptorLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bNumberOfPorts;
+		UINT16 fid_wHubCharacteristics;
+		UINT8 fid_bPowerOnToGood;
+		UINT8 fid_bHubControlCurrent;
+		UINT8 fid_bRemoveAndPowerMask[64];
+	}
+	UINT32 fid_CurrentWdfPowerDeviceState;
+}
+[Post.Global.InternalUsbTblPortPath$[Property.USBDevicePtr] = "-"]
+[Post.Global.InternalUsbTblDeviceDescription$[Property.USBDevicePtr] = "Root Hub"]
+Struct USBHUB3_ETW_EVENT_RUNDOWN_ROOT_HUB_INFORMATION = FormatString("USB Root Hub Information")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_CurrentWdfPowerDeviceState;
+}
+Struct USBHUB3_ETW_EVENT_RUNDOWN_DEVICE_INFORMATION = FormatString("USB Device Information")
+{
+	EtlPtr fid_HubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	InternalUsbTblDeviceDescription fid_DeviceDescription;
+	UnicodeString fid_DeviceInterfacePath;
+	USB_DEVICE_DESCRIPTOR fid_DeviceDescriptor;
+	[Property.InternalUsbDescriptorLength]
+	UINT16 fid_ConfigurationDescriptorLength;
+	USB_DESCRIPTORS ConfigurationDescriptor;
+	UnicodeString fid_PdoName;
+	UINT8 fid_Suspended;
+	UINT32 fid_PortPathDepth;
+	UINT32 fid_PortPath[6];
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	UINT32 fid_CurrentWdfPowerDeviceState;
+    UINT32 fid_Usb20LpmStatus = Usb20LpmStatus(this);
+}
+Struct USBHUB3_ETW_EVENT_RUNDOWN_DEVICE_INFORMATION_V1 = FormatString("USB Device Information")
+{
+	EtlPtr fid_HubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	InternalUsbTblDeviceDescription fid_DeviceDescription;
+	UnicodeString fid_DeviceInterfacePath;
+	USB_DEVICE_DESCRIPTOR fid_DeviceDescriptor;
+	[Property.InternalUsbDescriptorLength]
+	UINT16 fid_ConfigurationDescriptorLength;
+	USB_DESCRIPTORS ConfigurationDescriptor;
+	UnicodeString fid_PdoName;
+	UINT8 fid_Suspended;
+	UINT32 fid_PortPathDepth;
+	UINT32 fid_PortPath[6];
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	UINT32 fid_CurrentWdfPowerDeviceState;
+	UINT32 fid_Usb20LpmStatus = Usb20LpmStatus(this);
+	UINT32 fid_ControllerParentBusType = MapControllerParentBusType(this);
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+	UINT8 fid_PortFlagAcpiUpcValid;
+	UINT8 fid_PortConnectorType;
+	UINT64 fid_UcmConnectorId;
+}
+Struct USBHUB3_ETW_EVENT_RUNDOWN_20_PORT = FormatString("USB 2.0/1.1 Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+}
+Struct USBHUB3_ETW_EVENT_RUNDOWN_20_PORT_V1 = FormatString("USB 2.0/1.1 Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT8 fid_PortFlagAcpiUpcValid;
+	UINT8 fid_PortConnectorType;
+	UINT64 fid_UcmConnectorId;
+	UINT32 fid_ControllerParentBusType = MapControllerParentBusType(this);
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+}
+Struct USBHUB3_ETW_EVENT_RUNDOWN_30_PORT = FormatString("USB 3.0 Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+}
+Struct USBHUB3_ETW_EVENT_RUNDOWN_30_PORT_V1 = FormatString("USB 3.0 Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT8 fid_PortFlagAcpiUpcValid;
+	UINT8 fid_PortConnectorType;
+	UINT64 fid_UcmConnectorId;
+	UINT32 fid_ControllerParentBusType = MapControllerParentBusType(this);
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+}
+Struct USBHUB3_ETW_EVENT_RUNDOWN_ACPI_UPC = FormatString("ACPI _UPC Package for Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	struct 	fid_USBHUB_Acpi_Upc_Package
+	{
+		UINT8 fid_PortIsConnectable;
+		UINT8 fid_PortConnectorType;
+		UINT32 fid_Reserved0;
+		UINT32 fid_Reserved1;
+	}
+}
+Struct USBHUB3_ETW_EVENT_RUNDOWN_ACPI_PLD = FormatString("ACPI _PLD Package for Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	struct 	fid_USBHUB_Acpi_Pld
+	{
+		UINT64 fid_PortPath[2];
+	}
+}
+Struct USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_START = FormatString("Start of EvtDevicePrepareHardware for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_COMPLETE = FormatString("Complete EvtDevicePrepareHardware for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_USB30_HUB_INFORMATION = FormatString("USB 3.0 Hub Information")
+{
+	UsbDevicePtr fid_UsbDevice;
+	struct 	fid_USB30_HubDescriptor
+	{
+		UINT8 fid_bDescriptorLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bNumberOfPorts;
+		UINT16 fid_wHubCharacteristics;
+		UINT8 fid_bPowerOnToGood;
+		UINT8 fid_bHubControlCurrent;
+		UINT8 fid_bHubHdrDecLat;
+		UINT16 fid_wHubDelay;
+		UINT16 fid_DeviceRemovable;
+	}
+	UINT32 fid_CurrentWdfPowerDeviceState;
+}
+Struct USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_USB20_HUB_INFORMATION = FormatString("USB 2.0/1.1 Hub Information")
+{
+	UsbDevicePtr fid_UsbDevice;
+	struct 	fid_USB20_HubDescriptor
+	{
+		UINT8 fid_bDescriptorLength;
+		UINT8 fid_bDescriptorType;
+		UINT8 fid_bNumberOfPorts;
+		UINT16 fid_wHubCharacteristics;
+		UINT8 fid_bPowerOnToGood;
+		UINT8 fid_bHubControlCurrent;
+		UINT8 fid_bRemoveAndPowerMask[64];
+	}
+	UINT32 fid_CurrentWdfPowerDeviceState;
+}
+[Post.Global.InternalUsbTblPortPath$[Property.USBDevicePtr] = "-"]
+[Post.Global.InternalUsbTblDeviceDescription$[Property.USBDevicePtr] = "Root Hub"]
+Struct USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_ROOT_HUB_INFORMATION = FormatString("USB Root Hub Information")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_CurrentWdfPowerDeviceState;
+}
+Struct USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_20_PORT = FormatString("USB 2.0/1.1 Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+}
+Struct USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_20_PORT_V1 = FormatString("USB 2.0/1.1 Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT8 fid_PortFlagAcpiUpcValid;
+	UINT8 fid_PortConnectorType;
+	UINT64 fid_UcmConnectorId;
+	UINT32 fid_ControllerParentBusType = MapControllerParentBusType(this);
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+}
+Struct USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_30_PORT = FormatString("USB 3.0 Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+}
+Struct USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_30_PORT_V1 = FormatString("USB 3.0 Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT8 fid_PortFlagAcpiUpcValid;
+	UINT8 fid_PortConnectorType;
+	UINT64 fid_UcmConnectorId;
+	UINT32 fid_ControllerParentBusType = MapControllerParentBusType(this);
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+}
+Struct USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_ACPI_UPC = FormatString("ACPI _UPC Package for Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	struct 	fid_USBHUB_Acpi_Upc_Package
+	{
+		UINT8 fid_PortIsConnectable;
+		UINT8 fid_PortConnectorType;
+		UINT32 fid_Reserved0;
+		UINT32 fid_Reserved1;
+	}
+}
+Struct USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_ACPI_PLD = FormatString("ACPI _PLD Package for Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	struct 	fid_USBHUB_Acpi_Pld
+	{
+		UINT64 fid_PortPath[2];
+	}
+}
+Struct USBHUB3_ETW_EVENT_HUB_ADD_DEVICE_START = "Start of EvtDeviceAdd for USB Hub" {}; // Empty Struct
+Struct USBHUB3_ETW_EVENT_HUB_ADD_DEVICE_COMPLETE = FormatString("Complete EvtDeviceAdd for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_RELEASE_HARDWARE_START = FormatString("Start of EvtDeviceReleaseHardware for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_HUB_RELEASE_HARDWARE_COMPLETE = FormatString("Complete EvtDeviceReleaseHardware for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_D0_ENTRY_START = FormatString("Start of EvtDeviceD0Entry for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_TargetState;
+	UINT32 fid_PowerAction;
+	UINT16 fid_WaitWakePending;
+}
+Struct USBHUB3_ETW_EVENT_HUB_D0_ENTRY_COMPLETE = FormatString("Complete EvtDeviceD0Entry for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+	UINT32 fid_PowerAction;
+}
+Struct USBHUB3_ETW_EVENT_HUB_D0_EXIT_START = FormatString("Start of EvtDeviceD0Exit for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_TargetState;
+	UINT32 fid_PowerAction;
+	UINT16 fid_WaitWakePending;
+}
+Struct USBHUB3_ETW_EVENT_HUB_D0_EXIT_COMPLETE = FormatString("Complete EvtDeviceD0Exit for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+	UINT32 fid_PowerAction;
+}
+Struct USBHUB3_ETW_EVENT_HUB_SURPRISE_REMOVAL_START = FormatString("Start of EvtDeviceReleaseHardware for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_HUB_SURPRISE_REMOVAL_COMPLETE = FormatString("Complete EvtDeviceReleaseHardware for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_HUB_CLEANUP_START = FormatString("Start of EvtDeviceCleanup for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_HUB_CLEANUP_COMPLETE = FormatString("Complete EvtDeviceCleanup for USB Hub")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_START = FormatString("Start of EvtDevicePrepareHardware for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_COMPLETE = FormatString("Complete EvtDevicePrepareHardware for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_DEVICE_INFORMATION = FormatString("USB Device Information")
+{
+	EtlPtr fid_HubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	InternalUsbTblDeviceDescription fid_DeviceDescription;
+	UnicodeString fid_DeviceInterfacePath;
+	USB_DEVICE_DESCRIPTOR fid_DeviceDescriptor;
+	[Property.InternalUsbDescriptorLength = this]
+	UINT16 fid_ConfigurationDescriptorLength;
+	USB_DESCRIPTORS ConfigurationDescriptor;
+	UnicodeString fid_PdoName;
+	UINT8 fid_Suspended;
+	UINT32 fid_PortPathDepth;
+	UINT32 fid_PortPath[6];
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	UINT32 fid_CurrentWdfPowerDeviceState;
+    UINT32 fid_Usb20LpmStatus = Usb20LpmStatus(this);
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_DEVICE_INFORMATION_V1 = FormatString("USB Device Information")
+{
+	EtlPtr fid_HubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	InternalUsbTblDeviceDescription fid_DeviceDescription;
+	UnicodeString fid_DeviceInterfacePath;
+	USB_DEVICE_DESCRIPTOR fid_DeviceDescriptor;
+	[Property.InternalUsbDescriptorLength = this]
+	UINT16 fid_ConfigurationDescriptorLength;
+	USB_DESCRIPTORS ConfigurationDescriptor;
+	UnicodeString fid_PdoName;
+	UINT8 fid_Suspended;
+	UINT32 fid_PortPathDepth;
+	UINT32 fid_PortPath[6];
+	UINT32 fid_PciBus;
+	UINT32 fid_PciDevice;
+	UINT32 fid_PciFunction;
+	UINT32 fid_PciVendorId;
+	UINT32 fid_PciDeviceId;
+	UINT32 fid_PciRevisionId;
+	UINT32 fid_CurrentWdfPowerDeviceState;
+    UINT32 fid_Usb20LpmStatus = Usb20LpmStatus(this);
+	UINT32 fid_ControllerParentBusType = MapControllerParentBusType(this);
+	AsciiString fid_AcpiVendorId;
+	AsciiString fid_AcpiDeviceId;
+	AsciiString fid_AcpiRevisionId;
+	UINT8 fid_PortFlagAcpiUpcValid;
+	UINT8 fid_PortConnectorType;
+	UINT64 fid_UcmConnectorId;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_PREPARE_HARDWARE_NESTED_TOO_DEEP = FormatString("USB Hub Nested Too Deeply")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_HUB_PREPARE_HARDWARE_UNKNOWN_HUB_TYPE = FormatString("Unknown USB Hub Type")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_ADD_DEVICE_START = "Start of EvtDeviceAdd for USB Device" {}; // Empty Struct
+Struct USBHUB3_ETW_EVENT_DEVICE_ADD_DEVICE_COMPLETE = FormatString("Complete EvtDeviceAdd for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_RELEASE_HARDWARE_START = FormatString("Start of EvtDeviceReleaseHardware for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_RELEASE_HARDWARE_COMPLETE = FormatString("Complete EvtDeviceReleaseHardware for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_D0_ENTRY_START = FormatString("Start of EvtDeviceD0Entry for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_TargetState;
+	UINT32 fid_PowerAction;
+	UINT16 fid_WaitWakePending;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_D0_ENTRY_COMPLETE = FormatString("Complete EvtDeviceD0Entry for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+	UINT32 fid_PowerAction;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_D0_EXIT_START = FormatString("Start of EvtDeviceD0Exit for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_TargetState;
+	UINT32 fid_PowerAction;
+	UINT16 fid_WaitWakePending;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_D0_EXIT_COMPLETE = FormatString("Complete EvtDeviceD0Exit for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+	UINT32 fid_PowerAction;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_SURPRISE_REMOVAL_START = FormatString("Start of EvtDeviceReleaseHardware for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_SURPRISE_REMOVAL_COMPLETE = FormatString("Complete EvtDeviceReleaseHardware for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_CLEANUP_START = FormatString("Start of EvtDeviceCleanup for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_CLEANUP_COMPLETE = FormatString("Complete EvtDeviceCleanup for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_START = FormatString("Start of USB Device Enumeration")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_COMPLETE = FormatString("Completion of USB Device Enumeration")
+{
+	EtlPtr fid_HubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_RETRY = FormatString("Retry Enumeration")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_MAXIMUM_RETRY_COUNT_REACHED = FormatString("Maximum Enumeration Retry Count Reached")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_FAILED = FormatString("USB Device Enumeration Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_ENUMERATION_RESET_TIMEOUT = FormatString("Port Reset Timed Out")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_HUB_WAS_RESET_ON_RESUME = FormatString("USB Hub Was Reset On Resume")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_MSOS_EXTENDED_PROPERTY_DESCRIPTOR_HEADER = FormatString("Validation Failure of MS OS Extended Property Descriptor Header")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_MSOS_EXTENDED_PROPERTY_DESCRIPTOR = FormatString("Validation Failure of MS OS Extended Property Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_BOS_DESCRIPTOR_HEADER = FormatString("Validation Failure of BOS Descriptor Header")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_BOS_DESCRIPTOR = FormatString("Validation Failure of BOS Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_CONFIGURATION_DESCRIPTOR = FormatString("Validation Failure of Configuration Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_DEVICE_DESCRIPTOR = FormatString("Validation Failure of Device Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_DEVICE_QUALIFIER_DESCRIPTOR = FormatString("Validation Failure of Device Qualifier Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_LANGUAGE_ID_DESCRIPTOR = FormatString("Validation Failure of Language ID String Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_MSOS_CONTAINER_ID_DESCRIPTOR_HEADER = FormatString("Validation Failure of MS OS Container ID Descriptor Header")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_MSOS_CONTAINER_ID_DESCRIPTOR = FormatString("Validation Failure of MS OS Container ID Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_MSOS_DESCRIPTOR = FormatString("Validation Failure of MS OS Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_MSOS_EXTENDED_CONFIGURATION_DESCRIPTOR_HEADER = FormatString("Validation Failure of MS OS Extended Configuration Descriptor Header")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_MSOS_EXTENDED_CONFIGURATION_DESCRIPTOR = FormatString("Validation Failure of MS OS Extended Configuration Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_PRODUCT_ID_STRING_DESCRIPTOR = FormatString("Validation Failure of Product ID String Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_SERIAL_NUMBER_STRING_DESCRIPTOR = FormatString("Validation Failure of Serial Number String Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_MSOS20_DESCRIPTOR_SET = FormatString("Validation Failure of MS OS 2.0 Descriptor Set")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_INTERNAL_IOCTL_START = FormatString("Start of %s for USB Device", UsbIoctlInternalTable(fid_IoctlCode))
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_IoctlCode = FormatString ("%s", UsbIoctlInternalTable(this), this);
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_INTERNAL_IOCTL_COMPLETE = FormatString("Completion of %s for USB Device", UsbIoctlInternalTable(fid_IoctlCode))
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_IoctlCode = FormatString ("%s", UsbIoctlInternalTable(this), this);
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_URB_START = FormatString("Start URB Client Request for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_UrbFunction = FormatString("%s (0x%x)", USBPort_UsbUrbFunction(this), this);
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_URB_COMPLETE = FormatString("Completion of URB Client Request for USB Device")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_UrbFunction = FormatString("%s (0x%x)", USBPort_UsbUrbFunction(this), this);
+	USBD_STATUS fid_UsbdStatus;
+}
+Struct USBHUB3_ETW_EVENT_DISPATCH_URB_INVALID_HEADER_LENGTH_WARNING = FormatString("Invalid URB Header Length")
+{
+	UsbDevicePtr fid_UsbDevice;
+	EtlPtr fid_URB_Ptr;
+	struct 	fid_USBPORT_URB_HEADER
+	{
+		[Property.USBLength]
+		[Property.USBLengthRequested]
+		UINT16 fid_URB_Hdr_Length;
+		UINT16 fid_URB_Hdr_Function;
+		UINT32 fid_URB_Hdr_Status;
+		EtlPtr fid_URB_Hdr_UsbdDeviceHandle;
+		EtlPtr fid_URB_Hdr_UsbdFlags;
+	}
+}
+Struct USBHUB3_ETW_EVENT_DISPATCH_URB_INVALID_FUNCTION = FormatString("Invalid URB Function")
+{
+	UsbDevicePtr fid_UsbDevice;
+	EtlPtr fid_URB_Ptr;
+	struct 	fid_USBPORT_URB_HEADER
+	{
+		[Property.USBLength]
+		[Property.USBLengthRequested]
+		UINT16 fid_URB_Hdr_Length;
+		UINT16 fid_URB_Hdr_Function;
+		UINT32 fid_URB_Hdr_Status;
+		EtlPtr fid_URB_Hdr_UsbdDeviceHandle;
+		EtlPtr fid_URB_Hdr_UsbdFlags;
+	}
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_SUBMIT_IDLE_NOTIFICATION_START = FormatString("Start IOCTL_INTERNAL_USB_SUBMIT_IDLE_NOTIFICATION")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_SUBMIT_IDLE_NOTIFICATION_COMPLETE = FormatString("Complete IOCTL_INTERNAL_USB_SUBMIT_IDLE_NOTIFICATION")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_IDLE_CALLBACK = FormatString("Invoking Idle Notification Callback")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_20_PORT_STATUS = FormatString("Port Status for 2.0 Port: %d, %s", fid_PortNumber, PortStatus.ToString)
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+//	UINT16 fid_PortStatus;
+//	UINT16 fid_PortChange;
+	Usb2PortStatus PortStatus;
+}
+Struct USBHUB3_ETW_EVENT_30_PORT_STATUS = FormatString("Port Status for 3.0 Port: %d, %s", fid_PortNumber, PortStatus.ToString)
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+//	UINT16 fid_PortStatus;
+//	UINT16 fid_PortChange;
+	Usb3PortStatus PortStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_PORT_ACPI_UPC_FAILURE = FormatString("Error Evaluating ACPI _UPC Method for Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_PORT_ACPI_PLD_FAILURE = FormatString("Error Evaluating ACPI _PLD Method for Port")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_STATE_MACHINE = FormatString("State Machine Transition <%s> %s", HubEvent(fid_Event), HubState(fid_State))
+{
+	UsbDevicePtr fid_UsbDevice;
+	EtlPtr fid_Context;
+	UINT32 fid_StartIndex;
+	UINT32 fid_State;
+	UINT32 fid_Event;
+	UINT32 fid_Depth;
+}
+Struct USBHUB3_ETW_EVENT_UNHANDLED_STATE_MACHINE_EVENT = FormatString("Unhandled State Machine Event")
+{
+	UsbDevicePtr fid_UsbDevice;
+	EtlPtr fid_Context;
+	UINT32 fid_StartIndex;
+	UINT32 fid_State;
+	UINT32 fid_Event;
+	UINT32 fid_Depth;
+}
+Struct USBHUB3_ETW_EVENT_HUB_RESET_REQUEST_START = FormatString("Start of Hub Reset Request")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_HUB_RESET_REQUEST_COMPLETE = FormatString("Completion of Start Hub Reset Request")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_RESET_DUE_TO_PORT_ERROR = FormatString("Hub Reset Request Due to Port Error")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+}
+Struct USBHUB3_ETW_EVENT_PORT_STATUS_ERROR = FormatString("Failure during Port Change Request")
+{
+	UINT32 fid_PortNumber;
+	UINT16 fid_PreviousPortStatus;
+	UINT16 fid_CurrentPortStatus;
+	UINT16 fid_CurrentPortChange;
+	UINT32 fid_Event;
+}
+Struct USBHUB3_ETW_EVENT_PORT_STATUS_ERROR_V1 = FormatString("Failure during Port Change Request")
+{
+	UINT32 fid_PortNumber;
+	UINT16 fid_PreviousPortStatus;
+	UINT16 fid_CurrentPortStatus;
+	UINT16 fid_CurrentPortChange;
+	UINT32 fid_Event;
+	UINT16 fid_idVendor;
+	UINT16 fid_idProduct;
+	UINT16 fid_bcdDevice;
+}
+Struct USBHUB3_ETW_EVENT_HUB_CONTROL_TRANSFER_ERROR = FormatString("Hub Control Transfer Error")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	USBD_STATUS fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_PORT_CONTROL_TRANSFER_ERROR = FormatString("Port Control Transfer Error")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	USBD_STATUS fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_CONTROL_TRANSFER_ERROR = FormatString("Device Control Transfer Error")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	USBD_STATUS fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_PORT_INTERRUPT_TRANSFER_ERROR = FormatString("Status Change Interrupt Transfer Error")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_SELECTIVE_SUSPEND_NOT_SUPPORTED = FormatString("SuperSpeed Hub Entered Invalid Power State as It Does Not Support Remote Wake and Selective Suspend")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_INFORMATION_COMPLETE = FormatString("Completion of IOCTL_USB_GET_NODE_INFORMATION")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_DRIVERKEY_NAME_COMPLETE = FormatString("Completion of IOCTL_USB_GET_NODE_CONNECTION_DRIVERKEY_NAME")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_INFORMATION_COMPLETE = FormatString("Completion of IOCTL_USB_GET_NODE_CONNECTION_INFORMATION")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_INFORMATION_EX_COMPLETE = FormatString("Completion of IOCTL_USB_GET_NODE_CONNECTION_INFORMATION_EX")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_ATTRIBUTES_COMPLETE = FormatString("Completion of IOCTL_USB_GET_NODE_CONNECTION_ATTRIBUTES")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_NAME_COMPLETE = FormatString("Completion of IOCTL_USB_GET_NODE_CONNECTION_NAME")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_DESCRIPTOR_FROM_NODE_CONNECTION_START = FormatString("Start of IOCTL_USB_GET_DESCRIPTOR_FROM_NODE_CONNECTION")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_DESCRIPTOR_FROM_NODE_CONNECTION_COMPLETE = FormatString("Completion of IOCTL_USB_GET_DESCRIPTOR_FROM_NODE_CONNECTION")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_HUB_CAPABILITIES_COMPLETE = FormatString("Completion of IOCTL_USB_GET_HUB_CAPABILITIES")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_HUB_CAPABILITIES_EX_COMPLETE = FormatString("Completion of IOCTL_USB_GET_HUB_CAPABILITIES_EX")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_HUB_CYCLE_PORT_START = FormatString("Start of IOCTL_USB_HUB_CYCLE_PORT")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_HUB_CYCLE_PORT_COMPLETE = FormatString("Completion of IOCTL_USB_HUB_CYCLE_PORT")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_RESET_HUB_COMPLETE = FormatString("Completion of IOCTL_USB_RESET_HUB")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_UNSUPPORTED_IOCTL_COMPLETE = FormatString("Completion of Unsuppported IOCTL")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_PORT_CONNECTOR_PROPERTIES_COMPLETE = FormatString("Completion of IOCTL_USB_GET_PORT_CONNECTOR_PROPERTIES")
+{
+	UsbDevicePtr fid_UsbDeivce;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_HUB_INFORMATION_EX_COMPLETE = FormatString("Completion of IOCTL_USB_GET_HUB_INFORMATION_EX")
+{
+	UsbDevicePtr fid_UsbDeivce;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_HUB_IOCTL_USB_GET_NODE_CONNECTION_INFORMATION_EX_V2_COMPLETE = FormatString("Completion of IOCTL_USB_GET_NODE_CONNECTION_INFORMATION_EX_V2")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_UCX_IOCTL_FAILURE = FormatString("UCX IOCTL Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_IoctlCode;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_DESCRIPTOR_FAILURE = FormatString("Request for Device Descriptor Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_SET_ADDRESS_FAILURE = FormatString("Set Address Request Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_CONFIG_DESCRIPTOR_FAILURE = FormatString("Request for Configuration Descriptor Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_SET_SEL_FAILURE = FormatString("Set SEL Request Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_BOS_DESCRIPTOR_FAILURE = FormatString("Request for BOS Descriptor Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_QUALIFIER_DESCRIPTOR_FAILURE = FormatString("Request for Device Qualifier Descriptor Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_SERIAL_NUMBER_STRING_FAILURE = FormatString("Request for Serial Number String Descriptor Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_PRODUCT_ID_STRING_FAILURE = FormatString("Request for Product ID String Descriptor Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_MS_EXT_CONFIG_DESCRIPTOR_FAILURE = FormatString("Request for Microsoft OS Extended Configuration Descriptor Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_MS_CONTAINER_ID_DESCRIPTOR_FAILURE = FormatString("Request for Microsoft OS Container ID Descriptor Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_SET_ISOCH_DELAY_FAILURE = FormatString("Device Control Transfer for Set Isoch Delay Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_LANGUAGE_ID_STRING_FAILURE = FormatString("Request for Language ID String Descriptor Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_REGISTRY_FAILURE = FormatString("Unable to Access Registry")
+{
+	UsbDevicePtr fid_UsbDevice;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_SSDEVICE_CONNECTED_AT_LS = FormatString("SuperSpeed Device is Connected on the 2.0 Bus")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_HUB_TOO_MANY_RESETS = FormatString("Hub Exceeded Reset Limit. Declaring a PNP failure in the State Machine.")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INTERFACE_WAKE_CAPABILITY_MISMATCH = FormatString("Device Supports Remote Wake in Interface 0. But Does Not Report Remote Wake in the Configuration Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_DeviceIsComposite;
+	UINT32 fid_DeviceWakeupSupport;
+	UINT16 fid_InterfaceRemoteWakeupCapable;
+}
+Struct USBHUB3_ETW_EVENT_DESCRIPTOR_VALIDATION_FAILURE = FormatString("Descriptor validation failed for the device for the following reason: %s", DescriptorValidationError(fid_NtStatus))
+{
+	EtlPtr fid_HubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_NtStatus = FormatString ("%s", DescriptorValidationError(this), this);
+}
+Struct USBHUB3_ETW_EVENT_BUS_RENUMERATION = FormatString("Device getting Re-Enumerated. This Enumeration is not Visible to PnP Manager")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_USBENUM_SERIAL_MISMATCH_ON_RENUMERATION = FormatString("New Serial Number does not match Cached Serial Number")
+{
+	EtlPtr fid_HubDevice;
+	AsciiString fid_CachedSerialNumber;
+	UINT32 fid_CachedSerialNumberLength;
+	UnicodeString fid_NewSerialNumber;
+	UINT32 fid_NewSerialNumberLength;
+}
+Struct USBHUB3_ETW_EVENT_CLIENT_INITIATED_RECOVERY_ACTION = FormatString("Client Initiated Recovery Action")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_IoctlCode;
+	UINT32 fid_UrbFunction;
+}
+Struct USBHUB3_ETW_EVENT_CLIENT_INITIATED_RECOVERY_ACTION_V1 = FormatString("Client Initiated Recovery Action")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_IoctlCode;
+	UINT32 fid_UrbFunction;
+	UINT16 fid_idVendor;
+	UINT16 fid_idProduct;
+	UINT16 fid_bcdDevice;
+	UINT32 fid_EventCount;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_QUERY_USB_CAPABILITY = FormatString("Query USB capability for device")
+{
+	UsbDevicePtr fid_UsbDevice;
+	GUID(true) fid_Capability;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_MSOS20_DESCRIPTOR_FAILURE = FormatString("Request for Microsoft OS 2.0 Descriptor Set Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_MSOS20_SET_ALT_ENUMERATION_FAILURE = FormatString("Microsoft OS 2.0 Set Alternate Enumeration Command Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_SET_U1_ENABLE_FAILURE = FormatString("Set Feature for U1 Enable Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_SET_U2_ENABLE_FAILURE = FormatString("Set Feature for U2 Enable failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	[Property.USBNtStatus = this.ToString] NTSTATUS fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_DESCRIPTOR_VALIDATION_WARNING = FormatString("Descriptor Validation Warning")
+{
+	EtlPtr fid_HubDevice;
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_BILLBOARD = FormatString("Billboard Detected")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT8 fid_bNumberOfAlternateModes;
+	UINT8 fid_bPreferredAlternateMode;
+	UINT16 fid_VconnPower;
+	UnicodeString fid_AdditionalInfoUrlString;
+}
+Struct USBHUB3_ETW_EVENT_ALTERNATE_MODE_FAILED = FormatString("Alternate Mode Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT16 fid_Svid;
+	UINT8 fid_AlternateMode;
+	UnicodeString fid_AlternateModeString;
+	UINT8 fid_ConfigurationStatus;
+}
+Struct USBHUB3_ETW_EVENT_ALTERNATE_MODE_ENTERED = FormatString("Alternate Mode Entered")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT16 fid_Svid;
+	UINT8 fid_AlternateMode;
+	UnicodeString fid_AlternateModeString;
+	UINT8 fid_ConfigurationStatus;
+}
+Struct USBHUB3_ETW_EVENT_BILLBOARD_STRING_FAILURE = FormatString("Request for Billboard Additional Information Url String Descriptor Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	UINT32 fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_ALTERNATE_MODE_STRING_FAILURE = FormatString("Request for Alternate Mode String Descriptor Failed")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_PortNumber;
+	UINT32 fid_UsbdStatus;
+	UINT32 fid_NtStatus;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_BILLBOARD_STRING_DESCRIPTOR = FormatString("Validation Failure of Billboard String Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_INVALID_ALTERNATE_MODE_STRING_DESCRIPTOR = FormatString("Validation Failure of Alternate Mode String Descriptor")
+{
+	UsbDevicePtr fid_UsbDevice;
+}
+Struct USBHUB3_ETW_EVENT_DEVICE_DRIPS_WATCHDOG_COMPLETE = FormatString("Completion of HUBPDO_PoFxDripsWatchdogCallback")
+{
+	UsbDevicePtr fid_UsbDevice;
+	UINT32 fid_DripsWatchdogResult;
+	UINT16 fid_idVendor;
+	UINT16 fid_idProduct;
+	UINT16 fid_bcdDevice;
+}
+[RegisterBefore(EventDescriptor.DefaultKeyword, MicrosoftWindowsUSBUSBHUB3_Keyword, "{AC52AD17-CC01-4F85-8DF5-4DCE4333C99B}")]
+struct MicrosoftWindowsUSBUSBHUB3_Keyword
+{
+	UINT64 Default:1 = FormatString("            (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_DEFAULT":"");
+	UINT64 USBError:1 = FormatString("           (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_USBERROR":"");
+	UINT64 IRP:1 = FormatString("                (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_IRP":"");
+	UINT64 Power:1 = FormatString("              (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_POWER":"");
+	UINT64 PnP:1 = FormatString("                (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_PNP":"");
+	UINT64 Performance:1 = FormatString("        (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_PERFORMANCE":"");
+	UINT64 HeadersBusTrace:1 = FormatString("    (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_HEADERS_BUS_TRACE":"");
+	UINT64 PartialDataBusTrace:1 = FormatString("(%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_PARTIAL_DATA_BUS_TRACE":"");
+	UINT64 FullDataBusTrace:1 = FormatString("   (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_FULL_DATA_BUS_TRACE":"");
+	UINT64 StateMachine:1 = FormatString("       (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_STATEMACHINE":"");
+	UINT64 Enumeration:1 = FormatString("        (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_ENUMERATION":"");
+	UINT64 VerifyDriver:1 = FormatString("       (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_VERIFYDRIVER":"");
+	UINT64 HWVerifyHost:1 = FormatString("       (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_HW_VERIFYHOST":"");
+	UINT64 HWVerifyHub:1 = FormatString("        (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_HW_VERIFYHUB":"");
+	UINT64 HWVerifyDevice:1 = FormatString("     (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_HW_VERIFYDEVICE":"");
+	UINT64 Rundown:1 = FormatString("            (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_RUNDOWN":"");
+	UINT64 Device:1 = FormatString("             (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_DEVICE":"");
+	UINT64 Hub:1 = FormatString("                (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_HUB":"");
+	UINT64 Compat:1 = FormatString("             (%s) %s", this.ToBitString, this? "USBHUB3_ETW_KEYWORD_COMPAT":"");
+	UINT64 ControllerCommand:1 = FormatString("  (%s) %s", this.ToBitString, this? "USBXHCI_ETW_KEYWORD_CONTROLLER_COMMAND":"");
+	UINT64 Reserved1:44 = FormatString("          (%s)", this.ToBitString);
+}
+
+//
+// Added structs
+//
+
+[Global.InternalUsbTblDeviceDescription$[Property.USBDevicePtr] = this.ToString]
+Struct InternalUsbTblDeviceDescription = String.ToString
+{
+	UnicodeString String;
+}
+
+Struct UsbDevicePtr = Pointer.Ptr.ToString
+{
+	[Property.USBDevicePtr = Pointer.Ptr]
+	// Get all device attributes from global tables into event properties
+	// These can be filtered by the user, and used by the parser in processing subsequent frame data
+	[Post.Property.USBVid = Global.InternalUsbTblVid$[Property.USBDevicePtr]]
+	[Post.Property.USBPid = Global.InternalUsbTblPid$[Property.USBDevicePtr]]
+	[Post.Property.USBPortPath = Global.InternalUsbTblPortPath$[Property.USBDevicePtr]]
+	[Post.Property.USBDeviceDescription = Global.InternalUsbTblDeviceDescription$[Property.USBDevicePtr]]
+	[Post.Property.USBClass = Global.InternalUsbTblClass$[Property.USBDevicePtr]]
+	[Post.Property.USBSubclass = Global.InternalUsbTblSubclass$[Property.USBDevicePtr]]
+	[Post.Property.USBProtocol = Global.InternalUsbTblProtocol$[Property.USBDevicePtr]]
+	EtlPtr Pointer;
+}
+
+Struct Usb3PortStatus = FormatString("%s %s", wPortStatus.ToString, wPortChange.ToString)
+{
+	UINT16 wPortStatus = UsbPortLinkState(PORT_LINK_STATE)
+	{
+		UINT16 PORT_CONNECTION:1 = FormatString("  (%s) %s", this.ToBitString, this == 0 ? "" : "PORT_CONNECTION");
+		UINT16 PORT_ENABLE:1 = FormatString("      (%s) %s", this.ToBitString, this == 0 ? "" : "PORT_ENABLE");
+		UINT16 Reserved:1;
+		UINT16 PORT_OVER_CURRENT:1 = FormatString("(%s) %s", this.ToBitString, this == 0 ? "" : "PORT_OVER_CURRENT");
+		UINT16 PORT_RESET:1 = FormatString("       (%s) %s", this.ToBitString, this == 0 ? "" : "PORT_RESET");
+		UINT16 PORT_LINK_STATE:4 = FormatString("  -- %s --", UsbPortLinkState(this));
+		UINT16 PORT_POWER:1 = FormatString("       (%s) %s", this.ToBitString, this == 0 ? "" : "PORT_POWER");
+		UINT16 PORT_SPEED:3 = FormatString("       -- %s --", UsbSuperSpeedSpeed(this));
+		UINT16 Reserved2:3;
+	}
+	UINT16 wPortChange = UsbPortChangeBitsStringMap(this)
+	{
+		[Property.USBIsConnect = (this == 1 && wPortStatus.PORT_CONNECTION == 1) ? 1 : 0]
+		[Property.USBIsDisconnect = (this == 1 && wPortStatus.PORT_CONNECTION == 0) ? 1 : 0]
+		UINT16 C_PORT_CONNECTION:1 = FormatString("         (%s) %s", this.ToBitString, this == 0 ? "" : "C_PORT_CONNECTION");
+		UINT16 Reserved:2;
+		UINT16 C_PORT_OVER_CURRENT:1 = FormatString("       (%s) %s", this.ToBitString, this == 0 ? "" : "C_PORT_OVER_CURRENT");
+		UINT16 C_PORT_RESET:1 = FormatString("              (%s) %s", this.ToBitString, this == 0 ? "" : "C_PORT_RESET");
+		UINT16 C_BH_PORT_RESET:1 = FormatString("           (%s) %s", this.ToBitString, this == 0 ? "" : "C_BH_PORT_RESET");
+		UINT16 C_PORT_LINK_STATE:1 = FormatString("         (%s) %s", this.ToBitString, this == 0 ? "" : "C_PORT_LINK_STATE");
+		UINT16 C_PORT_CONFIG_ERROR:1 = FormatString("       (%s) %s", this.ToBitString, this == 0 ? "" : "C_PORT_CONFIG_ERROR");
+		UINT16 Reserved2:8;
+	}
+}
+
+Table UsbPortLinkState(value)
+{
+	switch (value)
+	{
+		case  0: "U0";
+		case  1: "U1";
+		case  2: "U2";
+		case  3: "U3 (Device Suspended)";
+		case  4: "SS.Disabled";
+		case  5: "Rx.Detect";
+		case  6: "SS.Inactive";
+		case  7: "Polling";
+		case  8: "Recovery";
+		case  9: "Hot Reset";
+		case 10: "Compliance Mode";
+		case 11: "Loopback";
+		case 12: "Reserved12";
+		case 13: "Reserved13";
+		case 14: "Reserved14";
+		case 15: "Resume"; // xHCI PORTSC only, won't see this in hub ETW
+		default: "UNKNOWN";
+	}
+}
+
+// This is really for future use, defined as "Negotiated speed of the SuperSpeed Device Attached to this port"
+Table UsbSuperSpeedSpeed(value)
+{
+	switch (value)
+	{
+		case 0: "5 Gbps";
+		default: "UNKNOWN";
+	}
+}
+
+// Descriptions for common values of hub port status change bits. Works for 2.0 and 3.0
+Table UsbPortChangeBitsStringMap(value)
+{
+	switch (value)
+	{
+		case 0x0: "No change";
+		case 0x1: "Changed PORT_CONNECTION";
+		case 0x2: "Changed PORT_ENABLE";
+		case 0x4: "Changed PORT_SUSPEND";
+		case 0x8: "Changed PORT_OVER_CURRENT";
+		case 0x10: "Changed PORT_RESET";
+		case 0x20: "Changed BH_PORT_RESET";
+		case 0x40: "Changed PORT_LINK_STATE";
+		case 0x80: "Changed PORT_CONFIG_ERROR";
+		default: FormatString("%s (Multiple changes, expand)", value.ToBitString);
+	}
+}
+
+// TRB structure is defined in the xHCI specification
+Struct TRB = GenericTrb.ToString
+{
+	// Currently we don't parse any specific TRB types. Just get the data common to all TRBs.
+	GenericTrb GenericTrb;
+}
+
+Struct GenericTrb = TrbType.ToString
+{
+	UINT64 TypeDependentQword;
+	UINT32 TypeDependentDword;
+	UINT32 CycleBit:1;
+	UINT32 TypeDependent1:9;
+	UINT32 TrbType:6 = TrbType(this);
+	UINT32 TypeDependent2:8;
+	UINT32 TypeDependent3:8;
+}
+
+Table TrbType(value)
+{
+	switch (value)
+	{
+		case 0:  "RESERVED";
+		case 1:  "NORMAL";
+		case 2:  "SETUP_STAGE";
+		case 3:  "DATA_STAGE";
+		case 4:  "STATUS_STAGE";
+		case 5:  "ISOCH";
+		case 6:  "LINK";
+		case 7:  "EVENT_DATA";
+		case 9:  "ENABLE_SLOT_COMMAND";
+		case 10: "DISABLE_SLOT_COMMAND";
+		case 11: "ADDRESS_DEVICE_COMMAND";
+		case 12: "CONFIGURE_ENDPOINT_COMMAND";
+		case 13: "EVALUATE_CONTEXT_COMMAND";
+		case 14: "RESET_ENDPOINT_COMMAND";
+		case 15: "STOP_ENDPOINT_COMMAND";
+		case 16: "SET_DEQUEUE_POINTER_COMMAND";
+		case 17: "RESET_DEVICE_COMMAND";
+		case 18: "FORCE_EVENT_COMMAND";
+		case 19: "NEGOTIATE_BANDWIDTH_COMMAND";
+		case 20: "SET_LATENCY_TOLERANCE_VALUE_COMMAND";
+		case 21: "GET_PORT_BANDWIDTH_COMMAND";
+		case 22: "FORCE_HEADER_COMMAND";
+		case 23: "NO_OP_COMMAND";
+		case 32: "TRANSFER_EVENT";
+		case 33: "COMMAND_COMPLETION_EVENT";
+		case 34: "PORT_STATUS_CHANGE_EVENT";
+		case 35: "BANDWIDTH_REQUEST_EVENT";
+		case 36: "DOORBELL_EVENT";
+		case 37: "HOST_CONTROLLER_EVENT";
+		case 38: "DEVICE_NOTIFICATION_EVENT";
+		case 39: "MFINDEX_WRAP_EVENT";
+		default: FormatString("Unknown TRB type %d", value);
+	}
+}

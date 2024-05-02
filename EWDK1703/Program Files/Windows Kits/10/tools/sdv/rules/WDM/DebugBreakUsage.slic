@@ -1,0 +1,39 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DebugBreakUsage
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule only applies when building without the DEBUG switch.
+    The rule verifies that drivers do not call to debug functions.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+DbgBreakPoint@SDV.entry
+{
+        abort "$fname should only be called when the driver is DEBUG build";
+}
+
+DbgBreakPointWithStatus@SDV.entry
+{
+        abort "$fname should only be called when the driver is DEBUG build";
+}

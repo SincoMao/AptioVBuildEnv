@@ -1,0 +1,89 @@
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Microsoft Confidential
+// Copyright 2009 Microsoft Corporation. All Rights Reserved.
+//
+// WDTFDriverSetupSystem.idl
+//
+// Collection: WDTF Internals - WDTFDriverSetupSystem Reference
+// 
+// Environment: User mode
+// 
+// DLL: WDTFDriverSetupSystem.dll
+//
+//---------------------------------------------------------------------------
+
+// This file will be processed by the MIDL tool to
+// produce the type library (WDTFDriverSetupSystemAction.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    uuid(0F652881-33BF-4312-AEA2-F29E9A29392C),
+    version(1.0),
+    helpstring("WDTFDriverSetupSystem 1.0 Type Library")
+]
+library WDTFDriverSetupSystemActionLib
+{
+    importlib("stdole2.tlb");
+    importlib("WDTF.tlb");
+    importlib("WDTFInterfaces.tlb");
+    importlib("WDTFDriverPackageAction.tlb");
+
+    [
+        object,
+        uuid(1E16523D-DC4C-4E82-A243-139771969158),
+        dual,
+        nonextensible,
+        helpstring("IWDTFDriverSetupSystem Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFDriverSetupSystemAction2 : IWDTFAction2
+    {
+
+    [id(10), helpstring("ClearTriageLogs")]
+    HRESULT ClearTriageLogs();
+    [id(11), helpstring("SnapTriageLogs")]
+    HRESULT SnapTriageLogs();
+    [id(12), helpstring("ImportDriverPackage")]
+    HRESULT ImportDriverPackage([in]IWDTFDriverPackageAction2* pDp);
+    [id(13), helpstring("RemoveDriverPackage")]
+    HRESULT RemoveDriverPackage([in]IWDTFDriverPackageAction2* pDp);
+    [id(14), helpstring("IsImported")]
+    HRESULT IsImported([in] IWDTFDriverPackageAction2* pDp,[out,retval] VARIANT_BOOL * bRet);
+    [id(15), helpstring("RescanAllDevices")]
+    HRESULT RescanAllDevices([out,retval] VARIANT_BOOL * bRet);
+    [id(16), helpstring("WaitNoPendingInstallEvents")]
+    HRESULT WaitNoPendingInstallEvents(LONG dwTimeout, [out,retval] VARIANT_BOOL* pNoMoreEvents);
+   
+    };
+
+
+    [
+        object,
+        uuid(72F2CF57-F3AF-4430-970E-37D798135BFA),
+        dual,
+        nonextensible,
+        helpstring("IWDTFInternalDriverSetupSystemAction2 Interface"),
+        pointer_default(unique)
+    ]
+    interface IWDTFInternalDriverSetupSystemAction2 : IWDTFDriverSetupSystemAction2
+    {
+    [id(17), helpstring("CreateRootEnumeratedDevice")]
+    HRESULT CreateRootEnumeratedDevice(BSTR ClassGuid, BSTR ClassName, BSTR hwid,[out,retval] IWDTFTarget2** ppTarget);
+    [id(18), helpstring("CreateRootEnumeratedDevice")]
+    HRESULT CreateRootEnumeratedDevicesFromPackage([in]IWDTFDriverPackageAction2* pDp,[out,retval] IWDTFTargets2** ppTargets);
+
+    };
+
+    [
+        uuid(238C0AEB-1DFC-4575-AAF3-C67FE15C1819),
+        helpstring("WDTFDriverSetupSystem Class")
+    ]
+    coclass WDTFDriverSetupSystemAction2
+    {
+        [default] interface IWDTFDriverSetupSystemAction2;
+    };
+};

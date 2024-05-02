@@ -1,0 +1,36 @@
+<!--
+***********************************************************************************************
+Microsoft.Cpp.Redirect.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file is used to build Visual C++ projects with the VS2010 toolset.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <VCTargetsPathActual>$(VCTargetsPath)</VCTargetsPathActual>
+    <VCTargetsPath>$(VCTargetsPath11)</VCTargetsPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PlatformTargetsFound Condition="Exists('$(VCTargetsPath)\Platforms\$(Platform)\Microsoft.Cpp.$(Platform).Targets')">true</PlatformTargetsFound>
+  </PropertyGroup>
+
+  <Import Condition="'$(PlatformTargetsFound)' == 'true'" Project="$(VCTargetsPath)\Platforms\$(Platform)\Microsoft.Cpp.$(Platform).Targets" />
+
+  <PropertyGroup>
+    <!-- If the Platform is found, then set the effective toolset before reverting VCTargetsPath -->
+    <VCTargetsPathEffective Condition="'$(PlatformTargetsFound)' == 'true'">$(VCTargetsPath)</VCTargetsPathEffective>
+    <VCTargetsPath>$(VCTargetsPath12)</VCTargetsPath>
+    <VCTargetsPathEffective Condition="'$(PlatformTargetsFound)' != 'true'">$(VCTargetsPath)</VCTargetsPathEffective>
+  </PropertyGroup>
+
+  <!-- Targets required by this VS version, but missing in old toolsets -->
+  <Import Condition="'$(PlatformTargetsFound)' != 'true' and '$(MinSupportedVCTargetsVersion)' != 'v110'" Project="Microsoft.Cpp.Redirect.10.targets" />
+</Project>

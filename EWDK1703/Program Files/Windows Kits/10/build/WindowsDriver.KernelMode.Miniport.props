@@ -1,0 +1,11 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies);$(KernelBufferOverflowLib)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Platform)' == 'Win32'">%(AdditionalDependencies);$(SDK_LIB_PATH)int64.lib</AdditionalDependencies>
+      <EntryPointSymbol Condition="'$(Platform)' == 'Win32'">GsDriverEntry@8</EntryPointSymbol>
+      <!-- x64 does not mangle the entrypoint name -->
+      <EntryPointSymbol Condition="'$(Platform)' != 'Win32'">GsDriverEntry</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+</Project>

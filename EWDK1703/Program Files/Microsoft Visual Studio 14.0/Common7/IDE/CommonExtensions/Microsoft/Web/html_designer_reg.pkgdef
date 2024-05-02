@@ -1,0 +1,41 @@
+[$RootKey$]
+
+[$RootKey$\ToolsOptionsPages]
+
+[$RootKey$\ToolsOptionsPages\HTML Designer]
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="#20003"
+
+[$RootKey$\ToolsOptionsPages\HTML Designer\CSS]
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"Page"="{E8FB8264-85C4-4e8d-A365-09459C17E6DB}"
+"Keywords"="#20151"
+@="#20018"
+
+[$RootKey$\ToolsOptionsPages\HTML Designer\CSS Styling]
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"Page"="{ACCCDD1E-D11D-48c8-BCD0-6C3004E5D8C3}"
+"Keywords"="#20152"
+@="#20021"
+
+[$RootKey$\ToolsOptionsPages\HTML Designer\General]
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"Page"="{C76D83FE-A489-11D0-8195-00A0C91BBEE3}"
+"Keywords"="#20150"
+@="#20004"
+
+[$RootKey$\ToolsOptionsPages\HTML Designer\Ruler and Grid]
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"Page"="{71dff30c-e0c7-428d-8432-8af02c2effd4}"
+"Keywords"="#20153"
+@="#20019"
+
+[$RootKey$\ToolsOptionsPages\HTML Designer\View]
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"Page"="{FFA9D66E-C8D2-4ae1-A7B5-DC897E4FDCC7}"
+"Keywords"="#20154"
+@="#20006"
+
+[$RootKey$\ToolsOptionsPages\HTML Designer\VisibilityCmdUIContexts]
+"{7174C6A0-B93D-11D1-9FF4-00A0C911004F}"="This value is ignored"
+

@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Baseline xmlns="http://schemas.microsoft.com/vs/profiler/PerfCounters/1.0">
+
+    <!--
+        Notice: only bits 0-7 (EVENT_SELECT) and 8-15 (UNIT_MASK)
+                of PerfEvtSel value are used. 
+                Rest of bits (USR, OS, E, PC, INT, EN, INV, CNT_MASK) are set by the tool
+                based on the usage model.
+ -->
+
+ <Family Name="K7">
+
+<!--
+	Implementation of portable counters
+ -->
+
+  <Category _locID="category.General" _locAttrData="Name" Name="General">
+
+  <Counter 	_locID="counter.InstructionsRetired" _locAttrData="DisplayName, Description" Name="InstructionsRetired" 
+		Reload="100000" 
+	   	PerfEvtSel="0x000000C0"
+		DisplayName="Instructions Retired"
+		Description="This event counts the number of instructions at retirement." />
+
+  <Counter 	_locID="counter.NonHaltedCycles" _locAttrData="DisplayName, Description" Name="NonHaltedCycles" 
+		Reload="100000" 
+	   	PerfEvtSel="0x00000076"
+		DisplayName="Non Halted Cycles"
+		Description="This event counts core clock cycles whenever the clock signal on the specific core is running (not halted)." />
+  </Category>
+
+
+
+  <Category _locID="category.MemoryEvents" _locAttrData="Name" Name="Memory Events">
+	<Counter 	_locID="counter.L2References" _locAttrData="DisplayName, Description" Name="L2References" 
+			Description="This event counts each request originating from the core to reference a cache line in the L2 level cache." 
+			Reload="1000" 
+            PerfEvtSel="0x00001f7d"
+			DisplayName="L2 References"  />
+
+	<Counter 	_locID="counter.L2Misses" _locAttrData="DisplayName, Description" Name="L2Misses" 
+			Description="This event counts each cache miss condition for references to the L2 level cache." 
+			Reload="1000" 
+            PerfEvtSel="0x0000077e"
+			DisplayName="L2 Misses"  />
+  </Category>
+
+  <Category _locID="category.FrontEndEvents" _locAttrData="Name" Name="Front End Events">
+  <Counter 	_locID="counter.ITLBMisses" _locAttrData="DisplayName, Description" Name="ITLBMisses"
+		Reload="100000" 
+		PerfEvtSel="0x00000085"
+		DisplayName="L1 ITLB Miss / L2 ITLB Miss"   
+		Description="This event counts misses in the Instruction Translation Lookaside Buffer (ITLB)." />
+
+  </Category>
+
+
+  <Category _locID="category.BranchEvents" _locAttrData="Name" Name="Branch Events">
+	<Counter 	_locID="counter.BranchesRetired" _locAttrData="DisplayName, Description" Name="BranchesRetired" 
+			Description="This event counts branch instructions at retirement." 
+			Reload="100000" 
+			PerfEvtSel="0x000000C2"
+			DisplayName="Branches Retired"  />
+
+	<Counter 	_locID="counter.MispredictedBranches" _locAttrData="DisplayName, Description" Name="MispredictedBranches" 
+			Description="This event counts mispredicted branch instructions at retirement." 
+			Reload="100000" 
+			PerfEvtSel="0x000000C3"
+			DisplayName="Mispredicted Branches"  />
+  </Category>
+
+<!--
+	Platform counters
+ -->
+
+ <Category _locID="category.DataCache" _locAttrData="Name" Name="Data Cache">
+
+  <Counter 	_locID="counter.DataCacheAccesses" _locAttrData="DisplayName, Description" Name="DataCacheAccesses"		 
+		Reload="100000" 
+		PerfEvtSel="0x00000040"
+		DisplayName="Data Cache Accesses"		 
+		Description="" />
+
+  <Counter 	_locID="counter.DataCacheMisses" _locAttrData="DisplayName, Description" Name="DataCacheMisses"		 
+		Reload="100000" 
+		PerfEvtSel="0x00000041"
+		DisplayName="Data Cache Misses"		 
+		Description="" />
+
+  <Counter 	_locID="counter.DataCacheRefillsfromL2" _locAttrData="DisplayName, Description" Name="DataCacheRefillsfromL2"	 
+		Reload="100000" 
+		PerfEvtSel="0x00001f42"
+		DisplayName="Data Cache Refills from L2"	 
+		Description="" />
+
+  <Counter 	_locID="counter.DataCacheRefillsFromSystem" _locAttrData="DisplayName, Description" Name="DataCacheRefillsFromSystem" 
+		Reload="100000" 
+		PerfEvtSel="0x00001f43"
+		DisplayName="Data Cache Refills from System" 
+		Description="" />
+
+  <Counter 	_locID="counter.DataCacheCopyback" _locAttrData="DisplayName, Description" Name="DataCacheCopyback"		 
+		Reload="100000" 
+		PerfEvtSel="0x00001f44"
+		DisplayName="Data Cache Copy back"		 
+		Description="" />
+
+  <Counter 	_locID="counter.L1DTLBMissL2DTLBHit" _locAttrData="DisplayName, Description" Name="L1DTLBMissL2DTLBHit"  	 
+		Reload="100000" 
+		PerfEvtSel="0x00000045"
+		DisplayName="L1 DTLB Miss / L2 DTLB Hit"  	 
+		Description="" />
+
+  <Counter 	_locID="counter.L1DTLBMissL2DTLBMiss" _locAttrData="DisplayName, Description" Name="L1DTLBMissL2DTLBMiss"    
+		Reload="100000" 
+		PerfEvtSel="0x00000046"
+		DisplayName="L1 DTLB Miss / L2 DTLB Miss"    
+		Description="" />
+
+  <Counter 	_locID="counter.MisalignedDataReference" _locAttrData="DisplayName, Description" Name="MisalignedDataReference"      
+		Reload="100000" 
+		PerfEvtSel="0x00000047"
+		DisplayName="Misaligned Data Reference"      
+		Description="" />
+	
+ </Category>
+
+ <Category _locID="category.BusUnit" _locAttrData="Name" Name="Bus Unit">
+
+  <Counter 	_locID="counter.InternalL2Requests" _locAttrData="DisplayName, Description" Name="InternalL2Requests"		 
+		Reload="100000" 
+		PerfEvtSel="0x00001f7d"
+		DisplayName="Internal L2 Requests"		 
+		Description="" />
+
+  <Counter 	_locID="counter.FillRequestMissedL2" _locAttrData="DisplayName, Description" Name="FillRequestMissedL2" 
+		Reload="100000" 
+		PerfEvtSel="0x0000077e"
+		DisplayName="Fill Request that Missed in L2" 
+		Description="" />
+
+  <Counter 	_locID="counter.FillIntoL2" _locAttrData="DisplayName, Description" Name="FillIntoL2"			 
+		Reload="100000" 
+		PerfEvtSel="0x0000037f"
+		DisplayName="Fill into L2"			 
+		Description="" />
+
+ </Category>
+
+ <Category _locID="category.InstructionCache" _locAttrData="Name" Name="Instruction Cache">
+
+  <Counter 	_locID="counter.InstructionCacheFetch" _locAttrData="DisplayName, Description" Name="InstructionCacheFetch"	 
+		Reload="100000" 
+		PerfEvtSel="0x00000080"
+		DisplayName="Instruction Cache Fetch"	 
+		Description="" />
+
+  <Counter 	_locID="counter.InstructionCacheMiss" _locAttrData="DisplayName, Description" Name="InstructionCacheMiss"	 
+		Reload="100000" 
+		PerfEvtSel="0x00000081"
+		DisplayName="Instruction Cache Miss"	 
+		Description="" />
+
+  <Counter 	_locID="counter.L1ITLBMissL2ITLBHit" _locAttrData="DisplayName, Description" Name="L1ITLBMissL2ITLBHit"
+		Reload="100000" 
+		PerfEvtSel="0x00000084"
+		DisplayName="L1 ITLB Miss / L2 ITLB Hit"	 
+		Description="" />
+
+  <Counter 	_locID="counter.L1ITLBMissL2ITLBMiss" _locAttrData="DisplayName, Description" Name="L1ITLBMissL2ITLBMiss"
+		Reload="100000" 
+		PerfEvtSel="0x00000085"
+		DisplayName="L1 ITLB Miss / L2 ITLB Miss"   
+		Description="" />
+
+ </Category>
+
+ </Family>
+
+
+
+</Baseline>

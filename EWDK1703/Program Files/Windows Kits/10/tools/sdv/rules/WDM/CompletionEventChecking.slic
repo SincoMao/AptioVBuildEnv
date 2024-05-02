@@ -1,0 +1,75 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    CompletionEventChecking
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x0001000E
+
+Description:
+
+    The CompletionEventChecking rule checks that a driver does not call 
+    IoMarkIrpPending and KeSetEvent in a completion routine for the same 
+    IRP:
+        IoMarkirpPending
+        KeSetEvent
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkID=218193
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+   enum {outside_completion,in_completion} callback_state = outside_completion;
+   enum {initial,setevent_event} event_state = initial;
+   enum {not_pending,pending} irp_state = not_pending;
+} 
+
+[SDV_IO_COMPLETION_ROUTINE].entry
+{
+    callback_state = in_completion;
+}
+
+KeSetEvent.entry
+{
+    if((callback_state==in_completion)&&(irp_state == not_pending))
+    {
+        event_state=setevent_event;
+    }
+    else if((callback_state==in_completion)&&(irp_state == pending))
+    {
+        abort "Warning:The CompletionEventChecking rule checks that a driver does not call IoMarkIrpPending and KeSetEvent in a completion routine for the same IRP.";
+    }
+}
+
+IoMarkIrpPending.entry
+{
+    if((callback_state==in_completion)&&(event_state==setevent_event))
+    {
+        abort "Warning:The CompletionEventChecking rule checks that a driver does not call IoMarkIrpPending and KeSetEvent in a completion routine for the same IRP.";
+    }
+    else if(callback_state==in_completion)
+    {
+        irp_state = pending;
+    }
+}
+
+[SDV_IO_COMPLETION_ROUTINE].exit
+{
+    callback_state = outside_completion;
+    event_state = initial;
+    irp_state = not_pending;
+}

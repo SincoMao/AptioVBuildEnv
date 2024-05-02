@@ -1,0 +1,70 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StorPortIrql
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule checks that StorPort routines are called at correct IRQL levels.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507236
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+[
+StorPortAllocateContiguousMemorySpecifyCacheNode
+,StorPortAllocateMdl
+,StorPortBuildMdlForNonPagedPool
+,StorPortFreeContiguousMemorySpecifyCache
+,StorPortFreeMdl
+,StorPortFreePool
+,StorPortGetActiveGroupCount
+,StorPortGetActiveNodeCount
+,StorPortGetCurrentProcessorNumber
+,StorPortGetGroupAffinity
+,StorPortGetHighestNodeNumber
+,StorPortGetLogicalProcessorRelationship
+,StorPortGetNodeAffinity
+,StorPortGetSystemAddress
+,StorPortLogSystemEvent
+,StorPortAllocatePool
+].entry
+{
+    if ( sdv_irql_current > DISPATCH_LEVEL ) {
+        abort "$fname should only be called at IRQL <= DISPATCH_LEVEL.";
+    }
+}
+
+[
+StorPortRegistryRead
+,StorPortRegistryWrite
+].entry
+{
+    if ( sdv_irql_current > PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL == PASSIVE_LEVEL.";
+    }
+}
+
+StorPortPutScatterGatherList.entry
+{
+    if ( sdv_irql_current != DISPATCH_LEVEL ) {
+        abort "$fname should only be called at IRQL == DISPATCH_LEVEL.";
+    }
+}

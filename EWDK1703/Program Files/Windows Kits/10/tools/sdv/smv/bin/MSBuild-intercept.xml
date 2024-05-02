@@ -1,0 +1,44 @@
+﻿<INTERCEPT>
+
+  <SETTINGS reason="SMV" debug_spew="false" />
+
+  <REASON name="SMV">
+
+    <!-- CL.EXE -->
+    <BINARY name="cl.exe">
+
+      <LAUNCH filename="%smv%\bin\iwrap.exe" use_return_value="false" inherit_command_line="true">
+        <ENV SMV_ANALYSIS_COMPILER="%VCINSTALLDIR%\bin\%PLATFORM_SMV_INTERCEPTOR%\cl.exe" />
+        <ENV PATH="%VCINSTALLDIR%\bin\;%VSINSTALLDIR%\Common7\IDE\;%PATH%" />        
+        <ADD text="/w /iwrap:cl.exe /plugin:&quot;%smv%\bin\EspPersist.dll&quot; %SMV_CL_ADD_ARG%"  />
+      </LAUNCH>
+      
+      <LAUNCH filename="cl.exe" use_return_value="true" inherit_command_line="true">
+      </LAUNCH>
+
+    </BINARY>
+
+    <!-- LINK.EXE -->
+    <BINARY name="link.exe">
+
+      <LAUNCH filename="%smv%\bin\iwrap.exe" use_return_value="false" inherit_command_line="true">
+        <ADD text="/iwrap:link.exe" />
+      </LAUNCH>
+
+      <LAUNCH filename="link.exe" use_return_value="true" inherit_command_line="true"/>
+
+    </BINARY>
+
+    <!-- LIB.EXE -->
+    <BINARY name="lib.exe">
+
+      <LAUNCH filename="%smv%\bin\iwrap.exe" use_return_value="false" inherit_command_line="true">
+        <ADD text="/iwrap:link.exe" />
+      </LAUNCH>
+      <LAUNCH filename="lib.exe" use_return_value="true" inherit_command_line="true"/>
+
+    </BINARY>
+
+    
+  </REASON>
+</INTERCEPT>

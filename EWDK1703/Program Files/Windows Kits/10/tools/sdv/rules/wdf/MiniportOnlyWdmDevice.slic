@@ -1,0 +1,61 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    MiniportOnlyWdmDevice
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    WDF drivers shouldn't use IoCreateDevice and IoCreateDeviceSecure functions to create bare WDM device objects. This will cause a BSOD if someone tries to send an IRP to the WDM device. 
+    This is because IRP dispatch entries of the device are set to WDF specific entries but WDF haven't created a WDF device. However miniport drivers can use the DDI, because driver dispatch entry points aren't set for them.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507109
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state {
+    enum {INIT, IOCREATEDEVCALLED} s = INIT;
+}
+
+WdfDriverCreate.entry
+{
+    if(($4->DriverInitFlags & 2) != 0)
+    {
+        halt;
+    }
+}
+
+[IoCreateDevice
+, IoCreateDeviceSecure].entry
+{
+    if (s == INIT) 
+    {
+        s = IOCREATEDEVCALLED;
+    }
+}
+
+sdv_main.exit
+{
+    if(s ==  IOCREATEDEVCALLED)
+    {
+        abort "KMDF Driver creates a bare WDM device with IoCreateDevice or IoCreateDeviceSecure, but driver's dispatch routines are initialized to WDF dispatch routines.KMDF Driver can create a bare WDM device only if WDF driver is created with WdfDriverInitNoDispatchOverride flag";    
+    }
+}

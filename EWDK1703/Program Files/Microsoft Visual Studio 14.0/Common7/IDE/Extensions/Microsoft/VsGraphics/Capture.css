@@ -1,0 +1,467 @@
+.frameTilesContainer {
+    -ms-grid-row: 3;
+    color: black; /*[{plugin-color}]*/
+    font-size: 9pt; /*[{plugin-font-size}]*/
+    font-family: "Segoe UI", Arial, sans-serif; /*[{plugin-font-family} , Arial, sans-serif]*/
+    padding-left: 10px;
+    padding-right: 14px;
+}
+
+    .frameTilesContainer a:focus {
+        outline: 1px dotted white; /*[1px dotted {plugin-perftools-focusdots}]*/
+    }
+
+.frameTile {
+    position: relative;
+    float: left;
+    min-height: 200px;
+    min-width: 200px;
+    margin: 5px 10px 5px 0px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: yellow; /*[{plugin-memory-frame-button}]*/
+    border-color: red; /*[{plugin-memory-frame-button-border}]*/
+    font-size: 1.0em;
+    font-family: "Segoe UI", Arial, sans-serif; /*[{plugin-font-family} , Arial, sans-serif]*/
+}
+
+.captureFrameTile {
+    padding: 0;
+    background-image: none;
+    cursor: pointer;
+    min-width:200px;
+    min-height:200px;
+    font-family: "Segoe UI", Arial, sans-serif; /*[{plugin-font-family} , Arial, sans-serif]*/
+    background-color: fuchsia; /*[{plugin-memory-frame-button}]*/
+    border-color: black; /*[{plugin-memory-frame-button-border}]*/
+    color: green; /*[{plugin-link-color}]*/
+}
+    .frameTile > .frameTileInner {
+        -ms-grid-columns: 1fr;
+        -ms-grid-rows: auto auto auto;
+        box-sizing: border-box;
+        display: -ms-grid;
+        font-size: small;
+        position: relative;
+    }
+
+.captureFrameTile > .frameTileInner {
+        box-sizing: border-box;
+        display: block;
+        font-size: small;
+        position: relative;
+}
+
+        .frameTile > .frameTileInner > .frameTileHeader {
+            background-color: yellowgreen; /*[{plugin-memory-frame-tile-header}]*/
+            padding: 5px;
+            padding-left: 10px;
+            -ms-grid-row: 1;
+            position: relative;
+            display: -ms-grid;
+            -ms-grid-columns: 1fr 1fr;
+            -ms-grid-rows: auto;
+            margin-bottom: 5px;
+        }
+
+        .frameTile > .frameTileInner > .frameTileHidden {
+                color: transparent;
+                background: transparent;
+                border: none;
+                text-indent: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                visibility:hidden;
+            }
+
+
+            .frameTile > .frameTileInner > .frameTileHeader > .frameTileTitle {
+                display: inline-block;
+                -ms-grid-column: 1;
+            }
+
+            .frameTile > .frameTileInner > .frameTileHeader > .frameTakenDate {
+                margin-right: 5px;
+                display: inline-block;
+                -ms-grid-column: 2;
+                -ms-grid-column-align: end;
+            }
+
+            .frameTile > .frameTileInner > .frameTileHeader > .frameTileHidden {
+                color: transparent;
+                background: transparent;
+                text-indent: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                visibility:hidden;
+            }
+
+        .frameTile > .frameTileInner > .frameTileMiddle {
+            -ms-grid-row: 2;
+            margin-top: 10px;
+            margin-bottom: 0px;
+            height: 150px;
+        }
+
+        .frameTile > .frameTileInner > .captureFrameButton {
+            display:block;
+        }
+
+        .frameTile > .frameTileInner > .frameTileImageHolder {
+            display: block;
+            z-index: 10000;
+        }
+
+            .frameTile > .frameTileInner > .frameTileImageHolder > .frameTileImage {
+                max-width: 200px;
+                max-height: 150px;
+                display: block;
+                margin: auto;
+                vertical-align: middle;
+            }
+
+        .frameTile > .frameTileInner > .frameTileBottom {
+            -ms-grid-row: 3;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            max-width: 180px;
+            -ms-grid-row-align: center;
+            -ms-grid-column-align: center;
+        }
+
+        .frameTile > .frameTileInner > .clickToSeeFrameDetail {
+            display: inline-block;
+            text-align: center;
+        }
+
+        .frameTile > .frameTileInner > .clickToSeeFrameDetail > .clickableLink {
+            cursor: pointer;
+        }
+
+        .frameTile > .frameTileInner > .frameTileHeader > .frameTileTitle > .clickableLink {
+            cursor: pointer;
+        }
+
+
+    .captureFrameTile:hover {
+        background-color: red; /*[{plugin-memory-frame-button-hover}]*/
+        border-color: black; /*[{plugin-memory-frame-button-border-hover}]*/
+        color: green; /*[{plugin-memory-frame-button-hover-text}]*/
+    }
+
+    .captureFrameTile:focus {
+        background-color: red; /*[{plugin-memory-frame-button-hover}]*/
+        color: green; /*[{plugin-memory-frame-button-hover-text}]*/
+    }
+
+    .captureFrameTile.active {
+        background-color: green; /*[{plugin-memory-frame-button-active}]*/
+        border-color: black; /*[{plugin-memory-frame-button-border-active}]*/
+        color: green; /*[{plugin-memory-frame-button-active-text}]*/
+    }
+
+    .captureFrameTile.active > .frameTileInner > .captureFrameButton > .frameTileTextContainer > .captureFrameIcon {
+        background-position-y: 2px;
+    }
+
+    .captureFrameTile.active > .frameTileInner > .captureFrameButton > .frameTileTextContainer > .clickableButtonLabel {
+        background-position-y: 5px;
+    }
+
+    .captureFrameTile.disabled {
+        background-color: black; /*[{plugin-memory-frame-button-disabled}]*/
+        color: black; /*[{plugin-memory-frame-button-disabled-text}]*/
+    }
+
+        .captureFrameTile > .frameTileInner .captureFrameButton.disabled .captureFrameIcon {
+            background-position-y: -64px;
+        }
+
+    .captureFrameTile > .frameTileInner .captureFrameButton .frameTileTextContainer {
+        -ms-grid-columns: 1fr;
+        -ms-grid-rows: 1fr 1fr;
+        display: -ms-grid;
+        height:100%;
+    }
+
+        .captureFrameTile > .frameTileInner .captureFrameButton .frameTileTextContainer .captureFrameIcon {
+            -ms-grid-column: 1;
+            -ms-grid-column-align: center;
+            -ms-grid-row: 1;
+            -ms-grid-row-align: end;
+            background: url('images/takeframe.png') no-repeat 0px 0px; /*[url({image-frame}) no-repeat 0px 0px]*/
+            background-size: 32px 96px;
+            height: 32px;
+            margin-right: 5px;
+            width: 32px;
+        }
+
+        .captureFrameTile > .frameTileInner .captureFrameButton .frameTileTextContainer .clickableButtonLabel {
+            -ms-grid-column: 1;
+            -ms-grid-column-align: center;
+            -ms-grid-row: 2;
+            -ms-grid-row-align: start;
+            cursor: pointer;
+        }
+
+    .captureFrameTile > .frameTileInner progress {
+        width: 100%;
+        margin: auto;
+        display: none;
+        color: blue; /*[{plugin-perftools-progress}]*/
+    }
+
+
+html, body {
+    -ms-high-contrast-adjust: none;
+    cursor: default;
+    height: 100%;
+    margin: 0px;
+}
+
+input:-ms-input-placeholder {
+    color: white; /*[{plugin-perftools-watermark-text}]*/
+}
+
+#mainContainer {
+    height: 100%;
+    width: 100%;
+}
+
+.warningMessage {
+    -ms-grid-row: 1;
+    background-image: url('images/i_warning.png'); /*[url({image-warning})]*/
+    background-position-y: -18px;
+    background-repeat: no-repeat;
+    background-size: 18px 54px;
+    color: white; /*[{plugin-color}]*/
+    display: none;
+    height: 18px;
+    margin-top: 2px;
+    padding-left: 21px;
+    width: 18px;
+}
+
+input {
+    padding: 2px;
+}
+
+.hidden {
+    display: none;
+}
+
+.controlDropdown {
+    padding: 0;
+    margin: 0;
+}
+
+.additionalSeperator {
+    display: none;
+}
+
+.heapOverviewGraph {
+    display: none; /* Initial state is display:none, but becomes visible on control initialization */
+    height: 100%;
+    margin-bottom: 5px;
+    position: relative;
+    width: 100%;
+}
+
+.datatypeSelection {
+    width: 90px;
+}
+
+.collectionView {
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: auto auto 1fr;
+    display: -ms-grid;
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+}
+
+    .collectionView > .giveFeedbackContainer {
+        position: absolute;
+        bottom: 2px;
+        left: 2px;
+    }
+
+.analysisView {
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: auto auto 1fr;
+    display: -ms-grid;
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+}
+
+    .analysisView > .giveFeedbackContainer {
+        position: absolute;
+        bottom: 2px;
+        left: 2px;
+    }
+
+.mainSection {
+    -ms-grid-row: 2;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+.frameScrollableContainer {
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.frameView {
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: .7fr .3fr auto;
+    box-sizing: border-box;
+    display: -ms-grid;
+    height: 100%;
+    min-height: 21em;
+    width: 100%;
+}
+
+    .frameView > .frameGridContainer {
+        -ms-grid-column: 1;
+        -ms-grid-row: 1;
+        box-sizing: border-box;
+        padding-top: 3px;
+    }
+
+    .frameView > .gridSplitter {
+        -ms-grid-column: 1;
+        -ms-grid-row: 2;
+        z-index: 10;
+        box-sizing: border-box;
+    }
+
+    .frameView > .referenceView {
+        -ms-grid-column: 1;
+        -ms-grid-row: 2;
+        display: -ms-grid;
+        -ms-grid-columns: 1fr;
+        -ms-grid-rows: auto 1fr;
+        box-sizing: border-box;
+    }
+
+    .frameView > .frameMessagesContainer {
+        -ms-grid-column: 1;
+        -ms-grid-row: 3;
+        border-top: 1px solid white; /*[1px solid {plugin-memory-frame-messages-border}]*/
+        box-sizing: border-box;
+        cursor: default;
+    }
+
+        .frameView > .frameMessagesContainer > .reachedItemsCapMessageContainer {
+            box-sizing: border-box;
+            display: none;
+            margin: 5px 0px 5px 10px;
+        }
+
+.frameTab {
+    height: 100%;
+}
+
+    .frameTab > .frameDataNavigation {
+        height: 100%;
+    }
+
+    .frameTab > .frameDataNavigationHidden {
+        display: none;
+    }
+
+    .frameTab > .frameErrorProgress {
+        height: 100%;
+        width: 100%;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+        .frameTab > .frameErrorProgress > .frameError {
+            font-size: 20px;
+        }
+
+            .frameTab > .frameErrorProgress > .frameError > .frameProcessingErrorFrown {
+                font-size: 100px;
+                margin-bottom: 20px;
+            }
+
+        .frameTab > .frameErrorProgress > .frameProcessingProgressDiv {
+            -ms-grid-columns: 1fr;
+            -ms-grid-rows: 1fr;
+            display: -ms-grid;
+            height: 100%;
+            width: 100%;
+        }
+
+        .frameTab > .frameErrorProgress > .frameProcessingProgressDivHidden {
+            display: none;
+        }
+
+        .frameTab > .frameErrorProgress > .frameProcessingProgressDiv > .progressContent {
+            -ms-grid-column: 1;
+            -ms-grid-column-align: center;
+            -ms-grid-row: 1;
+            -ms-grid-row-align: center;
+            max-width: 300px;
+            text-align: center;
+        }
+
+
+.headerAndTabContainer {
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: auto 1fr;
+    display: -ms-grid;
+    height: 100%;
+    width: 100%;
+}
+
+.tabContainer {
+    -ms-grid-columns: 1fr;
+    -ms-grid-row: 2;
+    -ms-grid-rows: 1fr;
+    background-color: white; /*[{plugin-background-color}]*/
+    display: -ms-grid;
+}
+
+    .tabContainer .startProfilingPrompt {
+        -ms-grid-column-align: center;
+        -ms-grid-row-align: center;
+    }
+
+        .tabContainer .startProfilingPrompt .startProfilingMessage {
+            font-size: 14px;
+        }
+
+.startToolbarButton {
+    background: url('../Common/images/i_start.png') no-repeat 0px 0px; /*[url({f12-image-toolbar-start}) no-repeat 0px 0px]*/
+    background-size: 18px 54px;
+}
+
+.stopToolbarButton {
+    background: url('../Common/images/i_stop.png') no-repeat 0px 0px; /*[url({f12-image-toolbar-stop}) no-repeat 0px 0px]*/
+    background-size: 18px 54px;
+}
+
+.captureFrameToolbarButton {
+    background: url('images/i_frame.png') no-repeat 0px 0px; /*[url({f12-image-toolbar-frame}) no-repeat 0px 0px]*/
+    background-size: 18px 54px;
+}
+
+.grid-gutter-row {
+    padding-top: 4px;
+}
+
+/*From the DOM/Console common "toolwindow.css"*/
+.BPT-FileLink, .BPT-HelpLink {
+    border: 1px solid white;
+    color: white; /*[{plugin-link-color}]*/ /*EnvironmentColors.CommandBarMenuLinkTextColorKey*/
+    cursor: pointer;
+}
+
+    .BPT-FileLink:hover, .BPT-HelpLink:hover {
+        color: white; /*[{plugin-link-hover-color}]*/ /*EnvironmentColors.CommandBarMenuLinkTextHoverColorKey*/
+        text-decoration: underline;
+    }

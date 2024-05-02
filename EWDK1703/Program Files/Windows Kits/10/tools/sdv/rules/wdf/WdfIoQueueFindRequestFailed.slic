@@ -1,0 +1,62 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    wdfioqueuefindrequestfailed
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    WdfIoQueueRetrieveFoundRequest or WdfObjectDereference should only
+    be called after WdfIoQueueFindRequest returns STATUS_SUCCESS
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507151
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state
+{
+     enum {init,find_failed} s = init;
+}
+[sdv_WdfIoQueueFindRequest].exit
+{
+    if($return==STATUS_SUCCESS)
+    {
+            halt;
+    }
+      else
+    {
+       s=find_failed;
+    }
+}
+
+[sdv_WdfIoQueueRetrieveFoundRequest].exit
+{
+      if(s==find_failed)
+      {
+          abort "$fname should only be called after WdfIoQueueFindRequest returns STATUS_SUCCESS.";
+      }
+}
+
+[sdv_WdfObjectDereference].exit
+{
+      if(s==find_failed)
+      {
+          abort "$fname should only be called after WdfIoQueueFindRequest returns STATUS_SUCCESS.";
+      }
+}

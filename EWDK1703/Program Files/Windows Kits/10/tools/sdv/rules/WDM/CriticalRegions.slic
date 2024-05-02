@@ -1,0 +1,67 @@
+/*
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    CriticalRegions
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00040003
+
+Description:
+
+    This rule verifies that calls to KeEnterCriticalRegion and
+    KeLeaveCriticalRegion are used in strict alternation.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216055
+--*/
+
+#include "slic_base.h"
+
+state{
+    int RegionDepth = 0;
+}
+
+[KeEnterCriticalRegion
+,ExEnterCriticalRegionAndAcquireResourceExclusive
+,ExEnterCriticalRegionAndAcquireResourceShared
+,ExEnterCriticalRegionAndAcquireSharedWaitForExclusive
+,ExEnterPriorityRegionAndAcquireResourceExclusive@XDV
+,ExEnterPriorityRegionAndAcquireResourceShared@XDV
+].entry
+{
+    RegionDepth = RegionDepth + 1 ;
+}
+
+[KeLeaveCriticalRegion
+,ExReleaseResourceAndLeaveCriticalRegion
+,ExReleaseResourceAndLeavePriorityRegion@XDV
+].entry
+{
+    if (RegionDepth == 0) {
+        abort "The driver is calling $fname from outside a critical region.";
+    } else {
+        RegionDepth = RegionDepth - 1;
+    }
+}
+
+[SDV_STANDARD_DRIVER_ROUTINES].exit
+{
+    if (RegionDepth != 0) {
+        abort "The driver has returned without leaving the critical region.";        
+    }
+}
+
+[SDV_SPECIAL_DRIVER_ROUTINES]@SDV.exit
+{
+    if (RegionDepth != 0) {
+        abort "The driver has returned without leaving the critical region.";        
+    }
+}

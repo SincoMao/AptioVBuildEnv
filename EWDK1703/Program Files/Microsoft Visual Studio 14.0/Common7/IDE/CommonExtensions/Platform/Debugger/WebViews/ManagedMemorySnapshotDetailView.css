@@ -1,0 +1,526 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+    -ms-high-contrast-adjust: none;
+}
+
+.SplashScreen {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 2em;    
+    text-align: center;
+    background-color: black; /*[{vs-command-bar-options-background-color}]*/
+}
+
+    /* splash message */
+    .SplashScreen > div {
+        position: relative;
+        top: 40%;
+    }
+
+.ImageTile {
+    position: relative;
+    overflow: hidden;
+    max-width: 16px;
+    -ms-grid-row-align: center;
+}
+
+.ImageTile > .Spacer {
+    max-height: 1.25em;
+    height: 16px;
+    float: left;
+}
+
+.ImageTile > .Sprite {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    max-height: 1.25em;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.ImageTile > .ViewInstancesIcon {
+    left: -200%;
+}
+
+.ImageTile > .NotificationIcon {
+    left: -300%;
+}
+
+.ImageTile > .ViewFilterIcon {
+    left: -400%;
+}
+
+.ImageTile > .BackIcon {
+    left: -500%;
+}
+
+/** 
+  * The entire snapshot viewer container
+  */
+.SnapshotViewContainer {
+    height: 100%;
+    width: 100%;
+    padding-top: 12px;
+    padding-left: 6px;
+}
+
+/**
+ * The viewer toolbar: process name, compare to, settings, etc
+ */
+.SnapshotViewToolbar {
+    display: -ms-grid;
+    -ms-grid-columns: 1fr auto;
+    width: 100%;
+    overflow: auto;
+    cursor: default;
+}
+
+    .SnapshotViewToolbar > .GeneralCaptionDiv {
+        display: none;
+    }
+
+    .SnapshotViewToolbar > .HeaderCaptionDiv {
+        -ms-grid-column: 1;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space:nowrap;
+    }
+
+        .SnapshotViewToolbar > .HeaderCaptionDiv > span {
+            font-weight: bold;
+        }
+
+        .SnapshotViewToolbar > .HeaderCaptionDiv > span > a {
+            color: black; /*[{vs-tab-title-link}]*/
+            font-weight: normal;
+            text-decoration: none;
+        }
+
+        .SnapshotViewToolbar > .HeaderCaptionDiv > span > a:hover {
+            cursor: pointer;
+        }
+
+    .SnapshotViewToolbar > .GoBackDiv {
+        display: inline-block;
+    }
+
+        .SnapshotViewToolbar > .GoBackDiv > a {
+            color: black; /*[{vs-tab-title-link}]*/
+            font-weight: normal;
+            text-decoration: none;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 3px;
+        }
+
+        .SnapshotViewToolbar > .GoBackDiv > a:hover {
+            cursor: pointer;
+            background-color: black; /*[{vs-command-bar-mouse-over-background-begin-color}]*/
+        }
+
+            .SnapshotViewToolbar > .GoBackDiv > a > div > img {
+                max-height: none;
+            }
+
+        .SnapshotViewToolbar > .GoBackDiv > span {
+            vertical-align: middle;
+        }
+
+    .SnapshotViewToolbar > .GeneralCaptionDiv {
+        display: none;
+        font-weight: 600;
+        font-size: 1.3em;
+    }
+
+    .SnapshotToolbarDiv {
+        -ms-grid-column: 2;
+        box-sizing: border-box;
+        float: right;
+        margin-left: auto;
+        white-space: nowrap;
+        display: -ms-grid;
+        -ms-grid-columns: auto auto auto 1fr;
+    }
+
+    .SnapshotToolbarDiv > div {
+        display: inline-block;
+        -ms-grid-row-align: center;
+        vertical-align: middle;
+        margin-right: 12px;
+        margin-bottom: 12px;
+    }
+
+    .SnapshotToolbarDiv > * > select {
+            width: 21em;
+            margin-left: 8px;
+            box-sizing: border-box;
+            border: 1px solid black; /*[1px solid {vs-tree-view-selected-item-inactive-color}]*/
+            vertical-align: middle;
+            min-height: 24px;
+            float: right;
+    }
+
+    .SnapshotToolbarDiv > .ViewModeDropDownDiv {
+        -ms-grid-column: 1;
+        -ms-grid-row: 2;
+        float: right;
+    }
+
+        .SnapshotToolbarDiv > .ViewModeDropDownDiv > span {
+            vertical-align: middle;
+        }
+
+    .SnapshotToolbarDiv > .DiffDropDownDiv {
+        -ms-grid-column: 1;
+        float:right;
+    }
+
+        .SnapshotToolbarDiv > .DiffDropDownDiv > span {
+            vertical-align: middle;
+        }
+
+    .SnapshotToolbarDiv > .ViewSettingsDiv {
+        -ms-grid-column: 3;
+        border: 1px solid black; /*[1px solid {vs-tree-view-selected-item-inactive-color}]*/
+    }
+
+        .SnapshotToolbarDiv > .ViewSettingsDiv:hover {
+            background-color: black; /*[{vs-command-bar-mouse-over-background-begin-color}]*/
+            cursor: pointer;
+        }
+
+        .SnapshotToolbarDiv > .ViewSettingsEnabled {
+            background-color: black; /*[{vs-command-bar-mouse-over-background-begin-color}]*/
+        }
+
+        .SnapshotToolbarDiv > .ViewSettingsDiv > .ViewSettingsLink > .ViewSettingsMenu {
+            max-width: none;
+            margin: 3px;
+        }
+
+            .SnapshotToolbarDiv > .ViewSettingsDiv > .ViewSettingsLink > .ViewSettingsMenu > img {
+                max-height: none;
+            }
+
+    .SnapshotToolbarDiv > .SearchFilterDiv {
+        display: block;
+        -ms-grid-column: 4;
+    }
+
+        .SnapshotToolbarDiv > .SearchFilterDiv > .FilterInput {
+            width: 100%;
+            box-sizing: border-box;
+            vertical-align: middle;
+            min-height: 24px;
+        }
+
+        .SnapshotToolbarDiv > .SearchFilterDiv > .FilterInput:-ms-input-placeholder {
+            color: black; /*[{plugin-textbox-disabled-color}]*/
+        }
+
+        @media screen and (-ms-high-contrast: active) {
+            /* Set background-color to make the text visible for for high contrast themes. We explicitly don't want to set background-color
+               for all themes because it makes normal theme look bad. */
+            .SnapshotToolbarDiv > .SearchFilterDiv > .FilterInput:-ms-input-placeholder {
+                background-color: rgb(252, 252, 252); /*[{plugin-textbox-disabled-background-color}]*/
+            }  
+        }
+
+        .SnapshotToolbarDiv > .SearchFilterDiv > .FilterInput > input {
+            min-height: 24px;
+        }
+
+        .SnapshotToolbarDiv > .SearchFilterDiv > .FilterInputProgressBar {
+            width: 100%;
+            height: 3px;
+            border: none;
+            display: block;
+            visibility: hidden;
+        }
+
+@media screen and (max-width: 424px) {
+    .SnapshotViewToolbar {
+        display: inline-block;
+    }
+
+        .SnapshotViewToolbar > .SnapshotToolbarDiv {
+            display: block;
+            min-width: 0px;
+            width: 100%;
+            white-space: normal;
+            text-align: right;
+        }
+}
+
+@media screen and (min-width: 900px) {
+    .SnapshotViewToolbar > .GeneralCaptionDiv {
+        display: inline-block;
+    }
+}
+
+.NotificationBar {
+    display: -ms-grid;
+    -ms-grid-columns: auto 1fr;
+    width: auto;
+    height: auto;
+    line-height: 1.5em;
+    cursor: default;
+    margin-bottom: 12px;
+} 
+
+    .NotificationBar > .NotificationBarInfoIcon {
+        display: inline-block;
+        -ms-grid-row-align: center;
+        -ms-grid-column: 1;
+    }
+
+    .NotificationBar > .NotificationBarMessage {
+        -ms-grid-column: 2;
+        margin-left: 0.25em;
+    }
+
+/**
+ * Snapshot view: types, objects, references graph
+ */
+
+.SnapshotView {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+    .SnapshotView > .TypesObjectsViewer {
+        position:absolute;
+        left:0; 
+        right: 0;
+    }
+
+        .SnapshotView > .TypesObjectsViewer > div {
+            width: 100%;
+            height: 100%;
+        }
+
+        .SnapshotView > .TypesObjectsViewer > .ViewDisabledMessage {
+            display: block;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            left: 0%;
+            top: 50%;
+            margin-top: -0.5em;
+        }
+
+            .SnapshotView > .TypesObjectsViewer > .ViewDisabledMessage p {
+                margin-top: auto;
+                margin-bottom: auto;
+                color: black; /*[{plugin-textbox-disabled-color}]*/
+            }
+
+    .SnapshotView > .Splitter {
+        position:absolute;
+        left:-10px; /* compensate padding of SnapshotViewContainer */
+        right: 0; 
+        height: 3px;
+        z-index: 10;
+        box-sizing: border-box;
+        background-color: black; /*[{vs-command-bar-options-background-color}]*/
+    }
+
+    .SnapshotView > .RefGraph {
+        position:absolute;        
+        left:0; 
+        right: 0; 
+    }
+
+        .SnapshotView > .RefGraph > .RefGraphHeader {
+            padding-left: 0em;
+            padding-top: 0.25em;
+            font-weight: bold;            
+        }
+
+        .SnapshotView > .RefGraph > .RefGraphHeader > .RefGraphDirection > * Separator {
+            opacity:0.3;
+            font-weight:bold;
+            padding-left: 0.1em;
+            padding-right: 0.1em;
+        }
+
+        .SnapshotView > .RefGraph > .RefGraphHeader > .RefGraphDirection * a.enabled {
+            font-weight: normal;
+            text-decoration: none;
+            color: black; /*[{plugin-color}]*/
+        }
+
+        .SnapshotView > .RefGraph > .RefGraphHeader > .RefGraphDirection * a.enabled:hover {
+            font-weight: normal;
+            text-decoration: none;
+            color: black; /*[{vs-tab-title-link}]*/
+        }
+
+        .SnapshotView > .RefGraph > .RefGraphHeader > .RefGraphDirection * a.disabled {
+            color: black; /*[{vs-tab-title-link}]*/
+            font-weight: bold;
+            text-decoration: none;
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .SnapshotView > .RefGraph > .RefGraphNoData {
+            padding: 6px;
+        }
+
+        .SnapshotView > .RefGraph > .RefGraphContainer {
+            position: absolute;
+            top: 2em;
+            left:0; 
+            right: 0; 
+            bottom: 0;     
+        }
+
+/**
+ * Goto objects icons
+ */
+.SnapshotGotoObjectsIconHover {
+    margin-top: 0.1em;
+    position: absolute;
+    right: 0.25em;
+    cursor: pointer;
+}
+
+.SnapshotGotoObjectsIconSelection {
+    margin-top: 0.1em;
+    position: absolute;
+    right: 0.25em;
+    cursor: pointer;
+}
+
+.SnapshotGotoObjectsIconOverlay {
+    z-index: 100;
+    margin: 0px;
+    height: 1.5em;
+    width: 2em;
+    max-width: 16px;
+}
+
+.SnapshotGotoObjectsIconGrayOut {
+    opacity:0.4;
+}
+
+/**
+ * Sampling objects icon
+ */
+.SamplingIcon {
+    display: inline-block;
+    margin-left: 0.125em;
+}
+
+/**
+ * Make grid control header look good
+ */
+.grid-cell-ref {
+    padding-top: 1px;
+    width: 100px;
+    height: 100%;
+    text-align: left;
+    text-indent: 2px;
+    overflow: visible;
+    vertical-align: middle;
+    float: left;
+    display: table-cell;
+    white-space: nowrap;
+    position: relative;
+    cursor: default;
+    
+    border-left-width: 0px;
+    border-right-width: 1px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    border-color: black; /*[{plugin-table-header-background-color}]*/
+    border-style: solid;
+}
+
+.grid-row {
+    height: 1.75em;
+}
+
+.grid-row-normal {
+    border-bottom-width: 1px;
+    border-top-width: 0px;
+    border-left-width: 1px;
+    border-right-width: 0px;
+    border-style: solid;
+    border-color: black; /*[{plugin-table-header-background-color}]*/
+}
+
+.grid-header {
+    background: url("./BptDiagnosticCommon/icons/grid-header-separator.png") no-repeat right top;
+    background-color: black; /*[{plugin-table-header-background-color}]*/
+    border-color: black; /*[{vs-tree-view-selected-item-inactive-color}]*/
+    border-width: 1px;
+    border-style: solid;
+}
+
+.grid-header-canvas {
+    border-bottom-color: transparent;
+    border-bottom-width: 0px;
+    border-bottom-style: solid;
+}
+
+.grid-cell {
+    padding-top: 1px;
+    height: 100%;
+    border-style:solid;
+    border-right-width: 1px;
+    border-left-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    border-color: black; /*[{plugin-table-header-background-color}]*/
+}
+
+.grid-header-column {
+    border-color: black; /*[{vs-tree-view-selected-item-inactive-color}]*/
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-style: solid;
+}
+
+.icon-information {
+    display: block;
+    float: right;
+    margin-left: 0.25em;
+}
+
+.icon-grid {
+    display: -ms-grid;
+    -ms-grid-columns: 1fr auto;
+}
+
+.rightAlignedColumn {
+    text-align: right;
+    padding-right: 5px;
+}
+/**
+ * Misc
+ */
+.disabledColor {
+    color: black; /*[{plugin-textbox-disabled-color}]*/
+}
+
+.disabledColor:hover {
+    color: black; /*[{plugin-textbox-disabled-color}]*/    
+}
+
+@media screen and (-ms-high-contrast: active) {
+    /* Set background-color to make the text visible for for high contrast themes. We explicitly don't want to set background-color
+       for all themes because it makes normal theme look bad */
+    .disabledColor {        
+        background-color: rgb(252, 252, 252); /*[{plugin-textbox-disabled-background-color}]*/
+    }  
+}

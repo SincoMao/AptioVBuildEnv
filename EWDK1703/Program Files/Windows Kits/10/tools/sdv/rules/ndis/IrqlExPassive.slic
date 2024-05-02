@@ -1,0 +1,81 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlExPassive
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020008
+
+Description:
+
+    The IrqlExPassive rule specifies that the driver calls the following 
+    executive support routines only at IRQL = PASSIVE_LEVEL:
+        ExCreateCallback
+        ExIsProcessorFeaturePresent
+        ExRaiseAccessViolation
+        ExRaiseDatatypeMisalignment
+        ExUuidCreate
+    and these routines at IRQL<=APC_LEVEL:
+        ExRaiseStatus
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216025
+
+--*/
+
+
+#include "slic_base.h"
+
+
+ExCreateCallback.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+ExIsProcessorFeaturePresent.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+ExRaiseAccessViolation.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+ExRaiseDatatypeMisalignment.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+ExRaiseStatus.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) 
+    {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+ExUuidCreate.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+

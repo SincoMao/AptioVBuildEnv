@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
+  <Metadata>
+    <Identity Version="8.1.0.0" Id="Microsoft.Windows.DevelopmentKit.WindowsStore" Publisher="Microsoft Corporation" Language="en-US"/>
+    <DisplayName>Windows Software Development Kit for Windows Store Apps</DisplayName>
+    <Description>Files and tools needed to compile a Windows Store app</Description>
+    <MoreInfo>http://go.microsoft.com/fwlink/?LinkId=221707</MoreInfo>
+    <Tags>Windows Store, app</Tags>
+    <GettingStartedGuide>http://go.microsoft.com/fwlink/?LinkId=221707</GettingStartedGuide>
+  </Metadata>
+
+  <Installation Scope="global" AllUsers="true" InstalledByMsi="true" SystemComponent="true">
+    <InstallationTarget Id="Microsoft.PlatformSDK" />
+  </Installation> 
+
+  <!-- The Windows Store SDK does not have any dependencies, it is the root of the SDK dependency tree -->
+  <Dependencies/>
+  
+  <!-- The Windows Store SDK install does not install any VS extensions or samples. Samples are installed from the web -->
+  <Assets/>
+</PackageManifest>

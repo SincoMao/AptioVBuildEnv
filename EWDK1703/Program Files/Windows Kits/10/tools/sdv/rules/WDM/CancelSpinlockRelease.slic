@@ -1,0 +1,53 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    CancelSpinlockRelease
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that calls to IoAcquireCancelSpinLock and
+    IoReleaseCancelSpinlock are used in strict alternation.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+   enum {unlocked,locked} s = unlocked;
+}
+
+
+IoAcquireCancelSpinLock.exit
+{
+    
+    s=locked;
+    
+}
+
+
+IoReleaseCancelSpinLock.exit
+{
+    if(s==unlocked) {
+        abort "The driver is calling IoReleaseCancelSpinLock without first acquiring the spinlock.";
+    } else {
+        s=unlocked;
+    }
+}
+
+

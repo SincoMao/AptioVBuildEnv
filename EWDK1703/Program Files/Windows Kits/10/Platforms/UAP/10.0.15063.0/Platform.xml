@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPlatform name="UAP" friendlyName="Windows 10 Creators Update" version="10.0.15063.0">
+	<MinimumVisualStudioVersion>15.0.25909.02</MinimumVisualStudioVersion>
+	<VersionedContent>true</VersionedContent>
+	<ContainedApiContracts>
+		<ApiContract name="Windows.ApplicationModel.Calls.CallsVoipContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.ApplicationModel.SocialInfo.SocialInfoContract" version="2.0.0.0"/>
+		<ApiContract name="Windows.Devices.DevicesLowLevelContract" version="3.0.0.0"/>
+		<ApiContract name="Windows.Devices.Printers.PrintersContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.Foundation.FoundationContract" version="3.0.0.0"/>
+		<ApiContract name="Windows.Foundation.UniversalApiContract" version="4.0.0.0"/>
+		<ApiContract name="Windows.Graphics.Printing3D.Printing3DContract" version="3.0.0.0"/>
+		<ApiContract name="Windows.Networking.Connectivity.WwanContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.Services.Store.StoreContract" version="2.0.0.0"/>
+		<ApiContract name="Windows.Services.TargetedContent.TargetedContentContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.System.Profile.ProfileHardwareTokenContract" version="1.0.0.0"/>
+		<ApiContract name="Windows.System.Profile.ProfileSharedModeContract" version="2.0.0.0"/>
+		<ApiContract name="Windows.UI.ViewManagement.ViewManagementViewScalingContract" version="1.0.0.0"/>
+	</ContainedApiContracts>
+</ApplicationPlatform>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="BEC88BA6-0F08-44EB-A533-0ACED7840557">
+    <Name>Workflow Designer Colors</Name>
+    <Author>Microsoft Corporation</Author>
+    <Version>14.0</Version>
+    <Description xml:space="preserve">Workflow Designer Colors</Description>
+    <Locale>1033</Locale>
+    <InstalledByMsi>true</InstalledByMsi>
+    <SupportedProducts>
+      <VisualStudio Version="14.0">
+        <Edition>Pro</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.5" />
+    <SystemComponent>true</SystemComponent>
+  </Identifier>
+  <References />
+  <Content>
+    <VsPackage>Microsoft.VisualStudio.Activities.Colors.pkgdef</VsPackage>
+  </Content>
+</Vsix>

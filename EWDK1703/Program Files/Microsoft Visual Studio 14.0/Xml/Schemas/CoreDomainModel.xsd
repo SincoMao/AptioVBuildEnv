@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema id="CoreSchema" targetNamespace="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" elementFormDefault="qualified" xmlns="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:core="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- ModelElement -->
+  <xsd:element name="modelElement" abstract="true" type="ModelElement" />
+  <xsd:complexType name="ModelElement" abstract="true" >
+    <xsd:annotation>
+      <xsd:documentation>Base class (root of hierarchy) for all domain model elements</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence minOccurs="0" maxOccurs="1">
+      <!-- Extensions -->
+      <xsd:element name="extensions" minOccurs="0" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Instances of ExtensionElement</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded" >
+              <xsd:element ref="extensions">
+              </xsd:element>
+              <xsd:element ref="extensionElement" >
+                <xsd:annotation>
+                  <xsd:documentation>ExtensionElement instance. Note: the extension element does not necessarily extend the containing model element - the element that is extended  is specified by the 'extends' relationship</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:choice>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ModelElement Moniker -->
+  <xsd:element name="modelElementMoniker" abstract="true" type="ModelElementMoniker" />
+  <xsd:complexType name="ModelElementMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for ModelElement instance.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+
+  <!-- ExtensionElement -->
+  <xsd:element name="extensionElement" abstract="true" type="ExtensionElement" substitutionGroup="modelElement" />
+  <xsd:complexType name="ExtensionElement" abstract="true" >
+    <xsd:annotation>
+      <xsd:documentation>Base class for all domain model element extensions</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: Extends -->
+          <xsd:element name="extendedElement" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instance of Extends</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="1" maxOccurs="1" >
+                  <xsd:element ref="extends">
+                    <xsd:annotation>
+                      <xsd:documentation>[Relationship deriving from Extends needs to be serialized in full-form]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element ref="modelElementMoniker" >
+                    <xsd:annotation>
+                      <xsd:documentation>[Target role-player]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ExtensionElement Moniker -->
+  <xsd:element name="extensionElementMoniker" abstract="true" type="ExtensionElementMoniker" substitutionGroup="modelElementMoniker" />
+  <xsd:complexType name="ExtensionElementMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for ExtensionElement instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ElementLink -->
+  <xsd:element name="elementLink" abstract="true" type="ElementLink" substitutionGroup="modelElement" />
+  <xsd:complexType name="ElementLink" abstract="true" >
+    <xsd:annotation>
+      <xsd:documentation>Base class for model element links</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ModelElement">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ElementLink Moniker -->
+  <xsd:element name="elementLinkMoniker" abstract="true" type="ElementLinkMoniker" substitutionGroup="modelElementMoniker" />
+  <xsd:complexType name="ElementLinkMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for ElementLink instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- Extensions pseudo-relationship -->
+  <xsd:element name="extensions" abstract="true" type="Extensions" substitutionGroup="modelElement" />
+  <xsd:complexType name="Extensions" abstract="true" >
+    <xsd:annotation>
+      <xsd:documentation>Pseudo-embedding relationship between ModelElement and ElementExtension. Allows ExtensionElements to be serialized inside an "extensions" element for any ModelElement</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+
+  <!-- Extends -->
+  <xsd:element name="extends" abstract="true" type="Extends" substitutionGroup="modelElement" />
+  <xsd:complexType name="Extends" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- Extends Moniker -->
+  <xsd:element name="extendsMoniker" abstract="true" type="ExtendsMoniker" substitutionGroup="modelElementMoniker" />
+  <xsd:complexType name="ExtendsMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for Extends instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+</xsd:schema>

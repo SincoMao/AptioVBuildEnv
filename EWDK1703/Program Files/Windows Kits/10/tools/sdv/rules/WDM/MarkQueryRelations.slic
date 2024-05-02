@@ -1,0 +1,102 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    MarkQueryRelations
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that a IRP_MJ_PNP with IRP_MN_QUERY_DEVICE_RELATIONS Irp is pended.
+    This rule only applies to FDO and FIDO device object of the BUS driver when processing RemovalRelations.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507284
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {initial,forwarded} s = initial;
+    enum {true,false} completion = false;
+
+}
+watch sdv_RunQueryDeviceRelations.entry.$2;
+
+[IoAcquireRemoveLock,IoAcquireRemoveLockEx].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+
+IoAllocateIrp.exit
+{
+    if($return==NULL)
+    {
+        halt;
+    }
+}
+
+[IoRegisterPlugPlayNotification,IoGetDeviceInterfaces].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+[IoSetCompletionRoutine,IoSetCompletionRoutineEx].entry[guard $1]
+{
+    completion = true;
+}
+
+[IoSetCompletionRoutineEx].exit[guard $1]
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+
+[IoMarkIrpPending].exit[guard $1]
+{  
+   halt;
+}
+
+[IoCallDriver,PoCallDriver,IofCallDriver].exit[guard $2]
+{  
+   s = forwarded;
+}
+
+[sdv_RunQueryDeviceRelations].exit[guard $2]
+{
+    
+    if($return!=STATUS_DELETE_PENDING&&$2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP&&completion==true)
+    {
+        if(($return!=STATUS_INVALID_DEVICE_STATE&&$return!=STATUS_NOT_SUPPORTED&&$return!=STATUS_NO_SUCH_DEVICE)&&s==forwarded)
+        {
+             abort "IRP_MJ_PNP with IRP_MN_QUERY_DEVICE_RELATIONS Irp is not pended.";
+        }
+    }
+    else
+    {
+        halt;
+    }
+}

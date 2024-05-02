@@ -1,0 +1,49 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    WdfRequestSendSyncAtDispatch
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    If the driver sets the WDF_REQUEST_SEND_OPTION_SYNCHRONOUS flag, it must call WdfRequestSend at IRQL = PASSIVE_LEVEL. 
+    If this flag is not set, the driver must call this method at IRQL <= DISPATCH_LEVEL.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+WdfRequestSend.entry
+{
+	if($3!=NULL) 
+	{
+		if(($3->Flags==2)&&(sdv_irql_current > PASSIVE_LEVEL ))
+		{
+			abort "$fname should be called at IRQL = PASSIVE_LEVEL ";
+		}
+		else if ( sdv_irql_current > DISPATCH_LEVEL ) 
+		{
+			abort "$fname should be called at IRQL <= DISPATCH_LEVEL ";
+		}
+	}
+	else if ( sdv_irql_current > DISPATCH_LEVEL ) 
+	{
+		abort "$fname should be called at IRQL <= DISPATCH_LEVEL ";
+	}
+}

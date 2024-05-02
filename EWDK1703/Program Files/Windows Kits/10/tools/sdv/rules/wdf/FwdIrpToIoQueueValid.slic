@@ -1,0 +1,105 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    FwdIrpToIoQueueValid
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the driver sends an Irp to an Io Queue, using WdfDeviceWdmDispatchIrpToIoQueue DDI
+    from either the EvtDeviceWdmIrpDispatch callback or the EvtDeviceWdmIrpPreprocess callback.
+
+    Irp forwarding to an I/O Queue is only allowed from EvtDeviceWdmIrpDispatch and EvtDeviceWdmIrpPreprocess callbacks.
+
+    Rule diagnostics:
+    If WdfDeviceWdmDispatchIrpToIoQueue is called by the driver it needs to be either from EvtDeviceWdmIrpDispatch
+    or EvtDeviceWdmIrpPreprocess callbacks. Otherwise, this rule reports a defect.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507079
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {initial,entered} f1= initial;
+    enum {initial2,entered2} f2= initial2;
+    PIRP irp1 = NULL;
+    PIRP irp2 = NULL;
+}
+
+[fun_WDFDEVICE_WDM_IRP_PREPROCESS_1,
+ fun_WDFDEVICE_WDM_IRP_PREPROCESS_2,
+ fun_WDFDEVICE_WDM_IRP_PREPROCESS_3,
+ fun_WDFDEVICE_WDM_IRP_PREPROCESS_4,
+ fun_WDFDEVICE_WDM_IRP_PREPROCESS_5,
+ fun_WDFDEVICE_WDM_IRP_PREPROCESS_6
+ ].entry
+{
+    f1 = entered;
+    irp1 = $2;
+}
+
+[fun_WDFDEVICE_WDM_IRP_PREPROCESS_1,
+ fun_WDFDEVICE_WDM_IRP_PREPROCESS_2,
+ fun_WDFDEVICE_WDM_IRP_PREPROCESS_3,
+ fun_WDFDEVICE_WDM_IRP_PREPROCESS_4,
+ fun_WDFDEVICE_WDM_IRP_PREPROCESS_5,
+ fun_WDFDEVICE_WDM_IRP_PREPROCESS_6
+ ].exit
+{
+    f1 = initial;
+    irp1 = NULL;
+}
+
+[fun_WDFDEVICE_WDM_IRP_DISPATCH_1,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_2,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_3,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_4,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_5,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_6
+].entry
+{
+    f2 = entered2;
+    irp2 = $6;
+}
+
+[fun_WDFDEVICE_WDM_IRP_DISPATCH_1,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_2,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_3,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_4,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_5,
+ fun_WDF_DEVICE_WDM_IRP_DISPATCH_6
+].exit
+{
+    f2 = initial2;
+    irp2 = NULL;
+}
+
+sdv_WdfDeviceWdmDispatchIrpToIoQueue.entry
+{    
+    if ((f1!=entered && f2!=entered2))
+    {
+        abort "WdfDeviceWdmDispatchIrpToIoQueue can only be called from Dispatch and  Preprocess callbacks.";
+    }
+    else if ( (f1==entered && $2 != irp1) || (f2==entered2 && $2!=irp2) ) 
+    {
+        abort "WdfDeviceWdmDispatchIrpToIoQueue can only be called for the Dispatch and Preprocess callbacks.";    
+    }    
+}

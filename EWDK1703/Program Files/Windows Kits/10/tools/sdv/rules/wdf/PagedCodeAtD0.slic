@@ -1,0 +1,45 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    PagedCodeAtD0
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    Do not mark code as pageable within callbacks in the power up code path.
+
+    When a function is marked pagable and the code section is paged out, 
+    it will generate a page fault which could impact
+    the fast resume behavior because the client driver will have to wait
+    until the system drivers can service this page fault.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507114
+
+--*/
+
+
+
+
+
+
+
+
+
+#include "slic_base.h"
+
+sdv_do_paged_code_check.entry 
+{
+    abort "Do not mark code as pageable within callabcks in the power up code path.";
+}

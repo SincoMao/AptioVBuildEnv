@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://schemas.microsoft.com/VisualStudio/CodeAnalysis/AnalysisResults/General"
+           xmlns="http://schemas.microsoft.com/VisualStudio/CodeAnalysis/AnalysisResults/General"
+           xmlns:ar="http://schemas.microsoft.com/VisualStudio/CodeAnalysis/AnalysisResults/General"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified" blockDefault="substitution">
+
+  <xs:annotation>
+    <xs:documentation xml:lang="en">
+            Visual Studio Code Analysis Result Schema Definition Language.
+            Copyright (c) Microsoft Corporation. All rights reserved.
+        </xs:documentation>
+  </xs:annotation>
+
+<!--  <xs:import namespace="http://www.w3.org/2001/XMLSchema" />-->
+  
+  <!-- Every time this file changes, be sure to change the Validate method for the corresponding object in the code -->
+
+  <xs:element name="AnalysisResult" type="AnalysisResult" />
+  <xs:element name="AnalysisUnit" type="AnalysisUnit" />
+
+  <xs:attribute name="SourceLanguage" type="xs:string" />
+  <xs:attribute name="OriginalType" type="xs:QName" />
+  
+  <xs:attributeGroup name="UnrecognizedAttributes">
+    <xs:attribute ref="ar:OriginalType" use="optional" />
+    <xs:anyAttribute processContents="skip" />
+  </xs:attributeGroup>
+
+  <xs:group name="UnrecognizedElements">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="skip" />
+    </xs:sequence>
+  </xs:group>
+  
+  <xs:complexType name="ObjectWithText" abstract="true">
+    <xs:attribute name="DisplayText" type="xs:string" use="required"/>
+    <xs:attribute ref="ar:SourceLanguage" use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="UnrecognizedObjectWithText" final="#all">
+    <xs:complexContent>
+      <xs:extension base="ObjectWithText">
+        <xs:group ref="UnrecognizedElements" />
+        <xs:attributeGroup ref="UnrecognizedAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="Argument" abstract="true" type="ObjectWithText" />
+  <xs:element name="Boolean" type="xs:boolean" final="#all" />
+  <xs:element name="Byte" type="xs:unsignedByte" final="#all" />
+  <xs:element name="Double" type="xs:double" final="#all" />
+  <xs:element name="Int16" type="xs:short" final="#all" />
+  <xs:element name="Int32" type="xs:int" final="#all" />
+  <xs:element name="Int64" type="xs:long" final="#all" />
+  <xs:element name="SByte" type="xs:byte" final="#all" />
+  <xs:element name="Single" type="xs:float" final="#all" />
+  <xs:element name="String" type="xs:string" final="#all" />
+  <xs:element name="UInt16" type="xs:unsignedShort" final="#all" />
+  <xs:element name="UInt32" type="xs:unsignedInt" final="#all" />
+  <xs:element name="UInt64" type="xs:unsignedLong" final="#all" />
+
+  <xs:group name="ArgumentElements">
+    <xs:choice>
+      <xs:element ref="Argument" />
+      <xs:element ref="Boolean" />
+      <xs:element ref="Byte" />
+      <xs:element ref="Double" />
+      <xs:element ref="Int16" />
+      <xs:element ref="Int32" />
+      <xs:element ref="Int64" />
+      <xs:element ref="SByte" />
+      <xs:element ref="Single" />
+      <xs:element ref="String" />
+      <xs:element ref="UInt16" />
+      <xs:element ref="UInt32" />
+      <xs:element ref="UInt64" />
+    </xs:choice>
+  </xs:group>
+  
+  <xs:complexType name="Target" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="ObjectWithText" />
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="Target" abstract="true" type="Target" />
+  
+  <xs:complexType name="SimpleTarget" final="extension">
+    <xs:complexContent>
+      <xs:extension base="Target" />
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UnrecognizedTarget" final="#all">
+    <xs:complexContent>
+      <xs:extension base="Target">
+        <xs:group ref="UnrecognizedElements" />
+        <xs:attributeGroup ref="UnrecognizedAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="Resolution" final="#all">
+    <xs:sequence>
+      <xs:group ref="ArgumentElements" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Description" type="xs:string" use="required" />
+  </xs:complexType>
+
+  <xs:simpleType name="Severity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Note" />
+      <xs:enumeration value="Warning" />
+      <xs:enumeration value="Error" />
+      <xs:enumeration value="FatalError" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="AnalysisMessage" final="#all">
+    <xs:sequence>
+      <xs:element ref="Target" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Resolution" type="Resolution" minOccurs="1" maxOccurs="1" />
+      <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##other" processContents="lax" />
+    </xs:sequence>
+    <xs:attribute name="Rule" type="NonEmptyString" use="optional" />
+    <xs:attribute name="SourceFile" type="NonEmptyString" use="optional" />
+    <xs:attribute name="Severity" type="Severity" use="required" />
+    <xs:attribute name="Line" type="LineOrColumn" use="optional" />
+    <xs:attribute name="Column" type="LineOrColumn" use="optional" />
+    <xs:attribute name="EndLine" type="LineOrColumn" use="optional" />
+    <xs:attribute name="EndColumn" type="LineOrColumn" use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="AnalysisUnit" final="#all">
+    <xs:sequence>
+      <xs:element name="Message" type="AnalysisMessage" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="File" type="NonEmptyString" use="optional" />
+    <xs:attribute name="ProjectName" type="NonEmptyString" use="optional" />
+    <xs:attribute name="Time" type="xs:dateTime" use="required" />
+    <xs:attribute name="Analyzer" type="NonEmptyString" use="required" />
+    <xs:attribute ref="ar:SourceLanguage" use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="AnalysisResult" final="#all">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax"/>
+      <xs:element ref="AnalysisUnit" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Time" type="xs:dateTime" use="required" />
+    <xs:attribute name="ToolsVersion" type="NonEmptyString" use="required" />
+  </xs:complexType>
+
+  <xs:simpleType name="NonEmptyString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LineOrColumn">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>

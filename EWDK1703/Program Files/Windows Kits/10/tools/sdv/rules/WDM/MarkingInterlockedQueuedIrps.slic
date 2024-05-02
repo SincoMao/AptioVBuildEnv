@@ -1,0 +1,67 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    MarkingInterlockedQueuedIrps
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that driver correctly marks the IRP as
+    pending before it queues it in an interlocked fashion for
+    further processing.  Drivers should call IoMarkIrpPending
+    before the IRP is queued with one of the interlocked queue
+    APIs. Otherwise, the IRP might get completed in an arbitrary
+    thread context before it is marked as pending.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+    int queuedWithoutMarking = 0;
+    int markedPending = 0;    
+} with guard (sdv_main,sdv_irp)
+
+[ExInterlockedInsertHeadList
+,ExInterlockedInsertTailList
+,ExInterlockedPushEntryList
+,ExfInterlockedInsertHeadList
+,ExfInterlockedInsertTailList
+,ExfInterlockedPushEntryList].entry 
+{
+    if (!markedPending) {
+        queuedWithoutMarking = 1;
+    }
+}
+
+IoMarkIrpPending.entry[guard $1]
+{
+    markedPending = 1;       
+}
+
+[RemoveHeadList,sdv_containing_record].entry
+{
+    halt;
+}
+
+[SDV_RunDispatchFunction].exit
+{
+    if ($return == STATUS_PENDING && queuedWithoutMarking) {
+        abort "Driver has queued the IRP in an interlocked fashion without marking it as pending."; 
+    }    
+}

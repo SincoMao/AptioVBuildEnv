@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+	targetNamespace="http://schemas.microsoft.com/appx/2010/StoreManifest"
+	xmlns:tns="http://schemas.microsoft.com/appx/2010/StoreManifest"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified"
+	blockDefault="#all">
+
+  <xs:element name="StoreManifest" type="tns:StoreManifestType" />
+
+  <xs:complexType name="StoreManifestType">
+    <xs:sequence>
+      <xs:element name="ProductFeatures" type="tns:ProductFeaturesType"
+                  minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ProductFeaturesType">
+    <xs:all>
+      <xs:element name="DeviceCompanionApplication"
+                  type="tns:DeviceCompanionApplicationType" minOccurs="0" />
+      <xs:element name="HardwareRequirements"
+                  type="tns:HardwareRequirementsType" maxOccurs="1"
+                                                      minOccurs="0" />
+      <xs:element name="AppDiscovery"
+                  type="tns:AppDiscoveryType" maxOccurs="1" minOccurs="0" />
+      <xs:element name="ExclusiveOptOut" type="xs:boolean" minOccurs="0" />
+      <xs:element name="PreinstallOptOut" type="xs:boolean" minOccurs="0" />
+      <xs:element name="SDOptOut" type="xs:boolean" minOccurs="0" />
+    </xs:all>
+  </xs:complexType>
+
+  <!-- definition of application discovery types (Wallet) -->
+  <xs:complexType name="AppDiscoveryType">
+    <xs:sequence>
+      <xs:element name="DiscoveryID" type="tns:DiscoveryIDType"
+                  maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- definition of application discovery types (Wallet) -->
+  <xs:complexType name="DiscoveryIDType">
+    <xs:annotation>
+      <xs:documentation>
+        Represents the different discovery IDs that the app might want to declare to
+        be discoverable in the store
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Name" type="tns:ST_NonEmptyString " use="required" />
+  </xs:complexType>
+
+
+  <!-- definition of hardware requirements -->
+  <xs:complexType name="HardwareRequirementsType">
+    <xs:sequence>
+      <xs:element name="Requirement" type="tns:HardwareRequirementType"
+                  maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="HardwareRequirementType">
+    <xs:attribute name="Name" use="required">
+      <xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>
+            Represents the enumeration describing the supported hardware
+            requirements for Windows phone
+          </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="tns:ST_NonEmptyString">
+          <xs:enumeration value="ID_REQ_MEMORY_90"/>
+          <xs:enumeration value="ID_REQ_FRONTCAMERA"/>
+          <xs:enumeration value="ID_REQ_REARCAMERA"/>
+          <xs:enumeration value="ID_REQ_NFC"/>
+          <xs:enumeration value="ID_REQ_MAGNETOMETER"/>
+          <xs:enumeration value="ID_REQ_GYROSCOPE"/>
+          <xs:enumeration value="ID_REQ_MEMORY_300"/>
+          <xs:enumeration value="ID_REQ_WVGA"/>
+          <xs:enumeration value="ID_REQ_WXGA"/>
+          <xs:enumeration value="ID_REQ_720P"/>
+          <xs:enumeration value="ID_REQ_1080P"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+
+  <!-- this complexType should only apply to ProductFeatures whose @name = 'DeviceCompanionApplication', not all ProductFeature elements -->
+  <xs:complexType name="DeviceCompanionApplicationType">
+    <xs:sequence>
+      <xs:element name="ExperienceIds" type="tns:ExperienceIdsType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ExperienceIdsType">
+    <xs:annotation>
+      <xs:documentation>
+        Add the ExperienceId (or ExperienceIds) provided by the
+        device owner within this element. At least one ExperienceId must be
+        specified. A maximum of 25 are allowed.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ExperienceId" type="tns:GUIDType" maxOccurs="500" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="GUIDType">
+    <xs:restriction base="tns:ST_NonEmptyString">
+      <xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Non-empty string must have a non-whitespace character at the beginning and end -->
+  <xs:simpleType name="ST_NonEmptyString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="32767"/>
+      <xs:pattern value="[^\s]|([^\s].*[^\s])"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

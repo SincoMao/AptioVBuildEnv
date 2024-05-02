@@ -1,0 +1,80 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    RequestSendAndForgetNoFormatting2
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the driver doesn't format a request using the I/O target formatting functions 
+    before sending it to an I/O target with the send option WDF_REQUEST_SEND_OPTION_SEND_AND_FORGET. RequestSendAndForgetNoFormatting2 
+    specifically checks for the driver created requests.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507364
+
+--*/
+
+/*
+Notes:
+
+WDF_REQUEST_SEND_OPTION_TIMEOUT = 0x0000001
+WDF_REQUEST_SEND_OPTION_SYNCHRONOUS = 0x0000002
+WDF_REQUEST_SEND_OPTION_IGNORE_TARGET_STATE = 0x0000004 
+WDF_REQUEST_SEND_OPTION_SEND_AND_FORGET = 0x0000008
+*/
+
+#include "slic_base.h"
+
+state 
+{
+	enum {NOTFORMATTED, FORMATTED} reqFormatted = NOTFORMATTED;
+}
+
+watch sdv_WdfRequestCreate.exit.(*$3);
+
+[WdfUsbTargetPipeFormatRequestForAbort,
+WdfUsbTargetPipeFormatRequestForRead,
+WdfUsbTargetPipeFormatRequestForReset,
+WdfUsbTargetPipeFormatRequestForUrb,
+WdfUsbTargetPipeFormatRequestForWrite,
+WdfUsbTargetDeviceFormatRequestForControlTransfer,
+WdfUsbTargetDeviceFormatRequestForCyclePort,
+WdfUsbTargetDeviceFormatRequestForString,
+WdfUsbTargetDeviceFormatRequestForUrb,
+WdfIoTargetFormatRequestForWrite,
+WdfIoTargetFormatRequestForIoctl,
+WdfIoTargetFormatRequestForInternalIoctl,
+WdfIoTargetFormatRequestForRead,
+WdfIoTargetFormatRequestForInternalIoctlOthers
+].exit[guard $2]
+{
+    if (NT_SUCCESS($return))
+    {
+        reqFormatted = FORMATTED;
+    }
+
+}
+
+WdfRequestSend.entry[guard $1]
+{	
+    if (reqFormatted == FORMATTED)
+    {
+        if ($3!=NULL && $3->Flags == 8)
+        {
+            abort "Request was formatted with an I/O target format function, it shouldn't be sent using the send_and_forget option.";
+        }
+    }
+}

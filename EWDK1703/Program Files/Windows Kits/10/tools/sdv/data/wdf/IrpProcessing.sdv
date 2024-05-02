@@ -1,0 +1,3 @@
+FwdIrpToIoQueueValid
+SetCompletionRoutineFromDispatch
+MiniportOnlyWdmDevice

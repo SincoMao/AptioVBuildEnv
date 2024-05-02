@@ -1,0 +1,17 @@
+
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(TargetPlatformVersion)'==''">
+    <TargetPlatformVersion>8.0</TargetPlatformVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
+    <RedirectionTarget>8.2</RedirectionTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RedirectionTarget)' == ''">
+    <RedirectionTarget>$(TargetPlatformVersion)</RedirectionTarget>
+  </PropertyGroup>
+
+  <Import Project="$(RedirectionTarget)\Microsoft.Windows.UI.Xaml.Common.targets" />
+</Project>

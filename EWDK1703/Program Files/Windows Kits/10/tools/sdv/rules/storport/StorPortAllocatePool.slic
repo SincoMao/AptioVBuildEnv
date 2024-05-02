@@ -1,0 +1,53 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StorPortAllocatePool
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the miniport must not attempt to call 
+    StorPortFreePool on an deallocated buffer. 
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=563008
+
+--*/
+
+#include "ntddk_slic.h"
+
+state 
+{
+   int allocationCount = 0;
+}
+watch StorPortFreePool.entry.($2);
+
+
+StorPortFreePool.entry[guard $2]
+{
+    if (allocationCount > 0) 
+    { 
+        abort "The miniport is attempting to free a buffer second time.";
+    } 
+    else 
+    {       
+        allocationCount = 1;
+    }  
+}
+
+StorPortAllocatePool.entry[guard *$4]
+{
+    halt;
+}
+

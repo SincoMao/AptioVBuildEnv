@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<categories>
+	<category _locID="Document" _locComment="Property grid category for superset of BODY, HEAD and HTML elements">Document<!--Документ--></category> 
+	<category _locID="Designer" _locComment="Property grid category for design-time element properties">Designer<!--Редактор--></category> 
+	<category _locID="Behavior" _locComment="Property grid category for design-time element properties">Behavior<!--Редактор--></category> 
+	<category _locID="Action" _locComment="Property grid category for design-time element properties">Action<!--Редактор--></category> 
+	<category _locID="Data" _locComment="Property grid category for design-time element properties">Data<!--Редактор--></category> 
+</categories>

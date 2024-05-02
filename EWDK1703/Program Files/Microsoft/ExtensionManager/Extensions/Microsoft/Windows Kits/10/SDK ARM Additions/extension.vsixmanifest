@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
+  <Metadata>
+    <Identity Version="8.1.0.0" Id="Microsoft.Windows.DevelopmentKit.DesktopArmAdditions" Publisher="Microsoft Corporation" Language="en-US"/>
+    <DisplayName>Microsoft Windows Desktop SDK Additions for ARM</DisplayName>
+    <Description>Headers, libraries, and tools needed to compile a Windows desktop application for ARM</Description>
+    <MoreInfo>http://go.microsoft.com/fwlink/p/?LinkID=228297&amp;clcid=0x3009</MoreInfo>
+    <Tags>SDK, desktop, application, exe, dll, ARM</Tags>
+    <GettingStartedGuide>http://go.microsoft.com/fwlink/p/?LinkID=228297&amp;clcid=0x3009</GettingStartedGuide>
+  </Metadata>
+
+  <Installation Scope="global" AllUsers="true" InstalledByMsi="true" SystemComponent="true">
+    <InstallationTarget Id="Microsoft.PlatformSDK" />
+  </Installation> 
+
+  <Dependencies/>
+
+  <Assets/>
+</PackageManifest>

@@ -1,0 +1,471 @@
+<?xml version="1.0" ?>
+
+<!-- Debugging helpers -->
+<!-- error    Set this to true to display detailed error messages for syntax or run-time errors in the script component.-->
+<!-- debug    Set this to true to enable debugging. If this debugging is not enabled, you cannot launch the script debugger for a script -->
+<?component error="false" debug="false"?>
+
+<package>
+    <!-- Test module metadata -->
+  
+    <ModuleProperty name="RebootPossible" value="true"/>
+
+
+    <ModuleProperty name="Description" value="This test performs IO and basic PnP disable/enable operations on devices with fault injection enabled."/>
+    <ModuleProperty name="Kits.Parameter" value="DQ"/>
+    <ModuleProperty name="Kits.Parameter.DQ.Description" value="A WDTF SDEL query that is used to identify the target device(s) - http://go.microsoft.com/fwlink/?LinkId=232678"/>
+    <ModuleProperty name="Kits.Parameter" value="TestCycles"/>
+    <ModuleProperty name="Kits.Parameter.TestCycles.Description" value="Number of test cycles"/>
+    <ModuleProperty name="Kits.Parameter" value="IOPeriod"/>
+    <ModuleProperty name="Kits.Parameter.IOPeriod.Description" value="IO period in minutes"/>
+    <ModuleProperty name="Kits.Drivers" value=""/>
+    <ModuleProperty name="Kits.Drivers.ResultFile" value="TestTextLog.log"/>
+    <ModuleProperty name="Kits.Category" value="Non-HCK Tests.Systematic Fault Injection"/>
+    <ModuleProperty name="Kits.Parameter.DQ.Default" value="INF::OriginalInfFileName='%InfFileName%'"/>
+    <ModuleProperty name="Kits.Parameter.TestCycles.Default" value="1"/>
+    <ModuleProperty name="Kits.Parameter.IOPeriod.Default" value="1"/>
+
+    <!-- Define a test class -->
+    <component id="Devfund">
+        <!-- define and instatiate a logger -->
+        <object id="Log" progid="WEX.Logger.Log" />
+        <object id="RuntimeParameters" progid="Te.Common.RuntimeParameters" />
+        <object id = "WDTF" progid="WDTF2.WDTF" />
+
+        <!-- include a reference to the logger so you could use the constants defined in logger library -->
+        <reference guid="e65ef678-a232-42a7-8a36-63108d719f31" version="1.0"/>
+
+        <public>
+            <method name="PNP_DisableEnable_With_IO_Before_And_After_With_Autofail">
+                <TestMethodProperty name="Kits.DisplayName" value="SystematicFaultInjection - PNP (disable and enable) with IO Before and After"/>
+            </method>
+        </public>
+
+        <script language="VBScript">
+            <![CDATA[
+                Dim WDTFSup
+                Dim WshShell
+                Dim AreInjecting
+                Dim TestPass
+                '
+                ' status of last attempted load
+                ' 0 is success, 3 is error that results in reload not being attempted
+                ' dont care about other possible values
+                '
+                Dim ProblemCode
+              
+                '
+                ' Autofail subroutines
+                '
+
+                Function AutofailInjectionCount
+
+                   Dim oExec
+                   Dim strRet
+                   Dim strArray
+                   Dim i
+                   Dim newRetStr
+
+                   Log.Comment "Get Autofail Statistics"
+
+                   AutofailInjectionCount = 0
+                   set oExec = WshShell.Exec("verifier /faultssystematic querystatistics")
+                   do while oExec.Status = 0
+                      WDTFSup.WaitForMilliseconds(100)
+                   loop
+                   strRet = oExec.StdOut.ReadAll
+                   Log.Comment strRet
+
+                   ' Convert newlines to spaces, then split on spaces
+  
+                   newRetStr = Replace(strRet, vbNewLine, " ", 1, -1, vbTextCompare)
+                   strArray = split(newRetStr)
+ 
+                   '  Find value for injection count and return it
+
+                   for i = 0 to UBound(strArray)-1
+                      if strArray(i) = "InjectionCount:" then
+                         AutofailInjectionCount = strArray(i+1)
+                         exit for
+                      end if
+                   next
+
+                End Function
+
+
+                Sub AutofailEnable
+
+                   Dim oExec
+                   Dim strRet
+
+                   Log.Comment "Enable autofail"
+                   set oExec = wshShell.Exec("verifier /faultssystematic enableruntime")
+                   do while oExec.Status = 0
+                      WDTFSup.WaitForMilliseconds(100)
+                   loop
+                   strRet = oExec.StdOut.ReadAll
+                   Log.Comment strRet
+                   AreInjecting = True
+
+                End Sub
+
+
+                Sub AutofailDisable
+
+                   Dim oExec
+                   Dim strRet
+
+                   Log.Comment "Disable autofail"
+                   set oExec = wshShell.Exec("verifier /faultssystematic disableruntime")
+                   do while oExec.Status = 0
+                      WDTFSup.WaitForMilliseconds(100)
+                   loop
+                   strRet = oExec.StdOut.ReadAll
+                   Log.Comment strRet
+                   AreInjecting = False
+
+                End Sub
+
+                Sub AutofailReset
+
+                   Dim oExec
+                   Dim strRet
+
+                   Log.Comment "Reset autofail"
+                   set oExec = wshShell.Exec("verifier /faultssystematic resetruntime")
+                   do while oExec.Status = 0
+                      WDTFSup.WaitForMilliseconds(100)
+                   loop
+                   strRet = oExec.StdOut.ReadAll
+                   Log.Comment strRet
+                   AreInjecting = False
+
+                End Sub
+
+
+                Sub AutofailIncrementCounter
+
+                   Dim oExec
+                   Dim strRet
+
+                   Log.Comment "Increment autofail testpass"
+                   set oExec = wshShell.Exec("verifier /faultssystematic incrementcounter")
+                   do while oExec.Status = 0
+                      WDTFSup.WaitForMilliseconds(100)
+                   loop
+                   strRet = oExec.StdOut.ReadAll
+                   Log.Comment strRet
+
+                End Sub
+
+                Sub AutofailAddStackExemptions
+
+                   dim exemptionCount
+                   dim i
+                   dim j
+                   dim cmdString
+                   Dim oExec
+                   Dim strRet
+                   Dim strArray
+                   Dim stackHash
+                   Dim newRetString
+
+                   exemptionCount = AutofailInjectionCount
+                   for i = 0 to (exemptionCount - 1)
+                       cmdString = "verifier /faultssystematic getstackid " & i
+                       set oExec = wshShell.Exec(cmdString)
+                       do while oExec.Status = 0
+                          WDTFSup.WaitForMilliseconds(100)
+                       loop
+                       strRet = oExec.StdOut.ReadAll
+                       Log.Comment strRet
+                       newRetStr = Replace(strRet, vbNewLine, " ", 1, -1, vbTextCompare)
+                       strArray = split(newRetStr)
+
+                       '  Find value for stack hash
+
+                       stackHash = "0x0"
+                       for j = 0 to UBound(strArray) - 1
+                          if strArray(j) = "StackHash:" then
+                             stackHash = strArray(j+1)
+                             exit for
+                          end if
+                       next
+
+                       if stackHash <> "0x0" then
+                          cmdString = "verifier /faultssystematic excludestack " & stackHash
+                          Log.Comment "Exclude " & stackHash
+                          set oExec = wshShell.Exec(cmdString)
+                          do while oExec.Status = 0
+                             WDTFSup.WaitForMilliseconds(100)
+                          loop
+                          strRet = oExec.StdOut.ReadAll
+                          Log.Comment strRet
+                       end if
+                   next
+
+                End Sub
+
+                Sub ShowVerifierSettings
+
+                   Dim oExec
+                   Dim strRet
+
+                   Log.Comment "Current Driver Verifier Settings"
+                   set oExec = wshShell.Exec("verifier /querysettings")
+                   do while oExec.Status = 0
+                      WDTFSup.WaitForMilliseconds(100)
+                   loop
+                   strRet = oExec.StdOut.ReadAll
+                   Log.Comment strRet
+
+                End Sub
+
+
+                '
+                ' main entry point
+                '
+
+                Function PNP_DisableEnable_With_IO_Before_And_After_With_Autofail()
+
+                  Dim oldInjectionCount
+                  Dim newInjectionCount
+                  Dim system
+
+                  Set WDTFSup = WDTF.SystemDepot.ThisSystem.GetInterface("Support")
+                  Set wshShell = CreateObject("WScript.Shell")
+                  ProblemCode = 0
+
+                  if NOT (WDTF.SystemDepot.ThisSystem.Eval("OSMajorVersion=6 AND OSMinorVersion>=3") OR WDTF.SystemDepot.ThisSystem.Eval("OSMajorVersion>6")) then
+                     WDTF.Log.OutputInfo "This test only works on Windows 8.1 or later"
+                     Exit Function
+                  end if                   
+
+                  Set System = WDTF.SystemDepot.ThisSystem.GetInterface("System")
+
+                  '                    
+                  '  Check if this is after a reboot 
+                  '
+                  if System.IsRestarted then
+                      Log.Comment "Resuming after reboot"
+                  else
+                       Log.Comment "Run test normally"
+                       AutofailReset
+                       RunTestCase
+                  end if
+
+                  Log.Comment "Run test with autofail"
+                  oldInjectionCount = AutofailInjectionCount
+                  AutofailEnable
+                  WDTF.Config.DisableObjectErrorLogging
+
+                  TestPass = 1
+                  AutofailIncrementCounter	' start it at one
+                  do while True
+                     RunTestCase
+                     newInjectionCount = AutofailInjectionCount
+                     if newInjectionCount = oldInjectionCount then
+                        exit do
+                     end if
+                     oldInjectionCount = newInjectionCount
+                     AutofailIncrementCounter
+                     TestPass = TestPass + 1
+                  loop
+
+                  Log.Comment "Finished running test with autofail"
+                  AutofailDisable
+
+                  if newInjectionCount = 0 then
+                     Log.Error "No injections were done. Please check driver verifier configuration"
+                     Log.Error "Systematic Low Resources Simulation plus all standard flags must be enabled in driver verifier."
+                     Log.Error "Driver Verifier must be enabled on driver being tested, and probably wdf01000.sys as well."
+                     ShowVerifierSettings
+                  elseif ProblemCode = 3 then
+                     Log.Comment "Unable to complete injection test run. Cannot restart driver."
+                     Log.Comment "Test will now add necessary stack exemptions, reboot, and restart test"
+                     AutofailAddStackExemptions
+                     System.RebootRestart()
+                     Exit Function
+                  else
+                     Log.Comment "Re-run test with autofail disabled"
+                     WDTF.Config.EnableObjectErrorLogging
+                     RunTestCase
+                  end if
+ 
+                end function
+
+
+
+                Function RunTestCase()
+                
+                    '
+                    ' Variable definition 
+                    '
+
+                    Dim DeviceCol
+                    Dim Device
+                    Dim IoDeviceCol
+                    Dim IoDevice
+                    Dim PNPAction
+                    Dim IoStressCol
+                    Dim DeviceQuery
+                    Dim TestCycles
+                    Dim IOPeriod 
+                    Dim TestModeVerify
+
+                    '
+                    ' TODO: Revisit to set these default values
+                    '   
+
+                    DeviceQuery = "IsDevice AND IsDisableable"
+                    TestCycles = 8
+                    IOPeriod = 1
+                    TestModeVerify = true
+                    
+                    '   Parameter details are as follows -
+                    '
+                    '        DQ
+                    '            An SDEL query.
+                    ' 
+                    '        TestCycles
+                    '            Number of test cycles.
+                    '         
+                    '        IOPeriod
+                    '            IO Period in minutes.
+                    ' 
+
+                    If RuntimeParameters.Contains("DQ") Then
+                        DeviceQuery = DeviceQuery & " AND (" & RuntimeParameters.GetValue("DQ") & ")"
+                    End If
+                    
+                    If RuntimeParameters.Contains("TestCycles") Then
+                        TestCycles = CInt(RuntimeParameters.GetValue("TestCycles"))
+                    End If
+
+                    If RuntimeParameters.Contains("IOPeriod") Then
+                        IOPeriod = CLng(RuntimeParameters.GetValue("IOPeriod"))
+                    End If
+                    
+                    If RuntimeParameters.Contains("TMV") Then
+                        TestModeVerify = RuntimeParameters.GetValue("TMV")
+                    End If                    
+                    
+                    Log.Comment "DQ: " & DeviceQuery
+                    Log.Comment "TestCycles: " & TestCycles 
+                    Log.Comment "IOPeriod: " & IOPeriod
+
+                    if areInjecting then
+                       Log.Comment("Running PNP_DisableEnable_With_IO_Before_And_After() with autofail, pass " + CStr(TestPass))
+                    else                    
+                       Log.Comment("Running PNP_DisableEnable_With_IO_Before_And_After()")
+                    end if
+
+                    '
+                    ' Setting TestModeVerify to TRUE will cause device configuration issues to be flagged as errors
+                    '
+
+                    WDTF.Config.TestModeVerify = TestModeVerify
+
+                    '
+                    ' Query for devices to Disable/Enable 
+                    '
+
+                    set DeviceCol = WDTF.DeviceDepot.Query(DeviceQuery)
+
+                    '
+                    ' End test if there are no devices to test
+                    '
+                    
+                    If DeviceCol.Count = 0 then
+                      WDTF.Log.OutputInfo "No devices were found for testing"
+                      Exit Function
+                    End If
+
+                    '
+                    '  Loop through each device
+                    '
+
+                    WDTF.Log.StartTestCase "Perform PNP with I/O before and after on selected devices"
+
+                    For Each Device In DeviceCol
+
+                       '
+                       ' Get device to do I/O against
+                       '
+
+                       set IoDeviceCol = Device.GetRelations("below-or-self/","IsDevice")
+
+                       if ProblemCode = 0 AND not areInjecting then
+                          '
+                          '  Get I/O Stress collection
+                          '
+                          if IoDeviceCol.Count then
+                            set IoStressCol = IoDeviceCol.GetInterfacesIfExist("SimpleIOStressEx")
+
+                            '
+                            '  Perform some BEFORE I/O stress
+                            '
+
+                            if IoStressCol.Count then 
+                               IoStressCol.Start()
+                               WDTFSup.WaitForMinutes(IOPeriod)
+                               IoStressCol.Stop()
+                            End if
+                          End if
+                       End if
+
+                       '
+                       '  Get PNP action for Device 
+                       ' 
+                       set PNPAction = Device.GetInterface("PNP")
+
+                       '
+                       '  Cycle through Devices 
+                       ' 
+
+                       WDTF.Log.OutputINfo "Perform " & TestCycles & " test cycles PNP with I/O before and after on device"
+
+                       Dim i
+                       For i = 1 To TestCycles
+
+                          '
+                          '   Disable / Enable device
+                          '
+
+                          PNPAction.DisableDevice()
+                          PNPAction.EnableDevice()
+
+                          '
+                          '  Wait a bit for device to become ready
+                          '
+                          WDTFSup.WaitForMilliseconds(10000)
+
+                          ProblemCode = Device.GetValue("ProblemCode")
+
+                          if ProblemCode = 0 AND not areInjecting then
+
+                             '
+                             '  Perform some AFTER I/O stress
+                             '
+   
+                             if IoDeviceCol.Count then
+                               if IoStressCol.Count then 
+                                  IoStressCol.Start()
+                                  WDTFSup.WaitForMinutes(IOPeriod)
+                                  IoStressCol.Stop()
+                               End if
+                             End if
+                          End if
+                       Next
+
+                    Next
+
+                    WDTF.Log.EndTestCase
+
+                End Function
+
+            ]]>
+        </script>
+    </component>
+</package>
+

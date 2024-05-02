@@ -1,0 +1,66 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlDispatch
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the following routines are only called at IRQL = DISPATCH_LEVEL:
+
+    * AllocateAdapterChannel
+    * FreeAdapterChannel
+    * FreeMapRegisters
+    * GetScatterGatherList
+    * IoAllocateController
+    * IoFreeController
+    * IoStartNextPacket
+    * KeAcquireSpinLockAtDpcLevel
+    * KeInsertByKeyDeviceQueue
+    * KeInsertDeviceQueue
+    * KeReleaseSpinLockFromDpcLevel
+    * KeRemoveByKeyDeviceQueue
+    * KeRemoveDeviceQueue
+    * PutScatterGatherList
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507218
+
+--*/
+
+
+#include "ntddk_slic.h"
+
+[
+AllocateAdapterChannel,
+FreeAdapterChannel,
+FreeMapRegisters,
+GetScatterGatherList,
+IoAllocateController,
+KeAcquireSpinLockAtDpcLevel,
+IoFreeController,
+IoStartNextPacket,
+KeInsertByKeyDeviceQueue,
+KeInsertDeviceQueue,
+KeReleaseSpinLockFromDpcLevel,
+KeRemoveByKeyDeviceQueue,
+KeRemoveDeviceQueue,
+PutScatterGatherList
+].entry
+{
+	if ( sdv_irql_current != DISPATCH_LEVEL ) {
+		abort "$fname should only be called at IRQL = DISPATCH_LEVEL.";
+	}
+}

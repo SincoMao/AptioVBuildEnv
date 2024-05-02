@@ -1,0 +1,65 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StorPortNotification2
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that calls to StorPortNotification use only allowed 
+    (i.e. documented) notification types:
+    BufferOverrunDetected,
+    BusChangeDetected,
+    LinkDown,
+    LinkUp,
+    QueryTickCount,
+    RequestComplete,
+    RequestTimerCall,
+    ResetDetected,
+    WMIEvent,
+    WMIReregister.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507238
+
+--*/
+
+
+#include "ntddk_slic.h"
+
+StorPortNotification.entry
+{
+	if ($1 == _obsolete1 ||
+		$1 == _obsolete2)
+	{
+		abort "$fname should not be called with this notification type. They are obsolete";
+	}
+	else if ( $1 == NextRequest ||
+		$1 == NextLuRequest )
+	{
+		abort "$fname should not be called with this notification type. They are legacy from ScsiPort.";
+	}
+	else if ( $1 == GetExtendedFunctionTable )
+	{
+		abort "$fname should not be called with this notification type. Call the functions needed directly.";
+	}
+	else if ( $1 == EnablePassiveInitialization ||
+		$1 == InitializeDpc ||
+		$1 == IssueDpc ||
+		$1 == AcquireSpinLock ||
+		$1 == ReleaseSpinLock)
+	{ 
+		abort "$fname should not be called with this notification type. Use their respective StorPort API equivalents.";
+	}	
+}

@@ -1,0 +1,11 @@
+[$RootKey$]
+
+[$RootKey$\TlbAutoRepair]
+
+[$RootKey$\TlbAutoRepair\webproperties.tlb]
+"DisplayMessage"=dword:00000001
+"IID"="{0F4EDFB6-C797-42FB-A7E0-0C93D6F4FB6B}"
+"LIBID"="{A6613CCA-B54B-43B0-AE3C-BA7E299C1CC8}"
+"TlbPath"="%CommonDir%\webproperties.tlb"
+"Version"="8.0"
+

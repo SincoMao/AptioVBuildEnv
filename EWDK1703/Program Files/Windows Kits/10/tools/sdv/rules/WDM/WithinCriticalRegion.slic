@@ -1,0 +1,111 @@
+/*++
+
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    WithinCriticalRegion
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x0004000D
+
+Description:
+
+    The WithinCriticalRegion rule specifies that the driver's
+    calls to particular synchronization functions appear only
+    after calling KeEnterCriticalRegion and before calling
+    KeLeaveCriticalRegion or after calling KeEnterGuardedRegion 
+    and before calling KeLeaveGuardedRegion.
+
+    The affected synchronization functions are the following:
+        ExAcquireResourceSharedLite 
+        ExAcquireResourceExclusiveLite 
+        ExAcquireSharedStarveExclusive 
+        ExAcquireSharedWaitForExclusive 
+        ExReleaseResourceLite 
+        ExReleaseResourceForThreadLite 
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216065
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    int CriticalregionDepth = 0;
+    int GuardedregionDepth = 0;
+}
+
+[fun_WORKER_THREAD_ROUTINE_1
+,fun_WORKER_THREAD_ROUTINE_2
+,fun_WORKER_THREAD_ROUTINE_3
+,fun_WORKER_THREAD_ROUTINE_4
+,fun_WORKER_THREAD_ROUTINE_5
+,fun_WORKER_THREAD_ROUTINE_6].entry
+{
+    halt;
+}
+
+
+
+KeEnterCriticalRegion.entry
+{
+    CriticalregionDepth = CriticalregionDepth + 1 ;
+}
+
+KeLeaveCriticalRegion.entry
+{
+    CriticalregionDepth = CriticalregionDepth - 1;
+}
+
+KeEnterGuardedRegion.entry
+{
+    GuardedregionDepth = GuardedregionDepth + 1 ;
+}
+
+KeLeaveGuardedRegion.entry
+{
+    GuardedregionDepth = GuardedregionDepth - 1;
+}
+
+
+
+[ExAcquireResourceSharedLite,
+ ExAcquireResourceExclusiveLite,
+ ExAcquireSharedStarveExclusive,
+ ExAcquireSharedWaitForExclusive,
+ ExReleaseResourceLite,
+ ExReleaseResourceForThreadLite,
+ ExReleaseResourceForThread]@SDV.entry
+{
+    if ((CriticalregionDepth == 0 && sdv_irql_current == PASSIVE_LEVEL)&&(GuardedregionDepth == 0 && sdv_irql_current == PASSIVE_LEVEL)) 
+    {      
+       abort "The driver is calling $fname without first disabling normal kernel APC delivery by calling KeEnterCriticalRegion,KeEnterGuardedRegion or raising IRQL to APC_LEVEL.";
+    }
+    
+}
+
+
+[ExAcquireResourceSharedLite,
+ ExAcquireResourceExclusiveLite,
+ ExAcquireSharedStarveExclusive,
+ ExAcquireSharedWaitForExclusive,
+ ExReleaseResourceLite,
+ ExReleaseResourceForThreadLite,
+ ExReleaseResourceForThread]@XDV.entry
+{
+    if ((!sdv_apc_disabled) && (CriticalregionDepth == 0 && sdv_irql_current == PASSIVE_LEVEL)&&(GuardedregionDepth == 0 && sdv_irql_current == PASSIVE_LEVEL)) 
+    {      
+       abort "The driver is calling $fname without first disabling normal kernel APC delivery by calling KeEnterCriticalRegion,KeEnterGuardedRegion or raising IRQL to APC_LEVEL.";
+    }
+    
+}

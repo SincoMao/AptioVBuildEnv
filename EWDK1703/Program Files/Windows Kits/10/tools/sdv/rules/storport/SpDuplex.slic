@@ -1,0 +1,41 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SpDuplex
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that this miniport is in Full Duplex mode.
+    Any driver built according to the StorPort-miniport model must be in
+    Full Duplex mode. Half Duplex should only be used when porting an
+    existing SCSI driver to StorPort.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507224
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+sdv_is_full_duplex.entry {
+
+	halt;
+}
+        
+sdv_is_half_duplex.entry {
+	abort "This is a half duplex miniport.";
+}

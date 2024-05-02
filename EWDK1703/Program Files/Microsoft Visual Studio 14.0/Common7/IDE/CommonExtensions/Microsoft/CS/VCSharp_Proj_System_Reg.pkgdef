@@ -1,0 +1,146 @@
+[$RootKey$]
+[$RootKey$\CLSID]
+[$RootKey$\CLSID\{521DF5B1-EC68-4DE3-8415-ABA698D35AFD}]
+"InprocServer32"="$BaseInstallDir$VC#\VCSPackages\csproj.dll"
+"ThreadingModel"="Apartment"
+@="CSharpDebug Class"
+[$RootKey$\CLSID\{61F3E62C-A68E-49E0-9F88-D8EE8B7ACB95}]
+"InprocServer32"="$BaseInstallDir$VC#\VCSPackages\csproj.dll"
+"ThreadingModel"="Apartment"
+@="CSharpAdvanced Class"
+[$RootKey$\CLSID\{94E9C3FE-2BD9-4EAd-AAAC-33C46C20FC81}]
+"InprocServer32"="$BaseInstallDir$VC#\VCSPackages\csproj.dll"
+"ThreadingModel"="Apartment"
+@="CSharpBuild Class"
+[$RootKey$\CLSID\{9EC55CFE-5112-457A-BDD5-78DA54A0D412}]
+"InprocServer32"="$BaseInstallDir$VC#\VCSPackages\csproj.dll"
+"ThreadingModel"="Apartment"
+@="CSharpVersion Class"
+[$RootKey$\CLSID\{BA33721B-ABEC-4F28-81FB-007BBCF60BB9}]
+"InprocServer32"="$BaseInstallDir$VC#\VCSPackages\csproj.dll"
+"ThreadingModel"="Apartment"
+@="CSharpGeneral Class"
+[$RootKey$\CLSID\{BA33721C-ABEC-4F28-81FB-007BBCF60BB9}]
+"InprocServer32"="$BaseInstallDir$VC#\VCSPackages\csproj.dll"
+"ThreadingModel"="Apartment"
+@="CSharpBuildEvents Class"
+[$RootKey$\CLSID\{BE9317FF-57B3-44A0-96DF-B257FAE43DB1}]
+"InprocServer32"="$BaseInstallDir$VC#\VCSPackages\csproj.dll"
+"ThreadingModel"="Apartment"
+@="CSharpCommonBuild Class"
+[$RootKey$\CLSID\{F65276D3-B79E-4FC9-BB11-3EFCEE90CE40}]
+"InprocServer32"="$BaseInstallDir$VC#\VCSPackages\csproj.dll"
+"ThreadingModel"="Apartment"
+@="CSharpDesigner Class"
+[$RootKey$\InstalledProducts]
+[$RootKey$\InstalledProducts\Microsoft Visual C#]
+"DefaultProductAttribute"="C#"
+"LogoID"="#356"
+"Package"="{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}"
+"ProductDetails"="#2021"
+"UseVSProductID"=dword:00000001
+@="#2000"
+[$RootKey$\Menus]
+"{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}"=",4022,1"
+[$RootKey$\NewProjectTemplates]
+[$RootKey$\NewProjectTemplates\TemplateDirs]
+[$RootKey$\NewProjectTemplates\TemplateDirs\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}]
+[$RootKey$\NewProjectTemplates\TemplateDirs\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\/1]
+"DeveloperActivity"="VC#"
+"SortPriority"=dword:00000009
+"TemplatesDir"="$BaseInstallDir$VC#\CSharpProjects"
+@="#2345"
+[$RootKey$\Packages]
+[$RootKey$\Packages\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}]
+"InprocServer32"="$BaseInstallDir$VC#\VCSPackages\csproj.dll"
+@="Visual C# Project System"
+[$RootKey$\Packages\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\Automation]
+"CSharpProjects"=""
+[$RootKey$\Packages\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\AutomationEvents]
+"CSharpBuildManagerEvents"="Returns the CSharpBuildManagerEvents Object"
+"CSharpProjectItemsEvents"="Returns the CSharpProjectItemsEvents Object"
+"CSharpProjectsEvents"="Returns the CSharpProjectsEvents Object"
+"CSharpReferencesEvents"="Returns the CSharpReferencesEvents Object"
+[$RootKey$\Packages\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\SatelliteDll]
+"DllName"="csprojui.dll"
+"Path"="$BaseInstallDir$VC#\VCSPackages\"
+[$RootKey$\Projects]
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}]
+"DefaultProjectExtension"="csproj"
+"DisplayProjectFileExtensions"="#2030"
+"DesignerTemplatesDir"="$BaseInstallDir$VC#\DesignerTemplates"
+"DisplayProjectType(VsTemplate)"="#2345"
+"ItemTemplatesDir"="$BaseInstallDir$VC#\CSharpProjectItems"
+"Language(VsTemplate)"="CSharp"
+"NewProjectRequiresNewFolder(VsTemplate)"=dword:00000001
+"Package"="{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}"
+"PossibleProjectExtensions"="csproj;btproj"
+"ProjectTemplatesDir"="$BaseInstallDir$VC#\CSharpProjects"
+"ResourcesFolderBehavior"=dword:00000001
+"WizardsTemplatesDir"="$BaseInstallDir$VC#\VC#Wizards"
+@="#2346"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\AddItemTemplates]
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\AddItemTemplates\TemplateDirs]
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\AddItemTemplates\TemplateDirs\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}]
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\AddItemTemplates\TemplateDirs\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\/1]
+"SortPriority"=dword:00000014
+"TemplatesDir"="$BaseInstallDir$VC#\CSharpProjectItems"
+@="#2346"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\FileExtensions]
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\FileExtensions\.asax]
+"EditorFactoryNotify"="{4D30FDB3-AB3E-4810-B6F2-64627BCCA384}"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\FileExtensions\.ascx]
+"EditorFactoryNotify"="{F390D63C-F7D8-4E74-AA04-57C1ECF53D4D}"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\FileExtensions\.asmx]
+"EditorFactoryNotify"="{FB9167C9-D3B8-4EDA-8083-9AF6B6F6DA62}"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\FileExtensions\.aspx]
+"EditorFactoryNotify"="{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\FileExtensions\.cs]
+"EditorFactoryNotify"="{A6C744A8-0E4A-4FC6-886A-064283054674}"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\Filters]
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\Filters\Common Files]
+"CommonFindFilesFilter"=dword:00000001
+"NotAddExistingItemFilter"=dword:00000001
+"NotOpenFileFilter"=dword:00000001
+"SortPriority"=dword:00000064
+@="#2247"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\Filters\Script Files]
+"SortPriority"=dword:00000640
+@="#2081"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\Filters\Visual C# Files]
+"CommonOpenFilesFilter"=dword:00000001
+"SortPriority"=dword:000003E8
+@="#2072"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\ImportTemplates]
+"ClassLibProjectFile"="ImportDefaultDll.csproj"
+"ConsoleAppProjectFile"="ImportDefault.csproj"
+"ImportProjectsDir"="$BaseInstallDir$ImportProjects\vcs"
+"ProjectType"="#4585"
+"WindowsAppProjectFile"="ImportDefaultwinexe.csproj"
+"WizardPageObjectAssembly"="Microsoft.VisualStudio.ImportProjectFolderWizard,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"WizardPageObjectClass"="Microsoft.VsWizards.ImportProjectFolderWizard.Managed.PageManager"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\RelatedFiles]
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\RelatedFiles\.cs]
+".designer.cs"=dword:00000001
+".resx"=dword:00000004
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\RelatedFiles\.dsc]
+".dscx"=dword:00000001
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\RelatedFiles\.mdf]
+".ldf"=dword:00000401
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\RelatedFiles\.msd]
+".msdx"=dword:00000001
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\RelatedFiles\.xaml]
+".xaml.cs"=dword:00000039
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\RelatedFiles\.xml]
+".msdx"=dword:00000002
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\RelatedFiles\.xsd]
+".cs"=dword:00000001
+".xsc"=dword:00000001
+".xss"=dword:00000001
+".xsx"=dword:00000001
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\MSBuildHostObjects\MarkupCompilePass1;CompileXaml]
+@="{E2905C7C-4435-4212-9148-BE9614BD377B}"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\MSBuildHostObjects\MarkupCompilePass1;MarkupCompilePass1]
+@="{E2905C7C-4435-4212-9148-BE9614BD377B}"
+[$RootKey$\Projects\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\MSBuildHostObjects\DesignTimeMarkupCompilationCT;CompileXaml]
+@="{E2905C7C-4435-4212-9148-BE9614BD377B}"

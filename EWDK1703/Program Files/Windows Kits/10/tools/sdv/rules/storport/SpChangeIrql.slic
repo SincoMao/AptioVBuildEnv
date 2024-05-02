@@ -1,0 +1,46 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SpChangeIrql
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that StorPort callback routines return at the same IRQL level
+    as the level at which they are called.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507223
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+[ALL_SP_CALLBACKS].exit
+{
+	if (sdv_irql_enter != sdv_irql_current) {
+		abort "$fname is returning at a different IRQL level than the one it was called at.";
+	}
+}
+
+
+
+
+
+
+
+
+

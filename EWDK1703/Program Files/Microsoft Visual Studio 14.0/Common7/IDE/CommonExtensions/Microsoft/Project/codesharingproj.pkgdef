@@ -1,0 +1,44 @@
+﻿[$RootKey$\Projects\{D954291E-2A0B-460D-934E-DC6B0785DB48}]
+@="ProjectFactory"
+"DisplayName"="#100"
+"DisplayProjectFileExtensions"="#101"
+"Package"="{3347BEE8-D7A1-4082-95E4-38A439553CC2}"
+"DefaultProjectExtension"="shproj"
+"PossibleProjectExtensions"="shproj"
+"Language(VsTemplate)"="Code Sharing Projects"
+
+[$RootKey$\Projects\{72C8CC65-A019-4582-9859-D22C29245638}]
+@="CodeSharingCSharpItemTemplates"
+"DisplayName"="Code Sharing C# Project Add Item Templates"
+"Package"="{3347BEE8-D7A1-4082-95E4-38A439553CC2}"
+"Language(VsTemplate)"="CSharp"
+"ShowOnlySpecifiedTemplates(VsTemplate)"=dword:00000001
+"TemplateGroupIDs(VsTemplate)"="CodeSharing-Managed"
+"TemplateIDs(VsTemplate)"="Microsoft.CSharp.Class,Microsoft.CSharp.Interface,Microsoft.CSharp.AppManifest,Microsoft.CSharp.AppManifestInternal,Microsoft.CSharp.AssemblyInfo,Microsoft.CSharp.AssemblyInfo.Internal,Microsoft.CSharp.ClassDiagram,Microsoft.CSharp.CodeFile,Microsoft.CSharp.HTMLPage,Microsoft.CSharp.JScript,Microsoft.CSharp.TextTemplating,Microsoft.WAP.CSharp.WebStyleSheet,Microsoft.CSharp.TextFile,Microsoft.CSharp.XmlFile,Microsoft.CSharp.XmlSchema,Microsoft.CSharp.XsltFile,CodeAnalysis-v10-RuleSet,Microsoft.Templates.CSharp.Resw,Microsoft.CSharp.GraphModel.DirectedGraph,Microsoft.CSharp.ArchitectureTools.Sequence"
+
+[$RootKey$\Projects\{DDDDC6BE-451D-46DD-A712-A5D07027E072}]
+@="SharedProjectCSharpItemTemplates"
+"DisplayName"="C# Shared Project Add Item Templates"
+"Package"="{3347BEE8-D7A1-4082-95E4-38A439553CC2}"
+"Language(VsTemplate)"="CSharp"
+"ShowOnlySpecifiedTemplates(VsTemplate)"=dword:00000001
+"TemplateGroupIDs(VsTemplate)"="CodeSharing-Managed"
+"TemplateIDs(VsTemplate)"="Microsoft.CSharp.Class,Microsoft.CSharp.Interface,Microsoft.CSharp.AppManifest,Microsoft.CSharp.AppManifestInternal,Microsoft.CSharp.AssemblyInfo,Microsoft.CSharp.AssemblyInfo.Internal,Microsoft.CSharp.ClassDiagram,Microsoft.CSharp.CodeFile,Microsoft.CSharp.HTMLPage,Microsoft.CSharp.JScript,Microsoft.CSharp.TextTemplating,Microsoft.WAP.CSharp.WebStyleSheet,Microsoft.CSharp.TextFile,Microsoft.CSharp.XmlFile,Microsoft.CSharp.XmlSchema,Microsoft.CSharp.XsltFile,CodeAnalysis-v10-RuleSet,Microsoft.Templates.CSharp.Resw,Microsoft.CSharp.GraphModel.DirectedGraph,Microsoft.CSharp.ArchitectureTools.Sequence"
+
+[$RootKey$\Projects\{2F4D68AA-6DA4-465E-88DE-2B0F67AFC98D}]
+@="SharedProjectVisualBasicItemTemplates"
+"DisplayName"="Code Sharing VB Project Add Item Templates"
+"Package"="{3347BEE8-D7A1-4082-95E4-38A439553CC2}"
+"Language(VsTemplate)"="VisualBasic"
+"ShowOnlySpecifiedTemplates(VsTemplate)"=dword:00000001
+"TemplateGroupIDs(VsTemplate)"="CodeSharing-Managed"
+"TemplateIDs(VsTemplate)"="Microsoft.VisualBasic.Internal.AssemblyInfo,Microsoft.VisualBasic.Code.Class,Microsoft.VisualBasic.Code.Module,Microsoft.VisualBasic.Code.Interface,Microsoft.VisualBasic.General.ClassDiagram,Microsoft.VisualBasic.Code.CodeFile,Microsoft.VisualBasic.Web.HtmlPage,Microsoft.VisualBasic.Web.JScript,Microsoft.VisualBasic.General.Text,Microsoft.VisualBasic.Data.XmlFile,Microsoft.VisualBasic.Data.XMLSchema,Microsoft.VisualBasic.Data.XSLTFile,Microsoft.WAP.VisualBasic.WebJScript,Microsoft.WAP.VisualBasic.WebStyleSheet,CodeAnalysis-v10-RuleSet,Microsoft.Templates.VisualBasic.Resw,Microsoft.VisualBasic.GraphModel.DirectedGraph,Microsoft.VisualBasic.ArchitectureTools.Sequence,Microsoft.VisualBasic.General.Resource"
+
+[$RootKey$\Projects\{D38D89B0-85D5-4C40-9EE2-3B2111BDE3FD}]
+@="CodeSharingJavaScriptItemTemplates"
+"DisplayName"="Code Sharing JavaScript Project Add Item Templates"
+"Package"="{7e89d1bd-0041-4382-9816-0e78fc502bed}"
+"Language(VsTemplate)"="JavaScript"
+"ShowOnlySpecifiedTemplates(VsTemplate)"=dword:00000001
+"TemplateGroupIDs(VsTemplate)"="JavaScript_Neutral_GroupID;JavaScript_Windows_8.1_GroupID"
+"TemplateIDs(VsTemplate)"=""

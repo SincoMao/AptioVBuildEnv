@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Rule
+    Name="DriverPackageDeploymentPage"
+    PageTemplate="DriverDeploymentPackagePropertyProvider"
+    DisplayName="Driver Install"
+    SwitchPrefix="/"
+    Order="37"
+    xmlns="http://schemas.microsoft.com/build/2009/properties"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:my="http://schemas.microsoft.com/developer/msbuild/tasks/2005">
+
+    <Rule.Categories>
+        <Category
+            Name="Deployment"
+            DisplayName="Deployment"/>
+    </Rule.Categories>
+
+    <Rule.DataSource>
+        <DataSource
+            Persistence="UserFile"
+            HasConfigurationCondition="true" />
+    </Rule.DataSource>
+
+    <BoolProperty
+        Name="RemoveDriver"
+        DisplayName="Remove Driver"
+        Description="Remove previous versions of the driver before deploying a new version"
+        Category="Deployment"/>
+
+    <EnumProperty
+        Name="InstallMode"
+        DisplayName="Driver Install Mode"
+        Description="Specifies how the driver should be installed"
+        Category="Deployment">
+        <EnumValue
+            Name="None"
+            Switch=""
+            DisplayName="None"
+            Description="Turns off driver installation">
+        </EnumValue>
+        <EnumValue
+            Name="HardwareId"
+            Switch=""
+            DisplayName="HardwareId"
+            Description="Install the driver to a specific hardware ID">
+        </EnumValue>
+        <EnumValue
+            Name="CustomCommand"
+            Switch=""
+            DisplayName="CustomCommand"
+            Description="Specify a custom command line that will install the driver">
+        </EnumValue>
+        <EnumValue
+            Name="InstallAndVerify"
+            Switch=""
+            DisplayName="InstallAndVerify"
+            Description="Specify a WDTF install script">
+        </EnumValue>
+        <EnumValue
+            Name="CbsInstall"
+            Switch=""
+            DisplayName="CbsInstall"
+            Description="Install/Reinstall the driver by deploying a CBS to the mobile device">
+        </EnumValue>
+        <EnumValue
+            Name="FastDeploy"
+            Switch=""
+            DisplayName="FastDeploy"
+            Description="Attempt to replace the driver service on a target device node, if it exists">
+        </EnumValue>
+    </EnumProperty>
+
+    <StringProperty
+        Name="DeployFiles"
+        Category="Deployment"
+        DisplayName="Deployment Files"
+        Description="Any additional files that need to be copied to the remote machine"/>
+
+    <StringProperty
+        Name="HardwareIdString"
+        Category="Deployment"
+        DisplayName="Hardware ID String"
+        Description="The hardware ID used to install the driver"/>
+
+    <StringProperty
+        Name="CommandLine"
+        Category="Deployment"
+        DisplayName="Command Line"
+        Description="Command line that will install the driver"/>
+
+    <StringProperty
+        Name="ScriptPath"
+        Category="Deployment"
+        DisplayName="Installer Path"
+        Description="Path to the WDTF binary or script that will install the driver"/>
+
+    <StringProperty
+        Name="ScriptName"
+        Category="Deployment"
+        DisplayName="Installer Name"
+        Description="Name of the method to be run from the WDTF binary or script that will install the driver"/>
+
+    <StringProperty
+        Name="ScriptDeviceQuery"
+        Category="Deployment"
+        DisplayName="Installer Device Query"
+        Description="Device query specifying the device that will be installed"/>
+
+</Rule>

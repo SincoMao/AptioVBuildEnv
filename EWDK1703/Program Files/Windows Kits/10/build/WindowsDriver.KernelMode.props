@@ -1,0 +1,69 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(ConfigurationType)' == 'Driver'">
+    <LinkCompiled>true</LinkCompiled>
+    <TargetExt>.sys</TargetExt>
+    <OutputType>sys</OutputType>
+    <IsDriver>true</IsDriver>
+    <EnableTestSign>true</EnableTestSign>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(ConfigurationType)' == 'DynLink'">
+    <EnableTestSign>true</EnableTestSign>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ConfigurationType)' == 'Utility'">
+    <EnableTestSign>true</EnableTestSign>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <KernelBufferOverflowLib Condition="'$(KernelBufferOverflowLib)' == '' and '$(_NT_TARGET_VERSION)' != '' and $(_NT_TARGET_VERSION) &gt;= $(_NT_TARGET_VERSION_WIN8)">$(DDK_LIB_PATH)BufferOverflowFastFailK.lib</KernelBufferOverflowLib>
+    <KernelBufferOverflowLib Condition="'$(KernelBufferOverflowLib)' == '' and '$(_NT_TARGET_VERSION)' != '' and $(_NT_TARGET_VERSION) &lt; $(_NT_TARGET_VERSION_WIN8)">$(DDK_LIB_PATH)BufferOverflowK.lib</KernelBufferOverflowLib>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DisableKernelFlag  Condition="'$(DisableKernelFlag)' == ''">false</DisableKernelFlag>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <IncludePath>$(CRT_IncludePath);$(KM_IncludePath);$(KIT_SHARED_IncludePath)</IncludePath>
+    <LibraryPath>$(DDK_LibraryPath_DDKPlatform);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_PropertySheetDisplayName>Windows Drivers</_PropertySheetDisplayName>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalOptions>-cbstring %(ClCompile.AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(DisableKernelFlag)' != 'true'">/kernel %(ClCompile.AdditionalOptions)</AdditionalOptions>
+      <PREfastAdditionalOptions Condition="'%(PREfastAdditionalOptions)' == ''">stacksize1024</PREfastAdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup>
+    <Link>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <Driver>Driver</Driver>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <OmitDefaultLibName>true</OmitDefaultLibName>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Native</SubSystem>
+      <MinimumRequiredVersion>$(SUBSYSTEM_NATVER)</MinimumRequiredVersion>
+      <AdditionalOptions Condition="'$(DisableKernelFlag)' != 'true'">/kernel %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <ItemDefinitionGroup>
+    <Midl>
+      <AdditionalIncludeDirectories>$(DDK_LibraryPath_DDKPlatform);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </Midl>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(UM_IncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+
+  <!-- Import KMDF-type-specific props file -->
+  <Import Condition="Exists('$(WDKContentRoot)build\windowsdriver.KernelMode.$(DriverType).props')" Project="$(WDKContentRoot)build\windowsdriver.KernelMode.$(DriverType).props"/> 
+</Project>
+
+

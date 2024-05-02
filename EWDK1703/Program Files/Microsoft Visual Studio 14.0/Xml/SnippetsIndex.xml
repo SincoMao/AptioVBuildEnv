@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SnippetCollection>
+    <Language Lang="XML" Guid="{F6819A78-A205-47B5-BE1C-675B3C7F0B8E}">
+        <SnippetDir>
+            <OnOff>On</OnOff>
+            <Installed>true</Installed>
+            <DirPath>%InstallRoot%\xml\%LCID%\Snippets\</DirPath> 
+            <LocalizedName>Snippets</LocalizedName>
+        </SnippetDir>
+    </Language>
+</SnippetCollection>

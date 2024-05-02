@@ -1,0 +1,468 @@
+//---------------------------------------------------------------------------
+// Microsoft Test Automation Sources
+//
+// Copyright 2005 Microsoft Corporation. All Rights Reserved.
+//
+// WDTFInterfaces.idl
+//
+// Collection: WDTF - Main Interface Reference
+// 
+// Environment: User mode
+// 
+// DLL: WDTFInterfaces.dll
+//
+// Primary Contact: WDTF Support (WDTFSupp@microsoft.com)
+//
+// History:
+//   [Date]        -   [Status]
+//   Jul 20 2005   -   Unreviewed
+//   Dec 01 2005   -   Reviewed
+// 
+// Abstract:
+//  This is a set of interfaces retrievable through the <!ITarget::GetInterface>
+// method. This particular library contains the definition of the interfaces
+// that are supported by default in the common WDTF distribution.
+//---------------------------------------------------------------------------
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    object,
+    uuid(AA8168CE-5F3B-49CB-A21B-BA6AACFB093E),
+    nonextensible,
+    helpstring("Bogus unreferenced but only to make MIDL generate correct output"),
+    pointer_default(unique)
+]
+interface IBogusUnreferenced_WDTFInterfaces : IUnknown
+{    
+};
+
+[
+    uuid(4FDDE146-5A50-430F-91FA-82418CC7C67A),
+    version(1.0),
+    helpstring("WDTFInterfaces 1.1 Type Library")
+]
+library WDTFInterfacesLib
+{
+    importlib("stdole2.tlb");
+
+    importlib("WDTF.tlb");
+
+
+
+    /* 
+     * TSimpleIO_MTestState
+     * 
+     * Abstract:
+     * 
+     * This enumerated type defines every possible state of an
+     * ISimpleIO_MTest. This state is accessed via the 
+     * <!ISimpleIO_MTest::State> property.
+     *
+     */
+    typedef 
+    [uuid(0804BED0-BE8B-46c7-A6C2-85D4362F68B8)]
+    enum
+    {
+        SimpleIO_Stopped,
+        SimpleIO_Started,
+        SimpleIO_Paused,
+        SimpleIO_Stopping,
+        SimpleIO_Pausing
+    } TSimpleIO_MTestState;
+
+    /* 
+     * ISimpleIO_Status
+     * 
+     * Abstract:
+     * 
+     *  This interface is used by the <!ISimpleIO_MTest> interface to expose a method
+     * of retrieving the status of the test.
+     *
+     *  The status will be used by the scenario writer to know when his scenario
+     * is a pass or a fail. However, just the methods below doesn't give you much.
+     * In order to actually find out the status, you must use an inherited interface
+     * that provides methods of accessing the status in some way.
+     *
+     *  <!ISimpleIO_StandardStatus> is the default interface in <!ISimpleIO_MTest::Status>,
+     * however the scenario writer can replace it with anything that supports
+     * ISimpleIO_Status.
+     *
+     */
+    [
+        object,
+        uuid(1EAE3EF3-9891-45B6-8074-646BE9A83038),
+        dual,
+        nonextensible,
+        helpstring("The methods in this interface are called by ISimpleIO_MTest to report the status of the MTest to the scenario writer."),
+        pointer_default(unique)
+    ]
+    interface ISimpleIO_Status : IDispatch
+    {
+        [helpstring("Provide the status object with one bit of status. If the HRESULT indicates an error, the callee should check the latest IErrorInfo for more details.")]
+        HRESULT ProvideHRESULT([in] HRESULT hr);
+    };
+
+
+
+    /* 
+     * ISimpleIO_MTest
+     * 
+     * Abstract:
+     * 
+     *  This interface encapsulates the syntax and semantics of an extremely simple
+     * interface that allows one to perform simple IO operations in an asynchronous
+     * manner on a Target.
+     * These are retrieved through a call to ITarget::GetInterface("MTest\SimpleIO").
+     *
+     * This interface is NOT thread-safe.
+     *
+     */
+    [
+        object,
+        uuid(D7FE62C4-EE6B-4A5A-B936-B3F18734ACC1),
+        dual,
+        nonextensible,
+        helpstring("A simple asynchronous Input/Output manageable test interface."),
+        pointer_default(unique)
+    ]
+    interface ISimpleIO_MTest : IAction
+    {
+        [helpstring("Start the SimpleIO test running in a worker thread.")]
+        HRESULT Start();
+
+        [helpstring("Stop the SimpleIO test.")] 
+        HRESULT Stop([in, optional] VARIANT bAsync);
+
+        [helpstring("Pause the SimpleIO test. It should keep the context open while paused.")] 
+        HRESULT Pause([in, optional] VARIANT bAsync);
+
+        [helpstring("Un-pause the SimpleIO test.")] 
+        HRESULT Continue();
+
+        [propget, helpstring("Retrieve the status object for this SimpleIO MTest.")] 
+        HRESULT Status([out, retval] ISimpleIO_Status** ppStatus);
+        [propput, helpstring("Attach a new status object for this SimpleIO MTest.")] 
+        HRESULT Status([in] ISimpleIO_Status* pNewStatus);
+
+        [propget, helpstring("Retrieve the current state of this SimpleIO MTest.")] 
+        HRESULT State([out, retval] TSimpleIO_MTestState* pState);
+    };
+
+
+    /* 
+     * ISimpleIO_StandardStatus
+     * 
+     * Abstract:
+     * 
+     *  This is the standard interface used by the ISimpleIO_MTest interface to
+     * expose a method of retrieving the status of the test.
+     *
+     *  The status will be used by the scenario writer to know when his scenario
+     * is a pass or a fail.
+     *
+     *  ISimpleIO_StandardStatus is the default interface in <!ISimpleIO_MTest::Status>.
+     *
+     */
+    [
+        object,
+        uuid(FDB452FD-B099-4366-9A6A-A9F0172AF65E),
+        dual,
+        nonextensible,
+        helpstring("The methods in this interface are called by ISimpleIO_MTest to report the status of the MTest to the scenario writer."),
+        pointer_default(unique)
+    ]
+    interface ISimpleIO_StandardStatus : ISimpleIO_Status
+    {
+        [propget, helpstring("Count of all S_OKs.")]
+        HRESULT SCount([out, retval] LONG* pVal);
+
+        [propget, helpstring("Count of all failed HRs.")]
+        HRESULT FCount([out, retval] LONG* pVal);
+
+        [helpstring("This method makes the assertion that there were no failures encountered, if there was an error it is returned.")]
+        //---------------------------------------------------------------------------
+        // Returns:
+        //   S_OK       If there were no failures in the SimpleIO object
+        //   hr         The failure code of the first error encountered.
+        //
+        // Remarks:
+        //   This method is used to retrieve detailed failure information from the 
+        // SimpleIO object.
+        //   The ISimpleIO_StandardStatus interface inherits from ISupportErrorInfo to
+        // permit retrieval of detailed error codes and messages.
+        //---------------------------------------------------------------------------
+        HRESULT AssertSuccess();
+
+        [helpstring("Clear all the counts and first failure codes back to zero.")]
+        HRESULT Clear();
+    };
+
+
+   
+      
+
+	 /* 
+     * IWDTFSimpleIOStressAction2
+     * Abstract:
+     * This interface is NOT thread-safe.
+     */
+    [
+        object,
+        uuid(69E52A11-6113-48BE-91BB-8F03FED7C5B0),
+        dual,
+        nonextensible,
+        helpstring("A simple asynchronous Input/Output manageable test interface."),
+        pointer_default(unique)
+    ]
+    interface IWDTFSimpleIOStressAction2 : IWDTFAction2
+    {
+        [helpstring("Start the SimpleIO test running in a worker thread.")]
+        HRESULT Start([out, retval] VARIANT_BOOL* pResult);
+
+		[helpstring("Start the SimpleIO test running in a worker thread.")]
+        HRESULT StartAsync();
+
+        [helpstring("Stop the SimpleIO test.")] 
+        HRESULT Stop([out, retval] VARIANT_BOOL* pResult);
+
+        [helpstring("Stop the SimpleIO test.")] 
+        HRESULT StopAsync();
+
+        [helpstring("Pause the SimpleIO test. It should keep the context open while paused.")] 
+        HRESULT Pause([out, retval] VARIANT_BOOL* pResult);
+
+        [helpstring("Continue the SimpleIO test.")] 
+        HRESULT Continue([out, retval] VARIANT_BOOL* pResult);
+
+        [helpstring("Continue the SimpleIO test.")] 
+        HRESULT ContinueAsync();
+
+        [helpstring("Get async result.")] 
+        HRESULT WaitAsyncCompletion([out, retval] VARIANT_BOOL* pResult);
+
+    };
+
+
+	/* 
+     * IWDTFSimpleIOStressCollectionBase2
+     * Abstract:
+     * This interface is NOT thread-safe.
+     */
+    [
+        object,
+        uuid(53B4BE53-1421-469C-9951-46FD627B4ACC),
+        dual,
+        nonextensible,
+        helpstring("Interface to create custom action collection."),
+        pointer_default(unique)
+    ]
+    interface IWDTFSimpleIOStressActionsBase2  : IWDTFActionsCustom2
+    {
+	[helpstring("Start the SimpleIO test running in a worker thread.")]
+    HRESULT Start([out, retval] VARIANT_BOOL* pResult);
+
+	[helpstring("Start the SimpleIO test running in a worker thread.")]
+	HRESULT StartAsync();
+
+	[helpstring("Stop the SimpleIO test.")] 
+	HRESULT Stop([out, retval] VARIANT_BOOL* pResult);
+
+	[helpstring("Stop the SimpleIO test.")] 
+	HRESULT StopAsync();
+
+	[helpstring("Pause the SimpleIO test. It should keep the context open while paused.")] 
+	HRESULT Pause([out, retval] VARIANT_BOOL* pResult);
+
+	[helpstring("Continue the SimpleIO test.")] 
+	HRESULT Continue([out, retval] VARIANT_BOOL* pResult);
+
+	[helpstring("Continue the SimpleIO test.")] 
+	HRESULT ContinueAsync();
+
+	[helpstring("Get async result.")] 
+	HRESULT WaitAsyncCompletion([out, retval] VARIANT_BOOL* pResult);
+    };
+
+	/* 
+     * IWDTFSimpleIOStressActions2
+     * Abstract:
+     * This interface is NOT thread-safe.
+     */
+    [
+        object,
+        uuid(1D8AB0B4-BDE7-4ECF-927F-A4D8C17CE35F),
+        dual,
+        nonextensible,
+        helpstring("A simple asynchronous Input/Output manageable test collection interface."),
+        pointer_default(unique)
+    ]
+    interface IWDTFSimpleIOStressActions2 : IWDTFSimpleIOStressActionsBase2
+    {
+      
+    };
+
+	/* 
+     * IWDTFSimpleIOStressProcAction2
+     * Abstract:
+     * This interface is NOT thread-safe.
+     */
+    [
+        object,
+        uuid(1B123901-6473-4D23-A702-9E8C04D2CD57),
+        dual,
+        nonextensible,
+        helpstring("A simple asynchronous Input/Output manageable test interface."),
+        pointer_default(unique)
+    ]
+    interface IWDTFSimpleIOStressProcAction2 : IWDTFSimpleIOStressAction2
+    {
+        HRESULT Terminate([out, retval] VARIANT_BOOL* pResult);
+        HRESULT EnableAbandonOnExit();
+        HRESULT DisableAbandonOnExit();
+    };
+
+	/* 
+     * IWDTFSimpleIOStressProcActions2
+     * Abstract:
+     * This interface is NOT thread-safe.
+     */
+    [
+        object,
+        uuid(E267A946-A229-45EA-B46E-8A6F2A78F731),
+        dual,
+        nonextensible,
+        helpstring("A asynchronous Input/Output manageable test collection interface."),
+        pointer_default(unique)
+    ]
+    interface IWDTFSimpleIOStressProcActions2 : IWDTFSimpleIOStressActionsBase2
+    {
+		HRESULT Terminate([out, retval] VARIANT_BOOL* pResult);
+		HRESULT EnableAbandonOnExit();
+        HRESULT DisableAbandonOnExit();
+    };
+
+
+    /* 
+     * ISimpleIO_Action
+     * 
+     * Abstract:
+     * 
+     * This interface encapsulates the syntax and semantics of an extremely simple
+     * interface that allows one to perform simple IO operations in a synchronous
+     * manner to a Target.
+     * These are retrieved through a call to ITarget::GetInterface("Action\SimpleIO").
+     *
+     * This interface is NOT thread-safe.
+     *
+     */
+
+	// Custom error code for ISimpleIO_Action::Open() to return to indicate 
+	// that the target device is not configured correctly to be tested.
+    cpp_quote("#define WDTF_SIMPLEIO_DEVICE_CONFIG_ERROR   MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x200)")
+    [
+        object,
+        uuid(4C6F34CA-0007-433D-ACF5-F794B6025B78),
+        dual,
+        nonextensible,
+        helpstring("A simple synchronous Input/Output action interface."),
+        pointer_default(unique)
+    ]
+    interface ISimpleIO_Action : IAction
+    {
+        [helpstring("Perform the Open Operation (this should be done before RunIO)")] 
+        HRESULT Open();
+        [helpstring("Perform the RunIO Operation (this should be done only after Open)")] 
+        HRESULT RunIO();
+        [helpstring("Perform the Close Operation (this should be done only after Open)")] 
+        HRESULT Close();
+    };
+
+
+    [
+        object,
+        uuid(C4F433FE-5746-4450-BB8E-3F9AA76737BB),
+        dual,
+        nonextensible,
+        pointer_default(unique)
+    ]
+	interface IWDTFSimpleIOEx2 : IWDTFAction2
+    {
+		[helpstring("Perform the Open Operation (this should be done before RunIO)")] 
+        HRESULT Open([out, retval] VARIANT_BOOL* pResult);
+        [helpstring("Perform the RunIO Operation (this should be done only after Open)")] 
+        HRESULT PerformIO([out, retval] VARIANT_BOOL* pResult);
+        [helpstring("Perform the Close Operation (this should be done only after Open)")] 
+        HRESULT Close([out, retval] VARIANT_BOOL* pResult);
+
+    };
+
+
+    [
+        uuid(1A7D6D61-4FE5-42E2-8F23-4FC1731C474F),
+        helpstring("SimpleIOEx Class")
+    ]
+    coclass WDTFSimpleIOEx2
+    {
+        [default] interface IWDTFSimpleIOEx2;	
+    };
+
+    [
+        uuid(ED05EF76-09A9-4409-90CA-C5D0711CA057),
+        helpstring("SimpleIO_StandardStatus Class")
+    ]
+    coclass SimpleIO_StandardStatus
+    {
+        [default] interface ISimpleIO_StandardStatus;
+    };
+    [
+        uuid(5EAE59BE-6946-44B7-A7B3-1D59811B246A),
+        helpstring("SimpleIO_MTest Class")
+    ]
+    coclass SimpleIO_MTest
+    {
+        [default] interface ISimpleIO_MTest;
+    };
+
+	[
+        uuid(3C0B0D50-611A-4368-AC87-4488D6E0C4A7),
+        helpstring("WDTFSimpleIOStressAction2 Class")
+    ]
+    coclass WDTFSimpleIOStressAction2
+    {
+        [default] interface IWDTFSimpleIOStressAction2;
+    };
+
+	[
+        uuid(F30FC2BB-F424-4A1F-8F95-68CFEE935E92),
+        helpstring("WDTFSimpleIOStressActions2 Class")
+    ]
+    coclass WDTFSimpleIOStressActions2
+    {
+        [default] interface IWDTFSimpleIOStressActions2;
+    };
+
+
+	[
+        uuid(EB9DB874-D23D-44D5-A988-85E966322843),
+        helpstring("WDTFSimpleIOStressProcActions2 Class")
+    ]
+    coclass WDTFSimpleIOStressProcActions2
+    {
+        [default] interface IWDTFSimpleIOStressProcActions2;
+    };
+
+
+
+	[
+        uuid(9C261B2B-DBD6-4087-B636-ABE1607989E8),
+        helpstring("WDTFSimpleIOStressProcAction2 Class")
+    ]
+    coclass WDTFSimpleIOStressProcAction2
+    {
+        [default] interface IWDTFSimpleIOStressProcAction2;
+    };
+
+
+};

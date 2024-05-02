@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html" />
+    <link href="Capture.css" type="text/css" rel="stylesheet" data-plugin-theme="true" />
+    <script src="plugin.js"></script>
+    <script src="DiagnosticsHub.js"></script>
+    <script src="VsGraphics.js"></script>
+    <title>Gpu Capture View</title>
+
+  <script id="CollectionViewTemplate" type="text/html">
+    <div class="collectionView">
+      <div id="warningSection" class="warningMessage"></div>
+      <div id="tilesContainer" class="frameTilesContainer">
+        <div id="captureFrameTile" tabIndex="0" class="frameTile captureFrameTile">
+          <div class="frameTileInner">
+                <div id="frameTileHeaderC" class="frameTileHeader frameTileHidden">
+                    <div id="frameTileTitleC" class="frameTileTitle">Hidden</div>
+                </div>
+            <div id="captureFrameButton" class="frameTileMiddle captureFrameButton">
+              <div class="frameTileTextContainer">
+                <div id="captureFrameIcon" class="captureFrameIcon">
+                </div>
+                <div id="captureFrameLabel" class="clickableButtonLabel" data-plugin-vs-tooltip='{"resource":"CaptureFrameTooltip"}'>
+                    Capture Frame
+                </div>
+              </div>
+            </div>
+              <progress id="captureFrameProgress" class="frameTileMiddle"></progress>
+         </div>
+       </div>
+      </div>
+    </div>
+  </script>
+
+  <script id="FrameTileTemplate" type="text/html">
+        <div id="frameTile" class="frameTile">
+            <div class="frameTileInner">
+                <div id="frameTileHeader" class="frameTileHeader">
+                    <div id="frameTileTitle" class="frameTileTitle">
+                        <a id="seeFrameDetailsButton" tabindex="0" class="clickableLink" data-plugin-vs-tooltip='{"resource":"AnalyzeFrameTooltip"}'>Frame X</a>
+                    </div>
+                    <div id="frameTileTitleDisabled" class="frameTileTitle frameTileHidden">Placeholder</div>
+                    <div id="frameTakenDate" class="frameTakenDate">Right now</div>
+                </div>
+                <div id="frameTileImageHolder" class="frameTileMiddle frameTileImageHolder">
+                    <img src="" id="frameTileImage" class="frameTileImage" alt="Frame not renderable" />
+                </div>
+            </div>
+        </div>
+  </script>
+</head>
+<body tabindex="-1">
+  <div id="mainContainer">
+  </div>
+  <script type="text/javascript">
+      (function () {
+          VsGraphics.Capture.CollectionViewHostInstance.loadView();
+      })();
+  </script>
+</body>
+</html>

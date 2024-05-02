@@ -1,0 +1,13 @@
+<CodeAnalysisPlugIn>
+  <ResultService Id="Microsoft.ResultServices.Native">
+    <Assembly>..\NativeCodeAnalysis.dll</Assembly>
+    <Type>Microsoft.VisualStudio.CodeAnalysis.NativeResultService</Type>
+  </ResultService>
+  <Analyzer Id="Microsoft.Analyzers.NativeCodeAnalysis">
+    <RuleProvider>
+      <Assembly>..\NativeCodeAnalysis.dll</Assembly>
+      <Type>Microsoft.VisualStudio.CodeAnalysis.NativeRuleProvider</Type>
+    </RuleProvider>
+    <ResultServiceReference>Microsoft.ResultServices.Native</ResultServiceReference>
+  </Analyzer>
+</CodeAnalysisPlugIn>

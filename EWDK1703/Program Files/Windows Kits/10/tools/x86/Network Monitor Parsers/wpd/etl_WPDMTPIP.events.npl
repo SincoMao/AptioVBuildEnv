@@ -1,0 +1,242 @@
+//#  (c) 2011 Microsoft Corporation
+//#
+//#  Title:       Microsoft-Windows-WPD-MTPIP
+//#
+//#  Details:     WPD MTP Driver over IP transport logs analytical ETW events.
+//#               This parser helps to decode the data logged.
+//#
+//#  References:  WpdCoreInstrumentation.man
+//#
+//#  Comments:    MTP dataphase is not logged at transport layer. Enable WPD-MTPClassDriver
+//#               to log the dataphase and etl_WPDMTP.events.npl will be able to parse it.
+//#
+//#  Revision Class and Date:Major, 8/2/2011
+//#
+//####
+
+const MTPIP_PACKET_TYPE_INVALID               = 0X00000000;
+const MTPIP_PACKET_TYPE_INIT_COMMAND_REQUEST  = 0X00000001;
+const MTPIP_PACKET_TYPE_INIT_COMMAND_ACK      = 0X00000002;
+const MTPIP_PACKET_TYPE_INIT_EVENT_REQUEST    = 0X00000003;
+const MTPIP_PACKET_TYPE_INIT_EVENT_ACK        = 0X00000004;
+const MTPIP_PACKET_TYPE_INIT_FAIL             = 0X00000005;
+const MTPIP_PACKET_TYPE_OPERATION_REQUEST     = 0X00000006;
+const MTPIP_PACKET_TYPE_OPERATION_RESPONSE    = 0X00000007;
+const MTPIP_PACKET_TYPE_EVENT                 = 0X00000008;
+const MTPIP_PACKET_TYPE_START_DATA            = 0X00000009;
+const MTPIP_PACKET_TYPE_DATA                  = 0X0000000A;
+const MTPIP_PACKET_TYPE_CANCEL                = 0X0000000B;
+const MTPIP_PACKET_TYPE_END_DATA              = 0X0000000C;
+const MTPIP_PACKET_TYPE_PROBE_REQUEST         = 0X0000000D;
+const MTPIP_PACKET_TYPE_PROBE_RESPONSE        = 0X0000000E;
+
+const MTPIP_PACKET_TYPE_DATA_SIZE   = 12;
+
+Table MTPIP_PacketTypeToStringTable
+{
+    switch(value)
+    {
+        case MTPIP_PACKET_TYPE_INVALID               : "PCKT_TYPE:INVALID";
+        case MTPIP_PACKET_TYPE_INIT_COMMAND_REQUEST  : "PCKT_TYPE:INIT_COMMAND_REQUEST";
+        case MTPIP_PACKET_TYPE_INIT_COMMAND_ACK      : "PCKT_TYPE:INIT_COMMAND_ACK";
+        case MTPIP_PACKET_TYPE_INIT_EVENT_REQUEST    : "PCKT_TYPE:INIT_EVENT_REQUEST";
+        case MTPIP_PACKET_TYPE_INIT_EVENT_ACK        : "PCKT_TYPE:INIT_EVENT_ACK";
+        case MTPIP_PACKET_TYPE_INIT_FAIL             : "PCKT_TYPE:INIT_FAIL";
+        case MTPIP_PACKET_TYPE_OPERATION_REQUEST     : "PCKT_TYPE:OPERATION_REQUEST";
+        case MTPIP_PACKET_TYPE_OPERATION_RESPONSE    : "PCKT_TYPE:OPERATION_RESPONSE";
+        case MTPIP_PACKET_TYPE_EVENT                 : "PCKT_TYPE:EVENT";
+        case MTPIP_PACKET_TYPE_START_DATA            : "PCKT_TYPE:START_DATA";
+        case MTPIP_PACKET_TYPE_DATA                  : "PCKT_TYPE:DATA";
+        case MTPIP_PACKET_TYPE_CANCEL                : "PCKT_TYPE:CANCEL";
+        case MTPIP_PACKET_TYPE_END_DATA              : "PCKT_TYPE:END_DATA";
+        case MTPIP_PACKET_TYPE_PROBE_REQUEST         : "PCKT_TYPE:PROBE_REQUEST";
+        case MTPIP_PACKET_TYPE_PROBE_RESPONSE        : "PCKT_TYPE:PROBE_RESPONSE";
+        default                                      : FormatString("PCKT_TYPE:Undefined 0X%08X", value);
+    }
+}
+
+[RegisterBefore(NetEvent.UserData, MicrosoftWindowsWPDMTPIP, "{C374D21E-69B2-4CD7-9A25-62187C5A5619}")]
+[Property.wpderror = 0]
+Protocol  WPDMTPIP = property.ETLSummary
+{
+    [BuildConversationWithParent, conversation.ConversationDescription = ""]
+    switch(property.EventID)
+    {
+        case 100: //WPD_I_MTPIP_DATACHANNEL_WRITE_PACKET
+            [property.ETLSummary = FormatString("Sending  Packet(Data  Channel): %-25s  %s", 
+                                    DataChannelSentPacket.ToString, Property.MTPIPPacketDesc)]
+            _struct
+            {
+                UINT32      ETWLength;
+                MTPIPPacket DataChannelSentPacket; 
+            }
+
+        case 101: //WPD_I_MTPIP_EVENTCHANNEL_WRITE_PACKET
+            [property.ETLSummary = FormatString("Sending  Packet(Event Channel): %-25s  %s", 
+                                    EventChannelSentPacket.ToString, Property.MTPIPPacketDesc)]
+            _struct
+            {
+                UINT32      ETWLength;
+                MTPIPPacket EventChannelSentPacket; 
+            }
+
+        case 102: //WPD_I_MTPIP_DATACHANNEL_READ_PACKET
+            [property.ETLSummary = FormatString("Received Packet(Data  Channel): %-25s  %s", 
+                                    DataChannelRecvdPacket.ToString ,Property.MTPIPPacketDesc)]
+            _struct
+            {
+                UINT32      ETWLength;
+                MTPIPPacket DataChannelRecvdPacket; 
+            }
+
+        case 103: //WPD_I_MTPIP_EVENTCHANNEL_READ_PACKET
+            [property.ETLSummary = FormatString("Received Packet(Event Channel): %-25s  %s",
+                                    EventChannelRecvdPacket.ToString, Property.MTPIPPacketDesc)]
+            _struct
+            {
+                UINT32      ETWLength;
+                MTPIPPacket EventChannelRecvdPacket; 
+            }
+        case 104: //WPD_I_MTPIP_READ_DATA_PACKET
+            [property.ETLSummary = FormatString("Received Packet(Data  Channel): %-25s  %s",
+                                                    MTPIPPacketHeader.PacketType.ToString, MTPIPPacketHeader.ToString)]
+            MTPIPPacketHeader MTPIPPacketHeader =  FormatString("TranID:%3s PayloadSize = %d (0X%X) bytes", 
+                                                        "X", //TODO: Log TransactionID for this event
+                                                        MTPIPPacketHeader.PacketLengthInBytes-MTPIP_PACKET_TYPE_DATA_SIZE,
+                                                        MTPIPPacketHeader.PacketLengthInBytes-MTPIP_PACKET_TYPE_DATA_SIZE);
+                                                        
+        case 105: //WPD_I_MTPIP_RECEIVED_DEVICE_EVENT
+            [property.ETLSummary = "Received Event(Event Channel): " + MTPIPEvent.ToString]            
+            struct MTPIPEvent = FormatString("%s", EventCode.ToString)
+            {
+                UINT32 EventDatasetLength;
+                MTPEventCode EventCode;
+                MTPTransactionID TransactionID;
+                UINT32 Param[MTP_EVENT_NUMPARAMS_MAX];
+            }
+
+        case 106: //WPD_I_MTPIP_DATACHANNEL_RECEIVED_UNEXPECTED_HEADER
+            [property.ETLSummary = "Received Unexpected PacketType(DataChannel)): " + DataChannelUnexpectedHeader.ToString]
+            MTPIPPacketHeader DataChannelUnexpectedHeader;
+
+        case 107: //WPD_I_MTPIP_EVENTCHANNEL_RECEIVED_UNEXPECTED_HEADER
+            [property.ETLSummary = "Received Unexpected PacketType(EventChannel): " + EventChannelUnexpectedHeader.ToString]
+            MTPIPPacketHeader EventChannelUnexpectedHeader;
+    }
+}
+
+struct MTPIPPacketHeader = FormatString("%s", PacketType.ToString)
+{
+    UINT32 PacketLengthInBytes;
+    UINT32 PacketType  = MTPIP_PacketTypeToStringTable(this);
+}
+
+struct MTPIPPacket = FormatString("%s", Header.ToString)
+{
+    MTPIPPacketHeader Header;
+    [Property.MTPIPPacketDesc = "";]
+    switch(Header.PacketType)    
+    {
+        case MTPIP_PACKET_TYPE_INIT_COMMAND_REQUEST:
+        [Property.MTPIPPacketDesc = FormatString( "Initiator:%s", InitiatorFriendlyName.ToString);]
+        struct MTPIP_PACKET_TYPE_INIT_COMMAND_REQUESTDetails = ""
+        {
+            GUID(true) InitiatorGUID;
+            UnicodeString InitiatorFriendlyName;
+            UINT32 InitiatorProtocolVersion;
+        }
+
+        case MTPIP_PACKET_TYPE_INIT_COMMAND_ACK:
+        [Property.MTPIPPacketDesc = FormatString( "Responder:%s", ResponderFriendlyName.ToString);]
+        struct MTPIP_PACKET_TYPE_INIT_COMMAND_ACKDetails = ""
+        {
+            UINT32 ConnectionNumber;
+            GUID(true) ResponderGUID;
+            UnicodeString ResponderFriendlyName;
+            UINT32 ResponderProtocolVersion;            
+        }
+
+        case MTPIP_PACKET_TYPE_INIT_EVENT_REQUEST:
+        [Property.MTPIPPacketDesc = FormatString( "Connection#:%s", ConnectionNumber.ToString);]
+        struct MTPIP_PACKET_TYPE_INIT_EVENT_REQUESTDetails = ""
+        {
+            UINT32 ConnectionNumber;            
+        }
+
+        case MTPIP_PACKET_TYPE_INIT_FAIL:
+        [Property.MTPIPPacketDesc = FormatString( "Reason:%s", Reason.ToString);]
+        struct MTPIP_PACKET_TYPE_INIT_FAILDetails = ""
+        {
+            ReportWPDError("INIT FAIL") InitPacketFailed;
+            UINT32 Reason;
+        }
+
+        case MTPIP_PACKET_TYPE_OPERATION_REQUEST:
+        [Property.MTPIPPacketDesc = FormatString( "TranID:%3s Operation:%s",TransactionID.ToString, Opcode.ToString);]
+        struct MTPIP_PACKET_TYPE_OPERATION_REQUESTDetails = ""
+        {
+            UINT32 DataPhaseInfo;
+            MTPOperation OpCode;
+            MTPTransactionID TransactionID;
+            UINT32 Params[MTP_COMMAND_NUMPARAMS_MAX];
+        }
+
+        case MTPIP_PACKET_TYPE_OPERATION_RESPONSE:
+        [Property.MTPIPPacketDesc = FormatString( "TranID:%3s Response:%s",TransactionID.ToString, ResponseCode.ToString);]
+        struct MTPIP_PACKET_TYPE_OPERATION_RESPONSEDetails = ""
+        {
+            MTPResponseCode ResponseCode;
+            switch
+            {
+                case (ResponseCode != MTP_RESPONSECODE_OK):
+                    ReportWPDError("ResponseCode Not OK") MTPResponseNotOK;
+            }
+            MTPTransactionID TransactionID;
+            UINT32 Params[MTP_RESPONSE_NUMPARAMS_MAX];
+        }
+        
+        case MTPIP_PACKET_TYPE_EVENT:
+        [Property.MTPIPPacketDesc = FormatString( "TranID:%3s Event:%s", TransactionID.ToString, EventCode.ToString);]
+        struct MTPIP_PACKET_TYPE_EVENTDetails = ""
+        {
+            MTPEventCode EventCode;
+            MTPTransactionID TransactionID;
+            UINT32 Params[MTP_EVENT_NUMPARAMS_MAX];
+        }
+        
+        case MTPIP_PACKET_TYPE_START_DATA:
+        [Property.MTPIPPacketDesc = FormatString( "TranID:%3s TotalDataLength = %s bytes", TransactionID.ToString, TotalDataLength.ToString);]
+        struct MTPIP_PACKET_TYPE_START_DATADetails = ""
+        {
+            MTPTransactionID TransactionID;
+            UINT64 TotalDataLength;    
+        }
+
+        case MTPIP_PACKET_TYPE_DATA:
+        [Property.MTPIPPacketDesc = FormatString( "TranID:%3s Data Payload size = %d (0x%x) bytes", 
+                    TransactionID.ToString, Header.PacketLengthInBytes-MTPIP_PACKET_TYPE_DATA_SIZE, Header.PacketLengthInBytes-MTPIP_PACKET_TYPE_DATA_SIZE);]
+        struct MTPIP_PACKET_TYPE_DATADetails = ""
+        {
+            MTPTransactionID TransactionID;            
+        }
+        case MTPIP_PACKET_TYPE_END_DATA:
+        [Property.MTPIPPacketDesc = FormatString( "TranID:%3s Data Payload size = %d (0x%x) bytes", 
+                    TransactionID.ToString, Header.PacketLengthInBytes-MTPIP_PACKET_TYPE_DATA_SIZE, Header.PacketLengthInBytes-MTPIP_PACKET_TYPE_DATA_SIZE);]
+        struct MTPIP_PACKET_TYPE_END_DATADetails = ""
+        {
+            MTPTransactionID TransactionID;            
+        }
+
+        case MTPIP_PACKET_TYPE_CANCEL:
+        [Property.MTPIPPacketDesc = FormatString( "TranID:%3s", TransactionID.ToString);]
+        struct MTPIP_PACKET_TYPE_CANCELDetails = ""
+        {
+            MTPTransactionID TransactionID;            
+        }
+
+        case MTPIP_PACKET_TYPE_INIT_EVENT_ACK:
+        case MTPIP_PACKET_TYPE_PROBE_REQUEST:
+        case MTPIP_PACKET_TYPE_PROBE_RESPONSE:
+        _struct{}        
+    }
+}

@@ -1,0 +1,56 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    UsbDeviceCreate
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that WdfUsbTargetDeviceCreate is not called outside of EvtDevicePrepareHardware.
+  
+    Rule diagnostics:
+    This rule verifies WdfUsbTargetDeviceCreate is not called outside of EVT_WDF_DEVICE_PREPARE_HARDWARE.
+	
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507144
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+	state{
+		enum {inPrepHardware, INIT} s = INIT;
+	}
+
+	fun_WDF_DEVICE_PREPARE_HARDWARE.entry
+	{
+		s=inPrepHardware;
+	}
+	fun_WDF_DEVICE_PREPARE_HARDWARE.exit
+	{
+		s=INIT;
+	}
+
+	[sdv_WdfUsbTargetDeviceCreate,
+     WdfUsbTargetDeviceCreateWithParameters].entry
+	{	
+               if (s!=inPrepHardware)
+               {
+			abort "Cannot call WdfUsbTargetDeviceCreate outside of WDF_DEVICE_PREPARE_HARDWARE.";
+	       }
+	}

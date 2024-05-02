@@ -1,0 +1,91 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoBuildFsdFree
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    A driver should use IoFreeIrp only on Irps it previously allocated with IoBuildAsynchronousFsdRequest.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507267
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {initial,allocated} irp_state = initial;             
+}
+watch IoBuildAsynchronousFsdRequest.exit.$return;
+
+IoBuildAsynchronousFsdRequest.exit[guard $return]
+{
+    if($return!=NULL)
+    {
+        irp_state = allocated;
+    }
+    else
+    {
+       halt;
+    }
+}
+
+IoFreeIrp.entry[guard $1]
+{
+    if(irp_state != allocated)
+    {
+        abort "A driver should only call $fname if IoBuildAsynchronousFsdRequest was called.";
+    }
+    else
+    {
+        halt;
+    }
+}
+
+[fun_IRP_MJ_CLEANUP
+,fun_IRP_MJ_CLOSE
+,fun_IRP_MJ_CREATE
+,fun_IRP_MJ_DEVICE_CONTROL
+,fun_IRP_MJ_FILE_SYSTEM_CONTROL
+,fun_IRP_MJ_FLUSH_BUFFERS
+,fun_IRP_MJ_INTERNAL_DEVICE_CONTROL
+,fun_IRP_MJ_LOCK_CONTROL
+,fun_IRP_MJ_QUERY_INFORMATION
+,fun_IRP_MJ_READ
+,fun_IRP_MJ_SET_INFORMATION
+,fun_IRP_MJ_SYSTEM_CONTROL
+,fun_IRP_MJ_WRITE
+,fun_IRP_MJ_PNP
+,fun_IRP_MJ_POWER].exit
+{
+    if(irp_state == allocated&&$return!=STATUS_PENDING)
+    {
+    	abort "The driver needs to call IoFreeIrp in this case.";
+    }
+}
+
+
+[fun_DriverStartIo
+,fun_DriverUnload].exit
+{
+    if(irp_state == allocated)
+    {
+    	abort "The driver needs to call IoFreeIrp in this case.";
+    }
+
+}

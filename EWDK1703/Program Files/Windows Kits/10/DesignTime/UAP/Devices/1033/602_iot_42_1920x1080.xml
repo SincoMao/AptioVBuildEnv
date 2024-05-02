@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device name="IoT Device" width="1920" height="1080" scale="100" size="42" default="true" resize="false" icon="Assets/box_icon.ico" generic="Generic/generic.xaml" MinVersion="10.0.0.0">
+	<Device.Qualifiers>
+		<Qualifier Name="Platform">IoT</Qualifier>
+	</Device.Qualifiers>
+</Device>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

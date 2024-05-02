@@ -1,0 +1,350 @@
+<!--
+***********************************************************************************************
+PostToolsetRules.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file defines the steps/targets required to build driver projects.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<!-- NOTE:  Never Overwrite any macros that may be set in the sources files or files imported by sources,
+            unless you only append values to it  -->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+ 
+  
+  <PropertyGroup>
+    <TARGETEXT Condition="!$(TARGETEXT.StartsWith('.')) And '$(TARGETEXT)'!=''">.$(TARGETEXT)</TARGETEXT> 
+  </PropertyGroup>
+  
+<!-- TARGETPATH was a valid macro in the older WDK, but is also used by the visual studio toolsets. The following
+     sets OutDir to TARGETPATH. Incase sources.props contains TARGETPATH, the output binary locaiton is hence updated.
+     We then overwrite TARGETPATH such that it conforms with expectaions of the VS toolsets.-->
+     <Choose>
+        <When Condition="'$(TARGETPATH)'!=''">
+            <PropertyGroup>
+				<TARGETPATH  Condition="!HasTrailingSlash('$(TARGETPATH)')">$(TARGETPATH)\</TARGETPATH>
+				<OutDir  Condition="'$(Platform)'!='Win32'">$(TARGETPATH)$(Platform)\</OutDir>
+				<OutDir  Condition="'$(Platform)'=='Win32'">$(TARGETPATH)x86\</OutDir>
+                <OutDir  Condition="!HasTrailingSlash('$(OutDir)')">$(OutDir)\</OutDir>
+                <TARGETPATH>$(OutDir)$(TARGETNAME)$(TargetExt)</TARGETPATH>
+            </PropertyGroup>
+        </When>
+    </Choose>
+  
+ <!-- Note: Escaping is a subtle thing. On the way out of the function, the semicolon is getting escaped to %3b. On the way into the task, it splits on semicolon but not %3b, then unescapes turning %3b into semicolon and passes to the task. 
+            The task sees a literal semicolon and knows it needs to quote that. [MSBuild]::Unescape and ::Escape functions are used wherever necessary --> 
+    
+  <PropertyGroup>
+    <ConvertedSources>$(SOURCES.ToLower())</ConvertedSources>
+    <ConvertedSources Condition="'$(Platform)' == 'Win32' and '$(I386_SOURCES)' != ''">$(ConvertedSources) $(I386_SOURCES.ToLower())</ConvertedSources>
+    <ConvertedSources Condition="'$(Platform)' == 'x64' and '$(AMD64_SOURCES)' != ''">$(ConvertedSources) $(AMD64_SOURCES.ToLower())</ConvertedSources>
+    <ConvertedSources Condition="'$(Platform)' == 'arm' and '$(ARM_SOURCES)' != ''">$(ConvertedSources) $(ARM_SOURCES.ToLower())</ConvertedSources>
+    <ConvertedSources>$([System.Text.RegularExpressions.Regex]::Replace($(ConvertedSources), `(\.(?'extension'c|cpp|cxx|rc|mc|idl|mof|bmf|asm)\s+)`, `.${extension};`))</ConvertedSources>
+  </PropertyGroup>
+  <ItemGroup>    
+    <!-- Find files with certain extensions. File name and path are preceded as well as followed by a ";", or begining/end of line. "%3C" is the escape code for "<"-->
+    <ClSourceFiles   Include="$([System.Text.RegularExpressions.Regex]::Matches($(ConvertedSources), '(?%3C=^|;)[^;]+\.(c|cpp|cxx)(?=;|$)'))"/>
+    <RcSourceFiles   Include="$([System.Text.RegularExpressions.Regex]::Matches($(ConvertedSources), '(?%3C=^|;)[^;]+\.(rc)(?=;|$)'))"/>
+    <IdlSourceFiles  Include="$([System.Text.RegularExpressions.Regex]::Matches($(ConvertedSources), '(?%3C=^|;)[^;]+\.(idl)(?=;|$)'))"/>
+    <McSourceFiles   Include="$([System.Text.RegularExpressions.Regex]::Matches($(ConvertedSources), '(?%3C=^|;)[^;]+\.(mc)(?=;|$)'))"/>
+    <AsmSourceFiles  Include="$([System.Text.RegularExpressions.Regex]::Matches($(ConvertedSources), '(?%3C=^|;)[^;]+\.(asm)(?=;|$)'))"/>
+    
+    <MofSourceFiles  Include="$([System.Text.RegularExpressions.Regex]::Matches($(ConvertedSources), `(?%3C=^|;)[^;]+\.(mof)(?=;|$)`))"/>
+    <!--
+    <BmfSourceFiles  Include="$([System.Text.RegularExpressions.Regex]::Matches($(ConvertedSources), `(?%3C=^|;)[^;]+\.(bmf)(?=;|$)`))"/>
+    -->
+  </ItemGroup>
+  
+  <!-- We need to extract the value associated with /wd to set the %(ClCompile.DisableSpecificWarnings). Regex is used to extract those values. -->
+  <Choose>
+    <When Condition="'$(Msc_Warning_Level.Contains(`-wd`))' == 'true' or '$(Msc_Warning_Level.Contains(`/wd`))' == 'true'">
+      <ItemGroup>                                                                                                 <!--pattern="(?<=(/w|-w)d)\d+"  -->
+        <DisableWarningLevelsItem Include="$([System.Text.RegularExpressions.Regex]::Matches($(Msc_Warning_Level), `(?%3C=(/w|-w)d)\d+`))"/>
+      </ItemGroup>   
+      <PropertyGroup>
+        <DisableWarningLevels>@(DisableWarningLevelsItem)</DisableWarningLevels>
+      </PropertyGroup>
+    </When>
+  </Choose>
+
+  <PropertyGroup>
+    <Converted_C_Defines>$(C_Defines.Replace("/D",";"))</Converted_C_Defines>
+    <Converted_C_Defines>$(Converted_C_Defines.Replace("-D",";"))</Converted_C_Defines>
+    <Converted_C_Defines>$([System.Text.RegularExpressions.Regex]::Replace($(Converted_C_Defines), `\\(?'quote'")\s*`, `${quote}`))</Converted_C_Defines>
+    <Converted_C_Defines>$([MSBuild]::Unescape($(Converted_C_Defines)))</Converted_C_Defines>
+    <Converted_RC_Defines>$(C_Defines.Replace("/D",";"))</Converted_RC_Defines>
+    <Converted_RC_Defines>$(Converted_RC_Defines.Replace("-D",";"))</Converted_RC_Defines>
+    <Converted_RC_Defines>$([MSBuild]::Unescape($(Converted_RC_Defines)))</Converted_RC_Defines>
+  </PropertyGroup>
+   
+  <PropertyGroup>
+    <UseOfAtl Condition="'$(USE_STATIC_ATL)'=='1'">Static</UseOfAtl>
+    <UseOfAtl Condition="'$(USE_ATL)'=='1'">Dynamic</UseOfAtl>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetLibs Condition="'$(USE_VCCOM)'=='1'">$(TargetLibs) $(SDK_LIB_PATH)\vccomsup.lib</TargetLibs>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetLibs)'!=''">
+    <ConvertedTargetLibs>$(TargetLibs.ToLower())</ConvertedTargetLibs>
+    <ConvertedTargetLibs>$([System.Text.RegularExpressions.Regex]::Replace($(ConvertedTargetLibs), `\.(?'extension'lib|tlb)\s*`, `.${extension}; `))</ConvertedTargetLibs>
+    <ConvertedTargetLibs Condition="'$(Platform)'!='Win32'">$(ConvertedTargetLibs.Replace("*",$(Platform))) </ConvertedTargetLibs>
+    <ConvertedTargetLibs Condition="'$(Platform)'=='Win32'">$(ConvertedTargetLibs.Replace("*","x86")) </ConvertedTargetLibs>
+    <ConvertedTargetLibs>$(ConvertedTargetLibs.Replace("$(SDK_LIB_PATH.ToLower())\ntstrsafe.lib","$(DDK_LIB_PATH.ToLower())\ntstrsafe.lib")) </ConvertedTargetLibs>
+    <ConvertedTargetLibs>$(ConvertedTargetLibs.Replace("$(SDK_LIB_PATH.ToLower())\libcntpr.lib","$(DDK_LIB_PATH.ToLower())\libcntpr.lib")) </ConvertedTargetLibs>
+    
+    <ConvertedTargetLibs Condition="'$(IsDriverAppToolset)'=='true'">$(ConvertedTargetLibs.Replace("$(SDK_LIB_PATH.ToLower())\","")) </ConvertedTargetLibs>
+    <ConvertedTargetLibs Condition="'$(IsDriverAppToolset)'=='true'">$(ConvertedTargetLibs.Replace("$(DDK_LIB_PATH.ToLower())\","")) </ConvertedTargetLibs>
+    <ConvertedTargetLibs>$(ConvertedTargetLibs.Replace("$(ATL_LIB_PATH.ToLower())\","")) </ConvertedTargetLibs>
+    <ConvertedTargetLibs>$([MSBuild]::Unescape($(ConvertedTargetLibs)))</ConvertedTargetLibs>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <ConvertedUMLIBS>$([System.Text.RegularExpressions.Regex]::Replace($(UMLIBS), `\.(?'extension'lib|tlb)\s*`, `.${extension}; `,System.Text.RegularExpressions.RegexOptions.IgnoreCase))</ConvertedUMLIBS>
+    <ConvertedUMLIBS>$([MSBuild]::Unescape($(ConvertedUMLIBS)))</ConvertedUMLIBS>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(DllEntry)'!=''">
+    <ConvertedDllEntry>$(DllEntry.Replace("-entry:",""))</ConvertedDllEntry>
+    <ConvertedDllEntry>$(ConvertedDllEntry.Replace("/entry:",""))</ConvertedDllEntry>
+    <ConvertedDllEntry>$([MSBuild]::Unescape($(ConvertedDllEntry)))</ConvertedDllEntry>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <ConvertedDllEntry Condition="'$(Resource_Only_Dll)' != '' and '$(Resource_Only_Dll)' == '1'"></ConvertedDllEntry>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Linker_StackSize)'!=''">
+    <Converted_Linker_StackSize>$(Linker_StackSize.Replace("-STACK:",""))</Converted_Linker_StackSize>
+    <Converted_Linker_StackSize>$(Converted_Linker_StackSize.Replace("/STACK:",""))</Converted_Linker_StackSize>
+    <Index>$(Converted_Linker_StackSize.Indexof(","))</Index>
+    <NewIndex> $([MSBuild]::Add($(Index),1))</NewIndex>
+    <StackReserveSize>$(Converted_Linker_StackSize.substring("0",$(index)))</StackReserveSize>
+    <StackCommitSize>$(Converted_Linker_StackSize.substring($(newindex)))</StackCommitSize>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <ConvertedDllDef>$(DllDef)</ConvertedDllDef>
+    <ConvertedDllDef Condition="'$(ConvertedDllDef)'=='' and ('$(TargetType)'=='DYNLINK' or '$(TargetType)'=='EXPORT_DRIVER')">$(TargetName).def</ConvertedDllDef>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="'$(ConvertedDllDef)'!=''">
+      <!-- if dlldef foo.def file does not exist, we look for foo.src in current directory and generate a foo.def file in the same directory.
+      The Link ModuleDefinitionFile metadata will be updated accordingly.
+      -->
+      <PropertyGroup>
+        <ConvertedDllDef Condition="'$(Platform)'!='Win32'">$(ConvertedDllDef.Replace("*",$(Platform)))</ConvertedDllDef>
+        <ConvertedDllDef Condition="'$(Platform)'=='Win32'">$(ConvertedDllDef.Replace("*","x86"))</ConvertedDllDef>
+        <DllDefInput>$([System.IO.Path]::GetFileNameWithoutExtension($(ConvertedDllDef))).src</DllDefInput>
+      </PropertyGroup>
+    </When>
+  </Choose>
+ 
+  <!-- Contains rules to map compiler and linker switches -->
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(Includes);$(User_Includes)</AdditionalIncludeDirectories>
+      <ExceptionHandling Condition="'$(Use_Native_Eh)' == '1'">Sync</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Use_Native_Eh)' == 'ASYNC'">ASync</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Use_Native_Eh)' == 'CTHROW'">SyncCThrow</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Use_Native_Eh)' == ''">false</ExceptionHandling>
+      <WarningLevel  Condition="'$(Msc_Warning_Level.Contains(`-W0`))' == 'true' or '$(Msc_Warning_Level.Contains(`/W0`))' == 'true'">TurnOffAllWarnings</WarningLevel>
+      <WarningLevel  Condition="'$(Msc_Warning_Level.Contains(`-W1`))' == 'true' or '$(Msc_Warning_Level.Contains(`/W1`))' == 'true'">Level1</WarningLevel>
+      <WarningLevel  Condition="'$(Msc_Warning_Level.Contains(`-W2`))' == 'true' or '$(Msc_Warning_Level.Contains(`/W2`))' == 'true'">Level2</WarningLevel>
+      <WarningLevel  Condition="'$(Msc_Warning_Level.Contains(`-W3`))' == 'true' or '$(Msc_Warning_Level.Contains(`/W3`))' == 'true'">Level3</WarningLevel>
+      <WarningLevel  Condition="'$(Msc_Warning_Level.Contains(`-W4`))' == 'true' or '$(Msc_Warning_Level.Contains(`/W4`))' == 'true'">Level4</WarningLevel>
+      <WarningLevel  Condition="'$(Msc_Warning_Level.Contains(`-Wall`))' == 'true' or '$(Msc_Warning_Level.Contains(`/Wall`))' == 'true'">EnableAllWarnings</WarningLevel>
+      <TreatWarningAsError Condition="'$(Msc_Warning_Level.Contains(`-WX`))' == 'true' or '$(Msc_Warning_Level.Contains(`/WX`))' == 'true'">true</TreatWarningAsError>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings);$([MSBuild]::Unescape($(DisableWarningLevels))) </DisableSpecificWarnings>
+      <Optimization Condition="'$(Msc_Optimization.Contains(`/O1`))' == 'true' 
+                                or '$(Msc_Optimization.Contains(`s1`))' == 'true'
+                                or '$(Msc_Optimization.Contains(`1s`))' == 'true'
+                                or '$(Msc_Optimization.Contains(`t1`))' == 'true'
+                                or '$(Msc_Optimization.Contains(`1t`))' == 'true'
+                                or '$(Msc_Optimization.Contains(`i1`))' == 'true'
+                                or '$(Msc_Optimization.Contains(`1i`))' == 'true'">MinSize</Optimization>
+      <Optimization Condition="'$(Msc_Optimization.Contains(`/O2`))' == 'true' 
+                                or '$(Msc_Optimization.Contains(`s2`))' == 'true'
+                                or '$(Msc_Optimization.Contains(`2s`))' == 'true'
+                                or '$(Msc_Optimization.Contains(`t2`))' == 'true'
+                                or '$(Msc_Optimization.Contains(`2t`))' == 'true'
+                                or '$(Msc_Optimization.Contains(`i2`))' == 'true'
+                                or '$(Msc_Optimization.Contains(`2i`))' == 'true'">MaxSpeed</Optimization>
+      <Optimization Condition="'$(Msc_Optimization.Contains(`x`))' == 'true'">Full</Optimization>
+      <Optimization Condition="'$(Msc_Optimization.Contains(`/Od`))' == 'true'">Disabled</Optimization>
+      
+      <IntrinsicFunctions Condition="'$(Msc_Optimization.Contains(`i`))' == 'true'">true</IntrinsicFunctions>
+      
+      <FavorSizeOrSpeed Condition="'$(Msc_Optimization.Contains(`s`))' == 'true'">Size</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed Condition="'$(Msc_Optimization.Contains(`t`))' == 'true'">Speed</FavorSizeOrSpeed>
+      
+      <InlineFunctionExpansion Condition="'$(Msc_Optimization.Contains(`b0`))' == 'true'">Disabled</InlineFunctionExpansion>
+      <InlineFunctionExpansion Condition="'$(Msc_Optimization.Contains(`b1`))' == 'true'">OnlyExplicitInline</InlineFunctionExpansion>
+      <InlineFunctionExpansion Condition="'$(Msc_Optimization.Contains(`b2`))' == 'true'">AnySuitable</InlineFunctionExpansion>
+      
+      <OmitFramePointers Condition="'$(Msc_Optimization.Contains(`y-`))' == 'true'">false</OmitFramePointers>
+      <OmitFramePointers Condition="'$(Msc_Optimization.Contains(`y+`))' == 'true'">true</OmitFramePointers>
+      
+      
+      <RuntimeTypeInfo Condition="'$(Use_Rtti)' == 'true' or '$(Use_Rtti)' == '1'">true</RuntimeTypeInfo>
+      <RuntimeTypeInfo Condition="'$(Use_Rtti)' == 'false' or '$(Use_Rtti)' == '0'">false</RuntimeTypeInfo>
+      <AdditionalOptions>$(User_C_Flags) %(AdditionalOptions) </AdditionalOptions>
+      <RuntimeLibrary Condition="'$(UseDebugLibraries)'=='False' and '$(Use_Libcmt)' == '1'">MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(UseDebugLibraries)'=='True' and '$(Use_Libcmt)' == '1'">MultiThreadedDebug</RuntimeLibrary>
+
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);$(Converted_C_Defines)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(NOT_LEAN_AND_MEAN)' == '' and ('$(IsDriverAppToolset)'=='true')">%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN=1</PreprocessorDefinitions>
+      <CompileAs Condition="'$(USECXX_FLAG)' == '1'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    
+    <ResourceCompile>
+      <AdditionalOptions>$(RCOPTIONS) %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);$(Converted_RC_Defines)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(NOT_LEAN_AND_MEAN)' == '' and ('$(IsDriverAppToolset)'=='true')">%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN=1</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(Includes);$(User_Includes)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(Includes);$(User_Includes)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);$(Converted_C_Defines)</PreprocessorDefinitions>
+      <AdditionalOptions>%(AdditionalOptions) $(MIDL_OPTIMIZATION)</AdditionalOptions>
+    </Midl>
+
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions) $(Linker_Flags)</AdditionalOptions>
+      <AdditionalDependencies>%(AdditionalDependencies);$(ConvertedTargetLibs);$(ConvertedUMLIBS)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries Condition="'$(No_Ntdll)' == '1'">%(IgnoreSpecificDefaultLibraries);ntdll.lib</IgnoreSpecificDefaultLibraries>
+
+      <BaseAddress Condition="'$(ConfigurationType)' =='DynamicLibrary' and '$(DllBase)'!= ''">$(DllBase)</BaseAddress>
+      <BaseAddress Condition="'$(ConfigurationType)' =='Application' and '$(UmBase)'!= ''">$(UmBase)</BaseAddress>
+      <ModuleDefinitionFile Condition="'$(ConvertedDllDef)'!='' and (Exists('$(ConvertedDllDef)') or Exists('$(DllDefInput)'))">$(ConvertedDllDef)</ModuleDefinitionFile>
+      <NoEntryPoint Condition="'$(USE_MSVCRT)'!='1' and ('$(ConvertedDllEntry)'=='' or '$(NO_DllEntry)'!='') and '$(ConfigurationType)'=='DynamicLibrary'">true</NoEntryPoint>
+      <EntryPointSymbol Condition="'$(ConvertedDllEntry)' !='' and '$(ConfigurationType)'=='DynamicLibrary' and '$(Platform)'=='win32'">$(ConvertedDllEntry)@12</EntryPointSymbol>
+      <EntryPointSymbol Condition="'$(ConvertedDllEntry)' !='' and '$(ConfigurationType)'=='DynamicLibrary' and '$(Platform)'!='win32'">$(ConvertedDllEntry)</EntryPointSymbol>
+      <StackCommitSize>$(StackCommitSize)</StackCommitSize>
+      <StackReserveSize>$(StackReserveSize)</StackReserveSize>
+    </Link>
+  </ItemDefinitionGroup>
+  
+   <Target Name="CheckManagedCxxContent" Condition="'$(MANAGED_CXX)'!=''" BeforeTargets="BeforeClCompile">
+     <ItemGroup>
+      <ClCompile Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('%(ClCompile.Extension)','\.c..'))">
+        <CompileAsManaged>true</CompileAsManaged>
+        <BasicRuntimeChecks Condition="'$(UseDebugLibraries)'=='true'"></BasicRuntimeChecks>
+      </ClCompile>
+    </ItemGroup>
+  </Target>
+    
+
+  <!-- PRECOMPILED_CXX=1 - do precompiled headers for CXX instead of C files
+       Note: precompiled headers can not be used on both c and cxx files in a single directory. -->
+
+  <!-- We preprocess the precompiled headers by creating a temp .c/.cpp file which just has #include "precomp.h" to generate precomp.pch. 
+        We later use this precompiled header for rest of source files, instead of creating a -->
+  <PropertyGroup>
+    <PrecompiledIncludeName Condition="$(PRECOMPILED_INCLUDE) != ''">$([System.IO.Path]::GetFileNameWithoutExtension ($(PRECOMPILED_INCLUDE)))</PrecompiledIncludeName>
+    <PrecompiledHeaderFileName Condition="$(PRECOMPILED_INCLUDE) != ''">$([System.IO.Path]::GetFileName($(ProjectDir)\$(PRECOMPILED_INCLUDE)))</PrecompiledHeaderFileName>
+    <PrecompiledHeaderFullPath Condition="$(PRECOMPILED_INCLUDE) != ''">$([System.IO.Path]::GetFullPath($(ProjectDir)\$(PRECOMPILED_INCLUDE)))</PrecompiledHeaderFullPath>
+    <PrecompiledHeaderDirectory Condition="$(PRECOMPILED_INCLUDE) != ''">$([System.IO.Path]::GetDirectoryName($(PrecompiledHeaderFullPath)))</PrecompiledHeaderDirectory>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PrecompileLine>#include "$(PrecompiledHeaderFileName)"</PrecompileLine>
+    <PrecompFlag>$(PRECOMPILED_INCLUDE.EndsWith(".hpp", StringComparison.OrdinalIgnoreCase))</PrecompFlag>
+    <PRECOMPILED_CXX Condition="'$(PrecompFlag)' == 'true'">1</PRECOMPILED_CXX>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PrecompiledSourceName Condition="'$(PRECOMPILED_CXX)'=='1'">$(IntDir)\$(PrecompiledIncludeName)_src.cpp</PrecompiledSourceName>
+    <PrecompiledSourceName Condition="('$(PRECOMPILED_CXX)'=='' or '$(PRECOMPILED_CXX)'=='0')">$(IntDir)\$(PrecompiledIncludeName)_src.c</PrecompiledSourceName>
+  </PropertyGroup>
+  
+  <Target Name="SetPreCompiledHeader" BeforeTargets="BeforeClCompile" Condition="$(PRECOMPILED_INCLUDE) != ''">
+    <!-- The way msbuild handles relative paths from nmake is different. So we strip the file name from the relative path. 
+    Then we get the absolute path of directory containing the precompiled header.-->
+    <ItemGroup>
+      <FileToGenerate Include="$(PrecompiledSourceName)"/>
+      <LinesToWrite Include="$(PrecompileLine)"/>
+    </ItemGroup>
+
+    <WriteLinesToFile
+      File="@(FileToGenerate)"
+        Lines="@(LinesToWrite)"
+        Overwrite="true"/>
+
+    <ItemGroup>
+      <ClCompile Condition="$(PRECOMPILED_INCLUDE) != ''" Include="$(PrecompiledSourceName)">
+        <PrecompiledHeader>Create</PrecompiledHeader>
+        <PreCompiledHeaderOutputFile>$(IntDir)\$(PrecompiledIncludeName).pch</PreCompiledHeaderOutputFile>
+        <PreCompiledHeaderFile Condition="$(PRECOMPILED_INCLUDE) != ''">$(PrecompiledHeaderFileName)</PreCompiledHeaderFile>
+        <AdditionalIncludeDirectories>$(PrecompiledHeaderDirectory);%(ClCompile.AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
+      </ClCompile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ClCompile Condition="'%(ClCompile.Extension)' !='.c' and '$(PRECOMPILED_CXX)'=='1' and '%(ClCompile.Identity)' !='$(PrecompiledSourceName)'">
+        <PreCompiledHeaderOutputFile>$(IntDir)\$(PrecompiledIncludeName).pch</PreCompiledHeaderOutputFile>
+        <PreCompiledHeaderFile Condition="$(PRECOMPILED_INCLUDE) != ''">$(PrecompiledHeaderFileName)</PreCompiledHeaderFile>
+        <PrecompiledHeader>Use</PrecompiledHeader>
+        <AdditionalIncludeDirectories>$(PrecompiledHeaderDirectory);%(ClCompile.AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
+      </ClCompile>
+
+      <ClCompile Condition="'%(ClCompile.Extension)' =='.c' and ('$(PRECOMPILED_CXX)'=='' or '$(PRECOMPILED_CXX)'=='0') and '%(ClCompile.Identity)' !='$(PrecompiledSourceName)'">
+        <PreCompiledHeaderOutputFile>$(IntDir)\$(PrecompiledIncludeName).pch</PreCompiledHeaderOutputFile>
+        <PreCompiledHeaderFile Condition="$(PRECOMPILED_INCLUDE) != ''">$(PrecompiledHeaderFileName)</PreCompiledHeaderFile>
+        <PrecompiledHeader>Use</PrecompiledHeader>
+        <AdditionalIncludeDirectories>$(PrecompiledHeaderDirectory);%(ClCompile.AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
+      </ClCompile>
+    </ItemGroup>
+
+  </Target>
+  
+  <!-- This target handles run_wpp-->
+  <Target Name="Run_Wpp" Condition="'$(RUN_WPP)'!='$(INITIAL_RUN_WPP)'" BeforeTargets="BeforeClCompile"> <!-- Execute if RUN_WPP is defined in sources--> 
+    <ItemGroup>
+        <MissingRunWPPFiles Include="%(ClCompile.Identity)"  Condition="$(RUN_WPP.ToLower().Contains(%(ClCompile.Identity)))=='false' and %(ClCompile.WppEnabled)!='true'"/>
+    </ItemGroup>    
+    <PropertyGroup>
+      <!-- setting RUN_WPP=$(SOURCES) before sources if defined actually worked previously.
+           Run_WPP ALWAYS receives the final definiton of sources it appears, the below seeks to achieve the same.-->
+      <RUN_WPP>$(RUN_WPP.Replace('$(INITIAL_RUN_WPP)',''))</RUN_WPP>                
+      <MissingRunWPPFiles>@(MissingRunWPPFiles)</MissingRunWPPFiles>
+      
+      <RUN_WPP>$(MissingRunWPPFiles.Replace(';',' ')) $(RUN_WPP)</RUN_WPP>
+      <WPP_CONFIG_PATH>$(WDKContentRoot)\bin\WppConfig</WPP_CONFIG_PATH>
+      <WPP_REVISION>rev1</WPP_REVISION>
+      <WPP_ODIR>$([System.IO.Path]::GetDirectoryName($(ProjectDir)\$(IntDir)))</WPP_ODIR>  <!-- Removes trailing slash, which chokes runwpp --> <!-- TODO: UPDATE THIS, this really should be $(OBJ_PATH)\$(O) but that causes problems with solutions-->
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <RunWppCommand> $(RUN_WPP) -cfgdir:"$(WPP_CONFIG_PATH)\$(WPP_REVISION)" -odir:"$(WPP_ODIR)"</RunWppCommand>
+    </PropertyGroup>
+    <Exec Condition="$([System.String]::IsNullOrWhiteSpace($(RUN_WPP)))=='false'" Command="&quot;$(WDKContentRoot)\bin\x86\tracewpp.exe&quot; $(RunWppCommand)" />
+  </Target>
+
+
+  <!-- This target handles run_Ctrpp-->
+  <Target Name="Run_Ctrpp" Condition="'$(COUNTERS_MANIFEST)'!=''" BeforeTargets="BeforeClCompile">
+
+    <PropertyGroup>
+      <COUNTERS_FLAGS Condition="'$(COUNTERS_PREFIX)'!=''">$(COUNTERS_FLAGS) -prefix $(COUNTERS_PREFIX)</COUNTERS_FLAGS>
+      <COUNTERS_MANIFEST_OUTPUT_FILE_BASENAME Condition="'$(COUNTERS_MANIFEST_OUTPUT_FILE_BASENAME)'==''">$([System.IO.Path]::GetFileNameWithoutExtension($(COUNTERS_MANIFEST)))</COUNTERS_MANIFEST_OUTPUT_FILE_BASENAME>
+      <CTRPP_ODIR>$([System.IO.Path]::GetDirectoryName($(ProjectDir)\$(IntDir)))</CTRPP_ODIR>
+      <!-- TODO: UPDATE THIS, this really should be $(OBJ_PATH)\$(O) but that causes problems with solutions-->
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <CtrppCommand> $(COUNTERS_MANIFEST) $(COUNTERS_FLAGS) -o "$(CTRPP_ODIR)\$(COUNTERS_MANIFEST_OUTPUT_FILE_BASENAME).h"  -ch "$(CTRPP_ODIR)\$(COUNTERS_MANIFEST_OUTPUT_FILE_BASENAME)_counters.h" -rc "$(CTRPP_ODIR)\$(COUNTERS_MANIFEST_OUTPUT_FILE_BASENAME).rc"</CtrppCommand>
+    </PropertyGroup>
+    <Exec  Condition="$([System.String]::IsNullOrWhiteSpace($(CtrppCommand)))=='false'" Command="&quot;$(WDKContentRoot)\bin\x86\ctrpp.exe&quot; $(CtrppCommand)" />
+  </Target>
+  
+</Project>

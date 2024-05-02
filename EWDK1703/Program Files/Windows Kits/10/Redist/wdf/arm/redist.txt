@@ -1,0 +1,2 @@
+Redist\wdf\arm\WdfCoInstaller01011.dll
+Redist\wdf\arm\WUDFUpdate_01011.dll

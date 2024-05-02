@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Rule Name="UserModeDriver" PageTemplate="tool" Order="32" DisplayName="Driver Settings" xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <Rule.Categories>
+    <Category Name="DriverModel" DisplayName="Driver Model" />
+    <Category Name="Sensors" DisplayName="Sensors" />
+    <Category Name="NFC" DisplayName="NFC" />
+    <Category Name="UCM" DisplayName="USB Connector Manager" />
+    <Category Name="IDDCX" DisplayName="Indirect Displays" />
+  </Rule.Categories>
+  <Rule.DataSource>
+    <DataSource Persistence="ProjectFile" Label="Configuration" HasConfigurationCondition="true" />
+  </Rule.DataSource>
+  <EnumProperty Name="UMDF_VERSION_MAJOR" DisplayName="UMDF Version Major" Description="Major Version of UMDF that will be used when compiling your driver" Category="DriverModel" F1Keyword="driver.drivermodelsettings.properties">
+    <EnumValue Name="1">
+    </EnumValue>
+    <EnumValue Name="2">
+    </EnumValue>
+  </EnumProperty>
+  <EnumProperty Name="UMDF_VERSION_MINOR" DisplayName="UMDF Version Minor" Description="Minor Version of UMDF that will be used when compiling your driver" Category="DriverModel" F1Keyword="driver.drivermodelsettings.properties">
+    <EnumValue Name="21"/>
+    <EnumValue Name="19"/>
+    <EnumValue Name="17"/>
+    <EnumValue Name="15"/>
+    <EnumValue Name="11"/>
+    <EnumValue Name="9"/>
+    <EnumValue Name="0"/>
+  </EnumProperty>
+  <EnumProperty Name="ALLOW_DATE_TIME" DisplayName="Allow Date, Time, and Timestamp" Description="Defines standard C/CPP macros __DATE__, __TIME__, __TIMESTAMP__" Category="DriverModel" F1Keyword="driver.drivermodelsettings.properties">
+    <EnumValue Name="1" DisplayName="Yes">
+    </EnumValue>
+    <EnumValue Name="0" DisplayName="No">
+    </EnumValue>
+  </EnumProperty>
+  <BoolProperty Name="OverrideTargetVersionDefines" DisplayName="Override Target Configuration Preprocessor Definitions" Description="Overrides the default values for preprocessing symbols:_WIN32_WINNT, WINVER, WINNT and NTDDI_VERSION for your source file. Note the default values are controlled by the current target configuration." Category="DriverModel" F1Keyword="driver.drivermodelsettings.properties" />
+  <!-- Sensors class extension -->
+  <BoolProperty Name="SensorDriver" DisplayName="Link to Sensor Class Extension" Description="Indicates whether the driver uses Sensor Class Extensions or not" Category="Sensors" />
+  <EnumProperty Name="SENSOR_VERSION_MAJOR" DisplayName="Sensor Version Major" Description="Major Version of Sensors Class Extension that will be used when compiling your driver" Category="Sensors" >
+    <EnumValue Name="1" />
+  </EnumProperty>
+  <EnumProperty Name="SENSOR_VERSION_MINOR" DisplayName="Sensor Version Minor" Description="Minor Version of Sensors Class Extension that will be used when compiling your driver" Category="Sensors" >
+    <EnumValue Name="1" />
+  </EnumProperty>
+  <!-- NFC class extension -->
+  <BoolProperty Name="NfcDriver" DisplayName="Link to NFC Class Extension" Description="Indicates whether the driver uses NFC Class Extensions or not" Category="NFC" />
+  <EnumProperty Name="NFC_VERSION_MAJOR" DisplayName="NFC Version Major" Description="Major Version of NFC Class Extension that will be used when compiling your driver" Category="NFC" >
+    <EnumValue Name="1" />
+  </EnumProperty>
+  <EnumProperty Name="NFC_VERSION_MINOR" DisplayName="NFC Version Minor" Description="Minor Version of NFC Class Extension that will be used when compiling your driver" Category="NFC" >
+    <EnumValue Name="0" />
+  </EnumProperty>
+  <!-- UCM class extension -->
+  <BoolProperty Name="UcmDriver" DisplayName="Link to the USB Connector Manager Class Extension" Description="Indicates whether the driver uses the USB Connector Manager Class Extension" Category="UCM" />
+  <EnumProperty Name="UCM_VERSION_MAJOR" DisplayName="UCM Major Version" Description="Major version of USB Connector Manager Class Extension that will be used when compiling your driver" Category="UCM" >
+    <EnumValue Name="1" />
+  </EnumProperty>
+  <EnumProperty Name="UCM_VERSION_MINOR" DisplayName="UCM Minor Version" Description="Minor version of USB Connector Manager Class Extension that will be used when compiling your driver" Category="UCM" >
+    <EnumValue Name="0" />
+  </EnumProperty>
+  <!-- Indirect Displays class extension -->
+  <BoolProperty Name="IndirectDisplayDriver" DisplayName="Link to the Indirect Displays Class Extension" Description="Indicates whether the driver uses the Indirect Displays Class Extension (IDDCX)" Category="IDDCX" />
+  <EnumProperty Name="IDDCX_VERSION_MAJOR" DisplayName="Indirect Displays Major Version" Description="Major version of Indirect Displays Class Extension that will be used when compiling your driver" Category="IDDCX" >
+    <EnumValue Name="1" />
+  </EnumProperty>
+  <EnumProperty Name="IDDCX_VERSION_MINOR" DisplayName="Indirect Displays Minor Version" Description="Minor version of Indirect Displays Class Extension that will be used when compiling your driver" Category="IDDCX" >
+    <EnumValue Name="0" />
+  </EnumProperty>
+</Rule>

@@ -1,0 +1,16 @@
+MarkDevicePower
+MarkingInterlockedQueuedIrps
+MarkIrpPending
+MarkIrpPending2
+MarkPower
+MarkPowerDown
+MarkQueryRelations
+MarkStartDevice
+PendedCompletedRequest
+PendedCompletedRequest2
+PendedCompletedRequest3
+PendedCompletedRequestEx
+StartDeviceWait
+StartDeviceWait2
+StartDeviceWait3
+StartDeviceWait4

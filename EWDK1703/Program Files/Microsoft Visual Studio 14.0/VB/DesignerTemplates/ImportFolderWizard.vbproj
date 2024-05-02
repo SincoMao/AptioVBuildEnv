@@ -1,0 +1,28 @@
+﻿<VisualStudioProject AllowExistingFolder = "true">
+    <VisualBasic>
+        <Build>
+            <Settings 
+                OutputType = "WinExe"
+            >
+                <Config
+                    Name = "Debug"
+                    GenerateSymbolInfo = "true"
+                    DefineDebug = "true"
+                    DefineTrace = "true"
+                    OutputPath = ".\bin\"
+                />
+                <Config
+                    Name = "Release"
+                    GenerateSymbolInfo = "false"
+                    DefineDebug = "false"
+                    DefineTrace = "false"
+                    OutputPath = ".\bin\"
+                />
+            </Settings>
+        </Build>
+        <Files>
+            <Include>
+            </Include>
+        </Files>
+    </VisualBasic>
+</VisualStudioProject>

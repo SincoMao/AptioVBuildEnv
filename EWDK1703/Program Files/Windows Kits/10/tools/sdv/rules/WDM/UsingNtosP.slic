@@ -1,0 +1,102 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    UsingNtosP
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    $fname called therefore this is a NTOSP driver.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+#include "slic_base.h"
+
+
+[PoDisableSleepStates,
+PoReenableSleepStates,
+PoUserShutdownInitiated,
+PoUserShutdownCancelled,
+PoRequestShutdownEvent,
+PoLatencySensitivityHint,
+KeIsAttachedProcess,
+KeAddSystemServiceTable,
+KeRemoveSystemServiceTable,
+KeUserModeCallback,
+ExTryQueueWorkItem,
+ExRegisterExtension,
+ExUnregisterExtension,
+FsRtlMdlRead,
+FsRtlMdlReadComplete,
+KiEditIopmDpc,
+Ke386IoSetAccessProcess,
+Ke386SetLdtProcess,
+Ke386SetDescriptorProcess,
+Ke386GetGdtEntryThread,
+Ke386SetIoAccessMap,
+Ke386QueryIoAccessMap,
+Ki386GetSelectorParameters,
+Ki386DispatchOpcodeV86,
+Ki386DispatchOpcode,
+Ke386SetVdmInterruptHandler,
+IoAllocateMiniCompletionPacket,
+IoInitializeMiniCompletionPacket,
+IoFreeMiniCompletionPacket,
+MmCreateSection,
+MmAdjustWorkingSetSize,
+MmMapViewOfSection,
+MmUnmapViewOfSection,
+MmMapMemoryDumpMdl,
+MmSetBankedSection,
+MmCopyVirtualMemory,
+ObIsDosDeviceLocallyMapped,
+PsSetProcessPriorityByClass,
+PsGetCurrentProcessSessionId,
+PsGetCurrentThreadStackLimit,
+PsGetCurrentThreadStackBase,
+PsGetCurrentThreadPreviousMode,
+PsGetJobLock,
+PsGetJobSessionId,
+PsGetJobUIRestrictionsClass,
+PsIsSystemProcess,
+PsIsThreadImpersonating,
+PsAcquireProcessExitSynchronization,
+PsReleaseProcessExitSynchronization,
+PsReferenceProcessFilePointer, 
+PsSetProcessPriorityClass,
+PsSetProcessWin32Process,
+PsSetProcessWindowStation,
+PsSetThreadHardErrorsAreDisabled,
+PsSetThreadWin32Thread,
+PsGetProcessSecurityPort,
+PsSetProcessSecurityPort,
+PsSuspendProcess, 
+PsResumeProcess,
+PsTerminateProcess,
+PsSuspendThread,
+PsResumeThread,
+PsSetLdtEntries,
+PsSetProcessLdtInfo,
+SeTokenImpersonationLevel,
+SeCreateAccessState,
+SeCreateAccessStateEx,
+SeDeleteAccessState,
+SeAuditingWithTokenForSubcategory
+].entry
+{
+   abort "$fname called therefore this is a NTOSP driver.";    
+}

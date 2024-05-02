@@ -1,0 +1,46 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoReleaseRemoveLockAndWaitOutsideRemoveDevice
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    IoReleaseRemoveLockAndWait should not be called outside IRP_MJ_PNP with IRP_MN_REMOVE_DEVICE for a PNP driver.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507271
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {no,yes}  IoReleaseRemoveLockAndWait_called = no;
+}with guard(sdv_main,sdv_irp)
+
+IoReleaseRemoveLockAndWait.entry
+{
+    IoReleaseRemoveLockAndWait_called = yes;
+}
+
+[SDV_RunDispatchFunction].exit[guard $2]
+{
+        if (IoReleaseRemoveLockAndWait_called == yes) 
+        {
+            abort "IoReleaseRemoveLockAndWait should not be called outside IRP_MJ_PNP with IRP_MN_REMOVE_DEVICE for a PNP driver.";
+        }
+}

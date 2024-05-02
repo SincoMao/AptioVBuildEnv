@@ -1,0 +1,38 @@
+[$RootKey$\Packages\{7eab3c71-59ff-4571-a5f3-643f255fc2e6}]
+@="ElementHost Designer Package"
+"InprocServer32"="$WinDir$\system32\MSCOREE.DLL"
+"Class"="WindowsFormsIntegration.Package.WindowsFormsIntegrationDesignPackage"
+"Assembly"="WindowsFormsIntegration.Package, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"ID"=dword:00000064
+"MinEdition"="Standard"
+"ProductVersion"="1.0"
+"ProductName"="WindowsFormsIntegrationDesignPackage"
+"CompanyName"="Microsoft Corporation"
+[$RootKey$\Packages\{7eab3c71-59ff-4571-a5f3-643f255fc2e6}\SatelliteDll]
+"Path"="$ShellFolder$\Common7\IDE\"
+"DllName"="WindowsFormsIntegration.PackageUI.dll"
+[$RootKey$\Packages\{7eab3c71-59ff-4571-a5f3-643f255fc2e6}\Toolbox]
+"Default Items"=dword:00000001
+"Formats"=".NET Toolbox Item,CF_CACHEKEY,CF_NDP_TYPENAME,CF_NESTEDTOOLBOXITEM,CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_CONTENTS,CF_TOOLBOXITEMCONTAINER_HASH"
+[$RootKey$\Packages\{7eab3c71-59ff-4571-a5f3-643f255fc2e6}\Toolbox\DefaultContent\FB62B11E837F8DE6BE67AFE5121CA67]
+@="#1110"
+"UniqueID"="{7eab3c71-59ff-4571-a5f3-643f255fc2e6}-#1110"
+[$RootKey$\Packages\{7eab3c71-59ff-4571-a5f3-643f255fc2e6}\Toolbox\DefaultContent\FB62B11E837F8DE6BE67AFE5121CA67\1F4D9D69F67191243EE1EE091949ABE]
+@="ElementHost"
+"UniqueID"="System.Windows.Forms.Integration.ElementHost, WindowsFormsIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"Formats"="CF_TOOLBOXITEMCONTAINER,CF_TOOLBOXITEMCONTAINER_HASH,CF_TOOLBOXITEMCONTAINER_CONTENTS"
+"HelpKeyword"="System.Windows.Forms.Integration.ElementHost"
+"BitmapResourceID"="#2001"
+"TransparentColor"=dword:00FF00FF
+"AssemblyName"="WindowsFormsIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"TypeName"="System.Windows.Forms.Integration.ElementHost"
+"TFMs"=".NETFramework,Version=v3.0;.NETFramework,Version=v3.5;.NETFramework,Version=v4.0"
+"TargetedItemProvider"="{7EAB3C71-59FF-4571-A5F3-643F255FC2E6}"
+"UseProjectTargetFrameworkVersionInTooltip"=dword:00000001
+[$RootKey$\Packages\{7EAB3C71-59FF-4571-A5F3-643F255FC2E6}\Toolbox\DefaultContent\FB62B11E837F8DE6BE67AFE5121CA67\1F4D9D69F67191243EE1EE091949ABE\ItemContent]
+".NET Toolbox Item"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,42,4f,62,73,6f,6c,65,74,65,3a,20,75,73,65,20,54,6f,6f,6c,62,6f,78,53,65,72,76,69,63,65,20,74,6f,20,72,65,74,72,69,65,76,65,20,74,6f,6f,6c,62,6f,78,20,69,74,65,6d,20,69,6e,66,6f,72,6d,61,74,69,6f,6e,2e,0b
+"CF_NDP_TYPENAME"=hex:ff,fe,53,00,79,00,73,00,74,00,65,00,6d,00,2e,00,57,00,69,00,6e,00,64,00,6f,00,77,00,73,00,2e,00,46,00,6f,00,72,00,6d,00,73,00,2e,00,49,00,6e,00,74,00,65,00,67,00,72,00,61,00,74,00,69,00,6f,00,6e,00,2e,00,45,00,6c,00,65,00,6d,00,65,00,6e,00,74,00,48,00,6f,00,73,00,74,00,2c,00,20,00,57,00,69,00,6e,00,64,00,6f,00,77,00,73,00,46,00,6f,00,72,00,6d,00,73,00,49,00,6e,00,74,00,65,00,67,00,72,00,61,00,74,00,69,00,6f,00,6e,00,2c,00,20,00,56,00,65,00,72,00,73,00,69,00,6f,00,6e,00,3d,00,33,00,2e,00,30,00,2e,00,30,00,2e,00,30,00,2c,00,20,00,43,00,75,00,6c,00,74,00,75,00,72,00,65,00,3d,00,6e,00,65,00,75,00,74,00,72,00,61,00,6c,00,2c,00,20,00,50,00,75,00,62,00,6c,00,69,00,63,00,4b,00,65,00,79,00,54,00,6f,00,6b,00,65,00,6e,00,3d,00,33,00,31,00,62,00,66,00,33,00,38,00,35,00,36,00,61,00,64,00,33,00,36,00,34,00,65,00,33,00,35,00,00,00
+"CF_CACHEKEY"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,24,62,65,66,62,32,37,39,31,2d,37,30,66,30,2d,34,36,64,34,2d,62,37,39,62,2d,35,30,62,36,38,31,39,35,62,31,30,39,0b
+[$RootKey$\Services\{fc2f4f8b-0566-4e16-bc81-2246b7b4a431}]
+@="{7EAB3C71-59FF-4571-A5F3-643F255FC2E6}"
+"Name"="PreviewService"

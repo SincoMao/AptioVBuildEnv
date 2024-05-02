@@ -1,0 +1,11 @@
+CancelSpinLock
+QueuedSpinLock
+QueuedSpinLockRelease
+SpinLock
+SpinLockDpc
+SpinLockRelease
+SpinLockSafe
+StorPortMSILock
+StorPortSpinLock
+StorPortSpinLock3
+StorPortSpinLock4

@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSourceSchema" targetNamespace="urn:schemas-microsoft-com:xml-msdatasource" elementFormDefault="qualified" xmlns="urn:schemas-microsoft-com:xml-msdatasource" xmlns:mstns="urn:schemas-microsoft-com:xml-msdatasource" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="DataSource">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Connections" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Connection" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence />
+                                    <xs:attribute name="Name" type="xs:string" use="required" />
+                                    <xs:attribute name="AppSettingsObjectName" type="xs:string" />
+                                    <xs:attribute name="AppSettingsPropertyName" type="xs:string" />
+                                    <xs:attribute name="ConnectionStringObject" type="xs:string" />
+                                    <xs:attribute name="IsAppSettingsProperty" type="xs:boolean" />
+                                    <xs:attribute name="Modifier" type="xs:string" />
+                                    <xs:attribute name="PropertyReference" type="xs:string" />
+                                    <xs:attribute name="Provider" type="xs:string" />
+                                    <xs:attribute name="ParameterPrefix" type="xs:string" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Tables" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="TableAdapter" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="MainSource" maxOccurs="1">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element ref="DbSource" maxOccurs="1" minOccurs="1">
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="Mappings" maxOccurs="1" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Mapping" maxOccurs="unbounded" minOccurs="0">
+                                                        <xs:complexType>
+                                                            <xs:sequence />
+                                                            <xs:attribute name="SourceColumn" type="xs:string" />
+                                                            <xs:attribute name="DataSetColumn" type="xs:string" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="Sources" maxOccurs="1" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element ref="DbSource" maxOccurs="unbounded" minOccurs="0">
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="Name" type="xs:string" use="required" />
+                                    <xs:attribute name="BaseClass" type="xs:string" />
+                                    <xs:attribute name="DataAccessorName" type="xs:string" />
+                                    <xs:attribute name="GeneratorDataComponentClassName" type="xs:string" />
+                                    <xs:attribute name="GeneratorDataComponentInterfaceName" type="xs:string" />
+                                    <xs:attribute name="UserDataComponentName" type="xs:string" />
+                                    <xs:attribute name="Modifier" type="xs:string" />
+                                    <xs:attribute name="Provider" type="xs:string" />
+                                    <xs:attribute name="DataAccessorModifier" type="xs:string" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Sources" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="DbSource">
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:attribute name="DefaultConnectionIndex" type="xs:integer" />
+            <xs:attribute name="Modifier" type="xs:string" />
+            <xs:attribute name="FunctionsComponentName" type="xs:string" />
+            <xs:attribute name="UserFunctionsComponentName" type="xs:string" />
+            <xs:attribute name="GeneratorFunctionsComponentClassName" type="xs:string" />
+            <xs:attribute name="SchemaSerializationMode" type="SchemaSerializationMode" />
+        </xs:complexType>
+        <xs:key name="ConnectionNameKey">
+            <xs:selector xpath=".//mstns:Connection" />
+            <xs:field xpath="@Name" />
+        </xs:key>
+        <xs:key name="TableAdapterNameKey">
+            <xs:selector xpath=".//mstns:TableAdapter" />
+            <xs:field xpath="@Name" />
+        </xs:key>
+        <xs:keyref name="ConnectionRefKeyRef" refer="ConnectionNameKey">
+            <xs:selector xpath=".//mstns:DbSource" />
+            <xs:field xpath="@ConnectionRef" />
+        </xs:keyref>
+    </xs:element>
+    <xs:element name="DbSource" type="DbSource">
+    </xs:element>
+    <xs:complexType name="SpecifiedCommand">
+        <xs:sequence maxOccurs="1" minOccurs="1">
+            <xs:element name="DbCommand" maxOccurs="1" minOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="CommandText" type="xs:string" maxOccurs="1" minOccurs="1">
+                        </xs:element>
+                        <xs:element name="Parameters" maxOccurs="1" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="Parameter" maxOccurs="unbounded" minOccurs="0">
+                                        <xs:complexType>
+                                            <xs:sequence />
+                                            <xs:attribute name="AllowDbNull" type="xs:boolean" />
+                                            <xs:attribute name="ParameterName" type="xs:string" />
+                                            <xs:attribute name="ColumnName" type="xs:string" />
+                                            <xs:attribute name="AutogeneratedName" type="xs:string" />
+                                            <xs:attribute name="DataSourceName" type="xs:string" />
+                                            <xs:attribute name="DbType" type="xs:string" />
+                                            <xs:attribute name="ProviderType" type="xs:string" />
+                                            <xs:attribute name="Direction" type="xs:string" />
+                                            <xs:attribute name="Precision" type="xs:unsignedByte" />
+                                            <xs:attribute name="Scale" type="xs:unsignedByte" />
+                                            <xs:attribute name="Size" type="xs:integer" />
+                                            <xs:attribute name="SourceColumn" type="xs:string" />
+                                            <xs:attribute name="SourceColumnNullMapping" type="xs:boolean" />
+                                            <xs:attribute name="UseOptimisticConcurrency" type="xs:boolean" />
+                                            <xs:attribute name="SourceVersion" type="xs:string" />
+                                            <xs:attribute name="DataTypeServer" type="xs:string" />
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                            <xs:unique name="ParameterNameKey">
+                                <xs:selector xpath="Parameter" />
+                                <xs:field xpath="@ParameterName" />
+                            </xs:unique>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="CommandType" type="xs:string" />
+                    <xs:attribute name="ModifiedByUser" type="xs:boolean" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Source">
+        <xs:attribute name="Name" type="xs:string" />
+        <xs:attribute name="Modifier" type="xs:string" />
+        <xs:attribute name="UserSourceName" type="xs:string" />
+        <xs:attribute name="GeneratorSourceName" type="xs:string" />
+        <xs:attribute name="GeneratorGetMethodName" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="DbSource">
+        <xs:complexContent>
+            <xs:extension base="Source">
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="DeleteCommand" type="SpecifiedCommand" maxOccurs="1" />
+                    <xs:element name="InsertCommand" type="SpecifiedCommand" maxOccurs="1" />
+                    <xs:element name="SelectCommand" type="SpecifiedCommand" maxOccurs="1" />
+                    <xs:element name="UpdateCommand" type="SpecifiedCommand" maxOccurs="1" />
+                </xs:choice>
+                <xs:attribute name="DbObjectName" type="xs:string" />
+                <xs:attribute name="DbObjectType" type="xs:string" />
+                <xs:attribute name="ConnectionRef" type="xs:string" />
+                <xs:attribute name="ScalarCallRetval" type="xs:string" />
+                <xs:attribute name="UseOptimisticConcurrency" type="xs:boolean" />
+                <xs:attribute name="MethodsParameterType" type="xs:string" />
+                <xs:attribute name="FillMethodModifier" type="xs:string" />
+                <xs:attribute name="GetMethodModifier" type="xs:string" />
+                <xs:attribute name="FillMethodName" type="xs:string" />
+                <xs:attribute name="GetMethodName" type="xs:string" />
+                <xs:attribute name="UserGetMethodName" type="xs:string" />
+                <xs:attribute name="GenerateMethods" type="GenerateMethodTypes" />
+                <xs:attribute name="QueryType" type="QueryType" />
+                <xs:attribute name="GenerateShortCommands" type="xs:boolean" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="QueryType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Rowset" />
+            <xs:enumeration value="Scalar" />
+            <xs:enumeration value="NoData" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="GenerateMethodTypes">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Fill" />
+            <xs:enumeration value="Get" />
+            <xs:enumeration value="Both" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SchemaSerializationMode">
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="IncludeSchema" />
+        <xs:enumeration value="ExcludeSchema" />
+      </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

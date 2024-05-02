@@ -1,0 +1,39 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    Pre_MiniportCheckForHang_Return
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This property is satisfied if the MiniportCheckForHang returns TRUE.
+
+    Related Rule:
+    MiniportCheckForHang_Return.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+
+#include "slic_base.h"
+
+sdv_MINIPORT_CHECK_FOR_HANG.exit
+{
+    if ($return == TRUE) {
+        abort "This property is satisfied as the MiniportCheckForHang returns TRUE.";
+    }
+}

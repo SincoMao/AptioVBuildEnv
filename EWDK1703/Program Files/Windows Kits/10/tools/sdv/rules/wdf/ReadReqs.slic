@@ -1,0 +1,55 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    ReadReqs
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This Rule verifies that Read requests are not passed to 
+    inappropriate KMDF request send DDIs.
+    
+    Rule diagnostics:
+    All requests presented to the driver in the WDF_IO_QUEUE_IO_READ
+    callback are guaranteed to be Read requests. Hence these cannot be sent using
+    DDIs that are specific to sending read, write, ioctl, etc requests. 
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507122
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state
+{
+}
+watch fun_WDF_IO_QUEUE_IO_READ.entry.$2;
+
+select one {
+  case fun_WDF_IO_QUEUE_IO_READ:
+        		
+  [sdv_WdfUsbTargetPipeWriteSynchronously,
+  sdv_WdfIoTargetSendIoctlSynchronously,
+  sdv_WdfIoTargetSendInternalIoctlSynchronously,
+  sdv_WdfIoTargetSendInternalIoctlOthersSynchronously,
+  sdv_WdfIoTargetSendWriteSynchronously].entry[guard $2]
+  {
+      abort "Cannot call $fname with an Read request object.";
+  }
+} 

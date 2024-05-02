@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SchemaCatalog xmlns="http://schemas.microsoft.com/xsd/catalog">
+  <Schema href="%InstallRoot%/Common7/IDE/Policy/Schemas/TDLSchema.xsd"              targetNamespace="http://www.microsoft.com/schema/EnterpriseTemplates/TDLSchema" />
+  <Schema href="%InstallRoot%/Common7/IDE/Policy/Schemas/Policy.xsd"                 targetNamespace="http://schemas.microsoft.com/VSPolicy/PDLSchema"               />
+  <Schema href="%InstallRoot%/xml/schemas/%LCID%/snippetformat.xsd"                  targetNamespace="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet"    />
+  <Schema href="%InstallRoot%/xml/schemas/%LCID%/vstemplate.xsd"                     targetNamespace="http://schemas.microsoft.com/developer/vstemplate/2005"        />
+  <Schema href="%InstallRoot%/xml/schemas/%LCID%/Microsoft.Build.xsd"                targetNamespace="http://schemas.microsoft.com/developer/msbuild/2003"           />
+  <Schema href="%InstallRoot%/xml/schemas/%LCID%/vscontent.xsd"                      targetNamespace="http://schemas.microsoft.com/developer/vscontent/2005"         />
+  <Schema href="%InstallRoot%/xml/schemas/%LCID%/customUI.xsd"                       targetNamespace="http://schemas.microsoft.com/office/2006/01/customui"          />
+  <Schema href="%InstallRoot%/common7/packages/SDM/Schema/SystemDefinitionModel.xsd" targetNamespace="http://schemas.microsoft.com/SystemDefinitionModel/2005/1"     />
+
+  <Association extension="config" schema="%InstallRoot%/xml/schemas/dotNetConfig20.xsd" condition="starts-with($TargetFrameworkMoniker, '.NETFramework,Version=v2.')" />
+  <Association extension="config" schema="%InstallRoot%/xml/schemas/dotNetConfig30.xsd" condition="starts-with($TargetFrameworkMoniker, '.NETFramework,Version=v3.0')" />
+  <Association extension="config" schema="%InstallRoot%/xml/schemas/dotNetConfig35.xsd" condition="starts-with($TargetFrameworkMoniker, '.NETFramework,Version=v3.5')" />
+  <Association extension="config" schema="%InstallRoot%/xml/schemas/dotNetConfig40.xsd" condition="starts-with($TargetFrameworkMoniker, '.NETFramework,Version=v4.0')" />
+  <Association extension="config" schema="%InstallRoot%/xml/schemas/dotNetConfig45.xsd" condition="$TargetFrameworkMoniker = '.NETFramework,Version=v4.5'" />
+  <Association extension="config" schema="%InstallRoot%/xml/schemas/%LCID%/dotNetConfig.xsd" condition="starts-with($TargetFrameworkMoniker, '.NETFramework,Version=v4.5.') or starts-with($TargetFrameworkMoniker, '.NETFramework,Version=v4.6') or $TargetFrameworkMoniker = ''" />
+</SchemaCatalog>

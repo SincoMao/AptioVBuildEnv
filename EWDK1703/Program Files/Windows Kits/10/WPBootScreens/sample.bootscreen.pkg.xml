@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) Microsoft Corporation.  All rights reserved.
+-->
+<Package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  Owner="OEMName"
+  OwnerType="OEM"
+  ReleaseType="Production"
+  Component="BootScreen"
+  SubComponent="SubName"
+  Platform="PlaformName"
+  xmlns="urn:Microsoft.WindowsPhone/PackageSchema.v8.00">
+  
+  <Components>
+      <OSComponent>
+          <Files Resolution="*">
+              <File Source="wp$(RESID)bootscreen.bmp"/>
+          </Files>
+      </OSComponent>
+  </Components>
+
+</Package>

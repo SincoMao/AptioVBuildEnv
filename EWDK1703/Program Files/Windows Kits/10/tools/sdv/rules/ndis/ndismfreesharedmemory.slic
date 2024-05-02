@@ -1,0 +1,50 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NdisMFreeSharedMemory
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+
+    NdisMFreeSharedMemory cannot be called from a MiniportShutdownEx function. From MSDN http://msdn.microsoft.com/en-us/library/windows/hardware/ff563589(v=vs.85).aspx
+
+    NdisMFreeSharedMemory frees memory that was previously allocated by NdisMAllocateSharedMemory or  NdisMAllocateSharedMemoryAsyncEx by the driver of a DMA NIC.
+
+    If it has already made a successful call to NdisMAllocateSharedMemory or  NdisMAllocateSharedMemoryAsyncEx, the miniport driver of a DMA device calls NdisMFreeSharedMemory if any of the following occurs:
+
+    1. Its MiniportInitializeEx function is unable to initialize the NIC, so this function must release all existing claims on hardware resources for that NIC before it returns control.
+    2. The NIC for which the miniport driver allocated the memory is being removed.
+    3. The driver is being unloaded, whether because the system is shutting down or because the user reconfigured the network components used in the machine.
+
+    A miniport driver cannot call NdisMFreeSharedMemory to free a subrange within an allocated shared memory range. The parameters passed to NdisMFreeSharedMemory must match exactly those that 
+    were passed to NdisMAllocateSharedMemory or NdisMAllocateSharedMemoryAsyncEx.
+
+    NdisMFreeSharedMemory cannot be called from a MiniportShutdownEx function.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507193
+
+--*/
+
+
+
+#include "slic_base.h"
+
+
+NdisMFreeSharedMemory.entry
+{
+  abort "$fname cannot be called from miniport shutdown";
+}

@@ -1,0 +1,103 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SyncReqSend
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that all synchronous request sends are done using synchronous specific DDIs that
+    have a non-zero timeout.
+
+    If the driver calls WDFxxxSendXXXSynchronously without setting a valid timeout,
+    the thread can be stalled if hardware does not respond promptly. Depending on the dispatch level at which 
+    the thread is running, this can cause various other issues for the OS.
+    
+    Rule diagnostics:
+    The timeout value in the request options must be non-zero and the timeout flag must be set.
+    If the driver fails to satisfy either of the above conditions, this rule reports a defect.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507141
+
+--*/
+
+
+
+#include "slic_base.h"
+
+
+
+state{
+}
+
+
+
+[
+ sdv_WdfUsbTargetDeviceSendUrbSynchronously,
+ sdv_WdfUsbTargetPipeWriteSynchronously,
+ sdv_WdfUsbTargetPipeReadSynchronously,
+ sdv_WdfUsbTargetPipeSendUrbSynchronously,
+ sdv_WdfUsbTargetDeviceSendControlTransferSynchronously].entry
+ {
+	if ($3==NULL )
+	{
+	    abort "Warning: $fname used to send a request synchronously without setting a timeout.";
+	}
+	else if ($3->Timeout==0)
+	{
+            abort "Warning: $fname used to send a request synchronously with zero timeout.";
+	}
+	else if ($3->Flags==0 || $3->Flags==2 ||$3->Flags==4 ||	$3->Flags==6) 			
+	{
+	    abort "Warning: $fname used to send a request synchronously without setting a timeout flag.";
+	}
+ }	
+		 
+[sdv_WdfIoTargetSendWriteSynchronously,
+ sdv_WdfIoTargetSendReadSynchronously].entry
+ {
+	if ($5==NULL )
+	{
+		abort "Warning: $fname used to send a request synchronously without setting a timeout.";
+	}
+	else if ($5->Timeout==0)
+	{
+		abort "Warning: $fname used to send a request synchronously with zero timeout set.";
+	}
+	else if ($5->Flags==0 || $5->Flags==2 || $5->Flags==4 || $5->Flags==6) 			
+	{
+		abort "Warning: $fname used to send a request synchronously without a timeout flag set.";
+	}
+ }
+
+[sdv_WdfIoTargetSendIoctlSynchronously
+ ].entry
+ {
+	if ($6==NULL )
+	{
+		abort "Warning: $fname used to send a request synchronously without setting a timeout.";
+	}
+	else if ($6->Timeout==0)
+	{
+		abort "Warning: $fname used to send a request synchronously with zero timeout";
+	}
+        else if (!($6->Flags&1)) 			
+	{
+		abort "Warning: $fname used to send a request synchronously without setting a timeout flag.";
+	}
+ }
+
+ 

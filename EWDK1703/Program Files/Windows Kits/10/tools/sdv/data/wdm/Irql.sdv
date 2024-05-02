@@ -1,0 +1,9 @@
+ForwardedAtBadIrql
+ForwardedAtBadIrqlAllocate
+ForwardedAtBadIrqlFsdAsync
+ForwardedAtBadIrqlFsdSync
+IrqlExFree1
+IrqlExFree2
+IrqlExFree3
+IrqlKeSetEvent
+IrqlReturn

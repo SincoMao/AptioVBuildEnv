@@ -1,0 +1,165 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    LowerDriverReturn
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that once a driver calls lower driver, it should
+    capture a return status from that call and return this status 
+    and no other from	the dispatch routine.  
+
+    Exceptions to the rule are drivers that call IoMarkIrpPending.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+#include "slic_base.h"
+
+state 
+{
+    int irpstatus = 0;
+    enum{false,true} lowerDriverFailed = false;
+    enum{no,yes,pending} return_state = no;
+    enum {init,check} irp_status=init;
+    enum {not_blocked,blocked} thread_status=not_blocked;
+    enum {on,off} irp_copy_next=off;
+    
+} with guard(sdv_main,sdv_irp) 
+
+fun_IRP_MJ_PNP.entry[guard $2]
+{
+    if ($2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP && ($2->STACKL->MinorFunction==IRP_MN_REMOVE_DEVICE||$2->STACKL->MinorFunction==IRP_MN_SURPRISE_REMOVAL))
+    {
+        halt;
+    } 
+}
+[KeWaitForSingleObject].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+    else
+    {
+        thread_status=blocked;
+    }
+}
+
+[IoSetDeviceInterfaceState,IoWMIRegistrationControl].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+}
+
+
+IoSetCompletionRoutineEx.entry[guard $2]
+{
+    irp_status=check;
+}
+
+IoSetCompletionRoutine.entry[guard $1]
+{
+    irp_status=check;
+}
+
+
+IoMarkIrpPending.entry[guard $1]
+{
+    halt;
+}
+
+
+IoCopyCurrentIrpStackLocationToNext.entry[guard $1]
+{
+    irp_copy_next=on;
+}
+
+
+IoSkipCurrentIrpStackLocation.entry[guard $1]
+{
+    halt;
+}
+
+[PoCallDriver,IoCallDriver].entry[guard $2]
+{
+    thread_status=not_blocked;
+}
+
+
+[PoCallDriver,IoCallDriver].exit[guard $2]
+{
+    if(irp_status==check)
+    {   
+        if((!NT_SUCCESS($2->IoStatus.Status))&&(!$2->PendingReturned))
+        {
+            return_state = yes; 
+            lowerDriverFailed = true; 
+        } 
+        else if($2->PendingReturned)
+        {
+            return_state = pending; 
+        }
+        else
+        {
+            halt;
+        }
+        
+    }
+    else
+    {
+        if(irp_copy_next==on)
+        {
+            halt;
+        }
+        else
+        {
+            return_state = yes;
+            
+        }
+    }
+    
+}
+
+sdv_stub_dispatch_end.entry[guard $2]
+{
+    if (return_state == yes) 
+    {
+        if ($2->IoStatus.Status==STATUS_PENDING)
+        {
+            abort "The dispatch routine return when STATUS_PENDING is set for IRP->IoStatus.Status.";
+        }
+        else if (($2->IoStatus.Status==STATUS_SUCCESS)&&(lowerDriverFailed==true))  
+        {
+            abort "The dispatch routine's return should not return STATUS_SUCCESS if the lower driver fails the IRP.";
+        }
+        else if ($1!=$2->IoStatus.Status&&(thread_status==blocked))  
+        {
+            abort "The dispatch routine's return value does not match that of the IRP->IoStatus.Status.";
+        }
+        else
+        {
+            halt;
+        }
+    }
+    
+    
+    
+}
+

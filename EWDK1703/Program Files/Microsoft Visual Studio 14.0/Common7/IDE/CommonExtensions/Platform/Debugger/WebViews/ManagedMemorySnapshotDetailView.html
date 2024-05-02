@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html" />
+    <link id="grid.css" rel="stylesheet" href="grid.css" type="text/css" data-plugin-theme="true" />
+    <link id="ManagedMemorySnapshotDetailView.css" rel="stylesheet" href="ManagedMemorySnapshotDetailView.css" type="text/css" data-plugin-theme="true" />
+    <script type="text/javascript" src="plugin.js"></script>
+    <script type="text/javascript" src="ManagedMemoryHelpers.js"></script>
+    <script type="text/javascript" src="BptDiagnosticCommon\JSTreeDynamicGridControl.js"></script>
+    <script type="text/javascript" src="ManagedHeapViewer.js"></script>
+    <!--[if IE 9]>    
+    <script type="text/javascript">
+        // disable select of nontext elements, in IE10+ Daytona handles this
+        document.onselectstart = function(event) { return event.srcElement.type === "text"; }
+    </script>
+    <![endif]-->
+
+    <!-- Templates -->
+    <script id="IconTemplate" type="text/html">
+        <div data-id="container" class="ImageTile">
+            <img class="Spacer" alt="" src="spacer.png" />
+            <img data-id="icon" class="Sprite" alt="" src="mma_icons.png" />
+        </div>
+    </script>
+</head>
+
+<!--  encode browser version into the class of the body -->
+<!--[if IE 9]>
+    <body class="IE9">
+<![endif]-->
+<!--[if !IE 9]> -->
+    <body>
+<!-- <![endif]-->
+
+<div class="SnapshotViewContainer">
+    <!-- toolbar -->
+    <div class="SnapshotViewToolbar">
+        <div id="goBackDiv" class="HeaderCaptionDiv GoBackDiv">
+            <a href="#">
+                <div id="goBackIcon" class="ImageTile">
+                    <img class="Spacer" alt="" src="spacer.png" />
+                    <img class="Sprite BackIcon" alt="" src="mma_icons.png" />
+                </div>
+            </a>
+            <span id="goBackCaption"></span>
+        </div>
+        <div id="viewGeneralCaptionDiv" class="HeaderCaptionDiv GeneralCaptionDiv"></div>
+        <div class ="SnapshotToolbarDiv">
+            <div id="searchFilterDiv" class="SearchFilterDiv">
+                <input id="filterInput" class="FilterInput" type="text" />
+                <progress id="filterInputProgressBar" class="FilterInputProgressBar" max="100"></progress>
+            </div>
+            <div id="diffDropDownDiv" class="DiffDropDownDiv">
+                <span id="diffDropDownCaption"></span>
+                <select id="diffDropDown"></select>
+            </div>
+            <div id="viewSettingsDiv" class="ViewSettingsDiv">
+                <a id="viewSettingsMenu" class="ViewSettingsLink" href="#">
+                    <div class="ImageTile ViewSettingsMenu">
+                        <img class="Spacer" alt="" src="spacer.png" />
+                        <img class="Sprite ViewFilterIcon" alt="" src="mma_icons.png" />
+                    </div>
+                </a>
+            </div>
+            <div id="viewModeDropDownDiv" class="ViewModeDropDownDiv">
+                <span id="viewModeCaption"></span>
+                <select id="viewModeDropDown"></select>
+            </div>
+        </div>
+    </div>
+    <div id="notificationBar" class="NotificationBar">
+        <div id="notificationBarInfoIcon" class="ImageTile NotificationBarInfoIcon">
+            <img class="Spacer" alt="" src="spacer.png" />
+            <img class="Sprite NotificationIcon" alt="" src="mma_icons.png" />
+        </div>
+        <div id="notificationBarMessage" class="NotificationBarMessage"></div>
+    </div>
+
+    <div id="snapshotView" class="SnapshotView">
+        <!-- Types/objects viewer -->
+        <div class="TypesObjectsViewer">
+            <div id="typesObjectsEmptyMessageDiv" class="ViewDisabledMessage"><p id="typesObjectsEmptyMessage"></p></div>
+            <div id="managedHeapTypesViewerContainer"></div>
+            <div id="managedHeapObjectsViewerContainer"></div>
+            <div id="aggregatedCallStacksViewerContainer"></div>
+        </div>
+
+        <!-- splitter -->
+        <div id="splitter" class="Splitter"></div>
+
+        <!-- References viewer -->
+        <div class="RefGraph">
+            <div id="refGraphHeader" class="RefGraphHeader">
+                <table class="RefGraphDirection">
+                    <tr>
+                        <td><a id="referencingGraph" href="#"></a></td>
+                        <td class="Separator">|</td>
+                        <td><a id="referencedGraph" href="#"></a></td>
+                    </tr>
+                </table>
+            </div> 
+            <div id="managedHeapViewerForwardRefGraphContainer" class="RefGraphContainer"></div>
+            <div id="managedHeapViewerBackwardRefGraphContainer" class="RefGraphContainer"></div>
+            <div id="managedHeapViewerForwardTypeRefGraphContainer" class="RefGraphContainer"></div>
+            <div id="managedHeapViewerBackwardTypeRefGraphContainer" class="RefGraphContainer"></div>
+            <!---Stack Viewer-->
+            <div id="stackHeader" class="RefGraphHeader">
+                <table class="RefGraphDirection">
+                    <tr>
+                        <td><a id="StackHeaderContent" href="#" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="nativeStackViewerContainer" class="RefGraphContainer"></div>
+            <div id="nativeAllocationListContainer" class="RefGraphContainer"></div>
+            <div id="allocationStackEmptyMessageDiv" class="ViewDisabledMessage"><p id="allocationStackEmptyMessage"></p></div>
+            <div id="managedHeapViewerRefGraphNoData" class="RefGraphNoData"></div>
+        </div>
+    </div>
+</div>
+
+</body>        
+</html>

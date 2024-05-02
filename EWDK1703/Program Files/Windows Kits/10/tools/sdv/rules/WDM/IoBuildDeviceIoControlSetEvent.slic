@@ -1,0 +1,79 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoBuildDeviceIoControlSetEvent
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    KeSetEvent does not need to be called in the driver for this irp.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507264
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+   enum {notsignaled,dont_signal,initialized} SignalState = initialized;
+} 
+watch IoBuildDeviceIoControlRequest.entry.$8;
+
+
+KeInitializeEvent.entry[guard $1]
+{
+    if($3)
+    {
+        halt;
+    }
+    else
+    {
+        SignalState=notsignaled;
+    }
+}
+
+IoBuildDeviceIoControlRequest.exit[guard $8]
+{
+    if($return==NULL)
+    {
+        halt;
+    }
+    else
+    {
+        SignalState=dont_signal;
+    }
+}
+
+KeClearEvent.entry[guard $1]
+{
+    halt;
+}
+
+
+
+KeSetEvent.entry[guard $1]
+{
+    if(SignalState==dont_signal)
+    {
+        abort "KeSetEvent does not need to be called in the driver for this irp.";
+    }
+    else
+    {
+        halt;
+    }
+}
+

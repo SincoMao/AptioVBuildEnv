@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Vsix Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+
+  <Identifier Id="Microsoft.VisualStudio.Web.Exports">
+    <Name>Microsoft Visual Studio Web Exports</Name>
+    <Author>Microsoft Corporation</Author>
+    <Version>14.0</Version>
+    <Description>Microsoft Visual Studio Web Exports</Description>
+    <Locale>1033</Locale>
+    <SupportedProducts>
+      <VisualStudio Version="14.0">
+        <Edition>Premium</Edition>
+        <Edition>Express_All</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.0" />
+    <InstalledByMsi>true</InstalledByMsi>
+    <SystemComponent>true</SystemComponent>
+  </Identifier>
+
+  <References />
+
+  <Content>
+    <MefComponent>Microsoft.VisualStudio.Web.Exports.dll</MefComponent>
+  </Content>
+
+</Vsix>

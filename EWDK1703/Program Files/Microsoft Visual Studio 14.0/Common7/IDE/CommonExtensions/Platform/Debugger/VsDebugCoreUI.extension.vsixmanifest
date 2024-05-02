@@ -1,0 +1,22 @@
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
+  <Metadata>
+    <Identity Id="d549bc66-c17b-4409-8729-583e60dc0bc1" Version="1.0" Language="en-US" Publisher="Microsoft" />
+    <DisplayName>Visual Studio Debugger Core UI</DisplayName>
+    <Description xml:space="preserve">Visual Studio Core Debugger User Interface Components</Description>
+  </Metadata>
+  <Installation SystemComponent="true" InstalledByMsi="true">
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[14.0,15.0)" />
+    <InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.Premium" />
+    <InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.Ultimate" />
+    <InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.VSWinExpress" />
+    <InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.VWDExpress" />
+    <InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.VSWinDesktopExpress" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" Version="[4.5,)" />
+    <Dependency Id="Microsoft.VisualStudio.MPF.14.0" DisplayName="Visual Studio MPF 14.0" Version="[14.0]" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" Path="VSDebugCoreUI.pkgdef" />
+  </Assets>
+</PackageManifest>

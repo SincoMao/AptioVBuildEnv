@@ -1,0 +1,114 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Choose>
+    <When Condition="('$(TargetVersion)'=='Windows10')">
+      <PropertyGroup>
+        <_NT_TARGET_VERSION>$(_NT_TARGET_VERSION_WIN10_RS2)</_NT_TARGET_VERSION>
+        <CURRENT_NTDDI_VERSION>0x0A000003</CURRENT_NTDDI_VERSION>
+        <CURRENT_WIN32_WINNT_VERSION>0x0A00</CURRENT_WIN32_WINNT_VERSION>
+        <SUBSYSTEM_VERSION_LATEST>10.00</SUBSYSTEM_VERSION_LATEST>
+        <!-- Continue to default to Vista due to extra requirement to link to ole32.dll in Win8 stubs -->
+        <MIDL_TARGET Condition="'$(MIDL_TARGET)' == ''">$(MIDL_TARGET_VISTA)</MIDL_TARGET>
+        <DDKSpec>winV10.0</DDKSpec>        
+      </PropertyGroup>
+      <Choose>
+        <When Condition="'$(DDKPlatform)' == 'arm64'">
+          <PropertyGroup>
+            <Inf2CatWindowsVersionList Condition="'$(Inf2CatWindowsVersionList)' == ''">Server10_$(DDKPlatform)</Inf2CatWindowsVersionList>
+          </PropertyGroup>
+        </When>
+        <When Condition="'$(DDKPlatform)' == 'arm'">
+          <PropertyGroup>
+            <!-- Inf2Cat is not supported for ARM for Windows 10 and above -->
+            <InvalidInf2CatConfig>true</InvalidInf2CatConfig>
+            <EnableInf2cat Condition="'$(EnableInf2cat)' == ''">false</EnableInf2cat>
+          </PropertyGroup>
+        </When>
+        <Otherwise>
+          <PropertyGroup>
+            <Inf2CatWindowsVersionList Condition="'$(Inf2CatWindowsVersionList)' == ''">10_$(DDKPlatform)</Inf2CatWindowsVersionList>
+          </PropertyGroup>
+        </Otherwise>
+      </Choose>
+    </When>
+    <When Condition="('$(TargetVersion)'=='WindowsV6.3')">
+      <PropertyGroup>
+        <_NT_TARGET_VERSION>$(_NT_TARGET_VERSION_WINV63)</_NT_TARGET_VERSION>
+        <CURRENT_NTDDI_VERSION>0x06030000</CURRENT_NTDDI_VERSION>
+        <CURRENT_WIN32_WINNT_VERSION>0x0603</CURRENT_WIN32_WINNT_VERSION>
+        <SUBSYSTEM_VERSION_LATEST>6.03</SUBSYSTEM_VERSION_LATEST>
+        <!-- Continue to default to Vista due to extra requirement to link to ole32.dll in Win8 stubs -->
+        <MIDL_TARGET Condition="'$(MIDL_TARGET)' == ''">$(MIDL_TARGET_VISTA)</MIDL_TARGET>
+        <DDKSpec>winV6.3</DDKSpec>        
+        <Inf2CatWindowsVersionList Condition="'$(Inf2CatWindowsVersionList)' == ''">6_3_$(DDKPlatform)</Inf2CatWindowsVersionList>
+      </PropertyGroup>
+    </When>
+    <When Condition="('$(TargetVersion)'=='Windows8') Or ('$(TargetVersion)'=='Win8')">
+      <PropertyGroup>
+        <_NT_TARGET_VERSION>$(_NT_TARGET_VERSION_WIN8)</_NT_TARGET_VERSION>
+        <CURRENT_NTDDI_VERSION>0x06020000</CURRENT_NTDDI_VERSION>
+        <CURRENT_WIN32_WINNT_VERSION>0x0602</CURRENT_WIN32_WINNT_VERSION>
+        <SUBSYSTEM_VERSION_LATEST>6.02</SUBSYSTEM_VERSION_LATEST>
+        <!-- Continue to default to Vista due to extra requirement to link to ole32.dll in Win8 stubs -->
+        <MIDL_TARGET Condition="'$(MIDL_TARGET)' == ''">$(MIDL_TARGET_VISTA)</MIDL_TARGET>
+        <DDKSpec>win8</DDKSpec>        
+        <Inf2CatWindowsVersionList Condition="'$(Inf2CatWindowsVersionList)' == ''">8_$(DDKPlatform)</Inf2CatWindowsVersionList>
+      </PropertyGroup>
+    </When>
+    <When Condition="('$(TargetVersion)'=='Windows7') Or ('$(TargetVersion)'=='Win7')">
+      <PropertyGroup>
+        <_NT_TARGET_VERSION>$(_NT_TARGET_VERSION_WIN7)</_NT_TARGET_VERSION>
+        <CURRENT_NTDDI_VERSION>0x06010000</CURRENT_NTDDI_VERSION>
+        <CURRENT_WIN32_WINNT_VERSION>0x0601</CURRENT_WIN32_WINNT_VERSION>
+        <SUBSYSTEM_VERSION_LATEST>6.01</SUBSYSTEM_VERSION_LATEST>
+        <!-- Continue to default to Vista due to extra requirement to link to ole32.dll in Win7 stubs -->
+        <MIDL_TARGET Condition="'$(MIDL_TARGET)' == ''">$(MIDL_TARGET_VISTA)</MIDL_TARGET>
+        <DDKSpec>win7</DDKSpec>
+        <Inf2CatWindowsVersionList Condition="'$(Inf2CatWindowsVersionList)' == ''">7_$(DDKPlatform)</Inf2CatWindowsVersionList>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <UnknownTargetVersion>true</UnknownTargetVersion>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+  <PropertyGroup>
+    <NTDDI_VERSION Condition="'$(NTDDI_VERSION)' == ''">$(CURRENT_NTDDI_VERSION)</NTDDI_VERSION>
+    <WIN32_WINNT_VERSION Condition="'$(WIN32_WINNT_VERSION)' == ''">$(CURRENT_WIN32_WINNT_VERSION)</WIN32_WINNT_VERSION>
+    <WINVER_VERSION Condition="'$(WINVER_VERSION)' == ''">$(WIN32_WINNT_VERSION)</WINVER_VERSION>
+    <SUBSYSTEM_NATVER Condition="'$(SUBSYSTEM_VERSION)' != '' and '$(OverrideTargetVersionDefines)' != 'true'">$(SUBSYSTEM_VERSION)</SUBSYSTEM_NATVER>
+    <SUBSYSTEM_NATVER Condition="'$(SUBSYSTEM_VERSION)' == '' and '$(OverrideTargetVersionDefines)' != 'true'">$(SUBSYSTEM_VERSION_LATEST)</SUBSYSTEM_NATVER>
+    <OverrideTargetVersionDefines Condition="'$(OverrideTargetVersionDefines)' == ''">false</OverrideTargetVersionDefines>
+  </PropertyGroup>
+
+  <!-- Don't build MIDL stubs that are too new for the OS being targeted -->
+  <Choose>
+    <When Condition="'$(MIDL_TARGET)' == '$(MIDL_TARGET_WIN10)' AND $(SUBSYSTEM_NATVER) &lt; 10.00">
+      <PropertyGroup>
+        <MidlTargetMismatch>true</MidlTargetMismatch>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MIDL_TARGET)' == '$(MIDL_TARGET_WINV63)' AND $(SUBSYSTEM_NATVER) &lt; 6.03">
+      <PropertyGroup>
+        <MidlTargetMismatch>true</MidlTargetMismatch>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MIDL_TARGET)' == '$(MIDL_TARGET_WIN8)' AND $(SUBSYSTEM_NATVER) &lt; 6.02">
+      <PropertyGroup>
+        <MidlTargetMismatch>true</MidlTargetMismatch>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MIDL_TARGET)' == '$(MIDL_TARGET_WIN7)' AND $(SUBSYSTEM_NATVER) &lt; 6.01">
+      <PropertyGroup>
+        <MidlTargetMismatch>true</MidlTargetMismatch>
+      </PropertyGroup>
+    </When>    
+    <When Condition="'$(MIDL_TARGET)' == '$(MIDL_TARGET_VISTA)' AND $(SUBSYSTEM_NATVER) &lt; 6.00">
+      <PropertyGroup>
+        <MidlTargetMismatch>true</MidlTargetMismatch>
+      </PropertyGroup>
+    </When>
+  </Choose>
+</Project>
+

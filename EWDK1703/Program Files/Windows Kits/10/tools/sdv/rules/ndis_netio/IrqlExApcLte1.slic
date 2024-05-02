@@ -1,0 +1,45 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlExApcLte1
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020005
+
+Description:
+
+    The IrqlExApcLte1 rule specifies that the driver calls ExAcquireFastMutex 
+    and ExTryToAcquireFastMutex only at IRQL <= APC_LEVEL.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216022
+
+--*/
+
+
+#include "slic_base.h"
+
+
+ExAcquireFastMutex.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+ExTryToAcquireFastMutex.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+

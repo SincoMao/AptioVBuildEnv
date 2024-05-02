@@ -1,0 +1,74 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlExAllocatePool
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020004
+
+Description:
+
+    The IrqlExAllocatePool rule specifies that the driver calls:
+        ExAllocatePool, 
+        ExAllocatePoolWithTag, 
+        ExAllocatePoolWithQuota, 
+        ExAllocatePoolWithQuotaTag and 
+        ExAllocatePoolWithTagPriority 
+    only when it is executing at IRQL <= DISPATCH_LEVEL. A caller 
+    executing at DISPATCH_LEVEL must specify a NonPagedXxx value 
+    for PoolType. A caller executing at IRQL <= APC_LEVEL can 
+    specify any POOL_TYPE value.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216021
+
+--*/
+
+
+#include "slic_base.h"
+
+
+/* 
+   Callers of ExAllocatePoolWithTag,ExAllocatePoolWithQuota,ExAllocatePoolWithQuotaTag,ExAllocatePool 
+   and ExAllocatePoolWithTagPriority must be executing at IRQL <= DISPATCH_LEVEL. A caller executing at
+   DISPATCH_LEVEL must specify a NonPagedXxx value for PoolType. A caller
+   executing at IRQL <= APC_LEVEL can specify any POOL_TYPE value: 
+   
+   */
+   
+[ExAllocatePoolWithTag,ExAllocatePoolWithTagPriority,ExAllocatePoolWithQuota,ExAllocatePoolWithQuotaTag,ExAllocatePool].entry
+{
+    if ( SDV_IRQL_ELEVATED_LEVEL(sdv_irql_current)) 
+    {
+        abort "$fname should only be called at IRQL <= DISPATCH_LEVEL.";
+    }
+    else if (sdv_irql_current == DISPATCH_LEVEL)
+    {
+        if (($1 & POOL_TYPE_MASK) == PagedPool)
+        {
+            abort "$fname can be called at DISPATCH_LEVEL only if a NonPagedXXX is specified for PoolType, not PagedPool.";
+        }
+        else if (($1 & POOL_TYPE_MASK) == DontUseThisType)
+        {
+            abort "$fname can be called at DISPATCH_LEVEL only if a NonPagedXXX is specified for PoolType, not DontUseThisType.";
+        }
+        else if (($1 & POOL_TYPE_MASK) == PagedPoolCacheAligned)
+        {
+            abort "$fname can be called at DISPATCH_LEVEL only if a NonPagedXXX is specified for PoolType, not PagedPoolCacheAligned.";
+        }
+        else if (($1 & POOL_TYPE_MASK) == MaxPoolType)
+        {
+            abort "$fname can be called at DISPATCH_LEVEL only if a NonPagedXXX is specified for PoolType, not MaxPoolType.";
+        }
+    }
+}
+

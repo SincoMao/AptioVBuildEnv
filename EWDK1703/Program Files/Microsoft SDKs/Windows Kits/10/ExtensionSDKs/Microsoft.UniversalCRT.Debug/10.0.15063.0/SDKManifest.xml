@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FileList 
+  TargetPlatform="UAP"
+  TargetPlatformMinVersion="10.0.0.0"
+  TargetPlatformVersion="10.0.15063.0"
+  DisplayName = "Microsoft Universal CRT Debug Runtime"
+  AppliesTo = "WindowsAppContainer + (Managed | Javascript | Native)"
+  MinVSVersion = "14.0"
+  SupportsMultipleVersions="Error"
+  SupportedArchitectures="x86;x64;ARM;ARM64">
+</FileList>

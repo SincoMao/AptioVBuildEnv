@@ -1,0 +1,149 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlKeRaiseLower2
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020014
+
+Description:
+
+    The IrqlKeRaiseLower2 rule specifies that drivers use KeLowerIrql to 
+    restore the original IRQL raised by a preceding call to KeRaiseIrql 
+    or KeRaiseIrqlToDpcLevel. 
+
+    This rule permits nested calls to KeRaiseIrql, KeRaiseIrqlToDpcLevel 
+    and KeLowerIrql.
+
+    This rule is not applicable on X64 platform
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216037
+
+--*/
+
+
+#include "slic_base.h"
+
+/*
+Calls to KeRaiseIrql/KeRaiseIrqlToDpcLevel and KeLowerIrql must follow
+a stack protocol (See general discussion of the SDV OS Model IRQL
+Stack in the SDV OS Model).
+
+Notice: The stack in the SDV OS Model is bounded to 3 levels in depth.
+The variable CheckDepth is therefore used to disable the check
+whenever a deeper stack would be needed for correct analysis.
+*/
+
+
+/* Count the number of raises in RaiseDepth and the actual number of
+pending checks in CheckDepth: */
+state 
+{
+    int RaiseDepth = 0;
+    int CheckDepth = 0;
+}
+
+/* Increase RaiseDepth.  Increase CheckDepth, but not to exceed 3: */
+[KeRaiseIrql, KfRaiseIrql]@X86.entry
+{
+    if (CheckDepth == 3) 
+    {
+        RaiseDepth = RaiseDepth + 1;
+    } 
+    else 
+    {
+	CheckDepth = CheckDepth + 1;
+	RaiseDepth = RaiseDepth + 1;
+    } 
+}
+
+[KeRaiseIrql, KfRaiseIrql]@SDV.entry
+{
+    if (CheckDepth == 3) 
+    {
+        RaiseDepth = RaiseDepth + 1;
+    } 
+    else 
+    {
+	CheckDepth = CheckDepth + 1;
+	RaiseDepth = RaiseDepth + 1;
+    } 
+}
+
+KeRaiseIrqlToDpcLevel@X86.entry
+{
+    if (CheckDepth == 3) 
+    {
+        RaiseDepth = RaiseDepth + 1;
+    } 
+    else 
+    {
+	CheckDepth = CheckDepth + 1;
+	RaiseDepth = RaiseDepth + 1;
+    } 
+}
+
+KeRaiseIrqlToDpcLevel@SDV.entry
+{
+    if (CheckDepth == 3) 
+    {
+        RaiseDepth = RaiseDepth + 1;
+    } 
+    else 
+    {
+	CheckDepth = CheckDepth + 1;
+	RaiseDepth = RaiseDepth + 1;
+    } 
+}
+
+/* If CheckDepth != 0: Check IRQL level. Additionally, decrease
+RaiseDepth and CheckDepth: */
+[KeLowerIrql, KfLowerIrql]@X86.entry 
+{
+     if (CheckDepth != 0) 
+     {
+	if (SDV_IRQL_PREVIOUS_EQUAL($1)) 
+        {
+		CheckDepth = CheckDepth - 1;
+	  	RaiseDepth = RaiseDepth - 1;
+	} 
+        else 
+        {
+        	abort "The driver must only use $fname to restore the original IRQL raised by a preceding call to KeRaiseIrql or KeRaiseIrqlToDpcLevel.";
+	} 
+    } 
+    else 
+    {
+        RaiseDepth = RaiseDepth - 1;
+    }
+}
+
+[KeLowerIrql, KfLowerIrql]@SDV.entry 
+{
+     if (CheckDepth != 0) 
+     {
+	if (SDV_IRQL_PREVIOUS_EQUAL($1)) 
+        {
+		CheckDepth = CheckDepth - 1;
+	  	RaiseDepth = RaiseDepth - 1;
+	} 
+        else 
+        {
+        	abort "The driver must only use $fname to restore the original IRQL raised by a preceding call to KeRaiseIrql or KeRaiseIrqlToDpcLevel.";
+	} 
+    } 
+    else 
+    {
+        RaiseDepth = RaiseDepth - 1;
+    }
+}

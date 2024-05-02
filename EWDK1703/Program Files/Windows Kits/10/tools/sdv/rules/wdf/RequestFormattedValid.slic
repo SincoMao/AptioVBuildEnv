@@ -1,0 +1,85 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    RequestFormattedValid
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the driver formats all requests before sending them to an I/O target, request formatting is required except for
+    send option WDF_REQUEST_SEND_OPTION_SEND_AND_FORGET.
+    
+    Before a request is sent, it must be appropriately formatted. 
+        
+    Rule diagnostics:
+    If WdfXxxFormatRequestForXXX fails, the driver shouldn't pass it to WdfRequestSend. Otherwise, this rule reports a defect.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507132
+
+--*/
+
+
+/*
+Notes:
+
+WDF_REQUEST_SEND_OPTION_TIMEOUT = 0x0000001
+WDF_REQUEST_SEND_OPTION_SYNCHRONOUS = 0x0000002
+WDF_REQUEST_SEND_OPTION_IGNORE_TARGET_STATE = 0x0000004 
+WDF_REQUEST_SEND_OPTION_SEND_AND_FORGET = 0x0000008
+*/
+
+#include "slic_base.h"
+
+[sdv_WdfUsbTargetPipeFormatRequestForAbort,
+sdv_WdfUsbTargetPipeFormatRequestForRead,
+sdv_WdfUsbTargetPipeFormatRequestForReset,
+sdv_WdfUsbTargetPipeFormatRequestForUrb,
+sdv_WdfUsbTargetPipeFormatRequestForWrite,
+sdv_WdfUsbTargetDeviceFormatRequestForControlTransfer,
+sdv_WdfUsbTargetDeviceFormatRequestForCyclePort,
+sdv_WdfUsbTargetDeviceFormatRequestForString,
+sdv_WdfUsbTargetDeviceFormatRequestForUrb,
+sdv_WdfIoTargetFormatRequestForWrite,
+sdv_WdfIoTargetFormatRequestForIoctl,
+sdv_WdfIoTargetFormatRequestForInternalIoctl,
+sdv_WdfIoTargetFormatRequestForRead,
+sdv_WdfIoTargetFormatRequestForInternalIoctlOthers
+].exit
+{
+    if (NT_SUCCESS($return))
+    {
+        halt;
+    }
+
+}
+
+[sdv_WdfRequestWdmFormatUsingStackLocation,
+sdv_WdfRequestFormatRequestUsingCurrentType
+].entry
+{
+    halt;    
+}
+
+sdv_WdfRequestSend.entry
+{
+    if ($3!=NULL && $3->Flags==8)
+    {
+        halt;
+    }
+    else {
+        abort "$fname called before formatting the request with a successfull call to WdfXxxFormatRequestForXxx.";
+    }
+}

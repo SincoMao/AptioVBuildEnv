@@ -1,0 +1,454 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NdisNetioIrqlPassive
+
+Domain:
+
+    NDIS_NETIO
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    TBD
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+#include "slic_base.h"
+
+GetIfEntry2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetIfTable2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetIfTable2Ex.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetIfStackTable.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetInvertedIfStackTable.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetIpInterfaceEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetIpInterfaceTable.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetUnicastIpAddressTable.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetAnycastIpAddressTable.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetMulticastIpAddressTable.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetIpForwardTable2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetIpPathTable.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetIpNetTable2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+InitializeIpInterfaceEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+SetIpInterfaceEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+CreateUnicastIpAddressEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+DeleteUnicastIpAddressEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetUnicastIpAddressEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+SetUnicastIpAddressEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+CreateAnycastIpAddressEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+DeleteAnycastIpAddressEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetAnycastIpAddressEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetMulticastIpAddressEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+CreateIpForwardEntry2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+DeleteIpForwardEntry2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetIpForwardEntry2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+InitializeIpForwardEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetIpPathEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+CreateIpNetEntry2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+DeleteIpNetEntry2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+NotifyIpInterfaceChange.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetIpNetworkConnectionBandwidthEstimates.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+InitializeUnicastIpAddressEntry.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+NotifyUnicastIpAddressChange.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+NotifyStableUnicastIpAddressTable.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+NotifyRouteChange2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+NotifyTeredoPortChange.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetIpNetEntry2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+SetIpNetEntry2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+FreeMibTable.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+FlushIpPathTable.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+FlushIpNetTable2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+CancelMibChangeNotify2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetTeredoPort.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ResolveIpNetEntry2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertLengthToIpv4Mask.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertIpv4MaskToLength.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertCompartmentGuidToId.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertCompartmentIdToGuid.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertInterfaceNameToLuidA.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertInterfaceNameToLuidW.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertInterfaceLuidToNameA.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetCurrentThreadCompartmentId.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+SetCurrentThreadCompartmentId.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertInterfaceLuidToIndex.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertInterfaceIndexToLuid.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+if_indextoname.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertInterfaceLuidToNameW.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertInterfaceLuidToAlias.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertInterfaceAliasToLuid.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertInterfaceLuidToGuid.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+ConvertInterfaceGuidToLuid.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+if_nametoindex.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetCurrentThreadCompartmentScope.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+SetCurrentThreadCompartmentScope.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetSessionCompartmentId.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+SetSessionCompartmentId.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+SetNetworkInformation.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetNetworkInformation.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+GetBestRoute2.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+
+CreateSortedAddressPairs.entry
+{
+if ( sdv_irql_current > PASSIVE_LEVEL )
+        abort "$fname should be called at IRQL == PASSIVE_LEVEL ";
+}
+

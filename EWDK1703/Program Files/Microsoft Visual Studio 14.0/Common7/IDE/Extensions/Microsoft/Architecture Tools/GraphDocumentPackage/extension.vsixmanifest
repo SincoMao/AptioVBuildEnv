@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="f95678de-1f4d-44ca-8307-c6e8c23b776e">
+    <Name>GraphDocumentPackage</Name>
+    <Author>Microsoft</Author>
+    <Version>1.0</Version>
+    <Description xml:space="preserve">The Directed Graph Document package.</Description>
+    <Locale>1033</Locale>
+    <InstalledByMsi>true</InstalledByMsi>
+    <SystemComponent>true</SystemComponent>
+    <SupportedProducts>
+      <VisualStudio Version="11.0">
+        <Edition>Ultimate</Edition>
+        <Edition>Premium</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" />
+  </Identifier>
+  <References>
+    <Reference Id="Microsoft.VisualStudio.MPF.11.0" MinVersion="11.0">
+      <Name>Visual Studio MPF 11.0</Name>
+    </Reference>
+  </References>
+  <Content>
+    <VsPackage>Microsoft.VisualStudio.GraphDocumentPackage.pkgdef</VsPackage>
+    <MefComponent>Microsoft.VisualStudio.Progression.GraphControl.dll</MefComponent>
+  </Content>
+</Vsix>

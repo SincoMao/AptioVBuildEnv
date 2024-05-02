@@ -1,0 +1,28 @@
+<!--
+***********************************************************************************************
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <IncludePath Condition="'$(SensorDriver)' == 'true' and $(UMDF_VERSION_MAJOR) &gt; 1">$(IncludePath);$(SENSOR_IncludePath)</IncludePath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IncludePath Condition="'$(NfcDriver)' == 'true' and $(UMDF_VERSION_MAJOR) &gt; 1">$(IncludePath);$(NFC_IncludePath)</IncludePath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IncludePath Condition="'$(UcmDriver)' == 'true' and $(UMDF_VERSION_MAJOR) &gt; 1">$(IncludePath);$(UCM_INC_PATH)</IncludePath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IncludePath Condition="'$(IndirectDisplayDriver)' == 'true' and $(UMDF_VERSION_MAJOR) &gt; 1">$(IncludePath);$(IDDCX_INC_PATH)</IncludePath>
+  </PropertyGroup>
+
+</Project>

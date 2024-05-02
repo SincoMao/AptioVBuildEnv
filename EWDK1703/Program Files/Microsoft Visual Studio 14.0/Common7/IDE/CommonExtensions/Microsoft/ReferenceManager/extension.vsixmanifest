@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Vsix Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="Microsoft.VisualStudio.ReferenceManager">
+    <Name>Microsoft Visual Studio Reference Manager</Name>
+    <Author>Microsoft</Author>
+    <Version>11.0</Version>
+    <Description>Microsoft Visual Studio Reference Manager</Description>
+    <Locale>1033</Locale>
+    <InstalledByMsi>false</InstalledByMsi>
+    <SupportedProducts>
+      <VisualStudio Version="11.0">
+        <Edition>Premium</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.0" />
+    <SystemComponent>true</SystemComponent>
+  </Identifier>
+  <References>
+    <Reference Id="Microsoft.VisualStudio.MPF" MinVersion="10.0">
+      <Name>Visual Studio MPF</Name>
+    </Reference>
+  </References>
+  <Content>
+    <VsPackage>Microsoft.VisualStudio.ReferenceManager.Providers.pkgdef</VsPackage>
+    <VsPackage>Microsoft.VisualStudio.ReferenceManager.pkgdef</VsPackage>
+    <MefComponent>Microsoft.VisualStudio.ReferenceManager.Providers.dll</MefComponent>
+    <MefComponent>Microsoft.VisualStudio.ReferenceManager.Dialog.dll</MefComponent>
+    <Assembly AssemblyName="Microsoft.VisualStudio.ReferenceManager.Contracts, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">Microsoft.VisualStudio.ReferenceManager.Contracts.dll</Assembly>
+  </Content>
+</Vsix>

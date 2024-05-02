@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+<Rule Name="Inf" PageTemplate="tool" DisplayName="StampInf"  Order="135">
+  <Rule.Categories>
+    <Category Name="General">
+      <Category.DisplayName>
+        <sys:String>General</sys:String>
+      </Category.DisplayName>
+    </Category>
+    <Category Name="Command Line" Subtype="CommandLine">
+      <Category.DisplayName>
+        <sys:String>Command Line</sys:String>
+      </Category.DisplayName>
+    </Category>
+  </Rule.Categories>
+  <Rule.DataSource>
+    <DataSource Persistence="ProjectFile" ItemType="Inf" Label="" HasConfigurationCondition="true"/>
+  </Rule.DataSource>
+  <BoolProperty Name="SpecifyArchitecture" Category="General" F1Keyword="driver.stampinf.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Enable Architecture</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Specifies the target platform architecture.</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="Architecture" Separator=" " Category="General" Switch="-a" F1Keyword="driver.stampinf.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Architecture</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>The architecture to be used in .inx files.  (-a [architecture]) </sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <BoolProperty Name="SpecifyDriverVerDirectiveVersion" Category="General" F1Keyword="driver.stampinf.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Enable VersionStamp</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Enable the version stamp. If 'Enable VersionStamp' is 'Yes', 'Driver Version Number' must not be empty.</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="TimeStamp" Separator=" " Category="General" Switch="-v" F1Keyword="driver.stampinf.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Driver Version Number</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>The value to write in the INF DriverVer directive. Specify * to write the current system time (-v [version|*])</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <BoolProperty Name="SpecifyDriverVerDirectiveDate" Category="General" F1Keyword="driver.stampinf.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Enable DateStamp</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Enable the date stamp. If 'Enable DateStamp' is 'Yes', 'Driver Version Directive Date' must not be empty.</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="DateStamp" Separator=" " Category="General" Switch="-d" F1Keyword="driver.stampinf.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Driver Version Directive Date</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>The date that is written in the INF DriverVer directive. (-d [date|*])</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="DriverVersionSectionName" Separator=" " Category="General" Switch="-s" F1Keyword="driver.stampinf.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Driver Version Directive Section</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Specifies the INF section in which the INF DriverVer directive should be put. (-s section)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="KmdfVersionNumber" Separator=" " Category="General" Switch="-k" F1Keyword="driver.stampinf.properties">
+    <StringProperty.DisplayName>
+      <sys:String>KMDF Version Number</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Specifies KMDF Version Number.  (-k KdmfVersionNumber)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="UmdfVersionNumber" Separator=" " Category="General" Switch="-u" F1Keyword="driver.stampinf.properties">
+    <StringProperty.DisplayName>
+      <sys:String>UMDF Version Number</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Specifies UMDF Version Number.  (-u UmdfVersionNumber)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="CatalogFileName" Separator=" "  Category="General" Switch="-c" F1Keyword="driver.stampinf.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Catalog File Name</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Specifies the catalog file directive in the INF version section (-c catalogfile)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="ProviderName" Separator=" "  Category="General" Switch="-p" F1Keyword="driver.stampinf.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Provider Name</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Specifies the value of the provider directive in the INF version section (-p provider)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <StringProperty Name="VersionHeaderPath" Separator=" "  Category="General" Switch="-i" F1Keyword="driver.stampinf.properties">
+    <StringProperty.DisplayName>
+      <sys:String>Version Header Path</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Specifies the location of the ntverp.h file. The path represents a fully-qualified location of the directory that contains ntverp.h. (-i path)</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+  <BoolProperty Name="EnableVerbose" Category="General" Switch="-n" F1Keyword="driver.stampinf.properties">
+    <BoolProperty.DisplayName>
+      <sys:String>Verbose</sys:String>
+    </BoolProperty.DisplayName>
+    <BoolProperty.Description>
+      <sys:String>Enable verbose tool output. (-n)</sys:String>
+    </BoolProperty.Description>
+  </BoolProperty>
+  <StringProperty Name="AdditionalOptions" Category="Command Line" F1Keyword="vc.project.AdditionalOptionsPage">
+    <StringProperty.DisplayName>
+      <sys:String>Additional Options</sys:String>
+    </StringProperty.DisplayName>
+    <StringProperty.Description>
+      <sys:String>Additional Options</sys:String>
+    </StringProperty.Description>
+  </StringProperty>
+</Rule>
+  <ItemType Name="Inf" DisplayName="Inf" />
+  <FileExtension Name=".inx"   ContentType="Inf" />
+  <FileExtension Name=".inf" ContentType="Inf" />
+  <ContentType Name="Inf" DisplayName="Inf" ItemType="Inf" />
+</ProjectSchemaDefinitions>

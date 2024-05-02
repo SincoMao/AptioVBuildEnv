@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SMVConfig
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="Config.xsd"
+>
+  <!-- Please don't add any comments with double hyphens in them.                                                                              -->
+  <!-- XML does not support a double hyphen within a comment, since it is a delimiter.                                                         -->
+  <!-- Available variables which can be used inside actions :                                                                                  -->
+  <!-- $assemblyDir         : Directory where SMV binaries are located            [Available in all actions]                                   -->
+  <!-- $workingDir          : Directory where SMV is run                          [Available in all actions]                                   -->
+  <!-- $actionName          : Name of the current action                          [Available in all actions]                                   -->
+  <!-- $actionPath          : Path where the current action is run                [Available in all actions]                                   -->
+  <!-- $configFilePath      : Path of the config file provided to SMV             [Available in all actions]                                   -->
+  <!-- $logFilePath         : Path to the log file                                [Available in all actions, if SMV is run with /log:<path>]   -->
+  <!-- $outputDir           : Directory where the build files are generated       [Available in all actions following InterceptedBuild]        -->
+  <!-- Run the normal build, intercepted build and the scan step -->
+
+  
+  <Variables>
+    <SetVar key="projectFile" value="%MSBuildProjectFile_SDV%" />
+    <SetVar key="dev14" value="&quot;%VCINSTALLDIR%&quot;" />
+  </Variables>
+
+  <Build>
+    <!-- Do a normal build first to ensure everything builds correctly. -->
+    <Action name="NormalBuild" breakOnError="true" nextAction="InterceptedBuild">
+      <Command value="msbuild" arguments="/noconsolelogger /fileLoggerParameters:LogFile=[$smvLogFileNamePrefix].log /t:rebuild &quot;[$projectFile]&quot; /p:configuration=&quot;%CONFIGURATION_SDV%&quot; /p:platform=&quot;%PLATFORM_SDV%&quot;"/>
+    </Action>
+
+    <Action name="InterceptedBuild" nextAction="Scan">
+      <Env key="PATH" value="%sdv%\bin\engine;%PATH%" />
+      <Env key="SMV_OUTPUT_DIR" value="[$outputDir]" />
+      <Env key="PLATFORM_SMV_INTERCEPTOR" value="[$interceptorPlatform]" />
+      <Env key="SMV_CL_ADD_ARG" value="-I\&quot;%sdv%\osmodel\wdm\&quot; -I\&quot;%sdv%\osmodel\wdf\&quot; -I\&quot;%sdv%\osmodel\ndis\&quot; -I\&quot;%sdv%\osmodel\fs\&quot; -I\&quot;%sdv%\osmodel\mpio\&quot; -I\&quot;%sdv%\osmodel\storport\&quot; -I\&quot;[$headersDir]\&quot;" /> 
+      <Command value="msbuild" arguments="/noconsolelogger /fileLoggerParameters:LogFile=[$smvLogFileNamePrefix].log /t:rebuild /p:trackfileaccess=false /p:forcerebuild=true /p:cltoolpath=&quot;%smv%\bin&quot; /p:libtoolpath=&quot;%smv%\bin&quot; /p:linktoolpath=&quot;%smv%\bin&quot; &quot;[$projectFile]&quot; /p:configuration=&quot;%CONFIGURATION_SDV%&quot; /p:platform=&quot;%PLATFORM_SDV%&quot;"/>
+
+    </Action>
+
+  </Build>
+</SMVConfig>

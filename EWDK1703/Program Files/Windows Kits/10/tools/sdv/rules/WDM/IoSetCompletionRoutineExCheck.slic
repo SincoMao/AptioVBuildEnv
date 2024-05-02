@@ -1,0 +1,70 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoSetCompletionRoutineExCheck
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    IoSetCompletionRoutineEx routine returns an NTSTATUS value. The driver must check this value to determine if the IoCompletion routine was successfully registered
+    before calling IoCallDriver or PoCallDriver.
+	
+
+    Background:
+    If the IoCompletion routine is successfully registered, IoSetCompletionRoutineEx allocates memory that remains allocated until the IoCompletion routine executes. 
+    Drivers must ensure that their IoCompletion routine executes by calling IoCallDriver or PoCallDriver otherwise, the kernel will leak memory.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507274
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+    enum {no_set, set,run} completion_state = no_set;
+} 
+watch IoSetCompletionRoutineEx.entry.$2;
+
+IoSetCompletionRoutineEx.exit[guard $2]
+{
+     if ($return == STATUS_SUCCESS) 
+     {
+        completion_state = set;
+     }
+     
+}
+
+[IoCallDriver,PoCallDriver].entry[guard $2]
+{
+    if (completion_state == no_set) 
+    {
+        abort "IoSetCompletionRoutineEx routine returns an NTSTATUS value. The driver must check this value to determine if the IoCompletion routine was successfully registered before calling $fname.";
+    }
+    else
+    {
+        completion_state=run;
+    }
+}
+
+[SDV_RunDispatchFunction].exit
+{
+    if (completion_state==set) 
+    {
+        abort "If the IoCompletion routine is successfully registered, IoSetCompletionRoutineEx allocates memory that remains allocated until the IoCompletion routine executes. Drivers must ensure that their IoCompletion routine executes by calling IoCallDriver or PoCallDriver otherwise, the kernel will leak memory.";
+    }
+}

@@ -1,0 +1,89 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlIoPassive4
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x0002000D
+
+Description:
+
+    The IrqlIoPassive4 rule specifies that the driver calls the following 
+    routines only when it is executing at IRQL = PASSIVE_LEVEL:
+        IoCreateFile
+        IoCreateNotificationEvent
+        IoCreateSymbolicLink
+        IoCreateSynchronizationEvent
+        IoCreateUnprotectedSymbolicLink
+        IoDeassignArcName
+        IoDeleteController
+        IoDeleteSymbolicLink
+        IoDisconnectInterrupt
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216030
+
+--*/
+
+
+#include "slic_base.h"
+
+
+IoCreateFile.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+IoCreateNotificationEvent.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+IoCreateSynchronizationEvent.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+IoCreateUnprotectedSymbolicLink.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+[IoDeassignArcName,IoDeleteSymbolicLink].entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+IoDeleteController.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+
+IoDisconnectInterrupt.entry
+{
+    if ( sdv_irql_current != PASSIVE_LEVEL ) {
+        abort "$fname should only be called at IRQL = PASSIVE_LEVEL.";
+    }
+}
+

@@ -1,0 +1,121 @@
+/*
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    ZwRegistryOpen
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the handle to the registry key opened via ZwOpenKey
+    is subsequently used correctly by other ZwXxx routines. The routines
+    ZwEnumerateKey, ZwEnumerateValueKey, ZwFlushKey, ZwQueryKey, ZwQueryValueKey,
+    ZwSetValueKey, ZwClose, and ZwDeleteKey must not be called on a handle
+    that isn't open. The handle must also be closed before returning.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507251
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+state{
+	enum {opened, closed} handleState = closed;
+	int * pHandle = 0;
+}
+
+
+ZwOpenKey.exit
+{
+	if (handleState == opened && pHandle == *$1) {
+		abort "The driver calls $fname with a registry key that has been opened already.";	
+	} else {
+		if (NT_SUCCESS($return)) {
+			handleState = opened;
+			pHandle = *$1;
+		}
+		else {
+			halt;
+		}
+	}
+}
+
+ZwEnumerateKey.entry
+{
+	if (handleState != opened && pHandle == $1) {
+		abort "The driver is trying to enumerate a registry key by calling $fname with an invalid handle.";
+	}
+}
+
+ZwEnumerateValueKey.entry
+{
+	if (handleState != opened && pHandle == $1) {
+		abort "The driver is trying to obtain information about the value entries of a registry key by calling $fname with an invalid handle.";
+	}
+}
+
+ZwFlushKey.entry
+{
+	if (handleState != opened && pHandle == $1) {
+		abort "The driver is trying to commit the changes made on a registry key to disk by calling $fname with an invalid handle.";
+	}
+}
+
+ZwQueryKey.entry
+{
+	if (handleState != opened && pHandle == $1) {
+		abort "THe driver is trying to obtain information about a registry key and its subkeys by calling $fname with an invalid handle.";
+	}
+}
+
+ZwQueryValueKey.entry
+{
+	if (handleState != opened && pHandle == $1) {
+		abort "The driver is trying to obtain the the value entries for a registry key by calling $fname with an invalid handle.";
+	}
+}
+
+ZwSetValueKey.entry
+{
+	if (handleState != opened && pHandle == $1) {
+		abort "The driver is trying to replace or create a value entry for a registry key by calling $fname with an invalid handle.";
+	}
+}
+
+ZwClose.entry
+{
+	if (handleState != opened && pHandle == $1) {
+		abort "The driver is trying to close an invalid handle.";  
+	} else {
+		handleState = closed;
+	}
+}
+
+ZwDeleteKey.entry
+{
+	if (handleState != opened && pHandle == $1) {
+		abort "The driver is trying to delete a registry key with an invalid handle.";
+	} else {
+		handleState = closed;
+	}
+}
+
+[ALL_SP_CALLBACKS].exit
+{
+	if (handleState == opened) {
+		abort "The driver is returning without closing an open handle.";
+	} 
+}

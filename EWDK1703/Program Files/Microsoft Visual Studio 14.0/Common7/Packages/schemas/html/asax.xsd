@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema
+	xmlns="http://schemas.microsoft.com/intellisense/asax-markup"
+	xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetnamespace="http://schemas.microsoft.com/intellisense/asax-markup"
+	vs:htmlflavor="4.0"
+	vs:ishtmlschema="false"
+	vs:isserverschema="true"
+	vs:nonbrowseable="true"
+	vs:succinctfriendlyname="ASP.Net">
+
+<!-- TOP LEVEL ELEMENTS -->
+<xsd:element name="object">
+	<xsd:complexType>
+		<xsd:attribute name="Class" />
+		<xsd:attribute name="ClassID" />
+		<xsd:attribute name="Id" vs:nonfilterable="true" vs:renametype="classmember" />
+		<xsd:attribute name="ProgId" />
+		<xsd:attribute name="RunAt" type="runatType" vs:nonfilterable="true" vs:readonly="true" />
+		<xsd:attribute name="Scope">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="application" />
+					<xsd:enumeration value="appinstance" />
+					<xsd:enumeration value="session" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="script">
+	<xsd:complexType mixed="true">
+		<xsd:attribute name="Language" vs:readonly="true" />
+		<xsd:attribute name="RunAt" type="runatType" vs:nonfilterable="true" vs:readonly="true" />
+	</xsd:complexType>
+</xsd:element>
+
+
+<!-- TOP LEVEL TYPES -->
+
+
+<!-- TOP LEVEL ELEMENT GROUPS -->
+
+
+<!-- TOP LEVEL ATTRIBUTE GROUPS -->
+
+
+<!-- TOP LEVEL ATTRIBUTES -->
+
+<xsd:simpleType name="runatType">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="server" />
+	</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,184 @@
+//To remove all other toolbox tabs except Microsoft Visual Studio Express for Windows Components - note that if some one defines a new tab after we release we don't control that one.
+[$RootKey$\Toolbox Item Types\{2ED5B6C0-E464-4454-972B-0A666A9F8C5D}]
+[$RootKey$\Toolbox Item Types\{7036b125-fa82-3aba-acb8-bdbc97782a06}]
+[$RootKey$\Toolbox Item Types\{7C9BECBA-12B9-4480-9DBF-2345AA3C4F9A}]
+[$RootKey$\ToolboxPages\ActiveXControls]
+// Exclude desktop profiles
+[$RootKey$\SupportedRuntimesForFxFamily\.NETFramework\2.0]
+[$RootKey$\SupportedRuntimesForFxFamily\.NETFramework\4.0]
+[$RootKey$\SupportedRuntimesForFxFamily\.NETFramework\4.5]
+
+[$RootKey$\NewProjectTemplates\TemplateDirs\{DA9FB551-C724-11d0-AE1F-00A0C90FFFC3}]
+
+// Toolbox package
+[$RootKey$\Packages\{6F453E1A-31DF-4cd6-AF8B-72AE242272B9}]
+// Toolbox installer
+[$RootKey$\Packages\{2c298b35-07da-45f1-96a3-be55d91c8d7a}]
+
+
+// Diagnostics hub
+[$RootKey$\Packages\{22512d50-40bc-4dea-89b1-21d70bb4218e}]
+[$RootKey$\ToolsOptionsPages\Performance]
+[$RootKey$\Services\{17b44e7a-f8a8-4791-981b-b110552dcda6}]
+[$RootKey$\Menus]
+"{22512d50-40bc-4dea-89b1-21d70bb4218e}"=""
+
+//Export template package
+[$RootKey$\CLSID\{f1e4cfca-4573-4345-8718-7bde2b1f0be8}]
+[$RootKey$\Menus]
+"{f1e4cfca-4573-4345-8718-7bde2b1f0be8}"="" 
+[$RootKey$\Packages\{f1e4cfca-4573-4345-8718-7bde2b1f0be8}]
+
+// Windows forms designer
+
+// User notifications
+//[$RootKey$\Packages\{b89cd7d2-19db-4b60-a958-e882ae71a66e}]
+[$RootKey$\Menus]
+"{b89cd7d2-19db-4b60-a958-e882ae71a66e}"=""
+[$RootKey$\ToolWindows\{c93a910a-0fa6-4307-93a4-f2bd61ec7828}]
+[$RootKey$\MainWindowFrameControls\{304ee989-b7c9-46c8-aa48-f080bc47cee0}]
+[$RootKey$\UIProviders\{773e46d7-dfca-4d7e-91e6-211d85c4b939}]
+//[$RootKey$\Services\{A68E8E35-CDE2-46DD-B613-4C2844E6DB13}]
+
+
+// Extension manager
+[$RootKey$\ExtensionManager]
+// Seems part of it needs to be here or MEF doesn't work.
+//[$RootKey$\Packages\{e7576c05-1874-450c-9e98-cf3a0897a069}]
+//[$RootKey$\ToolsOptionsPages\Environment\ExtensionManager]
+//[$RootKey$\UserSettings\Environment_Group\Environment_ExtensionManager]
+//[$RootKey$\AutomationProperties\Environment\ExtensionManager]
+//[$RootKey$\Services\{6b606dd8-f77e-4335-b9ac-5557a49e789b}]
+//[$RootKey$\Services\{316f4de6-3ca4-4f0d-b003-962d28f65238}]
+//[$RootKey$\Services\{2b7364a1-1482-4b25-9339-3a6bd7a8a86d}]
+//[$RootKey$\Services\{94fcfe35-a054-4233-b25a-9aa0b8aabb95}]
+//[$RootKey$\Services\{b625851a-40a1-426f-bd23-bb83c437e3a2}]
+
+
+// The following entries remove the default html tab in the toolbox.
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox]
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Toolbox]
+"Default Items"="1"
+
+[$RootKey$\Packages\{E7F851C8-6267-4794-B0FE-7BCAB6DACBB4}\Toolbox]
+"Default Items"="1"
+
+[$RootKey$\Packages\{E7F851C8-6267-4794-B0FE-7BCAB6DACBB4}\Toolbox\DefaultContent]
+
+// Hide "Web Projects" Tools Options
+[$RootKey$\ToolsOptionsPages\Projects\WebProjects]
+
+// Exclude win 8 store profile
+[$RootKey$\SupportedRuntimesForFxFamily\.NETCore\4.5]
+
+// XML Editor
+[$RootKey$\AutomationProperties\TextEditor\XML]
+[$RootKey$\CLSID\{87569308-4813-40A0-9CD0-D7A30838CA3F}]
+[$RootKey$\CLSID\{f6819a78-a205-47b5-be1c-675b3c7f0b8e}]
+[$RootKey$\Editors\{32CC8DFA-2D70-49b2-94CD-22D57349B778}]
+[$RootKey$\Editors\{412B8852-4F21-413B-9B47-0C9751D3EBFB}]
+[$RootKey$\Editors\{fa3cd31e-987b-443a-9b81-186104e8dac1}]
+[$RootKey$\Languages\CodeExpansions\XML]
+[$RootKey$\Languages\File Extensions\.addin]
+[$RootKey$\Languages\File Extensions\.browser]
+[$RootKey$\Languages\File Extensions\.config]
+[$RootKey$\Languages\File Extensions\.dtd]
+[$RootKey$\Languages\File Extensions\.resx]
+[$RootKey$\Languages\File Extensions\.sitemap]
+[$RootKey$\Languages\File Extensions\.vssettings]
+[$RootKey$\Languages\File Extensions\.vstemplate]
+[$RootKey$\Languages\File Extensions\.wsdl]
+[$RootKey$\Languages\File Extensions\.xdr]
+[$RootKey$\Languages\File Extensions\.xml]
+[$RootKey$\Languages\File Extensions\.xsd]
+[$RootKey$\Languages\File Extensions\.xsl]
+[$RootKey$\Languages\File Extensions\.xslt]
+[$RootKey$\Languages\Language Services\XML]
+[$RootKey$\Menus]
+"{87569308-4813-40a0-9cd0-d7a30838ca3f}"=""
+[$RootKey$\Packages\{87569308-4813-40a0-9cd0-d7a30838ca3f}]
+[$RootKey$\Projects\{B11A6AD6-2D76-4C13-BDD7-78ED7004C364}]
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}]
+[$RootKey$\Services\{1A5ACA9F-DFC2-44d4-8E3D-A2ADAC944FAB}]
+[$RootKey$\Services\{aee124ba-c826-4486-9a92-990873c96d8e}]
+[$RootKey$\Services\{F2CA69F1-49CD-4c69-9E73-B625F324596E}]
+[$RootKey$\Services\{f6819a78-a205-47b5-be1c-675b3c7f0b8e}]
+[$RootKey$\UserSettings\XmlEditor]
+[$RootKey$\XmlChooserFactory]
+[$RootKey$\XmlEditor]
+
+// Solution explorer
+[$RootKey$\ToolWindows\{3AE79031-E1BC-11D0-8F78-00A0C9110057}]
+[$RootKey$\Packages\{cf6a5c16-83b0-4d04-b702-195c35c6e887}]
+[$RootKey$\Menus]
+"{cf6a5c16-83b0-4d04-b702-195c35c6e887}"=""
+[$RootKey$\UserSettings\Environment_Group\Environment_SolutionExplorer]
+
+
+// Toolbox
+[$RootKey$\ToolWindows\{B1E99781-AB81-11D0-B683-00AA00A3EE26}]
+
+// Quick launch
+[$RootKey$\MainWindowFrameControls\{af24dacc-4700-4ef1-9322-be84c428a681}]
+
+// Tools options pages
+[$RootKey$\ToolsOptionsPages\Projects]
+[$RootKey$\ToolsOptionsPages\Debugger\ENC]
+[$RootKey$\ToolsOptionsPages\Debugger\Diagnostic Tools]
+[$RootKey$\ToolsOptionsPages\Debugger\PerformanceTools]
+[$RootKey$\ToolsOptionsPages\Source Control]
+
+// VsGraphicsDebuggerPkg (we need this folder because we need digit to load)
+[$RootKey$\Packages\{f20b4e46-cbc8-4ae7-b10a-43d1d73b4145}]
+[$RootKey$\BindingPaths\{F20B4E46-CBC8-4AE7-B10A-43D1D73B4145}]
+[$RootKey$\Editors\{39556fd8-dd82-40ea-9ce3-2cc09ce2c604}]
+[$RootKey$\Editors\{0d764ae4-7595-4db8-bf9f-65c731e84513}]
+[$RootKey$\Menus]
+"{f20b4e46-cbc8-4ae7-b10a-43d1d73b4145}"=""
+[$RootKey$\ToolsOptionsPages\Graphics Diagnostics]
+// VsGraphicsLaunchHook (skip this one too)
+[$RootKey$\Packages\{13c3063e-2b13-3e42-a7a2-6994ac024761}]
+[$RootKey$\CLSID\{6c006b6c-08af-3927-8bbc-6197dc11056f}]
+[$RootKey$\Debugger\LaunchHooks110]
+
+// Tailored project services menu
+[$RootKey$\Menus]
+"{65D2E08F-C7DD-4512-9486-156881C91F6E}"=""
+
+// Commands package (next to the tailored project services)
+[$RootKey$\Packages\{19aa6823-3ac0-4210-92af-07e2f0b4e81f}]
+[$RootKey$\AutoLoadPackages\{781d1330-8de9-429d-bf73-c74f19e4fcb1}]
+"{19aa6823-3ac0-4210-92af-07e2f0b4e81f}"=""
+[$RootKey$\AutoLoadPackages\{7cac4ae1-2e6b-4b02-a91c-71611e86f273}]
+"{19aa6823-3ac0-4210-92af-07e2f0b4e81f}"=""
+[$RootKey$\AutoLoadPackages\{de9f6b31-c1e5-b965-95f3-1885af956fc9}]
+"{19aa6823-3ac0-4210-92af-07e2f0b4e81f}"=""
+[$RootKey$\Menus]
+"{19aa6823-3ac0-4210-92af-07e2f0b4e81f}"=""
+[$RootKey$\Services\{990f16b8-f493-49fa-8910-471b4460a4a3}]
+[$RootKey$\Packages\{4bb3488f-6dcb-4b4d-8e4b-2841bab2d553}]
+[$RootKey$\AutoLoadPackages\{7cac4ae1-2e6b-4b02-a91c-71611e86f273}]
+"{4bb3488f-6dcb-4b4d-8e4b-2841bab2d553}"=""
+[$RootKey$\BindingPaths\{4BB3488F-6DCB-4B4D-8E4B-2841BAB2D553}]
+[$RootKey$\Editors\{4d47164b-07b6-4a52-a855-728d6a2e2aa3}]
+[$RootKey$\KeyBindingTables\{4d47164b-07b6-4a52-a855-728d6a2e2aa3}]
+[$RootKey$\Services\{5692cb97-bf4f-49ee-b62e-718a6c8f9cb2}]
+[$RootKey$\XmlChooserFactory\AppXManifestDesigner]
+[$RootKey$\Editors\{32CC8DFA-2D70-49b2-94CD-22D57349B778}]
+[$RootKey$\XmlChooserFactory\AppXManifestDesigner]
+[$RootKey$\Packages\{12ed8604-3c37-4407-8377-66e3bd16ed3f}]
+[$RootKey$\AutoLoadPackages\{7cac4ae1-2e6b-4b02-a91c-71611e86f273}]
+"{12ed8604-3c37-4407-8377-66e3bd16ed3f}"=""
+[$RootKey$\Services\{8800de81-2a5c-4847-a740-f5f3eaaaa536}]
+[$RootKey$\Packages\{20620670-54b9-4acb-a3d8-2f86e594132a}]
+[$RootKey$\AutoLoadPackages\{7cac4ae1-2e6b-4b02-a91c-71611e86f273}]
+"{20620670-54b9-4acb-a3d8-2f86e594132a}"=""
+[$RootKey$\Services\{fa3bf5e3-1c7d-37b1-bd31-ea067a49eb90}]
+
+// PixTestPackage
+[$RootKey$\Packages\{faf5b6af-ca8b-4c48-af98-a25667a88d71}]
+
+// Projects
+[$RootKey$\Projects\{911E67C6-3D85-4fce-B560-20A9C3E3FF48}]
+[$RootKey$\Projects\{5600DBA8-E3D8-42CB-B290-4CFFE16ACD2D}]

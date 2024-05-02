@@ -1,0 +1,57 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NsRemoveLockMnRemove
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies a driver does not return STATUS_NOT_SUPPORTED when processing IRP_MJ_PNP with MinorFunction IRP_MN_REMOVE_DEVICE.
+    This rule only applies to FDO and FIDO drivers.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507287
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+}
+
+IoAcquireRemoveLock.exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+       halt;
+    }
+}
+
+
+sdv_RunRemoveDevice.exit
+{
+    if($return==STATUS_NOT_SUPPORTED&&$2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP)
+    {
+      abort "Remove Device Irp is not supported.";
+    }
+    else
+    {
+        halt;
+    }
+}
+
+

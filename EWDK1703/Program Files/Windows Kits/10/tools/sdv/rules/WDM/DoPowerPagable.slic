@@ -1,0 +1,78 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DoPowerPagable
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    The property is statisfied if DO_POWER_PAGABLE is set on the DeviceObject.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507476
+
+--*/
+
+
+#include "slic_base.h"
+
+state{
+    enum {initial, called} s = initial;
+}
+
+[IoCreateDevice].exit
+{
+    if($return==STATUS_SUCCESS)
+    {
+        s=called;
+    }
+    else
+    {
+        halt;
+    }
+}
+
+[IoCreateDeviceSecure]@SDV.exit
+{
+    if($return==STATUS_SUCCESS)
+    {
+        s=called;
+    }
+    else
+    {
+        halt;
+    }
+}
+
+
+fun_AddDevice.exit
+{
+
+    if($return==STATUS_SUCCESS)
+    {
+        if((sdv_p_devobj_fdo->Flags&DO_POWER_PAGABLE)&&(s==called))
+        {
+            abort "The property is statisfied as DO_POWER_PAGABLE is set on the DeviceObject.";
+        }
+        else
+        {
+            halt;
+        }
+    }
+    else
+    {
+        halt;
+    }
+    
+}

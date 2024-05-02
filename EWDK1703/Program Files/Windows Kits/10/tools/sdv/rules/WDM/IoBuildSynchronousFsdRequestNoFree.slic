@@ -1,0 +1,48 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoBuildSynchronousFsdRequestNoFree
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    IoFreeIrp should not be called for this irp.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507269
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+} 
+watch IoBuildSynchronousFsdRequest.exit.$return;
+
+
+IoBuildSynchronousFsdRequest.exit[guard $return]
+{
+    if($return==NULL)
+    {
+        halt;
+    }
+}
+
+IoFreeIrp.entry[guard $1]
+{
+    abort "IoFreeIrp should not be called for this irp.";
+}
+

@@ -1,0 +1,38 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StorPortDDIsPortOnly
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule contains a list of StorPort port-only DDIs 
+    (excluding interlocked functions) that should not be called in StorPort miniports.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507232
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+[
+StorPortCompleteRequest
+].entry 
+{
+	
+    abort "This rule contains a list of StorPort port-only DDIs that should not be called in storport drivers.";
+}

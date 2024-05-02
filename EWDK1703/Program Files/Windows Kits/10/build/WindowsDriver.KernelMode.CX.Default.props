@@ -1,0 +1,59 @@
+<!--
+***********************************************************************************************
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Default values for kernel mode class extensions -->
+
+  <!-- Net Class Extension -->
+  <PropertyGroup Condition="'$(NetAdapterDriver)' == 'true'">
+    <NETADAPTER_VERSION_MAJOR Condition="'$(NETADAPTER_VERSION_MAJOR)' == ''">1</NETADAPTER_VERSION_MAJOR>
+    <NETADAPTER_VERSION_MINOR Condition="'$(NETADAPTER_VERSION_MINOR)' == ''">0</NETADAPTER_VERSION_MINOR>
+    <NETADAPTER_VERSION Condition="'$(NETADAPTER_VERSION)' == ''">$(NETADAPTER_VERSION_MAJOR).$(NETADAPTER_VERSION_MINOR)</NETADAPTER_VERSION>
+    <NETADAPTER_INC_PATH Condition="'$(NETADAPTER_INC_PATH)' == ''">$(DDK_INC_PATH)netadaptercx\$(NETADAPTER_VERSION)</NETADAPTER_INC_PATH>
+    <NETADAPTER_LIB_PATH Condition="'$(NETADAPTER_LIB_PATH)' == ''">$(DDK_LIB_PATH)netadaptercx\$(NETADAPTER_VERSION)\</NETADAPTER_LIB_PATH>
+  </PropertyGroup>
+
+  <!-- UCM Class Extension -->
+  <PropertyGroup Condition="'$(UcmDriver)' == 'true'">
+    <UCM_VERSION_MAJOR Condition="'$(UCM_VERSION_MAJOR)' == ''">1</UCM_VERSION_MAJOR>
+    <UCM_VERSION_MINOR Condition="'$(UCM_VERSION_MINOR)' == ''">0</UCM_VERSION_MINOR>
+    <UCM_VERSION Condition="'$(UCM_VERSION)' == ''">$(UCM_VERSION_MAJOR).$(UCM_VERSION_MINOR)</UCM_VERSION>
+    <UCM_INC_PATH Condition="'$(UCM_INC_PATH)' == ''">$(DDK_INC_PATH)ucm\$(UCM_VERSION)</UCM_INC_PATH>
+    <UCM_LIB_PATH Condition="'$(UCM_LIB_PATH)' == ''">$(DDK_LIB_PATH)ucm\$(UCM_VERSION)\</UCM_LIB_PATH>
+  </PropertyGroup>
+
+  <!-- UCM-TCPCI Class Extension -->
+  <PropertyGroup Condition="'$(UcmTcpciDriver)' == 'true'">
+    <UCMTCPCI_VERSION_MAJOR Condition="'$(UCMTCPCI_VERSION_MAJOR)' == ''">1</UCMTCPCI_VERSION_MAJOR>
+    <UCMTCPCI_VERSION_MINOR Condition="'$(UCMTCPCI_VERSION_MINOR)' == ''">0</UCMTCPCI_VERSION_MINOR>
+    <UCMTCPCI_VERSION Condition="'$(UCMTCPCI_VERSION)' == ''">$(UCMTCPCI_VERSION_MAJOR).$(UCMTCPCI_VERSION_MINOR)</UCMTCPCI_VERSION>
+    <UCMTCPCI_INC_PATH Condition="'$(UCMTCPCI_INC_PATH)' == ''">$(DDK_INC_PATH)UcmTcpci\$(UCMTCPCI_VERSION)</UCMTCPCI_INC_PATH>
+    <UCMTCPCI_LIB_PATH Condition="'$(UCMTCPCI_LIB_PATH)' == ''">$(DDK_LIB_PATH)UcmTcpci\$(UCMTCPCI_VERSION)\</UCMTCPCI_LIB_PATH>
+  </PropertyGroup>
+
+  <!-- URS Class Extension -->
+  <PropertyGroup Condition="'$(UrsDriver)' == 'true'">
+    <URS_VERSION_MAJOR Condition="'$(URS_VERSION_MAJOR)' == ''">1</URS_VERSION_MAJOR>
+    <URS_VERSION_MINOR Condition="'$(URS_VERSION_MINOR)' == ''">0</URS_VERSION_MINOR>
+    <URS_VERSION Condition="'$(URS_VERSION)' == ''">$(URS_VERSION_MAJOR).$(URS_VERSION_MINOR)</URS_VERSION>
+    <URS_INC_PATH Condition="'$(URS_INC_PATH)' == ''">$(DDK_INC_PATH)urs\$(URS_VERSION)</URS_INC_PATH>
+    <URS_LIB_PATH Condition="'$(URS_LIB_PATH)' == ''">$(DDK_LIB_PATH)urs\$(URS_VERSION)\</URS_LIB_PATH>
+  </PropertyGroup>
+
+  <!-- UDE Class Extension -->
+  <PropertyGroup Condition="'$(UdeDriver)' == 'true'">
+    <UDE_VERSION_MAJOR Condition="'$(UDE_VERSION_MAJOR)' == ''">1</UDE_VERSION_MAJOR>
+    <UDE_VERSION_MINOR Condition="'$(UDE_VERSION_MINOR)' == ''">0</UDE_VERSION_MINOR>
+    <UDE_VERSION Condition="'$(UDE_VERSION)' == ''">$(UDE_VERSION_MAJOR).$(UDE_VERSION_MINOR)</UDE_VERSION>
+    <UDE_INC_PATH Condition="'$(UDE_INC_PATH)' == ''">$(DDK_INC_PATH)Ude\$(UDE_VERSION)</UDE_INC_PATH>
+    <UDE_LIB_PATH Condition="'$(UDE_LIB_PATH)' == ''">$(DDK_LIB_PATH)Ude\$(UDE_VERSION)\</UDE_LIB_PATH>
+  </PropertyGroup>
+
+  </Project>

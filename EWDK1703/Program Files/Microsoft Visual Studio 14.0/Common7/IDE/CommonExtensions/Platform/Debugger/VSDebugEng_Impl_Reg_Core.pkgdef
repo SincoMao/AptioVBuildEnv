@@ -1,0 +1,10 @@
+[$RootKey$]
+
+[$RootKey$\Debugger]
+"ComponentDirectory"="$BaseInstallDir$\Common7\Packages\Debugger\"
+"VsDebugLaunchNotifyPath"="$BaseInstallDir$\Common7\Packages\Debugger\VsDebugLaunchNotify.exe"
+
+[$RootKey$\CLSID\{238CBF79-0107-4499-ADC7-8BF6BA1C564E}]
+@="CLSID_AD7ALCausalityEventBridge"
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\Debugger\vsdebugeng.impl.dll"
+"ThreadingModel"="Free"

@@ -1,0 +1,11 @@
+Spinlock
+SpinlockDpc
+SpinlockRelease
+WdfInterruptLock
+WdfInterruptLockRelease
+WdfSpinlock
+WdfSpinlockRelease
+WdfWaitlock
+WdfWaitlockRelease
+ParentObjectCheckLock
+ReqSendWhileSpinlock

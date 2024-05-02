@@ -1,0 +1,86 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoBuildSynchronousFsdRequestWait
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    KeWaitForSingleObject should be called in the case that IoCallDriver or PoCallDriver returns STATUS_PENDING.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507270
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+    enum {init,forwarded_and_pending} irp_state = init; 
+    enum {initial,notsignalled,notsignaled_sync} event_state = initial; 
+}
+watch KeInitializeEvent.entry.$1;
+
+
+KeInitializeEvent.entry[guard $1]
+{
+    if($3)
+    {
+        halt;
+    }
+    else
+    {
+        event_state=notsignalled;
+    }
+}
+
+IoBuildSynchronousFsdRequest.exit[guard $6]
+{
+    if($return!=NULL&&event_state==notsignalled)
+    {
+        event_state=notsignaled_sync;
+    }
+    else
+    {
+        halt;
+    }
+}
+
+[IoCallDriver,PoCallDriver].exit
+{
+    if($2==sdv_IoBuildSynchronousFsdRequest_irp&&$return==STATUS_PENDING&&event_state==notsignaled_sync)
+    {
+        irp_state = forwarded_and_pending;
+    }
+}
+
+KeWaitForSingleObject.entry[guard $1]
+{
+   if(irp_state == forwarded_and_pending)
+   {
+       halt;
+   }
+}
+
+[SDV_RunDispatchFunction].exit 
+{
+    if(irp_state == forwarded_and_pending)
+    {
+        abort "KeWaitForSingleObject should be called in the case that IoCallDriver or PoCallDriver returns STATUS_PENDING.";
+    }
+}
+
+

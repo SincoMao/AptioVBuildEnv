@@ -1,0 +1,52 @@
+[$RootKey$\Packages\{3807C10A-6B69-4525-9768-F7CF18D1D384}]
+@="Microsoft.VisualStudio.Editors.WcfPackage, Microsoft.VisualStudio.Editors.WCF, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+"InprocServer32"="$System$\mscoree.dll"
+"Class"="Microsoft.VisualStudio.Editors.WcfPackage"
+"Assembly"="Microsoft.VisualStudio.Editors.WCF, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+[$RootKey$\Menus]
+"{3807C10A-6B69-4525-9768-F7CF18D1D384}"=", Menus.ctmenu, 1"
+[$RootKey$\Services\{32d47224-21a6-4d8f-9223-c91f0d69c501}]
+@="{3807C10A-6B69-4525-9768-F7CF18D1D384}"
+"Name"="IVsAddWebReferenceDlg3"
+[$RootKey$\Services\{8213E5F9-8F49-435D-8AB3-CC4811AC0725}]
+@="{3807C10A-6B69-4525-9768-F7CF18D1D384}"
+"Name"="Application configuration service"
+[$RootKey$\Services\{a9c88af6-a07e-4b16-bf4a-63465305e696}]
+@="{3807C10A-6B69-4525-9768-F7CF18D1D384}"
+"Name"="SVsWCFReferenceManagerFactory2"
+[$RootKey$\Services\{f05018ee-67af-47da-bbb6-41abd82e7b1c}]
+@="{3807C10A-6B69-4525-9768-F7CF18D1D384}"
+"Name"="ServiceRenameRefactorNotify"
+[$RootKey$\Services\{0db255bd-46ca-4f3b-a122-007617b84b1f}]
+@="{3807C10A-6B69-4525-9768-F7CF18D1D384}"
+"Name"="SvcRenameRefactorNotify"
+[$RootKey$\CLSID\{69cf4e9e-c755-408a-b407-117cc3acabeb}]
+@="Microsoft.VisualStudio.Editors.WCF.WCFProxyGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="Microsoft.VisualStudio.Editors.WCF.WCFProxyGenerator"
+"Assembly"="Microsoft.VisualStudio.Editors.WCF, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+[$RootKey$\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\WCF Proxy Generator]
+@="Generator for WCF proxies"
+"CLSID"="{69cf4e9e-c755-408a-b407-117cc3acabeb}"
+"GeneratesDesignTimeSource"=dword:00000001
+[$RootKey$\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\.svcmap]
+@="WCF Proxy Generator"
+[$RootKey$\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\WCF Proxy Generator]
+@="Generator for WCF proxies"
+"CLSID"="{69cf4e9e-c755-408a-b407-117cc3acabeb}"
+"GeneratesDesignTimeSource"=dword:00000001
+[$RootKey$\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\.svcmap]
+@="WCF Proxy Generator"
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\FileExtensions\.config\RefactorNotify\{f05018ee-67af-47da-bbb6-41abd82e7b1c}]
+"NotificationType"=dword:00000000
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\FileExtensions\.config\RefactorNotify\{f05018ee-67af-47da-bbb6-41abd82e7b1c}]
+"NotificationType"=dword:00000000
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\FileExtensions\.config\RefactorNotify\{f05018ee-67af-47da-bbb6-41abd82e7b1c}]
+"NotificationType"=dword:00000000
+[$RootKey$\Projects\{E24C65DC-7377-472b-9ABA-BC803B73C61A}\FileExtensions\.svc\RefactorNotify\{0db255bd-46ca-4f3b-a122-007617b84b1f}]
+"NotificationType"=dword:00000001
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\FileExtensions\.svc\RefactorNotify\{0db255bd-46ca-4f3b-a122-007617b84b1f}]
+"NotificationType"=dword:00000001
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\FileExtensions\.svc\RefactorNotify\{0db255bd-46ca-4f3b-a122-007617b84b1f}]
+"NotificationType"=dword:00000001

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FileList 
+  FrameworkIdentity="Name=Microsoft.Midi.GmDls, MinVersion=1.0.0.0, Publisher='CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US'"
+  TargetPlatform="UAP"
+  TargetPlatformMinVersion="10.0.0.0"
+  TargetPlatformVersion="10.0.15063.0"
+  DisplayName = "Microsoft General MIDI DLS for Universal Windows Apps"
+  AppliesTo = "WindowsAppContainer + (Managed | Javascript | Native)"
+  AppX = ".\Appx\Neutral\MidiVoices.appx"
+  SDKType="Framework"
+  MinVSVersion = "14.0"
+  SupportsMultipleVersions="Error"
+  SupportedArchitectures="x86;x64;ARM">
+</FileList>

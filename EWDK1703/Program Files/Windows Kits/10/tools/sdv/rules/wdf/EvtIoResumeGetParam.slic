@@ -1,0 +1,64 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    evtioresumegetparam
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule checks that WdfRequestGetParameters is not called within EvtIoResume callback.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507069
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+state
+{
+     enum {init,inresume} s = init;
+}
+
+[fun_WDF_IO_QUEUE_IO_RESUME].entry
+{
+    s = inresume;               
+}
+
+[sdv_WdfRequestGetParameters].entry
+{
+   if(s == inresume)
+   {
+      abort "Warning:$fname should not be called within EvtIoResume.";
+   }
+   else
+   {
+      halt;
+   }
+}
+
+
+
+
+[fun_WDF_IO_QUEUE_IO_RESUME].exit
+{   
+	halt;
+}
+
+
+
+

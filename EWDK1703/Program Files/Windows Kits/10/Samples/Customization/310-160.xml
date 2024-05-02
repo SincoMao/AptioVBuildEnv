@@ -1,0 +1,1444 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--  Copyright (c) Microsoft Corporation.  All rights reserved.  -->
+<ImageCustomizations xmlns="http://schemas.microsoft.com/embedded/2004/10/ImageUpdate"
+                     Name="Customization File for T-Mobile"
+                     Description="Customization File for T-Mobile"
+                     Owner="Microsoft"
+                     OwnerType="MobileOperator"
+                     Priority="2">
+  <Targets>
+    <Target Id="TMO IPv4 Selfhost Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="160" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_SelfHost" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:200, 250" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_SelfHost" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="260" />
+        <Condition Name="GID1" Value="544D" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_SelfHost" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:270, 310" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_SelfHost" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="330" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_SelfHost" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="490" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_SelfHost" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="580" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_SelfHost" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="660" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_SelfHost" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="800" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_SelfHost" />
+        </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="001" />
+        <Condition Name="MNC" Value="01" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Selfhost)" />
+        <Condition Name="UIOrder" Value="85" />
+        <Condition Name="PRESELECTMO" Value="TMO_SelfHost" />
+      </TargetState>
+    </Target>
+    <Target Id="TMO Baio IPv4 Selfhost Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="160" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-Baio" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:200, 250" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-Baio" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="260" />
+        <Condition Name="GID1" Value="544D" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-Baio" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:270, 310" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-Baio" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="330" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-Baio" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="490" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-Baio" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="580" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-Baio" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="660" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-Baio" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="800" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-Baio" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="310" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-Baio" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="660" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-Baio" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="001" />
+        <Condition Name="MNC" Value="01" />
+        <Condition Name="DeviceType" Value="8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio)" />
+        <Condition Name="UIOrder" Value="86" />
+      </TargetState>
+    </Target>
+    <Target Id="TMO XLAT Selfhost Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="160" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile XLAT(Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_XLAT_SELFHOST" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:200, 250" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile XLAT(Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_XLAT_SELFHOST" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="260" />
+        <Condition Name="GID1" Value="544D" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile XLAT(Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_XLAT_SELFHOST" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:270, 310" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile XLAT(Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_XLAT_SELFHOST" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="330" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile XLAT(Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_XLAT_SELFHOST" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="490" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile XLAT(Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_XLAT_SELFHOST" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="580" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile XLAT(Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_XLAT_SELFHOST" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="660" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile XLAT(Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_XLAT_SELFHOST" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="800" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile XLAT(Selfhost)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="TMO_XLAT_SELFHOST" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="001" />
+        <Condition Name="MNC" Value="01" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile XLAT(Selfhost)" />
+        <Condition Name="UIOrder" Value="85" />
+        <Condition Name="PRESELECTMO" Value="TMO_XLAT_SELFHOST" />
+      </TargetState>
+    </Target>
+    <Target Id="TMO XLAT IMS Selfhost Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="160" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile IMS (Selfhost)" />
+        <Condition Name="UIOrder" Value="15" />
+        <Condition Name="PRESELECTMO" Value="TMO_VOLTE-TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:200, 250" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile IMS (Selfhost)" />
+        <Condition Name="UIOrder" Value="15" />
+        <Condition Name="PRESELECTMO" Value="TMO_VOLTE-TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="260" />
+        <Condition Name="GID1" Value="544D" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile IMS (Selfhost)" />
+        <Condition Name="UIOrder" Value="15" />
+        <Condition Name="PRESELECTMO" Value="TMO_VOLTE-TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:270, 310" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile IMS (Selfhost)" />
+        <Condition Name="UIOrder" Value="15" />
+        <Condition Name="PRESELECTMO" Value="TMO_VOLTE-TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="330" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile IMS (Selfhost)" />
+        <Condition Name="UIOrder" Value="15" />
+        <Condition Name="PRESELECTMO" Value="TMO_VOLTE-TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="490" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile IMS (Selfhost)" />
+        <Condition Name="UIOrder" Value="15" />
+        <Condition Name="PRESELECTMO" Value="TMO_VOLTE-TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="580" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile IMS (Selfhost)" />
+        <Condition Name="UIOrder" Value="15" />
+        <Condition Name="PRESELECTMO" Value="TMO_VOLTE-TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="660" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile IMS (Selfhost)" />
+        <Condition Name="UIOrder" Value="15" />
+        <Condition Name="PRESELECTMO" Value="TMO_VOLTE-TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="800" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile IMS (Selfhost)" />
+        <Condition Name="UIOrder" Value="15" />
+        <Condition Name="PRESELECTMO" Value="TMO_VOLTE-TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="001" />
+        <Condition Name="MNC" Value="01" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile IMS (Selfhost)" />
+        <Condition Name="UIOrder" Value="88" />
+      </TargetState>
+    </Target>
+    <Target Id="TMO Baio XLAT Selfhost Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="160" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio XLAT)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-SCOTTBAIO-XLAT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:200, 250" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio XLAT)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-SCOTTBAIO-XLAT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="260" />
+        <Condition Name="GID1" Value="544D" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio XLAT)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-SCOTTBAIO-XLAT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:270, 310" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio XLAT)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-SCOTTBAIO-XLAT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="330" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio XLAT)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-SCOTTBAIO-XLAT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="490" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio XLAT)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-SCOTTBAIO-XLAT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="580" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio XLAT)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-SCOTTBAIO-XLAT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="660" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio XLAT)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-SCOTTBAIO-XLAT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="800" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio XLAT)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-SCOTTBAIO-XLAT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="310" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio XLAT)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-SCOTTBAIO-XLAT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="660" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio XLAT)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="TMO-SCOTTBAIO-XLAT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="001" />
+        <Condition Name="MNC" Value="01" />
+        <Condition Name="DeviceType" Value="!8960" />
+        <Condition Name="UIName" Value="T-Mobile (Scott Baio XLAT)" />
+        <Condition Name="UIOrder" Value="86" />
+        <Condition Name="PRESELECTMO" Value="TMO-SCOTTBAIO-XLAT" />
+      </TargetState>
+    </Target>
+    <Target Id="MetroPCS Selfhost Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="310" />
+        <Condition Name="GID1" Value="6D38" />
+        <Condition Name="UIName" Value="MetroPCS (Selfhost)" />
+        <Condition Name="UIOrder" Value="30" />
+      </TargetState>
+    </Target>
+    <Target Id="BrightSpot Selfhost Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="260" />
+        <Condition Name="GID1" Value="4C45" />
+        <Condition Name="UIName" Value="brightspot (Selfhost)" />
+        <Condition Name="UIOrder" Value="40" />
+      </TargetState>
+    </Target>
+    <Target Id="FamilyMobile Selfhost Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="260" />
+        <Condition Name="GID1" Value="4D4B" />
+        <Condition Name="UIName" Value="FamilyMobile (Selfhost)" />
+        <Condition Name="UIOrder" Value="50" />
+      </TargetState>
+    </Target>
+  </Targets>
+  <Variant Name="TMO IPv4 Selfhost">
+    <TargetRefs>
+      <TargetRef Id="TMO IPv4 Selfhost Target" />
+    </TargetRefs>
+    <Applications>
+      <Application License="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\FakeTMOLicense.xml"
+                   ProvXML="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmo.provxml"
+                   TargetPartition="MainOS" />
+    </Applications>
+    <Settings Path="StartPrepinnedTile1">
+      <!--My Account-->
+      <Setting Name="StartPrepinnedOEMAppID" Value="{9d6460d1-c9c5-df11-9eae-00237de2db9e}" />
+      <Setting Name="StartPrepinnedTileSize" Value="1" />
+      <Setting Name="StartPrepinnedTileXCoordinate" Value="0" />
+      <Setting Name="StartPrepinnedTileYCoordinate" Value="6" />
+    </Settings>
+    <Settings Path="NFC/SEMgr/UI">
+      <Setting Name="HideFastCardsOptions" Value="1" />
+      <Setting Name="DefaultFastCardSetting" Value="4" />
+    </Settings>
+    <Settings Path="InternetExplorer">
+      <Setting Name="FirstRunUrl" Value="http://www.t-mobile.com/" />
+    </Settings>
+    <Settings Path="BootandShutdownScreens">
+      <Asset Name="BootImage"
+             DisplayName="TMOBootScreen"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMobile_Startup.jpg"
+             TargetFileName="TMOBootScreen.jpg" />
+      <Setting Name="WindowsPhoneBootScreenOverride" Value="TMOBootScreen.jpg" />
+      <Asset Name="ShutdownImage"
+             DisplayName="TMOShutdownScreen"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMobile_Shutdown.jpg"
+             TargetFileName="TMOShutdownScreen.jpg" />
+      <Setting Name="WindowsPhoneShutdownScreenOverride" Value="TMOShutdownScreen.jpg" />
+    </Settings>
+    <Settings Path="LockScreen">
+      <Asset Name="Wallpapers"
+             DisplayName="TMOWallpaper"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmo.jpg"
+             TargetFileName="TMOWallpaper.jpg" />
+      <Setting Name="DefaultWallpaper" Value="TMOWallpaper.jpg" />
+    </Settings>
+    <Settings Path="EventSounds">
+      <Asset Name="Ringtones"
+             DisplayName="TMORingtone"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmoringtone.wma"
+             TargetFileName="TMORingtone.wma"  />
+      <Setting Name="DefaultRingtone" Value="TMORingtone.wma" />
+      <Asset Name="NotificationSounds"
+             DisplayName="TMONotification"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMONotification.wma"
+             TargetFileName="TMONotification.wma"  />
+      <Setting Name="DefaultMessagingSound" Value="TMONotification.wma" />
+    </Settings>
+    <Settings Path="Theme">
+      <Setting Name="DefaultAccentColor" Value="Magenta" />
+      <Setting Name="DefaultBackgroundColor" Value="Dark" />
+    </Settings>
+    <Settings Path="Shell/SystemTray/DataActivity">
+      <Setting Name="DataActivityIcon" Value="1"/>
+    </Settings>
+    <Settings Path="Shell/SystemTray/Location">
+      <Setting Name="LocationIcon" Value="1"/>
+    </Settings>
+    <Settings Path="InternetExplorer/Favorites/T-Mobile Customer Service">
+      <Setting Name="URL" Value="http://www.t-mobile.com/contact-us.html‎" />
+    </Settings>
+    <Settings Path="Connections">
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/ExemptFromDisablePolicy" Value="1" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/IPType" Value="IPv4" />
+    </Settings>
+    <Settings Path="PGList/205-PRXY $(__MVID)/205-PRXY-PHY $(__MVID)">
+      <Setting Name="TRUST" Value="1" />
+      <Setting Name="AddressType" Value="E164" />
+      <Setting Name="Address" Value="205" />
+      <Setting Name="PushEnabled" Value="1" />
+      <Setting Name="MatchedNapID" Value="205-NAPDEF $(__MVID)" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="TMO_mms $(__MVID)" />
+      <Setting Name="TONAPID" Value="TMO_mms $(__MVID)" />
+      <Setting Name="ADDR" Value="http://mms.msg.eng.t-mobile.com/mms/wapenc" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="TargetVideoFormat" Value="2" />
+      <Setting Name="ErrorCodeEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RequestDeliveryReport">
+      <Setting Name="RequestDeliveryReportIsSupported" Value="1" />
+      <Setting Name="RequestDeliveryReport" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AllowSendingDeliveryReport">
+      <Setting Name="AllowSendingDeliveryReportIsSupported" Value="1" />
+      <Setting Name="AllowSendingDeliveryReport" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AutomaticallyDownload">
+      <Setting Name="ShowAutomaticallyDownloadMMSToggle" Value="1" />
+      <Setting Name="AutomaticallyDownload" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/EmergencyAlertOptions">
+      <Setting Name="CmasAMBERAlertEnabled" Value="1" />
+      <Setting Name="CmasExtremeAlertEnabled" Value="1" />
+      <Setting Name="CmasSevereAlertEnabled" Value="1" />
+      <Setting Name="EmOperatorEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="AllowSMStoSMTPAddress" Value="1" />
+      <Setting Name="SMStoSMTPShortCode" Value="500" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RcsOptions">
+      <Setting Name="ShowRcsEnabled" Value="1" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/MMS">
+      <Setting Name="MMSMessageRoles" Value="4096" />
+    </Settings>
+  </Variant>
+  <Variant Name="TMO IPv4 Baio Selfhost">
+    <TargetRefs>
+      <TargetRef Id="TMO Baio IPv4 Selfhost Target" />
+    </TargetRefs>
+    <Applications>
+      <Application License="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\FakeTMOLicense.xml"
+                   ProvXML="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmo.provxml"
+                   TargetPartition="MainOS" />
+    </Applications>
+    <Settings Path="StartPrepinnedTile1">
+      <!--My Account-->
+      <Setting Name="StartPrepinnedOEMAppID" Value="{9d6460d1-c9c5-df11-9eae-00237de2db9e}" />
+      <Setting Name="StartPrepinnedTileSize" Value="1" />
+      <Setting Name="StartPrepinnedTileXCoordinate" Value="0" />
+      <Setting Name="StartPrepinnedTileYCoordinate" Value="6" />
+    </Settings>
+    <Settings Path="NFC/SEMgr/UI">
+      <Setting Name="HideFastCardsOptions" Value="1" />
+      <Setting Name="DefaultFastCardSetting" Value="4" />
+    </Settings>
+    <Settings Path="InternetExplorer">
+      <Setting Name="FirstRunUrl" Value="http://www.t-mobile.com/" />
+    </Settings>
+    <Settings Path="BootandShutdownScreens">
+      <Asset Name="BootImage"
+             DisplayName="TMOBAIOBootScreen"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmo_baio.jpg"
+             TargetFileName="TMOBAIOBootScreen.jpg" />
+      <Setting Name="WindowsPhoneBootScreenOverride" Value="TMOBAIOBootScreen.jpg" />
+      <Asset Name="ShutdownImage"
+             DisplayName="TMOShutdownScreen"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMobile_Shutdown.jpg"
+             TargetFileName="TMOShutdownScreen.jpg" />
+      <Setting Name="WindowsPhoneShutdownScreenOverride" Value="TMOShutdownScreen.jpg" />
+    </Settings>
+    <Settings Path="LockScreen">
+      <Asset Name="Wallpapers"
+             DisplayName="TMOBAIOWallpaper"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmo_baio.jpg"
+             TargetFileName="TMOBAIOWallpaper.jpg" />
+      <Setting Name="DefaultWallpaper" Value="TMOBAIOWallpaper.jpg" />
+    </Settings>
+    <Settings Path="EventSounds">
+      <Asset Name="Ringtones"
+             DisplayName="TMORingtone"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmoringtone.wma"
+             TargetFileName="TMORingtone.wma"  />
+      <Setting Name="DefaultRingtone" Value="TMORingtone.wma" />
+      <Asset Name="NotificationSounds"
+             DisplayName="TMONotification"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMONotification.wma"
+             TargetFileName="TMONotification.wma"  />
+      <Setting Name="DefaultMessagingSound" Value="TMONotification.wma" />
+    </Settings>
+    <Settings Path="Theme">
+      <Setting Name="DefaultAccentColor" Value="Magenta" />
+      <Setting Name="DefaultBackgroundColor" Value="Dark" />
+    </Settings>
+    <Settings Path="InternetExplorer/Favorites/T-Mobile Customer Service">
+      <Setting Name="URL" Value="http://www.t-mobile.com/contact-us.html‎" />
+    </Settings>
+    <Settings Path="Connections">
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/ExemptFromDisablePolicy" Value="1" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/IPType" Value="IPv4" />
+    </Settings>
+    <Settings Path="PGList/205-PRXY $(__MVID)/205-PRXY-PHY $(__MVID)">
+      <Setting Name="TRUST" Value="1" />
+      <Setting Name="AddressType" Value="E164" />
+      <Setting Name="Address" Value="205" />
+      <Setting Name="PushEnabled" Value="1" />
+      <Setting Name="MatchedNapID" Value="205-NAPDEF $(__MVID)" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="TMO_mms $(__MVID)" />
+      <Setting Name="TONAPID" Value="TMO_mms $(__MVID)" />
+      <Setting Name="ADDR" Value="http://mms.msg.eng.t-mobile.com/mms/wapenc" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="TargetVideoFormat" Value="2" />
+      <Setting Name="ErrorCodeEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RequestDeliveryReport">
+      <Setting Name="RequestDeliveryReportIsSupported" Value="1" />
+      <Setting Name="RequestDeliveryReport" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AllowSendingDeliveryReport">
+      <Setting Name="AllowSendingDeliveryReportIsSupported" Value="1" />
+      <Setting Name="AllowSendingDeliveryReport" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AutomaticallyDownload">
+      <Setting Name="ShowAutomaticallyDownloadMMSToggle" Value="1" />
+      <Setting Name="AutomaticallyDownload" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/EmergencyAlertOptions">
+      <Setting Name="CmasAMBERAlertEnabled" Value="1" />
+      <Setting Name="CmasExtremeAlertEnabled" Value="1" />
+      <Setting Name="CmasSevereAlertEnabled" Value="1" />
+      <Setting Name="EmOperatorEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="AllowSMStoSMTPAddress" Value="1" />
+      <Setting Name="SMStoSMTPShortCode" Value="500" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RcsOptions">
+      <Setting Name="ShowRcsEnabled" Value="1" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/MMS">
+      <Setting Name="MMSMessageRoles" Value="4096" />
+    </Settings>
+  </Variant>
+  <Variant Name="TMO XLAT Selfhost">
+    <TargetRefs>
+      <TargetRef Id="TMO XLAT Selfhost Target" />
+    </TargetRefs>
+    <Applications>
+      <Application License="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\FakeTMOLicense.xml"
+                   ProvXML="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmo.provxml"
+                   TargetPartition="MainOS" />
+    </Applications>
+    <Settings Path="StartPrepinnedTile1">
+      <!--My Account-->
+      <Setting Name="StartPrepinnedOEMAppID" Value="{9d6460d1-c9c5-df11-9eae-00237de2db9e}" />
+      <Setting Name="StartPrepinnedTileSize" Value="1" />
+      <Setting Name="StartPrepinnedTileXCoordinate" Value="0" />
+      <Setting Name="StartPrepinnedTileYCoordinate" Value="6" />
+    </Settings>
+    <Settings Path="NFC/SEMgr/UI">
+      <Setting Name="HideFastCardsOptions" Value="1" />
+      <Setting Name="DefaultFastCardSetting" Value="4" />
+    </Settings>
+    <Settings Path="InternetExplorer">
+      <Setting Name="FirstRunUrl" Value="http://www.t-mobile.com/" />
+    </Settings>
+    <Settings Path="BootandShutdownScreens">
+      <Asset Name="BootImage"
+             DisplayName="TMOBootScreen"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMobile_Startup.jpg"
+             TargetFileName="TMOBootScreen.jpg" />
+      <Setting Name="WindowsPhoneBootScreenOverride" Value="TMOBootScreen.jpg" />
+      <Asset Name="ShutdownImage"
+             DisplayName="TMOShutdownScreen"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMobile_Shutdown.jpg"
+             TargetFileName="TMOShutdownScreen.jpg" />
+      <Setting Name="WindowsPhoneShutdownScreenOverride" Value="TMOShutdownScreen.jpg" />
+    </Settings>
+    <Settings Path="LockScreen">
+      <Asset Name="Wallpapers"
+             DisplayName="TMOWallpaper"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmo.jpg"
+             TargetFileName="TMOWallpaper.jpg" />
+      <Setting Name="DefaultWallpaper" Value="TMOWallpaper.jpg" />
+    </Settings>
+    <Settings Path="EventSounds">
+      <Asset Name="Ringtones"
+             DisplayName="TMORingtone"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmoringtone.wma"
+             TargetFileName="TMORingtone.wma"  />
+      <Setting Name="DefaultRingtone" Value="TMORingtone.wma" />
+      <Asset Name="NotificationSounds"
+             DisplayName="TMONotification"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMONotification.wma"
+             TargetFileName="TMONotification.wma"  />
+      <Setting Name="DefaultMessagingSound" Value="TMONotification.wma" />
+    </Settings>
+    <Settings Path="Theme">
+      <Setting Name="DefaultAccentColor" Value="Magenta" />
+      <Setting Name="DefaultBackgroundColor" Value="Dark" />
+    </Settings>
+    <Settings Path="Shell/SystemTray/DataActivity">
+      <Setting Name="DataActivityIcon" Value="1"/>
+    </Settings>
+    <Settings Path="Shell/SystemTray/Location">
+      <Setting Name="LocationIcon" Value="1"/>
+    </Settings>
+    <Settings Path="InternetExplorer/Favorites/T-Mobile Customer Service">
+      <Setting Name="URL" Value="http://www.t-mobile.com/contact-us.html‎" />
+    </Settings>
+    <Settings Path="Connections">
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/IPType" Value="IPv4v6xlat" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/ExemptFromDisablePolicy" Value="1" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/IPType" Value="IPv4v6xlat" />
+    </Settings>
+    <Settings Path="PGList/205-PRXY $(__MVID)/205-PRXY-PHY $(__MVID)">
+      <Setting Name="TRUST" Value="1" />
+      <Setting Name="AddressType" Value="E164" />
+      <Setting Name="Address" Value="205" />
+      <Setting Name="PushEnabled" Value="1" />
+      <Setting Name="MatchedNapID" Value="205-NAPDEF $(__MVID)" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="TMO_mms $(__MVID)" />
+      <Setting Name="TONAPID" Value="TMO_mms $(__MVID)" />
+      <Setting Name="ADDR" Value="http://mms.msg.eng.t-mobile.com/mms/wapenc" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="TargetVideoFormat" Value="2" />
+      <Setting Name="ErrorCodeEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RequestDeliveryReport">
+      <Setting Name="RequestDeliveryReportIsSupported" Value="1" />
+      <Setting Name="RequestDeliveryReport" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AllowSendingDeliveryReport">
+      <Setting Name="AllowSendingDeliveryReportIsSupported" Value="1" />
+      <Setting Name="AllowSendingDeliveryReport" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AutomaticallyDownload">
+      <Setting Name="ShowAutomaticallyDownloadMMSToggle" Value="1" />
+      <Setting Name="AutomaticallyDownload" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/EmergencyAlertOptions">
+      <Setting Name="CmasAMBERAlertEnabled" Value="1" />
+      <Setting Name="CmasExtremeAlertEnabled" Value="1" />
+      <Setting Name="CmasSevereAlertEnabled" Value="1" />
+      <Setting Name="EmOperatorEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="AllowSMStoSMTPAddress" Value="1" />
+      <Setting Name="SMStoSMTPShortCode" Value="500" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RcsOptions">
+      <Setting Name="ShowRcsEnabled" Value="1" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/MMS">
+      <Setting Name="MMSMessageRoles" Value="4096" />
+    </Settings>
+  </Variant>
+  <Variant Name="TMO XLAT IMS Selfhost">
+    <TargetRefs>
+      <TargetRef Id="TMO XLAT IMS Selfhost Target" />
+    </TargetRefs>
+    <Applications>
+      <Application License="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\FakeTMOLicense.xml"
+                   ProvXML="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmo.provxml"
+                   TargetPartition="MainOS" />
+    </Applications>
+    <Settings Path="StartPrepinnedTile1">
+      <!--My Account-->
+      <Setting Name="StartPrepinnedOEMAppID" Value="{9d6460d1-c9c5-df11-9eae-00237de2db9e}" />
+      <Setting Name="StartPrepinnedTileSize" Value="1" />
+      <Setting Name="StartPrepinnedTileXCoordinate" Value="0" />
+      <Setting Name="StartPrepinnedTileYCoordinate" Value="6" />
+    </Settings>
+    <Settings Path="NFC/SEMgr/UI">
+      <Setting Name="HideFastCardsOptions" Value="1" />
+      <Setting Name="DefaultFastCardSetting" Value="4" />
+    </Settings>
+    <Settings Path="InternetExplorer">
+      <Setting Name="FirstRunUrl" Value="http://www.t-mobile.com/" />
+    </Settings>
+    <Settings Path="BootandShutdownScreens">
+      <Asset Name="BootImage"
+             DisplayName="TMOBootScreen"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMobile_Startup.jpg"
+             TargetFileName="TMOBootScreen.jpg" />
+      <Setting Name="WindowsPhoneBootScreenOverride" Value="TMOBootScreen.jpg" />
+      <Asset Name="ShutdownImage"
+             DisplayName="TMOShutdownScreen"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMobile_Shutdown.jpg"
+             TargetFileName="TMOShutdownScreen.jpg" />
+      <Setting Name="WindowsPhoneShutdownScreenOverride" Value="TMOShutdownScreen.jpg" />
+    </Settings>
+    <Settings Path="LockScreen">
+      <Asset Name="Wallpapers"
+             DisplayName="TMOWallpaper"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmo.jpg"
+             TargetFileName="TMOWallpaper.jpg" />
+      <Setting Name="DefaultWallpaper" Value="TMOWallpaper.jpg" />
+    </Settings>
+    <Settings Path="EventSounds">
+      <Asset Name="Ringtones"
+             DisplayName="TMORingtone"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmoringtone.wma"
+             TargetFileName="TMORingtone.wma"  />
+      <Setting Name="DefaultRingtone" Value="TMORingtone.wma" />
+      <Asset Name="NotificationSounds"
+             DisplayName="TMONotification"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMONotification.wma"
+             TargetFileName="TMONotification.wma"  />
+      <Setting Name="DefaultMessagingSound" Value="TMONotification.wma" />
+    </Settings>
+    <Settings Path="Theme">
+      <Setting Name="DefaultAccentColor" Value="Magenta" />
+      <Setting Name="DefaultBackgroundColor" Value="Dark" />
+    </Settings>
+    <Settings Path="Shell/SystemTray/DataActivity">
+      <Setting Name="DataActivityIcon" Value="1"/>
+    </Settings>
+    <Settings Path="Shell/SystemTray/Location">
+      <Setting Name="LocationIcon" Value="1"/>
+    </Settings>
+    <Settings Path="InternetExplorer/Favorites/T-Mobile Customer Service">
+      <Setting Name="URL" Value="http://www.t-mobile.com/contact-us.html‎" />
+    </Settings>
+    <Settings Path="Connections">
+      <!--APN 1 general purpose data -->
+      <Setting Name="Cellular/TMO_Internet$(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/TMO_Internet$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/TMO_Internet$(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/TMO_Internet$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/TMO_Internet$(__MVID)@WAP/AuthType" Value="None" />
+      <!--Potentially this could be IPV6only-->
+      <Setting Name="Cellular/TMO_Internet$(__MVID)@WAP/IPType" Value="IPv4v6xlat" />
+      <Setting Name="Cellular/TMO_Internet$(__MVID)@WAP/Enabled" Value="1"/>
+      <Setting Name="Cellular/TMO_Internet$(__MVID)@WAP/OemConnectionId" Value="8CC16109-279F-4C53-A447-000000000001" />
+      <!--APN 2 ims this is accessible via LTE and WIFI IWLAN both -->
+      <Setting Name="Cellular/TMO_IMS$(__MVID)@WAP/AccessPointName" Value="ims" />
+      <Setting Name="Cellular/TMO_IMS$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/TMO_IMS$(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/TMO_IMS$(__MVID)@WAP/ConnectionType" Value="lte_iwlan" />
+      <Setting Name="Cellular/TMO_IMS$(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/TMO_IMS$(__MVID)@WAP/IPType" Value="IPv6" />
+      <Setting Name="Cellular/TMO_IMS$(__MVID)@WAP/Enabled" Value="1"/>
+      <Setting Name="Cellular/TMO_IMS$(__MVID)@WAP/OemConnectionId" Value="8CC16109-279F-4C53-A447-000000000002" />
+      <!--APN 3 Emergency APN for emergency VOLTE CALL -->
+      <Setting Name="Cellular/TMO_SOS$(__MVID)@WAP/AccessPointName" Value="sos" />
+      <Setting Name="Cellular/TMO_SOS$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/TMO_SOS$(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/TMO_SOS$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/TMO_SOS$(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/TMO_SOS$(__MVID)@WAP/IPType" Value="IPv4v6" />
+      <Setting Name="Cellular/TMO_SOS$(__MVID)@WAP/Enabled" Value="1"/>
+      <Setting Name="Cellular/TMO_SOS$(__MVID)@WAP/OemConnectionId" Value="8CC16109-279F-4C53-A447-000000000003" />
+      <!--APN 4 TMUS accessible via LTE and WIFI IWLAN both, MMS/TMO specific data flow -->
+      <Setting Name="Cellular/TMO_TMUS$(__MVID)@WAP/AccessPointName" Value="TMUS" />
+      <Setting Name="Cellular/TMO_TMUS$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/TMO_TMUS$(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/TMO_TMUS$(__MVID)@WAP/ConnectionType" Value="lte_iwlan" />
+      <Setting Name="Cellular/TMO_TMUS$(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/TMO_TMUS$(__MVID)@WAP/IPType" Value="IPv6" />
+      <Setting Name="Cellular/TMO_TMUS$(__MVID)@WAP/Enabled" Value="1"/>
+      <Setting Name="Cellular/TMO_TMUS$(__MVID)@WAP/OemConnectionId" Value="8CC16109-279F-4C53-A447-000000000004" />
+      <!-- Special policy for hybrid IMS registration -->
+      <Setting Name="Policies/Policy1/SID" Value="*" />
+      <Setting Name="Policies/Policy1/ClientType" Value="*" />
+      <Setting Name="Policies/Policy1/Host" Value="IMS-ims-v6" />
+      <Setting Name="Policies/Policy1/OrderedConnections" Value="1" />
+      <Setting Name="Policies/Policy1/Conn000/Type" Value="CMST_CONNECTION_NAME" />
+      <Setting Name="Policies/Policy1/Conn000/ConnectionId" Value="TMO_IMS$(__MVID)@WAP" />
+    </Settings>
+    <Settings Path="ModemConfigurations">
+      <!-- for normal TMO IMS registration over LTE -->
+      <Setting Name="Prop/GROUP_PROFILE_INFO:{8CC16109-279F-4C53-A447-000000000002}/PCSCF_ADDR_USING_PCO" Value="1" Type="boolean" />
+      <!-- for normal TMO IMS registration Wi-Fi Calling -->
+      <Setting Name="Prop/GROUP_PROFILE_INFO:{8CC16109-279F-4C53-A447-000000000003}/PCSCF_ADDR_USING_PCO" Value="1" Type="boolean" />
+      <!-- TMO emergency APN support-->
+      <Setting Name="Prop/GROUP_PROFILE_INFO:{8CC16109-279F-4C53-A447-000000000003}/SUPPORT_EMERGENCY_CALLS" Value="1" Type="boolean" />
+    </Settings>
+    <Settings Path="CellConfigurations">
+      <Setting Name="Prop/WifiCalling/EmergencyAddressUrl" Value="http://ma.web2go.com/911address.do" Type="string"/>
+      <!--Show Preference maps to previous ShowWiFiCallingPreferences . Should be an OR of WiFiCallingPreference where below values are bitwise OR'd
+         1 - WiFiPreferred
+         2 - CellularPreferred
+         4 - WiFiOnly
+      -->
+      <Setting Name="Prop/WifiCalling/ShowPreferences" Value="7" Type="integer" />
+      <Setting Name="Prop/WifiCalling/ShowToggle" Value="1" Type="boolean" />
+      <!-- This maps to previous DefaultWiFiCallingPreference. Should be a single value of WiFiCallingPreference where
+        0 - CellularOnly
+        1 - WiFiPreferred
+        2 - CellularPreferred
+        4 - WiFiOnly
+      -->
+      <Setting Name="Prop/WifiCalling/DefaultPreference" Value="1" Type="integer" />
+    </Settings>
+    <Settings Path="CellCore/PerIMSI/~__IMSI~/CellUX/Critical">
+      <Setting Name="SwitchIMS" Value="1" />
+      <Setting Name="SwitchSMSOverIMS" Value="0" />
+      <Setting Name="SwitchVoiceOverIMS" Value="0" />
+      <Setting Name="SwitchVideoOverIMS" Value="0" />
+    </Settings>
+    <!-- Show VOLTE toggle cannot be defined as 'perIMSI' customization. this UI only shows when modem supports it-->
+    <Settings Path="CellCore/PerDevice/CellUX/Critical">
+      <Setting Name="ShowVoLTEToggle" Value="1" />
+    </Settings>
+    <Settings Path="Phone/PerSimSettings/~__IMSI~">
+      <Setting Name="ShowVideoCallingSwitch" Value="1" />
+      <Setting Name="ShowVideoCapabilitySwitch" Value="1" />
+      <Setting Name="DefaultEnableVideoCalling" Value="1" /> 
+      <Setting Name="AllowVideoConferencing" Value="1" /> 
+      <Setting Name="AllowMixedAudioVideoConferencing" Value="1" /> 
+    </Settings>
+    <!-- This is set only for first SIM card inserted -->
+    <Settings Path="Phone/PhoneSettings">   
+      <Setting Name="PromptVideoCallingCharges" Value="1" />
+    </Settings>
+    <!-- Test purposes only -->
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RcsOptions">
+      <Setting Name="ShowRcsEnabled" Value="1" />
+    </Settings>
+    <Settings Path="PGList/205-PRXY $(__MVID)/205-PRXY-PHY $(__MVID)">
+      <Setting Name="TRUST" Value="1" />
+      <Setting Name="AddressType" Value="E164" />
+      <Setting Name="Address" Value="205" />
+      <Setting Name="PushEnabled" Value="1" />
+      <Setting Name="MatchedNapID" Value="205-NAPDEF $(__MVID)" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="TMO_TMUS$(__MVID)" />
+      <!--note: TONAPID should not include @WAP suffix when refering to connection names -->
+      <Setting Name="TONAPID" Value="TMO_TMUS$(__MVID)" />
+      <Setting Name="ADDR" Value="http://mms.msg.eng.t-mobile.com/mms/wapenc" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="TargetVideoFormat" Value="2" />
+      <Setting Name="ErrorCodeEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RequestDeliveryReport">
+      <Setting Name="RequestDeliveryReportIsSupported" Value="1" />
+      <Setting Name="RequestDeliveryReport" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AllowSendingDeliveryReport">
+      <Setting Name="AllowSendingDeliveryReportIsSupported" Value="1" />
+      <Setting Name="AllowSendingDeliveryReport" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AutomaticallyDownload">
+      <Setting Name="ShowAutomaticallyDownloadMMSToggle" Value="1" />
+      <Setting Name="AutomaticallyDownload" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/EmergencyAlertOptions">
+      <Setting Name="CmasAMBERAlertEnabled" Value="1" />
+      <Setting Name="CmasExtremeAlertEnabled" Value="1" />
+      <Setting Name="CmasSevereAlertEnabled" Value="1" />
+      <Setting Name="EmOperatorEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="AllowSMStoSMTPAddress" Value="1" />
+      <Setting Name="SMStoSMTPShortCode" Value="500" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/MMS">
+      <Setting Name="MMSMessageRoles" Value="4096" />
+    </Settings>
+  </Variant>
+  <Variant Name="TMO XLAT Baio Selfhost">
+    <TargetRefs>
+      <TargetRef Id="TMO Baio XLAT Selfhost Target" />
+    </TargetRefs>
+    <Applications>
+      <Application License="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\FakeTMOLicense.xml"
+                   ProvXML="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmo.provxml"
+                   TargetPartition="MainOS" />
+    </Applications>
+    <Settings Path="StartPrepinnedTile1">
+      <!--My Account-->
+      <Setting Name="StartPrepinnedOEMAppID" Value="{9d6460d1-c9c5-df11-9eae-00237de2db9e}" />
+      <Setting Name="StartPrepinnedTileSize" Value="1" />
+      <Setting Name="StartPrepinnedTileXCoordinate" Value="0" />
+      <Setting Name="StartPrepinnedTileYCoordinate" Value="6" />
+    </Settings>
+    <Settings Path="NFC/SEMgr/UI">
+      <Setting Name="HideFastCardsOptions" Value="1" />
+      <Setting Name="DefaultFastCardSetting" Value="4" />
+    </Settings>
+    <Settings Path="InternetExplorer">
+      <Setting Name="FirstRunUrl" Value="http://www.t-mobile.com/" />
+    </Settings>
+    <Settings Path="BootandShutdownScreens">
+      <Asset Name="BootImage"
+             DisplayName="TMOBAIOBootScreen"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmo_baio.jpg"
+             TargetFileName="TMOBAIOBootScreen.jpg" />
+      <Setting Name="WindowsPhoneBootScreenOverride" Value="TMOBAIOBootScreen.jpg" />
+      <Asset Name="ShutdownImage"
+             DisplayName="TMOShutdownScreen"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMobile_Shutdown.jpg"
+             TargetFileName="TMOShutdownScreen.jpg" />
+      <Setting Name="WindowsPhoneShutdownScreenOverride" Value="TMOShutdownScreen.jpg" />
+    </Settings>
+    <Settings Path="LockScreen">
+      <Asset Name="Wallpapers"
+             DisplayName="TMOBAIOWallpaper"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmo_baio.jpg"
+             TargetFileName="TMOBAIOWallpaper.jpg" />
+      <Setting Name="DefaultWallpaper" Value="TMOBAIOWallpaper.jpg" />
+    </Settings>
+    <Settings Path="EventSounds">
+      <Asset Name="Ringtones"
+             DisplayName="TMORingtone"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\tmoringtone.wma"
+             TargetFileName="TMORingtone.wma"  />
+      <Setting Name="DefaultRingtone" Value="TMORingtone.wma" />
+      <Asset Name="NotificationSounds"
+             DisplayName="TMONotification"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\TMONotification.wma"
+             TargetFileName="TMONotification.wma"  />
+      <Setting Name="DefaultMessagingSound" Value="TMONotification.wma" />
+    </Settings>
+    <Settings Path="Theme">
+      <Setting Name="DefaultAccentColor" Value="Magenta" />
+      <Setting Name="DefaultBackgroundColor" Value="Dark" />
+    </Settings>
+    <Settings Path="InternetExplorer/Favorites/T-Mobile Customer Service">
+      <Setting Name="URL" Value="http://www.t-mobile.com/contact-us.html‎" />
+    </Settings>
+    <Settings Path="Connections">
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/IPType" Value="IPv4v6xlat" />
+      <Setting Name="Cellular/TMO $(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/ExemptFromDisablePolicy" Value="1" />
+      <Setting Name="Cellular/TMO_mms $(__MVID)@WAP/IPType" Value="IPv4v6xlat" />
+    </Settings>
+    <Settings Path="PGList/205-PRXY $(__MVID)/205-PRXY-PHY $(__MVID)">
+      <Setting Name="TRUST" Value="1" />
+      <Setting Name="AddressType" Value="E164" />
+      <Setting Name="Address" Value="205" />
+      <Setting Name="PushEnabled" Value="1" />
+      <Setting Name="MatchedNapID" Value="205-NAPDEF $(__MVID)" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="TMO_mms $(__MVID)" />
+      <Setting Name="TONAPID" Value="TMO_mms $(__MVID)" />
+      <Setting Name="ADDR" Value="http://mms.msg.eng.t-mobile.com/mms/wapenc" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="TargetVideoFormat" Value="2" />
+      <Setting Name="ErrorCodeEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RequestDeliveryReport">
+      <Setting Name="RequestDeliveryReportIsSupported" Value="1" />
+      <Setting Name="RequestDeliveryReport" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AllowSendingDeliveryReport">
+      <Setting Name="AllowSendingDeliveryReportIsSupported" Value="1" />
+      <Setting Name="AllowSendingDeliveryReport" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AutomaticallyDownload">
+      <Setting Name="ShowAutomaticallyDownloadMMSToggle" Value="1" />
+      <Setting Name="AutomaticallyDownload" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/EmergencyAlertOptions">
+      <Setting Name="CmasAMBERAlertEnabled" Value="1" />
+      <Setting Name="CmasExtremeAlertEnabled" Value="1" />
+      <Setting Name="CmasSevereAlertEnabled" Value="1" />
+      <Setting Name="EmOperatorEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="AllowSMStoSMTPAddress" Value="1" />
+      <Setting Name="SMStoSMTPShortCode" Value="500" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RcsOptions">
+      <Setting Name="ShowRcsEnabled" Value="1" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/MMS">
+      <Setting Name="MMSMessageRoles" Value="4096" />
+    </Settings>
+  </Variant>
+  <Variant Name="MetroPCS Selfhost">
+    <TargetRefs>
+      <TargetRef Id="MetroPCS Selfhost Target" />
+    </TargetRefs>
+    <Settings Path="InternetExplorer">
+      <Setting Name="FirstRunUrl" Value="http://www.metropcs.com/" />
+    </Settings>
+    <Settings Path="Theme">
+      <Setting Name="DefaultBackgroundColor" Value="Light" />
+      <Setting Name="DefaultAccentColor" Value="Indigo" />
+    </Settings>
+    <Settings Path="Connections">
+      <Setting Name="Cellular/MetroPCS_i$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/MetroPCS_i$(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/MetroPCS_i$(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/MetroPCS_i$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/MetroPCS_i$(__MVID)@WAP/AuthType" Value="PAP" />
+      <Setting Name="Cellular/MetroPCS_i$(__MVID)@WAP/UserName" Value="" />
+      <Setting Name="Cellular/MetroPCS_i$(__MVID)@WAP/Password" Value="" />
+      <Setting Name="Cellular/MetroPCS_i$(__MVID)@WAP/Enabled" Value="1" />
+      <Setting Name="Cellular/MetroPCS_i$(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Cellular/MetroPCS_i$(__MVID)@WAP/AccessPointName" Value="fast.metropcs.com" />
+      <Setting Name="Cellular/MetroPCS MMS_m$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/MetroPCS MMS_m$(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/MetroPCS MMS_m$(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/MetroPCS MMS_m$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/MetroPCS MMS_m$(__MVID)@WAP/AuthType" Value="PAP" />
+      <Setting Name="Cellular/MetroPCS MMS_m$(__MVID)@WAP/UserName" Value="" />
+      <Setting Name="Cellular/MetroPCS MMS_m$(__MVID)@WAP/Password" Value="" />
+      <Setting Name="Cellular/MetroPCS MMS_m$(__MVID)@WAP/Enabled" Value="1" />
+      <Setting Name="Cellular/MetroPCS MMS_m$(__MVID)@WAP/AccessPointName" Value="fast.metropcs.com" />
+      <Setting Name="Cellular/MetroPCS MMS_m$(__MVID)@WAP/ExemptFromDisablePolicy" Value="0"/>
+      <Setting Name="Cellular/MPCS Hotspot_h$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/MPCS Hotspot_h$(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/MPCS Hotspot_h$(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/MPCS Hotspot_h$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/MPCS Hotspot_h$(__MVID)@WAP/AuthType" Value="PAP" />
+      <Setting Name="Cellular/MPCS Hotspot_h$(__MVID)@WAP/UserName" Value="" />
+      <Setting Name="Cellular/MPCS Hotspot_h$(__MVID)@WAP/Password" Value="" />
+      <Setting Name="Cellular/MPCS Hotspot_h$(__MVID)@WAP/Enabled" Value="1" />
+      <Setting Name="Cellular/MPCS Hotspot_h$(__MVID)@WAP/AccessPointName" Value="pcweb.metropcs.com" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="MetroPCS MMS-w4" />
+      <Setting Name="TONAPID" Value="MetroPCS MMS_m$(__MVID)" />
+      <Setting Name="ADDR" Value="http://metropcs.mmsmvno.com/mms/wapenc" />
+      <Setting Name="MS" Value="1024"/>
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/MMS">
+      <Setting Name="MMSMessageRoles" Value="4096" />
+    </Settings>
+    <Settings Path="HotSpot">
+      <Setting Name="Enabled" Value="Enabled"/>
+      <Setting Name="DedicatedConnections" Value="MPCS Hotspot_h$(__MVID)"/>
+      <Setting Name="MaxUsers" Value="8"/>
+      <Setting Name="MOHelpNumber" Value=""/>
+      <Setting Name="MOInfoLink" Value=""/>
+      <Setting Name="MOAppLink" Value="app://2377fe1b-c10f-47da-92f3-fc517345a3c0/_default#/WiFiProvisioningMetropcs;component/MainPage.xaml"/>
+      <Setting Name="EntitlementRequired" Value="Yes"/>
+      <Setting Name="EntitlementDLL" Value="c:\windows\system32\WiFiEntitlementTmo.dll"/>
+      <Setting Name="EntitlementInterval" Value="86400"/>
+      <Setting Name="PeerlessTimeout" Value="5"/>
+      <Setting Name="PublicConnectionTimeout" Value="20"/>
+    </Settings>
+  </Variant>
+  <Variant Name="BrightSpot Selfhost">
+    <TargetRefs>
+      <TargetRef Id="BrightSpot Selfhost Target" />
+    </TargetRefs>
+    <Settings Path="InternetExplorer">
+      <Setting Name="FirstRunUrl" Value="http://brightspotmobile.com/" />
+    </Settings>
+    <Settings Path="Theme">
+      <Setting Name="DefaultBackgroundColor" Value="Light" />
+      <Setting Name="DefaultAccentColor" Value="Orange" />
+    </Settings>
+    <Settings Path="Connections">
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/Enabled" Value="1" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/Enabled" Value="1" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/ExemptFromDisablePolicy" Value="0"/>
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/Enabled" Value="1" />
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/AccessPointName" Value="pcweb.tmobile.com" />
+      <Setting Name="Policies/Policy1/SID" Value="*" />
+      <Setting Name="Policies/Policy1/ClientType" Value="*" />
+      <Setting Name="Policies/Policy1/Host" Value="tmobileauth.rest.mobitv.com" />
+      <Setting Name="Policies/Policy1/OrderedConnections" Value="1" />
+      <Setting Name="Policies/Policy1/Conn000/Type" Value="CMST_CONNECTION_DEVICE_TYPE" />
+      <Setting Name="Policies/Policy1/Conn000/ConnectionId" Value="{F9A53167-4016-4198-9B41-86D9522DC019}" />
+      <Setting Name="Policies/Policy2/SID" Value="*" />
+      <Setting Name="Policies/Policy2/ClientType" Value="*" />
+      <Setting Name="Policies/Policy2/Host" Value="selfhelp.geo.t-mobile.com" />
+      <Setting Name="Policies/Policy2/OrderedConnections" Value="1" />
+      <Setting Name="Policies/Policy2/Conn000/Type" Value="CMST_CONNECTION_DEVICE_TYPE" />
+      <Setting Name="Policies/Policy2/Conn000/ConnectionId" Value="{F9A53167-4016-4198-9B41-86D9522DC019}" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="MMS-w4" />
+      <Setting Name="TONAPID" Value="MMS_m$(__MVID)" />
+      <Setting Name="ADDR" Value="http://mms.msg.eng.t-mobile.com/mms/wapenc" />
+      <Setting Name="MS" Value="1024"/>
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/MMS">
+      <Setting Name="MMSMessageRoles" Value="4096" />
+    </Settings>
+    <Settings Path="HotSpot">
+      <Setting Name="Enabled" Value="Enabled"/>
+      <Setting Name="DedicatedConnections" Value="Hotspot_h$(__MVID)"/>
+      <Setting Name="MaxUsers" Value="8"/>
+      <Setting Name="MOHelpNumber" Value=""/>
+      <Setting Name="MOInfoLink" Value=""/>
+      <Setting Name="MOAppLink" Value="app://2377fe1b-c10f-47da-92f3-fc517345a3c0/_default#/WiFiProvisioningTmo;component/MainPage.xaml"/>
+      <Setting Name="EntitlementRequired" Value="Yes"/>
+      <Setting Name="EntitlementDLL" Value="c:\windows\system32\WiFiEntitlementTmo.dll"/>
+      <Setting Name="EntitlementInterval" Value="86400"/>
+      <Setting Name="PeerlessTimeout" Value="5"/>
+      <Setting Name="PublicConnectionTimeout" Value="20"/>
+    </Settings>
+  </Variant>
+  <Variant Name="FamilyMobile Selfhost">
+    <TargetRefs>
+      <TargetRef Id="FamilyMobile Selfhost Target" />
+    </TargetRefs>
+    <Settings Path="InternetExplorer">
+      <Setting Name="FirstRunUrl" Value="http://www.walmart.com/" />
+    </Settings>
+    <Settings Path="Theme">
+      <Setting Name="DefaultBackgroundColor" Value="Light" />
+      <Setting Name="DefaultAccentColor" Value="Cobalt" />
+    </Settings>
+    <Settings Path="Connections">
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/Enabled" Value="1" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Cellular/Internet_i$(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/Enabled" Value="1" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/AccessPointName" Value="fast.t-mobile.com" />
+      <Setting Name="Cellular/MMS_m$(__MVID)@WAP/ExemptFromDisablePolicy" Value="0"/>
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/Enabled" Value="1" />
+      <Setting Name="Cellular/Hotspot_h$(__MVID)@WAP/AccessPointName" Value="pcweb.tmobile.com" />
+      <Setting Name="Policies/Policy1/SID" Value="*" />
+      <Setting Name="Policies/Policy1/ClientType" Value="*" />
+      <Setting Name="Policies/Policy1/Host" Value="tmobileauth.rest.mobitv.com" />
+      <Setting Name="Policies/Policy1/OrderedConnections" Value="1" />
+      <Setting Name="Policies/Policy1/Conn000/Type" Value="CMST_CONNECTION_DEVICE_TYPE" />
+      <Setting Name="Policies/Policy1/Conn000/ConnectionId" Value="{F9A53167-4016-4198-9B41-86D9522DC019}" />
+      <Setting Name="Policies/Policy2/SID" Value="*" />
+      <Setting Name="Policies/Policy2/ClientType" Value="*" />
+      <Setting Name="Policies/Policy2/Host" Value="selfhelp.geo.t-mobile.com" />
+      <Setting Name="Policies/Policy2/OrderedConnections" Value="1" />
+      <Setting Name="Policies/Policy2/Conn000/Type" Value="CMST_CONNECTION_DEVICE_TYPE" />
+      <Setting Name="Policies/Policy2/Conn000/ConnectionId" Value="{F9A53167-4016-4198-9B41-86D9522DC019}" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="MMS-w4" />
+      <Setting Name="TONAPID" Value="MMS_m$(__MVID)" />
+      <Setting Name="ADDR" Value="http://mms.msg.eng.t-mobile.com/mms/wapenc" />
+      <Setting Name="MS" Value="1024"/>
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/MMS">
+      <Setting Name="MMSMessageRoles" Value="4096" />
+    </Settings>
+    <Settings Path="HotSpot">
+      <Setting Name="Enabled" Value="Enabled"/>
+      <Setting Name="DedicatedConnections" Value="Hotspot_h$(__MVID)"/>
+      <Setting Name="MaxUsers" Value="8"/>
+      <Setting Name="MOHelpNumber" Value=""/>
+      <Setting Name="MOInfoLink" Value=""/>
+      <Setting Name="MOAppLink" Value="app://2377fe1b-c10f-47da-92f3-fc517345a3c0/_default#/WiFiProvisioningTmo;component/MainPage.xaml"/>
+      <Setting Name="EntitlementRequired" Value="Yes"/>
+      <Setting Name="EntitlementDLL" Value="c:\windows\system32\WiFiEntitlementTmo.dll"/>
+      <Setting Name="EntitlementInterval" Value="86400"/>
+      <Setting Name="PeerlessTimeout" Value="5"/>
+      <Setting Name="PublicConnectionTimeout" Value="20"/>
+    </Settings>
+  </Variant>
+</ImageCustomizations>

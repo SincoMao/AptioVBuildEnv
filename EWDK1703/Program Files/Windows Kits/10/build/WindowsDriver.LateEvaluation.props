@@ -1,0 +1,39 @@
+<!--
+***********************************************************************************************
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">  
+<!-- *******************************************************************************************
+        This file is for properties common to all driver-related toolsets.
+        
+        These item metadata and properties depend on properties that are specific to each project. 
+        The values must be updated after the project has been loaded and evaluated. 
+        Hence we update the properties using a target, which is evaluated after the project
+       ******************************************************************************************* -->
+  <PropertyGroup>
+    <IncludePath>$(IncludePath);$(ProjectDir)</IncludePath>
+  </PropertyGroup>
+
+  <!-- Define defaults for StampInf -->
+  <ItemDefinitionGroup>
+    <Inf>
+      <OutputPath Condition="'%(Inf.OutputPath)'  == ''">$(IntDir)</OutputPath>
+      <SpecifyArchitecture Condition="'%(Inf.SpecifyArchitecture)'  == ''">true</SpecifyArchitecture>
+      <CopyOutput Condition="'%(Inf.CopyOutput)'  == ''">$(IntDir)%(FileName).inf</CopyOutput>
+      <Architecture Condition="'%(Inf.Architecture)'  == ''">$(InfArch)</Architecture>
+      <StampInfTrackerLogDirectory Condition="'%(Inf.StampInfTrackerLogDirectory)' == ''">$(TLogLocation)</StampInfTrackerLogDirectory>
+      <SpecifyDriverVerDirectiveDate Condition="'%(Inf.SpecifyDriverVerDirectiveDate)'  == ''">true</SpecifyDriverVerDirectiveDate>
+      <SpecifyDriverVerDirectiveVersion Condition="'%(Inf.SpecifyDriverVerDirectiveVersion)'  == ''">true</SpecifyDriverVerDirectiveVersion>
+      <DateStamp Condition="'%(Inf.DateStamp)'  == ''">*</DateStamp>
+      <TimeStamp Condition="'%(Inf.TimeStamp)'  == ''">*</TimeStamp>
+    </Inf>
+  </ItemDefinitionGroup>
+
+  <Import Condition="'$(Platform)' != '' and exists('$(WDKContentRoot)bin\conversion\$(Platform)\ImportAfter') and '$(ConversionToolVersion)' == '1.0'" Project="$(WDKContentRoot)bin\conversion\$(Platform)\ImportAfter\*.props"/>
+</Project>

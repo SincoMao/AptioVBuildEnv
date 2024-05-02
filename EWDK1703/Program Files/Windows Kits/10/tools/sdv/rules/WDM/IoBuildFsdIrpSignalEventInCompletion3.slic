@@ -1,0 +1,75 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IoBuildFsdIrpSignalEventInCompletion3
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    KeSetEvent needs to be called in the completion routine when Irp->PendingReturned is TRUE and processing a locally created async. irp.
+    In this case the completion routine will not be called.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507372
+
+--*/
+
+#include "slic_base.h"
+
+state 
+{
+   enum {notsignaled,signaled,initialized} SignalState = initialized;
+} 
+watch KeInitializeEvent.entry.$1;
+
+
+KeInitializeEvent.entry[guard $1]
+{
+    if($3)
+    {
+        halt;
+    }
+    else
+    {
+        
+        SignalState=notsignaled;
+    }
+}
+IoSetCompletionRoutineEx.entry
+{
+    if(((!$5) || (!$6) || (!$7)) && SignalState==notsignaled && ($2==sdv_IoBuildAsynchronousFsdRequest_irp))
+    {
+        abort "KeSetEvent needs to be called in the completion routine when Irp->PendingReturned is TRUE and processing a locally created async. irp. In this case the completion routine may not be called in all cases.";
+    }
+    else
+    {
+        halt;
+    }
+}
+
+IoSetCompletionRoutine.entry
+{
+    if(((!$4) || (!$5) || (!$6)) && SignalState==notsignaled && ($1==sdv_IoBuildAsynchronousFsdRequest_irp))
+    {
+        abort "KeSetEvent needs to be called in the completion routine when Irp->PendingReturned is TRUE and processing a locally created async. irp.In this case the completion routine may not be called in all cases.";
+    }
+    else
+    {
+        halt;
+    }
+}
+
+
+
+

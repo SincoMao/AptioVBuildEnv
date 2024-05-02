@@ -1,0 +1,48 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SpIrql
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the routines TdiRegisterPnPHandlers and 
+    TdiDeregisterPnPHandlers are only called at IRQL lower than DISPATCH_LEVEL.
+    However, if ExFreeToNPagedLookasideList is called, the rule passes.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507226
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+ExFreeToNPagedLookasideList.entry 
+{
+	halt;
+}
+
+[
+TdiRegisterPnPHandlers,
+TdiDeregisterPnPHandlers
+].entry
+{
+	if ( sdv_irql_current != PASSIVE_LEVEL &&
+		sdv_irql_current != APC_LEVEL ) {
+		abort "$fname should be called at IRQL <= DISPATCH_LEVEL ";  
+	}
+}

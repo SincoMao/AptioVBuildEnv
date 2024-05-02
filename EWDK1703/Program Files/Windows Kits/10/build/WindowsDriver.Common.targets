@@ -1,0 +1,1842 @@
+<!--
+***********************************************************************************************
+WindowsDriver.Common.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file defines the steps/targets required to build driver projects.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '12.0'">
+      <PropertyGroup>
+        <VsBuildTaskBinarySuffix>v$(VisualStudioVersion)</VsBuildTaskBinarySuffix>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <VsBuildTaskBinarySuffix>Core</VsBuildTaskBinarySuffix>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+  <UsingTask TaskName="Telemetry_Packaging"  AssemblyFile="$(WDKContentRoot)build\bin\Microsoft.DriverKit.Build.Tasks.$(VisualStudioVersion).dll"/>
+  <UsingTask TaskName="Telemetry"  AssemblyFile="$(WDKContentRoot)build\bin\Microsoft.DriverKit.Build.Tasks.$(VisualStudioVersion).dll"/>
+  <UsingTask TaskName="Ctrpp"  AssemblyFile="$(WDKContentRoot)build\bin\Microsoft.DriverKit.Build.Tasks.$(VisualStudioVersion).dll" />
+  <UsingTask TaskName="Mc"  AssemblyFile="$(WDKContentRoot)build\bin\Microsoft.DriverKit.Build.Tasks.$(VisualStudioVersion).dll" />
+  <UsingTask TaskName="Wpp" AssemblyFile="$(WDKContentRoot)build\bin\Microsoft.DriverKit.Build.Tasks.$(VisualStudioVersion).dll" />
+  <UsingTask TaskName="StampInf"  AssemblyFile="$(WDKContentRoot)build\bin\Microsoft.DriverKit.Build.Tasks.$(VisualStudioVersion).dll" />
+  <UsingTask TaskName="Wmimofck"  AssemblyFile="$(WDKContentRoot)build\bin\Microsoft.DriverKit.Build.Tasks.$(VisualStudioVersion).dll"/>
+  <UsingTask TaskName="Mofcomp"  AssemblyFile="$(WDKContentRoot)build\bin\Microsoft.DriverKit.Build.Tasks.$(VisualStudioVersion).dll"/>
+  <UsingTask TaskName="Inf2Cat"  AssemblyFile="$(WDKContentRoot)build\bin\Microsoft.DriverKit.Build.Tasks.$(VisualStudioVersion).dll" />
+  <UsingTask TaskName="SignTask"  AssemblyFile="$(WDKContentRoot)build\bin\Microsoft.DriverKit.Build.Tasks.$(VisualStudioVersion).dll"/>
+  <UsingTask TaskName="Binplace"  AssemblyFile="$(WDKContentRoot)build\bin\Microsoft.DriverKit.Build.Tasks.$(VisualStudioVersion).dll"/>
+  <UsingTask TaskName="DPVerifierTask"  AssemblyFile="$(WDKContentRoot)build\bin\Microsoft.DriverKit.Build.Tasks.PackageVerifier.$(VisualStudioVersion).dll"/>
+  <UsingTask TaskName="PkgGen" TaskFactory="XamlTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.$(VsBuildTaskBinarySuffix).dll">
+    <Task>$(MSBuildThisFileDirectory)1033\PkgGen.xml</Task>
+  </UsingTask>
+  <UsingTask TaskName="ApiValidator" TaskFactory="XamlTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.$(VsBuildTaskBinarySuffix).dll">
+    <Task>$(MSBuildThisFileDirectory)1033\ApiValidator.xml</Task>
+  </UsingTask>
+
+  <!-- Inline Task to check if we are running as Administrator -->
+  <UsingTask TaskName="CheckIfRunningAsAdmin" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.$(VsBuildTaskBinarySuffix).dll">
+    <ParameterGroup>
+      <IsAdmin ParameterType="System.Boolean"  Output="True"/>
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.Security"/>
+      <Using Namespace="System.Security.Principal"/>
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+        try
+        {
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            IsAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+        catch (SecurityException)
+        {
+            Log.LogError("Caller does not have correct permissions to check if running as administrator.");
+        }
+      ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <PropertyGroup>
+    <TraceWppToolPath Condition="'$(TraceWppToolPath)' == ''">$(WDKContentRoot)bin\x86\</TraceWppToolPath>
+    <TraceWppToolArchitecture Condition="'$(TraceWppToolArchitecture)' == ''">Native32Bit</TraceWppToolArchitecture>
+
+    <InfToolPath Condition="'$(InfToolPath)' == ''">$(WDKContentRoot)bin\x86\</InfToolPath>
+    <InfToolArchitecture Condition="'$(InfToolArchitecture)' == ''">Native32Bit</InfToolArchitecture>
+
+    <CtrppToolPath Condition="'$(CtrppToolPath)' == ''">$(WDKContentRoot)bin\x86\</CtrppToolPath>
+    <CtrppToolArchitecture Condition="'$(CtrppToolArchitecture)' == ''">Native32Bit</CtrppToolArchitecture>
+
+    <WmimofckToolPath Condition="'$(WmimofckToolPath)' == '' and '$(Platform)' == 'x64'">$(WDKContentRoot)bin\x86\x64\</WmimofckToolPath>
+    <WmimofckToolPath Condition="'$(WmimofckToolPath)' == '' and '$(Platform)' != 'x64'">$(WDKContentRoot)bin\x86\</WmimofckToolPath>
+    <WmimofckToolArchitecture Condition="'$(WmimofckToolArchitecture)' == ''">Native32Bit</WmimofckToolArchitecture>
+
+    <MessageCompileToolPath Condition="'$(MessageCompileToolPath)' == ''">$(WDKContentRoot)bin\x86\</MessageCompileToolPath>
+    <MessageCompileToolArchitecture Condition="'$(MessageCompileToolArchitecture)' == ''">Native32Bit</MessageCompileToolArchitecture>
+
+    <BinplaceToolPath Condition="'$(BinplaceToolPath)' == ''">$(WDKContentRoot)bin\x86\</BinplaceToolPath>
+    <BinplaceToolArchitecture Condition="'$(BinplaceToolArchitecture)' == ''">Native32Bit</BinplaceToolArchitecture>
+
+    <RCToolArchitecture Condition="'$(RCToolArchitecture)' == '' and '$(CLToolArchitecture)' == 'Native32Bit'">Native32Bit</RCToolArchitecture>
+    <RCToolArchitecture Condition="'$(RCToolArchitecture)' == '' and '$(CLToolArchitecture)' == 'Native64Bit'">Native64Bit</RCToolArchitecture>
+    <RCToolArchitecture Condition="'$(RCToolArchitecture)' == '' and '$(VCToolArchitecture)' != '' and '$(VCToolArchitecture)' == 'Native32Bit'">Native32Bit</RCToolArchitecture>
+    <RCToolArchitecture Condition="'$(RCToolArchitecture)' == '' and '$(VCToolArchitecture)' != '' and '$(VCToolArchitecture)' == 'Native64Bit'">Native64Bit</RCToolArchitecture>
+    <RCToolArchitecture Condition="'$(RCToolArchitecture)' == '' and '$(DefaultToolArchitecture)' == 'Native32Bit'">Native32Bit</RCToolArchitecture>
+    <RCToolArchitecture Condition="'$(RCToolArchitecture)' == '' and '$(DefaultToolArchitecture)' == 'Native64Bit'">Native64Bit</RCToolArchitecture>
+    <RCToolPath Condition="'$(RCToolPath)' == '' and '$(RCToolArchitecture)' == 'Native32Bit'">$(WDKContentRoot)bin\x86\</RCToolPath>
+    <RCToolPath Condition="'$(RCToolPath)' == '' and '$(RCToolArchitecture)' == 'Native64Bit'">$(WDKContentRoot)bin\x64\</RCToolPath>
+
+    <Inf2CatToolPath Condition="'$(Inf2CatToolPath)' == ''">$(WDKContentRoot)bin\x86\</Inf2CatToolPath>
+    <Inf2CatToolArchitecture Condition="'$(Inf2CatToolArchitecture)' == ''">Native32Bit</Inf2CatToolArchitecture>
+
+    <DriverSignToolPath Condition="'$(DriverSignToolPath)' == ''">$(WDKContentRoot)bin\x86\</DriverSignToolPath>
+    <DriverSignToolArchitecture Condition="'$(DriverSignToolArchitecture)' == ''">Native32Bit</DriverSignToolArchitecture>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisStaticAnalysisDirectory Condition="'$(EnterpriseWDK)'=='True' and '$(CodeAnalysisStaticAnalysisDirectory)'==''">$(VSInstallDir)\Team Tools\Static Analysis Tools</CodeAnalysisStaticAnalysisDirectory>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PREfastAdditionalPlugins Condition="'%(PREfastAdditionalPlugins)' == '' and '$(CLToolArchitecture)' == 'Native64Bit'">$(WDKContentRoot)bin\x64\WindowsPrefast.dll;$(WDKContentRoot)bin\x64\drivers.dll</PREfastAdditionalPlugins>
+      <PREfastAdditionalPlugins Condition="'%(PREfastAdditionalPlugins)' == '' and '$(CLToolArchitecture)' == 'Native32Bit'">$(WDKContentRoot)bin\x86\WindowsPrefast.dll;$(WDKContentRoot)bin\x86\drivers.dll</PREfastAdditionalPlugins>
+      <PREfastAdditionalPlugins Condition="'%(PREfastAdditionalPlugins)' == '' and '$(VCToolArchitecture)' != '' and '$(VCToolArchitecture)' == 'Native64Bit'">$(WDKContentRoot)bin\x64\WindowsPrefast.dll;$(WDKContentRoot)bin\x64\drivers.dll</PREfastAdditionalPlugins>
+      <PREfastAdditionalPlugins Condition="'%(PREfastAdditionalPlugins)' == '' and '$(VCToolArchitecture)' != '' and '$(VCToolArchitecture)' != 'Native64Bit'">$(WDKContentRoot)bin\x86\WindowsPrefast.dll;$(WDKContentRoot)bin\x86\drivers.dll</PREfastAdditionalPlugins>
+      <PREfastAdditionalPlugins Condition="'%(PREfastAdditionalPlugins)' == '' and '$(DefaultToolArchitecture)' == 'Native64Bit'">$(WDKContentRoot)bin\x64\WindowsPrefast.dll;$(WDKContentRoot)bin\x64\drivers.dll</PREfastAdditionalPlugins>
+      <PREfastAdditionalPlugins Condition="'%(PREfastAdditionalPlugins)' == '' and '$(DefaultToolArchitecture)' != 'Native64Bit'">$(WDKContentRoot)bin\x86\WindowsPrefast.dll;$(WDKContentRoot)bin\x86\drivers.dll</PREfastAdditionalPlugins>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <!-- *******************************************************************************************
+        ValidateDriverProperties
+       ******************************************************************************************* -->
+  <Target Name="ValidateDriverProperties" BeforeTargets="PrepareForBuild">
+    <!-- Error our if the user tried to use an unknown driver target platform -->
+    <Error Text="Unknown or unsupported property value '$(DriverTargetPlatform)' for DriverTargetPlatform"
+           Condition="'$(UnknownDriverTargetPlatform)' == 'true'" />
+    <!-- Error out if the user tried to use the unknown target version -->
+    <Error Text="Unknown or unsupported property value '$(TargetVersion)' for TargetVersion."
+           Condition="'$(UnknownTargetVersion)' == 'true'" />
+    <!-- Error out if the user tried to use the unknown target platform version -->
+    <Error Text="TargetPlatformVersion must be specified for Windows 10 or higher. Unknown or unsupported property value '$(OldTPV)' for TargetPlatformVersion."
+           Condition="'$(VisualStudioVersion)' == '12.0' AND '$(UnknownTargetPlatformVersion)' == 'true'" />
+    <!-- Error out if the user tried to build against an OS that is not supported by the specified architecture -->
+    <Error Text="The specified architecture '$(Platform)' is not supported by the target OS '$(TargetVersion)' ($(_NT_TARGET_VERSION))."
+           Condition="'$(NotSupportedForCurrentOS)' == 'true'" />
+    <!-- Error out if the user tried to use an unknown architecture -->
+    <Error Text="Unknown property value '$(Platform)' for Platform."
+           Condition="'$(UnknownArchitecture)' == 'true'" />
+    <!-- Error out if trying to build for mobile on a downlevel OS -->
+    <Error Text="Mobile drivers cannot be built downlevel. To build a Mobile driver for an older OS, please use previous GDR kits."
+           Condition="'$(DriverTargetPlatform)' == 'Mobile' and '$(TargetVersion)' != '$(LatestTargetVersion)'" />
+    <!-- Error out if the user tried to build a universal driver for an unsupported OS -->
+    <Error Text="The '$(DriverTargetPlatform)' target platform is not supported by the target OS '$(TargetVersion)' ($(_NT_TARGET_VERSION))."
+           Condition="'$(DriverTargetPlatform)' == 'Universal' and $(_NT_TARGET_VERSION) &lt; $(_NT_TARGET_VERSION_WIN10)" />
+    <!-- Error out if the user tried to build a desktop driver for an unsupported OS and specified architecture combination-->
+    <Error Text="The '$(DriverTargetPlatform)' target platform is not supported by the target OS '$(TargetVersion)' ($(_NT_TARGET_VERSION)) for '$(Platform)'."
+           Condition="'$(NotSupportedForCurrentOSandTargetPlatform)'=='true'" />
+    <!-- Error out if the user enabled Inf2Cat for an architecture and driver target platform that does not support it -->
+    <Error Text="The Inf2Cat tool does not support architecture '$(Platform)' for target OS '$(TargetVersion)' and the '$(DriverTargetPlatform)' driver target platform."
+           Condition="'$(EnableInf2cat)' == 'true' AND '$(InvalidInf2CatConfig)'=='true'" />
+    <!-- Error out if there is MIDL_TARGET mismatch with SUBSYSTEM_VERSION -->
+    <Error Text="MIDL_TARGET=$(MIDL_TARGET) mismatch with SUBSYSTEM_VERSION=$(SUBSYSTEM_WINVER). MIDL_TARGET must not be newer."
+           Condition="'$(MidlTargetMismatch)' == 'true'" />
+    <!-- Error out if the user tried to use an unknown or unsupported value of KmdfVersion -->
+    <Error Text="Unknown or unsupported property value '$(KmdfVersion)' for KmdfVersion for target OS '$(TargetVersion)' ($(_NT_TARGET_VERSION))."
+           Condition="'$(UnknownKmdfVersion)' == 'true'" />
+    <!-- Error out if the user tried to use an unknown or unsupported value of UmdfVersion -->
+    <Error Text="Unknown or unsupported property value '$(UmdfVersion)' for UmdfVersion for target OS '$(TargetVersion)' ($(_NT_TARGET_VERSION))."
+           Condition="'$(UnknownUmdfVersion)' == 'true'" />
+    <!-- Error out if trying to build a mobile or universal driver for a downlevel UmdfVersion -->
+    <Error Text="Mobile and universal drivers do not support UMDF versions older than 2.0. To build UMDF mobile or universal drivers, please use UMDF version 2.0 or greater."
+           Condition="('$(DriverTargetPlatform)' == 'Mobile' or '$(DriverTargetPlatform)' == 'Universal') and ('$(UmdfVersion)' != '') and  ('$(UmdfVersion)' &lt; '2.0')" />
+    <!-- Error out if the user tried to use an unknown or unsupported value of SpbVersion -->
+    <Error Text="Unknown or unsupported property value '$(SpbVersion)' for SpbVersion for target OS '$(TargetVersion)' ($(_NT_TARGET_VERSION))."
+           Condition="'$(UnknownSpbVersion)' == 'true'" />
+    <!-- Error out if trying to statically link the CRT for a Mobile driver -->
+    <Error Text="Windows Mobile user mode binaries do not support statically linking the CRT. Set ClCompile.RuntimeLibrary to 'MultiThreadedDll' instead of '%(ClCompile.RuntimeLibrary)'."
+           Condition="'$(IsKernelModeToolset)' != 'true' AND '$(DriverTargetPlatform)' == 'Mobile' AND '@(ClCompile)' != '' AND ('%(ClCompile.RuntimeLibrary)'=='MultiThreaded' OR '%(ClCompile.RuntimeLibrary)'=='MultiThreadedDebug' OR '%(ClCompile.RuntimeLibrary)'=='')"/>
+    <Error Text="Windows Mobile user mode binaries do not support statically linking the CRT. Set ClCompile.RuntimeLibrary to 'MultiThreadedDLL' instead of '%(ClCompile.RuntimeLibrary)'."
+           Condition="'$(IsKernelModeToolset)' != 'true' AND '$(DriverTargetPlatform)' == 'Mobile' AND '@(ClCompile)' != '' AND ('%(ClCompile.RuntimeLibrary)'=='MultiThreaded' OR '%(ClCompile.RuntimeLibrary)'=='MultiThreadedDebug' OR '%(ClCompile.RuntimeLibrary)'=='')"/>
+    <!-- Error out if trying to dynamically link the Dev12 CRT for a Universal driver -->
+    <Error Text="Universal user mode drivers built with Visual Studio 2013 do not support dynamically linking the CRT. Set ClCompile.RuntimeLibrary to 'MultiThreaded' or 'MultiThreadedDebug' instead of '%(ClCompile.RuntimeLibrary)'."
+           Condition="'$(IsKernelModeToolset)' != 'true' AND '$(VisualStudioVersion)' == '12.0' AND '@(ClCompile)' != '' AND ('$(DriverTargetPlatform)' == 'Universal' and ('%(ClCompile.RuntimeLibrary)'=='MultiThreadedDLL' OR '%(ClCompile.RuntimeLibrary)'=='MultiThreadedDebugDLL'))"/>
+    <!-- Error out if trying to build a universal UM driver or application with Dev12 -->
+    <Error Text=" Visual Studio 2013 does not support building ARM64 Universal user mode binaries. Only the Desktop and Mobile driver target platforms are supported."
+           Condition="'$(IsKernelModeToolset)' != 'true' AND '$(VisualStudioVersion)' == '12.0' AND '$(DriverTargetPlatform)' == 'Universal' AND '$(DDKPlatform)' == 'arm64'"/>
+    <!-- Error out if a matching SDK is not found -->
+    <Error Text="An SDK corresponding to WDK version '$(OldTPV)' was not found. Please install the SDK before building."
+           Condition="'$(VisualStudioVersion)' == '12.0' AND '$(MatchingSdkPresent)' != 'true'" />
+    <Error Text="An SDK corresponding to WDK version '$(TargetPlatformVersion)' was not found. Please install the SDK before building."
+           Condition="'$(MatchingSdkPresent)' != 'true'" />
+    <!-- Indicate that the BuildWindowsPhone property is deprecated, if in use -->
+    <Message Importance="high"
+             Text="The 'BuildWindowsPhone' property is deprecated. Please use the 'DriverTargetPlatform' property instead."
+             Condition="'$(BuildWindowsPhone)' != ''" />
+  </Target>
+
+  <!-- *******************************************************************************************
+        Notification messages
+       ******************************************************************************************* -->
+  <Target Name="DriverBuildNotifications" BeforeTargets="PrepareForBuild" AfterTargets="ValidateDriverProperties">
+    <!-- Indicate to users what they are building -->
+    <Message Importance="high" Text="Building '$(ProjectName)' with toolset '$(PlatformToolset)' and the '$(DriverTargetPlatform)' target platform." />
+    <!-- Show UMDF version -->
+    <Message Text="Using UMDF $(UmdfVersion)." Condition="'$(IsUserModeToolset)' == 'true'" />
+    <!-- Show KMDF version -->
+    <Message Text="Using KMDF $(KmdfVersion)." Condition="'$(IsKernelModeToolset)' == 'true'" />
+  </Target>
+
+  <!-- *******************************************************************************************
+        Set the wdf coinstaller paths
+       ******************************************************************************************* -->
+  <PropertyGroup>
+    <UseKmdfCoinstaller Condition="('$(IsKernelModeToolset)' == 'true' and '$(DriverType)' == 'KMDF' and $(KMDF_VERSION_MAJOR) == 1 and $(KMDF_VERSION_MINOR) &lt; 13)">true</UseKmdfCoinstaller>
+    <UseUmdfCoinstaller Condition="('$(IsUserModeToolset)' == 'true' and $(UMDF_VERSION_MAJOR) &lt; 2)">true</UseUmdfCoinstaller>
+    <KmdfCoinstaller Condition="'$(UseKmdfCoinstaller)' == 'true'">$(WDKContentRoot)redist\wdf\$(DDKPlatform)\WdfCoinstaller$(KMDF_VERSION_MAJOR_STRING)$(KMDF_VERSION_MINOR_STRING).dll</KmdfCoinstaller>
+    <UmdfCoinstaller Condition="'$(UseUmdfCoinstaller)' == 'true'">$(WDKContentRoot)redist\wdf\$(DDKPlatform)\WudfUpdate_$(UMDF_VERSION_MAJOR_STRING)$(UMDF_VERSION_MINOR_STRING).dll</UmdfCoinstaller>
+  </PropertyGroup>
+
+  <!-- *******************************************************************************************
+        Set the package dir
+       ******************************************************************************************* -->
+  <PropertyGroup>
+    <PackageDir Condition="'$(PackageDir)' == ''">$(OutDir)$(ProjectName)\</PackageDir>
+  </PropertyGroup>
+
+  <!-- *******************************************************************************************
+        Set the cbs dir
+       ******************************************************************************************* -->
+  <PropertyGroup>
+    <CbsDir Condition="'$(CbsDir)' == ''">$(OutDir)$(ProjectName) CBS\</CbsDir>
+  </PropertyGroup>
+
+  <!-- *******************************************************************************************
+        Set signing-related properties
+       ******************************************************************************************* -->
+  <PropertyGroup>
+    <SignMode Condition="'$(SignMode)' == '' and '$(EnableTestSign)' == 'true'">TestSign</SignMode>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(UseDefaultProjectTools)' != 'false'">
+    <ProjectTools Include="DriverSign" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Inf2CatSource Condition="'$(Inf2CatSource)' == ''">$(PackageDir)</Inf2CatSource>
+  </PropertyGroup>
+
+  <!-- *******************************************************************************************
+        Set the dynamic BeforeTargets and AfterTargets
+       ******************************************************************************************* -->
+  <PropertyGroup>
+    <DriverPackage_AfterTargets Condition="'$(DriverType)' != 'Package'">AfterLink</DriverPackage_AfterTargets>
+    <DriverPackage_AfterTargets Condition="'$(DriverType)' == 'Package'">Build</DriverPackage_AfterTargets>
+  </PropertyGroup>
+
+  <!-- *******************************************************************************************
+        This target checks if the coinstallers are installed. In addition to this,
+        it also tells the deploy target to copy the coinstallers to the target machine.
+       ******************************************************************************************* -->
+  <Target Name="CheckForCoinstallers" Condition="'$(SupportsPackaging)'!='false'" BeforeTargets="DriverPackageTarget">
+
+    <!-- Resolve the project references based on the Solution Configuration -> Project configuration mappings -->
+    <AssignProjectConfiguration
+        Condition="('$(BuildingSolutionFile)'=='true' or '$(BuildingInsideVisualStudio)'=='true') and '@(ProjectReference)'!=''"
+        ProjectReferences="@(ProjectReference)"
+        SolutionConfigurationContents="$(CurrentSolutionConfigurationContents)">
+      <Output TaskParameter="AssignedProjects" ItemName="ResolvedDriverProjectReferences"/>
+    </AssignProjectConfiguration>
+
+    <!-- If we're not building a solution, then use the current project configuration -->
+    <ItemGroup Condition="'$(BuildingSolutionFile)'!='true' and '$(BuildingInsideVisualStudio)'!='true' and '@(ProjectReference)'!=''">
+      <ResolvedDriverProjectReferences Include="@(ProjectReference)">
+        <Configuration>$(Configuration)</Configuration>
+        <Platform>$(Platform)</Platform>
+      </ResolvedDriverProjectReferences>
+    </ItemGroup>
+
+    <MSBuild    Condition="@(ResolvedDriverProjectReferences) !=''"
+                Targets="GetDriverProjectAttributes"
+                Projects="@(ResolvedDriverProjectReferences)"
+                Properties="%(ResolvedDriverProjectReferences.AdditionalProperties); Configuration=%(ResolvedDriverProjectReferences.Configuration); Platform=%(ResolvedDriverProjectReferences.Platform);"
+                StopOnFirstFailure="true"
+                SkipNonexistentProjects="%(ResolvedDriverProjectReferences.SkipNonexistentProjects)"
+                >
+      <Output TaskParameter="TargetOutputs"
+              ItemName="DriverProjectAttributes" />
+    </MSBuild>
+
+    <PropertyGroup>
+      <IsKMDFProject Condition="'%(DriverProjectAttributes.DriverType)' == 'KMDF' and '%(DriverProjectAttributes.IsKernelModeToolset)'=='true'">true</IsKMDFProject>
+      <IsUMDFProject Condition="'%(DriverProjectAttributes.IsUserModeToolset)' == 'true'">true</IsUMDFProject>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <DeployFiles Condition="exists('$(KmdfCoinstaller)') and '$(IsKMDFProject)' == 'true'">$(KmdfCoinstaller);$(DeployFiles)</DeployFiles>
+      <DeployFiles Condition="exists('$(UmdfCoinstaller)') and '$(IsUMDFProject)' == 'true'">$(UmdfCoinstaller);$(DeployFiles)</DeployFiles>
+    </PropertyGroup>
+  </Target>
+
+  <!-- *******************************************************************************************
+       Get Driver Project Attributes.
+       ******************************************************************************************* -->
+  <Target Name="GetDriverProjectAttributes" Returns="@(DriverProjectAttributes)">
+
+    <ItemGroup>
+      <DriverProjectAttributes Include="$(ProjectGuid)">
+        <DriverType>$(DriverType)</DriverType>
+        <PlatformToolset>$(PlatformToolset)</PlatformToolset>
+        <IsKernelModeToolset>$(IsKernelModeToolset)</IsKernelModeToolset>
+        <IsUserModeToolset>$(IsUserModeToolset)</IsUserModeToolset>
+        <ProjectPath>$(MSBuildProjectFullPath)</ProjectPath>
+      </DriverProjectAttributes>
+    </ItemGroup>
+
+  </Target>
+
+  <Target Name="SetDriverVariables"
+          Condition="'$(UseEnv)' != 'true'"
+          BeforeTargets="SetBuildDefaultEnvironmentVariables">
+    <ItemGroup>
+      <ClCompile>
+        <PreprocessorDefinitions Condition="'$(IsUserModeToolset)' == 'true' and '$(UMDF_VERSION_MAJOR)' == '1'">%(PreprocessorDefinitions);UMDF_VERSION_MAJOR=$(UMDF_VERSION_MAJOR);UMDF_VERSION_MINOR=$(UMDF_VERSION_MINOR)</PreprocessorDefinitions>
+        <PreprocessorDefinitions Condition="'$(IsUserModeToolset)' == 'true' and '$(UMDF_VERSION_MAJOR)' == '2'">%(PreprocessorDefinitions);UMDF_VERSION_MAJOR=$(UMDF_VERSION_MAJOR);UMDF_VERSION_MINOR=$(UMDF_VERSION_MINOR);UMDF_USING_NTSTATUS;_UNICODE;UNICODE</PreprocessorDefinitions>
+        <PreprocessorDefinitions Condition="'$(IsKernelModeToolset)' == 'true' and '$(DriverType)' == 'KMDF'">%(PreprocessorDefinitions);KMDF_VERSION_MAJOR=$(KMDF_VERSION_MAJOR);KMDF_VERSION_MINOR=$(KMDF_VERSION_MINOR)</PreprocessorDefinitions>
+      </ClCompile>
+    </ItemGroup>
+  </Target>
+
+  <!-- *******************************************************************************************
+     Set universal drivers hybrid CRT compilation
+     This properly sets the compiler options so that hybrid CRT linking works properly
+     ******************************************************************************************* -->
+  <Target Name="SetHybridCrtCl"
+          Condition="'$(VisualStudioVersion)' &gt;= '14.0' and '$(DriverTargetPlatform)' == 'Universal' and '$(IsKernelModeToolset)' != 'true'"
+          BeforeTargets="BeforeClCompile">
+
+    <PropertyGroup>
+      <IsHybridDebugBuild Condition="'%(ClCompile.RuntimeLibrary)'=='MultiThreadedDebugDLL'">true</IsHybridDebugBuild>
+      <IsHybridReleaseBuild Condition="'%(ClCompile.RuntimeLibrary)'=='MultiThreadedDLL'">true</IsHybridReleaseBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ClCompile Condition="'%(ClCompile.RuntimeLibrary)'=='MultiThreadedDebugDLL'">
+        <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      </ClCompile>
+
+      <ClCompile Condition="'%(ClCompile.RuntimeLibrary)'=='MultiThreadedDLL'">
+        <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      </ClCompile>
+    </ItemGroup>
+  </Target>
+
+  <!-- *******************************************************************************************
+     Set universal drivers hybrid CRT linking
+     This properly sets the compiler options so that hybrid CRT linking works properly
+    ******************************************************************************************* -->
+  <Target Name="SetHybridCrtLink"
+          Condition="'$(VisualStudioVersion)' &gt;= '14.0' and '$(DriverTargetPlatform)' == 'Universal' and '$(IsKernelModeToolset)' != 'true'"
+          BeforeTargets="Link">
+
+    <ItemGroup>
+      <Link Condition="'$(IsHybridDebugBuild)'=='true'">
+        <IgnoreSpecificDefaultLibraries>%(Link.IgnoreSpecificDefaultLibraries);libucrtd.lib</IgnoreSpecificDefaultLibraries>
+        <AdditionalDependencies>%(Link.AdditionalDependencies);ucrtd.lib</AdditionalDependencies>
+      </Link>
+
+      <Link Condition="'$(IsHybridReleaseBuild)'=='true' and '$(IsHybridDebugBuild)'!='true'">
+        <IgnoreSpecificDefaultLibraries>%(Link.IgnoreSpecificDefaultLibraries);libucrt.lib</IgnoreSpecificDefaultLibraries>
+        <AdditionalDependencies>%(Link.AdditionalDependencies);ucrt.lib</AdditionalDependencies>
+      </Link>
+    </ItemGroup>
+  </Target>
+
+  <!-- *******************************************************************************************
+       Set Link library paths.
+       This is used to add the WPP Recorder lib when necessary.
+       ******************************************************************************************* -->
+  <Target Name="SetLinkLibraryPaths"
+         Condition="'$(UseEnv)' != 'true'"
+         BeforeTargets="Link">
+    <PropertyGroup>
+      <WppRecorderEnabledForCl Condition="'%(ClCompile.WppEnabled)' == 'true' and '%(ClCompile.WppRecorderEnabled)' == 'true'">true</WppRecorderEnabledForCl>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Link>
+        <AdditionalDependencies Condition="'$(IsKernelModeToolset)' == 'true' and '$(DriverType)' == 'KMDF' and '$(WppRecorderEnabledForCl)' == 'true' and '$(TargetVersion)'!='Windows7' and '$(TargetVersion)'!='Win7'">%(AdditionalDependencies);$(DDK_LIB_PATH)wpprecorder.lib</AdditionalDependencies>
+      </Link>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Link>
+        <AdditionalDependencies Condition="'$(IsUserModeToolset)' == 'true' and '$(UMDF_VERSION_MAJOR)' == '2' and '$(UMDF_VERSION_MINOR)' &gt;= '15' and '$(WppRecorderEnabledForCl)' == 'true'">%(AdditionalDependencies);$(SDK_LIB_PATH)wpprecorderum.lib</AdditionalDependencies>
+      </Link>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Link>
+          <AdditionalDependencies Condition="'$(OverrideCfgV1)' != 'true' and '$(VisualStudioVersion)' &gt;= '12.0' and '$(VisualStudioVersion)' &lt;= '14.0'">$(DDK_LIB_PATH)\cfg_support_v1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      </Link>
+    </ItemGroup>
+
+  </Target>
+
+  <!-- *******************************************************************************************
+        Ctrpp
+       ******************************************************************************************* -->
+  <Target Name="Ctrpp"
+          Condition="'@(Ctrpp)' != ''"
+          AfterTargets="$(BuildGenerateSourcesTargets)">
+
+    <ItemGroup>
+      <Ctrpp>
+        <MinimalRebuildFromTracking   Condition="'$(BuildType)' != 'Build' or '$(ForceRebuild)' == 'true'">false</MinimalRebuildFromTracking>
+      </Ctrpp>
+    </ItemGroup>
+
+    <Ctrpp Condition="'%(Ctrpp.ExcludedFromBuild)'!='true'"
+        GenerateHeaderFileForProvider  ="%(Ctrpp.GenerateHeaderFileForProvider)"
+        HeaderFileNameForProvider      ="%(Ctrpp.HeaderFileNameForProvider)"
+        GenerateResourceSourceFile     ="%(Ctrpp.GenerateResourceSourceFile)"
+        ResourceFileName               ="%(Ctrpp.ResourceFileName)"
+        EnableLegacy                   ="%(Ctrpp.EnableLegacy)"
+        GenerateMemoryRoutines         ="%(Ctrpp.GenerateMemoryRoutines)"
+        GenerateNotificationCallback   ="%(Ctrpp.GenerateNotificationCallback)"
+        AddPrefix                      ="%(Ctrpp.AddPrefix)"
+        GenerateHeaderFileForCounter   ="%(Ctrpp.GenerateHeaderFileForCounter)"
+        HeaderFileNameForCounter       ="%(Ctrpp.HeaderFileNameForCounter)"
+        BackwardCompatibility          ="%(Ctrpp.BackwardCompatibility)"
+        GenerateSummaryGlobalFile      ="%(Ctrpp.GenerateSummaryGlobalFile)"
+        GeneratedCounterFilesPath      ="%(Ctrpp.GeneratedCounterFilesPath)"
+        Source                         ="%(Ctrpp.Identity)"
+        AdditionalOptions              ="%(Ctrpp.AdditionalOptions)"
+
+        TLogReadFiles                  ="@(CtrppTLogReadFiles)"
+        TLogWriteFiles                 ="@(CtrppTLogWriteFiles)"
+        ToolExe                        ="$(CtrppToolExe)"
+        ToolPath                       ="$(CtrppToolPath)"
+        TrackFileAccess                ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking     ="%(Ctrpp.MinimalRebuildFromTracking)"
+        ToolArchitecture               ="$(CtrppToolArchitecture)"
+        TrackerFrameworkPath           ="$(CtrppTrackerFrameworkPath)"
+        TrackerSdkPath                 ="$(CtrppTrackerSdkPath)"
+    />
+  </Target>
+
+  <!-- *******************************************************************************************
+        StampInf
+       ******************************************************************************************* -->
+  <Target Name="StampInf"
+          Condition="'@(Inf)' != ''"
+          BeforeTargets="InfVerif">
+
+    <PropertyGroup>
+      <SetSharedIncPathEnvVariable Condition="'$([System.Environment]::GetEnvironmentVariable(`SDK_INC_PATH`))'==''">true</SetSharedIncPathEnvVariable>
+    </PropertyGroup>
+
+
+    <SetEnv
+            Condition="'$(SetSharedIncPathEnvVariable)'=='true'"
+            Name   ="SDK_INC_PATH"
+            Value  ="$(KIT_SHARED_INC_PATH)"
+            Prefix ="false">
+    </SetEnv>
+
+    <ItemGroup>
+      <Inf>
+        <AdditionalOptions Condition="('%(Inf.KmdfVersionNumber)' != '' and '%(Inf.KmdfVersionNumber)' != '1.9' and '%(Inf.KmdfVersionNumber)' != '1.11') or
+                                      ('%(Inf.UmdfVersionNumber)' != '' and '%(Inf.UmdfVersionNumber)' != '1.9.0' and '%(Inf.UmdfVersionNumber)' != '1.11.0')"
+                                      >%(Inf.AdditionalOptions) -x</AdditionalOptions>
+
+        <!-- Setting the default MinimalRebuildFromTracking value is deferred to this target, instead of the props since
+                  it is conditioned on the inputs to the tool -->
+        <MinimalRebuildFromTracking Condition="'%(Inf.MinimalRebuildFromTracking)' == ''">true</MinimalRebuildFromTracking>
+        <MinimalRebuildFromTracking
+                Condition="('%(Inf.SpecifyDriverVerDirectiveDate)'=='true' and '%(Inf.DateStamp)'=='*' ) or
+                               ('%(Inf.SpecifyDriverVerDirectiveVersion)'=='true' and '%(Inf.TimeStamp)'=='*' )">false</MinimalRebuildFromTracking>
+
+      </Inf>
+    </ItemGroup>
+
+    <!-- TrackerSource is different from Source, usually they are the same. Because the tool stamps the file in place, we
+     use the timestamp on the original file (Inf.FullPath) to determine if the output (Inf.CopyOutput) is out of date -->
+    <StampInf Condition="'%(Inf.ExcludedFromBuild)'!='true'"
+        CopyFrom                        ="%(Inf.FullPath)"
+        CopyToAndStamp                  ="%(Inf.CopyOutput)"
+        SpecifyArchitecture             ="%(Inf.SpecifyArchitecture)"
+        Architecture                    ="%(Inf.Architecture)"
+        DriverVerDirectiveSection       ="%(Inf.DriverVersionSectionName)"
+        SpecifyDriverVerDirectiveDate   ="%(Inf.SpecifyDriverVerDirectiveDate)"
+        DriverVerDirectiveDate          ="%(Inf.DateStamp)"
+        SpecifyDriverVerDirectiveVersion="%(Inf.SpecifyDriverVerDirectiveVersion)"
+        DriverVerDirectiveVersion       ="%(Inf.TimeStamp)"
+        TrackerLogDirectory             ="%(Inf.StampInfTrackerLogDirectory)"
+        CatalogFile                     ="%(Inf.CatalogFileName)"
+        VersionHeaderPath               ="%(Inf.VersionHeaderPath)"
+        KmdfVersion                     ="%(Inf.KmdfVersionNumber)"
+        UmdfVersion                     ="%(Inf.UmdfVersionNumber)"
+        Verbose                         ="%(Inf.EnableVerbose)"
+        ProviderName                    ="%(Inf.ProviderName)"
+        AdditionalOptions               ="%(Inf.AdditionalOptions)"
+
+        TLogReadFiles                   ="@(InfTLogReadFiles)"
+        TLogWriteFiles                  ="@(InfTLogWriteFiles)"
+        ToolExe                         ="$(InfToolExe)"
+        ToolPath                        ="$(InfToolPath)"
+        TrackFileAccess                 ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking      ="%(Inf.MinimalRebuildFromTracking)"
+        ToolArchitecture                ="$(InfToolArchitecture)"
+        TrackerFrameworkPath            ="$(InfTrackerFrameworkPath)"
+        TrackerSdkPath                  ="$(InfTrackerSdkPath)"
+      />
+
+    <!-- After stamping, the files should be placed in $(OutDir) -->
+    <Copy SkipUnchangedFiles="true" Condition="'@(Inf->'%(CopyOutput)')' != '' and '%(Inf.ExcludedFromBuild)'!='true'" SourceFiles="@(Inf->'%(CopyOutput)')"
+          DestinationFolder="$(OutDir)"/>
+
+    <SetEnv
+            Condition="'$(SetSharedIncPathEnvVariable)'=='true'"
+            Name   ="SDK_INC_PATH"
+            Value  =""
+            Prefix ="false">
+    </SetEnv>
+  </Target>
+
+  <!-- *******************************************************************************************
+        InfVerif
+       ******************************************************************************************* -->
+  <Target Name="InfVerif"
+          Condition="'@(Inf)' != '' and '$(IsDriverAppToolset)' != 'true'"
+          AfterTargets="StampInf"
+          BeforeTargets="PreBuildEvent">
+
+    <ItemGroup>
+      <InfItems Include="%(Inf.CopyOutput)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <InfSourceFiles Include="%(Inf.FullPath)"/>
+    </ItemGroup>
+
+    <PropertyGroup Condition = "'$(_NT_TARGET_VERSION)' >= '$(_NT_TARGET_VERSION_WIN10)'">
+      <InfVerif_NeedsValidation>false</InfVerif_NeedsValidation>
+    </PropertyGroup>
+
+    <PropertyGroup Condition = "'$(DriverTargetPlatform)' == 'Universal'">
+      <InfVerif_AdditionalValidation>true</InfVerif_AdditionalValidation>
+    </PropertyGroup>
+
+    <DPVerifierTask Condition="'@(InfItems)' != '' and '$(SkipPackageVerification)' != 'true'"
+        AdditionalValidation           ="$(InfVerif_AdditionalValidation)"
+        AdditionalOptions              ="$(InfVerif_AdditionalOptions)"
+        NeedsValidation                ="$(InfVerif_NeedsValidation)"
+        OriginalInfFiles               ="@(InfSourceFiles)"
+        PackageInfFile                 ="@(InfItems)"
+    />
+  </Target>
+
+  <!-- *******************************************************************************************
+        Mofcomp
+       ******************************************************************************************* -->
+  <Target Name="Mofcomp"
+          Condition="'@(Mofcomp)' != ''"
+          BeforeTargets="BeforeClCompile">
+
+    <ItemGroup>
+      <Mofcomp>
+        <MinimalRebuildFromTracking   Condition="'$(BuildType)' != 'Build' or '$(ForceRebuild)' == 'true'">false</MinimalRebuildFromTracking>
+      </Mofcomp>
+    </ItemGroup>
+
+    <PropertyGroup>
+      <MofcompToolArchitecture Condition="'$(MofcompToolArchitecture)' == ''">Native32Bit</MofcompToolArchitecture>
+    </PropertyGroup>
+
+
+    <Mofcomp Condition="'%(Mofcomp.ExcludedFromBuild)'!='true'"
+        LanguageNeutralOutput          ="%(Mofcomp.LanguageNeutralOutput)"
+        LanguageSpecificOutput         ="%(Mofcomp.LanguageSpecificOutput)"
+        CreateBinaryMofFile            ="%(Mofcomp.CreateBinaryMofFile)"
+        NamespacePath                  ="%(Mofcomp.NamespacePath)"
+        AutoRecover                    ="%(Mofcomp.AutoRecover)"
+        SyntaxCheck                    ="%(Mofcomp.SyntaxCheck)"
+        WmiSyntaxCheck                 ="%(Mofcomp.WmiSyntaxCheck)"
+        UserName                       ="%(Mofcomp.UserName)"
+        Password                       ="%(Mofcomp.Password)"
+        Authority                      ="%(Mofcomp.Authority)"
+        ResourceName                   ="%(Mofcomp.ResourceName)"
+        ResourceLocale                 ="%(Mofcomp.ResourceLocale)"
+        Amendment                      ="%(Mofcomp.Amendment)"
+        MofClass                       ="%(Mofcomp.MofClass)"
+        MofInstance                    ="%(Mofcomp.MofInstance)"
+        Sources                        ="@(Mofcomp)"
+        AdditionalOptions              ="%(Mofcomp.AdditionalOptions)"
+
+        TrackerLogDirectory            ="%(Mofcomp.TrackerLogDirectory)"
+        TLogReadFiles                  ="@(MofcompTLogReadFiles)"
+        TLogWriteFiles                 ="@(MofcompTLogWriteFiles)"
+        ToolExe                        ="$(MofcompToolExe)"
+        ToolPath                       ="$(MofcompToolPath)"
+        TrackFileAccess                ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking     ="%(Mofcomp.MinimalRebuildFromTracking)"
+        ToolArchitecture               ="$(MofcompToolArchitecture)"
+        TrackerFrameworkPath           ="$(MofcompTrackerFrameworkPath)"
+        TrackerSdkPath                 ="$(MofcompTrackerSdkPath)"
+    />
+  </Target>
+
+  <!-- *******************************************************************************************
+        Wmimofck
+       ******************************************************************************************* -->
+  <Target Name="Wmimofck"
+          Condition ="'@(Wmimofck)' != ''"
+          BeforeTargets="BeforeClCompile"
+          DependsOnTargets="Mofcomp">
+
+    <ItemGroup>
+      <Wmimofck>
+        <MinimalRebuildFromTracking   Condition="'$(BuildType)' != 'Build' or '$(ForceRebuild)' == 'true'">false</MinimalRebuildFromTracking>
+      </Wmimofck>
+    </ItemGroup>
+
+    <Wmimofck Condition="'%(Wmimofck.ExcludedFromBuild)'!='true'"
+        HeaderOutputFile                               ="%(Wmimofck.HeaderOutputFile)"
+        SourceOutputFile                               ="%(Wmimofck.SourceOutputFile)"
+        HtmlUIOutputDirectory                          ="%(Wmimofck.HtmlUIOutputDirectory)"
+        HtmlOutputDirectory                            ="%(Wmimofck.HtmlOutputDirectory)"
+        GenerateStructureDefinitionsForMethodParameters="%(Wmimofck.GenerateStructureDefinitionsForMethodParameters)"
+        GenerateStructureDefinitionsForDatablocks      ="%(Wmimofck.GenerateStructureDefinitionsForDatablocks)"
+        VBScriptTestOutputFile                         ="%(Wmimofck.VBScriptTestOutputFile)"
+        HexdumpOutputFile                              ="%(Wmimofck.HexdumpOutputFile)"
+        MofFile                                        ="%(Wmimofck.MofFile)"
+        MflFile                                        ="%(Wmimofck.MflFile)"
+        Source                                         ="%(Wmimofck.Identity)"
+        TrackerLogDirectory                            ="%(Wmimofck.TrackerLogDirectory)"
+        AdditionalOptions                              ="%(Wmimofck.AdditionalOptions)"
+
+        TLogReadFiles                                  ="@(WmimofckTLogReadFiles)"
+        TLogWriteFiles                                 ="@(WmimofckTLogWriteFiles)"
+        ToolExe                                        ="$(WmimofckToolExe)"
+        ToolPath                                       ="$(WmimofckToolPath)"
+        TrackFileAccess                                ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking                     ="%(Wmimofck.MinimalRebuildFromTracking)"
+        ToolArchitecture                               ="$(WmimofckToolArchitecture)"
+        TrackerFrameworkPath                           ="$(WmimofckTrackerFrameworkPath)"
+        TrackerSdkPath                                 ="$(WmimofckTrackerSdkPath)"
+    />
+  </Target>
+
+  <!-- *******************************************************************************************
+        Selective Build
+       ******************************************************************************************* -->
+  <!-- The following target removes build items from the project. -->
+  <Target Name="SelectMessageCompile" DependsOnTargets="_SelectedFiles;SelectCustomBuild">
+    <ItemGroup Condition="'@(SelectedFiles)'!=''">
+      <MessageCompile Remove="@(MessageCompile)" Condition="'%(Identity)'!='@(SelectedFiles)'"/>
+
+      <!-- Force rebuild if the MessageCompile item was specifically select for build-->
+      <MessageCompile>
+        <MinimalRebuildFromTracking>false</MinimalRebuildFromTracking>
+      </MessageCompile>
+    </ItemGroup>
+  </Target>
+
+  <!-- *******************************************************************************************
+        MessageCompile
+       ******************************************************************************************* -->
+  <Target Name="MessageCompile"
+          Condition ="'@(MessageCompile)' != ''"
+          BeforeTargets="BeforeClCompile"
+          DependsOnTargets="SelectMessageCompile">
+
+    <ItemGroup>
+      <MessageCompile>
+        <!-- Force rebuild if the MessageCompile item was specifically select for build-->
+        <MinimalRebuildFromTracking   Condition="'$(BuildType)' != 'Build' or '$(ForceRebuild)' == 'true'">false</MinimalRebuildFromTracking>
+      </MessageCompile>
+    </ItemGroup>
+
+    <Mc Condition="'%(MessageCompile.ExcludedFromBuild)'!='true'"
+        AnsiInputFile                   ="%(MessageCompile.AnsiInputFile)"
+        AnsiMessageInBinFile            ="%(MessageCompile.AnsiMessageInBinFile)"
+        EnableDebugOutputPath           ="%(MessageCompile.EnableDebugOutputPath)"
+        DebugOutputPath                 ="%(MessageCompile.DebugOutputPath)"
+        EnableCalloutMacro              ="%(MessageCompile.EnableCalloutMacro)"
+        GenerateBaselineResource        ="%(MessageCompile.GenerateBaselineResource)"
+        BaselineResourcePath            ="%(MessageCompile.BaselineResourcePath)"
+        GenerateCSharpLoggingClass      ="%(MessageCompile.GenerateCSharpLoggingClass)"
+        GenerateStaticCSharpLoggingClass="%(MessageCompile.GenerateStaticCSharpLoggingClass)"
+        GeneratedFilesBaseName          ="%(MessageCompile.GeneratedFilesBaseName)"
+        GeneratedHeaderPath             ="%(MessageCompile.GeneratedHeaderPath)"
+        HeaderFilePath                  ="%(MessageCompile.HeaderFilePath)"
+        GeneratedRCAndMessagesPath      ="%(MessageCompile.GeneratedRCAndMessagesPath)"
+        RCFilePath                      ="%(MessageCompile.RCFilePath)"
+        GenerateKernelModeLoggingMacros ="%(MessageCompile.GenerateKernelModeLoggingMacros)"
+        GenerateMofFile                 ="%(MessageCompile.GenerateMofFile)"
+        GenerateOle2Header              ="%(MessageCompile.GenerateOle2Header)"
+        GenerateUserModeLoggingMacros   ="%(MessageCompile.GenerateUserModeLoggingMacros)"
+        HeaderExtension                 ="%(MessageCompile.HeaderExtension)"
+        MaximumMessageLength            ="%(MessageCompile.MaximumMessageLength)"
+        PrefixMacroName                 ="%(MessageCompile.PrefixMacroName)"
+        RemoveCharsFromSymbolName       ="%(MessageCompile.RemoveCharsFromSymbolName)"
+        SetCustomerbit                  ="%(MessageCompile.SetCustomerbit)"
+        TerminateMessageWithNull        ="%(MessageCompile.TerminateMessageWithNull)"
+        UnicodeInputFile                ="%(MessageCompile.UnicodeInputFile)"
+        UnicodeMessageInBinFile         ="%(MessageCompile.UnicodeMessageInBinFile)"
+        UseBaseNameOfInput              ="%(MessageCompile.UseBaseNameOfInput)"
+        UseDecimalValues                ="%(MessageCompile.UseDecimalValues)"
+        ValidateAgainstBaselineResource ="%(MessageCompile.ValidateAgainstBaselineResource)"
+        BaselinePath                    ="%(MessageCompile.BaselinePath)"
+        Verbose                         ="%(MessageCompile.Verbose)"
+        Sources                         ="@(MessageCompile)"
+        TrackerLogDirectory             ="%(MessageCompile.TrackerLogDirectory)"
+        AdditionalOptions               ="%(MessageCompile.AdditionalOptions)"
+        EventmanPath                    ="%(MessageCompile.EventmanPath)"
+        WinmetaPath                     ="%(MessageCompile.WinmetaPath)"
+
+        TLogReadFiles                   ="@(MessageCompileTLogReadFiles)"
+        TLogWriteFiles                  ="@(MessageCompileTLogWriteFiles)"
+        ToolExe                         ="$(MessageCompileToolExe)"
+        ToolPath                        ="$(MessageCompileToolPath)"
+        TrackFileAccess                 ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking      ="%(MessageCompile.MinimalRebuildFromTracking)"
+        ToolArchitecture                ="$(MessageCompileToolArchitecture)"
+        TrackerFrameworkPath            ="$(MessageCompileTrackerFrameworkPath)"
+        TrackerSdkPath                  ="$(MessageCompileTrackerSdkPath)"
+    />
+  </Target>
+
+
+  <!-- *******************************************************************************************
+        CheckIfWppEnabled
+       ******************************************************************************************* -->
+  <!-- Dynamically add RUN_WPP preprocessor definition to MIDL if Wpp is enabled -->
+  <Target Name="CheckIfWppEnabled" Condition="'@(Midl)'!=''" BeforeTargets="BeforeMidl" >
+
+    <!-- Get ClCompile items that are not excluded from build and for which Wpp is enabled-->
+    <ItemGroup>
+      <WppEnabledCLItems Include="@(ClCompile)" Condition="'%(ClCompile.ExcludedFromBuild)'!='true' and '%(ClCompile.WppEnabled)' == 'true'"/>
+    </ItemGroup>
+
+    <ItemGroup >
+      <Midl Condition="@(WppEnabledCLItems) != ''" >
+        <PreprocessorDefinitions >RUN_WPP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      </Midl>
+    </ItemGroup>
+
+    <ItemGroup>
+      <WppEnabledCLItems Remove="@(WppEnabledCLItems)"/>
+    </ItemGroup>
+  </Target>
+
+  <!-- *******************************************************************************************
+        Dynamically add the required WPP preprocessor definitions to the compiler if Wpp is enabled
+       ******************************************************************************************* -->
+  <Target Name="AddWppClDefinitions" BeforeTargets="BeforeClCompile" >
+
+    <!-- Set the preprocessor definitions required for WPP if necessary -->
+    <ItemGroup>
+      <ClCompile>
+        <PreprocessorDefinitions Condition="'$(IsUserModeToolset)' == 'true' and '$(UMDF_VERSION_MAJOR)' == '2' and '$(UMDF_VERSION_MINOR)' &gt;= '15' and '%(ClCompile.WppEnabled)' == 'true'">%(PreprocessorDefinitions);WPP_MACRO_USE_KM_VERSION_FOR_UM=1</PreprocessorDefinitions>
+      </ClCompile>
+    </ItemGroup>
+    <ItemGroup>
+      <ClCompile>
+        <PreprocessorDefinitions Condition="'%(ClCompile.WppEnabled)' == 'true' and '%(ClCompile.WppRecorderEnabled)' == 'true' and '$(IsUserModeToolset)' == 'true' and '$(UMDF_VERSION_MAJOR)' == '2' and '$(UMDF_VERSION_MINOR)' &gt;= '15'">%(PreprocessorDefinitions);ENABLE_WPP_RECORDER=1</PreprocessorDefinitions>
+      </ClCompile>
+    </ItemGroup>
+    <ItemGroup>
+      <ClCompile>
+        <PreprocessorDefinitions Condition="'%(ClCompile.WppEnabled)' == 'true' and '%(ClCompile.WppRecorderEnabled)' == 'true' and '$(IsKernelModeToolset)' == 'true' and '$(TargetVersion)'!='Windows7' and '$(TargetVersion)'!='Win7'">%(PreprocessorDefinitions);ENABLE_WPP_RECORDER=1</PreprocessorDefinitions>
+      </ClCompile>
+    </ItemGroup>
+
+  </Target>
+
+  <!-- *******************************************************************************************
+        RunWpp
+       ******************************************************************************************* -->
+  <Target Name="RunWpp"
+          BeforeTargets="BeforeClCompile">
+
+    <!--
+         OtherWpp items contain everything other than clcompile items. These items
+         when excluded from build also need to be excluded from OtherWpp item group.
+    -->
+    <ItemGroup>
+      <TraceWpp Include="@(ClCompile)" Condition="'%(ClCompile.WppEnabled)'  == 'true' and '%(ClCompile.ExcludedFromBuild)'!='true'"/>
+      <OtherWppExcludedFromBuild Include="@(ResourceCompile)" Condition="'%(ResourceCompile.ExcludedFromBuild)'=='true'"/>
+      <OtherWppExcludedFromBuild Include="@(Mofcomp)" Condition="'%(Mofcomp.ExcludedFromBuild)'=='true'"/>
+      <OtherWppExcludedFromBuild Include="@(Wmimofck)" Condition="'%(Wmimofck.ExcludedFromBuild)' =='true'"/>
+      <OtherWppExcludedFromBuild Include="@(MessageCompile)" Condition="'%(MessageCompile.ExcludedFromBuild)'=='true'"/>
+      <OtherWppExcludedFromBuild Include="@(Ctrpp)" Condition="'%(Ctrpp.ExcludedFromBuild)'=='true'"/>
+      <OtherWpp Remove="@(OtherWpp)" Condition="'%(Identity)'=='@(OtherWppExcludedFromBuild)'"/>
+      <TraceWpp Include="@(OtherWpp)"  Condition="'%(OtherWpp.WppEnabled)'  == 'true'"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <TraceWpp>
+        <WppMinimalRebuildFromTracking   Condition="'$(BuildType)' != 'Build' or '$(ForceRebuild)' == 'true'">false</WppMinimalRebuildFromTracking>
+      </TraceWpp>
+    </ItemGroup>
+
+    <Wpp Condition ="'@(TraceWpp)' != ''"
+        PreprocessorDefinitions        ="%(TraceWpp.WppPreprocessorDefinitions)"
+        Sources                        ="@(TraceWpp)"
+        AdditionalOptions              ="%(TraceWpp.WppAdditionalOptions)"
+        AdditionalIncludeDirectories   ="%(TraceWpp.WppAdditionalIncludeDirectories)"
+        ConfigurationDirectories       ="%(TraceWpp.WppConfigurationDirectories)"
+        KernelMode                     ="%(TraceWpp.WppKernelMode)"
+        TraceFunction                  ="%(TraceWpp.WppTraceFunction)"
+        FileExtensions                 ="%(TraceWpp.WppFileExtensions)"
+        PreserveExtensions             ="%(TraceWpp.WppPreserveExtensions)"
+        AdditionalConfigurationFile    ="%(TraceWpp.WppAdditionalConfigurationFile)"
+        AlternateConfigurationFile     ="%(TraceWpp.WppAlternateConfigurationFile)"
+        ScanConfigurationData          ="%(TraceWpp.WppScanConfigurationData)"
+        EnableOutputDirectory          ="%(TraceWpp.WppEnableOutputDirectory)"
+        OutputDirectory                ="%(TraceWpp.WppOutputDirectory)"
+        IgnoreExclamationmarks         ="%(TraceWpp.WppIgnoreExclamationmarks)"
+        DllMacro                       ="%(TraceWpp.WppDllMacro)"
+        SearchString                   ="%(TraceWpp.WppSearchString)"
+        AddAlternateNameToMessageGUID  ="%(TraceWpp.WppModuleName)"
+        AddControlGUID                 ="%(TraceWpp.WppAddControlGUID)"
+        NumericBaseForFormatStrings    ="%(TraceWpp.WppNumericBaseForFormatStrings)"
+        GenerateUsingTemplateFile      ="%(TraceWpp.WppGenerateUsingTemplateFile)"
+        TrackerLogDirectory            ="%(TraceWpp.WppTrackerLogDirectory)"
+
+        TLogReadFiles                  ="@(TraceWppTLogReadFiles)"
+        TLogWriteFiles                 ="@(TraceWppTLogWriteFiles)"
+        ToolExe                        ="$(TraceWppToolExe)"
+        ToolPath                       ="$(TraceWppToolPath)"
+        TrackFileAccess                ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking     ="%(TraceWpp.WppMinimalRebuildFromTracking)"
+        ToolArchitecture               ="$(TraceWppToolArchitecture)"
+        TrackerFrameworkPath           ="$(TraceWppTrackerFrameworkPath)"
+        TrackerSdkPath                 ="$(TraceWppTrackerSdkPath)"
+    />
+  </Target>
+
+  <!-- *******************************************************************************************
+        BinplaceGenerated Target == PASS0 Binplace
+       ******************************************************************************************* -->
+  <Target Name="BinplaceGenerated"
+          Condition="'@(BinplaceGenerated)' != ''"
+          AfterTargets="$(BuildGenerateSourcesTargets)">
+    <SetEnv Name   ="_NTTREE"
+            Value  ="$(UserRootDir)\Microsoft\WindowsDriverKit\10.0\"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="_NTTREE"/>
+    </SetEnv>
+
+    <SetEnv Name   ="BINPLACE_LOG"
+            Value  ="$(_NTTREE)build_logs\binplace.log"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="BINPLACE_LOG"/>
+    </SetEnv>
+
+    <SetEnv Name   ="BINPLACE_EXCLUDE_FILE"
+            Value  ="$(WDKContentRoot)bin\symbad.txt"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="BINPLACE_EXCLUDE_FILE"/>
+    </SetEnv>
+
+    <ItemGroup>
+      <BinPlaceFilesNotExcluded Include="@(BinplaceGenerated)" Condition="'%(BinplaceGenerated.ExludedFromBuild)' != 'true'"/>
+    </ItemGroup>
+
+
+    <ItemGroup Condition="@(BinPlaceFilesNotExcluded) != ''">
+      <BinplaceDirsToMake Include="$(_NTTREE)"/>
+      <BinplaceDirsToMake Include="$(_NTTREE)build_logs"/>
+      <BinplaceDirsToMake Include="$(_NTTREE)build_logs\sidebyside"/>
+    </ItemGroup>
+
+    <MakeDir Condition="!exists('%(BinplaceDirsToMake.%Identity)')" Directories="@(BinplaceDirsToMake)" />
+
+    <ItemGroup>
+      <BinplaceDirsToMake Remove="@(BinplaceDirsToMake)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <WppEnabledCLItems Include="@(ClCompile)" Condition="'%(ClCompile.ExcludedFromBuild)'!='true' and '%(ClCompile.WppEnabled)' == 'true'"/>
+    </ItemGroup>
+
+    <ItemGroup >
+      <BinplaceGenerated Condition="@(WppEnabledCLItems) != ''">
+        <CreateTMFFiles >true</CreateTMFFiles>
+      </BinplaceGenerated>
+    </ItemGroup>
+
+    <ItemGroup>
+      <WppEnabledCLItems  Remove="@(WppEnabledCLItems)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <BinplaceGenerated>
+        <SymbolRoot                   Condition="'%(BinplaceGenerated.SymbolRoot)' == ''">true</SymbolRoot>
+        <SymbolRootPath                   Condition="'%(BinplaceGenerated.SymbolRoot)' == ''">$(_NTTREE)Symbols.pri\.</SymbolRootPath>
+        <BinplaceDestinationDirectories   Condition="'%(BinplaceGenerated.BinplaceDestinationDirectories)' == ''">$(IntDir)</BinplaceDestinationDirectories>
+      </BinplaceGenerated>
+    </ItemGroup>
+
+    <Binplace Condition="'%(BinplaceGenerated.ExcludedFromBuild)'!='true'"
+        CreateHardlinks                    ="%(BinplaceGenerated.CreateHardlinks)"
+        PlaceFile                          ="%(BinplaceGenerated.PlaceFile)"
+        CreateTmfFiles                     ="%(BinplaceGenerated.CreateTmfFiles)"
+        ExtraSubdirectory                  ="%(BinplaceGenerated.ExtraSubdirectory)"
+        Sources                            ="@(BinplaceGenerated)"
+        NoClassSubdirectories              ="%(BinplaceGenerated.NoClassSubdirectories)"
+        NoCheckInCodeView                  ="%(BinplaceGenerated.NoCheckInCodeView)"
+        BinplaceFilesToDump                ="%(BinplaceGenerated.BinplaceFilesToDump)"
+        ContinueExecution                  ="%(BinplaceGenerated.ContinueExecution)"
+        TestMode                           ="%(BinplaceGenerated.TestMode)"
+        QuietMode                          ="%(BinplaceGenerated.QuietMode)"
+        PreserveFileAttributes             ="%(BinplaceGenerated.PreserveFileAttributes)"
+        SymbolCheck                        ="%(BinplaceGenerated.SymbolCheck)"
+        Verbose                            ="%(BinplaceGenerated.Verbose)"
+        StripPrivateSymbols                ="%(BinplaceGenerated.StripPrivateSymbols)"
+        UniProcessDriver                   ="%(BinplaceGenerated.UniProcessDriver)"
+        LogPdb                             ="%(BinplaceGenerated.LogPdb)"
+        EmitWarning                        ="%(BinplaceGenerated.EmitWarning)"
+        RunDLCheck                         ="%(BinplaceGenerated.RunDLCheck)"
+        ChangeAsmsToRetailForSymbols       ="%(BinplaceGenerated.ChangeAsmsToRetailForSymbols)"
+        DeletePrivateSymbolic              ="%(BinplaceGenerated.DeletePrivateSymbolic)"
+        IgnoreDeletePrivateSymbolic        ="%(BinplaceGenerated.IgnoreDeletePrivateSymbolic)"
+        PreventDebugFilesBinplace          ="%(BinplaceGenerated.PreventDebugFilesBinplace)"
+        BinplaceDestinationDirectories     ="%(BinplaceGenerated.BinplaceDestinationDirectories)"
+        ValidateUsingCustomApplication     ="%(BinplaceGenerated.ValidateUsingCustomApplication)"
+        RootSubdirectory                   ="%(BinplaceGenerated.RootSubdirectory)"
+        RootSubdirectoryPath               ="%(BinplaceGenerated.RootSubdirectoryPath)"
+        RootDestination                    ="%(BinplaceGenerated.RootDestination)"
+        RootDestinationPath                ="%(BinplaceGenerated.RootDestinationPath)"
+        FullSymbolRoot                     ="%(BinplaceGenerated.FullSymbolRoot)"
+        FullSymbolRootPath                 ="%(BinplaceGenerated.FullSymbolRootPath)"
+        SymbolRoot                         ="%(BinplaceGenerated.SymbolRoot)"
+        SymbolRootPath                      ="%(BinplaceGenerated.SymbolRootPath)"
+        VerifyImageWithLocalization        ="%(BinplaceGenerated.VerifyImageWithLocalization)"
+        RenameDestinationFile              ="%(BinplaceGenerated.RenameDestinationFile)"
+        ValidateWithCommand                ="%(BinplaceGenerated.ValidateWithCommand)"
+        PostBinplaceCommand                ="%(BinplaceGenerated.PostBinplaceCommand)"
+        TruncateExtension                  ="%(BinplaceGenerated.TruncateExtension)"
+        BinplaceArchiveFilesOnly           ="%(BinplaceGenerated.BinplaceArchiveFilesOnly)"
+        AdditionalOptions                  ="%(BinplaceGenerated.AdditionalOptions)"
+
+        TrackerLogDirectory                ="%(BinplaceGenerated.TrackerLogDirectory)"
+        TLogReadFiles                      ="@(BinplaceTLogReadFiles)"
+        TLogWriteFiles                     ="@(BinplaceTLogWriteFiles)"
+        ToolExe                            ="$(BinplaceToolExe)"
+        ToolPath                           ="$(BinplaceToolPath)"
+        TrackFileAccess                    ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking         ="%(BinplaceGenerated.MinimalRebuildFromTracking)"
+        ToolArchitecture                   ="$(BinplaceToolArchitecture)"
+        TrackerFrameworkPath               ="$(BinplaceTrackerFrameworkPath)"
+        TrackerSdkPath                     ="$(BinplaceTrackerSdkPath)"
+    />
+
+    <SetEnv Name   ="_NTTREE"
+            Value  =""
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="_NTTREE"/>
+    </SetEnv>
+
+    <SetEnv Name   ="BINPLACE_LOG"
+            Value  =""
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="BINPLACE_LOG"/>
+    </SetEnv>
+
+    <SetEnv Name   ="BINPLACE_EXCLUDE_FILE"
+            Value  =""
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="BINPLACE_EXCLUDE_FILE"/>
+    </SetEnv>
+  </Target>
+
+  <!-- *******************************************************************************************
+        BinplaceCompiled Target == PASS1 Binplace
+       ******************************************************************************************* -->
+  <Target Name="BinplaceCompiled"
+          Condition="'@(BinplaceCompiled)' != ''"
+          AfterTargets="$(BuildCompileTargets)">
+    <SetEnv Name   ="_NTTREE"
+            Value  ="$(UserRootDir)\Microsoft\WindowsDriverKit\10.0"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="_NTTREE"/>
+    </SetEnv>
+
+    <SetEnv Name   ="BINPLACE_LOG"
+            Value  ="$(_NTTREE)\build_logs\binplace.log"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="BINPLACE_LOG"/>
+    </SetEnv>
+
+    <SetEnv Name   ="BINPLACE_EXCLUDE_FILE"
+            Value  ="$(WDKContentRoot)bin\symbad.txt"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="BINPLACE_EXCLUDE_FILE"/>
+    </SetEnv>
+
+    <ItemGroup>
+      <BinPlaceFilesNotExcluded Include="@(BinplaceCompiled)" Condition="'%(BinplaceCompiled.ExludedFromBuild)' != 'true'"/>
+    </ItemGroup>
+
+
+    <ItemGroup Condition="@(BinPlaceFilesNotExcluded) != ''">
+      <BinplaceDirsToMake Include="$(_NTTREE)"/>
+      <BinplaceDirsToMake Include="$(_NTTREE)build_logs"/>
+      <BinplaceDirsToMake Include="$(_NTTREE)build_logs\sidebyside"/>
+    </ItemGroup>
+
+    <MakeDir Condition="!exists('%(BinplaceDirsToMake.%Identity)')" Directories="@(BinplaceDirsToMake)" />
+
+    <ItemGroup>
+      <BinplaceDirsToMake Remove="@(BinplaceDirsToMake)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <WppEnabledCLItems Include="@(ClCompile)" Condition="'%(ClCompile.ExcludedFromBuild)'!='true' and '%(ClCompile.WppEnabled)' == 'true'"/>
+    </ItemGroup>
+
+    <ItemGroup >
+      <BinplaceCompiled Condition="@(WppEnabledCLItems) != ''">
+        <CreateTMFFiles >true</CreateTMFFiles>
+      </BinplaceCompiled>
+    </ItemGroup>
+
+    <ItemGroup>
+      <WppEnabledCLItems  Remove="@(WppEnabledCLItems)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <BinplaceCompiled>
+        <SymbolRoot                   Condition="'%(BinplaceCompiled.SymbolRoot)' == ''">true</SymbolRoot>
+        <SymbolRootPath                   Condition="'%(BinplaceCompiled.SymbolRoot)' == ''">$(_NTTREE)\Symbols.pri\.</SymbolRootPath>
+        <BinplaceDestinationDirectories   Condition="'%(BinplaceCompiled.BinplaceDestinationDirectories)' == ''">$(IntDir)</BinplaceDestinationDirectories>
+      </BinplaceCompiled>
+    </ItemGroup>
+
+    <Binplace Condition="'%(BinplaceCompiled.ExcludedFromBuild)'!='true'"
+        CreateHardlinks                    ="%(BinplaceCompiled.CreateHardlinks)"
+        PlaceFile                          ="%(BinplaceCompiled.PlaceFile)"
+        CreateTmfFiles                     ="%(BinplaceCompiled.CreateTmfFiles)"
+        ExtraSubdirectory                  ="%(BinplaceCompiled.ExtraSubdirectory)"
+        Sources                            ="@(BinplaceCompiled)"
+        NoClassSubdirectories              ="%(BinplaceCompiled.NoClassSubdirectories)"
+        NoCheckInCodeView                  ="%(BinplaceCompiled.NoCheckInCodeView)"
+        BinplaceFilesToDump                ="%(BinplaceCompiled.BinplaceFilesToDump)"
+        ContinueExecution                  ="%(BinplaceCompiled.ContinueExecution)"
+        TestMode                           ="%(BinplaceCompiled.TestMode)"
+        QuietMode                          ="%(BinplaceCompiled.QuietMode)"
+        PreserveFileAttributes             ="%(BinplaceCompiled.PreserveFileAttributes)"
+        SymbolCheck                        ="%(BinplaceCompiled.SymbolCheck)"
+        Verbose                            ="%(BinplaceCompiled.Verbose)"
+        StripPrivateSymbols                ="%(BinplaceCompiled.StripPrivateSymbols)"
+        UniProcessDriver                   ="%(BinplaceCompiled.UniProcessDriver)"
+        LogPdb                             ="%(BinplaceCompiled.LogPdb)"
+        EmitWarning                        ="%(BinplaceCompiled.EmitWarning)"
+        RunDLCheck                         ="%(BinplaceCompiled.RunDLCheck)"
+        ChangeAsmsToRetailForSymbols       ="%(BinplaceCompiled.ChangeAsmsToRetailForSymbols)"
+        DeletePrivateSymbolic              ="%(BinplaceCompiled.DeletePrivateSymbolic)"
+        IgnoreDeletePrivateSymbolic        ="%(BinplaceCompiled.IgnoreDeletePrivateSymbolic)"
+        PreventDebugFilesBinplace          ="%(BinplaceCompiled.PreventDebugFilesBinplace)"
+        BinplaceDestinationDirectories     ="%(BinplaceCompiled.BinplaceDestinationDirectories)"
+        ValidateUsingCustomApplication     ="%(BinplaceCompiled.ValidateUsingCustomApplication)"
+        RootSubdirectory                   ="%(BinplaceCompiled.RootSubdirectory)"
+        RootSubdirectoryPath               ="%(BinplaceCompiled.RootSubdirectoryPath)"
+        RootDestination                    ="%(BinplaceCompiled.RootDestination)"
+        RootDestinationPath                ="%(BinplaceCompiled.RootDestinationPath)"
+        FullSymbolRoot                     ="%(BinplaceCompiled.FullSymbolRoot)"
+        FullSymbolRootPath                 ="%(BinplaceCompiled.FullSymbolRootPath)"
+        SymbolRoot                         ="%(BinplaceCompiled.SymbolRoot)"
+        SymbolRootPath                      ="%(BinplaceCompiled.SymbolRootPath)"
+        VerifyImageWithLocalization        ="%(BinplaceCompiled.VerifyImageWithLocalization)"
+        RenameDestinationFile              ="%(BinplaceCompiled.RenameDestinationFile)"
+        ValidateWithCommand                ="%(BinplaceCompiled.ValidateWithCommand)"
+        PostBinplaceCommand                ="%(BinplaceCompiled.PostBinplaceCommand)"
+        TruncateExtension                  ="%(BinplaceCompiled.TruncateExtension)"
+        BinplaceArchiveFilesOnly           ="%(BinplaceCompiled.BinplaceArchiveFilesOnly)"
+        AdditionalOptions                  ="%(BinplaceCompiled.AdditionalOptions)"
+
+        TrackerLogDirectory                ="%(BinplaceCompiled.TrackerLogDirectory)"
+        TLogReadFiles                      ="@(BinplaceTLogReadFiles)"
+        TLogWriteFiles                     ="@(BinplaceTLogWriteFiles)"
+        ToolExe                            ="$(BinplaceToolExe)"
+        ToolPath                           ="$(BinplaceToolPath)"
+        TrackFileAccess                    ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking         ="%(BinplaceCompiled.MinimalRebuildFromTracking)"
+        ToolArchitecture                   ="$(BinplaceToolArchitecture)"
+        TrackerFrameworkPath               ="$(BinplaceTrackerFrameworkPath)"
+        TrackerSdkPath                     ="$(BinplaceTrackerSdkPath)"
+    />
+
+    <SetEnv Name   ="_NTTREE"
+            Value  =""
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="_NTTREE"/>
+    </SetEnv>
+
+    <SetEnv Name   ="BINPLACE_LOG"
+            Value  =""
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="BINPLACE_LOG"/>
+    </SetEnv>
+
+    <SetEnv Name   ="BINPLACE_EXCLUDE_FILE"
+            Value  =""
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="BINPLACE_EXCLUDE_FILE"/>
+    </SetEnv>
+  </Target>
+
+  <!-- *******************************************************************************************
+        BinplaceLinked Target == PASS2 Binplace
+       ******************************************************************************************* -->
+  <Target Name="BinplaceLinked"
+          Condition="'@(BinplaceLinked)' != ''"
+          AfterTargets="DriverTestSign;DriverProductionSign">
+    <SetEnv Name   ="_NTTREE"
+            Value  ="$(UserRootDir)\Microsoft\WindowsDriverKit\10.0"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="_NTTREE"/>
+    </SetEnv>
+
+    <SetEnv Name   ="BINPLACE_LOG"
+            Value  ="$(_NTTREE)\build_logs\binplace.log"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="BINPLACE_LOG"/>
+    </SetEnv>
+
+    <SetEnv Name   ="BINPLACE_EXCLUDE_FILE"
+            Value  ="$(WDKContentRoot)bin\symbad.txt"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="BINPLACE_EXCLUDE_FILE"/>
+    </SetEnv>
+
+    <ItemGroup>
+      <BinPlaceFilesNotExcluded Include="@(BinplaceLinked)" Condition="'%(BinplaceLinked.ExludedFromBuild)' != 'true'"/>
+    </ItemGroup>
+
+
+    <ItemGroup Condition="@(BinPlaceFilesNotExcluded) != ''">
+      <BinplaceDirsToMake Include="$(_NTTREE)"/>
+      <BinplaceDirsToMake Include="$(_NTTREE)build_logs"/>
+      <BinplaceDirsToMake Include="$(_NTTREE)build_logs\sidebyside"/>
+    </ItemGroup>
+
+    <MakeDir Condition="!exists('%(BinplaceDirsToMake.%Identity)')" Directories="@(BinplaceDirsToMake)" />
+
+    <ItemGroup>
+      <BinplaceDirsToMake Remove="@(BinplaceDirsToMake)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <WppEnabledCLItems Include="@(ClCompile)" Condition="'%(ClCompile.ExcludedFromBuild)'!='true' and '%(ClCompile.WppEnabled)' == 'true'"/>
+    </ItemGroup>
+
+    <ItemGroup >
+      <BinplaceLinked Condition="@(WppEnabledCLItems) != ''">
+        <CreateTMFFiles >true</CreateTMFFiles>
+      </BinplaceLinked>
+    </ItemGroup>
+
+    <ItemGroup>
+      <WppEnabledCLItems  Remove="@(WppEnabledCLItems)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <BinplaceLinked>
+        <SymbolRoot                   Condition="'%(BinplaceLinked.SymbolRoot)' == ''">true</SymbolRoot>
+        <SymbolRootPath                   Condition="'%(BinplaceLinked.SymbolRoot)' == ''">$(_NTTREE)\Symbols.pri\.</SymbolRootPath>
+        <BinplaceDestinationDirectories   Condition="'%(BinplaceLinked.BinplaceDestinationDirectories)' == ''">$(IntDir)</BinplaceDestinationDirectories>
+      </BinplaceLinked>
+    </ItemGroup>
+
+    <Binplace Condition="'%(BinplaceLinked.ExcludedFromBuild)'!='true'"
+        CreateHardlinks                    ="%(BinplaceLinked.CreateHardlinks)"
+        PlaceFile                          ="%(BinplaceLinked.PlaceFile)"
+        CreateTmfFiles                     ="%(BinplaceLinked.CreateTmfFiles)"
+        ExtraSubdirectory                  ="%(BinplaceLinked.ExtraSubdirectory)"
+        Sources                            ="@(BinplaceLinked)"
+        NoClassSubdirectories              ="%(BinplaceLinked.NoClassSubdirectories)"
+        NoCheckInCodeView                  ="%(BinplaceLinked.NoCheckInCodeView)"
+        BinplaceFilesToDump                ="%(BinplaceLinked.BinplaceFilesToDump)"
+        ContinueExecution                  ="%(BinplaceLinked.ContinueExecution)"
+        TestMode                           ="%(BinplaceLinked.TestMode)"
+        QuietMode                          ="%(BinplaceLinked.QuietMode)"
+        PreserveFileAttributes             ="%(BinplaceLinked.PreserveFileAttributes)"
+        SymbolCheck                        ="%(BinplaceLinked.SymbolCheck)"
+        Verbose                            ="%(BinplaceLinked.Verbose)"
+        StripPrivateSymbols                ="%(BinplaceLinked.StripPrivateSymbols)"
+        UniProcessDriver                   ="%(BinplaceLinked.UniProcessDriver)"
+        LogPdb                             ="%(BinplaceLinked.LogPdb)"
+        EmitWarning                        ="%(BinplaceLinked.EmitWarning)"
+        RunDLCheck                         ="%(BinplaceLinked.RunDLCheck)"
+        ChangeAsmsToRetailForSymbols       ="%(BinplaceLinked.ChangeAsmsToRetailForSymbols)"
+        DeletePrivateSymbolic              ="%(BinplaceLinked.DeletePrivateSymbolic)"
+        IgnoreDeletePrivateSymbolic        ="%(BinplaceLinked.IgnoreDeletePrivateSymbolic)"
+        PreventDebugFilesBinplace          ="%(BinplaceLinked.PreventDebugFilesBinplace)"
+        BinplaceDestinationDirectories     ="%(BinplaceLinked.BinplaceDestinationDirectories)"
+        ValidateUsingCustomApplication     ="%(BinplaceLinked.ValidateUsingCustomApplication)"
+        RootSubdirectory                   ="%(BinplaceLinked.RootSubdirectory)"
+        RootSubdirectoryPath               ="%(BinplaceLinked.RootSubdirectoryPath)"
+        RootDestination                    ="%(BinplaceLinked.RootDestination)"
+        RootDestinationPath                ="%(BinplaceLinked.RootDestinationPath)"
+        FullSymbolRoot                     ="%(BinplaceLinked.FullSymbolRoot)"
+        FullSymbolRootPath                 ="%(BinplaceLinked.FullSymbolRootPath)"
+        SymbolRoot                         ="%(BinplaceLinked.SymbolRoot)"
+        SymbolRootPath                      ="%(BinplaceLinked.SymbolRootPath)"
+        VerifyImageWithLocalization        ="%(BinplaceLinked.VerifyImageWithLocalization)"
+        RenameDestinationFile              ="%(BinplaceLinked.RenameDestinationFile)"
+        ValidateWithCommand                ="%(BinplaceLinked.ValidateWithCommand)"
+        PostBinplaceCommand                ="%(BinplaceLinked.PostBinplaceCommand)"
+        TruncateExtension                  ="%(BinplaceLinked.TruncateExtension)"
+        BinplaceArchiveFilesOnly           ="%(BinplaceLinked.BinplaceArchiveFilesOnly)"
+        AdditionalOptions                  ="%(BinplaceLinked.AdditionalOptions)"
+
+        TrackerLogDirectory                ="%(BinplaceLinked.TrackerLogDirectory)"
+        TLogReadFiles                      ="@(BinplaceTLogReadFiles)"
+        TLogWriteFiles                     ="@(BinplaceTLogWriteFiles)"
+        ToolExe                            ="$(BinplaceToolExe)"
+        ToolPath                           ="$(BinplaceToolPath)"
+        TrackFileAccess                    ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking         ="%(BinplaceLinked.MinimalRebuildFromTracking)"
+        ToolArchitecture                   ="$(BinplaceToolArchitecture)"
+        TrackerFrameworkPath               ="$(BinplaceTrackerFrameworkPath)"
+        TrackerSdkPath                     ="$(BinplaceTrackerSdkPath)"
+    />
+
+    <SetEnv Name   ="_NTTREE"
+            Value  =""
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="_NTTREE"/>
+    </SetEnv>
+
+    <SetEnv Name   ="BINPLACE_LOG"
+            Value  =""
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="BINPLACE_LOG"/>
+    </SetEnv>
+
+    <SetEnv Name   ="BINPLACE_EXCLUDE_FILE"
+            Value  =""
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="BINPLACE_EXCLUDE_FILE"/>
+    </SetEnv>
+  </Target>
+
+  <!-- *******************************************************************************************
+        Inf2Cat Target
+       ******************************************************************************************* -->
+  <Target Name="Inf2Cat"
+          Condition="'$(Inf2CatSource)' != '' and '$(EnableInf2cat)'  == 'true' and '$(IsDriverAppToolset)' != 'true'"
+          AfterTargets="DriverPackageTarget">
+
+    <ItemGroup>
+      <Inf2CatItems Include="$(Inf2CatSource)\**\*"></Inf2CatItems>
+    </ItemGroup>
+
+    <PropertyGroup>
+      <HaveInfItems Condition="'%(Inf2CatItems.Extension)' == '.inf'">true</HaveInfItems>
+      <Inf2CatTrackerLogDirectory Condition="'$(Inf2CatTrackerLogDirectory)' == ''">$(TLogLocation)</Inf2CatTrackerLogDirectory>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Inf2CatOutputLog Include="$(IntDir)inf2catOutput.log"></Inf2CatOutputLog>
+    </ItemGroup>
+
+    <Inf2Cat Condition="'$(HaveInfItems)' == 'true' and '%(Inf2Cat.ExcludedFromBuild)'!='true'"
+        DriverPackagePath                  ="$(Inf2CatSource)"
+        NoCatalog                          ="$(Inf2CatNoCatalog)"
+        WindowsVersionList                 ="$(Inf2CatWindowsVersionList)"
+        AddDrm                             ="$(Inf2CatAddDrm)"
+        AddPEAttribute                     ="$(Inf2CatAddPEAttribute)"
+        Verbose                            ="$(Inf2CatVerbose)"
+        UseLocalTime                       ="$(Inf2CatUseLocalTime)"
+        IncludePageHashes                  ="$(Inf2CatIncludePageHashes)"
+        AdditionalOptions                  ="$(Inf2CatAdditionalOptions)"
+        IsBuiltInsideVS                    ="$(BuildingInsideVisualStudio)"
+        ToolOutputLog                      ="@(Inf2CatOutputLog)"
+        TrackerLogDirectory                ="$(Inf2CatTrackerLogDirectory)"
+        TLogReadFiles                      ="@(Inf2CatTLogReadFiles)"
+        TLogWriteFiles                     ="@(Inf2CatTLogWriteFiles)"
+        ToolExe                            ="$(Inf2CatToolExe)"
+        ToolPath                           ="$(Inf2CatToolPath)"
+        TrackFileAccess                    ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking         ="$(Inf2CatMinimalRebuildFromTracking)"
+        ToolArchitecture                   ="$(Inf2CatToolArchitecture)"
+        TrackerFrameworkPath               ="$(Inf2CatTrackerFrameworkPath)"
+        TrackerSdkPath                     ="$(Inf2CatTrackerSdkPath)"
+    />
+    <ItemGroup>
+      <Inf2CatItemsNotExcludedFromBuild Include="$(Inf2CatSource)" Condition="'$(HaveInfItems)' == 'true' and '%(Inf2Cat.ExcludedFromBuild)'!='true'"/>
+    </ItemGroup>
+
+    <Message Importance="High" Condition="'$(HaveInfItems)' != 'true' or '@(Inf2CatItemsNotExcludedFromBuild)'==''" Text="Inf2Cat task was skipped as there were no inf files to process&#xA;" />
+    <ItemGroup>
+      <Inf2CatItems Remove="@(Inf2CatItems)" />
+      <Inf2CatOutputLog Remove="@(Inf2CatOutputLog)" />
+      <Inf2CatItemsNotExcludedFromBuild Remove="@(Inf2CatItemsNotExcludedFromBuild)" />
+    </ItemGroup>
+  </Target>
+
+  <PropertyGroup>
+    <CertificateOutputPath>$(OutDir)$(TargetName).cer</CertificateOutputPath>
+  </PropertyGroup>
+
+  <!-- *******************************************************************************************
+        Driver Test Sign Driver Target
+        This test signs the driver that was built by the project.
+        This does not run for package projects, since those don't actually build a driver.
+       ******************************************************************************************* -->
+  <Target Name="DriverTestSign"
+          BeforeTargets="DriverPackageTarget"
+          AfterTargets="AfterLink"
+          Condition="'$(SignMode)' == 'TestSign' and '$(DriverType)' != 'Package'">
+
+    <MSBuild Targets="TestSign" Properties="SignStage=SignDriver" Projects="$(MSBuildProjectFile)"/>
+
+  </Target>
+
+  <!-- *******************************************************************************************
+        Package Test Sign Target
+        This test signs the package (CAT file) that was built by the project.
+        This runs for any project that builds a package for which Inf2Cat was executed.
+       ******************************************************************************************* -->
+  <Target Name="PackageTestSign"
+          AfterTargets="Inf2Cat"
+          Condition="'$(SignMode)' == 'TestSign' and '$(SupportsPackaging)' != 'false'">
+
+    <MSBuild Targets="TestSign" Properties="SignStage=SignPackage" Projects="$(MSBuildProjectFile)"/>
+
+  </Target>
+
+  <!-- *******************************************************************************************
+        Driver Test Sign Target
+       ******************************************************************************************* -->
+  <Target Name="TestSign">
+
+    <!-- When signing the driver, sign the project output -->
+    <ItemGroup Condition="'$(SignStage)' == 'SignDriver'">
+      <DriverSign Include="$(TargetPath)"/>
+    </ItemGroup>
+
+    <!-- When signing a package, sign the catalog file -->
+    <ItemGroup Condition="'$(SignStage)' == 'SignPackage'">
+      <TempInf2CatItem Condition="'$(Inf2CatSource)' != '' and HasTrailingSlash('$(Inf2CatSource)')" Include="$(Inf2CatSource)**\*"/>
+      <TempInf2CatItem Condition="'$(Inf2CatSource)' != '' and !HasTrailingSlash('$(Inf2CatSource)')" Include="$(Inf2CatSource)\**\*"/>
+      <DriverSign Include="@(TempInf2CatItem)" Condition="'%(TempInf2CatItem.Extension)' =='.cat'"/>
+    </ItemGroup>
+
+    <PropertyGroup>
+      <DriverTestSignTrackerLogDirectory Condition="'$(DriverTestSignTrackerLogDirectory)' == ''">$(TLogLocation)</DriverTestSignTrackerLogDirectory>
+    </PropertyGroup>
+
+    <Message
+      Text="The driver will be test-signed. Driver signing options can be changed from the project properties."
+      Condition="'$(SignStage)' == 'SignDriver'"/>
+    <Message
+      Text="The driver package will be test-signed. Driver signing options can be changed from the project properties."
+      Condition="'$(SignStage)' == 'SignPackage'"/>
+    <Message Text="Sign Inputs: @(DriverSign)" Condition="'@(DriverSign->Count())' &gt; 0"/>
+    <Message Text="No files to sign, skipping SignTask." Condition="'@(DriverSign->Count())' &lt;= 0" />
+
+    <SignTask  Condition="'@(DriverSign->Count())'  &gt; 0"
+        SignMode                               ="$(SignMode)"
+        BuildingInIDE                          ="$(BuildingInsideVisualStudio)"
+        ProjectFileName                        ="$(MSBuildProjectName) "
+        Sources                                ="@(DriverSign)"
+        DriverType                             ="$(DriverType)"
+        GenerateCertificate                    ="$(GenerateTestCertificate)"
+        CertificateStoreName                   ="$(CertificateStoreName)"
+        SubjectName                            ="$(SubjectName)"
+        TrackerLogDirectory                    ="$(DriverTestSignTrackerLogDirectory)"
+        TestCertificate                        ="$(TestCertificate)"
+        Password                               ="$(Password)"
+        OSList                                 ="$(Inf2CatWindowsVersionList)"
+        Inf2CatToolPath                        ="$(Inf2CatToolPath)"
+        UseDebugLibraries                      ="$(UseDebugLibraries)"
+        UserRootDirectory                      ="$(UserRootDir)"
+        Platform                               ="$(Platform)"
+        SignedOutputDirectory                  ="$(OutDir)"
+        TargetOS                               ="$(TargetVersion)"
+        CertificateToExport                    ="$(CertificateOutputPath)"
+        FileDigestAlgorithm                    ="%(DriverSign.FileDigestAlgorithm)"
+        AdditionalOptions                      ="%(DriverSign.AdditionalOptions)"
+
+        DiagnosticMode                         ="$(DiagnosticMode)"
+        TLogReadFiles                          ="@(DriverSignTLogReadFiles)"
+        TLogWriteFiles                         ="@(DriverSignTLogWriteFiles)"
+        ToolExe                                ="$(DriverSignToolExe)"
+        ToolPath                               ="$(DriverSignToolPath)"
+        TrackFileAccess                        ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking             ="$(DriverTestSignMinimalRebuildFromTracking)"
+        ToolArchitecture                       ="$(DriverSignToolArchitecture)"
+        TrackerFrameworkPath                   ="$(DriverSignTrackerFrameworkPath)"
+        TrackerSdkPath                         ="$(DriverSignTrackerSdkPath)">
+    </SignTask>
+
+    <ItemGroup Condition="'$(SignStage)' == 'SignPackage'">
+      <TempInf2CatItem Remove="@(TempInf2CatItem)" />
+    </ItemGroup>
+    <OnError ExecuteTargets="RemoveUnsignedOutput"/>
+  </Target>
+
+  <!-- *******************************************************************************************
+        Driver Production Sign Driver Target
+        This production signs the driver that was built by the project.
+        This does not run for package projects, since those don't actually build a driver.
+       ******************************************************************************************* -->
+  <Target Name="DriverProductionSign"
+          BeforeTargets="DriverPackageTarget"
+          AfterTargets="AfterLink"
+          Condition="'$(SignMode)' == 'ProductionSign' and '$(DriverType)' != 'Package'">
+
+    <MSBuild Targets="ProductionSign" Properties="SignStage=SignDriver" Projects="$(MSBuildProjectFile)"/>
+
+  </Target>
+
+  <!-- *******************************************************************************************
+        Package Production Sign Target
+        This production signs the package (CAT file) that was built by the project.
+        This runs for any project that builds a package for which Inf2Cat was executed.
+       ******************************************************************************************* -->
+  <Target Name="PackageProductionSign"
+          AfterTargets="Inf2Cat"
+          Condition="'$(SignMode)' == 'ProductionSign' and '$(SupportsPackaging)' != 'false'">
+
+    <MSBuild Targets="ProductionSign" Properties="SignStage=SignPackage" Projects="$(MSBuildProjectFile)"/>
+
+  </Target>
+
+  <!-- *******************************************************************************************
+        Production Sign Target
+        This is a utility target called by other targets (DriverProductionSign and PackageProductionSign)
+       ******************************************************************************************* -->
+  <Target Name="ProductionSign">
+
+    <!-- When signing the driver, sign the project output -->
+    <ItemGroup Condition="'$(SignStage)' == 'SignDriver'">
+      <DriverSign Include="$(TargetPath)"/>
+    </ItemGroup>
+
+    <!-- When signing a package, sign the catalog file -->
+    <ItemGroup Condition="'$(SignStage)' == 'SignPackage'">
+      <TempInf2CatItem Condition="'$(Inf2CatSource)' != '' and HasTrailingSlash('$(Inf2CatSource)')" Include="$(Inf2CatSource)**\*"/>
+      <TempInf2CatItem Condition="'$(Inf2CatSource)' != '' and !HasTrailingSlash('$(Inf2CatSource)')" Include="$(Inf2CatSource)\**\*"/>
+      <DriverSign Include="@(TempInf2CatItem)" Condition="'%(TempInf2CatItem.Extension)' =='.cat'"/>
+    </ItemGroup>
+
+    <PropertyGroup>
+      <DriverProductionSignTrackerLogDirectory Condition="'$(DriverProductionSignTrackerLogDirectory)' == ''">$(TLogLocation)</DriverProductionSignTrackerLogDirectory>
+    </PropertyGroup>
+
+    <Message
+      Text="The driver will be production-signed. Driver signing options can be changed from the project properties."
+      Condition="'$(SignStage)' == 'SignDriver'"/>
+    <Message
+      Text="The driver package will be production-signed. Driver signing options can be changed from the project properties."
+      Condition="'$(SignStage)' == 'SignPackage'"/>
+    <Message Text="Sign Inputs: @(DriverSign)" Condition="'@(DriverSign->Count())' &gt; 0"/>
+    <Message Text="No files to sign, skipping SignTask." Condition="'@(DriverSign->Count())' &lt;= 0" />
+
+    <SignTask  Condition="'@(DriverSign->Count())'  &gt; 0"
+        SignMode                               ="$(SignMode)"
+        BuildingInIDE                          ="$(BuildingInsideVisualStudio)"
+        ProjectFileName                        ="$(MSBuildProjectName) "
+        Sources                                ="@(DriverSign)"
+        DriverType                             ="$(DriverType)"
+        CertificateStoreName                   ="$(CertificateStoreName)"
+        SubjectName                            ="$(SubjectName)"
+        TrackerLogDirectory                    ="$(DriverProductionSignTrackerLogDirectory)"
+        ProductionCertificate                  ="$(ProductionCertificate)"
+        Password                               ="$(Password)"
+        OSList                                 ="$(Inf2CatWindowsVersionList)"
+        Inf2CatToolPath                        ="$(Inf2CatToolPath)"
+        TimestampServer                        ="$(TimestampServer)"
+        CrossCertificateName                   ="$(CrossCertificateFile)"
+        UserRootDirectory                      ="$(UserRootDir)"
+        UseDebugLibraries                      ="$(UseDebugLibraries)"
+        Platform                               ="$(Platform)"
+        SignedOutputDirectory                  ="$(OutDir)"
+        TargetOS                               ="$(TargetVersion)"
+        DisableDebugWarnings                   ="$(DisableProductionSignDebugWarnings)"
+        CertificateToExport                    ="$(CertificateOutputPath)"
+        FileDigestAlgorithm                    ="%(DriverSign.FileDigestAlgorithm)"
+        AdditionalOptions                      ="%(DriverSign.AdditionalOptions)"
+
+        DiagnosticMode                         ="$(DiagnosticMode)"
+        TLogReadFiles                          ="@(DriverSignTLogReadFiles)"
+        TLogWriteFiles                         ="@(DriverSignTLogWriteFiles)"
+        ToolExe                                ="$(DriverSignToolExe)"
+        ToolPath                               ="$(DriverSignToolPath)"
+        TrackFileAccess                        ="$(TrackFileAccess)"
+        MinimalRebuildFromTracking             ="$(DriverProductionSignMinimalRebuildFromTracking)"
+        ToolArchitecture                       ="$(DriverSignToolArchitecture)"
+        TrackerFrameworkPath                   ="$(DriverSignTrackerFrameworkPath)"
+        TrackerSdkPath                         ="$(DriverSignTrackerSdkPath)">
+    </SignTask>
+
+    <ItemGroup Condition="'$(SignStage)' == 'SignPackage'">
+      <TempInf2CatItem Remove="@(TempInf2CatItem)" />
+    </ItemGroup>
+    <OnError ExecuteTargets="RemoveUnsignedOutput"/>
+  </Target>
+
+  <!-- *******************************************************************************************
+       Post build telemetry task.
+       ******************************************************************************************* -->
+  <Target Name="Telemetry_Packaging"
+          BeforeTargets="DriverPackageTarget"
+          AfterTargets="AfterLink">
+
+    <PropertyGroup>
+      <HasInfs Condition="'@(Inf)' != ''">true</HasInfs>
+      <HasSPKGS Condition="'@(PkgGen)' != '' and '$(SupportsPackaging)' != 'false'">true</HasSPKGS>
+    </PropertyGroup>
+
+    <Telemetry
+        BuildPhase ="DriverPackage"
+        KitVersion = "$(LatestTargetPlatformVersion)"
+        SolutionNameHash = "$(SolutionName)"
+        ProjectNameHash ="$(ProjectName)"
+        BuildingInIDE ="$(BuildingInsideVisualStudio)"
+        BuildingIneWDK ="$(EnterpriseWDK)"
+        VisualStudioVersion ="$(VisualStudioVersion)"
+        MSBuildVersion ="$(MSBuildToolsVersion)"
+        PlatformToolset ="$(PlatformToolset)"
+        DriverType ="$(DriverType)"
+        TargetOS ="$(TargetVersion)"
+        UsingDebugLibraries ="$(UseDebugLibraries)"
+        Platform ="$(Platform)"
+        TargetPlatform ="$(DriverTargetPlatform)"
+        SigningMode ="$(SignMode)"
+        ApiValidatorEnabled ="$(ApiValidator_Enable)"
+        ProjectSupportsPackaging ="$(SupportsPackaging)"
+        HasInfs ="$(HasInfs)"
+        HasSPKGS ="$(HasSPKGS)"
+        MobilePackageGenEnabled ="$(EnablePkgGen)"
+        ValidateDriverPackage ="$(SkipPackageVerification)"
+        ContinueOnError ="false"
+    />
+  </Target>
+
+  <!-- *******************************************************************************************
+       Pre-build Telemetry task.
+       ******************************************************************************************* -->
+  <Target Name="Telemetry" AfterTargets="PreBuildEvent" >
+    <Telemetry
+        BuildPhase ="PreBuildEvent"
+        KitVersion = "$(LatestTargetPlatformVersion)"
+        SolutionNameHash = "$(SolutionName)"
+        ProjectNameHash ="$(ProjectName)"
+        BuildingInIDE ="$(BuildingInsideVisualStudio)"
+        BuildingIneWDK ="$(EnterpriseWDK)"
+        VisualStudioVersion ="$(VisualStudioVersion)"
+        MSBuildVersion ="$(MSBuildToolsVersion)"
+        PlatformToolset ="$(PlatformToolset)"
+        DriverType ="$(DriverType)"
+        TargetOS ="$(TargetVersion)"
+        UsingDebugLibraries ="$(UseDebugLibraries)"
+        Platform ="$(Platform)"
+        TargetPlatform ="$(DriverTargetPlatform)"
+        SigningMode ="$(SignMode)"
+        ApiValidatorEnabled ="$(ApiValidator_Enable)"
+        ProjectSupportsPackaging ="$(SupportsPackaging)"
+        ContinueOnError ="false"
+    />
+  </Target>
+
+  <!-- *******************************************************************************************
+       Clean all miscellaneous items in $(IntDir) except for the .log files.
+       ******************************************************************************************* -->
+  <!-- Files in OutDir will be deleted using the ExtensionsToDeleteOnClean which will get evaluated to real full paths -->
+  <PropertyGroup>
+    <ExtensionsToDeleteOnClean>$(OutDir)$(TargetName).cer;$(OutDir)$(TargetName).cat;$(OutDir)WudfUpdate_$(UMDF_VERSION_MAJOR_STRING)$(UMDF_VERSION_MINOR_STRING).dll;$(OutDir)WdfCoinstaller$(KMDF_VERSION_MAJOR_STRING)$(KMDF_VERSION_MINOR_STRING).dll;$(OutDir)$(TargetName).inf;$(OutDir)$(TargetName).bmf;$(OutDir)$(TargetName).mof;$(OutDir)$(TargetName).tmh;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
+  </PropertyGroup>
+
+
+  <Target Name="CleanOutput" AfterTargets="CoreCppClean">
+    <PropertyGroup>
+      <IntDir Condition="!HasTrailingSlash('$(IntDir)')">$(IntDir)\</IntDir>
+      <PackageDir Condition="$(PackageDir) != '' and !HasTrailingSlash('$(PackageDir)')">$(PackageDir)\</PackageDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <FilesToDelete  Include="$(IntDir)**\*;" Exclude="$(IntDir)**\*.log"/>
+      <DriverPackageFilesToDelete Condition="$(PackageDir) != ''" Include="$(PackageDir)**\*;" Exclude="$(PackageDir)**\*.log;@(FilesToDelete)"/>
+      <SubFolders Include="@(FilesToDelete->'%(RecursiveDir)'->Distinct())" />
+      <PackageSubFolders Condition="$(PackageDir) != ''" Include="@(DriverPackageFilesToDelete->'%(RecursiveDir)'->Distinct())"/>
+      <FoldersToDelete Condition ="@(SubFolders) != ''" Include="$(IntDir)%(SubFolders.Identity)"/>
+      <FoldersToDelete Condition ="$(PackageDir) != '' and @(PackageSubFolders) != ''" Include="$(PackageDir)%(PackageSubFolders.Identity)"/>
+    </ItemGroup>
+    <Delete ContinueOnError="true" Files="@(FilesToDelete)"/>
+    <Delete ContinueOnError="true" Files="@(DriverPackageFilesToDelete)"/>
+    <RemoveDir ContinueOnError="true" Directories="@(FoldersToDelete)"/>
+
+    <ItemGroup>
+      <FilesToDelete Remove="@(FilesToDelete)" />
+      <DriverPackageFilesToDelete Remove="@(DriverPackageFilesToDelete)" />
+      <SubFolders Remove="@(SubFolders)" />
+      <PackageSubFolders Remove="@(PackageSubFolders)" />
+      <FoldersToDelete Remove="@(FoldersToDelete)" />
+    </ItemGroup>
+  </Target>
+
+  <!-- *******************************************************************************************
+
+    <FilesToPackage Condition="'@(DeviceMetadata)' != ''" Include="@(DeviceMetadata)"/>
+        Add the coinstallers to list of items to be packaged for WDF projects
+       ******************************************************************************************* -->
+  <ItemGroup>
+    <FilesToPackage Condition="exists('$(KmdfCoinstaller)') and ('$(DriverType)' == 'KMDF' or '$(IsUserModeToolset)' == 'true')" Include="$(KmdfCoinstaller)"/>
+    <FilesToPackage Condition="exists('$(UmdfCoinstaller)') and ('$(IsUserModeToolset)' == 'true')" Include="$(UmdfCoinstaller)"/>
+    <FilesToPackage Condition="'@(DeviceMetadata)' != ''" Include="@(DeviceMetadata)"/>
+  </ItemGroup>
+
+  <!-- *******************************************************************************************
+        Remove unsigned binaries
+        If signtool encounters a failure, an unsigned binary is left over in the outdir.
+        So we need to delete the unsigned files binaries from output directory, if the task encounters a failue.
+       ******************************************************************************************* -->
+  <Target Name="RemoveUnsignedOutput" Condition="('$(SignMode)' == 'TestSign' or '$(SignMode)' == 'ProductionSign')">
+    <!-- Delete all the files based ExtensionsToDeleteOnClean -->
+    <Delete ContinueOnError="true" Files="@(DriverSign)"/>
+    <Delete ContinueOnError="true" Files="$(ExtensionsToDeleteOnClean)"/>
+  </Target>
+
+  <!-- *******************************************************************************************
+       Driver Package Target.
+       ******************************************************************************************* -->
+  <Target Name="DriverPackageTarget"
+          Condition="'$(SupportsPackaging)'!='false' and '$(IsDriverAppToolset)' != 'true'"
+          AfterTargets="$(DriverPackage_AfterTargets)">
+
+    <Warning
+            Text="The driver package project $(MSBuildProjectFullPath) doesn't have any references to other projects and no projects were packaged.&#xA;"
+            Condition="'@(ProjectReference)' == '' and '$(DriverType)' == 'Package'" />
+
+    <!-- Resolve the project references based on the Solution Configuration -> Project configuration mappings -->
+    <AssignProjectConfiguration
+        Condition="('$(BuildingSolutionFile)'=='true' or '$(BuildingInsideVisualStudio)'=='true') and '@(ProjectReference)'!=''"
+        ProjectReferences="@(ProjectReference)"
+        SolutionConfigurationContents="$(CurrentSolutionConfigurationContents)">
+      <Output TaskParameter="AssignedProjects" ItemName="ResolvedProjectReferences"/>
+    </AssignProjectConfiguration>
+
+    <!-- If we're not building a solution, then use the current project configuration -->
+    <ItemGroup Condition="'$(BuildingSolutionFile)'!='true' and '$(BuildingInsideVisualStudio)'!='true' and '@(ProjectReference)'!=''">
+      <ResolvedProjectReferences Include="@(ProjectReference)">
+        <Configuration>$(Configuration)</Configuration>
+        <Platform>$(Platform)</Platform>
+      </ResolvedProjectReferences>
+    </ItemGroup>
+
+    <Message Text="Packaging up the following projects for the following configurations:&#xA;" />
+    <Message Text="%(ResolvedProjectReferences.Identity) Configuration='%(ResolvedProjectReferences.Configuration)' Platform='%(ResolvedProjectReferences.Platform)'&#xA;" />
+
+    <!-- If we're not building a solution, then also build the referenced projects explicitly -->
+    <MSBuild    Condition="'$(BuildingSolutionFile)'!='true' and '$(BuildingInsideVisualStudio)'!='true' and @(ResolvedProjectReferences) !=''"
+                Targets="Build"
+                Projects="@(ResolvedProjectReferences)"
+                Properties="%(ResolvedProjectReferences.AdditionalProperties); Configuration=%(ResolvedProjectReferences.Configuration); Platform=%(ResolvedProjectReferences.Platform);"
+                StopOnFirstFailure="true"
+                SkipNonexistentProjects="%(ResolvedProjectReferences.SkipNonexistentProjects)"
+                >
+    </MSBuild>
+
+    <MSBuild    Condition="@(ResolvedProjectReferences) !=''"
+                Targets="GetPackageFiles"
+                Projects="@(ResolvedProjectReferences)"
+                Properties="%(ResolvedProjectReferences.AdditionalProperties); Configuration=%(ResolvedProjectReferences.Configuration); Platform=%(ResolvedProjectReferences.Platform);"
+                StopOnFirstFailure="true"
+                SkipNonexistentProjects="%(ResolvedProjectReferences.SkipNonexistentProjects)"
+                >
+      <Output TaskParameter="TargetOutputs"
+              ItemName="ItemsToPackage" />
+    </MSBuild>
+
+    <ItemGroup>
+      <ItemsToPackage Include="@(FilesToPackage)"/>
+    </ItemGroup>
+
+    <PropertyGroup>
+      <SetReleaseMode>true</SetReleaseMode>
+      <SetReleaseMode Condition="'$(UseDebugLibraries)' == 'true'">false</SetReleaseMode>
+    </PropertyGroup>
+
+    <Message Text="&#xA;The following files will be packaged:&#xA;" />
+    <Message Text="File to package:      %(ItemsToPackage.Identity).&#xA;Location in Package:  @(ItemsToPackage->'%(PackageRelativeDirectory)\%(Filename)%(Extension)').&#xA;Requested by project: %(ItemsToPackage.MSBuildSourceProjectFile)&#xA;&#xA;" />
+
+    <Copy SkipUnchangedFiles="true" Condition="'%(ItemsToPackage.ExcludedFromBuild)'!='true'" SourceFiles="@(ItemsToPackage->'%(Identity)')" DestinationFolder="$(PackageDir)\%(ItemsToPackage.PackageRelativeDirectory)" />
+
+  </Target>
+
+  <!-- *******************************************************************************************
+       Get Package Files Target.
+       ******************************************************************************************* -->
+  <Target Name="GetPackageFiles" Returns="@(FullyQualifiedFilesToPackage)"
+          BeforeTargets="DriverPackageTarget">
+
+    <!-- Include any INF files in the project in the list of files to be packaged. Unless they explicitly opt out or it is an ApplicationForDriver project. -->
+    <ItemGroup Condition="'$(IsDriverAppToolset)' != 'true'">
+      <FilesToPackage Include="@(Inf->'%(CopyOutput)')" Condition="'%(Inf.ExcludeFromPackage)'!='true'" Exclude="@(FilesToPackage)"/>
+    </ItemGroup>
+
+    <!-- Force all item includes to be evaluated in this project and not passed with property references -->
+    <ConvertToAbsolutePath Paths="@(FilesToPackage)">
+      <Output TaskParameter="AbsolutePaths" ItemName="FullyQualifiedFilesToPackage" />
+    </ConvertToAbsolutePath>
+
+  </Target>
+
+  <!-- *******************************************************************************************
+       Mobile Driver Packaging Target.
+       ******************************************************************************************* -->
+  <Target Name="PkgGen"
+          Condition="'@(PkgGen)' != '' and '$(EnablePkgGen)' == 'true' and '$(SupportsPackaging)' != 'false'"
+          AfterTargets="AfterLink">
+
+    <Message Text="Generating mobile driver package using pkggen.exe" />
+
+    <CheckIfRunningAsAdmin>
+      <Output PropertyName="IsAdmin" TaskParameter="IsAdmin" />
+    </CheckIfRunningAsAdmin>
+
+    <Error Text="Creation of mobile driver package requires administrator privileges. Please restart Visual Studio as administrator to proceed. If you want to just build the driver without creation of mobile driver package, set 'Run PkgGen' as 'No' under project properties->PackageGen."
+           Condition="'$(IsAdmin)' == 'false'" />
+
+    <Message Text="PackageGen is skipped when driver install option is set to Fast Reinstall"
+             Importance="High"
+             Condition="'$(InstallMode)' == 'FastDeploy'" />
+
+    <SetEnv Name="PATH"
+            Value  = "%PATH%;$(WDKContentRoot)Tools\bin\i386\;"
+            Prefix = "false" />
+    <SetEnv Name="SIGN_OEM"
+            Value  = "1"
+            Prefix = "false" />
+    <SetEnv Name="SIGN_WITH_TIMESTAMP"
+            Value  = "0"
+            Prefix = "false" />
+    <PkgGen Condition="'$(InstallMode)' != 'FastDeploy' and '@(PkgGen)' != '' and '%(PkgGen.ExcludedFromBuild)' != 'true'"
+            CommandLineTemplate =     "%(PkgGen.CommandLineTemplate)"
+            ConfigurationFile   =     "%(PkgGen.ConfigurationFile)"
+            XsdPath             =     "%(PkgGen.XsdPath)"
+            OutputDirectory     =     "$(CbsDir)"
+            Version             =     "%(PkgGen.Version)"
+            BuildType           =     "%(PkgGen.BuildType)"
+            CPU                 =     "%(PkgGen.CPU)"
+            Languages           =     "%(PkgGen.Languages)"
+            Resolutions         =     "%(PkgGen.Resolutions)"
+            Variables           =     "%(PkgGen.Variables)"
+            TOC                 =     "%(PkgGen.TOC)"
+            Compress            =     "%(PkgGen.Compress)"
+            Diagnostic          =     "%(PkgGen.Diagnostic)"
+            AdditionalOptions   =     "%(PkgGen.AdditionalOptions)"
+            Inputs              =     "%(Identity)"
+            />
+  </Target>
+
+  <!-- *******************************************************************************************
+       API Validator Target.
+       ******************************************************************************************* -->
+  <Target Name="ApiValidator"
+          Condition="'$(DriverTargetPlatform)' == 'Universal' and '$(ApiValidator_Enable)' == 'true' and '$(DriverType)' != 'Package'"
+          AfterTargets="AfterLink"
+          BeforeTargets="DriverPackageTarget;PkgGen">
+
+    <Message Text="Validating universal driver using ApiValidator.exe" />
+
+    <ApiValidator CommandLineTemplate               =     "$(ApiValidator_CmdLine)"
+                  ApiValidator_DriverPackagePath    =     "$(TargetDir)"
+                  ApiValidator_SupportedApisFile    =     "$(ApiValidator_SupportedApisFile)"
+                  ApiValidator_ModuleWhiteListFile  =     "$(ApiValidator_ModuleWhiteListFile)"
+                  ApiValidator_ApiExtractorExePath  =     "$(ApiValidator_ApiExtractorExePath)"
+                  >
+      <Output TaskParameter="ExitCode" PropertyName="ApiValidator_ExitCode" />
+    </ApiValidator>
+
+    <Message Condition="'$(ApiValidator_ExitCode)' == '0'" Importance="High" Text="Driver is a Universal Driver." />
+    <Message Condition="'$(ApiValidator_ExitCode)' == '-1'" Importance="High" Text="Driver is not a Universal Driver." />
+    <Message Condition="'$(ApiValidator_ExitCode)' == '-2'" Importance="High" Text="An error occurred while running ApiValidator.exe." />
+  </Target>
+
+  <!-- *******************************************************************************************
+       Property pages
+       ******************************************************************************************* -->
+  <ItemGroup>
+    <PropertyPageSchema Include="$(WDKContentRoot)build\1033\DriverGeneral.xml" />
+    <PropertyPageSchema Condition="'$(IsDriverAppToolset)' != 'true'" Include="$(WDKContentRoot)build\1033\sign.xml" />
+    <PropertyPageSchema Condition="'$(IsDriverAppToolset)' != 'true'" Include="$(WDKContentRoot)build\1033\stampinf.xml" />
+    <PropertyPageSchema Condition="'$(IsDriverAppToolset)' != 'true'" Include="$(WDKContentRoot)build\1033\inf2cat.xml" />
+    <PropertyPageSchema Condition="'$(ConfigurationType)' != 'Utility'" Include="$(WDKContentRoot)build\1033\mofcomp.xml" />
+    <PropertyPageSchema Condition="'$(ConfigurationType)' != 'Utility' and '@(Mofcomp)' != ''" Include="$(WDKContentRoot)build\1033\wmimofck.xml" />
+    <PropertyPageSchema Condition="'$(ConfigurationType)' != 'Utility'" Include="$(WDKContentRoot)build\1033\ctrpp.xml" />
+    <PropertyPageSchema Condition="'$(ConfigurationType)' != 'Utility'" Include="$(WDKContentRoot)build\1033\messagecompile.xml" />
+    <PropertyPageSchema Condition="'$(ConfigurationType)' != 'Utility'" Include="$(WDKContentRoot)build\1033\tracewpp.xml" />
+    <PropertyPageSchema Condition="'$(DriverType)' != 'Package'" Include="$VCTargetsPath)$(LangID)\midl.xml" />
+    <PropertyPageSchema Condition="'$(IsUserModeToolset)' == 'true' and '$(ConfigurationType)' != 'Utility'" Include="$(WDKContentRoot)build\1033\UserModeDriver.xml" />
+    <PropertyPageSchema Condition="'$(IsKernelModeToolset)' == 'true' and '$(ConfigurationType)' != 'Utility'" Include="$(WDKContentRoot)build\1033\KernelModeDriver.xml" />
+    <PropertyPageSchema Condition="'$(IsDriverAppToolset)' == 'true' and '$(ConfigurationType)' != 'Utility'" Include="$(WDKContentRoot)build\1033\UserModeGeneral.xml" />
+    <PropertyPageSchema Include="$(WDKContentRoot)build\1033\PkgGen.xml" />
+    <PropertyPageSchema Condition="'$(DriverTargetPlatform)' == 'Universal' and '$(SupportsPackaging)'!='false'" Include="$(WDKContentRoot)build\1033\ApiValidator.xml" />
+  </ItemGroup>
+
+  <!-- *******************************************************************************************
+       Deployment Property pages
+       ******************************************************************************************* -->
+  <ItemGroup Condition="('$(IsUserModeToolset)'=='true' or '$(IsKernelModeToolset)'=='true')">
+    <PropertyPageSchema Include="$(WDKContentRoot)\build\1033\DriverPackageDeploymentPage.xml" />
+    <PropertyPageSchema Include="$(WDKContentRoot)build\1033\DriverVerifierPage.xml" />
+    <PropertyPageSchema Include="$(WDKContentRoot)build\1033\KMDFVerifierPage.xml" />
+    <PropertyPageSchema Include="$(WDKContentRoot)build\1033\UMDFVerifierPage.xml" />
+    <PropertyPageSchema Include="$(WDKContentRoot)build\1033\PackageFilesPage.xml" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(UseDefaultProjectTools)' != 'false'">
+    <ProjectTools Include="MessageCompile" />
+    <ProjectTools Include="Ctrpp" />
+    <ProjectTools Include="DriverDeployment"/>
+    <ProjectTools Include="FilesToPackage"/>
+  </ItemGroup>
+
+  <!-- *******************************************************************************************
+       Link Property pages
+       ******************************************************************************************* -->
+
+  <ItemGroup Condition="'$(UseDefaultPropertyPageSchemas)' != 'false'">
+    <!-- Property pages that needs to apply for driver projects in addition to Application and Dynamic Library -->
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\link.xml" Condition="'$(ConfigurationType)' == 'Driver'" />
+  </ItemGroup>
+
+  <!--  Link tool needs to show up in the IDE property pages for .sys  projects -->
+  <ItemGroup Condition="'$(UseDefaultProjectTools)' != 'false' and ('$(ConfigurationType)' == 'Driver')">
+    <ProjectTools Include="Link"/>
+  </ItemGroup>
+
+  <Import Condition="Exists('$(WDKContentRoot)build\WindowsDriver.KernelMode.CX.targets') and '$(IsKernelModeToolset)' == 'true'" Project="$(WDKContentRoot)build\WindowsDriver.KernelMode.CX.targets" />
+  <Import Condition="Exists('$(WDKContentRoot)build\WindowsDriver.UserMode.CX.targets') and '$(IsUserModeToolset)' == 'true'" Project="$(WDKContentRoot)build\WindowsDriver.UserMode.CX.targets" />
+  <Import Condition="Exists('$(VCTargetsPath)\BuildCustomizations\masm.targets') and '$(Platform)' != 'arm' and '$(Platform)' != 'arm64'" Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+
+  <!-- *******************************************************************************************
+        Import any platform specific targets
+       ******************************************************************************************* -->
+  <Import Condition="Exists('$(WDKContentRoot)build\windowsdriver.$(Platform).targets')" Project="$(WDKContentRoot)build\windowsdriver.$(Platform).targets"/>
+  <Import Condition="Exists('$(WDKContentRoot)build\windowsdriver.Sdv.targets')" Project="$(WDKContentRoot)build\windowsdriver.Sdv.targets"/>
+</Project>

@@ -1,0 +1,468 @@
+//#  (c) 2011 Microsoft Corporation
+//#
+//#  Title:                  Microsoft-Windows-ndis-packetcapture
+//#
+//#  Details:                
+//#
+//#  Public References:      microsoft-windows-ndis-packetcapture.man
+//#
+//#  Comments:               
+//#
+//#  Revision Class and Date:major, 6/22/2011
+//#                          Minor, 3/6/2012
+//#
+//####
+[RegisterBefore(NetEvent.UserData, MicrosoftWindowsNDISPacketCapture, "{2ED6006E-4729-4609-B423-3EE7BCD678EF}")]
+Protocol NDISPacCap_MicrosoftWindowsNDISPacketCapture = property.ETLSummary
+{
+	[BuildConversationWithParent, conversation.ConversationDescription = ""]
+	switch(property.EventID)
+	{
+		case 1001: [property.ETLSummary = this.ToString] NDISPacCap_PacketFragment PacketFragment;
+		case 1002: [property.ETLSummary = this.ToString] NDISPacCap_PacketMetadata PacketMetadata;
+		case 1003: [property.ETLSummary = this.ToString] NDISPacCap_VmSwitchPacketFragment VmSwitchPacketFragment;
+		case 1011: [property.ETLSummary = this.ToString] NDISPacCap_CaptureRules CaptureRules;
+		case 1012: [property.ETLSummary = this.ToString] NDISPacCap_DriverLoad DriverLoad;
+		case 1013: [property.ETLSummary = this.ToString] NDISPacCap_DriverUnload DriverUnload;
+		case 1014: [property.ETLSummary = this.ToString] NDISPacCap_LayerLoad LayerLoad;
+		case 1015: [property.ETLSummary = this.ToString] NDISPacCap_LayerUnload LayerUnload;
+		case 1016: [property.ETLSummary = this.ToString] NDISPacCap_CaptureRule CaptureRule;
+		case 2001: [property.ETLSummary = this.ToString] NDISPacCap_DriverLoadError DriverLoadError;
+		case 2002: [property.ETLSummary = this.ToString] NDISPacCap_LayerLoadError LayerLoadError;
+		case 2003: [property.ETLSummary = this.ToString] NDISPacCap_RuleLoadError RuleLoadError;
+		case 3001: [property.ETLSummary = this.ToString] NDISPacCap_StartLayerLoad StartLayerLoad;
+		case 3002: [property.ETLSummary = this.ToString] NDISPacCap_EndLayerLoad EndLayerLoad;
+		case 5000: [property.ETLSummary = this.ToString] NDISPacCap_RxPacketStart RxPacketStart;
+		case 5001: [property.ETLSummary = this.ToString] NDISPacCap_RxPacketComplete RxPacketComplete;
+		case 5002: [property.ETLSummary = this.ToString] NDISPacCap_TxPacketStart TxPacketStart;
+		case 5003: [property.ETLSummary = this.ToString] NDISPacCap_TxPacketComplete TxPacketComplete;
+		default: [property.ETLSummary = "Not exist EventID"]struct{};
+	}
+}
+Table NDISPacCap_utOpcodeMap(value)
+{
+	switch(value)
+	{
+		case 1: "Start State";
+		case 2: "End State";
+		case 21: "Loading State";
+		case 22: "Unloading State";
+		default:
+			FormatString("Unknown value: %d", value);
+	}
+}
+Table NDISPacCap_RuleIdMap(value)
+{
+	switch(value)
+	{
+		case 2: "FrameControl";
+		case 3: "MultiLayer";
+		case 4: "InterfaceIndex";
+		case 6: "EtherType";
+		case 7: "Source MAC Address";
+		case 8: "Destination MAC Address";
+		case 9: "Any MAC Address";
+		case 10: "Source IPv4 Address";
+		case 11: "Destination IPv4 Address";
+		case 12: "Any IPv4 Address";
+		case 13: "Source IPv6 Address";
+		case 14: "Destination IPv6 Address";
+		case 15: "Any IPv6 Address";
+		case 16: "IP Protocol";
+		case 17: "Packet Truncate Bytes";
+		case 18: "Custom MAC Offset";
+		case 19: "Custom IP Offset";
+		default:
+			FormatString("Unknown value: %d", value);
+	}
+}
+Table NDISPacCap_DirectiveMap(value)
+{
+	switch(value)
+	{
+		case 0: "OFF";
+		case 1: "LTE";
+		case 2: "GTE";
+		case 3: "EQU";
+		case 4: "MASK";
+		case 5: "LIST";
+		case 6: "RANGE";
+		case 131: "NEQ";
+		case 132: "NMASK";
+		case 133: "NLIST";
+		case 134: "NRANGE";
+		default:
+			FormatString("Unknown value: %d", value);
+	}
+}
+Struct NDISPacCap_PacketFragment = FormatString("Packet Fragment (%s bytes)", FragmentSize.ToString)
+{
+	UINT32 MiniportIfIndex;
+	UINT32 LowerIfIndex;
+	UINT32 FragmentSize;
+	[DataFieldByteOrder = BigEndian]
+	switch
+	{
+		case Property.UTEventFirstFragment && Property.UTEventLastFragment:
+			switch
+			{
+				case Property.UTEventFragEthernet8023:
+					Ethernet Ethernet;
+				case Property.UTEventFragNative80211:
+					UTWiFi UTWiFi;
+				case Property.UTEventFragWirelessWAN:
+					UTWWan WirelessWAN;
+			}
+		default:
+			BLOB(FragmentSize) Fragment;
+	}
+}
+
+Struct NDISPacCap_NetBufferListInfo32
+{
+	UINT32 TcpIpChecksumNetBufferListInfoOrTcpOffloadBytesTransferred;
+	
+	switch
+	{
+		case Global.EventTraceProviderVersion >= 6001:
+			UINT32 IPsecOffloadV1NetBufferListInfo;
+		default:
+			UINT32 IPsecOffloadV2NetBufferListInfo;
+	}
+	UINT32 TcpLargeSendNetBufferListInfoOrTcpReceiveNoPush;
+	UINT32 ClassificationHandleNetBufferListInfo;
+	UINT32 Ieee8021QNetBufferListInfo;
+	UINT32 NetBufferListCancelId;
+	UINT32 MediaSpecificInformation;
+	UINT32 NetBufferListFrameTypeOrNetBufferListProtocolId;
+	UINT32 NetBufferListHashValue;
+	UINT32 NetBufferListHashInfo;
+	UINT32 WfpNetBufferListInfo;
+	switch
+	{
+		case Global.EventTraceProviderVersion >= 6001:
+			Struct
+			{
+				UINT32 IPsecOffloadV2TunnelNetBufferListInfo;
+				UINT32 IPsecOffloadV2HeaderNetBufferListInfo;
+			}
+	}
+
+	switch
+	{
+		case Global.EventTraceProviderVersion >= 7600:
+			struct
+			{
+					UINT32 NetBufferListCorrelationId;
+					UINT32 NetBufferListFilteringInfo;
+					UINT32 MediaSpecificInformationEx;
+					UINT32 NblOriginalInterfaceIfIndexOrNblReAuthWfpFlowContext;
+					UINT32 TcpReceiveBytesTransferred;
+					switch
+					{
+						case Global.EventTraceProviderVersion >= 8250:
+							Struct
+							{
+								switch
+								{
+									case property.EventIs64Bit:
+										Struct
+										{
+											UINT32 SwitchForwardingReserved;
+											UINT32 SwitchForwardingDetail;
+											UINT32 TenantNetworkInfo;
+										}
+								}
+								UINT32 IMReserved;
+								UINT32 TcpRecvSegCoalesceInfo;
+								UINT32 RscTcpTimestampDeltaOrTcpSendOffloadsSupplementalNetBufferListInfo;
+							}
+					}
+			}
+	}
+	UINT32 MaxNetBufferListInfo;
+}
+
+Struct NDISPacCap_NetBufferListInfo64
+{
+	UINT64 TcpIpChecksumNetBufferListInfoOrTcpOffloadBytesTransferred;
+	
+	switch
+	{
+		case Global.EventTraceProviderVersion >= 6001:
+			UINT64 IPsecOffloadV1NetBufferListInfo;
+		default:
+			UINT64 IPsecOffloadV2NetBufferListInfo;
+	}
+	UINT64 TcpLargeSendNetBufferListInfoOrTcpReceiveNoPush;
+	UINT64 ClassificationHandleNetBufferListInfo;
+	UINT64 Ieee8021QNetBufferListInfo;
+	UINT64 NetBufferListCancelId;
+	UINT64 MediaSpecificInformation;
+	UINT64 NetBufferListFrameTypeOrNetBufferListProtocolId;
+	UINT64 NetBufferListHashValue;
+	UINT64 NetBufferListHashInfo;
+	UINT64 WfpNetBufferListInfo;
+	switch
+	{
+		case Global.EventTraceProviderVersion >= 6001:
+			Struct
+			{
+				UINT64 IPsecOffloadV2TunnelNetBufferListInfo;
+				UINT64 IPsecOffloadV2HeaderNetBufferListInfo;
+			}
+	}
+
+	switch
+	{
+		case Global.EventTraceProviderVersion >= 7600:
+			struct
+			{
+					UINT64 NetBufferListCorrelationId;
+					UINT64 NetBufferListFilteringInfo;
+					UINT64 MediaSpecificInformationEx;
+					UINT64 NblOriginalInterfaceIfIndexOrNblReAuthWfpFlowContext;
+					UINT64 TcpReceiveBytesTransferred;
+					switch
+					{
+						case Global.EventTraceProviderVersion >= 8250:
+							Struct
+							{
+								switch
+								{
+									case property.EventIs64Bit:
+										Struct
+										{
+											UINT64 SwitchForwardingReserved;
+											UINT64 SwitchForwardingDetail;
+											UINT64 TenantNetworkInfo;
+										}
+								}
+								UINT64 IMReserved;
+								UINT64 TcpRecvSegCoalesceInfo;
+								UINT64 RscTcpTimestampDeltaOrTcpSendOffloadsSupplementalNetBufferListInfo;
+							}
+					}
+			}
+	}
+	UINT64 MaxNetBufferListInfo;
+}
+
+Struct NDISPacCap_PacketMetadata = FormatString("Packet Metadata (%s bytes)", MetadataSize.ToString)
+{
+	UINT32 MiniportIfIndex;
+	UINT32 LowerIfIndex;
+	UINT32 MetadataSize;
+	UTWiFiMetadata Metadata;
+}
+
+struct NDISPacCap_Destination //Array Struct
+{
+	UINT32 DestinationPortId;
+	UnicodeString DestinationPortName;
+	UnicodeString DestinationNicName;
+	UnicodeString DestinationNicType;
+}
+
+
+Struct NDISPacCap_VmSwitchPacketFragment = FormatString("VmSwitch Packet Fragment (%s bytes)", FragmentSize.ToString)
+{
+	[Property.VmSwitchMiniportIfIndex]
+	UINT32 MiniportIfIndex;
+	[Property.VmSwitchLowerIfIndex]
+	UINT32 LowerIfIndex;
+	[Property.VmSwitchSourcePortId]
+	UINT32 SourcePortId;
+	[Property.VmSwitchSourcePortName]
+	UnicodeString SourcePortName;
+	[Property.VmSwitchSourceNicName]
+	UnicodeString SourceNicName;
+	[Property.VmSwitchSourceNicType]
+	UnicodeString SourceNicType;
+	[Property.VmSwitchDestinationCount]
+	UINT32 DestinationCount;
+	[Property.VmSwitchDestination]
+	NDISPacCap_Destination Destination[DestinationCount]; // Struct Array
+	UINT32 FragmentSize;
+	
+	[DataFieldByteOrder = BigEndian]
+	[PayloadStart( property.NetworkDirection,//Direction,
+				   0,// Identifier,
+				   0,// SequenceNumber,
+				   0,// NextSequenceNumber,
+				   0,// TotalPayloadLength, 
+				   Property.UTEventFirstFragment,//IsFirstFlag, 
+				   Property.UTEventLastFragment,//IsLastFlag, 
+				   RssmblyIndStartBit+RssmblyIndEndBit,//IndicationMode, 
+				   //OptionalUserPropertyBlock
+					0x0000,
+					property.EventID,
+					0x0000,
+					Property.UTEventFirstFragment,
+					0x0000,
+					Property.UTEventLastFragment,
+					0x0000,
+					Property.UTEventFragEthernet8023,
+					0x0000,
+					Property.UTEventFragNative80211,
+					0x0000,
+					Property.UTEventFragWirelessWAN,
+					0x0000,
+					Property.VmSwitchMiniportIfIndex,
+					0x0000,
+					Property.VmSwitchLowerIfIndex,
+					0x0000,
+					Property.VmSwitchSourcePortId,
+					0x0000,
+					Property.VmSwitchSourcePortName,
+					0x0000,
+					Property.VmSwitchSourceNicName,
+					0x0000,
+					Property.VmSwitchSourceNicType
+				 )
+	]
+	switch 
+	{
+		case Property.UTEventFirstFragment:
+			switch
+ 			{
+				case Property.UTEventFragEthernet8023:
+					[DataFieldFrameLength = FrameOffset + FragmentSize]
+					Ethernet Ethernet;
+				case Property.UTEventFragNative80211:
+					[DataFieldFrameLength = FrameOffset + FragmentSize]
+					UTWiFi UTWiFi;
+				case Property.UTEventFragWirelessWAN:
+					[DataFieldFrameLength = FrameOffset + FragmentSize]
+					UTWWan WirelessWAN;
+			}
+		default:
+			BLOB(FragmentSize) ContinualFragment;
+	}
+
+	UINT32 OOBDataSize;
+	Switch
+	{
+		case OOBDataSize == (FrameLength - FrameOffset):
+			switch
+			{
+				case property.EventIs64Bit:
+					NDISPacCap_NetBufferListInfo64 OOBData64;
+				default:
+					NDISPacCap_NetBufferListInfo32 OOBData32;
+			}
+	}
+}
+Struct NDISPacCap_CaptureRules = FormatString("Capture Rules Count=%s", RulesCount.ToString)
+{
+	UINT32 RulesCount;
+}
+Struct NDISPacCap_DriverLoad = FormatString("Driver Loaded (FriendlyName=%s UniqueName=%s ServiceName=%s)", FriendlyName.ToString, UniqueName.ToString, ServiceName.ToString)
+{
+	UnicodeString FriendlyName;
+	UnicodeString UniqueName;
+	UnicodeString ServiceName;
+	UnicodeString Version;
+}
+Struct NDISPacCap_DriverUnload = FormatString("Driver Unloaded (FriendlyName=%s UniqueName=%s ServiceName=%s)", FriendlyName.ToString, UniqueName.ToString, ServiceName.ToString)
+{
+	UnicodeString FriendlyName;
+	UnicodeString UniqueName;
+	UnicodeString ServiceName;
+	UnicodeString Version;
+}
+Struct NDISPacCap_LayerLoad = FormatString("Attached to miniport interface %s above layer interface %s with media type %s (context=%s)", MiniportIfIndex.ToString, LowerIfIndex.ToString, MediaType.ToString, ReferenceContext.ToString)
+{
+	UINT32 MiniportIfIndex;
+	UINT32 LowerIfIndex;
+	UINT32 MediaType;
+	UINT32 ReferenceContext;
+}
+Struct NDISPacCap_LayerUnload = FormatString("Detached from miniport interface %s above layer interface %s with media type %s (context=%s)", MiniportIfIndex.ToString, LowerIfIndex.ToString, MediaType.ToString, ReferenceContext.ToString)
+{
+	UINT32 MiniportIfIndex;
+	UINT32 LowerIfIndex;
+	UINT32 MediaType;
+	UINT32 ReferenceContext;
+}
+Struct NDISPacCap_CaptureRule = FormatString("Capture Rule: Id=%s Directive=%s ValueLength=%s Value=%s", RuleId.ToString, Directive.ToString, Length.ToString, Value.ToString)
+{
+	UINT8 RuleId = NDISPacCap_RuleIdMap(this);
+	UINT8 Directive = NDISPacCap_DirectiveMap(this);
+	UINT16 Length;
+	BLOB(Length) Value;
+}
+Struct NDISPacCap_DriverLoadError = FormatString("Driver load failed with status=%s at location %s", ErrorCode.ToString, Location.ToString)
+{
+	WinErrorCode ErrorCode;
+	UINT32 Location;
+	UINT32 Context;
+}
+Struct NDISPacCap_LayerLoadError = FormatString("FilterAttach failed with status=%s at location %s (context=%s)", ErrorCode.ToString, Location.ToString, Context.ToString)
+{
+	WinErrorCode ErrorCode;
+	UINT32 Location;
+	UINT32 Context;
+}
+Struct NDISPacCap_RuleLoadError = FormatString("Received Invalid Capture Rule: Id=%s Directive=%s ValueLength=%s Value=%s", RuleId.ToString, Directive.ToString, Length.ToString, Value.ToString)
+{
+	UINT8 RuleId = NDISPacCap_RuleIdMap(this);
+	UINT8 Directive = NDISPacCap_DirectiveMap(this);
+	UINT16 Length;
+	BLOB(Length) Value;
+}
+Struct NDISPacCap_StartLayerLoad = FormatString("Entering state '%s' from state '%s' (location=%s, context=%s)", NextState.ToString, PreviousState.ToString, Location.ToString, Context.ToString)
+{
+	UINT8 PreviousState = NDISPacCap_utOpcodeMap(this);
+	UINT8 NextState = NDISPacCap_utOpcodeMap(this);
+	UINT32 Location;
+	UINT32 Context;
+}
+Struct NDISPacCap_EndLayerLoad = FormatString("Entering state '%s' from state '%s' (location=%s, context=%s)", NextState.ToString, PreviousState.ToString, Location.ToString, Context.ToString)
+{
+	UINT8 PreviousState = NDISPacCap_utOpcodeMap(this);
+	UINT8 NextState = NDISPacCap_utOpcodeMap(this);
+	UINT32 Location;
+	UINT32 Context;
+}
+Struct NDISPacCap_RxPacketStart = "Rx Packet Processing Start" {}; // Empty Struct
+Struct NDISPacCap_RxPacketComplete = "Rx Packet Processing Complete" {}; // Empty Struct
+Struct NDISPacCap_TxPacketStart = "Rx Packet Processing Start" {}; // Empty Struct
+Struct NDISPacCap_TxPacketComplete = "Rx Packet Processing Complete" {}; // Empty Struct
+[RegisterBefore(EventDescriptor.DefaultKeyword, MicrosoftWindowsNDISPacketCapture_Keyword, "{2ED6006E-4729-4609-B423-3EE7BCD678EF}"), Property.KeywordFlags]
+struct NDISPacCap_MicrosoftWindowsNDISPacketCapture_Keyword
+{
+	[Property.UTEventFragEthernet8023]
+	UINT64 Ethernet8023:1 = FormatString("     (%s) %s", this.ToBitString, this? "KW_MEDIA_802_3":"");
+	UINT64 Reserved1:8 = FormatString("        (%s)", this.ToBitString);
+	[Property.UTEventFragWirelessWAN]
+	UINT64 WirelessWAN:1 = FormatString("      (%s) %s", this.ToBitString, this? "KW_MEDIA_WIRELESS_WAN": "");
+	UINT64 Reserved2:5 = FormatString("        (%s)", this.ToBitString);
+	UINT64 Tunnel:1 = FormatString("           (%s) %s", this.ToBitString, this? "KW_MEDIA_TUNNEL": "");
+	[Property.UTEventFragNative80211]
+	UINT64 Native80211:1 = FormatString("      (%s) %s", this.ToBitString, this? "KW_MEDIA_NATIVE_802_11":"");
+	UINT64 Reserved3:7 = FormatString("        (%s)", this.ToBitString);
+	UINT64 VMSwitch:1 = FormatString("         (%s) %s", this.ToBitString, this? "KW_VMSWITCH": "");
+	UINT64 Reserved4:5 = FormatString("        (%s)", this.ToBitString);
+	[Property.UTEventFirstFragment]
+	UINT64 PacketStart:1 = FormatString("      (%s) %s", this.ToBitString, this? "KW_PACKET_START": "");
+	[Property.UTEventLastFragment]
+	UINT64 PacketEnd:1 = FormatString("        (%s) %s", this.ToBitString, this? "KW_PACKET_END":"");
+	[Property.UTEventSend]
+	UINT64 utSendPath:1 = FormatString("       (%s) %s", this.ToBitString, this? "KW_SEND":"");
+	[Property.UTEventReceive]
+	UINT64 utReceivePath:1 = FormatString("    (%s) %s", this.ToBitString, this? "KW_RECEIVE":"");
+	UINT64 utL3ConnectPath:1 = FormatString("  (%s) %s", this.ToBitString, this? "KW_L3_CONNECT":"");
+	UINT64 utL2ConnectPath:1 = FormatString("  (%s) %s", this.ToBitString, this? "KW_L2_CONNECT":"");
+	UINT64 utClosePath:1 = FormatString("      (%s) %s", this.ToBitString, this? "KW_CLOSE":"");
+	UINT64 utAuthentication:1 = FormatString(" (%s) %s", this.ToBitString, this? "KW_AUTHENTICATION":"");
+	UINT64 utConfiguration:1 = FormatString("  (%s) %s", this.ToBitString, this? "KW_CONFIGURATION":"");
+	UINT64 utGlobal:1 = FormatString("         (%s) %s", this.ToBitString, this? "KW_GLOBAL":"");
+	UINT64 utDropped:1 = FormatString("        (%s) %s", this.ToBitString, this? "KW_DROPPED":"");
+	UINT64 utPiiPresent:1 = FormatString("     (%s) %s", this.ToBitString, this? "KW_PII_PRESENT":"");
+	UINT64 utPacket:1 = FormatString("         (%s) %s", this.ToBitString, this? "KW_PACKET":"");
+	UINT64 utAddress:1 = FormatString("        (%s) %s", this.ToBitString, this? "KW_ADDRESS":"");
+	UINT64 utStdTemplateHint:1 = FormatString("(%s) %s", this.ToBitString, this? "KW_STD_TEMPLATE_HINT":"");
+	UINT64 utStateTransition:1 = FormatString("(%s) %s", this.ToBitString, this? "KW_STATE_TRANSITION":"");
+	UINT64 Reserved5:18 = FormatString("        (%s)", this.ToBitString);
+}

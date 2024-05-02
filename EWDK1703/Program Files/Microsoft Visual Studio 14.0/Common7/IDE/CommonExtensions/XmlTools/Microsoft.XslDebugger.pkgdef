@@ -1,0 +1,31 @@
+[$RootKey$]
+[$RootKey$\AD7Metrics]
+[$RootKey$\AD7Metrics\ExpressionEvaluator]
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{462D4A3E-B257-4AEE-97CD-5918C7531758}]
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{462D4A3E-B257-4AEE-97CD-5918C7531758}\{994B45C4-E6E9-11D2-903F-00C04FA302A1}]
+"CLSID"="{657A4B5B-732B-4C6F-95E4-3378D527141D}"
+"Language"="XSLT"
+"Name"="XSLT"
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{462D4A3E-B257-4AEE-97CD-5918C7531758}\{994B45C4-E6E9-11D2-903F-00C04FA302A1}\Engine]
+"0"="{449EC4CC-30D2-4032-9256-EE18EB41B62B}"
+"1"="{92EF0900-2251-11D2-B72E-0000F87572EF}"
+[$RootKey$\CLSID]
+[$RootKey$\CLSID\{657A4B5B-732B-4C6F-95E4-3378D527141D}]
+@="Microsoft.XslDebugger.XsltEE"
+[$RootKey$\CLSID\{657A4B5B-732B-4C6F-95E4-3378D527141D}\Implemented Categories]
+[$RootKey$\CLSID\{657A4B5B-732B-4C6F-95E4-3378D527141D}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+[$RootKey$\CLSID\{657A4B5B-732B-4C6F-95E4-3378D527141D}\InprocServer32]
+"Assembly"="Microsoft.XslDebugger,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.XslDebugger.XsltEE"
+"CodeBase"="$ShellFolder$\Common7\IDE\Xml\Microsoft.XslDebugger.dll"
+"ThreadingModel"="Both"
+@="$System$\mscoree.dll"
+[$RootKey$\CLSID\{657A4B5B-732B-4C6F-95E4-3378D527141D}\InprocServer32\14.0.0.0]
+"Assembly"="Microsoft.XslDebugger,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.XslDebugger.XsltEE"
+"CodeBase"="$ShellFolder$\Common7\IDE\Xml\Microsoft.XslDebugger.dll"
+[$RootKey$\XmlEditor]
+"XsltDebuggerArgs"=""{0}" "{1}" /a:"{2}" /t:System.Xml.Xsl.CompiledQuery.Query /o:{3} /c:{4} /wait"
+"XsltDebuggerHost"="$ShellFolder$\Common7\IDE\Xml\Microsoft.XslDebugger.Host.exe"
+"XsltExecuterArgs"=""{0}" "{1}" /a:"{2}" /t:System.Xml.Xsl.CompiledQuery.Query /o:{3} /c:{4} /time /jit"
+"XsltExecuterHost"="$ShellFolder$\Common7\IDE\Xml\Microsoft.XslDebugger.Host.exe"

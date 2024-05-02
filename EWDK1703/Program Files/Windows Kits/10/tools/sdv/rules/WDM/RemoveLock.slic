@@ -1,0 +1,90 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    RemoveLock
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that calls to IoAcquireRemoveLock and IoReleaseRemoveLock are used in
+    correctly.  Moreover, at the end of the IRP_MJ_PNP or
+    IRP_MJ_POWER routine driver should not hold the Removelock.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507301
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {init,on} t=init;
+   int LockDepth = 0;
+}
+
+
+[fun_IRP_MJ_PNP].entry
+{
+        if ($2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP) 
+        {
+            t=on;
+        }
+        else
+        {
+            halt;
+        }
+}
+
+[RemoveHeadList,sdv_containing_record].entry
+{
+    halt;
+}
+
+IoAcquireRemoveLock.exit
+{
+    if(LockDepth > 0 && $return!=STATUS_SUCCESS)
+    {
+       halt;
+    }
+    else if($return==STATUS_SUCCESS)
+    {
+       LockDepth = LockDepth + 1;
+    }
+}
+
+[IoReleaseRemoveLock,IoReleaseRemoveLockAndWait].entry
+{
+        if (LockDepth == 0&&t==on) 
+        {
+           abort "The driver is calling $fname without first acquiring the Removelock.";
+        } 
+        else 
+        {
+           LockDepth = LockDepth - 1;
+        }
+}
+
+[fun_IRP_MJ_PNP].exit
+{
+        if (LockDepth > 0 &&$2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP&&t==on) 
+        {
+            abort "The routine has returned without releasing a Removelock.";
+        }
+        else
+        {
+            halt;
+        }
+}

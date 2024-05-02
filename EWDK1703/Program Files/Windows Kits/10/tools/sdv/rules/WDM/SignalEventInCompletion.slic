@@ -1,0 +1,113 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SignalEventInCompletion
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    KeSetEvent needs to be called in the completion routine when Irp->PendingReturned is TRUE and processing a async. irp.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507329
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+   enum {initial,required_in_completion} signal_location = initial;
+   enum {not_completed,completed} completion_state = not_completed;
+   enum {not_init,initialized_event} event_state = not_init;
+   enum {notsignaled,signaled,initialized} SignalState = initialized;
+} 
+watch KeInitializeEvent.entry.$1;
+
+
+KeInitializeEvent.exit[guard $1]
+{
+    if($3)
+    {
+        halt;
+    }
+    else
+    {
+        SignalState=notsignaled;
+        event_state = initialized_event;
+    }
+}
+IoSetCompletionRoutineEx.entry
+{
+    if(SignalState==notsignaled&&($2==sdv_irp))
+    {
+        signal_location = required_in_completion;
+    }
+}
+
+IoSetCompletionRoutine.entry
+{
+    if(SignalState==notsignaled&&($1==sdv_irp))
+    {
+        signal_location = required_in_completion;
+    }
+}
+
+[sdv_RunIoCompletionRoutines].entry
+{
+   if ($2->PendingReturned&&($2==sdv_irp))
+   {
+       completion_state=completed;
+       
+   }
+}
+
+IoBuildDeviceIoControlRequest.entry[guard $8]
+{
+  halt;
+}
+
+IoBuildSynchronousFsdRequest.entry[guard $6]
+{
+  halt;
+}
+
+
+
+KeSetEvent.entry[guard $1]
+{
+    if(completion_state==completed)
+    {
+        halt;
+    }
+    
+}
+
+[sdv_RunIoCompletionRoutines].exit
+{
+   if(!(*$4))
+   {
+       halt;
+   }
+   else if (signal_location==required_in_completion&&completion_state==completed&&($2==sdv_irp)&&(event_state == initialized_event))
+   {
+       abort "KeSetEvent needs to be called in the completion routine when Irp->PendingReturned is TRUE and processing a async. irp.";
+   }
+   else
+   {
+       halt;
+   }
+}
+

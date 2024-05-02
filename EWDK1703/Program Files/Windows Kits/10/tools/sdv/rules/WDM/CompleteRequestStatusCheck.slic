@@ -1,0 +1,142 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    CompleteRequestStatusCheck
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    The Irp status value does not match the status value returned by the lower driver.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507254
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+    int lowerDriverReturn = 0;
+    int lowerDriverCalled = 0;
+    enum {no,yes} return_state = no;
+    enum {init,check} irp_status=init;
+    enum {on,off} irp_copy_next=off;
+    enum {initialized,wait_called} thread_state=initialized;
+    enum {false,true} lowerDriverFailed = false;
+} with guard(sdv_main,sdv_irp) 
+
+[KeWaitForSingleObject].exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+        halt;
+    }
+    else
+    {
+        thread_state=wait_called;
+    }
+}
+
+IoAcquireRemoveLock.exit
+{
+    if($return!=STATUS_SUCCESS)
+    {
+       halt;
+    }
+}
+
+IoSetCompletionRoutineEx.entry[guard $2]
+{
+    irp_status=check;
+}
+
+IoSetCompletionRoutine.entry[guard $1]
+{
+    irp_status=check;
+}
+
+
+IoMarkIrpPending.entry[guard $1]
+{
+    halt;
+}
+
+IoCopyCurrentIrpStackLocationToNext.entry[guard $1]
+{
+    irp_copy_next=on;
+}
+
+
+IoSkipCurrentIrpStackLocation.entry[guard $1]
+{
+    halt;
+}
+
+
+[PoCallDriver,IoCallDriver].exit[guard $2]
+{
+    if(irp_status==check)
+    {   
+        if((!NT_SUCCESS($2->IoStatus.Status))&&(!$2->PendingReturned))
+        {
+            return_state = yes; 
+            lowerDriverFailed = true; 
+        } 
+        else if($2->PendingReturned)
+        {
+            return_state = yes; 
+        }
+        else
+        {
+            halt;
+        }
+        
+    }
+    else
+    {
+        if(irp_copy_next==on)
+        {
+            halt;
+        }
+        else
+        {
+            return_state = yes;
+            
+        }
+    }
+    
+}
+
+IoCompleteRequest.entry[guard $1]
+{
+    if (return_state == yes) 
+    {
+        if ($1->IoStatus.Status==STATUS_PENDING&&(thread_state!=wait_called))
+        {
+            abort "The dispatch routine should not complete a STATUS_PENDING IRP.";
+        }
+        else if (($1->IoStatus.Status==STATUS_SUCCESS)&&(lowerDriverFailed==true))  
+        {
+            abort "The dispatch routine's should not complete the IRP with STATUS_SUCCESS if the lower driver fails the IRP.";
+        }
+        else
+        {
+            halt;
+        }
+        
+    }
+}
+

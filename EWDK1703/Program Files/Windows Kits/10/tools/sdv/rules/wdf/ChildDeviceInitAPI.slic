@@ -1,0 +1,91 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    ChildDeviceInitAPI
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    For an Child device, the framework device object initialization methods
+    must be called BEFORE the driver calls the WdfDeviceCreate method for the child device object.
+
+    Rule diagnostics:
+    "XXX could only be called before WdfDeviceCreate."
+
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507050
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+     enum {INIT, CREATECALLED} s = INIT;
+     enum {outside, entered} scope = outside;
+} with guard (sdv_main, hchild_deviceinit)
+
+fun_WDF_CHILD_LIST_CREATE_DEVICE.entry
+{
+    scope=entered;
+}
+
+sdv_WdfDeviceCreate.exit [guard *$1]
+{
+    if (NT_SUCCESS($return)&&scope==entered) 
+    {
+        s = CREATECALLED;
+    }
+}
+[sdv_WdfDeviceInitSetPnpPowerEventCallbacks
+, sdv_WdfDeviceInitSetFileObjectConfig
+, sdv_WdfDeviceInitSetExclusive                                                         
+, sdv_WdfDeviceInitSetPowerPolicyEventCallbacks
+, sdv_WdfDeviceInitSetPowerPolicyOwnership  
+, sdv_WdfDeviceInitRegisterPnpStateChangeCallback
+, sdv_WdfDeviceInitRegisterPowerStateChangeCallback
+, sdv_WdfDeviceInitRegisterPowerPolicyStateChangeCallback
+, sdv_WdfDeviceInitSetIoType
+, sdv_WdfDeviceInitSetPowerNotPageable
+, sdv_WdfDeviceInitSetPowerPageable
+, sdv_WdfDeviceInitSetPowerInrush
+, sdv_WdfDeviceInitSetDeviceType
+, sdv_WdfDeviceInitAssignName
+, sdv_WdfDeviceInitAssignSDDLString
+, sdv_WdfDeviceInitSetDeviceClass
+, sdv_WdfDeviceInitSetCharacteristics
+, sdv_WdfDeviceInitSetRequestAttributes
+, sdv_WdfDeviceInitAssignWdmIrpPreprocessCallback
+, sdv_WdfDeviceInitSetIoInCallerContextCallback
+, sdv_WdfPdoInitSetEventCallbacks
+, sdv_WdfPdoInitAssignDeviceID
+, sdv_WdfPdoInitAssignInstanceID
+, sdv_WdfPdoInitAddHardwareID
+, sdv_WdfPdoInitAddCompatibleID
+, sdv_WdfPdoInitAddDeviceText
+, sdv_WdfPdoInitSetDefaultLocale
+, sdv_WdfPdoInitAssignRawDevice].entry[guard $1]
+{
+   if (s == CREATECALLED) 
+   {
+      abort "$fname could only be called before WdfDeviceCreate.";
+   }
+}
+fun_WDF_CHILD_LIST_CREATE_DEVICE.exit
+{
+    halt;
+}

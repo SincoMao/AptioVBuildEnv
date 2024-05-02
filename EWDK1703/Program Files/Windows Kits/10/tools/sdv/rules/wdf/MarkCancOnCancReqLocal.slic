@@ -1,0 +1,77 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    MarkCancOnCancReqLocal
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    The WdfRequestMarkCancelable method can only be called on a request
+    that had not been marked cancelable.
+    
+    Diagnostic message: 
+    "Warning: WdfRequestMarkCancelable cannot be called 
+        twice in a row on the same Request." 
+    
+    
+    Note 1: This rule does the check only within the default I/O queue callback functions.
+    The rule MarkCancOnCancReq performs this check globally (in both I/O queue
+    callback functions and deferred processing callback functions).
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507092
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state{
+     enum {INIT, MARK} s = INIT;
+} with guard (sdv_main, hrequest)
+[sdv_WdfRequestComplete
+,sdv_WdfRequestCompleteWithInformation
+,sdv_WdfRequestCompleteWithPriorityBoost
+].entry[guard $1]
+{
+   s = INIT;  
+}
+sdv_WdfRequestMarkCancelable.entry[guard $1]
+{
+    if (s == INIT) {
+        s = MARK;     
+    }else{
+        abort "Warning: WdfRequestMarkCancelable cannot be called twice in a row on the same Request.";
+    }    
+}
+
+sdv_WdfRequestMarkCancelableEx.exit[guard $1]
+{
+    if (s != INIT) {
+        abort "Warning: WdfRequestMarkCancelable cannot be called twice in a row on the same Request.";
+    }
+
+    if($return == STATUS_SUCCESS) {
+        s = MARK;     
+    } 
+}
+
+sdv_WdfRequestUnmarkCancelable.exit[guard $1]
+{
+     s = INIT;
+}
+
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Vsix Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="Microsoft.VisualStudio.ConnectedServices">
+    <Name>Microsoft Visual Studio Connected Services</Name>
+    <Author>Microsoft</Author>
+    <Version>14.0</Version>
+    <Description>Microsoft Visual Studio Connected Services</Description>
+    <Locale>1033</Locale>
+    <InstalledByMsi>false</InstalledByMsi>
+    <SupportedProducts>
+      <VisualStudio Version="14.0">
+        <Edition>Pro</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.5" />
+    <SystemComponent>true</SystemComponent>
+  </Identifier>
+  <References>
+    <Reference Id="Microsoft.VisualStudio.MPF" MinVersion="10.0">
+      <Name>Visual Studio MPF</Name>
+    </Reference>
+  </References>
+  <Content>
+    <MefComponent>Microsoft.VisualStudio.ConnectedServices.Package.dll</MefComponent>
+    <Assembly AssemblyName="Microsoft.VisualStudio.ConnectedServices.Contracts, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">Microsoft.VisualStudio.ConnectedServices.Contracts.dll</Assembly>
+  </Content>
+</Vsix>

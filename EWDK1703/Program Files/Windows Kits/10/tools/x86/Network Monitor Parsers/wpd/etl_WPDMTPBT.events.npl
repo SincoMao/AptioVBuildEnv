@@ -1,0 +1,283 @@
+//#  (c) 2011 Microsoft Corporation
+//#
+//#  Title:       Microsoft-Windows-WPD-MTPBT
+//#
+//#  Details:     WPD MTP Driver over bluetooth logs analytical ETW events.
+//#               This parser helps to decode the data logged.
+//#
+//#  References:  WpdCoreInstrumentation.man
+//#
+//#  Comments:    MTP dataphase is not logged at transport layer. Enable WPD-MTPClassDriver
+//#               to log the dataphase and etl_WPDMTP.events.npl will be able to parse it.
+//#
+//#  Revision Class and Date:Major, 8/2/2011
+//#
+//####
+
+const MTPBT_PACKET_TYPE_INVALID               = 0X0000;
+const MTPBT_PACKET_TYPE_INIT_FAIL             = 0X0105;
+const MTPBT_PACKET_TYPE_OPERATION_REQUEST     = 0X0106;
+const MTPBT_PACKET_TYPE_OPERATION_RESPONSE    = 0X0107;
+const MTPBT_PACKET_TYPE_EVENT                 = 0X0108;
+const MTPBT_PACKET_TYPE_START_DATA            = 0X0109;
+const MTPBT_PACKET_TYPE_CANCEL                = 0X010B;
+const MTPBT_PACKET_TYPE_PROBE_REQUEST         = 0X010D;
+const MTPBT_PACKET_TYPE_PROBE_RESPONSE        = 0X010E;
+const MTPBT_PACKET_TYPE_INIT_COMMAND_REQUEST  = 0X0111;
+const MTPBT_PACKET_TYPE_INIT_EVENT_REQUEST    = 0X0112;
+const MTPBT_PACKET_TYPE_INIT_LINK_ACK         = 0X0113;
+const MTPBT_PACKET_TYPE_END_DATA              = 0X0114;
+const MTPBT_PACKET_TYPE_TRANSPORT_ERROR       = 0X0115;
+const MTPBT_PACKET_TYPE_TRANSPORT_READY       = 0X0116;
+const MTPBT_PACKET_TYPE_LINK_DESTROY_REQUEST  = 0X0117;
+const MTPBT_PACKET_TYPE_DATA                  = 0X0118;
+
+const MTPBT_PACKET_TYPE_DATA_SIZE   = 16;
+
+const MTPBT_TRANSPORT_ERROR_UNKNOWNREASON = 0;
+const MTPBT_TRANSPORT_ERROR_DATALOST      = 1;
+const MTPBT_TRANSPORT_ERROR_DATACORRUPTION= 2;
+const MTPBT_TRANSPORT_ERROR_DESTROYLINK   = 3; 
+
+Table MTPBT_TransportError
+{
+    switch(value)
+    {
+        case MTPBT_TRANSPORT_ERROR_UNKNOWNREASON    : "MTPBT_TRANSPORT_ERROR_UNKNOWNREASON";
+        case MTPBT_TRANSPORT_ERROR_DATALOST         : "MTPBT_TRANSPORT_ERROR_DATALOST";
+        case MTPBT_TRANSPORT_ERROR_DATACORRUPTION   : "MTPBT_TRANSPORT_ERROR_DATACORRUPTION";
+        case MTPBT_TRANSPORT_ERROR_DESTROYLINK      : "MTPBT_TRANSPORT_ERROR_DESTROYLINK";
+        default                                     : "Undefined Transport Error";
+    }
+}
+
+Table MTPBT_PacketTypeToStringTable
+{
+    switch(value)
+    {
+        case MTPBT_PACKET_TYPE_INVALID               : "PCKT_TYPE:INVALID";
+        case MTPBT_PACKET_TYPE_INIT_FAIL             : "PCKT_TYPE:INIT_FAIL";
+        case MTPBT_PACKET_TYPE_OPERATION_REQUEST     : "PCKT_TYPE:OP_REQUEST";
+        case MTPBT_PACKET_TYPE_OPERATION_RESPONSE    : "PCKT_TYPE:OP_RESPONSE";
+        case MTPBT_PACKET_TYPE_EVENT                 : "PCKT_TYPE:EVENT";
+        case MTPBT_PACKET_TYPE_START_DATA            : "PCKT_TYPE:START_DATA";
+        case MTPBT_PACKET_TYPE_CANCEL                : "PCKT_TYPE:CANCEL";
+        case MTPBT_PACKET_TYPE_PROBE_REQUEST         : "PCKT_TYPE:PROBE_REQUEST";
+        case MTPBT_PACKET_TYPE_PROBE_RESPONSE        : "PCKT_TYPE:PROBE_RESPONSE";
+        case MTPBT_PACKET_TYPE_INIT_COMMAND_REQUEST  : "PCKT_TYPE:INIT_COMMAND_REQUEST";
+        case MTPBT_PACKET_TYPE_INIT_EVENT_REQUEST    : "PCKT_TYPE:INIT_EVENT_REQUEST";
+        case MTPBT_PACKET_TYPE_INIT_LINK_ACK         : "PCKT_TYPE:INIT_LINK_ACK";
+        case MTPBT_PACKET_TYPE_END_DATA              : "PCKT_TYPE:END_DATA";
+        case MTPBT_PACKET_TYPE_TRANSPORT_ERROR       : "PCKT_TYPE:TRANSPORT_ERROR";
+        case MTPBT_PACKET_TYPE_TRANSPORT_READY       : "PCKT_TYPE:TRANSPORT_READY";
+        case MTPBT_PACKET_TYPE_LINK_DESTROY_REQUEST  : "PCKT_TYPE:LINK_DESTROY_REQUEST";
+        case MTPBT_PACKET_TYPE_DATA                  : "PCKT_TYPE:DATA";
+        default                                      : FormatString("PCKT_TYPE:Undefined:0X%08X", value);
+    }
+}
+
+[RegisterBefore(NetEvent.UserData, MicrosoftWindowsWPDMTPBT, "{92AB58D3-F351-4AF5-9C72-D52F36EE2C92}")]
+[Property.wpderror = 0]
+Protocol  WPDMTPBT = property.ETLSummary
+{
+    [BuildConversationWithParent, conversation.ConversationDescription = ""]
+    switch(property.EventID)
+    {
+        case 100: //WPD_I_MTPBT_DATACHANNEL_WRITE_PACKET
+            [property.ETLSummary = FormatString("Sending  Packet(Data  Channel): %-25s  %s", 
+                                    DataChannelSentPacket.ToString, Property.MTPBTPacketDesc)]
+            _struct
+            {
+                UINT32      ETWLength;
+                MTPBTPacket DataChannelSentPacket; 
+            }
+
+        case 101: //WPD_I_MTPBT_EVENTCHANNEL_WRITE_PACKET
+            [property.ETLSummary = FormatString("Sending  Packet(Event Channel): %-25s  %s", 
+                                    EventChannelSentPacket.ToString, Property.MTPBTPacketDesc)]
+            _struct
+            {
+                UINT32      ETWLength;
+                MTPBTPacket EventChannelSentPacket; 
+            }
+
+        case 102: //WPD_I_MTPBT_DATACHANNEL_READ_PACKET
+            [property.ETLSummary = FormatString("Received Packet(Data  Channel): %-25s  %s", 
+                                    DataChannelRecvdPacket.ToString ,Property.MTPBTPacketDesc)]
+            _struct
+            {
+                UINT32      ETWLength;
+                MTPBTPacket DataChannelRecvdPacket; 
+            }
+
+        case 103: //WPD_I_MTPBT_EVENTCHANNEL_READ_PACKET
+            [property.ETLSummary = FormatString("Received Packet(Event Channel): %-25s  %s",
+                                    EventChannelRecvdPacket.ToString, Property.MTPBTPacketDesc)]
+            _struct
+            {
+                UINT32      ETWLength;
+                MTPBTPacket EventChannelRecvdPacket; 
+            }
+
+        case 104: //WPD_I_MTPBT_READ_DATA_PACKET
+            [property.ETLSummary = FormatString("Received Packet(Data  Channel): %-25s  %s",
+                                                    MTPBTPacketHeader.PacketType.ToString, MTPBTPacketHeader.ToString)]
+            MTPBTPacketHeader MTPBTPacketHeader = FormatString("TranID:%3s PayloadSize = %d (0X%X) bytes", 
+                                                        "X", //TODO: Log TransactionID for this event
+                                                        MTPBTPacketHeader.PacketLengthInBytes-MTPBT_PACKET_TYPE_DATA_SIZE,
+                                                        MTPBTPacketHeader.PacketLengthInBytes-MTPBT_PACKET_TYPE_DATA_SIZE);
+        case 105: //WPD_I_MTPBT_RECEIVED_DEVICE_EVENT
+            [property.ETLSummary = "Received Event(Event Channel): " + MTPBTEvent.ToString]
+            struct MTPBTEvent = FormatString("%s", EventCode.ToString)
+            {
+                UINT32 EventDatasetLength;
+                MTPEventCode EventCode;
+                MTPTransactionID TransactionID;
+                UINT32 Param[MTP_EVENT_NUMPARAMS_MAX];
+            }
+        case 106: //WPD_I_MTPBT_DATACHANNEL_RECEIVED_UNEXPECTED_HEADER
+            [property.ETLSummary = "Received Unexpected PacketType(Data  Channel)): " + DataChannelUnexpectedHeader.ToString]
+            MTPBTPacketHeader DataChannelUnexpectedHeader;
+
+        case 107: //WPD_I_MTPBT_EVENTCHANNEL_RECEIVED_UNEXPECTED_HEADER
+            [property.ETLSummary = "Received Unexpected PacketType(Event Channel): " + EventChannelUnexpectedHeader.ToString]
+            MTPBTPacketHeader EventChannelUnexpectedHeader;
+    }
+}
+
+struct MTPBTPacketHeader = FormatString("%s", PacketType.ToString)
+{
+    UINT32 PacketLengthInBytes;
+    UINT16 PacketType  = MTPBT_PacketTypeToStringTable(this);
+    UINT16 PacketSeqID;
+}
+
+
+struct MTPBTPacket = FormatString("%s", Header.ToString)
+{
+    MTPBTPacketHeader Header;
+    
+    [Property.MTPBTPacketDesc = "";]
+    switch(Header.PacketType)    
+    {
+        case MTPBT_PACKET_TYPE_INIT_FAIL:
+        [Property.MTPBTPacketDesc = FormatString( "Reason:%s", FailReason.ToString);]
+        struct MTPBT_PACKET_TYPE_INIT_FAILDetails = ""
+        {
+            ReportWPDError("INIT FAIL") InitPacketFailed;
+            UINT32 FailReason;
+        }
+
+        case MTPBT_PACKET_TYPE_OPERATION_REQUEST:
+        [Property.MTPBTPacketDesc = FormatString( "TranID:%3s Operation:%s",TransactionID.ToString, Opcode.ToString);]
+        struct MTPBT_PACKET_TYPE_OPERATION_REQUESTDetails =""
+        {
+            UINT32 DataPhaseInfo;
+            MTPOperation OpCode;
+            MTPTransactionID TransactionID;
+            UINT32 Params[MTP_COMMAND_NUMPARAMS_MAX];
+        }
+
+
+        case MTPBT_PACKET_TYPE_OPERATION_RESPONSE:
+        [Property.MTPBTPacketDesc = FormatString( "TranID:%3s Response:%s",TransactionID.ToString, ResponseCode.ToString);]
+        struct MTPBT_PACKET_TYPE_OPERATION_RESPONSEDetails = ""
+        {
+            MTPResponseCode ResponseCode;
+            switch
+            {
+                case (ResponseCode != MTP_RESPONSECODE_OK):
+                    ReportWPDError("ResponseCode Not OK") MTPResponseNotOK;
+            }            
+            MTPTransactionID TransactionID;
+            UINT32 Params[MTP_RESPONSE_NUMPARAMS_MAX];
+        }
+
+        case MTPBT_PACKET_TYPE_EVENT:
+        [Property.MTPBTPacketDesc = FormatString( "TranID:%3s Event:%s", TransactionID.ToString, EventCode.ToString);]
+        struct MTPBT_PACKET_TYPE_EVENTDetails = ""
+        {
+            MTPEventCode EventCode;
+            MTPTransactionID TransactionID;
+            UINT32 Params[MTP_EVENT_NUMPARAMS_MAX];
+        }
+        
+        case MTPBT_PACKET_TYPE_START_DATA:
+        [Property.MTPBTPacketDesc = FormatString( "TranID:%3s TotalDataLength = %s bytes", TransactionID.ToString, TotalDataLength.ToString);]
+        struct MTPBT_PACKET_TYPE_START_DATADetails = ""
+        {
+            MTPTransactionID TransactionID;
+            UINT64 TotalDataLength;    
+        }
+
+        case MTPBT_PACKET_TYPE_CANCEL:
+        [Property.MTPBTPacketDesc = FormatString( "TranID:%3s", TransactionID.ToString);]
+        struct MTPBT_PACKET_TYPE_CANCELDetails = ""
+        {
+            MTPTransactionID TransactionID;            
+        }        
+
+        case MTPBT_PACKET_TYPE_PROBE_REQUEST:_struct{}
+        case MTPBT_PACKET_TYPE_PROBE_RESPONSE:
+        struct MTPBT_PACKET_TYPE_PROBE_RESPONSEDetails = ""
+        {
+            UINT32 DeviceStatus;
+        }
+
+        case MTPBT_PACKET_TYPE_INIT_COMMAND_REQUEST:
+        struct MTPBT_PACKET_TYPE_INIT_COMMAND_REQUESTDetails = ""
+        {
+            GUID(true) LinkID;
+            UINT16 PSM;
+        }
+
+        case MTPBT_PACKET_TYPE_INIT_EVENT_REQUEST:
+        [Property.MTPBTPacketDesc = FormatString( "Initiator:%s", LinkID.ToString);]
+        struct MTPBT_PACKET_TYPE_INIT_EVENT_REQUESTDetails = ""
+        {
+            GUID(true) LinkID;
+            UINT16 PSM;
+        }
+
+        case MTPBT_PACKET_TYPE_DATA:
+        [Property.MTPBTPacketDesc = FormatString( "TranID:%3s Data Payload size = %d (0x%x) bytes", 
+                    TransactionID.ToString, Header.PacketLengthInBytes-MTPBT_PACKET_TYPE_DATA_SIZE, Header.PacketLengthInBytes-MTPBT_PACKET_TYPE_DATA_SIZE);]
+        struct MTPBT_PACKET_TYPE_DATADetails = ""
+        {
+            MTPTransactionID TransactionID;
+            UINT32 xCRC32;
+        }
+
+        case MTPBT_PACKET_TYPE_END_DATA:
+        [Property.MTPBTPacketDesc = FormatString( "TranID:%3s Data Payload size = %d (0x%x) bytes", 
+                    TransactionID.ToString, Header.PacketLengthInBytes-MTPBT_PACKET_TYPE_DATA_SIZE, Header.PacketLengthInBytes-MTPBT_PACKET_TYPE_DATA_SIZE);]
+        struct MTPBT_PACKET_TYPE_END_DATADetails = ""
+        {
+            MTPTransactionID TransactionID;
+            UINT32 xCRC32;
+        }
+
+        case MTPBT_PACKET_TYPE_TRANSPORT_ERROR:
+        [Property.MTPBTPacketDesc = FormatString( "TranID:%3s Reason = %s", 
+                    TransactionID.ToString, Reason.ToString);]
+        struct MTPBT_PACKET_TYPE_TRANSPORT_ERRORDetails = ""
+        {
+            MTPTransactionID TransactionID;
+            GUID(true) LinkID;
+            UINT32 Reason = MTPBT_TransportError(this);
+        }
+
+        case MTPBT_PACKET_TYPE_TRANSPORT_READY:
+        [Property.MTPBTPacketDesc = FormatString( "LinkID = %s", LinkID.ToString);]
+        struct MTPBT_PACKET_TYPE_TRANSPORT_READYDetails = ""
+        {
+            GUID(true) LinkID;
+        }
+        case MTPBT_PACKET_TYPE_LINK_DESTROY_REQUEST:
+        [Property.MTPBTPacketDesc = FormatString( "LinkID = %s", LinkID.ToString);]
+        struct MTPBT_PACKET_TYPE_LINK_DESTROY_REQUESTDetails = ""
+        {
+            GUID(true) LinkID;
+        }
+    } 
+}

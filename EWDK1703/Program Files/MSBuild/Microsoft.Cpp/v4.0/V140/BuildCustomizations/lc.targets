@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml" />
+    <AvailableItemName Include="LicxCompiler">
+      <Targets>_LicxCompiler</Targets>
+    </AvailableItemName>
+  </ItemGroup>
+  <PropertyGroup>
+    <ComputeLinkInputsTargets>
+      $(ComputeLinkInputsTargets);
+      ComputeLicxCompilerOutput;
+    </ComputeLinkInputsTargets>
+  </PropertyGroup>
+  <UsingTask TaskName="LicxCompiler" TaskFactory="XamlTaskFactory" AssemblyFile="$(MsBuildCppTaskAssemblyRoot)Microsoft.Build.Tasks.v4.0.dll">
+    <Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+  </UsingTask>
+  <Target Name="_LicxCompiler" BeforeTargets="$(LicxCompilerBeforeTargets)" AfterTargets="$(LicxCompilerAfterTargets)" Condition="'@(LicxCompiler)' != ''" Outputs="@(LicxCompiler-&gt;'%(Outputs)')" Inputs="@(LicxCompiler);@(LicxCompiler-&gt;'%(AdditionalDependencies)');$(MSBuildProjectFile)" DependsOnTargets="$(LicxCompilerDependsOn)">
+    <ItemGroup Condition="'@(SelectedFiles)' != ''">
+      <LicxCompiler Remove="@(LicxCompiler)" Condition="'%(Identity)' != '@(SelectedFiles)'" />
+    </ItemGroup>
+    <ItemGroup>
+      <LicxCompiler_tlog Include="%(LicxCompiler.Outputs)" Condition="'%(LicxCompiler.Outputs)' != '' and '%(LicxCompiler.ExcludedFromBuild)' != 'true'">
+        <Source>@(LicxCompiler, '|')</Source>
+      </LicxCompiler_tlog>
+    </ItemGroup>
+    <ItemGroup>
+      <LicxCompiler_ComponentModules Include="@(ReferencePath)" Condition="'%(LicxCompiler.UseDefaultComponentModules)' == 'true'" />
+      <LicxCompiler_ComponentModules Include="%(LicxCompiler.ComponentModules)" />
+    </ItemGroup>
+    <Message Importance="High" Text="%(LicxCompiler.ExecutionDescription)" />
+    <WriteLinesToFile Condition="'@(LicxCompiler_tlog)' != '' and '%(LicxCompiler_tlog.ExcludedFromBuild)' != 'true'" File="$(TLogLocation)$(ProjectName).write.1u.tlog" Lines="^%(LicxCompiler_tlog.Source);@(LicxCompiler_tlog-&gt;'%(Fullpath)')" Encoding="Unicode" />
+    <LicxCompiler Condition="'@(LicxCompiler)' != '' and '%(LicxCompiler.ExcludedFromBuild)' != 'true'" CommandLineTemplate="%(LicxCompiler.CommandLineTemplate)" NoLogo="%(LicxCompiler.NoLogo)" VerboseOutput="%(LicxCompiler.VerboseOutput)" TargetAssembly="%(LicxCompiler.TargetAssembly)" OutputDirectory="%(LicxCompiler.OutputDirectory)" ComponentModules="@(LicxCompiler_ComponentModules)" AdditionalOptions="%(LicxCompiler.AdditionalOptions)" Inputs="@(LicxCompiler)" />
+    <ItemGroup>
+      <LicxCompiler_ComponentModules Remove="@(LicxCompiler_ComponentModules)" />
+    </ItemGroup>
+  </Target>
+  <Target Name="ComputeLicxCompilerOutput" Condition="'@(LicxCompiler)' != ''">
+    <ItemGroup>
+      <_EmbedManagedResourceFile Include="@(LicxCompiler-&gt;Metadata('Outputs')-&gt;Distinct()-&gt;ClearMetadata())" Condition="'%(LicxCompiler.ExcludedFromBuild)' != 'true'" />
+    </ItemGroup>
+  </Target>
+</Project>

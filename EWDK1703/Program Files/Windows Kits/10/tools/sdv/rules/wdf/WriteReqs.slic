@@ -1,0 +1,56 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    WriteReqs
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    Rule verifies that a write request is not passed to 
+    inappropriate request-send DDIs
+    
+    Rule diagnostics:
+    All requests presented to the driver in the EVT_WDF_IO_QUEUE_IO_WRITE
+    callback are guaranteed to be write requests. Hence, these requests cannot be sent using
+    DDIs specifically for sending read, IOCTL, etc requests. If the same request that is
+    received from the framework is passed to any such DDI, then this rule reports a defect.
+    
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507158
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state
+{
+}
+watch fun_WDF_IO_QUEUE_IO_WRITE.entry.$2;
+
+select one 
+{
+  case fun_WDF_IO_QUEUE_IO_WRITE:
+  [sdv_WdfUsbTargetPipeReadSynchronously,
+   sdv_WdfIoTargetSendIoctlSynchronously,
+   sdv_WdfIoTargetSendInternalIoctlSynchronously,
+   sdv_WdfIoTargetSendInternalIoctlOthersSynchronously,
+   sdv_WdfIoTargetSendReadSynchronously].entry[guard $2]
+   {
+       abort "$fname called with a write request object.";
+   }
+		
+} 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SlamConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!--This variable selects the frontend to be used by StaticDV. Note this value must be set to "esp". -->
+  <SDV_frontend xmlns="http://www.microsoft.com/SDV">esp</SDV_frontend>
+  <!--This variable selects the primary verification engine to be used by StaticDV. Note this value must be set to "slam2". -->
+  <SDV_engine xmlns="http://www.microsoft.com/SDV">engineq</SDV_engine>
+  <!--Limits on the maximum driver size supported by SDV. Default is 100 KLOC -->
+  <SDV_SlamConfig_Maximum_Driver_Size xmlns="http://www.microsoft.com/SDV">100000</SDV_SlamConfig_Maximum_Driver_Size>
+  <!--Limits the amount of time StaticDV spends verifying a rule per thread. The minimum is 10(Sec) and the maximum is 86400(Sec). -->
+  <SDV_SlamConfig_Timeout xmlns="http://www.microsoft.com/SDV">3000</SDV_SlamConfig_Timeout>
+  <!--Limits the amount of virtual memory per thread. The minimum is 1000 (MB) and the maximum is 2500 (MB). -->
+  <SDV_SlamConfig_Spaceout xmlns="http://www.microsoft.com/SDV">2500</SDV_SlamConfig_Spaceout>
+  <!--If value is 0 this limits the number of threads to the number of processors else if >0 then this indicates the number of threads to be used by SDV. -->
+  <SDV_SlamConfig_NumberOfThreads xmlns="http://www.microsoft.com/SDV">0</SDV_SlamConfig_NumberOfThreads>
+  <!--The libraries listed below are already covered by the Osmodel. This list should be comma separated. -->
+  <SDV_SlamConfig_Osmodel_Libraries xmlns="http://www.microsoft.com/SDV">netio.lib,no_cfg_support.lib,bufferoverflowfastfailk.lib,csq.lib,int64.lib,ndis.lib,rtlver.lib,ntstrsafe.lib,sehupd.lib,wdmsec.lib,wdm.lib,ntoskrnl.lib,BufferOverflowK.lib,hal.lib,wmilib.lib,memcmp.lib,armrt.lib</SDV_SlamConfig_Osmodel_Libraries>
+  <!-- The SlamclFlags should not be changed by the end user. -->
+  <SlamclFlags xmlns="http://www.microsoft.com/SDV"></SlamclFlags>
+  <!-- The ScannerFlags should not be changed by the end user. -->
+  <ScannerFlags xmlns="http://www.microsoft.com/SDV"></ScannerFlags>
+  <!-- To pass custom variables to the verification engine -->
+  <SlamFlags xmlns="http://www.microsoft.com/SDV">-iflat off -driver -arrays -no_pa 3  -field_pa_version nocollapse -max_fields_nocollapse 5</SlamFlags>
+</SlamConfig>

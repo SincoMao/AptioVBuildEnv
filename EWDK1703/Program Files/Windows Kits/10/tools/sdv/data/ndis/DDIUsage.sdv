@@ -1,0 +1,6 @@
+Init_DeRegisterInterrupt
+Init_NdisAllocateIoWorkItem
+Init_RegisterInterrupt
+Init_RegisterSG
+NdisFDeregisterFilterDriver
+NdisMDeregisterInterruptEx

@@ -1,0 +1,166 @@
+<!--
+***********************************************************************************************
+Microsoft.Cpp.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+This file defines the properties required to build Visual C++ projects.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" TreatAsLocalProperty="OutDir">
+
+  <Import Condition=" '$(ForceImportBeforeCppTargets)' != '' and exists('$(ForceImportBeforeCppTargets)')" Project="$(ForceImportBeforeCppTargets)"/>
+
+  <PropertyGroup>
+    <SolutionExt>.sln</SolutionExt>
+    <Language>C++</Language>
+    <DefaultLanguageSourceExtension>.cpp</DefaultLanguageSourceExtension>
+
+  <!-- Ensure that IntDir and OutDir will contain proper trailing slash.  Also set the flag to warn the user.  -->
+    <IntDirTrailingSlashWarning Condition="'$(IntDir)' != '' and !HasTrailingSlash('$(IntDir)')">true</IntDirTrailingSlashWarning>
+    <OutDirTrailingSlashWarning Condition="'$(OutDir)' != '' and !HasTrailingSlash('$(OutDir)')">true</OutDirTrailingSlashWarning>
+    <IntDir Condition="'$(IntDir)' != '' and !HasTrailingSlash('$(IntDir)')">$(IntDir)\</IntDir>
+    <OutDir Condition="'$(OutDir)' != '' and !HasTrailingSlash('$(OutDir)')">$(OutDir)\</OutDir>
+
+    <!-- Correct OutputPath as it may be out of sync with OutDir -->
+    <OutputPath>$(OutDir)</OutputPath>
+  </PropertyGroup>
+
+  <!-- *******************************************************************************************
+        Set Build Default Environment Variables
+       ******************************************************************************************* -->
+
+  <UsingTask TaskName="SetEnv" AssemblyFile="$(MSBuildThisFileDirectory)Microsoft.Build.CppTasks.Common.dll"/>
+
+  <!-- Determine to use the 32 or 64 bit tools. -->
+  <PropertyGroup>
+    <_IsNativeEnvironment Condition="'$(PROCESSOR_ARCHITECTURE)' == 'AMD64' and '$(Platform)' == 'X64'">true</_IsNativeEnvironment>
+    <_IsNativeEnvironment Condition="'$(PROCESSOR_ARCHITECTURE)' == 'IA64' and '$(Platform)' == 'Itanium'">true</_IsNativeEnvironment>
+    <!-- VS2013 is not using DefaultToolArchitecture (it is using PreferredToolArchitecture instead), but need to keep it defined for older toolsets -->
+    <DefaultToolArchitecture Condition="'$(DefaultToolArchitecture)' == '' and '$(_IsNativeEnvironment)' != 'true'">Native32Bit</DefaultToolArchitecture>
+    <DefaultToolArchitecture Condition="'$(DefaultToolArchitecture)' == '' and '$(_IsNativeEnvironment)' == 'true'">Native64Bit</DefaultToolArchitecture>
+  </PropertyGroup>
+
+  <!-- Capabilities for this project.  Conditions should be based on platform|configuration only. -->
+  <ItemGroup>
+    <ProjectCapability Include="AssemblyReferences;COMReferences;ProjectReferences;WinRTReferences;SDKReferences" />
+    <ProjectCapability Include="AllTargetOutputGroups;VisualStudioWellKnownOutputGroups" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(LibraryWPath)' != '' and '$(TargetPlatformIdentifier)' == 'Windows' and '$(TargetPlatformVersion)' != '' and '$(TargetPlatformVersion)' &gt; '7.0'">
+    <ReferencePath>$(LibraryWPath);$(ReferencePath)</ReferencePath>
+  </PropertyGroup>
+
+  <Target Name="SetBuildDefaultEnvironmentVariables"
+          Condition="'$(UseEnv)' != 'true'">
+
+    <!-- Vs2013 does not use NativeExecutablePath, but we have to keep this for older toolsets. -->
+    <PropertyGroup>
+      <ExecutablePath Condition="'$(_IsNativeEnvironment)' == 'true' and '$(NativeExecutablePath)' != ''">$(NativeExecutablePath)</ExecutablePath>
+    </PropertyGroup>
+
+    <SetEnv Name   ="PATH"
+            Value  ="$(ExecutablePath)"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="Path"/>
+    </SetEnv>
+
+    <SetEnv Name   ="LIB"
+            Value  ="$(LibraryPath)"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="LIB"/>
+    </SetEnv>
+
+    <SetEnv Name   ="LIBPATH"
+            Value  ="$(ReferencePath)"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="LIBPATH"/>
+    </SetEnv>
+
+    <SetEnv Name   ="INCLUDE"
+            Value  ="$(IncludePath)"
+            Prefix ="false" >
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="INCLUDE"/>
+    </SetEnv>
+
+  </Target>
+
+  <!-- *******************************************************************************************
+        Set User Macro Environment Variables
+       ******************************************************************************************* -->
+  <Target Name="SetUserMacroEnvironmentVariables" Condition="'@(BuildMacro)' != ''">
+
+    <SetEnv Condition="'%(BuildMacro.EnvironmentVariable)' == 'true'"
+            Name   ="@(BuildMacro)"
+            Value  ="%(BuildMacro.Value)"
+            Prefix ="false">
+      <Output TaskParameter="OutputEnvironmentVariable" PropertyName="%(BuildMacro.Identity)"/>
+    </SetEnv>
+
+  </Target>
+
+  <PropertyGroup>
+    <PlatformTargetsFound Condition="Exists('$(_PlatformFolder)\Platform.targets')">true</PlatformTargetsFound>
+  </PropertyGroup>
+
+  <!-- makefile project -->
+  <Import Condition="'$(ConfigurationType)' == 'Makefile'" Project="$(VCTargetsPath)\Microsoft.MakeFile.Targets"/>
+
+  <!-- Regular project, Dev12 platform is found -->
+  <Import Condition="'$(ConfigurationType)' != 'Makefile' and '$(PlatformTargetsFound)' == 'true'" Project="$(_PlatformFolder)\Platform.targets"/>
+
+  <!-- Regular project, Dev12 platform is not found, redirect to older VS versions -->
+  <Import Condition="'$(ConfigurationType)' != 'Makefile' and '$(PlatformTargetsFound)' != 'true'and '$(MinSupportedVCTargetsVersion)' != 'v120'" Project="Microsoft.Cpp.Redirect.targets" />
+
+  <!-- If no platforms file was found then use the InvalidPlatform.Targets -->
+  <Import Condition="'$(ConfigurationType)' != 'Makefile' and '$(PlatformTargetsFound)' != 'true'" Project="$(VCTargetsPath)\Microsoft.Cpp.InvalidPlatform.Targets"/>
+
+  <!-- Handle the case where the default or selected platform toolset doesn't exist.
+       For example, the user is trying to open a Visual Studio 2010 project in Dev 11
+       and doesn't have Visual Studio 2010 installed
+  -->
+  <ItemGroup Condition="'$(ConfigurationType)' != 'Makefile' and ('$(PlatformTargetsFound)' != 'true' or '$(ToolsetTargetsFound)' != 'true')">
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\general.xml" Condition="'$(WindowsAppContainer)' != 'true'">
+       <Context>Project</Context>
+    </PropertyPageSchema>
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\general_appcontainerapplication.xml" Condition="'$(WindowsAppContainer)' == 'true'">
+       <Context>Project</Context>
+    </PropertyPageSchema>
+    <PropertyPageSchema Include="$(VCTargetsPath)$(LangID)\general_ps.xml">
+       <Context>PropertySheet</Context>
+    </PropertyPageSchema>
+  </ItemGroup>
+
+  <!-- If the VCTargetPath was redirected to VCTargetsPath10, then general_file.xml doesn't exists. To correct this, use the current version of the xml instead.-->
+  <ItemGroup Condition="'$(VCTargetsPathEffective)'=='$(VCTargetsPath10)'">
+    <PropertyPageSchema Include="$(VCTargetsPathActual)$(LangID)\general_file.xml">
+      <Context>File</Context>
+    </PropertyPageSchema>
+  </ItemGroup>
+
+  <!-- override config general xml for Dev11 AppStore projects -->
+  <ItemGroup Condition="'$(PlatformToolset)'=='v110' and '$(AppContainerApplication)' == 'true'">
+    <PropertyPageSchema Include="$(VCTargetsPathActual)$(LangID)\general_appcontainerapplication.xml">
+      <Context>Project</Context>
+    </PropertyPageSchema>
+  </ItemGroup>
+
+ 
+  <!-- *******************************************************************************************
+        Cleaning targets
+       ******************************************************************************************* -->
+  <Import Project="$(VCTargetsPath)\Microsoft.CppClean.targets" />
+
+  <!-- All imports are done at this time.  Set VCTargetsPath to Effective so that property sheets items will pick up the correct VCTargetsPath form that their respective platformtoolset. -->
+  <PropertyGroup>
+    <VCTargetsPath Condition="'$(VCTargetsPathEffective)'!=''">$(VCTargetsPathEffective)</VCTargetsPath>
+  </PropertyGroup>
+
+  <Import Condition=" '$(ForceImportAfterCppTargets)' != '' and exists('$(ForceImportAfterCppTargets)')" Project="$(ForceImportAfterCppTargets)"/>
+
+</Project>

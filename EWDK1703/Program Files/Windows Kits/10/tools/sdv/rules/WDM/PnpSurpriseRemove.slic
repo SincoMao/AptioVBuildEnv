@@ -1,0 +1,63 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    PnpSurpriseRemove
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00030003
+
+Description:
+
+    The PnpSurpriseRemove rule specifies that the driver does not call 
+    IoDeleteDevice or IoDetachDevice on the functional device object while processing an 
+    IRP_MN_SUPRISE_REMOVAL request.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216012
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+    int surprise = 0;
+}
+
+[fun_IRP_MJ_PNP].entry
+{
+    if ($2->STACKL->MinorFunction==IRP_MN_SURPRISE_REMOVAL) 
+    {
+        surprise = 1;
+    } 
+    else 
+    {
+        surprise = 0;
+    }
+}
+
+
+
+
+[IoDeleteDevice,IoDetachDevice].entry 
+{
+    if(surprise&&($1==sdv_p_devobj_fdo)) 
+    {
+        abort "Driver should not call $fname on functional device object while processing a surprise remove irp";
+    }
+}
+
+[fun_IRP_MJ_PNP].exit
+{
+    surprise = 0;
+}

@@ -1,0 +1,75 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlKeRaiseLower
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x00020013
+
+Description:
+
+    The IrqlKeRaiseLower rule specifies that the driver does the following 
+    when raising and lowering the IRQL.
+
+        When the driver calls KeRaiseIrql, it is executing at an IRQL that 
+        is lower than or equal to the value of the NewIrql parameter.
+
+        The driver calls KeLowerIrql only after calling KeRaiseIrql or 
+        KeRaiseIrqlToDpcLevel.
+
+    This rule permits nested calls to KeRaiseIrql, KeRaiseIrqlToDpcLevel, 
+    and KeLowerIrql.
+
+    This rule is not applicable for X64 drivers
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216036
+
+--*/
+
+
+#include "slic_base.h"
+
+/* Counts the number of raises: */
+state {
+    int RaiseDepth = 0;
+}
+
+/* Check use of KeRaiseIrql at proper IRQL: */
+[KeRaiseIrql, KfRaiseIrql]@X86@SDV.entry 
+{
+    if ($1 < sdv_irql_current) {
+        abort "The driver calls $fname with a new IRQL less than the current IRQL.";
+    } 
+}
+
+/* Increment the number of raises: */
+[KeRaiseIrql, KfRaiseIrql]@X86@SDV.exit
+{
+     RaiseDepth = RaiseDepth + 1;
+}
+
+/* Increment the number of raises: */
+[KeRaiseIrqlToDpcLevel]@X86@SDV.exit
+{
+     RaiseDepth = RaiseDepth + 1;
+}
+
+/* Decrement/check the number of raises: */
+[KeLowerIrql, KfLowerIrql]@SDV.entry 
+{
+     if (RaiseDepth == 0) {
+	abort "$fname should not be called without a previous call to KeRaiseIrql or KeRaiseIrqlToDpcLevel.";
+     } else {
+        RaiseDepth = RaiseDepth - 1;
+     }
+}

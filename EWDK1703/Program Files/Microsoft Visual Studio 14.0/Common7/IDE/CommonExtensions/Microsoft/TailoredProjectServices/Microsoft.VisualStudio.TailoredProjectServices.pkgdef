@@ -1,0 +1,24 @@
+[$RootKey$\Packages\{65D2E08F-C7DD-4512-9486-156881C91F6E}]
+@="Microsoft.VisualStudio.TailoredProjectServices"
+"InprocServer32"="$System$\mscoree.dll"
+"Class"="Microsoft.VisualStudio.ImmersiveProjectServices.ImmersiveProjectServices"
+"CodeBase"="$PackageFolder$\Microsoft.VisualStudio.TailoredProjectServices.dll"
+
+[$RootKey$\Services\{7E97079C-BB7C-4003-8DFB-730CD0B88250}]
+"Name"="Microsoft Visual Studio Tailored Projects Deploy Service"
+@="{65D2E08F-C7DD-4512-9486-156881C91F6E}"
+
+[$RootKey$\Services\{46B0C039-DE36-4DAE-A038-9F1635F5F962}]
+"Name"="Microsoft Visual Studio Tailored Developer Licensing Service"
+@="{65D2E08F-C7DD-4512-9486-156881C91F6E}"
+
+[$RootKey$\Services\{7C894C21-C465-4867-BB04-84ED52EAD94A}]
+"Name"="Microsoft Visual Studio Developer Licensing Notification Provider"
+@="{65D2E08F-C7DD-4512-9486-156881C91F6E}"
+
+[$RootKey$\Menus]
+"{65D2E08F-C7DD-4512-9486-156881C91F6E}"=", ips.ctmenu, 1"
+
+// Autoload this package in the WinExpress UI context
+[$RootKey$\AutoLoadPackages\{E16EC553-041C-403A-A275-958469FCDE74}]
+"{65D2E08F-C7DD-4512-9486-156881C91F6E}"=dword:00000000

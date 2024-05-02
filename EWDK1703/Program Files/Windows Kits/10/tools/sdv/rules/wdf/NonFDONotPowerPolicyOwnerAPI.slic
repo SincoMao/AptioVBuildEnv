@@ -1,0 +1,57 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    NonFDONotPowerPolicyOwnerAPI
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that if a non-FDO driver is not a power policy owner, certain DDIs cannot be called.
+
+    If the precondition rule NotPowerPolicyOwner passes, and another precondition
+    rule FDODriver finds a defect, the driver cannot call the following DDIs:
+    WdfDeviceInitSetPowerPolicyEventCallbacks, WdfDeviceAssignS0IdleSettings,
+    WdfDeviceAssignSxWakeSettings.
+    
+    Rule diagnostics:
+        "The Driver is not a Power Policy Owner and cannot call $fname. For the rule to be applicable, 
+         the precondition rule FDODriver should find a defect, and the precondition rule NotPowerPolicyOwner 
+         should pass."
+    
+    Pre-conditions: NotPowerPolicyOwner.slic (pass),
+    FDODriver.slic (fail).
+
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507111
+
+--*/
+
+
+
+
+#include "slic_base.h"
+
+
+state{
+     enum {INIT, OWNER} s = INIT;
+}
+[sdv_WdfDeviceInitSetPowerPolicyEventCallbacks
+,sdv_WdfDeviceAssignS0IdleSettings
+,sdv_WdfDeviceAssignSxWakeSettings
+].entry
+{
+   abort "The Driver is not a Power Policy Owner and cannot call $fname. For the rule to be applicable, the precondition rule FDODriver should find a defect, and the precondition rule NotPowerPolicyOwner should pass.";
+}

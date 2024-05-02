@@ -1,0 +1,39 @@
+﻿<!--
+***********************************************************************************************
+Microsoft.Cpp.Props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Support for platforms being defined by multiple versions of Visual Studio.
+       Import Platform specific settings. Check if the platform exists in the current version of Visual Studio
+       and point to Visual Studio 2011 & 2010 if it doesn't -->
+
+  <PropertyGroup>
+    <!-- Win8 store projects did not define ApplicationType* in the project file-->
+    <Win8AppStoreProject Condition="'$(ApplicationType)' == '' and ('$(AppContainerApplication)' == 'true' or '$(WindowsAppContainer)' == 'true')">true</Win8AppStoreProject>
+    <AddItemTemplateGuid Condition="'$(Win8AppStoreProject)' == 'true'">{8C3FFDCC-9A63-43F2-9A3E-C45FB2ABF450}</AddItemTemplateGuid>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Win8AppStoreProject)' == 'true'">
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>8.0</ApplicationTypeRevision>
+    <TargetOSAndVersion>Windows 8</TargetOSAndVersion>
+    <_PlatformToolsetShortNameFor_v110>$(TargetOSAndVersion)</_PlatformToolsetShortNameFor_v110>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <PlatformPropsFound Condition="Exists('$(_PlatformFolder)\Platform.props')">true</PlatformPropsFound>
+  </PropertyGroup>
+
+  <Import Condition="'$(PlatformPropsFound)' == 'true'" Project="$(_PlatformFolder)\Platform.props" />
+
+  <Import Condition="'$(PlatformPropsFound)' != 'true' and '$(MinSupportedVCTargetsVersion)' != 'v120'" Project="Microsoft.Cpp.Platform.Redirect.props" />
+</Project>

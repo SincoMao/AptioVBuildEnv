@@ -1,0 +1,93 @@
+[$RootKey$]
+
+[$RootKey$\AD7Metrics]
+
+[$RootKey$\AD7Metrics\Engine]
+
+[$RootKey$\AD7Metrics\Engine\{F4453496-1DB8-47F8-A7D5-31EBDDC2EC96}]
+@="guidConcordGpuEng"
+"Name"="resource=$BaseInstallDir$\Common7\Packages\\Debugger\*\vsdebugui.dll#6068"
+"CLSID"="{014D0C8F-3FBD-4A8F-A6F1-14190DD7C090}"
+"Attach"=dword:00000001
+"JITDebug"=dword:00000000
+"FunctionBP"=dword:00000001
+"HitCountBP"=dword:00000001
+"SetNextStatement"=dword:00000000
+"SuspendThread"=dword:00000001
+"ConditionalBP"=dword:00000001
+"DataBP"=dword:00000001
+"CallStackBP"=dword:00000001
+"Disassembly"=dword:00000001
+"Registers"=dword:00000001
+"ENC"=dword:00000001
+"Exceptions"=dword:00000001
+"PortSupplier"="{708C1ECA-FF48-11D2-904F-00C04FA302A1}"
+"ProgramProvider"="{4FF9DEF4-8922-4D02-9379-3FFA64D1D639}"
+"AlwaysLoadLocal"=dword:00000001
+"ManagedOnly"=dword:00000000
+"ClrDebuggingServicesId"=dword:00000000
+"RemoteDebugging"=dword:00000001
+"AutoSelectPriority"=dword:00000004
+"JustMyCodeStepping"=dword:00000000
+"DumpWriting"=dword:00000001
+"EnableFuncEvalQuickAbort"=dword:00000001
+"FuncEvalQuickAbortDlls"="System.Windows.Forms.dll"
+"FuncEvalQuickAbortExcludeList"="PresentationHost.exe"
+"FuncEvalAbortLoggingLevel"=dword:00000000
+"GPU"=dword:00000001
+"AllowMultipleDebuggers"=dword:00000001
+"HardwareBlocksAtBreak"=dword:00000000
+"BaseDebugMonitorId"="{72E62FA3-9001-40F1-9D75-AD1166A9FF41}"
+
+[$RootKey$\AD7Metrics\Engine\{F4453496-1DB8-47F8-A7D5-31EBDDC2EC96}\IncompatibleList]
+"guidNativeOnlyEng"="{3B476D35-A401-11D2-AAD4-00C04F990171}"
+"guidCOMPlusOnlyEng2"="{5FFF7536-0C87-462D-8FD2-7971D948E6DC}"
+"guidCOMPlusOnlyEng4"="{FB0D4648-F776-4980-95F8-BB7F36EBC1EE}"
+"guidScriptEng"="{F200A7E7-DEA5-11D0-B854-00A0244A1DE2}"
+"guidSilverlightEng"="{032F4B8C-7045-4B24-ACCF-D08C9DA108FE}"
+"guidSQLEng2"="{1202F5B4-3522-4149-BAD8-58B2079D704F}"
+"GUID_WorkflowDebugEngine"="{6589AE11-3B51-494A-AC77-91DA1B53F35A}"
+
+[$RootKey$\AD7Metrics\Exception]
+
+[$RootKey$\AD7Metrics\Exception\{D7B0137A-4054-41FC-AA2F-A4C1C8B72138}]
+
+[$RootKey$\AD7Metrics\Exception\{D7B0137A-4054-41FC-AA2F-A4C1C8B72138}\GPU Memory Access Exceptions]
+"Code"=dword:00000000
+"State"=dword:00003002
+
+[$RootKey$\AD7Metrics\Exception\{D7B0137A-4054-41FC-AA2F-A4C1C8B72138}\GPU Memory Access Exceptions\Detect uninitialized data]
+"Code"=dword:00000001
+"State"=dword:00003002
+
+[$RootKey$\AD7Metrics\Exception\{D7B0137A-4054-41FC-AA2F-A4C1C8B72138}\GPU Memory Access Exceptions\Detect read after write hazards]
+"Code"=dword:00000005
+"State"=dword:00003002
+
+[$RootKey$\AD7Metrics\Exception\{D7B0137A-4054-41FC-AA2F-A4C1C8B72138}\GPU Memory Access Exceptions\Detect read after write hazards across thread groups]
+"Code"=dword:0000000a
+"State"=dword:00003002
+
+[$RootKey$\AD7Metrics\Exception\{D7B0137A-4054-41FC-AA2F-A4C1C8B72138}\GPU Memory Access Exceptions\Detect write after read hazards]
+"Code"=dword:00000006
+"State"=dword:00003002
+
+[$RootKey$\AD7Metrics\Exception\{D7B0137A-4054-41FC-AA2F-A4C1C8B72138}\GPU Memory Access Exceptions\Detect write after read hazards across thread groups]
+"Code"=dword:0000000b
+"State"=dword:00003002
+
+[$RootKey$\AD7Metrics\Exception\{D7B0137A-4054-41FC-AA2F-A4C1C8B72138}\GPU Memory Access Exceptions\Detect write after write hazards]
+"Code"=dword:00000007
+"State"=dword:00003002
+
+[$RootKey$\AD7Metrics\Exception\{D7B0137A-4054-41FC-AA2F-A4C1C8B72138}\GPU Memory Access Exceptions\Detect write after write hazards across thread groups]
+"Code"=dword:0000000c
+"State"=dword:00003002
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator]
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{53CD816A-FB44-4C89-8D93-AF7E251DE590}]
+
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{53CD816A-FB44-4C89-8D93-AF7E251DE590}\{994B45C4-E6E9-11D2-903F-00C04FA302A1}]
+"Language"="HLSL"
+"Name"="HLSL"

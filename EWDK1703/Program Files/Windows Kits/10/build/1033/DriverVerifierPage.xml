@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Rule
+  Name="DriverVerifierPage"
+  PageTemplate="DriverVerifierDeploymentPropertyProvider"
+  DisplayName="Driver Install"
+  SwitchPrefix="/"
+  Order="38"
+  xmlns="http://schemas.microsoft.com/build/2009/properties"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+  xmlns:my="http://schemas.microsoft.com/developer/msbuild/tasks/2005">
+
+  <Rule.Categories>
+    <Category Name="Verifier" DisplayName="Driver Verification"/>
+  </Rule.Categories>
+
+  <Rule.DataSource>
+    <DataSource Persistence="UserFile" HasConfigurationCondition="true" />
+  </Rule.DataSource>
+
+  <BoolProperty
+    Name="EnableVerifier"
+    Category="Verifier"
+    DisplayName="Enable Driver Verifier"
+    Description="Enable driver verifier on the remote machine"
+    />
+
+  <BoolProperty
+    Name="AllDrivers"
+    Category="Verifier"
+    DisplayName="Verify All Drivers"
+    Description="Enable driver verifier for all drivers on the remote machine"
+    />
+
+  <BoolProperty
+    Name="VerifyProjectOutput"
+    Category="Verifier"
+    DisplayName="Verify Project Output"
+    Description="Enable driver verifier for the driver binaries from the project on the remote machine"
+    />
+
+  <StringProperty
+    Name="VerifyDrivers"
+    Category="Verifier"
+    DisplayName="Driver List"
+    Description="Space separated list of the driver names to verify on the remote machine"
+    />
+
+  <IntProperty
+    Name="VerifyFlags"
+    Category="Verifier"
+    DisplayName="Verifier Flags"
+    Description="Driver verifier flags to enable on the remote machine"/>
+
+</Rule>

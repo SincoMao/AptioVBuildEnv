@@ -1,0 +1,137 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    RemoveLockForward
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that calls to IoAcquireRemoveLock and IoReleaseRemoveLock are used correctly when forwarding an IRP using IoCallDriver to a another device. 
+    Note this rule does not check IRP_MN_REMOVE_DEVICE, IRP_MN_QUERY_DEVICE or IRP_MN_SUPRISE_REMOVAL.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507303
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {init,on} t = init;
+   int LockDepth = 0;
+}watch fun_IRP_MJ_PNP.entry.$2;
+
+[fun_IRP_MJ_PNP].entry[guard $2]
+{
+    if($2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP)
+    {
+        t=on;
+    }
+    else
+    {
+        halt;
+    }
+}
+
+
+
+[IoCsqInsertIrp,
+IoCsqInsertIrpEx].entry[guard $2]
+{
+    halt;
+}
+
+[ExInterlockedInsertHeadList
+,ExInterlockedInsertTailList
+,ExInterlockedPushEntryList
+,ExfInterlockedInsertHeadList
+,ExfInterlockedInsertTailList
+,ExfInterlockedPushEntryList].entry 
+{
+    halt;
+}
+
+[InsertHeadList
+,InsertTailList].entry
+{
+    halt;
+}
+
+[RemoveHeadList,sdv_containing_record].entry
+{
+    halt;
+}
+
+
+
+IoAcquireRemoveLock.exit
+{
+    if(LockDepth > 0 && $return!=STATUS_SUCCESS)
+    {
+       halt;
+    }
+    else if($return==STATUS_SUCCESS)
+    {
+       LockDepth = LockDepth + 1;
+    }
+}
+
+[IoReleaseRemoveLock].entry
+{
+   if(LockDepth==0&&t==on)
+   {
+       abort "Removelock should be acquired before it is released.";
+   }
+   else 
+   {
+      LockDepth = LockDepth - 1;
+   }
+}
+
+[IoCallDriver,PoCallDriver].entry
+{  
+   if (LockDepth==0&&t==on) 
+   {
+       abort "The routine was called without holding the Removelock.";
+   }
+}
+
+/*[IoCallDriver,PoCallDriver].exit
+{  
+   if (t==on&&$return==STATUS_PENDING) 
+   {
+       halt;
+   }
+}*/
+
+
+/*[KeWaitForSingleObject].exit
+{
+   halt;
+}*/
+
+
+[fun_IRP_MJ_PNP].exit[guard $2]
+{
+    if(LockDepth>0&&$2->Tail.Overlay.CurrentStackLocation->MajorFunction==IRP_MJ_PNP)
+    {
+        abort "Removelock should be released within the Dispatch PNP routine.";
+    }
+    else 
+    {
+        halt;
+    }
+}

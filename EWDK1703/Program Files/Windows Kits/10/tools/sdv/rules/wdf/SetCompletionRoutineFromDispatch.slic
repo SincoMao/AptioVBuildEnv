@@ -1,0 +1,76 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    SetCompletionRoutineFromDispatch
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule verifies that the driver don't specify a completion routine on an IRP from their
+    EvtDeviceWdmIrpDispatch callback. 
+
+    Rule diagnostics:
+    If IoSetCompletionRoutine is called from EvtDeviceWdmIrpDispatch callback this rule reports a defect.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507136
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+    enum {initial,entered} f1= initial;
+} with guard (sdv_main, sdv_irp)
+
+[fun_WDFDEVICE_WDM_IRP_DISPATCH_1,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_2,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_3,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_4,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_5,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_6
+].entry
+{
+    f1 = entered;
+}
+
+[fun_WDFDEVICE_WDM_IRP_DISPATCH_1,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_2,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_3,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_4,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_5,
+ fun_WDFDEVICE_WDM_IRP_DISPATCH_6
+].exit
+{
+    halt;
+}
+
+IoSetCompletionRoutine.entry
+{    
+    if ((f1==entered && $1==sdv_irp))
+    {
+        abort "IoSetCompletionRoutine shouldn't be called from WDF EvtDeviceWdmIrpDispatch callback.";
+    }
+}
+
+IoSetCompletionRoutineEx.entry
+{
+    if ((f1==entered && $2==sdv_irp))
+    {
+        abort "IoSetCompletionRoutine shouldn't be called from WDF EvtDeviceWdmIrpDispatch callback.";
+    }    
+}

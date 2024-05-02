@@ -1,0 +1,962 @@
+[$RootKey$]
+
+[$RootKey$\CLSID]
+
+[$RootKey$\CLSID\{0A15E103-0771-11d3-9AA9-00C04F79EFC3}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmdlgs.dll"
+@="CSSFilterBuilder Object"
+
+[$RootKey$\CLSID\{E7FAD81F-0F1D-49EF-9F42-7BF9DCE3ADB8}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmdlgs.dll"
+@="HTMLColorPicker Object"
+
+[$RootKey$\CLSID\{12B0F5C6-9514-49ef-A27F-6BAE455079B4}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmdlgs.dll"
+@="ProjectSelector Object"
+
+[$RootKey$\CLSID\{1A643CC4-A0A0-4D28-A967-C0CB9ED67C1F}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmdlgs.dll"
+@="Visual Studio 7 URL Picker"
+
+[$RootKey$\Component Categories]
+
+[$RootKey$\Component Categories\{B8E04060-F909-11D2-A6AE-00104BCC7269}]
+@="URLPicker 7"
+
+[$RootKey$\Component Categories\{B8E04060-F909-11D2-A6AE-00104BCC7269}\{1A643CC4-A0A0-4D28-A967-C0CB9ED67C1F}]
+@="Visual Studio 7 URL Picker"
+
+[$RootKey$]
+
+[$RootKey$\AutomationProperties]
+
+[$RootKey$\AutomationProperties\TextEditor]
+
+[$RootKey$\AutomationProperties\TextEditor\HTML]
+"Description"="#20138"
+"Name"="HTML"
+"Package"="{F5E7E720-1401-11D1-883B-0000F87579D2}"
+"ProfileSave"=dword:00000001
+"ResourcePackage"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"VsSettingsMigration"=dword:00000002
+@="#20116"
+
+[$RootKey$\AutomationProperties\TextEditor\HTML Specific]
+"Description"="#20137"
+"Name"="HTML Specific"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"ProfileSave"=dword:00000001
+"ResourcePackage"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"VSSettingsMigration"=dword:00000002
+@="#20136"
+
+[$RootKey$\CLSID]
+
+[$RootKey$\CLSID\{006D4220-F8FE-11d2-A6AE-00104BCC7269}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmled.dll"
+@="IWebDesignControlContext7 Class"
+
+[$RootKey$\CLSID\{1B437D20-F8FE-11d2-A6AE-00104BCC7269}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmled.dll"
+@="VsHtmEditorPackage7 Class"
+
+[$RootKey$\CLSID\{58E975A0-F8FE-11d2-A6AE-00104BCC7269}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmled.dll"
+@="HtmLanguageService7 Class"
+
+[$RootKey$\CLSID\{62C81794-A9EC-11D0-8198-00A0C91BBEE3}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmled.dll"
+@="HtmDocData7 Class"
+
+[$RootKey$\CLSID\{6D9AB360-B355-48e5-A35C-14EA632200B9}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmled.dll"
+@="FreeHtmlDoc7 Class"
+
+[$RootKey$\CLSID\{9397D870-F8FD-11d2-A6AE-00104BCC7269}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmled.dll"
+@="HTMLDocProp7 Class"
+
+[$RootKey$\CLSID\{B1195A00-4492-46da-ACD8-018E7DE295D7}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmled.dll"
+@="Style Builder"
+
+[$RootKey$\CLSID\{B82A64BF-BEFB-4261-A81F-C06CFBB8997B}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmled.dll"
+@="Accessibility Checker"
+
+[$RootKey$\CLSID\{C146ECBC-910B-4eee-B9D6-667F90DAC99A}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmled.dll"
+@="Contained Language Manager Class"
+
+[$RootKey$\CLSID\{D3307C6A-4545-4857-B635-E7A5D6E091B2}]
+"InprocServer32"="$BaseInstallDir$\Common7\Packages\htmled.dll"
+@="HtmlEncodingDetector Class"
+
+[$RootKey$\Editors]
+
+[$RootKey$\Editors\{25B02EE5-DB4E-48bd-A9BB-4FD280EB058B}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DefaultToolboxTab"="Standard"
+"DisplayName"="#20109"
+"EditorTrustLevel"=dword:00000001
+"LinkedEditorGuid"="{F390D63C-F7D8-4E74-AA04-57C1ECF53D4D}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="WebUserControl Editor with Encoding"
+
+[$RootKey$\Editors\{25B02EE5-DB4E-48bd-A9BB-4FD280EB058B}\Extensions]
+"ascx"=dword:00000027
+
+[$RootKey$\Editors\{25B02EE5-DB4E-48bd-A9BB-4FD280EB058B}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{29947C11-E110-4596-85B8-42A21EF46F6B}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DefaultToolboxTab"="HTML"
+"DisplayName"="#20118"
+"EditorTrustLevel"=dword:00000001
+"LinkedEditorGuid"="{A52A054C-5228-4819-B568-E5B8040801B5}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Script Editor with Encoding"
+
+[$RootKey$\Editors\{29947C11-E110-4596-85B8-42A21EF46F6B}\Extensions]
+"vbs"=dword:00000027
+
+[$RootKey$\Editors\{29947C11-E110-4596-85B8-42A21EF46F6B}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{39398A2C-C7EC-417c-850D-06C3CAEBF76A}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DisplayName"="#20113"
+"EditorTrustLevel"=dword:00000001
+"LinkedEditorGuid"="{4D30FDB3-AB3E-4810-B6F2-64627BCCA384}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Web Application Editor with Encoding"
+
+[$RootKey$\Editors\{39398A2C-C7EC-417c-850D-06C3CAEBF76A}\Extensions]
+"asax"=dword:00000027
+
+[$RootKey$\Editors\{39398A2C-C7EC-417c-850D-06C3CAEBF76A}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{4D30FDB3-AB3E-4810-B6F2-64627BCCA384}]
+"CommonPhysicalViewAttributes"=dword:00000002
+"DisplayName"="#20112"
+"EditorTrustLevel"=dword:00000001
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Web Application Editor"
+
+[$RootKey$\Editors\{4D30FDB3-AB3E-4810-B6F2-64627BCCA384}\Extensions]
+"asax"=dword:00000028
+
+[$RootKey$\Editors\{4D30FDB3-AB3E-4810-B6F2-64627BCCA384}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}]
+"CommonPhysicalViewAttributes"=dword:00000002
+"DefaultToolboxTab"="Standard"
+"DisplayName"="#20106"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="WebForm Editor"
+
+[$RootKey$\Editors\{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}\Extensions]
+"aspx"=dword:00000028
+
+[$RootKey$\Editors\{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{5FA86C67-6204-4eed-81DE-E9A98BD4E207}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DisplayName"="#20122"
+"EditorTrustLevel"=dword:00000001
+"LinkedEditorGuid"="{DAB1E6DB-4119-49a3-ACE3-0FE8F3E0669F}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Web Handler Editor with Encoding"
+
+[$RootKey$\Editors\{5FA86C67-6204-4eed-81DE-E9A98BD4E207}\Extensions]
+"ashx"=dword:00000027
+
+[$RootKey$\Editors\{5FA86C67-6204-4eed-81DE-E9A98BD4E207}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{80323CE9-9455-4f20-8F50-DC4916F5BF9E}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DisplayName"="#20111"
+"EditorTrustLevel"=dword:00000001
+"LinkedEditorGuid"="{FB9167C9-D3B8-4EDA-8083-9AF6B6F6DA62}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Web Service Editor with Encoding"
+
+[$RootKey$\Editors\{80323CE9-9455-4f20-8F50-DC4916F5BF9E}\Extensions]
+"asmx"=dword:00000027
+"msgx"=dword:00000027
+"svc"=dword:00000027
+
+[$RootKey$\Editors\{80323CE9-9455-4f20-8F50-DC4916F5BF9E}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{8281C572-2171-45AA-A642-7D8BC1662F1C}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DefaultToolboxTab"="HTML"
+"DisplayName"="#20101"
+"LinkedEditorGuid"="{C76D83F8-A489-11D0-8195-00A0C91BBEE3}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="HTML Editor with Encoding"
+
+[$RootKey$\Editors\{8281C572-2171-45AA-A642-7D8BC1662F1C}\Extensions]
+"*"=dword:00000018
+"asa"=dword:00000027
+"asp"=dword:00000027
+"asx"=dword:00000027
+"hta"=dword:00000027
+"htc"=dword:00000027
+"htm"=dword:00000031
+"html"=dword:00000031
+"sct"=dword:00000027
+"srf"=dword:00000027
+"stm"=dword:00000027
+
+[$RootKey$\Editors\{8281C572-2171-45AA-A642-7D8BC1662F1C}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{8B382828-6202-11d1-8870-0000F87579D2}]
+"skin"=dword:00000028
+
+[$RootKey$\Editors\{9D5CE001-788A-4856-A350-4EB6AC570047}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DefaultToolboxTab"="Standard"
+"DisplayName"="#20115"
+"EditorTrustLevel"=dword:00000001
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Master Page Editor with Encoding"
+
+[$RootKey$\Editors\{9D5CE001-788A-4856-A350-4EB6AC570047}\Extensions]
+"master"=dword:00000027
+
+[$RootKey$\Editors\{9D5CE001-788A-4856-A350-4EB6AC570047}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{A52A054C-5228-4819-B568-E5B8040801B5}]
+"CommonPhysicalViewAttributes"=dword:00000002
+"DefaultToolboxTab"="HTML"
+"DisplayName"="#20117"
+"EditorTrustLevel"=dword:00000001
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Script Editor"
+
+[$RootKey$\Editors\{A52A054C-5228-4819-B568-E5B8040801B5}\Extensions]
+"vbs"=dword:00000028
+
+[$RootKey$\Editors\{A52A054C-5228-4819-B568-E5B8040801B5}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{B30AFBFF-D992-43b7-B62D-2642580A2883}]
+"CommonPhysicalViewAttributes"=dword:00000002
+"DefaultToolboxTab"="Standard"
+"DisplayName"="#20114"
+"EditorTrustLevel"=dword:00000001
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Master Page Editor"
+
+[$RootKey$\Editors\{B30AFBFF-D992-43b7-B62D-2642580A2883}\Extensions]
+"master"=dword:00000028
+
+[$RootKey$\Editors\{B30AFBFF-D992-43b7-B62D-2642580A2883}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{C76D83F8-A489-11D0-8195-00A0C91BBEE3}]
+"CommonPhysicalViewAttributes"=dword:00000002
+"DefaultToolboxTab"="HTML"
+"DisplayName"="#20100"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="HTML Editor"
+
+[$RootKey$\Editors\{C76D83F8-A489-11D0-8195-00A0C91BBEE3}\Extensions]
+"*"=dword:00000019
+"asa"=dword:00000028
+"asp"=dword:00000028
+"asx"=dword:00000028
+"hta"=dword:00000028
+"htc"=dword:00000028
+"htm"=dword:00000031
+"html"=dword:00000031
+"sct"=dword:00000028
+"srf"=dword:00000028
+"stm"=dword:00000028
+
+[$RootKey$\Editors\{C76D83F8-A489-11D0-8195-00A0C91BBEE3}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{CBA754F9-4BE6-437b-9FFD-4336DDAB8621}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DisplayName"="#20120"
+"EditorTrustLevel"=dword:00000001
+"LinkedEditorGuid"="{D411C4AC-FCFD-49bf-8D63-B94E075023F2}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Windows Scripting Host File Editor with Encoding"
+
+[$RootKey$\Editors\{CBA754F9-4BE6-437b-9FFD-4336DDAB8621}\Extensions]
+"wsf"=dword:00000027
+
+[$RootKey$\Editors\{CBA754F9-4BE6-437b-9FFD-4336DDAB8621}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{D411C4AC-FCFD-49bf-8D63-B94E075023F2}]
+"CommonPhysicalViewAttributes"=dword:00000002
+"DisplayName"="#20119"
+"EditorTrustLevel"=dword:00000001
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Windows Scripting Host File Editor"
+
+[$RootKey$\Editors\{D411C4AC-FCFD-49bf-8D63-B94E075023F2}\Extensions]
+"wsf"=dword:00000028
+
+[$RootKey$\Editors\{D411C4AC-FCFD-49bf-8D63-B94E075023F2}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{D704C95A-F138-4c97-8B90-AE8287758DD1}]
+"CommonPhysicalViewAttributes"=dword:00000003
+"DefaultToolboxTab"="Standard"
+"DisplayName"="#20107"
+"LinkedEditorGuid"="{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="WebForm Editor with Encoding"
+
+[$RootKey$\Editors\{D704C95A-F138-4c97-8B90-AE8287758DD1}\Extensions]
+"aspx"=dword:00000027
+
+[$RootKey$\Editors\{D704C95A-F138-4c97-8B90-AE8287758DD1}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{DAB1E6DB-4119-49a3-ACE3-0FE8F3E0669F}]
+"CommonPhysicalViewAttributes"=dword:00000002
+"DisplayName"="#20121"
+"EditorTrustLevel"=dword:00000001
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Web Handler Editor"
+
+[$RootKey$\Editors\{DAB1E6DB-4119-49a3-ACE3-0FE8F3E0669F}\Extensions]
+"ashx"=dword:00000028
+
+[$RootKey$\Editors\{DAB1E6DB-4119-49a3-ACE3-0FE8F3E0669F}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{F390D63C-F7D8-4E74-AA04-57C1ECF53D4D}]
+"CommonPhysicalViewAttributes"=dword:00000002
+"DefaultToolboxTab"="Standard"
+"DisplayName"="#20108"
+"EditorTrustLevel"=dword:00000001
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="WebUserControl Editor"
+
+[$RootKey$\Editors\{F390D63C-F7D8-4E74-AA04-57C1ECF53D4D}\Extensions]
+"ascx"=dword:00000028
+
+[$RootKey$\Editors\{F390D63C-F7D8-4E74-AA04-57C1ECF53D4D}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\Editors\{FB9167C9-D3B8-4EDA-8083-9AF6B6F6DA62}]
+"CommonPhysicalViewAttributes"=dword:00000002
+"DisplayName"="#20110"
+"EditorTrustLevel"=dword:00000001
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Web Service Editor"
+
+[$RootKey$\Editors\{FB9167C9-D3B8-4EDA-8083-9AF6B6F6DA62}\Extensions]
+"asmx"=dword:00000028
+"msgx"=dword:00000028
+"svc"=dword:00000028
+
+[$RootKey$\Editors\{FB9167C9-D3B8-4EDA-8083-9AF6B6F6DA62}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+
+[$RootKey$\FileExtensionMapping]
+
+[$RootKey$\FileExtensionMapping\{25B02EE5-DB4E-48bd-A9BB-4FD280EB058B}]
+"DisplayName"="#20109"
+"EditorGUID"="{25B02EE5-DB4E-48bd-A9BB-4FD280EB058B}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="WebUserControl Editor with Encoding"
+
+[$RootKey$\FileExtensionMapping\{29947C11-E110-4596-85B8-42A21EF46F6B}]
+"DisplayName"="#20118"
+"EditorGUID"="{29947C11-E110-4596-85B8-42A21EF46F6B}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Script Editor with Encoding"
+
+[$RootKey$\FileExtensionMapping\{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}]
+"DisplayName"="#20106"
+"EditorGUID"="{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="WebForm Editor"
+
+[$RootKey$\FileExtensionMapping\{5FA86C67-6204-4eed-81DE-E9A98BD4E207}]
+"DisplayName"="#20122"
+"EditorGUID"="{5FA86C67-6204-4eed-81DE-E9A98BD4E207}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Web Handler Editor with Encoding"
+
+[$RootKey$\FileExtensionMapping\{80323CE9-9455-4f20-8F50-DC4916F5BF9E}]
+"DisplayName"="#20111"
+"EditorGUID"="{80323CE9-9455-4f20-8F50-DC4916F5BF9E}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Web Service Editor with Encoding"
+
+[$RootKey$\FileExtensionMapping\{A52A054C-5228-4819-B568-E5B8040801B5}]
+"DisplayName"="#20117"
+"EditorGUID"="{A52A054C-5228-4819-B568-E5B8040801B5}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Script Editor"
+
+[$RootKey$\FileExtensionMapping\{CBA754F9-4BE6-437b-9FFD-4336DDAB8621}]
+"DisplayName"="#20120"
+"EditorGUID"="{CBA754F9-4BE6-437b-9FFD-4336DDAB8621}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Windows Scripting Host File Editor with Encoding"
+
+[$RootKey$\FileExtensionMapping\{D411C4AC-FCFD-49bf-8D63-B94E075023F2}]
+"DisplayName"="#20119"
+"EditorGUID"="{D411C4AC-FCFD-49bf-8D63-B94E075023F2}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Windows Scripting Host File Editor"
+
+[$RootKey$\FileExtensionMapping\{D704C95A-F138-4c97-8B90-AE8287758DD1}]
+"DisplayName"="#20107"
+"EditorGUID"="{D704C95A-F138-4c97-8B90-AE8287758DD1}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="WebForm Editor with Encoding"
+
+[$RootKey$\FileExtensionMapping\{DAB1E6DB-4119-49a3-ACE3-0FE8F3E0669F}]
+"DisplayName"="#20121"
+"EditorGUID"="{DAB1E6DB-4119-49a3-ACE3-0FE8F3E0669F}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Web Handler Editor"
+
+[$RootKey$\FileExtensionMapping\{F390D63C-F7D8-4E74-AA04-57C1ECF53D4D}]
+"DisplayName"="#20108"
+"EditorGUID"="{F390D63C-F7D8-4E74-AA04-57C1ECF53D4D}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="WebUserControl Editor"
+
+[$RootKey$\FileExtensionMapping\{FB9167C9-D3B8-4EDA-8083-9AF6B6F6DA62}]
+"DisplayName"="#20110"
+"EditorGUID"="{FB9167C9-D3B8-4EDA-8083-9AF6B6F6DA62}"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="Web Service Editor"
+
+[$RootKey$\KeyBindingTables]
+
+[$RootKey$\KeyBindingTables\{cb3fcfea-03df-11d1-81d2-00a0c91bbee3}]
+"AllowNavKeyBinding"=dword:00000000
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="#20001"
+
+[$RootKey$\KeyBindingTables\{cb3fcfeb-03df-11d1-81d2-00a0c91bbee3}]
+"AllowNavKeyBinding"=dword:00000000
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="#20002"
+
+[$RootKey$\Languages]
+
+[$RootKey$\Languages\CodeExpansions]
+
+[$RootKey$\Languages\CodeExpansions\HTML]
+"DisplayName"="131"
+"IndexPath"="%InstallRoot%\Web\Snippets\HTML\%LCID%\SnippetsIndex.xml"
+"LangStringID"="html"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"ShowRoots"=dword:00000000
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\CodeExpansions\HTML\ForceCreateDirs]
+"Microsoft Visual Web Developer"="%InstallRoot%\Web\Snippets\HTML\%LCID%\HTML\;%InstallRoot%\Web\Snippets\HTML\%LCID%\ASP.NET\;%MyDocs%\Code Snippets\Visual Web Developer\My HTML Snippets\"
+
+[$RootKey$\Languages\CodeExpansions\HTML\Paths]
+"Microsoft Visual Web Developer"="%InstallRoot%\Web\Snippets\HTML\%LCID%\HTML\;%InstallRoot%\Web\Snippets\HTML\%LCID%\ASP.NET\;%MyDocs%\Code Snippets\Visual Web Developer\My HTML Snippets\"
+
+[$RootKey$\Languages\File Extensions]
+
+[$RootKey$\Languages\File Extensions\.alx]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.asa]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.ascx]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.asp]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.aspx]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.asx]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.hta]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.htc]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.master]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.skin]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.srf]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.stm]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.vbs]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\File Extensions\.wsf]
+"unused"="HTML"
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\Language Services]
+
+[$RootKey$\Languages\Language Services\HTML]
+"Default to Non Hot URLs"=dword:00000000
+"DefaultToInsertSpaces"=dword:00000001
+"LangResID"=dword:000003EB
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"RequestStockColors"=dword:00000001
+"ShowBraceCompletion"=dword:00000001
+"ShowCompletion"=dword:00000001
+"ShowDropdownBarOption"=dword:00000000
+"ShowSmartIndent"=dword:00000001
+"Single Code Window Only"=dword:00000001
+"Support CF_HTML"=dword:00000001
+@="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\Languages\Language Services\HTML\Debugger Languages]
+
+[$RootKey$\Languages\Language Services\HTML\Debugger Languages\{F7FA31DA-C32A-11D0-B442-00A0244A1DD2}]
+@="Script"
+
+[$RootKey$\Languages\Language Services\HTML\EditorToolsOptions]
+
+[$RootKey$\Languages\Language Services\HTML\EditorToolsOptions\Format]
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"Page"="{7583bb73-a453-40e8-8951-b6986ddb1d9b}"
+"Keywords"="#20156"
+@="#20009"
+
+[$RootKey$\Languages\Language Services\HTML\EditorToolsOptions\Miscellaneous]
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"Page"="{14D94957-CF37-413e-85E7-A4E59BF69AB0}"
+"Keywords"="#20157"
+@="#20010"
+
+[$RootKey$\Languages\Language Services\HTML\EditorToolsOptions\Validation]
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"Page"="{CD914678-D0EC-11d2-A87B-00C04F79EFB7}"
+"Keywords"="#20158"
+@="#20005"
+
+[$RootKey$\Languages\Language Services\VBScript]
+"Default to Non Hot URLs"=dword:00000000
+"DefaultToInsertSpaces"=dword:00000001
+"LangResID"=dword:000003EC
+"NotALanguage"=dword:00000001
+"RequestStockColors"=dword:00000001
+"ShowCompletion"=dword:00000001
+"ShowDropdownBarOption"=dword:00000000
+"ShowSmartIndent"=dword:00000000
+"Single Code Window Only"=dword:00000001
+"Support CF_HTML"=dword:00000001
+@="{59E2F421-410A-4fc9-9803-1F4E79216BE8}"
+
+[$RootKey$\Menus]
+"{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"=",99,1"
+
+[$RootKey$\Packages]
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}]
+"InProcServer32"="$BaseInstallDir$\Common7\Packages\htmled.dll"
+@="Visual Studio HTM Editor Package"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox]
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0]
+"Name"="HTML"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element A]
+"Bitmap Index"=dword:0000000A
+"Data"="<input id="Button1" type="button" value="button" />"
+"Item Type"=dword:0000001F
+"Keyword"="input type=button"
+"Name"="Input (Button)"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element B]
+"Bitmap Index"=dword:00000009
+"Data"="<input id="Reset1" type="reset" value="reset" />"
+"Item Type"=dword:0000001F
+"Keyword"="input type=reset"
+"Name"="Input (Reset)"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element C]
+"Bitmap Index"=dword:00000009
+"Data"="<input id="Submit1" type="submit" value="submit" />"
+"Item Type"=dword:0000001F
+"Keyword"="input type=submit"
+"Name"="Input (Submit)"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element D]
+"Bitmap Index"=dword:00000002
+"Data"="<input id="Text1" type="text" />"
+"Item Type"=dword:0000001F
+"Keyword"="input type=text"
+"Name"="Input (Text)"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element E]
+"Bitmap Index"=dword:00000002
+"Data"="<input id="File1" type="file" />"
+"Item Type"=dword:0000001F
+"Keyword"="input type=file"
+"Name"="Input (File)"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element F]
+"Bitmap Index"=dword:00000003
+"Data"="<input id="Password1" type="password" />"
+"Item Type"=dword:0000001F
+"Keyword"="input type=password"
+"Name"="Input (Password)"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element G]
+"Bitmap Index"=dword:00000005
+"Data"="<input id="Checkbox1" type="checkbox" />"
+"Item Type"=dword:0000001F
+"Keyword"="input type=checkbox"
+"Name"="Input (Checkbox)"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element H]
+"Bitmap Index"=dword:00000006
+"Data"="<input id="Radio1" type="radio" />"
+"Item Type"=dword:0000001F
+"Keyword"="input type=radio"
+"Name"="Input (Radio)"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element I]
+"Bitmap Index"=dword:00000021
+"Data"="<input id="Hidden1" type="hidden" />"
+"Item Type"=dword:0000001F
+"Keyword"="input type=hidden"
+"Name"="Input (Hidden)"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element J]
+"Bitmap Index"=dword:00000004
+"Data"="<textarea id="TextArea1" rows="2" cols="20"></textarea>"
+"Item Type"=dword:0000001F
+"Keyword"="Textarea"
+"Name"="Textarea"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element K]
+"Bitmap Index"=dword:00000010
+"Data"="<table style="width:100%;"><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table>"
+"Item Type"=dword:0000001F
+"Keyword"="Table"
+"Name"="Table"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element L]
+"Bitmap Index"=dword:00000013
+"Data"="<img src="" alt="" />"
+"Item Type"=dword:0000001F
+"Keyword"="Img"
+"Name"="Image"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element M]
+"Bitmap Index"=dword:00000007
+"Data"="<select id="Select1" >\n<option></option>\n\n</select>"
+"Item Type"=dword:0000001F
+"Keyword"="Select"
+"Name"="Select"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element N]
+"Bitmap Index"=dword:0000000B
+"Data"="<hr />"
+"Item Type"=dword:0000001F
+"Keyword"="hr"
+"Name"="Horizontal Rule"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\DefaultToolbox\Tab 0\Element O]
+"Bitmap Index"=dword:00000012
+"Data"="<div></div>"
+"Item Type"=dword:0000001F
+"Keyword"="div"
+"Name"="Div"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Doctypes]
+"html public -//w3c//dtd html 4.0 frameset//en"="http://schemas.microsoft.com/intellisense/xhtml-frameset-10"
+"html public -//w3c//dtd html 4.0 transitional//en"="http://schemas.microsoft.com/intellisense/html-401"
+"html public -//w3c//dtd html 4.0//en"="http://schemas.microsoft.com/intellisense/html-401"
+"html public -//w3c//dtd html 4.01 frameset//en"="http://schemas.microsoft.com/intellisense/xhtml-frameset-10"
+"html public -//w3c//dtd html 4.01 transitional//en"="http://schemas.microsoft.com/intellisense/html-401"
+"html public -//w3c//dtd html 4.01//en"="http://schemas.microsoft.com/intellisense/html-401"
+"html public -//w3c//dtd xhtml 1.0 frameset//en"="http://schemas.microsoft.com/intellisense/xhtml-frameset-10"
+"html public -//w3c//dtd xhtml 1.0 strict//en"="http://schemas.microsoft.com/intellisense/xhtml-11"
+"html public -//w3c//dtd xhtml 1.0 transitional//en"="http://schemas.microsoft.com/intellisense/xhtml-transitional-10"
+"html public -//w3c//dtd xhtml 1.1//en"="http://schemas.microsoft.com/intellisense/xhtml-11"
+"html public;htm"="http://schemas.microsoft.com/intellisense/html5"
+"html public;xml"="http://schemas.microsoft.com/intellisense/xhtml5"
+"html;htm"="http://schemas.microsoft.com/intellisense/html5"
+"html;xml"="http://schemas.microsoft.com/intellisense/xhtml5"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\SatelliteDll]
+"DllName"="htmledui.dll"
+"Path"="$BaseInstallDir$\Common7\Packages"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas]
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/AspNet/WebControlsInHead]
+"File"="html\asp_head_content.xsd"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/intellisense/asax-markup]
+"File"="html\asax.xsd"
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/intellisense/html-401]
+"File"="html\html_401.xsd"
+"Friendly Name"="HTML 4.01"
+"IsBrowseable"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/intellisense/html5]
+"File"="html\html_5.xsd"
+"Friendly Name"="HTML5"
+"IsBrowseable"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/intellisense/xhtml-11]
+"File"="html\xhtml_strict-11.xsd"
+"Friendly Name"="XHTML 1.1"
+"IsBrowseable"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/intellisense/xhtml5]
+"File"="html\xhtml_5.xsd"
+"Friendly Name"="XHTML5"
+"IsBrowseable"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/intellisense/xhtml-frameset-10]
+"File"="html\xhtml_frameset.xsd"
+"Friendly Name"="XHTML 1.0 Frameset"
+"IsBrowseable"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/intellisense/xhtml-transitional-10]
+"File"="html\xhtml_transitional.xsd"
+"Friendly Name"="XHTML 1.0 Transitional"
+"IsBrowseable"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/mobile/chtml10template]
+"File"="xml\MobileChtmlTemplate.xsd"
+"Friendly Name"="Mobile cHTML 1.0 Template"
+"IsMobile"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/mobile/html32template]
+"File"="xml\MobileHtml32Template.xsd"
+"Friendly Name"="Mobile HTML 3.2 Template"
+"IsMobile"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/Mobile/Page]
+"File"="xml\MobilePage.xsd"
+"IsMobile"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/Mobile/WebForm]
+"File"="xml\MobileForm.xsd"
+"IsMobile"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/Mobile/WebUserControl]
+"File"="xml\MobileUserControl.xsd"
+"IsMobile"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://schemas.microsoft.com/WindowsScriptHost]
+"File"="xml\wshmeta.xsd"
+"IsBrowseable"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://www.w3.org/2000/svg]
+"File"="html\svg.xsd"
+"IsBrowseable"=dword:00000001
+"IsXml"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://www.w3.org/XML/1998/namespace]
+"File"="html\xml.xsd"
+"IsXml"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Schemas\http://www.w3.org/1999/xlink]
+"File"="html\xlink.xsd"
+"IsXml"=dword:00000001
+
+[$RootKey$\Packages\{1B437D20-F8FE-11D2-A6AE-00104BCC7269}\Toolbox]
+"Default Items"=dword:00000001
+"Formats"="HTML Format"
+"LoadOrder"=dword:00001001
+"NeedsCallbackAfterReset"=dword:00000001
+
+[$RootKey$\Services]
+
+[$RootKey$\Services\{58E975A0-F8FE-11D2-A6AE-00104BCC7269}]
+"Name"="HTML Language Service"
+@="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\ToolsOptionsPages]
+
+[$RootKey$\ToolsOptionsPages\General]
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+@="#20004"
+
+[$RootKey$\ToolsOptionsPages\General\vwd]
+"NoShowAllView"=dword:00000001
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"Page"="{B348473A-58E8-4D50-86A5-F5B12AB77A70}"
+"Keywords"="#20155"
+@="#20004"
+
+[$RootKey$\ToolWindows]
+
+[$RootKey$\ToolWindows\{1CBA9826-3184-4799-A184-784E41B56398}]
+"Float"="100, 100, 286, 426"
+"Name"="CSS Property Grid"
+"Orientation"="Right"
+"Style"="Tabbed"
+"Window"="{EEFA5220-E298-11D0-8F78-00A0C9110057}"
+@="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\ToolWindows\{25f7e850-ffa1-11d0-b63f-00a0c922e851}]
+
+[$RootKey$\ToolWindows\{25f7e850-ffa1-11d0-b63f-00a0c922e851}\Visibility]
+"{A764E895-518D-11d2-9A89-00C04F79EFC3}"=dword:00000000
+
+[$RootKey$\ToolWindows\{38ED9834-0C97-445b-BD1D-F78F3E08AFAC}]
+"Float"="100, 100, 286, 426"
+"Name"="CSS Manage Styles Task Pane"
+"Orientation"="Right"
+"Style"="Tabbed"
+"Window"="{EEFA5220-E298-11D0-8F78-00A0C9110057}"
+@="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\ToolWindows\{402DC223-D700-4029-866F-ACEE803F3F0C}]
+"Float"="100, 100, 286, 426"
+"Name"="CSS Apply Styles Task Pane"
+"Orientation"="Right"
+"Style"="Tabbed"
+"Window"="{EEFA5220-E298-11D0-8F78-00A0C9110057}"
+@="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\ToolWindows\{56B32054-DE4D-4de3-8396-BCB6F98BD246}]
+"Name"="Behaviors"
+@="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\ToolWindows\{58875C41-862B-4d6f-B046-03E8A333907E}]
+"Float"="100, 100, 696, 350"
+"Name"="Page Layout"
+"Style"="Float"
+@="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\ToolWindows\{6FB4A4D9-0C08-4663-AF7B-2ECBDF7A20EC}]
+"Name"="'Conditional Formatting"
+@="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\ToolWindows\{7B8C4981-13EC-4c56-9F24-ABE5FAAA9440}]
+"Name"="Layers"
+@="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\ToolWindows\{A693A243-4743-4034-AED4-BEC4E79E0B3B}]
+"Name"="Web Part Gallery"
+@="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\ToolWindows\{A9B00010-7308-415c-95C6-EED62C1B9788}]
+"Name"="CSS Properties"
+@="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\ToolWindows\{F62AF5AD-1276-46dd-AE7B-D07AB54D1081}]
+"Name"="HTML Property Grid"
+@="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+
+[$RootKey$\UserSettings]
+
+[$RootKey$\UserSettings\HTML Tag Specific]
+"AlternateParent"="AutomationProperties\TextEditor"
+"Category"="{7583bb73-a453-40e8-8951-b6986ddb1d9b}"
+"Description"="#20135"
+"Package"="{1B437D20-F8FE-11D2-A6AE-00104BCC7269}"
+"VSSettingsMigration"=dword:00000001
+@="#20133"
+
+; The default editor for any HTML document unless the extension is specified
+[$RootKey$\Debugger\DynamicScriptDocumentEditor\HTML]
+"LanguageServiceId"="{9BBFD173-9770-47DC-B191-651B7FF493CD}"
+"EditorType"="{40D31677-CBC0-4297-A9EF-89D907823A98}"
+
+; Editor for aspx
+[$RootKey$\Debugger\DynamicScriptDocumentEditor\HTML\.aspx]
+"LanguageServiceId"="{58E975A0-F8FE-11D2-A6AE-00104BCC7269}"
+"EditorType"="{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"

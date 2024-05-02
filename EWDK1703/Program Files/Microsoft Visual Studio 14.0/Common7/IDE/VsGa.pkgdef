@@ -1,0 +1,18 @@
+[$Initialization$]
+"ApplicationExtensionsFolder" = "$ShellFolder$\Common7\IDE\VsGraphicsExtensions"
+"PkgDefSearchPath"            = "$ApplicationExtensionsFolder$; \
+                                 $ShellFolder$\Common7\IDE\CommonExtensions\Platform; \
+                                 $ShellFolder$\Common7\IDE\CommonExtensions\Microsoft\Editor; \
+                                 $ShellFolder$\Common7\IDE\CommonExtensions\Microsoft\ErrorList; \
+                                 $ShellFolder$\Common7\IDE\CommonExtensions\Microsoft\VSLog; \
+                                 $ShellFolder$\Common7\IDE\CommonExtensions\Microsoft\VSTelemetry; \
+                                 $ShellFolder$\Common7\IDE\CommonExtensions\Microsoft\VC; \
+                                 $ShellFolder$\Common7\IDE\CommonExtensions\Microsoft\ReferenceManager; \
+                                 $ShellFolder$\Common7\IDE\CommonExtensions\Microsoft\TailoredProjectServices; \
+                                 $ShellFolder$\Common7\IDE\CommonExtensions\Microsoft\Connected; \
+                                 $ShellFolder$\Common7\IDE\VsGa.Application.pkgdef; \
+                                 $ShellFolder$\Common7\IDE\Extensions\Microsoft\VsGraphics; \
+                                 $ShellFolder$\Common7\IDE\Extensions\Microsoft\Web Tools\Editors; \
+                                 $ShellFolder$\Common7\IDE\Extensions\Microsoft\Web Tools\Package Management;"
+"RegistryRoot"                = "Software\Microsoft\VsGraphics\14.0"
+"ImageManifestSearchPath"     = "$ShellFolder$\Common7\IDE\CommonExtensions"

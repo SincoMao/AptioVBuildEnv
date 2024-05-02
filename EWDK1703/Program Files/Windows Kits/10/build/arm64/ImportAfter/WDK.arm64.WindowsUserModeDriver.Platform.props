@@ -1,0 +1,23 @@
+<!--
+***********************************************************************************************
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Condition="'$(IsUserModeToolset)'=='true' and '$(ConversionToolVersion)' == '1.0'" Project="$(WDKContentRoot)bin\conversion\OverrideMacros.props" />
+  <Import Condition="'$(IsUserModeToolset)'=='true'" Project="$(WDKContentRoot)build\WindowsDriver.common.props" />
+  <Import Condition="'$(IsUserModeToolset)'=='true'" Project="$(WDKContentRoot)build\WindowsDriver.UserMode.Default.props" />
+  <Import Condition="'$(IsUserModeToolset)'=='true'" Project="$(WDKContentRoot)build\WindowsDriver.UserMode.props" />
+  <Import Condition="'$(IsUserModeToolset)'=='true' and '$(ConversionToolVersion)' == '1.0'" Project="$(WDKContentRoot)bin\conversion\Conversion.props" />
+  <Import Condition="'$(IsUserModeToolset)'=='true'" Project="$(WDKContentRoot)build\WindowsDriver.UserMode.LateEvaluation.props" />
+  <Import Condition="'$(IsUserModeToolset)'=='true'" Project="$(WDKContentRoot)build\WindowsDriver.LateEvaluation.props" />
+
+  <!-- Import After -->
+  <Import Condition="'$(IsUserModeToolset)'=='true' and Exists('$(VCTargetsPath)\Platforms\$(Platform)\PlatformToolsets\$(PlatformToolset)\ImportAfter')" Project="$(VCTargetsPath)\Platforms\$(Platform)\PlatformToolsets\$(PlatformToolset)\ImportAfter\*.props" />
+</Project>
+

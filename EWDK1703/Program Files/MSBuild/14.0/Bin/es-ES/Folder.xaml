@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright, Microsoft Corporation, All rights reserved.-->
+<Rule Name="Folder" DisplayName="General" PageTemplate="generic" Description="Marcadores de posición de carpeta vacía" xmlns="http://schemas.microsoft.com/build/2009/properties">
+  <Rule.DataSource>
+    <DataSource Persistence="ProjectInstance" HasConfigurationCondition="False" ItemType="Folder"/>
+  </Rule.DataSource>
+
+  <StringProperty Name="Identity" Visible="false" ReadOnly="true" Category="Misc"/>
+  <StringProperty Name="FullPath" DisplayName="Ruta de acceso completa" ReadOnly="true" Category="Misc"/>
+  <StringProperty Name="FileNameAndExtension" DisplayName="Nombre de carpeta" ReadOnly="true" Category="Misc">
+      <StringProperty.DataSource>
+            <DataSource Persistence="ProjectInstance" ItemType="Folder" PersistedName="FileNameAndExtension"/>
+      </StringProperty.DataSource>
+  </StringProperty>
+</Rule>

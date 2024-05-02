@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ProjectSchemaDefinitions
+    xmlns="http://schemas.microsoft.com/build/2009/properties"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
+    <Rule
+        Name="PackageFilesPage"
+        PageTemplate="PackageFilesPropertyProvider"
+        DisplayName="Driver Install"
+        SwitchPrefix="/"
+        Order="35">
+
+        <Rule.Categories>
+            <Category
+                Name="PackageFiles"
+                DisplayName="Package Files"/>
+        </Rule.Categories>
+
+        <Rule.DataSource>
+            <DataSource
+                Persistence="ProjectFile"
+                ItemType="FilesToPackage"
+                HasConfigurationCondition="true" />
+        </Rule.DataSource>
+
+        <StringProperty
+            Name="SubDirectory"
+            Category="PackageFiles">
+            <StringProperty.DataSource>
+                <DataSource
+                    Persistence="ProjectFile"
+                    ItemType="FilesToPackage"
+                    SourceType="Item"/>
+            </StringProperty.DataSource>
+        </StringProperty>
+
+    </Rule>
+
+    <ItemType
+        Name="DeviceMetadata"
+        DisplayName="Device Metadata Files"/>
+    <ContentType
+        Name="DeviceMetadata"
+        DisplayName="Driver Metadata Files"
+        ItemType="DeviceMetadata"/>
+    <FileExtension
+        Name="*.devicemetadata-ms"
+        ContentType="DeviceMetadata"/>
+    
+</ProjectSchemaDefinitions>

@@ -1,0 +1,66 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StartDeviceWait
+
+Domain:
+
+    wdm
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    KeWaitForSingleObject should not be called in the context of Start Device IRP.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507332
+
+--*/
+
+
+#include "slic_base.h"
+
+state 
+{
+	enum {initial,set_in_completion} irp_event=initial;
+} 
+watch KeInitializeEvent.exit.$1;
+
+KeInitializeEvent.exit[guard $1]
+{
+   irp_event=initial;
+}
+
+IoSetCompletionRoutine.entry
+{
+    if($1==sdv_irp)
+    {
+        irp_event = set_in_completion;
+    }
+}
+
+
+KeWaitForSingleObject.exit[guard $1]
+{
+   if(($return==STATUS_SUCCESS)&&(irp_event == set_in_completion))
+   {
+       abort "KeWaitForSingleObject should not be called in the context of Start Device IRP.";
+   }
+}
+
+
+
+sdv_RunStartDevice.exit
+{
+    halt;
+}
+
+
+

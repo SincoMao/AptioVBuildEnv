@@ -1,0 +1,172 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    StorPortSpinLock3
+
+Domain:
+
+    storport
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    This rule will reflect the lock acquisition hierarchy 
+    as outlined in the StorPortAcquireSpinLock WDK documentation. 
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507242
+
+--*/
+
+
+
+#include "ntddk_slic.h"
+
+state {
+	enum {in_adaptercontrol_no, in_adaptercontrol_yes} in_adaptercontrol = in_adaptercontrol_no;
+	enum {in_buildio_no, in_buildio_yes} in_buildio = in_buildio_no;
+	enum {in_findadapter_no, in_findadapter_yes} in_findadapter = in_findadapter_no;
+	enum {in_initialize_no, in_initialize_yes} in_initialize = in_initialize_no;
+	enum {in_interrupt_no, in_interrupt_yes} in_interrupt = in_interrupt_no;
+	enum {in_resetbus_no, in_resetbus_yes} in_resetbus = in_resetbus_no;
+	enum {in_startio_no, in_startio_yes} in_startio = in_startio_no;
+	enum {in_passive_no, in_passive_yes} in_passive = in_passive_no;
+	enum {in_timer_no, in_timer_yes} in_timer = in_timer_no;
+}
+
+
+fun_SP_HW_ADAPTER_CONTROL.entry
+{
+	in_adaptercontrol = in_adaptercontrol_yes;
+}
+fun_SP_HW_ADAPTER_CONTROL.exit
+{
+	in_adaptercontrol = in_adaptercontrol_no;
+}
+fun_SP_HW_BUILDIO.entry 
+{
+	in_buildio = in_buildio_yes;
+}
+fun_SP_HW_BUILDIO.exit
+{
+	in_buildio = in_buildio_no;
+}
+fun_SP_HW_FIND_ADAPTER.entry
+{
+	in_findadapter = in_findadapter_yes;
+}
+fun_SP_HW_FIND_ADAPTER.exit
+{
+	in_findadapter = in_findadapter_no;
+}
+fun_SP_VIRTUAL_HW_FIND_ADAPTER.entry
+{
+	in_findadapter = in_findadapter_yes;
+}
+fun_SP_VIRTUAL_HW_FIND_ADAPTER.exit
+{
+	in_findadapter = in_findadapter_no;
+}
+fun_SP_HW_INITIALIZE.entry
+{
+	in_initialize = in_initialize_yes;
+}
+fun_SP_HW_INITIALIZE.exit
+{
+	in_initialize = in_initialize_no;
+}
+fun_SP_HW_INTERRUPT.entry
+{
+	in_interrupt = in_interrupt_yes;
+}
+fun_SP_HW_INTERRUPT.exit
+{
+	in_interrupt = in_interrupt_no;
+}
+fun_SP_HW_RESET_BUS.entry
+{
+	in_resetbus = in_resetbus_yes;
+}
+fun_SP_HW_RESET_BUS.exit
+{
+	in_resetbus = in_resetbus_no;
+}
+fun_SP_HW_STARTIO.entry
+{
+	in_startio = in_startio_yes;
+}
+fun_SP_HW_STARTIO.exit
+{
+	in_startio = in_startio_no;
+}
+[fun_SP_HW_TIMER_1,
+fun_SP_HW_TIMER_2,
+fun_SP_HW_TIMER_3,
+fun_SP_HW_TIMER_4,
+fun_SP_HW_TIMER_5,
+fun_SP_HW_TIMER_6].entry
+{
+	in_timer = in_timer_yes;
+}
+[fun_SP_HW_TIMER_1,
+fun_SP_HW_TIMER_2,
+fun_SP_HW_TIMER_3,
+fun_SP_HW_TIMER_4,
+fun_SP_HW_TIMER_5,
+fun_SP_HW_TIMER_6].exit
+{
+	in_timer = in_timer_no;
+}
+
+[fun_SP_HW_PASSIVE_INITIALIZE_ROUTINE_1,
+fun_SP_HW_PASSIVE_INITIALIZE_ROUTINE_2,
+fun_SP_HW_PASSIVE_INITIALIZE_ROUTINE_3,
+fun_SP_HW_PASSIVE_INITIALIZE_ROUTINE_4,
+fun_SP_HW_PASSIVE_INITIALIZE_ROUTINE_5,
+fun_SP_HW_PASSIVE_INITIALIZE_ROUTINE_6].entry
+{
+	in_passive = in_passive_yes;
+}
+[fun_SP_HW_PASSIVE_INITIALIZE_ROUTINE_1,
+fun_SP_HW_PASSIVE_INITIALIZE_ROUTINE_2,
+fun_SP_HW_PASSIVE_INITIALIZE_ROUTINE_3,
+fun_SP_HW_PASSIVE_INITIALIZE_ROUTINE_4,
+fun_SP_HW_PASSIVE_INITIALIZE_ROUTINE_5,
+fun_SP_HW_PASSIVE_INITIALIZE_ROUTINE_6].exit
+{
+	in_passive = in_passive_no;
+}
+
+StorPortAcquireSpinLock.entry
+{  
+	if ( (in_findadapter == in_findadapter_yes) 
+		|| (in_initialize == in_initialize_yes)
+		|| (in_interrupt == in_interrupt_yes)
+		|| (in_passive == in_passive_yes) ) {
+			abort "The current miniport callback must not obtain any locks.";
+	}
+    else if ( (in_startio == in_startio_yes) 
+		|| (in_timer == in_timer_yes) 
+		|| (in_resetbus == in_resetbus_yes) ) {
+			if ($2 != 3) {
+				abort "The current miniport callback may only obtain an InterruptLock.";
+			}
+    }
+	else if ( (in_buildio == in_buildio_yes)|| (in_adaptercontrol == in_adaptercontrol_yes)) 
+	{
+			if ( ($2 != 3) && ($2 != 2) ) {
+				abort "The current miniport callback may only obtain an InterruptLock or a StartIoLock";
+			}
+	}
+	else {
+		halt;
+	}        
+}
+

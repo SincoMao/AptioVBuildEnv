@@ -1,0 +1,31 @@
+[$RootKey$\Packages\{bc9ca0b3-bb4f-449a-967c-29a8fae32086}]
+"Assembly"="Microsoft.VSDesigner.WCF,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VSDesigner.WCF.VSDesignerWcfPackage"
+"InprocServer32"="$System$\mscoree.dll"
+@="Microsoft VSDesigner WCF Package"
+[$RootKey$\Services\{DDD04E59-6B86-4a73-8BC7-3FF5D7B1111C}]
+"Name"="SVsWCFReferenceManagerFactory"
+@="{bc9ca0b3-bb4f-449a-967c-29a8fae32086}"
+[$RootKey$\Services\{B9A32C80-B14D-4AE3-A955-5CBC3E7FAB10}]
+"Name"="IVsDiscoveryService"
+@="{bc9ca0b3-bb4f-449a-967c-29a8fae32086}"
+[$RootKey$\Services\{51DEE0D2-41A3-4245-BC91-A8B6D5E02DD5}]
+"Name"="ICodeGeneratorCapabilitiesManager"
+@="{bc9ca0b3-bb4f-449a-967c-29a8fae32086}"
+[$RootKey$\Services\{E1DA470C-1A7D-4450-A933-30B69273A855}]
+"Name"="IDataServiceSupport"
+@="{bc9ca0b3-bb4f-449a-967c-29a8fae32086}"
+[$RootKey$\CLSID\{350EBC73-4AB1-4f27-B9AE-57CAB29DBCB0}]
+"Assembly"="Microsoft.VSDesigner.WCF,version=14.0.0.0,publicKeyToken=b03f5f7f11d50a3a,culture=neutral"
+"Class"="Microsoft.VSDesigner.DataServicesClient.DataServiceClientSingleFileGenerator"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+@="ADO.NET Data Services client-side single file generator"
+[$RootKey$\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\DataServiceClientGenerator]
+"CLSID"="{350EBC73-4AB1-4f27-B9AE-57CAB29DBCB0}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft VB Code Generator for ADO.NET Data Services"
+[$RootKey$\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\DataServiceClientGenerator]
+"CLSID"="{350EBC73-4AB1-4f27-B9AE-57CAB29DBCB0}"
+"GeneratesDesignTimeSource"=dword:00000001
+@="Microsoft C# Code Generator for ADO.NET Data Services"

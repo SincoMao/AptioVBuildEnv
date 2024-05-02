@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="XMLSchema1" targetNamespace="http://schemas.microsoft.com/XML-Document-Transform" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns="http://schemas.microsoft.com/XML-Document-Transform" xmlns:mstns="http://schemas.microsoft.com/XML-Document-Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense" vs:helpNamespace="http://schemas.microsoft.com/XML-Document-Transform">
+  <xs:simpleType name="small_boolean_Type">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="false" />
+      <xs:enumeration value="true" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:attribute name="Transform" type="xs:string" vs:help="Transform" />
+  <xs:attribute name="Locator" type="xs:string" vs:help="Locator" />
+  <xs:attribute name="SupressWarnings" type="small_boolean_Type"  default="false" vs:help="SupressWarnings" />
+  <xs:element name="Import" vs:help="Import">
+    <xs:complexType>
+      <xs:attribute name="assembly" type="xs:string" />
+      <xs:attribute name="path" type="xs:string" />
+      <xs:attribute name="namespace" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

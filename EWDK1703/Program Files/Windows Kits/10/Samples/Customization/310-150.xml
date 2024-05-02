@@ -1,0 +1,1310 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--  Copyright (c) Microsoft Corporation.  All rights reserved.  -->
+<ImageCustomizations xmlns="http://schemas.microsoft.com/embedded/2004/10/ImageUpdate"
+                     Name="Customization File for ATT"
+                     Description="Customization File for ATT"
+                     Owner="Microsoft"
+                     OwnerType="MobileOperator"
+                     Priority="2">
+
+  <Targets>
+    <Target Id="ATT Selfhost Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="070" />
+        <Condition Name="UIName" Value="AT&amp;T (Selfhost)" />
+        <Condition Name="UIOrder" Value="1" />
+        <Condition Name="PRESELECTMO" Value="ATT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="090" />
+        <Condition Name="UIName" Value="AT&amp;T (Selfhost)" />
+        <Condition Name="UIOrder" Value="1" />
+        <Condition Name="PRESELECTMO" Value="ATT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="150" />
+        <Condition Name="PNN" Value="AT&amp;T" />
+        <Condition Name="UIName" Value="AT&amp;T (Selfhost)" />
+        <Condition Name="UIOrder" Value="1" />
+        <Condition Name="PRESELECTMO" Value="ATT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:170, 180" />
+        <Condition Name="UIName" Value="AT&amp;T (Selfhost)" />
+        <Condition Name="UIOrder" Value="1" />
+        <Condition Name="PRESELECTMO" Value="ATT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="380" />
+        <Condition Name="UIName" Value="AT&amp;T (Selfhost)" />
+        <Condition Name="UIOrder" Value="1" />
+        <Condition Name="PRESELECTMO" Value="ATT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="410" />
+        <Condition Name="UIName" Value="AT&amp;T (Selfhost)" />
+        <Condition Name="UIOrder" Value="1" />
+        <Condition Name="PRESELECTMO" Value="ATT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="560" />
+        <Condition Name="UIName" Value="AT&amp;T (Selfhost)" />
+        <Condition Name="UIOrder" Value="1" />
+        <Condition Name="PRESELECTMO" Value="ATT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="680" />
+        <Condition Name="UIName" Value="AT&amp;T (Selfhost)" />
+        <Condition Name="UIOrder" Value="1" />
+        <Condition Name="PRESELECTMO" Value="ATT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="980" />
+        <Condition Name="UIName" Value="AT&amp;T (Selfhost)" />
+        <Condition Name="UIOrder" Value="1" />
+        <Condition Name="PRESELECTMO" Value="ATT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="311" />
+        <Condition Name="MNC" Value="180" />
+        <Condition Name="PNN" Value="AT&amp;T" />
+        <Condition Name="UIName" Value="AT&amp;T (Selfhost)" />
+        <Condition Name="UIOrder" Value="1" />
+        <Condition Name="PRESELECTMO" Value="ATT" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="001" />
+        <Condition Name="MNC" Value="01" />
+        <Condition Name="UIName" Value="AT&amp;T (Selfhost)" />
+        <Condition Name="UIOrder" Value="1" />
+        <Condition Name="PRESELECTMO" Value="ATT" />
+      </TargetState>
+
+    </Target>
+    <Target Id="ATT TA Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="070" />
+        <Condition Name="UIName" Value="AT&amp;T (TA)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="090" />
+        <Condition Name="UIName" Value="AT&amp;T (TA)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="150" />
+        <Condition Name="PNN" Value="AT&amp;T" />
+        <Condition Name="UIName" Value="AT&amp;T (TA)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:170, 180" />
+        <Condition Name="UIName" Value="AT&amp;T (TA)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="380" />
+        <Condition Name="UIName" Value="AT&amp;T (TA)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="410" />
+        <Condition Name="UIName" Value="AT&amp;T (TA)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="560" />
+        <Condition Name="UIName" Value="AT&amp;T (TA)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="680" />
+        <Condition Name="UIName" Value="AT&amp;T (TA)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="980" />
+        <Condition Name="UIName" Value="AT&amp;T (TA)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="311" />
+        <Condition Name="MNC" Value="180" />
+        <Condition Name="PNN" Value="AT&amp;T" />
+        <Condition Name="UIName" Value="AT&amp;T (TA)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="001" />
+        <Condition Name="MNC" Value="01" />
+        <Condition Name="UIName" Value="AT&amp;T (TA)" />
+        <Condition Name="UIOrder" Value="10" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA" />
+      </TargetState>
+    </Target>
+
+    <Target Id="ATT VOLTE Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="070" />
+        <Condition Name="UIName" Value="AT&amp;T (TA - VoLTE)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA-VOLTE" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="090" />
+        <Condition Name="UIName" Value="AT&amp;T (TA - VoLTE)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA-VOLTE" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="150" />
+        <Condition Name="PNN" Value="AT&amp;T" />
+        <Condition Name="UIName" Value="AT&amp;T (TA - VoLTE)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA-VOLTE" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:170, 180" />
+        <Condition Name="UIName" Value="AT&amp;T (TA - VoLTE)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA-VOLTE" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="380" />
+        <Condition Name="UIName" Value="AT&amp;T (TA - VoLTE)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA-VOLTE" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="410" />
+        <Condition Name="UIName" Value="AT&amp;T (TA - VoLTE)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA-VOLTE" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="560" />
+        <Condition Name="UIName" Value="AT&amp;T (TA - VoLTE)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA-VOLTE" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="680" />
+        <Condition Name="UIName" Value="AT&amp;T (TA - VoLTE)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA-VOLTE" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="980" />
+        <Condition Name="UIName" Value="AT&amp;T (TA - VoLTE)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA-VOLTE" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="311" />
+        <Condition Name="MNC" Value="180" />
+        <Condition Name="PNN" Value="AT&amp;T" />
+        <Condition Name="UIName" Value="AT&amp;T (TA - VoLTE)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA-VOLTE" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="001" />
+        <Condition Name="MNC" Value="01" />
+        <Condition Name="UIName" Value="AT&amp;T (TA - VoLTE)" />
+        <Condition Name="UIOrder" Value="20" />
+        <Condition Name="PRESELECTMO" Value="ATT_TA-VOLTE" />
+      </TargetState>
+    </Target>
+    <Target Id="AT&amp;T (MCN) Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="070" />
+        <Condition Name="UIName" Value="AT&amp;T (MCN)" />
+        <Condition Name="UIOrder" Value="30" />
+        <Condition Name="PRESELECTMO" Value="ATT_MCN" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="090" />
+        <Condition Name="UIName" Value="AT&amp;T (MCN)" />
+        <Condition Name="UIOrder" Value="30" />
+        <Condition Name="PRESELECTMO" Value="ATT_MCN" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="150" />
+        <Condition Name="PNN" Value="AT&amp;T" />
+        <Condition Name="UIName" Value="AT&amp;T (MCN)" />
+        <Condition Name="UIOrder" Value="30" />
+        <Condition Name="PRESELECTMO" Value="ATT_MCN" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="range:170, 180" />
+        <Condition Name="UIName" Value="AT&amp;T (MCN)" />
+        <Condition Name="UIOrder" Value="30" />
+        <Condition Name="PRESELECTMO" Value="ATT_MCN" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="380" />
+        <Condition Name="UIName" Value="AT&amp;T (MCN)" />
+        <Condition Name="UIOrder" Value="30" />
+        <Condition Name="PRESELECTMO" Value="ATT_MCN" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="410" />
+        <Condition Name="UIName" Value="AT&amp;T (MCN)" />
+        <Condition Name="UIOrder" Value="30" />
+        <Condition Name="PRESELECTMO" Value="ATT_MCN" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="560" />
+        <Condition Name="UIName" Value="AT&amp;T (MCN)" />
+        <Condition Name="UIOrder" Value="30" />
+        <Condition Name="PRESELECTMO" Value="ATT_MCN" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="680" />
+        <Condition Name="UIName" Value="AT&amp;T (MCN)" />
+        <Condition Name="UIOrder" Value="30" />
+        <Condition Name="PRESELECTMO" Value="ATT_MCN" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="980" />
+        <Condition Name="UIName" Value="AT&amp;T (MCN)" />
+        <Condition Name="UIOrder" Value="30" />
+        <Condition Name="PRESELECTMO" Value="ATT_MCN" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="311" />
+        <Condition Name="MNC" Value="180" />
+        <Condition Name="PNN" Value="AT&amp;T" />
+        <Condition Name="UIName" Value="AT&amp;T (MCN)" />
+        <Condition Name="UIOrder" Value="30" />
+        <Condition Name="PRESELECTMO" Value="ATT_MCN" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="001" />
+        <Condition Name="MNC" Value="01" />
+        <Condition Name="UIName" Value="AT&amp;T (MCN)" />
+        <Condition Name="UIOrder" Value="30" />
+        <Condition Name="PRESELECTMO" Value="ATT_MCN" />
+      </TargetState>
+    </Target>
+    <Target Id="Cricket Selfhost Target">
+      <TargetState>
+        <Condition Name="MCC" Value="310" />
+        <Condition Name="MNC" Value="150" />
+        <Condition Name="PNN" Value="cricket" />
+        <Condition Name="UIName" Value="Cricket Wireless (Selfhost)" />
+        <Condition Name="UIOrder" Value="40" />
+        <Condition Name="PRESELECTMO" Value="CRICKET" />
+      </TargetState>
+      <TargetState>
+        <Condition Name="MCC" Value="311" />
+        <Condition Name="MNC" Value="180" />
+        <Condition Name="PNN" Value="cricket" />
+        <Condition Name="UIName" Value="Cricket Wireless (Selfhost)" />
+        <Condition Name="UIOrder" Value="40" />
+        <Condition Name="PRESELECTMO" Value="CRICKET" />
+      </TargetState>
+    </Target>
+  </Targets>
+
+  <Variant Name="ATT Selfhost">
+    <TargetRefs>
+      <TargetRef Id="ATT Selfhost Target" />
+    </TargetRefs>
+
+    <Applications>
+      <Application License="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\FakeATTLicense.xml"
+                   ProvXML="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\att.provxml"
+                   TargetPartition="MainOS" />
+    </Applications>
+
+    <Settings Path="StartPrepinnedTile1">
+      <!--myAT&T-->
+      <Setting Name="StartPrepinnedOEMAppID" Value="{4cc12d74-5ebc-df11-9eae-00237de2db9e}" />
+      <Setting Name="StartPrepinnedTileSize" Value="1" />
+      <Setting Name="StartPrepinnedTileXCoordinate" Value="0" />
+      <Setting Name="StartPrepinnedTileYCoordinate" Value="6" />
+    </Settings>
+
+    <Settings Path="NFC/SEMgr/UI">
+      <Setting Name="HideFastCardsOptions" Value="0" />
+      <Setting Name="DefaultFastCardSetting" Value="3" />
+    </Settings>
+
+    <Settings Path="InternetExplorer">
+      <Setting Name="FirstRunUrl" Value="http://www.att.com/" />
+    </Settings>
+
+    <Settings Path="BootandShutdownScreens">
+      <Asset Name="BootImage"
+             DisplayName="ATTBootScreen"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\ATT_Startup.jpg"
+             TargetFileName="ATTBootScreen.jpg" />
+      <Setting Name="WindowsPhoneBootScreenOverride" Value="ATTBootScreen.jpg" />
+
+      <Asset Name="ShutdownImage"
+             DisplayName="ATTShutdownScreen"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\ATT_Shutdown.jpg"
+             TargetFileName="ATTShutdownScreen.jpg" />
+      <Setting Name="WindowsPhoneShutdownScreenOverride" Value="ATTShutdownScreen.jpg" />
+    </Settings>
+
+    <Settings Path="LockScreen">
+      <Asset Name="Wallpapers"
+             DisplayName="ATTWallpaper"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\att.jpg"
+             TargetFileName="ATTWallpaper.jpg" />
+      <Setting Name="DefaultWallpaper" Value="ATTWallpaper.jpg" />
+    </Settings>
+
+    <Settings Path="EventSounds">
+      <Asset Name="Ringtones"
+             DisplayName="ATTRingtone"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\attringtone.wma"
+             TargetFileName="ATTRingtone.wma"  />
+      <Setting Name="DefaultRingtone" Value="ATTRingtone.wma" />
+      <Asset Name="NotificationSounds"
+             DisplayName="ATTNotification"
+             Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\ATTNotification.wma"
+             TargetFileName="ATTNotification.wma"  />
+      <Setting Name="DefaultMessagingSound" Value="ATTNotification.wma" />
+    </Settings>
+
+    <Settings Path="Theme">
+      <Setting Name="DefaultBackgroundColor" Value="Light" />
+      <Setting Name="DefaultAccentColor" Value="Orange" />
+    </Settings>
+
+    <Settings Path="Shell/SystemTray/DataActivity">
+      <Setting Name="DataActivityIcon" Value="0"/>
+    </Settings>
+
+    <Settings Path="Shell/SystemTray/Location">
+      <Setting Name="LocationIcon" Value="0"/>
+    </Settings>
+
+    <Settings Path="InternetExplorer/Favorites/ATT Support">
+      <Setting Name="URL" Value="http://www.att.com/esupport/" />
+    </Settings>
+
+    <Settings Path="Connections">
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/AccessPointName" Value="phone" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/AccessPointName" Value="phone" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/ExemptFromDisablePolicy" Value="1" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/Server" Value="proxy.mobile.att.net" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/Port" Value="80" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/ConnectionName" Value="att_mms $(__MVID)@WAP" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/Type" Value="HTTP" />
+    </Settings>
+
+    <Settings Path="PGList/att_mms-PRXY $(__MVID)/att_mms-PRXY-PHY $(__MVID)">
+      <Setting Name="AddressType" Value="IPV4" />
+      <Setting Name="Address" Value="proxy.mobile.att.net" />
+      <Setting Name="MatchedNapID" Value="att_mms $(__MVID)" />
+    </Settings>
+
+    <Settings Path="PGList/1111301000-PRXY $(__MVID)/1111301000-PRXY-PHY $(__MVID)">
+      <Setting Name="TRUST" Value="1" />
+      <Setting Name="AddressType" Value="E164" />
+      <Setting Name="Address" Value="1111301000" />
+      <Setting Name="PushEnabled" Value="1" />
+      <Setting Name="MatchedNapID" Value="1111301000-NAPDEF $(__MVID)" />
+    </Settings>
+
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="att_mms $(__MVID)" />
+      <Setting Name="TONAPID" Value="att_mms $(__MVID)" />
+      <Setting Name="TOPROXY" Value="att_mms-PRXY $(__MVID)" />
+      <Setting Name="ADDR" Value="http://mmsc.mobile.att.net" />
+      <Setting Name="MS" Value="1024" />
+    </Settings>
+
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="TargetVideoFormat" Value="2" />
+      <Setting Name="ErrorCodeEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RequestDeliveryReport">
+      <Setting Name="RequestDeliveryReportIsSupported" Value="1" />
+      <Setting Name="RequestDeliveryReport" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AllowSendingDeliveryReport">
+      <Setting Name="AllowSendingDeliveryReportIsSupported" Value="1" />
+      <Setting Name="AllowSendingDeliveryReport" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AutomaticallyDownload">
+      <Setting Name="ShowAutomaticallyDownloadMMSToggle" Value="1" />
+      <Setting Name="AutomaticallyDownload" Value="1" />
+    </Settings>
+
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/EmergencyAlertOptions">
+      <Setting Name="CmasAMBERAlertEnabled" Value="1" />
+      <Setting Name="CmasExtremeAlertEnabled" Value="1" />
+      <Setting Name="CmasSevereAlertEnabled" Value="1" />
+      <Setting Name="EmOperatorEnabled" Value="1" />
+    </Settings>
+
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="AllowSMStoSMTPAddress" Value="1" />
+      <Setting Name="SMStoSMTPShortCode" Value="36245" />
+    </Settings>
+
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RcsOptions">
+      <Setting Name="ShowRcsEnabled" Value="1" />
+    </Settings>
+
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+  </Variant>
+  
+  <Variant Name="ATT TA">
+    <TargetRefs>
+      <TargetRef Id="ATT TA Target" />
+    </TargetRefs>
+    <Settings Path="StartPrepinnedTile1">
+      <Setting Name="StartPrepinnedOEMAppID" Value="{4cc12d74-5ebc-df11-9eae-00237de2db9e}" />
+      <Setting Name="StartPrepinnedTileSize" Value="1" />
+      <Setting Name="StartPrepinnedTileXCoordinate" Value="0" />
+      <Setting Name="StartPrepinnedTileYCoordinate" Value="6" />
+    </Settings>
+    <Settings Path="NFC/SEMgr/UI">
+      <Setting Name="HideFastCardsOptions" Value="0" />
+      <Setting Name="DefaultFastCardSetting" Value="3" />
+    </Settings>
+    <Settings Path="InternetExplorer">
+      <Setting Name="FirstRunUrl" Value="http://home.att.com" />
+      <Setting Name="CustomHTTPHeaders1/x-att-deviceid" Value="NOKIA Lumia 920/1232.5962.1314.0001" />
+    </Settings>
+    <Settings Path="Theme">
+      <Setting Name="DefaultBackgroundColor" Value="1" />
+      <Setting Name="DefaultAccentColor" Value="0" />
+    </Settings>
+    <Settings Path="InternetExplorer/Favorites/ATT Support">
+      <Setting Name="URL" Value="http://www.att.com/esupport" />
+    </Settings>
+    <Settings Path="BootandShutdownScreens">
+      <Setting Name="WindowsPhoneBootScreenOverride" Value="ATTBootScreen_emote.jpg" />
+      <Setting Name="WindowsPhoneShutdownScreenOverride" Value="ATTShutdownScreen_emote.jpg" />
+      <Asset Name="BootImage" Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\ATT_Startup_emote.jpg" TargetFileName="ATTBootScreen_emote.jpg" DisplayName="ATTBootScreen_eMOTe" Type="OEM" />
+      <Asset Name="ShutdownImage" Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\ATT_Shutdown_emote.jpg" TargetFileName="ATTShutdownScreen_emote.jpg" DisplayName="ATTShutdownScreen_eMOTe" Type="OEM" />
+    </Settings>
+    <Settings Path="LockScreen">
+      <Setting Name="DefaultWallpaper" Value="ATTWallpaper_emote.png" />
+      <Asset Name="Wallpapers" Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\att_emote.png" TargetFileName="ATTWallpaper_emote.png" DisplayName="ATTWallpaper_eMOTe" Type="OEM" />
+    </Settings>
+    <Settings Path="Connections">
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/AccessPointName" Value="phone" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/AccessPointName" Value="phone" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/ExemptFromDisablePolicy" Value="1" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/Server" Value="proxy.mobile.att.net" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/Port" Value="80" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/ConnectionName" Value="att_mms $(__MVID)@WAP" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/Type" Value="HTTP" />
+    </Settings>
+    <Settings Path="PGList/att_mms-PRXY ~__MVID~/att_mms-PRXY-PHY ~__MVID~">
+      <Setting Name="AddressType" Value="IPV4" />
+      <Setting Name="Address" Value="proxy.mobile.att.net" />
+      <Setting Name="MatchedNapID" Value="att_mms $(__MVID)" />
+    </Settings>
+    <Settings Path="PGList/1111301000-PRXY ~__MVID~/1111301000-PRXY-PHY ~__MVID~">
+      <Setting Name="TRUST" Value="1" />
+      <Setting Name="AddressType" Value="E164" />
+      <Setting Name="Address" Value="1111301000" />
+      <Setting Name="PushEnabled" Value="1" />
+      <Setting Name="MatchedNapID" Value="1111301000-NAPDEF $(__MVID)" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="att_mms $(__MVID)" />
+      <Setting Name="TONAPID" Value="att_mms $(__MVID)" />
+      <Setting Name="TOPROXY" Value="att_mms-PRXY $(__MVID)" />
+      <Setting Name="ADDR" Value="http://mmsc.mobile.att.net" />
+      <Setting Name="MS" Value="1024" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/AllowSendingDeliveryReport">
+      <Setting Name="AllowSendingDeliveryReport" Value="1" />
+      <Setting Name="AllowSendingDeliveryReportIsSupported" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/EmergencyAlertOptions">
+      <Setting Name="CmasAMBERAlertEnabled" Value="1" />
+      <Setting Name="CmasExtremeAlertEnabled" Value="1" />
+      <Setting Name="CmasSevereAlertEnabled" Value="1" />
+      <Setting Name="EmOperatorEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/RequestDeliveryReport">
+      <Setting Name="RequestDeliveryReport" Value="0" />
+      <Setting Name="RequestDeliveryReportIsSupported" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/SMSDeliveryNotify">
+      <Setting Name="DeliveryNotifySupported" Value="0" />
+      <Setting Name="SMSDeliveryNotify" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/MMSGroupText">
+      <Setting Name="MMSGroupText" Value="1" />
+      <Setting Name="ShowMMSGroupTextUI" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~">
+      <Setting Name="AllowSMStoSMTPAddress" Value="1" />
+      <Setting Name="ConvertLongSMStoMMS" Value="0" />
+      <Setting Name="ErrorCodeEnabled" Value="1" />
+      <Setting Name="HideMediumSIPopups" Value="0" />
+      <Setting Name="MaxRetryCount" Value="3" />
+      <Setting Name="MMSLimitAttachments" Value="5" />
+      <Setting Name="RetrySize" Value="1000000" />
+      <Setting Name="ShowRequiredMonthlyTest" Value="1" />
+      <Setting Name="SMStoSMTPShortCode" Value="121" />
+      <Setting Name="TargetVideoFormat" Value="0" />
+      <Setting Name="UAProf" Value="http://nds1.nds.nokia.com/uaprof/NokiaLumia920r100.xml" />
+      <Setting Name="UAProfToken" Value="x-wap-profile" />
+      <Setting Name="UseDefaultAddress" Value="0" />
+      <Setting Name="UserAgentString" Value="WindowsPhoneMMS/1.0 WindowsPhoneOS/8.0-9903 NOKIA-RM-820" />
+      <Setting Name="WapPushTechnology" Value="0" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="CellCore/PerIMSI/~__IMSI~/CellUX">
+      <Setting Name="HighestSpeed3G" Value="4G" />
+      <Setting Name="IsATTSpecific" Value="1" />
+      <Setting Name="APNIPTypeIfHidden" Value="0" />
+      <Setting Name="HideAPN" Value="0" />
+      <Setting Name="HideAPNIPType" Value="1" />
+      <Setting Name="HideHighestSpeed" Value="0" />
+      <Setting Name="HideHighestSpeed4G" Value="0" />
+      <Setting Name="HideMMSAPN" Value="0" />
+      <Setting Name="HideMMSAPNIPType" Value="1" />
+      <Setting Name="HighestSpeed2G" Value="G" />
+      <Setting Name="HighestSpeed3GPreferred" Value="4G" />
+      <Setting Name="HighestSpeed4G" Value="LTE" />
+      <Setting Name="MMSAPNIPTypeIfHidden" Value="0" />
+      <Setting Name="ShowExtendedRejectCodes" Value="1" />
+      <Setting Name="Hide3GPP2ModeSelection" Value="1" />
+      <Setting Name="Hide3GPP2Selection" Value="1" />
+      <Setting Name="Hide3GPPNetworks" Value="0" />
+      <Setting Name="HideHighestSpeed2G" Value="0" />
+      <Setting Name="HideModeSelection" Value="1" />
+      <Setting Name="ShowHighestSpeed3GPreferred" Value="1" />
+      <Setting Name="ShowPreferredPLMNPage" Value="0" />
+    </Settings>
+    <Settings Path="CellCore/PerIMSI/~__IMSI~/CellUX/Critical">
+      <Setting Name="ShowVoLTEToggle" Value="0" />
+      <Setting Name="SwitchIMS" Value="0" />
+      <Setting Name="SwitchSMSOverIMS" Value="0" />
+      <Setting Name="SwitchVoiceOverIMS" Value="0" />
+    </Settings>
+    <Settings Path="CellCore/PerIMSI/~__IMSI~/General">
+      <Setting Name="AvoidStayingInManualSelection" Value="0" />
+      <Setting Name="LTEEnabled" Value="1" />
+    </Settings>
+    <Settings Path="CellCore/PerIMSI/~__IMSI~/SMS">
+      <Setting Name="DefaultMCC" Value="310" />
+      <Setting Name="Encodings/GSM7BitEncodingPage" Value="55000" />
+      <Setting Name="Encodings/SendUDHNLSS" Value="0" />
+      <Setting Name="Encodings/UseASCII" Value="0" />
+      <Setting Name="Encodings/UseKeyboardLanguage" Value="0" />
+    </Settings>
+    <Settings Path="CellCore/PerIMSI/~__IMSI~/General/atomicRoamingTableSettings3GPP">
+      <Setting Name="RoamingTables/3GPPRoamingTables/Enabled" Value="1" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/Exceptions/000" Value="310,110" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/Exceptions/001" Value="310,140" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/Exceptions/002" Value="310,400" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/Exceptions/003" Value="310,470" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/Exceptions/004" Value="311,170" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/000" Value="310" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/001" Value="311" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/002" Value="316" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/003" Value="310,260" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/004" Value="312" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/005" Value="313" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/006" Value="314" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/007" Value="315" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/008" Value="001,01" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/000" Value="311,180" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/001" Value="310,410" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/002" Value="310,150" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/003" Value="310,170" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/004" Value="310,380" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/005" Value="310,560" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/006" Value="310,680" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/007" Value="310,070" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/008" Value="310,980" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/009" Value="310,090" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/010" Value="001,01" />
+    </Settings>
+    <Settings Path="CellCore/PerDevice/External">
+      <Setting Name="CarrierSpecific/FallBackMode" Value="0" />
+      <Setting Name="SignalBarMappingTable/UMTS/2" Value="0xFFFFFC0E" />
+      <Setting Name="SignalBarMappingTable/UMTS/3" Value="0xFFFFFC4A" />
+      <Setting Name="SignalBarMappingTable/UMTS/4" Value="0xFFFFFCAE" />
+      <Setting Name="SignalBarMappingTable/UMTS/5" Value="0xFFFFFD12" />
+    </Settings>
+    <Settings Path="CellCore/PerDevice/CellUX">
+      <Setting Name="ShowExtendedRejectCodes" Value="1" />
+    </Settings>
+    <Settings Path="SetupWizard">
+      <Setting Name="ShowLanguageSelectionScreenInSetup" Value="1" />
+    </Settings>
+    <Settings Path="AutomaticTime">
+      <Setting Name="TimeZonePriority1" Value="400" />
+      <Setting Name="TimeZonePriority2" Value="500" />
+      <Setting Name="TimeZonePriority3" Value="620" />
+      <Setting Name="TimeZonePriority4" Value="700" />
+    </Settings>
+    <Settings Path="Connections/General">
+      <Setting Name="DataRoam" Value="0" />
+    </Settings>
+    <Settings Path="DeviceInfo/Variant">
+      <Setting Name="PhoneOEMSupportLink" Value="eMOTe" />
+      <Setting Name="PhoneSupportLink" Value="eMOTe" />
+      <Setting Name="PhoneMobileOperatorDisplayName" Value="AT&amp;T" />
+      <Setting Name="PhoneMobileOperatorName" Value="ATT-US " />
+    </Settings>
+    <Settings Path="EaseOfAccessCPL/Telecoil">
+      <Setting Name="Enabled" Value="0" />
+      <Setting Name="ShowInControlPanel" Value="1" />
+    </Settings>
+    <Settings Path="EaseOfAccessCPL/TTY">
+      <Setting Name="CompactMode" Value="0" />
+      <Setting Name="Mode" Value="0" />
+      <Setting Name="ShowInControlPanel" Value="1" />
+    </Settings>
+    <Settings Path="Email">
+      <Setting Name="WarnIfNoSubject" Value="1" />
+    </Settings>
+    <Settings Path="Phone/BrandingInformation">
+      <Setting Name="BrandingFlags" Value="507" />
+    </Settings>
+    <Settings Path="Phone/PartnerAppSupport">
+      <Setting Name="PartnerImmediateDialStrings" Value="##634#;##4678255#;*#07#;##07#;##7820#" />
+      <Setting Name="PartnerNonImmediateDialStrings" Value="##7820" />
+    </Settings>
+    <Settings Path="Phone/PerSimSettings/~__IMSI~">
+      <Setting Name="IgnoreUssdExclusions" Value="0" />
+      <Setting Name="UssdExclusionList" Value="0;00;*0;*1;*2;*3;*4;*5;*6;*7;*8;*9;#0;#1;#2;#3;#4;#5;#6;#7;#8;#9" />
+    </Settings>
+    <Settings Path="Phone/PhoneSettings">
+      <Setting Name="AssistedDialSetting" Value="1" />
+      <Setting Name="CallIDMatch" Value="8" />
+      <Setting Name="HideCallForwarding" Value="0" />
+      <Setting Name="ShowLongTones" Value="0" />
+      <Setting Name="UseOKForUssdDialogs" Value="1" />
+    </Settings>
+    <Settings Path="Shell/SystemTray/DataActivity">
+      <Setting Name="DataActivityIcon" Value="1" />
+    </Settings>
+    <Settings Path="Shell/SystemTray/DataConnectionStrings">
+      <Setting Name="1XRTT" Value="1X" />
+      <Setting Name="1XRTTDEFAULT" Value="1X" />
+      <Setting Name="EVDODEFAULT" Value="DO" />
+      <Setting Name="EVDOREV0" Value="DO" />
+      <Setting Name="EVDOREVA" Value="DO" />
+      <Setting Name="EVDOREVB" Value="DO" />
+      <Setting Name="GSMDEFAULT" Value="G" />
+      <Setting Name="GSMEDGE" Value="E" />
+      <Setting Name="GSMGPRS" Value="G" />
+      <Setting Name="GSMGSM" Value="G" />
+      <Setting Name="LTEDEFAULT" Value="LTE" />
+      <Setting Name="LTEFDD" Value="LTE" />
+      <Setting Name="LTETDD" Value="LTE" />
+      <Setting Name="TDSCDMADCHSPAPLUS" Value="H" />
+      <Setting Name="TDSCDMADEFAULT" Value="3G" />
+      <Setting Name="TDSCDMAHSDPA" Value="H" />
+      <Setting Name="TDSCDMAHSPAPLUS" Value="H" />
+      <Setting Name="TDSCDMAHSUPA" Value="H" />
+      <Setting Name="TDSCDMAUMTS" Value="3G" />
+      <Setting Name="UMTSDCHSPAPLUS" Value="4G" />
+      <Setting Name="UMTSDEFAULT" Value="4G" />
+      <Setting Name="UMTSHSDPA" Value="4G" />
+      <Setting Name="UMTSHSPAPLUS" Value="4G" />
+      <Setting Name="UMTSHSUPA" Value="4G" />
+      <Setting Name="UMTSUMTS" Value="4G" />
+    </Settings>
+    <Settings Path="VolumeLimit">
+      <Setting Name="EnableVolumeLimit" Value="1" />
+      <Setting Name="VolumeLimit" Value="19" />
+    </Settings>
+    <Settings Path="WebSearch/Search">
+      <Setting Name="PartnerId" Value="ATNT" />
+    </Settings>
+    <Settings Path="QuickSettings">
+      <Setting Name="DefaultQuickSettingSlot1" Value="4" />
+      <Setting Name="DefaultQuickSettingSlot2" Value="2" />
+      <Setting Name="DefaultQuickSettingSlot3" Value="8" />
+      <Setting Name="DefaultQuickSettingSlot4" Value="13" />
+    </Settings>
+  </Variant>
+  
+  <Variant Name="ATT VOLTE">
+    <TargetRefs>
+      <TargetRef Id="ATT VOLTE Target" />
+    </TargetRefs>
+    <Settings Path="StartPrepinnedTile1">
+      <Setting Name="StartPrepinnedOEMAppID" Value="{4cc12d74-5ebc-df11-9eae-00237de2db9e}" />
+      <Setting Name="StartPrepinnedTileSize" Value="1" />
+      <Setting Name="StartPrepinnedTileXCoordinate" Value="0" />
+      <Setting Name="StartPrepinnedTileYCoordinate" Value="6" />
+    </Settings>
+    <Settings Path="NFC/SEMgr/UI">
+      <Setting Name="HideFastCardsOptions" Value="0" />
+      <Setting Name="DefaultFastCardSetting" Value="3" />
+    </Settings>
+    <Settings Path="InternetExplorer">
+      <Setting Name="FirstRunUrl" Value="http://home.att.com" />
+      <Setting Name="CustomHTTPHeaders1/x-att-deviceid" Value="NOKIA Lumia 920/1232.5962.1314.0001" />
+    </Settings>
+    <Settings Path="Theme">
+      <Setting Name="DefaultBackgroundColor" Value="1" />
+      <Setting Name="DefaultAccentColor" Value="0" />
+    </Settings>
+    <Settings Path="InternetExplorer/Favorites/ATT Support">
+      <Setting Name="URL" Value="http://www.att.com/esupport/" />
+    </Settings>
+    <Settings Path="BootandShutdownScreens">
+      <Setting Name="WindowsPhoneBootScreenOverride" Value="ATTBootScreen_emote.jpg" />
+      <Setting Name="WindowsPhoneShutdownScreenOverride" Value="ATTShutdownScreen_emote.jpg" />
+      <Asset Name="BootImage" Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\ATT_Startup_emote.jpg" TargetFileName="ATTBootScreen_emote.jpg" DisplayName="ATTBootScreen_eMOTe" Type="OEM" />
+      <Asset Name="ShutdownImage" Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\ATT_Shutdown_emote.jpg" TargetFileName="ATTShutdownScreen_emote.jpg" DisplayName="ATTShutdownScreen_eMOTe" Type="OEM" />
+    </Settings>
+    <Settings Path="LockScreen">
+      <Setting Name="DefaultWallpaper" Value="ATTWallpaper_emote.png" />
+      <Asset Name="Wallpapers" Source="$(_FLATRELEASEDIR)\..\..\..\..\DeviceImaging\Customization\att_emote.png" TargetFileName="ATTWallpaper_emote.png" DisplayName="ATTWallpaper_eMOTe" Type="OEM" />
+    </Settings>
+    <Settings Path="Connections">
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/AccessPointName" Value="nxtgenphone" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/IPType" Value="IPv4v6" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Cellular/att_ims $(__MVID)/AccessPointName" Value="ims" />
+      <Setting Name="Cellular/att_ims $(__MVID)/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/att_ims $(__MVID)/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/att_ims $(__MVID)/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/att_ims $(__MVID)/AuthType" Value="None" />
+      <Setting Name="Cellular/att_ims $(__MVID)/IPType" Value="IPv4v6" />
+      <Setting Name="Cellular/att_ims $(__MVID)/Enabled" Value="1" />
+      <!--until we have wpmbbextensiondef.h file with ATT IMS GUID, we will use 'second APN profile' GUID for now -->
+      <Setting Name="Cellular/att_ims $(__MVID)/OemConnectionId" Value="8CC16109-279F-4C53-A447-000000000002" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/AccessPointName" Value="nxtgenphone" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/ExemptFromDisablePolicy" Value="1" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/Server" Value="proxy.mobile.att.net" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/Port" Value="80" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/ConnectionName" Value="att_mms $(__MVID)@WAP" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/Type" Value="HTTP" />
+      <Setting Name="Policies/VideoCall_V6/SID" Value="*" />
+      <Setting Name="Policies/VideoCall_V6/ClientType" Value="*" />
+      <Setting Name="Policies/VideoCall_V6/Host" Value="IMS-ims-v6" />
+      <Setting Name="Policies/VideoCall_V6/OrderedConnections" Value="1" />
+      <Setting Name="Policies/VideoCall_V6/Conn000/Type" Value="CMST_CONNECTION_NAME" />
+      <Setting Name="Policies/VideoCall_V6/Conn000/ConnectionId" Value="att_ims $(__MVID)" />
+      <Setting Name="Policies/VideoCall_V4/SID" Value="*" />
+      <Setting Name="Policies/VideoCall_V4/ClientType" Value="*" />
+      <Setting Name="Policies/VideoCall_V4/Host" Value="IMS-ims-v4" />
+      <Setting Name="Policies/VideoCall_V4/OrderedConnections" Value="1" />
+      <Setting Name="Policies/VideoCall_V4/Conn000/Type" Value="CMST_CONNECTION_NAME" />
+      <Setting Name="Policies/VideoCall_V4/Conn000/ConnectionId" Value="att_ims $(__MVID)" />
+    </Settings>
+
+    <Settings Path="ModemConfigurations">
+      <Setting Name="Prop/GROUP_PROFILE_INFO:{9476C91D-608F-47B6-856A-1D90C1BED333}/PCSCF_ADDR_USING_PCO" Value="0" Type="boolean"/>
+      <Setting Name="Prop/GROUP_PROFILE_INFO:{8CC16109-279F-4C53-A447-000000000002}/PCSCF_ADDR_USING_PCO" Value="1" Type="boolean"/>
+      <Setting Name="Prop/GROUP_PROFILE_INFO:{8CC16109-279F-4C53-A447-000000000003}/SUPPORT_EMERGENCY_CALLS" Value="1" Type="boolean"/>
+    </Settings>
+
+    <Settings Path="PGList/att_mms-PRXY ~__MVID~/att_mms-PRXY-PHY ~__MVID~">
+      <Setting Name="AddressType" Value="IPV4" />
+      <Setting Name="Address" Value="proxy.mobile.att.net" />
+      <Setting Name="MatchedNapID" Value="att_mms $(__MVID)" />
+    </Settings>
+    <Settings Path="PGList/1111301000-PRXY ~__MVID~/1111301000-PRXY-PHY ~__MVID~">
+      <Setting Name="TRUST" Value="1" />
+      <Setting Name="AddressType" Value="E164" />
+      <Setting Name="Address" Value="1111301000" />
+      <Setting Name="PushEnabled" Value="1" />
+      <Setting Name="MatchedNapID" Value="1111301000-NAPDEF $(__MVID)" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="att_mms $(__MVID)" />
+      <Setting Name="TONAPID" Value="att_mms $(__MVID)" />
+      <Setting Name="TOPROXY" Value="att_mms-PRXY $(__MVID)" />
+      <Setting Name="ADDR" Value="http://mmsc.mobile.att.net" />
+      <Setting Name="MS" Value="1024" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/AllowSendingDeliveryReport">
+      <Setting Name="AllowSendingDeliveryReport" Value="1" />
+      <Setting Name="AllowSendingDeliveryReportIsSupported" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/EmergencyAlertOptions">
+      <Setting Name="CmasAMBERAlertEnabled" Value="1" />
+      <Setting Name="CmasExtremeAlertEnabled" Value="1" />
+      <Setting Name="CmasSevereAlertEnabled" Value="1" />
+      <Setting Name="EmOperatorEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/MMSGroupText">
+      <Setting Name="MMSGroupText" Value="1" />
+      <Setting Name="ShowMMSGroupTextUI" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/RequestDeliveryReport">
+      <Setting Name="RequestDeliveryReport" Value="0" />
+      <Setting Name="RequestDeliveryReportIsSupported" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/SMSDeliveryNotify">
+      <Setting Name="DeliveryNotifySupported" Value="0" />
+      <Setting Name="SMSDeliveryNotify" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~">
+      <Setting Name="AllowSMStoSMTPAddress" Value="1" />
+      <Setting Name="ConvertLongSMStoMMS" Value="0" />
+      <Setting Name="ErrorCodeEnabled" Value="1" />
+      <Setting Name="HideMediumSIPopups" Value="0" />
+      <Setting Name="MaxRetryCount" Value="3" />
+      <Setting Name="MMSLimitAttachments" Value="5" />
+      <Setting Name="RetrySize" Value="1000000" />
+      <Setting Name="ShowRequiredMonthlyTest" Value="1" />
+      <Setting Name="SMStoSMTPShortCode" Value="121" />
+      <Setting Name="TargetVideoFormat" Value="0" />
+      <Setting Name="UAProf" Value="http://nds1.nds.nokia.com/uaprof/NokiaLumia920r100.xml" />
+      <Setting Name="UAProfToken" Value="x-wap-profile" />
+      <Setting Name="UseDefaultAddress" Value="0" />
+      <Setting Name="UserAgentString" Value="WindowsPhoneMMS/1.0 WindowsPhoneOS/8.0-9903 NOKIA-RM-820" />
+      <Setting Name="WapPushTechnology" Value="0" />
+    </Settings>
+
+    <!--test purposes only-->
+    <Settings Path="RcsPresence">
+      <Setting Name="BypassVideoCapabilities" Value="1"/>
+    </Settings>
+
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="CellCore/PerIMSI/~__IMSI~/CellUX">
+      <Setting Name="HighestSpeed3G" Value="4G" />
+      <Setting Name="IsATTSpecific" Value="1" />
+      <Setting Name="APNIPTypeIfHidden" Value="0" />
+      <Setting Name="HideAPN" Value="0" />
+      <Setting Name="HideAPNIPType" Value="1" />
+      <Setting Name="HideHighestSpeed" Value="0" />
+      <Setting Name="HideHighestSpeed4G" Value="0" />
+      <Setting Name="HideMMSAPN" Value="0" />
+      <Setting Name="HideMMSAPNIPType" Value="1" />
+      <Setting Name="HighestSpeed2G" Value="G" />
+      <Setting Name="HighestSpeed3GPreferred" Value="4G" />
+      <Setting Name="HighestSpeed4G" Value="LTE" />
+      <Setting Name="MMSAPNIPTypeIfHidden" Value="0" />
+      <Setting Name="ShowExtendedRejectCodes" Value="1" />
+      <Setting Name="Hide3GPP2ModeSelection" Value="1" />
+      <Setting Name="Hide3GPP2Selection" Value="1" />
+      <Setting Name="Hide3GPPNetworks" Value="0" />
+      <Setting Name="HideHighestSpeed2G" Value="0" />
+      <Setting Name="HideModeSelection" Value="1" />
+      <Setting Name="ShowHighestSpeed3GPreferred" Value="1" />
+      <Setting Name="ShowPreferredPLMNPage" Value="0" />
+    </Settings>
+    <Settings Path="CellCore/PerIMSI/~__IMSI~/CellUX/Critical">
+      <Setting Name="SwitchIMS" Value="1" />
+      <Setting Name="SwitchSMSOverIMS" Value="0" />
+      <Setting Name="SwitchVoiceOverIMS" Value="0" />
+      <Setting Name="SwitchVideoOverIMS" Value="0" />
+    </Settings>
+	
+    <!-- Show VOLTE toggle cannot be defined as 'perIMSI' customization. this UI only shows when modem supports it-->
+    <Settings Path="CellCore/PerDevice/CellUX/Critical">
+      <Setting Name="ShowVoLTEToggle" Value="1" />
+    </Settings>
+
+    <Settings Path="CellCore/PerIMSI/~__IMSI~/General">
+      <Setting Name="AvoidStayingInManualSelection" Value="0" />
+      <Setting Name="LTEEnabled" Value="1" />
+    </Settings>
+    <Settings Path="CellCore/PerIMSI/~__IMSI~/SMS">
+      <Setting Name="DefaultMCC" Value="310" />
+      <Setting Name="Encodings/GSM7BitEncodingPage" Value="55000" />
+      <Setting Name="Encodings/SendUDHNLSS" Value="0" />
+      <Setting Name="Encodings/UseASCII" Value="0" />
+      <Setting Name="Encodings/UseKeyboardLanguage" Value="0" />
+    </Settings>
+    <Settings Path="CellCore/PerIMSI/~__IMSI~/General/atomicRoamingTableSettings3GPP">
+      <Setting Name="RoamingTables/3GPPRoamingTables/Enabled" Value="1" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/Exceptions/000" Value="310,110" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/Exceptions/001" Value="310,140" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/Exceptions/002" Value="310,400" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/Exceptions/003" Value="310,470" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/Exceptions/004" Value="311,170" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/000" Value="310" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/001" Value="311" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/002" Value="316" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/003" Value="310,260" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/004" Value="312" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/005" Value="313" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/006" Value="314" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/007" Value="315" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/HomePLMN/008" Value="001,01" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/000" Value="311,180" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/001" Value="310,410" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/002" Value="310,150" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/003" Value="310,170" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/004" Value="310,380" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/005" Value="310,560" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/006" Value="310,680" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/007" Value="310,070" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/008" Value="310,980" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/009" Value="310,090" />
+      <Setting Name="RoamingTables/3GPPRoamingTables/TargetImsi/010" Value="001,01" />
+    </Settings>
+    <Settings Path="CellCore/PerDevice/External">
+      <Setting Name="CarrierSpecific/FallBackMode" Value="0" />
+      <Setting Name="SignalBarMappingTable/UMTS/2" Value="0xFFFFFC0E" />
+      <Setting Name="SignalBarMappingTable/UMTS/3" Value="0xFFFFFC4A" />
+      <Setting Name="SignalBarMappingTable/UMTS/4" Value="0xFFFFFCAE" />
+      <Setting Name="SignalBarMappingTable/UMTS/5" Value="0xFFFFFD12" />
+    </Settings>
+    <Settings Path="CellCore/PerDevice/CellUX">
+      <Setting Name="ShowExtendedRejectCodes" Value="1" />
+    </Settings>
+    <Settings Path="SetupWizard">
+      <Setting Name="ShowLanguageSelectionScreenInSetup" Value="1" />
+    </Settings>
+    <Settings Path="AutomaticTime">
+      <Setting Name="TimeZonePriority1" Value="400" />
+      <Setting Name="TimeZonePriority2" Value="500" />
+      <Setting Name="TimeZonePriority3" Value="620" />
+      <Setting Name="TimeZonePriority4" Value="700" />
+    </Settings>
+    <Settings Path="Connections/General">
+      <Setting Name="DataRoam" Value="0" />
+    </Settings>
+    <Settings Path="DeviceInfo/Variant">
+      <Setting Name="PhoneOEMSupportLink" Value="eMOTe_ATT_VOLTE" />
+      <Setting Name="PhoneSupportLink" Value="eMOTe" />
+      <Setting Name="PhoneMobileOperatorDisplayName" Value="AT&amp;T" />
+      <Setting Name="PhoneMobileOperatorName" Value="ATT-US " />
+    </Settings>
+    <Settings Path="EaseOfAccessCPL/Telecoil">
+      <Setting Name="Enabled" Value="0" />
+      <Setting Name="ShowInControlPanel" Value="1" />
+    </Settings>
+    <Settings Path="EaseOfAccessCPL/TTY">
+      <Setting Name="CompactMode" Value="0" />
+      <Setting Name="Mode" Value="0" />
+      <Setting Name="ShowInControlPanel" Value="1" />
+    </Settings>
+    <Settings Path="Email">
+      <Setting Name="WarnIfNoSubject" Value="1" />
+    </Settings>
+    <Settings Path="Phone/BrandingInformation">
+      <Setting Name="BrandingFlags" Value="507" />
+    </Settings>
+    <Settings Path="Phone/PartnerAppSupport">
+      <Setting Name="PartnerImmediateDialStrings" Value="##634#;##4678255#;*#07#;##07#;##7820#" />
+      <Setting Name="PartnerNonImmediateDialStrings" Value="##7820" />
+    </Settings>
+    <Settings Path="Phone/PerSimSettings/~__IMSI~">
+      <Setting Name="IgnoreUssdExclusions" Value="0" />
+      <Setting Name="UssdExclusionList" Value="0;00;*0;*1;*2;*3;*4;*5;*6;*7;*8;*9;#0;#1;#2;#3;#4;#5;#6;#7;#8;#9" />
+      <Setting Name="ShowVideoCallingSwitch" Value="1" />
+      <Setting Name="DefaultEnableVideoCalling" Value="1" /> 
+      <Setting Name="AllowVideoConferencing" Value="1" /> 
+      <Setting Name="AllowMixedAudioVideoConferencing" Value="1" /> 
+    </Settings>
+    <Settings Path="Phone/PhoneSettings">
+      <Setting Name="AssistedDialSetting" Value="1" />
+      <Setting Name="CallIDMatch" Value="8" />
+      <Setting Name="HideCallForwarding" Value="0" />
+      <Setting Name="ShowLongTones" Value="0" />
+      <Setting Name="UseOKForUssdDialogs" Value="1" />
+      <Setting Name="VoLTEAudioQualityString" Value="HD" />
+    </Settings>
+    <Settings Path="Shell/SystemTray/DataActivity">
+      <Setting Name="DataActivityIcon" Value="1" />
+    </Settings>
+    <Settings Path="Shell/SystemTray/DataConnectionStrings">
+      <Setting Name="1XRTT" Value="1X" />
+      <Setting Name="1XRTTDEFAULT" Value="1X" />
+      <Setting Name="EVDODEFAULT" Value="DO" />
+      <Setting Name="EVDOREV0" Value="DO" />
+      <Setting Name="EVDOREVA" Value="DO" />
+      <Setting Name="EVDOREVB" Value="DO" />
+      <Setting Name="GSMDEFAULT" Value="G" />
+      <Setting Name="GSMEDGE" Value="E" />
+      <Setting Name="GSMGPRS" Value="G" />
+      <Setting Name="GSMGSM" Value="G" />
+      <Setting Name="LTEDEFAULT" Value="LTE" />
+      <Setting Name="LTEFDD" Value="LTE" />
+      <Setting Name="LTETDD" Value="LTE" />
+      <Setting Name="TDSCDMADCHSPAPLUS" Value="H" />
+      <Setting Name="TDSCDMADEFAULT" Value="3G" />
+      <Setting Name="TDSCDMAHSDPA" Value="H" />
+      <Setting Name="TDSCDMAHSPAPLUS" Value="H" />
+      <Setting Name="TDSCDMAHSUPA" Value="H" />
+      <Setting Name="TDSCDMAUMTS" Value="3G" />
+      <Setting Name="UMTSDCHSPAPLUS" Value="4G" />
+      <Setting Name="UMTSDEFAULT" Value="4G" />
+      <Setting Name="UMTSHSDPA" Value="4G" />
+      <Setting Name="UMTSHSPAPLUS" Value="4G" />
+      <Setting Name="UMTSHSUPA" Value="4G" />
+      <Setting Name="UMTSUMTS" Value="4G" />
+    </Settings>
+    <Settings Path="VolumeLimit">
+      <Setting Name="EnableVolumeLimit" Value="1" />
+      <Setting Name="VolumeLimit" Value="19" />
+    </Settings>
+    <Settings Path="WebSearch/Search">
+      <Setting Name="PartnerId" Value="ATNT" />
+    </Settings>
+    <Settings Path="QuickSettings">
+      <Setting Name="DefaultQuickSettingSlot1" Value="4" />
+      <Setting Name="DefaultQuickSettingSlot2" Value="2" />
+      <Setting Name="DefaultQuickSettingSlot3" Value="8" />
+      <Setting Name="DefaultQuickSettingSlot4" Value="13" />
+    </Settings>
+  </Variant>
+  
+  <Variant Name="AT&amp;T (MCN)">
+    <TargetRefs>
+      <TargetRef Id="AT&amp;T (MCN) Target" />
+    </TargetRefs>
+
+    <Settings Path="Connections">
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/AccessPointName" Value="phone" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/att_internet $(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/AccessPointName" Value="phone" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/ExemptFromDisablePolicy" Value="1" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/att_mms $(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/Server" Value="proxy.mobile.att.net" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/Port" Value="80" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/ConnectionName" Value="att_mms $(__MVID)@WAP" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/Type" Value="HTTP" />
+      <Setting Name="Proxies/att_mms-PRXY-PHY $(__MVID)@att_mms-PRXY $(__MVID)@att_mms $(__MVID)/ExtraInfo" Value="???80??" />
+    </Settings>
+
+    <Settings Path="PGList/att_mms-PRXY $(__MVID)/att_mms-PRXY-PHY $(__MVID)">
+      <Setting Name="AddressType" Value="IPV4" />
+      <Setting Name="Address" Value="proxy.mobile.att.net" />
+      <Setting Name="MatchedNapID" Value="att_mms $(__MVID)" />
+    </Settings>
+
+    <Settings Path="PGList/1111301000-PRXY $(__MVID)/1111301000-PRXY-PHY $(__MVID)">
+      <Setting Name="TRUST" Value="1" />
+      <Setting Name="AddressType" Value="E164" />
+      <Setting Name="Address" Value="1111301000" />
+      <Setting Name="PushEnabled" Value="1" />
+      <Setting Name="MatchedNapID" Value="1111301000-NAPDEF $(__MVID)" />
+    </Settings>
+
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="att_mms $(__MVID)" />
+      <Setting Name="TONAPID" Value="att_mms $(__MVID)" />
+      <Setting Name="TOPROXY" Value="att_mms-PRXY $(__MVID)" />
+      <Setting Name="ADDR" Value="http://mmsc.mobile.att.net" />
+      <Setting Name="MS" Value="1024" />
+    </Settings>
+
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)">
+      <Setting Name="TargetVideoFormat" Value="2" />
+      <Setting Name="ErrorCodeEnabled" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/~__ICCID~/MMSGroupText">
+      <Setting Name="MMSGroupText" Value="1" />
+      <Setting Name="ShowMMSGroupTextUI" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/RequestDeliveryReport">
+      <Setting Name="RequestDeliveryReportIsSupported" Value="1" />
+      <Setting Name="RequestDeliveryReport" Value="0" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AllowSendingDeliveryReport">
+      <Setting Name="AllowSendingDeliveryReportIsSupported" Value="1" />
+      <Setting Name="AllowSendingDeliveryReport" Value="1" />
+    </Settings>
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/AutomaticallyDownload">
+      <Setting Name="ShowAutomaticallyDownloadMMSToggle" Value="1" />
+      <Setting Name="AutomaticallyDownload" Value="1" />
+    </Settings>
+
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+  </Variant>
+
+  <Variant Name="Cricket Selfhost">
+    <TargetRefs>
+      <TargetRef Id="Cricket Selfhost Target" />
+    </TargetRefs>
+
+    <Settings Path="InternetExplorer">
+      <Setting Name="FirstRunUrl" Value="http://www.cricketwireless.com/" />
+    </Settings>
+
+    <Settings Path="Theme">
+      <Setting Name="DefaultBackgroundColor" Value="Light" />
+      <Setting Name="DefaultAccentColor" Value="Green" />
+    </Settings>
+
+    <Settings Path="Shell/SystemTray/DataActivity">
+      <Setting Name="DataActivityIcon" Value="0"/>
+    </Settings>
+
+    <Settings Path="Shell/SystemTray/Location">
+      <Setting Name="LocationIcon" Value="0"/>
+    </Settings>
+    
+    <Settings Path="Connections">
+      <Setting Name="Cellular/aio Internet_i$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/aio Internet_i$(__MVID)@WAP/AlwaysOn" Value="1" />
+      <Setting Name="Cellular/aio Internet_i$(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/aio Internet_i$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="0" />
+      <Setting Name="Cellular/aio Internet_i$(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/aio Internet_i$(__MVID)@WAP/Enabled" Value="1" />
+      <Setting Name="Cellular/aio Internet_i$(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Cellular/aio Internet_i$(__MVID)@WAP/AccessPointName" Value="ndo" />
+
+      <Setting Name="Cellular/aio MMS_m$(__MVID)@WAP/ConnectionType" Value="gprs" />
+      <Setting Name="Cellular/aio MMS_m$(__MVID)@WAP/AlwaysOn" Value="0" />
+      <Setting Name="Cellular/aio MMS_m$(__MVID)@WAP/IPType" Value="IPv4" />
+      <Setting Name="Cellular/aio MMS_m$(__MVID)@WAP/UseRequiresMappingsPolicy" Value="1" />
+      <Setting Name="Cellular/aio MMS_m$(__MVID)@WAP/AuthType" Value="None" />
+      <Setting Name="Cellular/aio MMS_m$(__MVID)@WAP/Enabled" Value="1" />
+      <Setting Name="Cellular/aio MMS_m$(__MVID)@WAP/OemConnectionId" Value="9476C91D-608F-47B6-856A-1D90C1BED333" />
+      <Setting Name="Cellular/aio MMS_m$(__MVID)@WAP/AccessPointName" Value="ndo" />
+      <Setting Name="Cellular/aio MMS_m$(__MVID)@WAP/ExemptFromDisablePolicy" Value="0"/>
+
+      <Setting Name="Proxies/aio MMS_m-PRXY$(__MVID)/ConnectionName" Value="aio MMS_m$(__MVID)@WAP" />
+      <Setting Name="Proxies/aio MMS_m-PRXY$(__MVID)/Type" Value="1"  />
+      <Setting Name="Proxies/aio MMS_m-PRXY$(__MVID)/Server" Value="proxy.aiowireless.net"  />
+      <Setting Name="Proxies/aio MMS_m-PRXY$(__MVID)/Port" Value="80"  />
+    </Settings>
+
+    <Settings Path="Messaging/PerSimSettings/$(__ICCID)/w4">
+      <Setting Name="APPID" Value="w4" />
+      <Setting Name="NAME" Value="aio MMS-w4" />
+      <Setting Name="TONAPID" Value="aio MMS_m$(__MVID)" />
+      <Setting Name="TOPROXY" Value="aio MMS_m-PRXY$(__MVID)" />
+      <Setting Name="ADDR" Value="http://mmsc.aiowireless.net" />
+      <Setting Name="MS" Value="1024"/>
+    </Settings>
+
+    <Settings Path="DeviceManagement/Policies/OMACP">
+      <Setting Name="NetwpinRoles" Value="256" />
+      <Setting Name="UserpinRoles" Value="256" />
+      <Setting Name="UsernetwpinRoles" Value="256" />
+    </Settings>
+    <Settings Path="DeviceManagement/Policies/MMS">
+      <Setting Name="MMSMessageRoles" Value="4096" />
+    </Settings>
+
+    <Settings Path="HotSpot">
+      <Setting Name="Enabled" Value="Disabled"/>
+      <Setting Name="EntitlementRequired" Value="No"/>
+    </Settings>
+  </Variant>
+  
+</ImageCustomizations>

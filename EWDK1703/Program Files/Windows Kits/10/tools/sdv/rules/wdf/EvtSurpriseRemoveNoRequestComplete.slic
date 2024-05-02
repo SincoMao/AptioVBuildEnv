@@ -1,0 +1,57 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    EvtSurpriseRemoveNoRequestComplete
+
+Domain:
+
+    wdf
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    WDF Drivers shouldn't complete requests from EvtDeviceSurpriseRemoval callback, instead self-managed I/O callbacks should be used. EvtDeviceSurpriseRemoval callback isn't synchronized with the power-down path.
+
+    Rule diagnostics:
+    If driver cancels or completes a request from EvtDeviceSurpriseRemoval callback, then rule fails.
+
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507074
+
+--*/
+
+
+#include "slic_base.h"
+
+state
+{
+   enum {init, surprise_remove_called} s = init;
+}
+
+[fun_WDF_DEVICE_SURPRISE_REMOVAL].entry
+{
+    s = surprise_remove_called;
+}
+
+[fun_WDF_DEVICE_SURPRISE_REMOVAL].exit
+{
+    halt;
+}
+
+[WdfRequestComplete,
+WdfRequestCompleteWithPriorityBoost,
+WdfRequestCompleteWithInformation].entry
+{
+    if(s == surprise_remove_called)
+    {
+        abort "WARNING: $fname should not be called to completed the request from EvtDeviceSurpriseRemoval, EvtDeviceSurpriseRemoval isn't synchronized with the power down path. Use Self-managed I/O callbacks for cancelling the request.";
+    }
+}

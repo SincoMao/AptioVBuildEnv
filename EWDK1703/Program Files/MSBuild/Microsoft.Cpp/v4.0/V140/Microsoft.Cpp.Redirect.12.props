@@ -1,0 +1,57 @@
+﻿<!--
+***********************************************************************************************
+Microsoft.Cpp.Redirect.12.props
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+      created a backup copy.  Incorrect changes to this file will make it
+      impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <VCTargetsPath>$(VCTargetsPath12)</VCTargetsPath>
+    <_PlatformFolder/>
+    <_PlatformFolder Condition="'$(ApplicationType)' != '' and '$(ApplicationTypeRevision)' != ''">$(VCTargetsPath)\Application Type\$(ApplicationType)\$(ApplicationTypeRevision)\Platforms\$(Platform)\</_PlatformFolder>
+    <_PlatformFolder Condition="'$(_PlatformFolder)' == ''">$(VCTargetsPath)\Platforms\$(Platform)\</_PlatformFolder>
+    <PlatformPropsFound Condition="Exists('$(_PlatformFolder)\Platform.props')">true</PlatformPropsFound>
+    <_ToolsetPropsPath>$(_PlatformFolder)PlatformToolsets\$(PlatformToolset)\Toolset.props</_ToolsetPropsPath>
+    <ToolsetPropsFound Condition="Exists('$(_ToolsetPropsPath)')">true</ToolsetPropsFound>
+    <PlatformTargetsFound Condition="Exists('$(_PlatformFolder)\Platform.targets')">true</PlatformTargetsFound>
+    <_ToolsetTargetsPath>$(_PlatformFolder)PlatformToolsets\$(PlatformToolset)\Toolset.targets</_ToolsetTargetsPath>
+    <ToolsetTargetsFound Condition="Exists('$(_ToolsetTargetsPath)')">true</ToolsetTargetsFound>
+    <_ToolsetFound Condition="'$(PlatformPropsFound)' == 'true' and '$(ToolsetPropsFound)' == 'true'
+                               and '$(PlatformTargetsFound)' and '$(ToolsetTargetsFound)'">true</_ToolsetFound>
+    <VCTargetsPathEffective Condition="$(_ToolsetFound) == 'true'">$(VCTargetsPath12)</VCTargetsPathEffective>
+    <_RedirectToV120 Condition="$(_ToolsetFound) == 'true'">true</_RedirectToV120>
+  </PropertyGroup>
+
+  <!-- Import the ApplicationType defaults before redirecting -->
+  <PropertyGroup Condition="'$(_ToolsetFound)' == 'true'">
+    <_ApplicationTypeDefaultPropsPath Condition="'$(ApplicationType)' != ''">$(VCTargetsPath)\Application Type\$(ApplicationType)\Default.props</_ApplicationTypeDefaultPropsPath>
+    <_ApplicationTypeRevisionDefaultPropsPath Condition="'$(ApplicationType)' != '' and '$(ApplicationTypeRevision)' != ''">$(VCTargetsPath)\Application Type\$(ApplicationType)\$(ApplicationTypeRevision)\Default.props</_ApplicationTypeRevisionDefaultPropsPath>
+  </PropertyGroup>
+  
+   <PropertyGroup Condition="'$(_ToolsetFound)' == 'true' and '$(WindowsAppContainer)' == 'true'">
+     <!-- When redirecting, use the current version of XAML tools. -->
+     <_DefaultCppCommonExtensionTargets>false</_DefaultCppCommonExtensionTargets>
+     <_CppCommonExtensionTargets Condition="'$(_CppCommonExtensionTargets)' == ''">$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.Cpp.targets</_CppCommonExtensionTargets>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(_ToolsetFound)' == 'true' and ('$(WindowsAppContainer)' == 'true' or '$(ApplicationType)' == 'Windows Phone Silverlight')">
+     <!-- For Phone 8.1 projects, override the _UpgradePlatformToolset, as upgrade to V140 toolset should be disabled -->
+     <_UpgradePlatformToolsetFor_v120>v120</_UpgradePlatformToolsetFor_v120>
+  </PropertyGroup>
+  
+  <Import Project="$(_ApplicationTypeDefaultPropsPath)" Condition="'$(_ToolsetFound)' == 'true' and '$(_ApplicationTypeDefaultPropsPath)' != '' and Exists('$(_ApplicationTypeDefaultPropsPath)')" />
+  <Import Project="$(_ApplicationTypeRevisionDefaultPropsPath)" Condition="'$(_ToolsetFound)' == 'true' and '$(_ApplicationTypeRevisionDefaultPropsPath)' != '' and Exists('$(_ApplicationTypeRevisionDefaultPropsPath)')" />
+  <Import Condition="'$(_ToolsetFound)' == 'true'" Project="$(VCTargetsPath)\Microsoft.cpp.props" />
+
+  <PropertyGroup Condition="'$(_ToolsetFound)' == 'true' and '$(WindowsAppContainer)' == 'true'">
+    <CanBeStartupProject>$(AppxPackage)</CanBeStartupProject>
+  </PropertyGroup>
+
+</Project>

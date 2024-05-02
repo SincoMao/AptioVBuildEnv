@@ -1,0 +1,87 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    IrqlKeApcLte1
+
+Domain:
+
+    Wdm
+
+Rule ID:
+
+    0x0002000F
+
+Description:
+
+    The IrqlKeApcLte1 rule specifies that the driver calls the following 
+    kernel routines only when it is executing at IRQL <= APC_LEVEL:
+        KeAcquireGuardedMutex
+        KeAcquireGuardedMutexUnsafe
+        KeDelayExecutionThread
+        KeQueryActiveProcessors
+        KeReleaseGuardedMutex
+        KeReleaseGuardedMutexUnsafe
+        KeTryToAcquireGuardedMutex
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=216032
+
+--*/
+
+
+#include "slic_base.h"
+
+
+KeAcquireGuardedMutex.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+KeAcquireGuardedMutexUnsafe.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+KeDelayExecutionThread.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+KeQueryActiveProcessors.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+KeReleaseGuardedMutex.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+KeReleaseGuardedMutexUnsafe.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+
+KeTryToAcquireGuardedMutex.entry
+{
+    if ( sdv_irql_current > APC_LEVEL ) {
+        abort "$fname should only be called at IRQL <= APC_LEVEL.";
+    }
+}
+

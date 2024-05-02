@@ -1,0 +1,53 @@
+/*++
+
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Rule Name:
+
+    DoubleCompleteWorkItem
+
+Domain:
+
+    ndis
+
+Rule ID:
+
+    Not Applicable
+
+Description:
+
+    An NDIS miniport should not be double complete an OID when the completion is deferred in a WorkItem.
+
+    This rule will report an error if:
+        - NdisMOidRequestComplete is called multiple times with the same MINIPORT_OID_REQUEST
+    
+    Related Rule:
+    DoubleComplete: check for double completion issues in MINIPORT_OID_REQUEST.
+
+Help Link:
+
+    http://go.microsoft.com/fwlink/?LinkId=507161
+
+--*/
+
+
+
+#include "slic_base.h"
+
+state{
+     enum {INIT,  COMPLETED} t = INIT;
+     int *cur_request = 0;
+}
+
+NdisMOidRequestComplete.entry
+{
+      if ( (t == COMPLETED) && ($2 == cur_request)) 
+      {
+          abort "The driver is completing the Request twice.";
+      }
+      else
+      {
+          t = COMPLETED; 
+          cur_request = $2;
+      }
+}
